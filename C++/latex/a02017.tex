@@ -1,968 +1,579 @@
-\hypertarget{a02017}{}\doxysection{HF\+::Spatial\+Structures\+::Node Struct Reference}
-\label{a02017}\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\hypertarget{a02017}{}\doxysection{HF\+::Spatial\+Structures\+::Path Struct Reference}
+\label{a02017}\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
 
 
-A point in space with an ID.  
-
-
-
-
-{\ttfamily \#include $<$node.\+h$>$}
+A collection of nodes that form a path.  
 
 
 
-Collaboration diagram for HF\+::Spatial\+Structures\+::Node\+:
+
+{\ttfamily \#include $<$path.\+h$>$}
+
+
+
+Collaboration diagram for HF\+::Spatial\+Structures\+::Path\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=225pt]{a02015}
+\includegraphics[width=212pt]{a02015}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a02017_a3d229a53bb7328f88649fd48e6098b5d}{Node}} ()
-\begin{DoxyCompactList}\small\item\em Default constructor. Every element contained is defaulted to N\+AN. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02017_a5e6500cbe9a1c29ebca5045dceebe9d6}{Node}} (float \mbox{\hyperlink{a02017_a78dfebaa44da09b03d7ca15445c8d222}{x}}, float \mbox{\hyperlink{a02017_a41981fb2cc6dc0edb787f921188702b0}{y}}, float \mbox{\hyperlink{a02017_a495b47689917e0395ce96ee01d3f5ed3}{z}}, int ID=-\/1)
-\begin{DoxyCompactList}\small\item\em Create a node without an ID. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02017_a7d3f18b093670b7696aa1aecf8adab00}{Node}} (const std\+::array$<$ float, 3 $>$ \&position)
-\begin{DoxyCompactList}\small\item\em Create a node from an array. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02017_afc1e769b57e880909a11178bb8654adf}{Node}} (const std\+::array$<$ float, 3 $>$ \&position, \mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cc}{N\+O\+D\+E\+\_\+\+T\+Y\+PE}} t, int \mbox{\hyperlink{a02017_a8212d00e6913abf0ca6fec1f2624b677}{id}})
-\begin{DoxyCompactList}\small\item\em Constructor to create a node with a different N\+O\+D\+E\+\_\+\+T\+Y\+PE. \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{a02017_abbd66b566460f9557a373b5fbcc30bb1}{distance\+To}} (const \mbox{\hyperlink{a02017}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Calculate the distance between this node and n2. \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{a02017_a260ab9e9763234dab08decfc2aa6bf63}{angle\+To}} (const \mbox{\hyperlink{a02017}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Calculate the angle between node 1 and n2 \end{DoxyCompactList}\item 
-std\+::array$<$ float, 3 $>$ \mbox{\hyperlink{a02017_ad3f7898ef3178eef0c3579869a7f5c67}{direction\+To}} (const \mbox{\hyperlink{a02017}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Get the direction between this node and another node \end{DoxyCompactList}\item 
-std\+::array$<$ float, 3 $>$ \mbox{\hyperlink{a02017_a51c4642674d54d02b8600f7ffeb45670}{get\+Array}} () const
-\begin{DoxyCompactList}\small\item\em Returns the x,y,z of this node as an array of 3 floats. \end{DoxyCompactList}\item 
-float \& \mbox{\hyperlink{a02017_a556efc898ddc67b64fff560d0c7b5a0a}{operator\mbox{[}$\,$\mbox{]}}} (int i)
-\begin{DoxyCompactList}\small\item\em Directly access a nodes\textquotesingle{}s position as if it were an array of 3 floats, \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{a02017_ae3e88bd4eecfdbd93431953ed07b8a7b}{operator\mbox{[}$\,$\mbox{]}}} (int i) const
-\begin{DoxyCompactList}\small\item\em Access a nodes\textquotesingle{}s position, by value. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{a02017_af687c2e97fffe3b7d14e3cfa8af3e5cd}{operator==}} (const \mbox{\hyperlink{a02017}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Check if this node occupies the same space as n2. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{a02017_a6137878845816e2fe8ecbe1215c490fd}{operator!=}} (const \mbox{\hyperlink{a02017}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em See operator==, checks if this node does N\+OT occupy the same space as n2. 
-\begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{a02017}{Node}} to compare with this node.\\
-\hline
-\end{DoxyParams}
-\end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02017}{Node}} \mbox{\hyperlink{a02017_ad58a4eb9f0a15c645eedf668d9bcec54}{operator-\/}} (const \mbox{\hyperlink{a02017}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Creates a node from the vector subtraction of this node and n2\textquotesingle{}s position. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02017}{Node}} \mbox{\hyperlink{a02017_a064540b380fc6251bdf6d740abf7a169}{operator+}} (const \mbox{\hyperlink{a02017}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Creates a new node from the vector addition of this node and n2. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02017}{Node}} \mbox{\hyperlink{a02017_a099271bad26dd059037f3c84459058e0}{operator$\ast$}} (const \mbox{\hyperlink{a02017}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Creates a new node from the dot product of this node and n2. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{a02017_a1d74d883b7291a760908f3dc81783b3d}{operator$<$}} (const \mbox{\hyperlink{a02017}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Determines if this node\textquotesingle{}s id (an integer) is less than n2\textquotesingle{}s id. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{a02017_a7547e73076e40bb880261574216e4251}{operator$<$}} (const \mbox{\hyperlink{a02017}{Node}} \&n2)
-\begin{DoxyCompactList}\small\item\em Determines if this node\textquotesingle{}s id (an integer) is less than n2\textquotesingle{}s id. const qualification omitted for std\+::sort. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{a02017_a9d67cccc8b0fc57d61390da493149790}{operator$>$}} (const \mbox{\hyperlink{a02017}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Determines if this node\textquotesingle{}s id (an integer) is greater than n2\textquotesingle{}s id \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{a02017_a61a8a911a572d91683229a80ede5f541}{Path\+::\+Path}} ()
+\begin{DoxyCompactList}\small\item\em Construct an empty path.\end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02017_a6d38f5fb939535a26e10ea2a969b2333}{Path\+::\+Path}} (const std\+::vector$<$ \mbox{\hyperlink{a02013}{Path\+Member}} $>$ \&pm)
+\begin{DoxyCompactList}\small\item\em Construct a path from an ordered list of Path\+Members. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a02017_a55ded4e02787eb739770ebe28ef386a9}{Add\+Node}} (int node, float cost)
+\begin{DoxyCompactList}\small\item\em Add a new node to the path. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02017_a3066bac2d76b5c8a28b35a8d1f6ace71}{empty}} () const
+\begin{DoxyCompactList}\small\item\em Determine if this path has any nodes in it. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a02017_a28f61f0f57b38a5249a11a725d9d692b}{size}} () const
+\begin{DoxyCompactList}\small\item\em Determine how many nodes are in this path. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a02017_adf2bad9ac73dbdc436c365654d54ad98}{Reverse}} ()
+\begin{DoxyCompactList}\small\item\em Reverse the direction of this path. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02017_ac8cd7f5bcbaf0f399ce196c8967ae87e}{operator==}} (const \mbox{\hyperlink{a02017}{Path}} \&p2) const
+\begin{DoxyCompactList}\small\item\em Determine if this path is identical to p2. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02013}{Path\+Member}} \mbox{\hyperlink{a02017_a4bbba8e48932e990cc6d523ac628765a}{operator\mbox{[}$\,$\mbox{]}}} (int i) const
+\begin{DoxyCompactList}\small\item\em Retrieve the node and cost in this path at index i. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02013}{Path\+Member}} $\ast$ \mbox{\hyperlink{a02017_a942cb49007bbeb5588e2d526c68bdcf9}{Get\+PMPointer}} ()
+\begin{DoxyCompactList}\small\item\em Get a pointer to the path\textquotesingle{}s underlying path members vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-float \mbox{\hyperlink{a02017_a78dfebaa44da09b03d7ca15445c8d222}{x}}
-\item 
-float \mbox{\hyperlink{a02017_a41981fb2cc6dc0edb787f921188702b0}{y}}
-\item 
-float \mbox{\hyperlink{a02017_a495b47689917e0395ce96ee01d3f5ed3}{z}}
-\begin{DoxyCompactList}\small\item\em Cartesian coordinates x, y, z. \end{DoxyCompactList}\item 
-short \mbox{\hyperlink{a02017_a3894a51f72b82cea2d6675a91fcb39cf}{type}} = \mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}{G\+R\+A\+PH}}
-\begin{DoxyCompactList}\small\item\em Unused. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{a02017_a8212d00e6913abf0ca6fec1f2624b677}{id}}
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a02017}{Node}} identifier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+std\+::vector$<$ \mbox{\hyperlink{a02013}{Path\+Member}} $>$ \mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}}
+\begin{DoxyCompactList}\small\item\em Ordered array of Path\+Members that comprise the path. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-A point in space with an ID. 
+A collection of nodes that form a path. 
 
-
-
-Definition at line 38 of file node.\+h.
-
-
-
-\doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{a02017_a3d229a53bb7328f88649fd48e6098b5d}\label{a02017_a3d229a53bb7328f88649fd48e6098b5d}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!Node@{Node}}
-\index{Node@{Node}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Node\+::\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Default constructor. Every element contained is defaulted to N\+AN. 
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node(); \textcolor{comment}{// all fields initialized to NAN            }}
-\end{DoxyCode}
- 
-
-Definition at line 15 of file node.\+cpp.
-
-
-
-References x, y, and z.
-
-
-
-Referenced by operator$\ast$(), operator+(), and operator-\/().
-
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a02017_a3d229a53bb7328f88649fd48e6098b5d_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a02017_a5e6500cbe9a1c29ebca5045dceebe9d6}\label{a02017_a5e6500cbe9a1c29ebca5045dceebe9d6}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!Node@{Node}}
-\index{Node@{Node}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Node\+::\+Node (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{float}]{z,  }\item[{int}]{ID = {\ttfamily -\/1} }\end{DoxyParamCaption})}
-
-
-
-Create a node without an ID. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em x} & X coordinate.\\
-\hline
-{\em y} & Y coordinate.\\
-\hline
-{\em z} & Z coordinate.\\
-\hline
-{\em id} & ID of the node \\
-\hline
-\end{DoxyParams}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2);   \textcolor{comment}{// default ID is -\/1}}
-\end{DoxyCode}
- 
-
-Definition at line 22 of file node.\+cpp.
-
-\mbox{\Hypertarget{a02017_a7d3f18b093670b7696aa1aecf8adab00}\label{a02017_a7d3f18b093670b7696aa1aecf8adab00}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!Node@{Node}}
-\index{Node@{Node}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Node\+::\+Node (\begin{DoxyParamCaption}\item[{const std\+::array$<$ float, 3 $>$ \&}]{position }\end{DoxyParamCaption})}
-
-
-
-Create a node from an array. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em position} & An array of 3 floats for x,y,z.\\
-\hline
-\end{DoxyParams}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{std::array<float, 3> pos = \{ 12.0, 23.1, 34.2 \};}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node(pos);      \textcolor{comment}{// id == -\/1, type == NODE\_TYPE::GRAPH}}
-\end{DoxyCode}
- 
-
-Definition at line 24 of file node.\+cpp.
-
-
-
-References H\+F\+::\+Spatial\+Structures\+::\+G\+R\+A\+PH, x, y, and z.
-
-\mbox{\Hypertarget{a02017_afc1e769b57e880909a11178bb8654adf}\label{a02017_afc1e769b57e880909a11178bb8654adf}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!Node@{Node}}
-\index{Node@{Node}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Node\+::\+Node (\begin{DoxyParamCaption}\item[{const std\+::array$<$ float, 3 $>$ \&}]{position,  }\item[{\mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cc}{N\+O\+D\+E\+\_\+\+T\+Y\+PE}}}]{t,  }\item[{int}]{id }\end{DoxyParamCaption})}
-
-
-
-Constructor to create a node with a different N\+O\+D\+E\+\_\+\+T\+Y\+PE. 
-
-\begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cc}{N\+O\+D\+E\+\_\+\+T\+Y\+PE}}
-\end{DoxySeeAlso}
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{std::array<float, 3> pos = \{ 12.0, 23.1, 34.2 \};}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node(pos, \mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}{HF::SpatialStructures::NODE\_TYPE::GRAPH}}, 456);}
-\end{DoxyCode}
- 
-
-Definition at line 32 of file node.\+cpp.
-
-
-
-References x, y, and z.
+Definition at line \mbox{\hyperlink{a00215_source_l00076}{76}} of file \mbox{\hyperlink{a00215_source}{path.\+h}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a02017_a260ab9e9763234dab08decfc2aa6bf63}\label{a02017_a260ab9e9763234dab08decfc2aa6bf63}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!angleTo@{angleTo}}
-\index{angleTo@{angleTo}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{angleTo()}{angleTo()}}
-{\footnotesize\ttfamily float H\+F\+::\+Spatial\+Structures\+::\+Node\+::angle\+To (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02017}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+\mbox{\Hypertarget{a02017_a55ded4e02787eb739770ebe28ef386a9}\label{a02017_a55ded4e02787eb739770ebe28ef386a9}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!AddNode@{AddNode}}
+\index{AddNode@{AddNode}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{AddNode()}{AddNode()}}
+{\footnotesize\ttfamily void HF\+::\+Spatial\+Structures\+::\+Path\+::\+Add\+Node (\begin{DoxyParamCaption}\item[{int}]{node,  }\item[{float}]{cost }\end{DoxyParamCaption})}
 
 
 
-Calculate the angle between node 1 and n2 
+Add a new node to the path. 
 
-
+Constructs a \mbox{\hyperlink{a02013}{Path\+Member}} and appends it to the underlying members vector. 
 \begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{a02017}{Node}} to calculate direction to \\
+{\em node} & The identifier for the \mbox{\hyperlink{a02013}{Path\+Member}} \\
+\hline
+{\em cost} & The cost (weight) for the \mbox{\hyperlink{a02013}{Path\+Member}} \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Angle between this node and n2
-\end{DoxyReturn}
 
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{TODO code sample: line 40 of node.cpp -\/ \textcolor{stringliteral}{'This needs an actual angle formula'}}
-\end{DoxyCode}
- \mbox{\Hypertarget{a02017_ad3f7898ef3178eef0c3579869a7f5c67}\label{a02017_ad3f7898ef3178eef0c3579869a7f5c67}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!directionTo@{directionTo}}
-\index{directionTo@{directionTo}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{directionTo()}{directionTo()}}
-{\footnotesize\ttfamily std\+::array$<$ float, 3 $>$ H\+F\+::\+Spatial\+Structures\+::\+Node\+::direction\+To (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02017}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
-
-
-
-Get the direction between this node and another node 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n2} & The node to get the direction to \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-an array of 3 floats indicating a direction
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}path.h"{}}}
 \DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
+\DoxyCodeLine{\textcolor{comment}{// Create the PathMembers}}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p2 = \{ 1.64f, 1 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p3 = \{ 9.35, 7 \};}
 \DoxyCodeLine{}
-\DoxyCodeLine{std::array<float, 3> direction\_vector = node\_0.directionTo(node\_1);}
+\DoxyCodeLine{\textcolor{comment}{// Create the container of PathMembers}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> \mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}}\{ p0, p1, p2, p3 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the path, using the container of PathMembers}}
+\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Path}} path(\mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}});}
+\DoxyCodeLine{\textcolor{keywordtype}{int} node\_id = 278;}
+\DoxyCodeLine{\textcolor{keywordtype}{float} cost = 8.92f;}
+\DoxyCodeLine{}
+\DoxyCodeLine{path.AddNode(node\_id, cost);    \textcolor{comment}{// A PathMember is constructed within AddNode from node\_id and cost}}
+\DoxyCodeLine{                                \textcolor{comment}{// and is then appended to the underlying}}
+\DoxyCodeLine{                                \textcolor{comment}{// members vector (via push\_back)}}
+
 \end{DoxyCode}
  
 
-Definition at line 131 of file node.\+cpp.
+Definition at line \mbox{\hyperlink{a00212_source_l00012}{12}} of file \mbox{\hyperlink{a00212_source}{path.\+cpp}}.
 
 
 
-References H\+F\+::\+Spatial\+Structures\+::\+Normalize(), x, y, and z.
+References \mbox{\hyperlink{a00215_source_l00078}{members}}.
 
 
 
-Referenced by H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Energy\+Expenditure(), H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Get\+Perpendicular\+Edges(), H\+F\+::\+Visibility\+Graph\+::\+Is\+Occlusion\+Between(), and Node\+Example\+Tests\+::\+T\+E\+S\+T().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a02017_ad3f7898ef3178eef0c3579869a7f5c67_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a02017_ad3f7898ef3178eef0c3579869a7f5c67_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a02017_abbd66b566460f9557a373b5fbcc30bb1}\label{a02017_abbd66b566460f9557a373b5fbcc30bb1}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!distanceTo@{distanceTo}}
-\index{distanceTo@{distanceTo}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{distanceTo()}{distanceTo()}}
-{\footnotesize\ttfamily float H\+F\+::\+Spatial\+Structures\+::\+Node\+::distance\+To (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02017}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
-
-
-
-Calculate the distance between this node and n2. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n2} & Note to calculate the distance to. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Distance between this node and n2.
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
-\DoxyCodeLine{\textcolor{keywordtype}{float} \mbox{\hyperlink{a00409_a355d486f17db42f6c56411cc53f76aec}{euclidean\_distance}} = node\_0.distanceTo(node\_1);}
-\end{DoxyCode}
- 
-
-Definition at line 40 of file node.\+cpp.
-
-
-
-References x, y, and z.
-
-
-
-Referenced by H\+F\+::\+Visibility\+Graph\+::\+All\+To\+All(), H\+F\+::\+Visibility\+Graph\+::\+All\+To\+All\+Undirected(), H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Energy\+Expenditure(), H\+F\+::\+Visibility\+Graph\+::\+Group\+To\+Group(), H\+F\+::\+Visibility\+Graph\+::\+Is\+Occlusion\+Between(), and Node\+Example\+Tests\+::\+T\+E\+S\+T().
+Referenced by \mbox{\hyperlink{a00137_source_l00078}{HF\+::\+Pathfinding\+::\+Construct\+Shortest\+Path\+From\+Pred()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a02017_abbd66b566460f9557a373b5fbcc30bb1_icgraph}
+\includegraphics[width=350pt]{a02017_a55ded4e02787eb739770ebe28ef386a9_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{a02017_a51c4642674d54d02b8600f7ffeb45670}\label{a02017_a51c4642674d54d02b8600f7ffeb45670}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!getArray@{getArray}}
-\index{getArray@{getArray}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{getArray()}{getArray()}}
-{\footnotesize\ttfamily std\+::array$<$ float, 3 $>$ H\+F\+::\+Spatial\+Structures\+::\+Node\+::get\+Array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+\mbox{\Hypertarget{a02017_a3066bac2d76b5c8a28b35a8d1f6ace71}\label{a02017_a3066bac2d76b5c8a28b35a8d1f6ace71}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!empty@{empty}}
+\index{empty@{empty}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily bool HF\+::\+Spatial\+Structures\+::\+Path\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
 
 
-Returns the x,y,z of this node as an array of 3 floats. 
+Determine if this path has any nodes in it. 
 
-\begin{DoxyReturn}{Returns}
-The x,y, and z coordinates of this node as an array of floats.
+Checks if the size of members is zero. \begin{DoxyReturn}{Returns}
+True if the underyling members vector is empty, false otherwise 
 \end{DoxyReturn}
 
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}path.h"{}}}
 \DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node(12.0, 23.1, 34.2, 456);}
+\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Path}} path;}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// An array is created from within the getArray() member function}}
-\DoxyCodeLine{std::array<float, 3> arr = node.\mbox{\hyperlink{a02017_a51c4642674d54d02b8600f7ffeb45670}{getArray}}();}
+\DoxyCodeLine{\textcolor{comment}{// There are no PathMembers in path's members container.}}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// ref\_arr and ref\_node have the same value, but}}
-\DoxyCodeLine{\textcolor{comment}{// refer to different locations in memory -\/-\/ }}
-\DoxyCodeLine{\textcolor{comment}{// arr does not consist of the same memory locations as}}
-\DoxyCodeLine{\textcolor{comment}{// that of the coordinate fields within node.}}
-\DoxyCodeLine{\textcolor{keywordtype}{float}\& ref\_arr = arr[0];}
-\DoxyCodeLine{\textcolor{keywordtype}{float}\& ref\_node = node.\mbox{\hyperlink{a02017_a78dfebaa44da09b03d7ca15445c8d222}{x}};}
+\DoxyCodeLine{\textcolor{comment}{// if empty() returns true, that means the underlying members vector is of size 0}}
+\DoxyCodeLine{\textcolor{comment}{// (no members) otherwise, empty returns false. In this case, path.empty() returns true.}}
+\DoxyCodeLine{std::string result = path.\mbox{\hyperlink{a02017_a3066bac2d76b5c8a28b35a8d1f6ace71}{empty}}() ? \textcolor{stringliteral}{"{}is empty"{}} : \textcolor{stringliteral}{"{}has at least one member"{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"{}The Path object "{}} << result << std::endl;}
+
 \end{DoxyCode}
  
 
-Definition at line 141 of file node.\+cpp.
+Definition at line \mbox{\hyperlink{a00212_source_l00016}{16}} of file \mbox{\hyperlink{a00212_source}{path.\+cpp}}.
 
 
 
-References x, y, and z.
+References \mbox{\hyperlink{a00215_source_l00078}{members}}.
 
 
 
-Referenced by Node\+Example\+Tests\+::\+T\+E\+S\+T(), and Graph\+Example\+Tests\+::\+T\+E\+S\+T().
+Referenced by \mbox{\hyperlink{a00356_source_l00023}{Create\+Path()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a02017_a51c4642674d54d02b8600f7ffeb45670_icgraph}
+\includegraphics[width=291pt]{a02017_a3066bac2d76b5c8a28b35a8d1f6ace71_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{a02017_a6137878845816e2fe8ecbe1215c490fd}\label{a02017_a6137878845816e2fe8ecbe1215c490fd}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator"!=@{operator"!=}}
-\index{operator"!=@{operator"!=}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
-{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02017}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+\mbox{\Hypertarget{a02017_a942cb49007bbeb5588e2d526c68bdcf9}\label{a02017_a942cb49007bbeb5588e2d526c68bdcf9}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!GetPMPointer@{GetPMPointer}}
+\index{GetPMPointer@{GetPMPointer}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{GetPMPointer()}{GetPMPointer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02013}{Path\+Member}} $\ast$ HF\+::\+Spatial\+Structures\+::\+Path\+::\+Get\+PMPointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
-See operator==, checks if this node does N\+OT occupy the same space as n2. 
-\begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{a02017}{Node}} to compare with this node.\\
-\hline
-\end{DoxyParams}
-
-
-\begin{DoxyReturn}{Returns}
-True if the distance between n1 and n2 greator greater than or equal to Rounding Precision, false otherwise.
-\end{DoxyReturn}
-
+Get a pointer to the path\textquotesingle{}s underlying path members vector. 
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}path.h"{}}}
 \DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
+\DoxyCodeLine{\textcolor{comment}{// Create the PathMembers}}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p2 = \{ 1.64f, 1 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p3 = \{ 9.35f, 7 \};}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Does the inverse of operator==.}}
-\DoxyCodeLine{\textcolor{keywordtype}{bool} different\_positions = node\_0 != node\_1;}
+\DoxyCodeLine{\textcolor{comment}{// Create the container of PathMembers}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> \mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}}\{p0, p1, p2, p3\};}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordflow}{if} (different\_positions) \{}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Different positions"} << std::endl;}
-\DoxyCodeLine{\} \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Occupies the same space"} << std::endl;}
+\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Path}} path(\mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}});                          \textcolor{comment}{// Create the Path object, path}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} *ptr = path.GetPMPointer();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// You now have a pointer to the underlying buffer of the members vector with in a PathMember.}}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} *curr = ptr;}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} *finish = ptr + path.size();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{while} (curr != finish) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}Cost: "{}} << curr-\/>\mbox{\hyperlink{a02013_aa854e4b8d04fc62d8e09cff48ba95d68}{cost}} << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{              << \textcolor{stringliteral}{"{}Node: "{}} << curr-\/>\mbox{\hyperlink{a02013_aed2cf97b3136ad0929cdd3c5c2b96e1c}{node}} << std::endl;}
+\DoxyCodeLine{    ++curr;}
 \DoxyCodeLine{\}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// different\_positions evaluates to true}}
+
 \end{DoxyCode}
  
 
-Definition at line 96 of file node.\+cpp.
+Definition at line \mbox{\hyperlink{a00212_source_l00056}{56}} of file \mbox{\hyperlink{a00212_source}{path.\+cpp}}.
 
 
 
-References operator==().
+References \mbox{\hyperlink{a00215_source_l00078}{members}}.
 
-Here is the call graph for this function\+:
+
+
+Referenced by \mbox{\hyperlink{a00356_source_l00023}{Create\+Path()}}, \mbox{\hyperlink{a00356_source_l00115}{Get\+Path\+Info()}}, and \mbox{\hyperlink{a00137_source_l00201}{HF\+::\+Pathfinding\+::\+Insert\+Paths\+Into\+Array()}}.
+
+Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a02017_a6137878845816e2fe8ecbe1215c490fd_cgraph}
+\includegraphics[width=350pt]{a02017_a942cb49007bbeb5588e2d526c68bdcf9_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{a02017_a099271bad26dd059037f3c84459058e0}\label{a02017_a099271bad26dd059037f3c84459058e0}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator$\ast$@{operator$\ast$}}
-\index{operator$\ast$@{operator$\ast$}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a02017}{Node}} H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02017}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
-
-
-
-Creates a new node from the dot product of this node and n2. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n2} & Second factor of dot product, N1 (dot) N2\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A node with the values obtained from the dot product of N1 and N2
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_2 = node\_1 * node\_0;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// node\_2 has values (x = 543.6, y = 1302.84, z = 2308.5, id = -\/1, type = NODE\_TYPE::GRAPH)}}
-\DoxyCodeLine{\textcolor{comment}{// id and type are given default values as per Node::Node(const std::array<float, 3>\& position)}}
-\end{DoxyCode}
- 
-
-Definition at line 114 of file node.\+cpp.
-
-
-
-References Node(), x, y, and z.
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a02017_a099271bad26dd059037f3c84459058e0_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a02017_a064540b380fc6251bdf6d740abf7a169}\label{a02017_a064540b380fc6251bdf6d740abf7a169}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator+@{operator+}}
-\index{operator+@{operator+}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a02017}{Node}} H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02017}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
-
-
-
-Creates a new node from the vector addition of this node and n2. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{a02017}{Node}} to add to n1\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A node with the values obtained from n1 + n2
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_2 = node\_1 + node\_0;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// node\_2 has values (x = 57.3, y = 79.5, z = 101.7, id = -\/1, type = NODE\_TYPE::GRAPH)}}
-\DoxyCodeLine{\textcolor{comment}{// id and type are given default values as per Node::Node(const std::array<float, 3>\& position)}}
-\end{DoxyCode}
- 
-
-Definition at line 104 of file node.\+cpp.
-
-
-
-References Node(), x, y, and z.
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a02017_a064540b380fc6251bdf6d740abf7a169_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a02017_ad58a4eb9f0a15c645eedf668d9bcec54}\label{a02017_ad58a4eb9f0a15c645eedf668d9bcec54}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator-\/@{operator-\/}}
-\index{operator-\/@{operator-\/}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a02017}{Node}} H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02017}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
-
-
-
-Creates a node from the vector subtraction of this node and n2\textquotesingle{}s position. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{a02017}{Node}} to subtract from this node.\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A node with the values obtained from n1 -\/ n2
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_2 = node\_1 -\/ node\_0;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// node\_2 has values (x = 33.3, y = 33.3, z = 33.3, id = -\/1, type = NODE\_TYPE::GRAPH)}}
-\DoxyCodeLine{\textcolor{comment}{// id and type are given default values as per Node::Node(const std::array<float, 3>\& position)}}
-\end{DoxyCode}
- 
-
-Definition at line 100 of file node.\+cpp.
-
-
-
-References Node(), x, y, and z.
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a02017_ad58a4eb9f0a15c645eedf668d9bcec54_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a02017_a7547e73076e40bb880261574216e4251}\label{a02017_a7547e73076e40bb880261574216e4251}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator$<$@{operator$<$}}
-\index{operator$<$@{operator$<$}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02017}{Node}} \&}]{n2 }\end{DoxyParamCaption})}
-
-
-
-Determines if this node\textquotesingle{}s id (an integer) is less than n2\textquotesingle{}s id. const qualification omitted for std\+::sort. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{a02017}{Node}} whose id will be compared with n1\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if this node\textquotesingle{}s id is less than n2\textquotesingle{}s id, false otherwise
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h", and \#include <algorithm>}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// For this example, we are not concerned about the node coordinates.}}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_0(0.0, 0.0, 0.0, 3);}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_1(0.0, 0.0, 0.0, 1);}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_2(0.0, 0.0, 0.0, 2);}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_3(0.0, 0.0, 0.0, 0);}
-\DoxyCodeLine{}
-\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> vec\{ node\_0, node\_1, node\_2, node\_3 \};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// operator< sorts Node by ID, in non-\/decreasing order}}
-\DoxyCodeLine{std::sort(vec.begin(), vec.end());  \textcolor{comment}{// uses natural ordering through operator<, non-\/const}}
-\DoxyCodeLine{}
-\DoxyCodeLine{std::vector<HF::SpatialStructures::Node>::iterator it = vec.begin();}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordflow}{while} (it != vec.end()) \{}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Node ID: "} << it-\/>id << std::endl;}
-\DoxyCodeLine{    \(\backslash\)++it;}
-\DoxyCodeLine{\} \textcolor{comment}{// Node ID will print in order by ID, from smallest to largest}}
-\end{DoxyCode}
- 
-
-Definition at line 119 of file node.\+cpp.
-
-
-
-References id.
-
-\mbox{\Hypertarget{a02017_a1d74d883b7291a760908f3dc81783b3d}\label{a02017_a1d74d883b7291a760908f3dc81783b3d}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator$<$@{operator$<$}}
-\index{operator$<$@{operator$<$}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02017}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
-
-
-
-Determines if this node\textquotesingle{}s id (an integer) is less than n2\textquotesingle{}s id. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{a02017}{Node}} to compare against. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if this node\textquotesingle{}s id is less than n2\textquotesingle{}s id, false otherwise
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// operator< compares ID fields of node\_0 and node\_1}}
-\DoxyCodeLine{\textcolor{keywordtype}{bool} compare = node\_0 < node\_1;     \textcolor{comment}{// evaluates to true, since 456 < 789}}
-\end{DoxyCode}
- 
-
-Definition at line 118 of file node.\+cpp.
-
-
-
-References id.
-
-\mbox{\Hypertarget{a02017_af687c2e97fffe3b7d14e3cfa8af3e5cd}\label{a02017_af687c2e97fffe3b7d14e3cfa8af3e5cd}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator==@{operator==}}
-\index{operator==@{operator==}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\mbox{\Hypertarget{a02017_ac8cd7f5bcbaf0f399ce196c8967ae87e}\label{a02017_ac8cd7f5bcbaf0f399ce196c8967ae87e}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!operator==@{operator==}}
+\index{operator==@{operator==}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
 \doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
-{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02017}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily bool HF\+::\+Spatial\+Structures\+::\+Path\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02017}{Path}} \&}]{p2 }\end{DoxyParamCaption}) const}
 
 
 
-Check if this node occupies the same space as n2. 
+Determine if this path is identical to p2. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{a02017}{Node}} to compare with n1\\
+{\em p2} & The \mbox{\hyperlink{a02017}{Path}} to compare against this path \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-True if the distance between n1 and n2 is less than Rounding Precision, false otherwise.
+True, if all \mbox{\hyperlink{a02013}{Path\+Member}} elements in p2 are equal to all \mbox{\hyperlink{a02013}{Path\+Member}} elements in this path, false otherwise 
+\end{DoxyReturn}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a02013_af59604b398e925b0b24030a00dd92f59}{Path\+Member.\+operator==()}}
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}path.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};                \textcolor{comment}{// Create all the PathMember objects}}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p2 = \{ 3.14f, 3 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p3 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p4 = \{ 1.1f, 9 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p5 = \{ 123.0f, 10 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> members\_0\{p0, p1\};   \textcolor{comment}{// Create the HF::SpatialStructures::PathMember vectors}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> members\_1\{p2, p3\};}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> members\_2\{p4, p5\};}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> members\_3\{p1, p0\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Path}} path\_0(members\_0);                      \textcolor{comment}{// Create the Path objects}}
+\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Path}} path\_1(members\_1);}
+\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Path}} path\_2(members\_2);}
+\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Path}} path\_3(members\_3);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} same\_values\_same\_order = path\_0 == path\_1;}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} totally\_different = path\_0 == path\_2;}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} same\_values\_different\_order = path\_0 == path\_3;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// path\_0 and path\_1 share the same PathMember values, with an identical permutation, so}}
+\DoxyCodeLine{\textcolor{comment}{// they are equivalent.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// path\_0 and path\_2 are not equivalent, because they have completely different}}
+\DoxyCodeLine{\textcolor{comment}{// PathMember values.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// path\_0 and path\_3 are not equivalent, because although they have PathMember objects}}
+\DoxyCodeLine{\textcolor{comment}{// of the same values, the order in which path\_0 and path\_3 have their member vectors}}
+\DoxyCodeLine{\textcolor{comment}{// arranged are different.}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00212_source_l00028}{28}} of file \mbox{\hyperlink{a00212_source}{path.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00212_source_l00020}{size()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{a02017_ac8cd7f5bcbaf0f399ce196c8967ae87e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02017_a4bbba8e48932e990cc6d523ac628765a}\label{a02017_a4bbba8e48932e990cc6d523ac628765a}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02013}{Path\+Member}} HF\+::\+Spatial\+Structures\+::\+Path\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption}) const}
+
+
+
+Retrieve the node and cost in this path at index i. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & The index for the desired \mbox{\hyperlink{a02013}{Path\+Member}} element within members. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \mbox{\hyperlink{a02013}{Path\+Member}} within the members vector, at index i, by value. 
 \end{DoxyReturn}
 
 
 
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & i extended past the number of nodes in the path.\\
+\hline
+\end{DoxyExceptions}
+
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}path.h"{}}}
 \DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
+\DoxyCodeLine{\textcolor{comment}{// Create the PathMembers}}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p2 = \{ 1.64f, 1 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p3 = \{ 9.35f, 7 \};}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{bool} same\_position = node\_0 == node\_1;}
+\DoxyCodeLine{\textcolor{comment}{// Create the container of PathMembers}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> \mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}}\{p0, p1, p2, p3\};}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordflow}{if} (same\_position) \{}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Occupies the same space"} << std::endl;}
-\DoxyCodeLine{\} \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Different positions"} << std::endl;}
-\DoxyCodeLine{\}}
+\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Path}} path(\mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}});                      \textcolor{comment}{// Create the Path object, path}}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// same\_position evaluates to false}}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} desired\_index = 2;}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} result = path[desired\_index]; \textcolor{comment}{// a copy of the element at desired\_index}}
+\DoxyCodeLine{                                                                \textcolor{comment}{// within the}}
+\DoxyCodeLine{                                                                \textcolor{comment}{// internal members}}
+\DoxyCodeLine{                                                                \textcolor{comment}{// vector is}}
+\DoxyCodeLine{                                                                \textcolor{comment}{// assigned to result}}
+
 \end{DoxyCode}
  
 
-Definition at line 83 of file node.\+cpp.
+Definition at line \mbox{\hyperlink{a00212_source_l00048}{48}} of file \mbox{\hyperlink{a00212_source}{path.\+cpp}}.
 
 
 
-References H\+F\+::\+Spatial\+Structures\+::\+R\+O\+U\+N\+D\+I\+N\+G\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON, x, y, and z.
+References \mbox{\hyperlink{a00215_source_l00078}{members}}.
+
+\mbox{\Hypertarget{a02017_a61a8a911a572d91683229a80ede5f541}\label{a02017_a61a8a911a572d91683229a80ede5f541}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!Path::Path@{Path::Path}}
+\index{Path::Path@{Path::Path}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{Path::Path()}{Path::Path()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily HF\+::\+Spatial\+Structures\+::\+Path\+::\+Path\+::\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Referenced by operator!=().
+Construct an empty path.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}path.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Path}} path;}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00215_source_l00088}{88}} of file \mbox{\hyperlink{a00215_source}{path.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00215_source_l00088}{Path\+::\+Path()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00215_source_l00088}{Path\+::\+Path()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{a02017_a61a8a911a572d91683229a80ede5f541_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{a02017_a61a8a911a572d91683229a80ede5f541_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02017_a6d38f5fb939535a26e10ea2a969b2333}\label{a02017_a6d38f5fb939535a26e10ea2a969b2333}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!Path::Path@{Path::Path}}
+\index{Path::Path@{Path::Path}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{Path::Path()}{Path::Path()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily HF\+::\+Spatial\+Structures\+::\+Path\+::\+Path\+::\+Path (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{a02013}{Path\+Member}} $>$ \&}]{pm }\end{DoxyParamCaption})}
+
+
+
+Construct a path from an ordered list of Path\+Members. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}path.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the PathMembers}}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p2 = \{ 1.64f, 1 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p3 = \{ 9.35, 7 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the container of PathMembers}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> \mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}}\{p0, p1, p2, p3\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the path, using the container of PathMembers}}
+\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Path}} path(\mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}});}
+
+\end{DoxyCode}
+ 
+
+References \mbox{\hyperlink{a00215_source_l00088}{Path\+::\+Path()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{a02017_a6d38f5fb939535a26e10ea2a969b2333_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02017_adf2bad9ac73dbdc436c365654d54ad98}\label{a02017_adf2bad9ac73dbdc436c365654d54ad98}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!Reverse@{Reverse}}
+\index{Reverse@{Reverse}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{Reverse()}{Reverse()}}
+{\footnotesize\ttfamily void HF\+::\+Spatial\+Structures\+::\+Path\+::\+Reverse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reverse the direction of this path. 
+
+Invokes std\+::reverse to reverse the contents of the underlying members vector using iterators
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}path.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the PathMembers}}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p2 = \{ 1.64f, 1 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p3 = \{ 9.35f, 7 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the container of PathMembers}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> \mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}}\{p0, p1, p2, p3\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Path}} path(\mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}});          \textcolor{comment}{// Create the Path object, path}}
+\DoxyCodeLine{path.AddNode(278, 3.14f);                           \textcolor{comment}{// Append one more PathMember to path}}
+\DoxyCodeLine{}
+\DoxyCodeLine{path.Reverse();             \textcolor{comment}{// The order of the PathMembers within members is now that of}}
+\DoxyCodeLine{                            \textcolor{comment}{// p3, p2, p1, p0}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00212_source_l00024}{24}} of file \mbox{\hyperlink{a00212_source}{path.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00215_source_l00078}{members}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00137_source_l00078}{HF\+::\+Pathfinding\+::\+Construct\+Shortest\+Path\+From\+Pred()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a02017_af687c2e97fffe3b7d14e3cfa8af3e5cd_icgraph}
+\includegraphics[width=350pt]{a02017_adf2bad9ac73dbdc436c365654d54ad98_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{a02017_a9d67cccc8b0fc57d61390da493149790}\label{a02017_a9d67cccc8b0fc57d61390da493149790}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator$>$@{operator$>$}}
-\index{operator$>$@{operator$>$}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}}
-{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02017}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+\mbox{\Hypertarget{a02017_a28f61f0f57b38a5249a11a725d9d692b}\label{a02017_a28f61f0f57b38a5249a11a725d9d692b}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!size@{size}}
+\index{size@{size}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily int HF\+::\+Spatial\+Structures\+::\+Path\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
 
 
-Determines if this node\textquotesingle{}s id (an integer) is greater than n2\textquotesingle{}s id 
+Determine how many nodes are in this path. 
 
-
-\begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{a02017}{Node}} whose id will be compared with n1\\
-\hline
-\end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-True if n1\textquotesingle{}s id is greater than n2\textquotesingle{}s id, false otherwise
+The length of this path. 
 \end{DoxyReturn}
 
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}path.h"{}}}
 \DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
+\DoxyCodeLine{\textcolor{comment}{// Create the PathMembers}}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p2 = \{ 1.64f, 1 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p3 = \{ 9.35f, 7 \};}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// operator< compares ID fields of node\_0 and node\_1}}
-\DoxyCodeLine{\textcolor{keywordtype}{bool} compare = node\_0 > node\_1; \textcolor{comment}{// evaluates to false, since 456 < 789}}
+\DoxyCodeLine{\textcolor{comment}{// Create the container of PathMembers}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> \mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}}\{p0, p1, p2, p3\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Path}} path(\mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}});          \textcolor{comment}{// Create the Path object, path}}
+\DoxyCodeLine{path.AddNode(278, 3.14f);   \textcolor{comment}{// Add one more PathMember to path}}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::string result = path.size() >= 5 ? \textcolor{stringliteral}{"{}at least 5 members"{}} : \textcolor{stringliteral}{"{}under 5 members"{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"{}The Path object has "{}} << result << std::endl;}
+
 \end{DoxyCode}
  
 
-Definition at line 120 of file node.\+cpp.
+Definition at line \mbox{\hyperlink{a00212_source_l00020}{20}} of file \mbox{\hyperlink{a00212_source}{path.\+cpp}}.
 
 
 
-References id.
-
-\mbox{\Hypertarget{a02017_a556efc898ddc67b64fff560d0c7b5a0a}\label{a02017_a556efc898ddc67b64fff560d0c7b5a0a}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator\mbox{[}\mbox{]}@{operator[]}}
-\index{operator\mbox{[}\mbox{]}@{operator[]}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily float \& H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+References \mbox{\hyperlink{a00215_source_l00078}{members}}.
 
 
 
-Directly access a nodes\textquotesingle{}s position as if it were an array of 3 floats, 
+Referenced by \mbox{\hyperlink{a00137_source_l00078}{HF\+::\+Pathfinding\+::\+Construct\+Shortest\+Path\+From\+Pred()}}, \mbox{\hyperlink{a00356_source_l00023}{Create\+Path()}}, \mbox{\hyperlink{a00356_source_l00115}{Get\+Path\+Info()}}, \mbox{\hyperlink{a00137_source_l00201}{HF\+::\+Pathfinding\+::\+Insert\+Paths\+Into\+Array()}}, \mbox{\hyperlink{a00215_source_l00344}{std\+::operator$<$$<$()}}, and \mbox{\hyperlink{a00212_source_l00028}{operator==()}}.
 
-
-\begin{DoxyParams}{Parameters}
-{\em i} & Index. 0 = x, 1 = y, 2 = z\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A reference to the member float for the requested coordinate
-\end{DoxyReturn}
-
-
-
-\begin{DoxyExceptions}{Exceptions}
-{\em std\+::exception} & i was greater than 2 or less than 0.\\
-\hline
-\end{DoxyExceptions}
-\begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{a00386__todo000028}{Todo}}]Exception should be std\+::out\+\_\+of\+\_\+range to match other functionality\end{DoxyRefDesc}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node(12.0, 23.1, 34.2, 456);    \textcolor{comment}{// (x, y, z), ID}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{float}\& position = node[1];          \textcolor{comment}{// access by reference}}
-\DoxyCodeLine{position = 93.5;                    \textcolor{comment}{// node.y is now 93.5}}
-\end{DoxyCode}
- 
-
-Definition at line 51 of file node.\+cpp.
-
-
-
-References x, y, and z.
-
-\mbox{\Hypertarget{a02017_ae3e88bd4eecfdbd93431953ed07b8a7b}\label{a02017_ae3e88bd4eecfdbd93431953ed07b8a7b}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator\mbox{[}\mbox{]}@{operator[]}}
-\index{operator\mbox{[}\mbox{]}@{operator[]}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily float H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption}) const}
-
-
-
-Access a nodes\textquotesingle{}s position, by value. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em i} & Index. 0 = x, 1 = y, 2 = z\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-the value (copy) of the member float for the requested coordinate
-\end{DoxyReturn}
-
-
-\begin{DoxyRemark}{Remarks}
-Unlike the non-\/const version of this function, this will actually allow the caller to change the value of x, y, or z. Will automatically be selected if the node isn\textquotesingle{}t const.
-\end{DoxyRemark}
-
-\begin{DoxyExceptions}{Exceptions}
-{\em std\+::exception} & i was greater than 2 or less than 0.\\
-\hline
-\end{DoxyExceptions}
-\begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{a00386__todo000029}{Todo}}]Exception should be std\+::out\+\_\+of\+\_\+range to match other functionality\end{DoxyRefDesc}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node(12.0, 23.1, 34.2, 456);    \textcolor{comment}{// (x, y, z), ID}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{float} position = node[1];           \textcolor{comment}{// access by reference}}
-\DoxyCodeLine{position = 93.5                     \textcolor{comment}{// node.y is still 23.1}}
-\end{DoxyCode}
- 
-
-Definition at line 67 of file node.\+cpp.
-
-
-
-References x, y, and z.
-
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02017_a28f61f0f57b38a5249a11a725d9d692b_icgraph}
+\end{center}
+\end{figure}
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{a02017_a8212d00e6913abf0ca6fec1f2624b677}\label{a02017_a8212d00e6913abf0ca6fec1f2624b677}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!id@{id}}
-\index{id@{id}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{id}{id}}
-{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+Node\+::id}
+\mbox{\Hypertarget{a02017_a864cebbf4e5d7c135c501a63d42f8708}\label{a02017_a864cebbf4e5d7c135c501a63d42f8708}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!members@{members}}
+\index{members@{members}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{members}{members}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{a02013}{Path\+Member}}$>$ HF\+::\+Spatial\+Structures\+::\+Path\+::members}
 
 
 
-\mbox{\hyperlink{a02017}{Node}} identifier. 
+Ordered array of Path\+Members that comprise the path. 
 
 
 
-Definition at line 42 of file node.\+h.
+Definition at line \mbox{\hyperlink{a00215_source_l00078}{78}} of file \mbox{\hyperlink{a00215_source}{path.\+h}}.
 
 
 
-Referenced by H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Cross\+Slope(), H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Energy\+Expenditure(), operator$<$(), operator$>$(), and Graph\+Example\+Tests\+::\+T\+E\+S\+T().
-
-\mbox{\Hypertarget{a02017_a3894a51f72b82cea2d6675a91fcb39cf}\label{a02017_a3894a51f72b82cea2d6675a91fcb39cf}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!type@{type}}
-\index{type@{type}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{type}{type}}
-{\footnotesize\ttfamily short H\+F\+::\+Spatial\+Structures\+::\+Node\+::type = \mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}{G\+R\+A\+PH}}}
-
-
-
-Unused. 
-
-\begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cc}{N\+O\+D\+E\+\_\+\+T\+Y\+PE}} for more infomration about this. 
-\end{DoxySeeAlso}
-
-
-Definition at line 41 of file node.\+h.
-
-\mbox{\Hypertarget{a02017_a78dfebaa44da09b03d7ca15445c8d222}\label{a02017_a78dfebaa44da09b03d7ca15445c8d222}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!x@{x}}
-\index{x@{x}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{x}{x}}
-{\footnotesize\ttfamily float H\+F\+::\+Spatial\+Structures\+::\+Node\+::x}
-
-
-
-Definition at line 40 of file node.\+h.
-
-
-
-Referenced by direction\+To(), distance\+To(), get\+Array(), Node(), operator$\ast$(), operator+(), operator-\/(), std\+::operator$<$$<$(), operator==(), operator\mbox{[}$\,$\mbox{]}(), and Node\+Example\+Tests\+::\+T\+E\+S\+T().
-
-\mbox{\Hypertarget{a02017_a41981fb2cc6dc0edb787f921188702b0}\label{a02017_a41981fb2cc6dc0edb787f921188702b0}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!y@{y}}
-\index{y@{y}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{y}{y}}
-{\footnotesize\ttfamily float H\+F\+::\+Spatial\+Structures\+::\+Node\+::y}
-
-
-
-Definition at line 40 of file node.\+h.
-
-
-
-Referenced by direction\+To(), distance\+To(), get\+Array(), Node(), operator$\ast$(), operator+(), operator-\/(), std\+::operator$<$$<$(), operator==(), and operator\mbox{[}$\,$\mbox{]}().
-
-\mbox{\Hypertarget{a02017_a495b47689917e0395ce96ee01d3f5ed3}\label{a02017_a495b47689917e0395ce96ee01d3f5ed3}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!z@{z}}
-\index{z@{z}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{z}{z}}
-{\footnotesize\ttfamily float H\+F\+::\+Spatial\+Structures\+::\+Node\+::z}
-
-
-
-Cartesian coordinates x, y, z. 
-
-
-
-Definition at line 40 of file node.\+h.
-
-
-
-Referenced by H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Cross\+Slope(), direction\+To(), distance\+To(), get\+Array(), Node(), operator$\ast$(), operator+(), operator-\/(), std\+::operator$<$$<$(), operator==(), and operator\mbox{[}$\,$\mbox{]}().
+Referenced by \mbox{\hyperlink{a00212_source_l00012}{Add\+Node()}}, \mbox{\hyperlink{a00212_source_l00016}{empty()}}, \mbox{\hyperlink{a00212_source_l00056}{Get\+PMPointer()}}, \mbox{\hyperlink{a00212_source_l00048}{operator\mbox{[}$\,$\mbox{]}()}}, \mbox{\hyperlink{a00212_source_l00024}{Reverse()}}, and \mbox{\hyperlink{a00212_source_l00020}{size()}}.
 
 
 
 The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Cpp/spatialstructures/src/\mbox{\hyperlink{a00209}{node.\+h}}\item 
-Cpp/spatialstructures/src/\mbox{\hyperlink{a02928}{node.\+cpp}}\end{DoxyCompactItemize}
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00215}{path.\+h}}\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00212}{path.\+cpp}}\end{DoxyCompactItemize}

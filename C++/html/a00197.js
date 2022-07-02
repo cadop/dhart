@@ -1,8 +1,8 @@
 var a00197 =
 [
-    [ "Edge", "a01473.html", "a01473" ],
-    [ "IntEdge", "a01477.html", "a01477" ],
-    [ "EdgeSet", "a01481.html", "a01481" ],
+    [ "HF::SpatialStructures::Edge", "a01461.html", "a01461" ],
+    [ "HF::SpatialStructures::IntEdge", "a01465.html", "a01465" ],
+    [ "HF::SpatialStructures::EdgeSet", "a01469.html", "a01469" ],
     [ "STEP", "a00197.html#af0378d900074d484ba791d4317e5935e", [
       [ "NOT_CONNECTED", "a00197.html#af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9", null ],
       [ "NONE", "a00197.html#af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a", null ],

@@ -1,11 +1,8 @@
 var a01461 =
 [
-    [ "nanoRT_Data", "a01461.html#a2383cbed15c0012ff96ebc4da296af0a", null ],
-    [ "nanoRT_Data", "a01461.html#a0ae198ce1631e5d96a2fa44ccd4d1acc", null ],
-    [ "~nanoRT_Data", "a01461.html#a0300eeb238ac5748f98b59b9a262450d", null ],
-    [ "dist", "a01461.html#a08d942806f986d3ceef1bf276e043cb3", null ],
-    [ "hit", "a01461.html#af9f21fbf5a65e0b29495fff58e466c57", null ],
-    [ "mesh", "a01461.html#a949f0f10008ed14b2183510786efe24e", null ],
-    [ "point", "a01461.html#aed0de5480c190a177f5adf4ee086719d", null ],
-    [ "ray", "a01461.html#ab057f30627ea451e58b9c6cd2d39134a", null ]
+    [ "Edge", "a01461.html#aef0cf597e116d00ae3f4826578c14e7e", null ],
+    [ "Edge", "a01461.html#a5334b25fe2ee17fa77c29253db4123f2", null ],
+    [ "child", "a01461.html#a7194f21733a2251ec083b3c448ad0484", null ],
+    [ "score", "a01461.html#a8ac634140d603f7471f059d5845e9467", null ],
+    [ "step_type", "a01461.html#a79b64af5b0377c99c5020a603e1464c5", null ]
 ];

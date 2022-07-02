@@ -1,15 +1,17 @@
 var a01369 =
 [
-    [ "rebind", "a01369.html#a01377", [
-      [ "other", "a01369.html#a698baf091fd2fa48069785c07d96a0bc", null ]
-    ] ],
-    [ "Source", "a01373.html", "a01373" ],
-    [ "pointer", "a01369.html#a6397373387f6be6e360ce62d29cd97fa", null ],
-    [ "size_type", "a01369.html#a19e16d250851f2e0cc2b6bf1758ca4e5", null ],
-    [ "StackAllocator", "a01369.html#abb6fcf8f97b38ce41e00019887efcbeb", null ],
-    [ "StackAllocator", "a01369.html#ae41a8dc7b8467e183cb2755ecc61df30", null ],
-    [ "StackAllocator", "a01369.html#ae1227fcf2c34e5516b580a40178d4a66", null ],
-    [ "allocate", "a01369.html#a5e0ce428678fdd1f7e29856b1d2ef0e5", null ],
-    [ "deallocate", "a01369.html#ab75f6481223b08774332f16eee4747b9", null ],
-    [ "source_", "a01369.html#ad719f77abb3cff5d39872840de127cf0", null ]
+    [ "Allocator", "a01369.html#adee41f24a3ac6ea0b7986f6867b9e196", null ],
+    [ "ContainedType", "a01369.html#a437fb42ea149f8bb1137cd5ac347adfb", null ],
+    [ "ContainerType", "a01369.html#a95b22d28f0c6cb69681840cb38a3ae50", null ],
+    [ "StackContainer", "a01369.html#a2cbf454e80a2df06299bb68501b45b1c", null ],
+    [ "StackContainer", "a01369.html#a74af3d6ed0c9d04b05293075b47f4fb1", null ],
+    [ "container", "a01369.html#a936c210e9cedf972a8d60070913c4c0b", null ],
+    [ "container", "a01369.html#a1ebcc1f2c383c175b7eae1c79d977090", null ],
+    [ "operator->", "a01369.html#a0f196c7ce631f7086a4ee251d4bd3307", null ],
+    [ "operator->", "a01369.html#a735d8fd70307ff670527979e0e603169", null ],
+    [ "operator=", "a01369.html#ab4a7ac3bf979058399fe51398dfca19f", null ],
+    [ "allocator_", "a01369.html#a3deacc82000a8dd504728c4d5d4c13d2", null ],
+    [ "container_", "a01369.html#a57209394c4822c3b89a94b53eb3a63c7", null ],
+    [ "pad_", "a01369.html#aec17d40ec4697fddd66440dee615d898", null ],
+    [ "stack_data_", "a01369.html#ae62c48e89ceda926c8ee1f3bd07fbbf8", null ]
 ];

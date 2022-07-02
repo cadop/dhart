@@ -1,0 +1,96 @@
+\hypertarget{a00134_source}{}\doxysection{boost\+\_\+graph.\+h}
+\label{a00134_source}\index{Cpp/pathfinding/src/boost\_graph.h@{Cpp/pathfinding/src/boost\_graph.h}}
+\mbox{\hyperlink{a00134}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00008}00008 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00009}00009 \textcolor{preprocessor}{\#include <boost/graph/graph\_traits.hpp>}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00010}00010 \textcolor{preprocessor}{\#include <boost/graph/adjacency\_matrix.hpp>}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00011}00011 \textcolor{preprocessor}{\#include <boost/graph/directed\_graph.hpp>}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00012}00012 \textcolor{preprocessor}{\#include <boost/graph/compressed\_sparse\_row\_graph.hpp>}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00013}00013 \textcolor{preprocessor}{\#include <boost/graph/adjacency\_list.hpp>}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00014}00014 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00015}00015 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00016}00016 \textcolor{comment}{// Define a hash function for arrays of 3 floats.}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00017}00017 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00395}{std}} \{}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00020}00020 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00032}00032     \textcolor{keyword}{template} <\textcolor{keyword}{typename} SizeT>}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00033}00033     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a00395_a78d69e3306ec9cf190f79b72217f2340}{array\_hash\_combine\_impl}}(SizeT\& seed, SizeT value)}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00034}00034     \{}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00035}00035         seed \string^= \mbox{\hyperlink{a00411_a2fb6dae6578e06ae73ca0d7cc8512b1aa2063c1608d6e0baf80249c42e2be5804}{value}} + 0x9e3779b9 + (seed << 6) + (seed >> 2);}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00036}00036     \}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00037}00037     \textcolor{keyword}{template} <>}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00038}\mbox{\hyperlink{a01305}{00038}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a00411_a679e5e522ac6afa5d5923292fab450b8}{hash}}<\mbox{\hyperlink{a00395}{std}}::array<float, 3>>}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00039}00039     \{}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00043}00043 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00053}\mbox{\hyperlink{a01305_af1c504305bc3e72e72884840ae9b1177}{00053}}         \textcolor{keyword}{inline} std::size\_t \mbox{\hyperlink{a01305_af1c504305bc3e72e72884840ae9b1177}{operator()}}(\textcolor{keyword}{const} std::array<float, 3>\& k)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00054}00054 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00055}00055             \textcolor{keywordtype}{size\_t} seed = std::hash<float>()(k[0]);}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00056}00056             \mbox{\hyperlink{a00395_a78d69e3306ec9cf190f79b72217f2340}{array\_hash\_combine\_impl}}(seed, std::hash<float>()(k[1]));}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00057}00057             \mbox{\hyperlink{a00395_a78d69e3306ec9cf190f79b72217f2340}{array\_hash\_combine\_impl}}(seed, std::hash<float>()(k[2]));}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00058}00058             \textcolor{keywordflow}{return} seed;}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00059}00059         \}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00060}00060     \};}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00061}00061 \}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00062}00062 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00075}\mbox{\hyperlink{a00407}{00075}} \textcolor{keyword}{namespace }\mbox{\hyperlink{a00407}{boost}}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00076}00076 \{}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00077}00077 \textcolor{preprocessor}{\#ifdef BOOST\_NO\_EXCEPTIONS}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00078}00078     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} throw\_exception(std::exception \textcolor{keyword}{const}\& e) \{}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00079}00079         \textcolor{keywordflow}{throw} 11; \textcolor{comment}{// or whatever}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00080}00080     \};}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00081}00081 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00082}00082 \}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00083}00083 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00084}00084 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00085}00085 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00396}{HF}} \{}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00086}00086 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00087}00087     \textcolor{comment}{// Forward Declares}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00088}00088     \textcolor{keyword}{namespace }SpatialStructures \{}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00089}00089         \textcolor{keyword}{class }Graph;}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00090}00090         \textcolor{keyword}{class }Node;     }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00091}00091     \}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00092}00092 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00093}00093     \textcolor{keyword}{namespace }Pathfinding \{}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00094}00094         \textcolor{comment}{// Note: These structs and typedefs are used to simplify creation and usage of the boost}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00095}00095         \textcolor{comment}{// graph and serve no purpose outside of that.}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00096}00096 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00098}00098 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00099}\mbox{\hyperlink{a00406}{00099}}         \textcolor{keyword}{struct }\mbox{\hyperlink{a00406_a01309}{Edge\_Cost}} \{ }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00100}\mbox{\hyperlink{a00406_aefea62ffa2c7078ac7d9f2eefaa96e07}{00100}}             \textcolor{keywordtype}{float} \mbox{\hyperlink{a00406_aefea62ffa2c7078ac7d9f2eefaa96e07}{weight}}; }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00101}00101         \};}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00102}00102 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00104}00104 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00111}\mbox{\hyperlink{a00406}{00111}}         \textcolor{keyword}{struct }\mbox{\hyperlink{a00406_a01313}{vertex\_data}} \{}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00112}00112             boost::graph\_traits<}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00113}00113                 boost::compressed\_sparse\_row\_graph<boost::directedS>}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00114}\mbox{\hyperlink{a00406_a6d7facb34a520e63bf016898c8352648}{00114}}             >\mbox{\hyperlink{a00406_a4dc50f188646ed884b58b3e26c7932a5}{::vertex\_descriptor}} \mbox{\hyperlink{a00406_a6d7facb34a520e63bf016898c8352648}{p}};         }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00115}\mbox{\hyperlink{a00406_a3f23d92f8d538033cf4096201083944e}{00115}}             \textcolor{keywordtype}{double} \mbox{\hyperlink{a00406_a3f23d92f8d538033cf4096201083944e}{d}};                      }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00116}00116         \};}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00117}00117 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00131}00131         \textcolor{keyword}{typedef} boost::compressed\_sparse\_row\_graph<}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00132}00132             boost::directedS,}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00133}00133             \mbox{\hyperlink{a00406_a01313}{vertex\_data}},}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00134}00134             \mbox{\hyperlink{a00406_a01309}{Edge\_Cost}}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00135}\mbox{\hyperlink{a00406_a9314d552e0a8092644fa080c9945bd25}{00135}}         > \mbox{\hyperlink{a00406_a9314d552e0a8092644fa080c9945bd25}{graph\_t}};}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00136}00136 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00139}\mbox{\hyperlink{a00406_a4dc50f188646ed884b58b3e26c7932a5}{00139}}         \textcolor{keyword}{typedef} \mbox{\hyperlink{a00406_a4dc50f188646ed884b58b3e26c7932a5}{boost::graph\_traits< graph\_t >::vertex\_descriptor}} \mbox{\hyperlink{a00406_a4dc50f188646ed884b58b3e26c7932a5}{vertex\_descriptor}};}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00140}00140 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00142}\mbox{\hyperlink{a00406_acc378c1e475802d96758aaef12d33dbc}{00142}}         \textcolor{keyword}{typedef} std::pair <int, int> \mbox{\hyperlink{a00406_acc378c1e475802d96758aaef12d33dbc}{pair}};}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00143}00143 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00166}\mbox{\hyperlink{a01317}{00166}}         \textcolor{keyword}{class }\mbox{\hyperlink{a01317}{BoostGraph}} \{}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00167}00167         \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00168}\mbox{\hyperlink{a01317_a8af65de831cc2255b7ad2069791124ef}{00168}}             \mbox{\hyperlink{a00406_a9314d552e0a8092644fa080c9945bd25}{graph\_t}} \mbox{\hyperlink{a01317_a8af65de831cc2255b7ad2069791124ef}{g}};                          }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00169}\mbox{\hyperlink{a01317_ac7b026041a385cf55c089944a02e0c1d}{00169}}             std::vector<vertex\_descriptor> \mbox{\hyperlink{a01317_ac7b026041a385cf55c089944a02e0c1d}{p}};  }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00170}\mbox{\hyperlink{a01317_a45e623a31de17dd7eba2e849822fc692}{00170}}             std::vector<double> \mbox{\hyperlink{a01317_a45e623a31de17dd7eba2e849822fc692}{d}};             }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00171}00171 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00173}00173 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00217}00217             \mbox{\hyperlink{a01317_ac7878a25105aec59a116942a717d71b4}{BoostGraph}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01485}{HF::SpatialStructures::Graph}}\& graph, \textcolor{keyword}{const} std::string \& cost\_type = \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00218}00218     }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00220}00220 }
+\DoxyCodeLine{\Hypertarget{a00134_source_l00264}\mbox{\hyperlink{a01317_a9626c462cdaa2b8d869e7a4311c51b7d}{00264}}             \mbox{\hyperlink{a01317_a9626c462cdaa2b8d869e7a4311c51b7d}{\string~BoostGraph}}();}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00265}00265         \};}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00266}00266     \}}
+\DoxyCodeLine{\Hypertarget{a00134_source_l00267}00267 \}}
+
+\end{DoxyCode}

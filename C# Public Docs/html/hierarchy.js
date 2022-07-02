@@ -1,6 +1,6 @@
 var hierarchy =
 [
-    [ "ApplicationException", null, [
+    [ "System.ApplicationException", null, [
       [ "HumanFactors.Exceptions.InvalidCostOperation", "class_human_factors_1_1_exceptions_1_1_invalid_cost_operation.html", null ],
       [ "HumanFactors.Exceptions.InvalidMeshException", "class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception.html", null ],
       [ "HumanFactors.Exceptions.LogicError", "class_human_factors_1_1_exceptions_1_1_logic_error.html", null ]

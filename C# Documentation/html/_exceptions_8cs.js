@@ -1,8 +1,8 @@
 var _exceptions_8cs =
 [
-    [ "InvalidMeshException", "class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception.html", "class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception" ],
-    [ "InvalidCostOperation", "class_human_factors_1_1_exceptions_1_1_invalid_cost_operation.html", "class_human_factors_1_1_exceptions_1_1_invalid_cost_operation" ],
-    [ "LogicError", "class_human_factors_1_1_exceptions_1_1_logic_error.html", "class_human_factors_1_1_exceptions_1_1_logic_error" ],
+    [ "HumanFactors.Exceptions.InvalidMeshException", "class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception.html", "class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception" ],
+    [ "HumanFactors.Exceptions.InvalidCostOperation", "class_human_factors_1_1_exceptions_1_1_invalid_cost_operation.html", "class_human_factors_1_1_exceptions_1_1_invalid_cost_operation" ],
+    [ "HumanFactors.Exceptions.LogicError", "class_human_factors_1_1_exceptions_1_1_logic_error.html", "class_human_factors_1_1_exceptions_1_1_logic_error" ],
     [ "HF_STATUS", "_exceptions_8cs.html#a8a5123945956ef2d754b5420be18987f", [
       [ "OK", "_exceptions_8cs.html#a8a5123945956ef2d754b5420be18987fae0aa021e21dddbd6d8cecec71e9cf564", null ],
       [ "NOT_IMPLEMENTED", "_exceptions_8cs.html#a8a5123945956ef2d754b5420be18987fa3e860a081575fc82cc7b6ed2ca602947", null ],

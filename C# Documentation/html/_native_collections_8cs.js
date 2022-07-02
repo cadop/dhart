@@ -1,0 +1,8 @@
+var _native_collections_8cs =
+[
+    [ "HumanFactors.NativeUtils.CommonNativeArrays.ManagedFloatArray", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_managed_float_array.html", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_managed_float_array" ],
+    [ "HumanFactors.NativeUtils.CommonNativeArrays.ManagedCharPtrArray", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_managed_char_ptr_array.html", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_managed_char_ptr_array" ],
+    [ "HumanFactors.NativeUtils.CommonNativeArrays.UnmanagedIntArray2D", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_int_array2_d.html", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_int_array2_d" ],
+    [ "HumanFactors.NativeUtils.CommonNativeArrays.UnmanagedFloatArray2D", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_float_array2_d.html", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_float_array2_d" ],
+    [ "HumanFactors.NativeUtils.CommonNativeArrays.NativeMethods", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_native_methods.html", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_native_methods" ]
+];

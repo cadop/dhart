@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['y_2697',['y',['../a01389.html#af92059bf1d44c9bf67c90ca2d46be17e',1,'nanort::real3']]]
+  ['z_0',['z',['../a01377.html#a96d4a74ac8a453a85c5661d38d3003d1',1,'nanort::real3']]]
 ];

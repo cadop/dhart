@@ -1,12 +1,12 @@
 var a00008 =
 [
-    [ "Precision", "a00397.html#a01241", [
+    [ "HF::GraphGenerator::Precision", "a00397.html#a01229", [
       [ "ground_offset", "a00397.html#a4fa4f096863296469711e52da4b36b9c", null ],
       [ "node_spacing", "a00397.html#ac982230f7d151df6018c19d712cd3436", null ],
       [ "node_z", "a00397.html#a6ec86cb69c1cc0e0dc8ea229310939b6", null ]
     ] ],
-    [ "GeometryFlagMap", "a01245.html", "a01245" ],
-    [ "GraphParams", "a00397.html#a01249", [
+    [ "HF::GraphGenerator::GeometryFlagMap", "a01233.html", "a01233" ],
+    [ "HF::GraphGenerator::GraphParams", "a00397.html#a01237", [
       [ "down_slope", "a00397.html#a7c141d33285a77c81fc1b9ce0b210d72", null ],
       [ "down_step", "a00397.html#add2b6fa6bf77a8c4626a1e6d0559970f", null ],
       [ "geom_ids", "a00397.html#a5dc55aa5861e9bb2f2675146b11812af", null ],
@@ -14,8 +14,8 @@ var a00008 =
       [ "up_slope", "a00397.html#add7f080950668f5dfa8d857e9c66b89d", null ],
       [ "up_step", "a00397.html#a0b8afc5f531e3286ce2434b1bc2b1f50", null ]
     ] ],
-    [ "optional_real3", "a01253.html", "a01253" ],
-    [ "GraphGenerator", "a01257.html", "a01257" ],
+    [ "HF::GraphGenerator::optional_real3", "a01241.html", "a01241" ],
+    [ "HF::GraphGenerator::GraphGenerator", "a01245.html", "a01245" ],
     [ "_USE_MATH_DEFINES", "a00008.html#a525335710b53cb064ca56b936120431e", null ],
     [ "graph_edge", "a00008.html#a2472e370aa77f9486bb1c46a1ff704c5", null ],
     [ "hashmap", "a00008.html#adacfd76227db1d19cad7c15a8dde7330", null ],

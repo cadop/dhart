@@ -2,7 +2,7 @@
 \label{a00338}\index{Cinterface/analysis\_C.cpp@{Cinterface/analysis\_C.cpp}}
 {\ttfamily \#include $<$analysis\+\_\+\+C.\+h$>$}\newline
 {\ttfamily \#include $<$robin\+\_\+hood.\+h$>$}\newline
-{\ttfamily \#include $<$H\+F\+Exceptions.\+h$>$}\newline
+{\ttfamily \#include $<$HFExceptions.\+h$>$}\newline
 {\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
 {\ttfamily \#include $<$graph\+\_\+generator.\+h$>$}\newline
 {\ttfamily \#include $<$graph.\+h$>$}\newline
@@ -17,35 +17,35 @@ Include dependency graph for analysis\+\_\+\+C.\+cpp\+:
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename T $>$ }\\std\+::vector$<$ T $>$ \mbox{\hyperlink{a00338_a4eef6bb89f81a518e6d028fba61abd7f}{Map\+To\+Vector}} (int length, const T $\ast$in\+\_\+ptr)
+{\footnotesize template$<$typename T $>$ }\\std\+::vector$<$ T $>$ \mbox{\hyperlink{a00338_ae57988500f66a8ab4a31a9b50ed58b02}{Map\+To\+Vector}} (int length, const T $\ast$in\+\_\+ptr)
 \item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00388_gac2583dc1ee6786b15fa4f06bfde2130a}{Generate\+Graph}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ray\+\_\+tracer, const float $\ast$start\+\_\+point, const float $\ast$spacing, int Max\+Nodes, float Up\+Step, float Up\+Slope, float Down\+Step, float Down\+Slope, int max\+\_\+step\+\_\+connections, int core\+\_\+count, \mbox{\hyperlink{a01497}{Graph}} $\ast$$\ast$out\+\_\+graph)
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00388_gac2583dc1ee6786b15fa4f06bfde2130a}{Generate\+Graph}} (\mbox{\hyperlink{a01345}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ray\+\_\+tracer, const float $\ast$start\+\_\+point, const float $\ast$spacing, int Max\+Nodes, float Up\+Step, float Up\+Slope, float Down\+Step, float Down\+Slope, int max\+\_\+step\+\_\+connections, int core\+\_\+count, \mbox{\hyperlink{a01485}{Graph}} $\ast$$\ast$out\+\_\+graph)
 \begin{DoxyCompactList}\small\item\em Construct a graph by performing a breadth-\/first search of accessible space. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00388_ga4dea438697ab06c4ab5e6da840bfdcfa}{Generate\+Graph\+Obstacles}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ray\+\_\+tracer, const float $\ast$start\+\_\+point, const float $\ast$spacing, int Max\+Nodes, float Up\+Step, float Up\+Slope, float Down\+Step, float Down\+Slope, int max\+\_\+step\+\_\+connections, int core\+\_\+count, const int $\ast$obstacle\+\_\+ids, const int $\ast$walkable\+\_\+ids, int num\+\_\+obstacles, int num\+\_\+walkables, \mbox{\hyperlink{a01497}{Graph}} $\ast$$\ast$out\+\_\+graph)
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00388_ga4dea438697ab06c4ab5e6da840bfdcfa}{Generate\+Graph\+Obstacles}} (\mbox{\hyperlink{a01345}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ray\+\_\+tracer, const float $\ast$start\+\_\+point, const float $\ast$spacing, int Max\+Nodes, float Up\+Step, float Up\+Slope, float Down\+Step, float Down\+Slope, int max\+\_\+step\+\_\+connections, int core\+\_\+count, const int $\ast$obstacle\+\_\+ids, const int $\ast$walkable\+\_\+ids, int num\+\_\+obstacles, int num\+\_\+walkables, \mbox{\hyperlink{a01485}{Graph}} $\ast$$\ast$out\+\_\+graph)
 \begin{DoxyCompactList}\small\item\em Construct a graph by performing a breadth-\/first search of accessible space, seperating obstacles from walkable geometry. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{a00338_a4eef6bb89f81a518e6d028fba61abd7f}\label{a00338_a4eef6bb89f81a518e6d028fba61abd7f}} 
+\mbox{\Hypertarget{a00338_ae57988500f66a8ab4a31a9b50ed58b02}\label{a00338_ae57988500f66a8ab4a31a9b50ed58b02}} 
 \index{analysis\_C.cpp@{analysis\_C.cpp}!MapToVector@{MapToVector}}
 \index{MapToVector@{MapToVector}!analysis\_C.cpp@{analysis\_C.cpp}}
 \doxysubsubsection{\texorpdfstring{MapToVector()}{MapToVector()}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
-std\+::vector$<$T$>$ Map\+To\+Vector (\begin{DoxyParamCaption}\item[{int}]{length,  }\item[{const T $\ast$}]{in\+\_\+ptr }\end{DoxyParamCaption})}
+std\+::vector$<$ T $>$ Map\+To\+Vector (\begin{DoxyParamCaption}\item[{int}]{length,  }\item[{const T $\ast$}]{in\+\_\+ptr }\end{DoxyParamCaption})}
 
 
 
-Definition at line 15 of file analysis\+\_\+\+C.\+cpp.
+Definition at line \mbox{\hyperlink{a00338_source_l00015}{15}} of file \mbox{\hyperlink{a00338_source}{analysis\+\_\+\+C.\+cpp}}.
 
 
 
-Referenced by Generate\+Graph\+Obstacles().
+Referenced by \mbox{\hyperlink{a00338_source_l00060}{Generate\+Graph\+Obstacles()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=334pt]{a00338_a4eef6bb89f81a518e6d028fba61abd7f_icgraph}
+\includegraphics[width=317pt]{a00338_ae57988500f66a8ab4a31a9b50ed58b02_icgraph}
 \end{center}
 \end{figure}

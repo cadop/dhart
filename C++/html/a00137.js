@@ -1,6 +1,6 @@
 var a00137 =
 [
-    [ "DistPred", "a01333.html", "a01333" ],
+    [ "HF::Pathfinding::DistPred", "a01321.html", "a01321" ],
     [ "BuildDistanceAndPredecessor", "a00137.html#a9f6490539108da057db2486295458886", null ],
     [ "ConstructShortestPathFromPred", "a00137.html#a322ac32effd41c99359b82df0890e34a", null ],
     [ "ConstructShortestPathFromPred", "a00137.html#a977e4c93a977ab4e9e784d1e6fec79f4", null ],

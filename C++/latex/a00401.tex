@@ -8,17 +8,17 @@ Evaluate visibility between points in a set of locations.
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{a00401_af811d21e4c49275521912df9254bb737}{Height\+Check}} (const \mbox{\hyperlink{a02017}{Node}} \&\mbox{\hyperlink{a02017}{Node}}, float height, \mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} \&ert)
+bool \mbox{\hyperlink{a00401_af811d21e4c49275521912df9254bb737}{Height\+Check}} (const \mbox{\hyperlink{a02005}{Node}} \&\mbox{\hyperlink{a02005}{Node}}, float height, \mbox{\hyperlink{a01345}{Embree\+Ray\+Tracer}} \&ert)
 \begin{DoxyCompactList}\small\item\em Check if Node can be raised by height without clipping into any geometry. \end{DoxyCompactList}\item 
-vector$<$ int $>$ \mbox{\hyperlink{a00401_a5cddfd8eb7ae23f8ecea0277ad5c3cc5}{Height\+Check\+All\+Nodes}} (const vector$<$ \mbox{\hyperlink{a02017}{Node}} $>$ \&nodes\+\_\+to\+\_\+filter, float height, \mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} \&ert)
+vector$<$ int $>$ \mbox{\hyperlink{a00401_a05b8a83ab27113369c95649470d864b9}{Height\+Check\+All\+Nodes}} (const vector$<$ \mbox{\hyperlink{a02005}{Node}} $>$ \&nodes\+\_\+to\+\_\+filter, float height, \mbox{\hyperlink{a01345}{Embree\+Ray\+Tracer}} \&ert)
 \begin{DoxyCompactList}\small\item\em Obtain the indexes of all nodes that pass the Height\+Check. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{a00401_a4d9cf77879eb78075f7f7b0a7e31119a}{Is\+Occlusion\+Between}} (const \mbox{\hyperlink{a02017}{Node}} \&node\+\_\+a, const \mbox{\hyperlink{a02017}{Node}} \&node\+\_\+b, \mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} \&ert, float height=1.\+7f, float pre\+\_\+calculated\+\_\+distance=0.\+0f)
+bool \mbox{\hyperlink{a00401_a4d9cf77879eb78075f7f7b0a7e31119a}{Is\+Occlusion\+Between}} (const \mbox{\hyperlink{a02005}{Node}} \&node\+\_\+a, const \mbox{\hyperlink{a02005}{Node}} \&node\+\_\+b, \mbox{\hyperlink{a01345}{Embree\+Ray\+Tracer}} \&ert, float height=1.\+7f, float pre\+\_\+calculated\+\_\+distance=0.\+0f)
 \begin{DoxyCompactList}\small\item\em Perform a line of sight check between two nodes. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01497}{Graph}} \mbox{\hyperlink{a00401_a12eb1e4c06400c4625cd22d925927b03}{All\+To\+All}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&input\+\_\+nodes, float height=1.\+7f)
+\mbox{\hyperlink{a01485}{Graph}} \mbox{\hyperlink{a00401_a12eb1e4c06400c4625cd22d925927b03}{All\+To\+All}} (\mbox{\hyperlink{a01345}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} $>$ \&input\+\_\+nodes, float height=1.\+7f)
 \begin{DoxyCompactList}\small\item\em Generate a Visibility Graph between every node in a set of nodes in parallel. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01497}{Graph}} \mbox{\hyperlink{a00401_ae42a5aafdfcc29b6a668355c07602efb}{Group\+To\+Group}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&from, const std\+::vector$<$ \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&to, float height=1.\+7f)
+\mbox{\hyperlink{a01485}{Graph}} \mbox{\hyperlink{a00401_ae42a5aafdfcc29b6a668355c07602efb}{Group\+To\+Group}} (\mbox{\hyperlink{a01345}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} $>$ \&from, const std\+::vector$<$ \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} $>$ \&to, float height=1.\+7f)
 \begin{DoxyCompactList}\small\item\em Generate a Visibility Graph from a set of nodes to another set of nodes. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01497}{Graph}} \mbox{\hyperlink{a00401_ab1db87927118f70786a664c3b3cc7905}{All\+To\+All\+Undirected}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&nodes, float height, int cores=-\/1)
+\mbox{\hyperlink{a01485}{Graph}} \mbox{\hyperlink{a00401_ab1db87927118f70786a664c3b3cc7905}{All\+To\+All\+Undirected}} (\mbox{\hyperlink{a01345}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} $>$ \&nodes, float height, int cores=-\/1)
 \begin{DoxyCompactList}\small\item\em Generate a Visibility Graph with every edge stored twice. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -33,7 +33,7 @@ Edges in Visibility Graph are bidirectional, since if one node can see another n
 One can quickly summarize the information in a Visibility Graph by summarizing the values of its edges for each node in the graph.
 \end{DoxyRemark}
 \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} for more info on the Graph Datatype that is returned from all functions in the \mbox{\hyperlink{a00401}{Visibility\+Graph}} namespace. 
+\mbox{\hyperlink{a01485}{HF\+::\+Spatial\+Structures\+::\+Graph}} for more info on the Graph Datatype that is returned from all functions in the \mbox{\hyperlink{a00401}{Visibility\+Graph}} namespace. 
 \end{DoxySeeAlso}
 
 
@@ -42,7 +42,7 @@ One can quickly summarize the information in a Visibility Graph by summarizing t
 \index{HF::VisibilityGraph@{HF::VisibilityGraph}!AllToAll@{AllToAll}}
 \index{AllToAll@{AllToAll}!HF::VisibilityGraph@{HF::VisibilityGraph}}
 \doxysubsubsection{\texorpdfstring{AllToAll()}{AllToAll()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} H\+F\+::\+Visibility\+Graph\+::\+All\+To\+All (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&}]{ert,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&}]{input\+\_\+nodes,  }\item[{float}]{height = {\ttfamily 1.7f} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01485}{HF\+::\+Spatial\+Structures\+::\+Graph}} HF\+::\+Visibility\+Graph\+::\+All\+To\+All (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01345}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&}]{ert,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} $>$ \&}]{input\+\_\+nodes,  }\item[{float}]{height = {\ttfamily 1.7f} }\end{DoxyParamCaption})}
 
 
 
@@ -80,19 +80,19 @@ The time complexity of this algorithm is O(n$^\wedge$2), performing approximatel
 \end{DoxySeeAlso}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "objloader.h"}}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}objloader.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// path to OBJ file for a flat plane}}
-\DoxyCodeLine{std::string \mbox{\hyperlink{a00335_ad2d18c3c0371ab0b0822553fbbe333f9}{plane\_path}} = \textcolor{stringliteral}{"plane.obj"};}
+\DoxyCodeLine{std::string plane\_path = \textcolor{stringliteral}{"{}plane.obj"{}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Create a vector of MeshInfo from plane\_path, using LoadMeshObjects. Note that}}
 \DoxyCodeLine{\textcolor{comment}{// LoadMeshObjects has two more arguments after plane\_path -\/ an enum}}
 \DoxyCodeLine{\textcolor{comment}{// HF::Geometry::GROUP\_METHOD (defaults to GROUP\_METHOD::ONLY\_FILE) a bool}}
 \DoxyCodeLine{\textcolor{comment}{// (defaults to true, used to convert OBJ coordinate system to Rhino coordinates)}}
-\DoxyCodeLine{std::vector<HF::Geometry::MeshInfo> meshInfo = \mbox{\hyperlink{a00403_a06c0c11adb62f8b204e42f75ac1990ac}{HF::Geometry::LoadMeshObjects}}(\mbox{\hyperlink{a00335_ad2d18c3c0371ab0b0822553fbbe333f9}{plane\_path}});}
+\DoxyCodeLine{std::vector<HF::Geometry::MeshInfo> meshInfo = \mbox{\hyperlink{a00403_a06c0c11adb62f8b204e42f75ac1990ac}{HF::Geometry::LoadMeshObjects}}(plane\_path);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Create an EmbreeRayTracer.}}
-\DoxyCodeLine{\mbox{\hyperlink{a01357}{HF::RayTracer::EmbreeRayTracer}} tracer(meshInfo);}
+\DoxyCodeLine{\mbox{\hyperlink{a01345}{HF::RayTracer::EmbreeRayTracer}} tracer(meshInfo);}
 \DoxyCodeLine{}
 \DoxyCodeLine{std::vector<HF::SpatialStructures::Node> node\_vec;      \textcolor{comment}{// container of nodes}}
 \DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} reserve\_count = 100;                          \textcolor{comment}{// pre-\/defined reserve size}}
@@ -110,19 +110,20 @@ The time complexity of this algorithm is O(n$^\wedge$2), performing approximatel
 \DoxyCodeLine{\textcolor{comment}{// AllToAll constructs and returns a Graph consisting of Node (from node\_vec)}}
 \DoxyCodeLine{\textcolor{comment}{// that do not occlude each other}}
 \DoxyCodeLine{\textcolor{keywordtype}{float} desired\_height = 2.0f;        \textcolor{comment}{// Height of graph}}
-\DoxyCodeLine{\mbox{\hyperlink{a01497}{HF::SpatialStructures::Graph}} graph = \mbox{\hyperlink{a00401_a12eb1e4c06400c4625cd22d925927b03}{AllToAll}}(tracer, node\_vec, desired\_height);}
+\DoxyCodeLine{\mbox{\hyperlink{a01485}{HF::SpatialStructures::Graph}} graph = \mbox{\hyperlink{a00401_a12eb1e4c06400c4625cd22d925927b03}{AllToAll}}(tracer, node\_vec, desired\_height);}
+
 \end{DoxyCode}
  
 
-Definition at line 128 of file visibility\+\_\+graph.\+cpp.
+Definition at line \mbox{\hyperlink{a00026_source_l00128}{128}} of file \mbox{\hyperlink{a00026_source}{visibility\+\_\+graph.\+cpp}}.
 
 
 
-References H\+F\+::\+Spatial\+Structures\+::\+Node\+::distance\+To(), Height\+Check\+All\+Nodes(), and Is\+Occlusion\+Between().
+References \mbox{\hyperlink{a03488_source_l00040}{HF\+::\+Spatial\+Structures\+::\+Node\+::distance\+To()}}, \mbox{\hyperlink{a00026_source_l00069}{Height\+Check\+All\+Nodes()}}, \mbox{\hyperlink{a00026_source_l00103}{Is\+Occlusion\+Between()}}, and \mbox{\hyperlink{a01485_a2710af2a75976862d7a235793567d2f3}{HF\+::\+Spatial\+Structures\+::\+Graph\+::size()}}.
 
 
 
-Referenced by Create\+Visibility\+Graph\+All\+To\+All(), and T\+E\+S\+T().
+Referenced by \mbox{\hyperlink{a00380_source_l00016}{Create\+Visibility\+Graph\+All\+To\+All()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -137,14 +138,14 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a00401_a12eb1e4c06400c4625cd22d925927b03_icgraph}
+\includegraphics[width=333pt]{a00401_a12eb1e4c06400c4625cd22d925927b03_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{a00401_ab1db87927118f70786a664c3b3cc7905}\label{a00401_ab1db87927118f70786a664c3b3cc7905}} 
 \index{HF::VisibilityGraph@{HF::VisibilityGraph}!AllToAllUndirected@{AllToAllUndirected}}
 \index{AllToAllUndirected@{AllToAllUndirected}!HF::VisibilityGraph@{HF::VisibilityGraph}}
 \doxysubsubsection{\texorpdfstring{AllToAllUndirected()}{AllToAllUndirected()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} H\+F\+::\+Visibility\+Graph\+::\+All\+To\+All\+Undirected (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&}]{ert,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&}]{nodes,  }\item[{float}]{height,  }\item[{int}]{cores = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01485}{HF\+::\+Spatial\+Structures\+::\+Graph}} HF\+::\+Visibility\+Graph\+::\+All\+To\+All\+Undirected (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01345}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&}]{ert,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} $>$ \&}]{nodes,  }\item[{float}]{height,  }\item[{int}]{cores = {\ttfamily -\/1} }\end{DoxyParamCaption})}
 
 
 
@@ -178,19 +179,19 @@ O(n$^\wedge$2) in space and time. ~\newline
 \end{DoxyParagraph}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "objloader.h"}}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}objloader.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// path to OBJ file for a flat plane}}
-\DoxyCodeLine{std::string \mbox{\hyperlink{a00335_ad2d18c3c0371ab0b0822553fbbe333f9}{plane\_path}} = \textcolor{stringliteral}{"plane.obj"};}
+\DoxyCodeLine{std::string plane\_path = \textcolor{stringliteral}{"{}plane.obj"{}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Create a vector of MeshInfo from plane\_path, using LoadMeshObjects. Note that}}
 \DoxyCodeLine{\textcolor{comment}{// LoadMeshObjects has two more arguments after plane\_path -\/ an enum}}
 \DoxyCodeLine{\textcolor{comment}{// HF::Geometry::GROUP\_METHOD (defaults to GROUP\_METHOD::ONLY\_FILE) a bool}}
 \DoxyCodeLine{\textcolor{comment}{// (defaults to true, used to convert OBJ coordinate system to Rhino coordinates)}}
-\DoxyCodeLine{std::vector<HF::Geometry::MeshInfo> meshInfo = \mbox{\hyperlink{a00403_a06c0c11adb62f8b204e42f75ac1990ac}{HF::Geometry::LoadMeshObjects}}(\mbox{\hyperlink{a00335_ad2d18c3c0371ab0b0822553fbbe333f9}{plane\_path}});}
+\DoxyCodeLine{std::vector<HF::Geometry::MeshInfo> meshInfo = \mbox{\hyperlink{a00403_a06c0c11adb62f8b204e42f75ac1990ac}{HF::Geometry::LoadMeshObjects}}(plane\_path);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Create an EmbreeRayTracer.}}
-\DoxyCodeLine{\mbox{\hyperlink{a01357}{HF::RayTracer::EmbreeRayTracer}} tracer(meshInfo);}
+\DoxyCodeLine{\mbox{\hyperlink{a01345}{HF::RayTracer::EmbreeRayTracer}} tracer(meshInfo);}
 \DoxyCodeLine{}
 \DoxyCodeLine{std::vector<HF::SpatialStructures::Node> node\_vec;      \textcolor{comment}{// container of nodes}}
 \DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} reserve\_count = 100;                          \textcolor{comment}{// pre-\/defined reserve size}}
@@ -201,7 +202,7 @@ O(n$^\wedge$2) in space and time. ~\newline
 \DoxyCodeLine{    \textcolor{comment}{// runs 10 times}}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{float} j = -\/5; j < 5.0; j++) \{}
 \DoxyCodeLine{        \textcolor{comment}{// runs 10 times}}
-\DoxyCodeLine{        node\_vec.emplace\_back(\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}}(i, j, 0.0f)); \textcolor{comment}{// all Node ID default to -\/1}}
+\DoxyCodeLine{        node\_vec.emplace\_back(\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}}(i, j, 0.0f)); \textcolor{comment}{// all Node ID default to -\/1}}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
@@ -209,20 +210,21 @@ O(n$^\wedge$2) in space and time. ~\newline
 \DoxyCodeLine{\textcolor{comment}{// node\_vec) that do not occlude each other}}
 \DoxyCodeLine{\textcolor{keywordtype}{float} desired\_height = 2.0f;        \textcolor{comment}{// Height of graph}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} core\_count = 4;                 \textcolor{comment}{// For omp\_set\_num\_threads(int num\_threads), CPU core count}}
-\DoxyCodeLine{\mbox{\hyperlink{a01497}{HF::SpatialStructures::Graph}} graph =}
+\DoxyCodeLine{\mbox{\hyperlink{a01485}{HF::SpatialStructures::Graph}} graph =}
 \DoxyCodeLine{    \mbox{\hyperlink{a00401_ab1db87927118f70786a664c3b3cc7905}{HF::VisibilityGraph::AllToAllUndirected}}(tracer, node\_vec, desired\_height, core\_count);}
+
 \end{DoxyCode}
  
 
-Definition at line 252 of file visibility\+\_\+graph.\+cpp.
+Definition at line \mbox{\hyperlink{a00026_source_l00252}{252}} of file \mbox{\hyperlink{a00026_source}{visibility\+\_\+graph.\+cpp}}.
 
 
 
-References H\+F\+::\+Spatial\+Structures\+::\+Node\+::distance\+To(), Height\+Check\+All\+Nodes(), and Is\+Occlusion\+Between().
+References \mbox{\hyperlink{a03488_source_l00040}{HF\+::\+Spatial\+Structures\+::\+Node\+::distance\+To()}}, \mbox{\hyperlink{a00026_source_l00069}{Height\+Check\+All\+Nodes()}}, \mbox{\hyperlink{a00026_source_l00103}{Is\+Occlusion\+Between()}}, and \mbox{\hyperlink{a01485_a2710af2a75976862d7a235793567d2f3}{HF\+::\+Spatial\+Structures\+::\+Graph\+::size()}}.
 
 
 
-Referenced by Create\+Visibility\+Graph\+All\+To\+All\+Undirected(), and T\+E\+S\+T().
+Referenced by \mbox{\hyperlink{a00380_source_l00040}{Create\+Visibility\+Graph\+All\+To\+All\+Undirected()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -237,14 +239,14 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a00401_ab1db87927118f70786a664c3b3cc7905_icgraph}
+\includegraphics[width=337pt]{a00401_ab1db87927118f70786a664c3b3cc7905_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{a00401_ae42a5aafdfcc29b6a668355c07602efb}\label{a00401_ae42a5aafdfcc29b6a668355c07602efb}} 
 \index{HF::VisibilityGraph@{HF::VisibilityGraph}!GroupToGroup@{GroupToGroup}}
 \index{GroupToGroup@{GroupToGroup}!HF::VisibilityGraph@{HF::VisibilityGraph}}
 \doxysubsubsection{\texorpdfstring{GroupToGroup()}{GroupToGroup()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} H\+F\+::\+Visibility\+Graph\+::\+Group\+To\+Group (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&}]{ert,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&}]{from,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&}]{to,  }\item[{float}]{height = {\ttfamily 1.7f} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01485}{HF\+::\+Spatial\+Structures\+::\+Graph}} HF\+::\+Visibility\+Graph\+::\+Group\+To\+Group (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01345}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&}]{ert,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} $>$ \&}]{from,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} $>$ \&}]{to,  }\item[{float}]{height = {\ttfamily 1.7f} }\end{DoxyParamCaption})}
 
 
 
@@ -280,19 +282,19 @@ In time\+: O(ft) where f is the number of nodes in from, and t is the number of 
 \end{DoxyParagraph}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "objloader.h"}}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}objloader.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// path to OBJ file for a flat plane}}
-\DoxyCodeLine{std::string \mbox{\hyperlink{a00335_ad2d18c3c0371ab0b0822553fbbe333f9}{plane\_path}} = \textcolor{stringliteral}{"plane.obj"};}
+\DoxyCodeLine{std::string plane\_path = \textcolor{stringliteral}{"{}plane.obj"{}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Create a vector of MeshInfo from plane\_path, using LoadMeshObjects. Note that}}
 \DoxyCodeLine{\textcolor{comment}{// LoadMeshObjects has two more arguments after plane\_path -\/ an enum}}
 \DoxyCodeLine{\textcolor{comment}{// HF::Geometry::GROUP\_METHOD (defaults to GROUP\_METHOD::ONLY\_FILE) a bool}}
 \DoxyCodeLine{\textcolor{comment}{// (defaults to true, used to convert OBJ coordinate system to Rhino coordinates)}}
-\DoxyCodeLine{std::vector<HF::Geometry::MeshInfo> meshInfo = \mbox{\hyperlink{a00403_a06c0c11adb62f8b204e42f75ac1990ac}{HF::Geometry::LoadMeshObjects}}(\mbox{\hyperlink{a00335_ad2d18c3c0371ab0b0822553fbbe333f9}{plane\_path}});}
+\DoxyCodeLine{std::vector<HF::Geometry::MeshInfo> meshInfo = \mbox{\hyperlink{a00403_a06c0c11adb62f8b204e42f75ac1990ac}{HF::Geometry::LoadMeshObjects}}(plane\_path);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Create an EmbreeRayTracer.}}
-\DoxyCodeLine{\mbox{\hyperlink{a01357}{HF::RayTracer::EmbreeRayTracer}} tracer(meshInfo);}
+\DoxyCodeLine{\mbox{\hyperlink{a01345}{HF::RayTracer::EmbreeRayTracer}} tracer(meshInfo);}
 \DoxyCodeLine{}
 \DoxyCodeLine{std::vector<HF::SpatialStructures::Node> node\_vec\_0;        \textcolor{comment}{// First container of Node}}
 \DoxyCodeLine{std::vector<HF::SpatialStructures::Node> node\_vec\_1;        \textcolor{comment}{// Second container of Node}}
@@ -306,33 +308,34 @@ In time\+: O(ft) where f is the number of nodes in from, and t is the number of 
 \DoxyCodeLine{    \textcolor{comment}{// runs 10 times}}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{float} j = -\/5.0; j < 5.0; j++) \{}
 \DoxyCodeLine{        \textcolor{comment}{// runs 10 times}}
-\DoxyCodeLine{        node\_vec\_0.emplace\_back(\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}}(i, j, 0.0f));   \textcolor{comment}{// all Node ID default to -\/1}}
+\DoxyCodeLine{        node\_vec\_0.emplace\_back(\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}}(i, j, 0.0f));   \textcolor{comment}{// all Node ID default to -\/1}}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// 1) Construct reserve\_count Node and insert each of them into node\_vec\_1}}
 \DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{float} i = 0.0; i < 10.0; i++) \{}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{float} j = 0.0; j < 10.0; j++) \{}
-\DoxyCodeLine{        node\_vec\_1.emplace\_back(\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}}(i, j, 0.0f));   \textcolor{comment}{// all Node ID default to -\/1}}
+\DoxyCodeLine{        node\_vec\_1.emplace\_back(\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}}(i, j, 0.0f));   \textcolor{comment}{// all Node ID default to -\/1}}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// GroupToGroup constructs and returns a Graph consisting of Node (between}}
 \DoxyCodeLine{\textcolor{comment}{// node\_vec\_0 and node\_vec\_1) such that the nodes do not occlude each other}}
 \DoxyCodeLine{\textcolor{keywordtype}{float} desired\_height = 2.0f;        \textcolor{comment}{// Height of graph}}
-\DoxyCodeLine{\mbox{\hyperlink{a01497}{HF::SpatialStructures::Graph}} graph = \mbox{\hyperlink{a00401_ae42a5aafdfcc29b6a668355c07602efb}{HF::VisibilityGraph::GroupToGroup}}(tracer, node\_vec\_0, node\_vec\_1, desired\_height);}
+\DoxyCodeLine{\mbox{\hyperlink{a01485}{HF::SpatialStructures::Graph}} graph = \mbox{\hyperlink{a00401_ae42a5aafdfcc29b6a668355c07602efb}{HF::VisibilityGraph::GroupToGroup}}(tracer, node\_vec\_0, node\_vec\_1, desired\_height);}
+
 \end{DoxyCode}
  
 
-Definition at line 189 of file visibility\+\_\+graph.\+cpp.
+Definition at line \mbox{\hyperlink{a00026_source_l00189}{189}} of file \mbox{\hyperlink{a00026_source}{visibility\+\_\+graph.\+cpp}}.
 
 
 
-References H\+F\+::\+Spatial\+Structures\+::\+Node\+::distance\+To(), Height\+Check\+All\+Nodes(), and Is\+Occlusion\+Between().
+References \mbox{\hyperlink{a03488_source_l00040}{HF\+::\+Spatial\+Structures\+::\+Node\+::distance\+To()}}, \mbox{\hyperlink{a00026_source_l00069}{Height\+Check\+All\+Nodes()}}, \mbox{\hyperlink{a00026_source_l00103}{Is\+Occlusion\+Between()}}, and \mbox{\hyperlink{a01485_a2710af2a75976862d7a235793567d2f3}{HF\+::\+Spatial\+Structures\+::\+Graph\+::size()}}.
 
 
 
-Referenced by Create\+Visibility\+Graph\+Group\+To\+Group(), and T\+E\+S\+T().
+Referenced by \mbox{\hyperlink{a00380_source_l00064}{Create\+Visibility\+Graph\+Group\+To\+Group()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -347,14 +350,14 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a00401_ae42a5aafdfcc29b6a668355c07602efb_icgraph}
+\includegraphics[width=348pt]{a00401_ae42a5aafdfcc29b6a668355c07602efb_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{a00401_af811d21e4c49275521912df9254bb737}\label{a00401_af811d21e4c49275521912df9254bb737}} 
 \index{HF::VisibilityGraph@{HF::VisibilityGraph}!HeightCheck@{HeightCheck}}
 \index{HeightCheck@{HeightCheck}!HF::VisibilityGraph@{HF::VisibilityGraph}}
 \doxysubsubsection{\texorpdfstring{HeightCheck()}{HeightCheck()}}
-{\footnotesize\ttfamily bool H\+F\+::\+Visibility\+Graph\+::\+Height\+Check (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02017}{Node}} \&}]{Node,  }\item[{float}]{height,  }\item[{\mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} \&}]{ert }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool HF\+::\+Visibility\+Graph\+::\+Height\+Check (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02005}{Node}} \&}]{Node,  }\item[{float}]{height,  }\item[{\mbox{\hyperlink{a01345}{Embree\+Ray\+Tracer}} \&}]{ert }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -379,15 +382,15 @@ This is useful to prevent nodes from going through ceilings or other geometry wh
 \end{DoxyRemark}
 
 
-Definition at line 47 of file visibility\+\_\+graph.\+cpp.
+Definition at line \mbox{\hyperlink{a00026_source_l00047}{47}} of file \mbox{\hyperlink{a00026_source}{visibility\+\_\+graph.\+cpp}}.
 
 
 
-References H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Occluded(), and H\+F\+::\+Spatial\+Structures\+::\+R\+O\+U\+N\+D\+I\+N\+G\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON.
+References \mbox{\hyperlink{a00146_source_l01185}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Occluded()}}, and \mbox{\hyperlink{a00185_source_l00030}{HF\+::\+Spatial\+Structures\+::\+ROUNDING\+\_\+\+PRECISION}}.
 
 
 
-Referenced by Height\+Check\+All\+Nodes().
+Referenced by \mbox{\hyperlink{a00026_source_l00069}{Height\+Check\+All\+Nodes()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -405,11 +408,11 @@ Here is the caller graph for this function\+:
 \includegraphics[width=350pt]{a00401_af811d21e4c49275521912df9254bb737_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{a00401_a5cddfd8eb7ae23f8ecea0277ad5c3cc5}\label{a00401_a5cddfd8eb7ae23f8ecea0277ad5c3cc5}} 
+\mbox{\Hypertarget{a00401_a05b8a83ab27113369c95649470d864b9}\label{a00401_a05b8a83ab27113369c95649470d864b9}} 
 \index{HF::VisibilityGraph@{HF::VisibilityGraph}!HeightCheckAllNodes@{HeightCheckAllNodes}}
 \index{HeightCheckAllNodes@{HeightCheckAllNodes}!HF::VisibilityGraph@{HF::VisibilityGraph}}
 \doxysubsubsection{\texorpdfstring{HeightCheckAllNodes()}{HeightCheckAllNodes()}}
-{\footnotesize\ttfamily vector$<$int$>$ H\+F\+::\+Visibility\+Graph\+::\+Height\+Check\+All\+Nodes (\begin{DoxyParamCaption}\item[{const vector$<$ \mbox{\hyperlink{a02017}{Node}} $>$ \&}]{nodes\+\_\+to\+\_\+filter,  }\item[{float}]{height,  }\item[{\mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} \&}]{ert }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily vector$<$ int $>$ HF\+::\+Visibility\+Graph\+::\+Height\+Check\+All\+Nodes (\begin{DoxyParamCaption}\item[{const vector$<$ \mbox{\hyperlink{a02005}{Node}} $>$ \&}]{nodes\+\_\+to\+\_\+filter,  }\item[{float}]{height,  }\item[{\mbox{\hyperlink{a01345}{Embree\+Ray\+Tracer}} \&}]{ert }\end{DoxyParamCaption})}
 
 
 
@@ -432,22 +435,22 @@ The indexes in nodes\+\_\+to\+\_\+filter of all nodes that pass the height check
 \end{DoxySeeAlso}
 
 
-Definition at line 69 of file visibility\+\_\+graph.\+cpp.
+Definition at line \mbox{\hyperlink{a00026_source_l00069}{69}} of file \mbox{\hyperlink{a00026_source}{visibility\+\_\+graph.\+cpp}}.
 
 
 
-References Height\+Check().
+References \mbox{\hyperlink{a00026_source_l00047}{Height\+Check()}}.
 
 
 
-Referenced by All\+To\+All(), All\+To\+All\+Undirected(), and Group\+To\+Group().
+Referenced by \mbox{\hyperlink{a00026_source_l00128}{All\+To\+All()}}, \mbox{\hyperlink{a00026_source_l00252}{All\+To\+All\+Undirected()}}, and \mbox{\hyperlink{a00026_source_l00189}{Group\+To\+Group()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a00401_a5cddfd8eb7ae23f8ecea0277ad5c3cc5_cgraph}
+\includegraphics[width=350pt]{a00401_a05b8a83ab27113369c95649470d864b9_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:
@@ -455,14 +458,14 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a00401_a5cddfd8eb7ae23f8ecea0277ad5c3cc5_icgraph}
+\includegraphics[width=350pt]{a00401_a05b8a83ab27113369c95649470d864b9_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{a00401_a4d9cf77879eb78075f7f7b0a7e31119a}\label{a00401_a4d9cf77879eb78075f7f7b0a7e31119a}} 
 \index{HF::VisibilityGraph@{HF::VisibilityGraph}!IsOcclusionBetween@{IsOcclusionBetween}}
 \index{IsOcclusionBetween@{IsOcclusionBetween}!HF::VisibilityGraph@{HF::VisibilityGraph}}
 \doxysubsubsection{\texorpdfstring{IsOcclusionBetween()}{IsOcclusionBetween()}}
-{\footnotesize\ttfamily bool H\+F\+::\+Visibility\+Graph\+::\+Is\+Occlusion\+Between (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02017}{Node}} \&}]{node\+\_\+a,  }\item[{const \mbox{\hyperlink{a02017}{Node}} \&}]{node\+\_\+b,  }\item[{\mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} \&}]{ert,  }\item[{float}]{height = {\ttfamily 1.7f},  }\item[{float}]{pre\+\_\+calculated\+\_\+distance = {\ttfamily 0.0f} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool HF\+::\+Visibility\+Graph\+::\+Is\+Occlusion\+Between (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02005}{Node}} \&}]{node\+\_\+a,  }\item[{const \mbox{\hyperlink{a02005}{Node}} \&}]{node\+\_\+b,  }\item[{\mbox{\hyperlink{a01345}{Embree\+Ray\+Tracer}} \&}]{ert,  }\item[{float}]{height = {\ttfamily 1.7f},  }\item[{float}]{pre\+\_\+calculated\+\_\+distance = {\ttfamily 0.0f} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -486,15 +489,15 @@ True if there is an obstacle blocking line of sight between node\+\_\+a and node
 \end{DoxyReturn}
 Calculate the distance between node\+\_\+a and node\+\_\+b if required, then calculate the direction between them. Cast an occlusion ray in the direction between node\+\_\+a and node\+\_\+b with a maximum distance equal to the distance between them. If the ray intersects anything then the nodes don\textquotesingle{}t have a line of sight. 
 
-Definition at line 103 of file visibility\+\_\+graph.\+cpp.
+Definition at line \mbox{\hyperlink{a00026_source_l00103}{103}} of file \mbox{\hyperlink{a00026_source}{visibility\+\_\+graph.\+cpp}}.
 
 
 
-References H\+F\+::\+Spatial\+Structures\+::\+Node\+::direction\+To(), H\+F\+::\+Spatial\+Structures\+::\+Node\+::distance\+To(), and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Occluded().
+References \mbox{\hyperlink{a03488_source_l00131}{HF\+::\+Spatial\+Structures\+::\+Node\+::direction\+To()}}, \mbox{\hyperlink{a03488_source_l00040}{HF\+::\+Spatial\+Structures\+::\+Node\+::distance\+To()}}, and \mbox{\hyperlink{a00146_source_l01185}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Occluded()}}.
 
 
 
-Referenced by All\+To\+All(), All\+To\+All\+Undirected(), and Group\+To\+Group().
+Referenced by \mbox{\hyperlink{a00026_source_l00128}{All\+To\+All()}}, \mbox{\hyperlink{a00026_source_l00252}{All\+To\+All\+Undirected()}}, and \mbox{\hyperlink{a00026_source_l00189}{Group\+To\+Group()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak

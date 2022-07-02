@@ -1,6 +1,6 @@
 var a01281 =
 [
-    [ "NoCost", "a01281.html#a628e4ab383f4e35646df1d523060a1b9", null ],
-    [ "what", "a01281.html#a4c33926dc611aebf0163c446121c44e8", null ],
-    [ "cost_type", "a01281.html#a87a6374ad931bdac8c6ce88e120e1eaf", null ]
+    [ "CopyArray", "a01281.html#ae8d8899c0064ea7a63bf8e5ab4c19b59", null ],
+    [ "data", "a01281.html#a08a18687fbab39a7f68557da7ae40b8a", null ],
+    [ "size", "a01281.html#aac2cc3466ba798ea434a2c855f86a5dc", null ]
 ];

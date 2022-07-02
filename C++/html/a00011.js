@@ -6,6 +6,7 @@ var a00011 =
     [ "CheckRay", "a00011.html#a74be560268a713fc9e9b8b4a453afa2f", null ],
     [ "CheckSlope", "a00011.html#a9daa85cb56a1b18d44f46aa9c420afde", null ],
     [ "CreateDirecs", "a00011.html#aefd344ebb2faadc64a56a16dc8582026", null ],
+    [ "DirectionTo", "a00011.html#a750afc15c798c79a8b6a0784ed092f3c", null ],
     [ "DistanceTo", "a00011.html#a7f96186b8f24f878404d1feccf2f64db", null ],
     [ "GeneratePotentialChildren", "a00011.html#a41e03f9bab54e4e0d1314c6a4bdf2ec1", null ],
     [ "GetChildren", "a00011.html#ab7ffcc7d6657ce276c06deed24c546a4", null ],

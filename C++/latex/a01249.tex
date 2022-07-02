@@ -1,0 +1,448 @@
+\hypertarget{a01249}{}\doxysection{HF\+::Graph\+Generator\+::Unique\+Queue Class Reference}
+\label{a01249}\index{HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}}
+
+
+A queue that remembers every object inserted, and prevents the addition of nodes that have already been inserted even if they\textquotesingle{}ve been popped. 
+
+
+
+
+{\ttfamily \#include $<$unique\+\_\+queue.\+h$>$}
+
+
+
+Collaboration diagram for HF\+::Graph\+Generator\+::Unique\+Queue\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01247}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{a01249_ae0dc637a2d7c3aae32d8f035ac6b8016}{push}} (const \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} \&p)
+\begin{DoxyCompactList}\small\item\em Add a node to the queue if it has never previously been in the queue. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} \mbox{\hyperlink{a01249_a4aab642bf2c86a04f6890711ab7f2437}{pop}} ()
+\begin{DoxyCompactList}\small\item\em Remove the topmost node from the queue and return it. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01249_a6d38edb96130bda3eb8126cc7501065f}{size}} () const
+\begin{DoxyCompactList}\small\item\em Determine how many nodes are currently in the queue. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} \mbox{\hyperlink{a01249_ad0b5106014e798684efc0d3bdc4939da}{pop\+From\+Dict}} ()
+\begin{DoxyCompactList}\small\item\em Retrieve the topmost node from the queue, but \char`\"{}forget\char`\"{} about it to allow it to enter again in the future. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01249_ae990ff15bb41d6da5b477f0c91550116}{has\+Node}} (const \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} \&p) const
+\begin{DoxyCompactList}\small\item\em Check to see if the node has ever been in the queue. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01249_a6708d5114e7fbc588ec4d17919d2ad8e}{force\+Push}} (const \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} \&p)
+\begin{DoxyCompactList}\small\item\em Forcibly push a node onto the queue without checking it. Saves a hash function, but risks breaking the invariant. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01249_ab659349de3391b0e2327f3736135752f}{empty}} () const
+\begin{DoxyCompactList}\small\item\em Tell if the queue is empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01249_a8b1e179e1aa3d8d585c5708ae08ef3cc}{clear\+Queue}} ()
+\begin{DoxyCompactList}\small\item\em Clear every node from the queue without forgetting them. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{a02005}{Spatial\+Structures\+::\+Node}} $>$ \mbox{\hyperlink{a01249_ae941f357ddbefc3b670c43ce2d90b589}{pop\+Many}} (int max=-\/1)
+\begin{DoxyCompactList}\small\item\em Pop a set amount of nodes from the queue, and return them as a vector. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename arr\+\_\+type $>$ }\\bool \mbox{\hyperlink{a01249_a35a8d70ffef5833ae214feaa89aaf220}{Push\+Any}} (const arr\+\_\+type \&node)
+\begin{DoxyCompactList}\small\item\em Call push with any type of object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::queue$<$ \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} $>$ \mbox{\hyperlink{a01249_a042595ba3856fb6912dbf5c6692daa75}{node\+\_\+queue}}
+\begin{DoxyCompactList}\small\item\em The underlying queue. \end{DoxyCompactList}\item 
+robin\+\_\+hood\+::unordered\+\_\+map$<$ \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}}, int $>$ \mbox{\hyperlink{a01249_ac034e92d8100f2f6d96968c6de5b51c4}{hashmap}}
+\begin{DoxyCompactList}\small\item\em Hashmap to keep track of nodes that have entered the queue. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A queue that remembers every object inserted, and prevents the addition of nodes that have already been inserted even if they\textquotesingle{}ve been popped.
+
+\begin{DoxyInvariant}{Invariant}
+All unique nodes can only enter the queue once. After they\textquotesingle{}ve been popped, future attempts to push them will fail.
+\end{DoxyInvariant}
+\begin{DoxyRemark}{Remarks}
+This class was designed specificlaly to manage the \mbox{\hyperlink{a01245}{Graph\+Generator}}\textquotesingle{}s todo list with as few hashmap calls as possible.
+\end{DoxyRemark}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00386__todo000001}{Todo}}]This could be a useful standalone templated class. \end{DoxyRefDesc}
+
+
+Definition at line \mbox{\hyperlink{a00017_source_l00029}{29}} of file \mbox{\hyperlink{a00017_source}{unique\+\_\+queue.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01249_a8b1e179e1aa3d8d585c5708ae08ef3cc}\label{a01249_a8b1e179e1aa3d8d585c5708ae08ef3cc}} 
+\index{HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}!clearQueue@{clearQueue}}
+\index{clearQueue@{clearQueue}!HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{clearQueue()}{clearQueue()}}
+{\footnotesize\ttfamily void HF\+::\+Graph\+Generator\+::\+Unique\+Queue\+::clear\+Queue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clear every node from the queue without forgetting them. 
+
+
+
+Definition at line \mbox{\hyperlink{a00014_source_l00057}{57}} of file \mbox{\hyperlink{a00014_source}{unique\+\_\+queue.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00017_source_l00031}{node\+\_\+queue}}.
+
+\mbox{\Hypertarget{a01249_ab659349de3391b0e2327f3736135752f}\label{a01249_ab659349de3391b0e2327f3736135752f}} 
+\index{HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}!empty@{empty}}
+\index{empty@{empty}!HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily bool HF\+::\+Graph\+Generator\+::\+Unique\+Queue\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Tell if the queue is empty. 
+
+\begin{DoxyReturn}{Returns}
+False if there is atleast one node in the queue. True otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00014_source_l00055}{55}} of file \mbox{\hyperlink{a00014_source}{unique\+\_\+queue.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00014_source_l00032}{size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00005_source_l00220}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom()}}, and \mbox{\hyperlink{a00005_source_l00139}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom\+Parallel()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=335pt]{a01249_ab659349de3391b0e2327f3736135752f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01249_ab659349de3391b0e2327f3736135752f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01249_a6708d5114e7fbc588ec4d17919d2ad8e}\label{a01249_a6708d5114e7fbc588ec4d17919d2ad8e}} 
+\index{HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}!forcePush@{forcePush}}
+\index{forcePush@{forcePush}!HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{forcePush()}{forcePush()}}
+{\footnotesize\ttfamily bool HF\+::\+Graph\+Generator\+::\+Unique\+Queue\+::force\+Push (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Forcibly push a node onto the queue without checking it. Saves a hash function, but risks breaking the invariant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Node to add to the end of the queue. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Always true since it cannot fail. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00014_source_l00047}{47}} of file \mbox{\hyperlink{a00014_source}{unique\+\_\+queue.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00017_source_l00031}{node\+\_\+queue}}.
+
+\mbox{\Hypertarget{a01249_ae990ff15bb41d6da5b477f0c91550116}\label{a01249_ae990ff15bb41d6da5b477f0c91550116}} 
+\index{HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}!hasNode@{hasNode}}
+\index{hasNode@{hasNode}!HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{hasNode()}{hasNode()}}
+{\footnotesize\ttfamily bool HF\+::\+Graph\+Generator\+::\+Unique\+Queue\+::has\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} \&}]{p }\end{DoxyParamCaption}) const}
+
+
+
+Check to see if the node has ever been in the queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Node to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the node has existed in the queue. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00014_source_l00043}{43}} of file \mbox{\hyperlink{a00014_source}{unique\+\_\+queue.\+cpp}}.
+
+\mbox{\Hypertarget{a01249_a4aab642bf2c86a04f6890711ab7f2437}\label{a01249_a4aab642bf2c86a04f6890711ab7f2437}} 
+\index{HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}!pop@{pop}}
+\index{pop@{pop}!HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{pop()}{pop()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} HF\+::\+Graph\+Generator\+::\+Unique\+Queue\+::pop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Remove the topmost node from the queue and return it. 
+
+\begin{DoxyReturn}{Returns}
+The node at the top of the queue. 
+\end{DoxyReturn}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01249_ad0b5106014e798684efc0d3bdc4939da}{pop\+From\+Dict}} for removing the topmost node and allowing it to enter again in the future. 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{a00014_source_l00025}{25}} of file \mbox{\hyperlink{a00014_source}{unique\+\_\+queue.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00017_source_l00031}{node\+\_\+queue}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00005_source_l00220}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom()}}, and \mbox{\hyperlink{a00014_source_l00064}{pop\+Many()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01249_a4aab642bf2c86a04f6890711ab7f2437_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01249_ad0b5106014e798684efc0d3bdc4939da}\label{a01249_ad0b5106014e798684efc0d3bdc4939da}} 
+\index{HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}!popFromDict@{popFromDict}}
+\index{popFromDict@{popFromDict}!HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{popFromDict()}{popFromDict()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} HF\+::\+Graph\+Generator\+::\+Unique\+Queue\+::pop\+From\+Dict (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retrieve the topmost node from the queue, but \char`\"{}forget\char`\"{} about it to allow it to enter again in the future. 
+
+\begin{DoxyReturn}{Returns}
+Topmost node in the queue. 
+\end{DoxyReturn}
+
+
+This sets the node\textquotesingle{}s value to 0 in the hashmap, making it behave exactly like a node that has never been seen by the queue. 
+
+Definition at line \mbox{\hyperlink{a00014_source_l00034}{34}} of file \mbox{\hyperlink{a00014_source}{unique\+\_\+queue.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00017_source_l00031}{node\+\_\+queue}}.
+
+\mbox{\Hypertarget{a01249_ae941f357ddbefc3b670c43ce2d90b589}\label{a01249_ae941f357ddbefc3b670c43ce2d90b589}} 
+\index{HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}!popMany@{popMany}}
+\index{popMany@{popMany}!HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{popMany()}{popMany()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{a02005}{Spatial\+Structures\+::\+Node}} $>$ HF\+::\+Graph\+Generator\+::\+Unique\+Queue\+::pop\+Many (\begin{DoxyParamCaption}\item[{int}]{max = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+Pop a set amount of nodes from the queue, and return them as a vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max} & Stop after popping this amount of nodes.\\
+\hline
+\end{DoxyParams}
+
+
+Use this to quickly pop several nodes without having to make a function call for each. \begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00386__todo000002}{Todo}}]Opetion to pop every node by setting max to -\/1.\end{DoxyRefDesc}
+
+
+Definition at line \mbox{\hyperlink{a00014_source_l00064}{64}} of file \mbox{\hyperlink{a00014_source}{unique\+\_\+queue.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00017_source_l00031}{node\+\_\+queue}}, \mbox{\hyperlink{a00014_source_l00025}{pop()}}, and \mbox{\hyperlink{a00014_source_l00032}{size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00005_source_l00139}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom\+Parallel()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{a01249_ae941f357ddbefc3b670c43ce2d90b589_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01249_ae941f357ddbefc3b670c43ce2d90b589_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01249_ae0dc637a2d7c3aae32d8f035ac6b8016}\label{a01249_ae0dc637a2d7c3aae32d8f035ac6b8016}} 
+\index{HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}!push@{push}}
+\index{push@{push}!HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily bool HF\+::\+Graph\+Generator\+::\+Unique\+Queue\+::push (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Add a node to the queue if it has never previously been in the queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Node to add to the queue. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+False if the node wasn\textquotesingle{}t added, true if it was 
+\end{DoxyReturn}
+
+
+If the node has a value of 1 in hashmap, then the node is ignored. If the node doesn\textquotesingle{}t already exist in the hashmap, the call to hashmap\mbox{[}p\mbox{]} will automatically create an entry with a value of 0, indicating that the node hasn\textquotesingle{}t been seen before. 
+
+Definition at line \mbox{\hyperlink{a00014_source_l00011}{11}} of file \mbox{\hyperlink{a00014_source}{unique\+\_\+queue.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00017_source_l00031}{node\+\_\+queue}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00005_source_l00139}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom\+Parallel()}}, and \mbox{\hyperlink{a00017_source_l00118}{Push\+Any()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01249_ae0dc637a2d7c3aae32d8f035ac6b8016_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01249_a35a8d70ffef5833ae214feaa89aaf220}\label{a01249_a35a8d70ffef5833ae214feaa89aaf220}} 
+\index{HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}!PushAny@{PushAny}}
+\index{PushAny@{PushAny}!HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{PushAny()}{PushAny()}}
+{\footnotesize\ttfamily template$<$typename arr\+\_\+type $>$ \\
+bool HF\+::\+Graph\+Generator\+::\+Unique\+Queue\+::\+Push\+Any (\begin{DoxyParamCaption}\item[{const arr\+\_\+type \&}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Call push with any type of object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Node to add to the queue. ~\newline
+\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+False if the node wasn\textquotesingle{}t added, true if it was.
+\end{DoxyReturn}
+If the node has a value of 1 in hashmap, then the node is ignored. If the node doesn\textquotesingle{}t already exist in the hashmap, the call to hashmap\mbox{[}p\mbox{]} will automatically create an entry with a value of 0, indicating that the node hasn\textquotesingle{}t been seen before. 
+
+Definition at line \mbox{\hyperlink{a00017_source_l00118}{118}} of file \mbox{\hyperlink{a00017_source}{unique\+\_\+queue.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00014_source_l00011}{push()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00005_source_l00220}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom()}}, and \mbox{\hyperlink{a00005_source_l00069}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+IMPL\+\_\+\+Build\+Network()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01249_a35a8d70ffef5833ae214feaa89aaf220_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01249_a35a8d70ffef5833ae214feaa89aaf220_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01249_a6d38edb96130bda3eb8126cc7501065f}\label{a01249_a6d38edb96130bda3eb8126cc7501065f}} 
+\index{HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}!size@{size}}
+\index{size@{size}!HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily int HF\+::\+Graph\+Generator\+::\+Unique\+Queue\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Determine how many nodes are currently in the queue. 
+
+\begin{DoxyReturn}{Returns}
+The number of nodes in the queue 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00014_source_l00032}{32}} of file \mbox{\hyperlink{a00014_source}{unique\+\_\+queue.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00017_source_l00031}{node\+\_\+queue}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00005_source_l00139}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom\+Parallel()}}, \mbox{\hyperlink{a00014_source_l00055}{empty()}}, and \mbox{\hyperlink{a00014_source_l00064}{pop\+Many()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01249_a6d38edb96130bda3eb8126cc7501065f_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01249_ac034e92d8100f2f6d96968c6de5b51c4}\label{a01249_ac034e92d8100f2f6d96968c6de5b51c4}} 
+\index{HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}!hashmap@{hashmap}}
+\index{hashmap@{hashmap}!HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{hashmap}{hashmap}}
+{\footnotesize\ttfamily robin\+\_\+hood\+::unordered\+\_\+map$<$\mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}}, int$>$ HF\+::\+Graph\+Generator\+::\+Unique\+Queue\+::hashmap\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Hashmap to keep track of nodes that have entered the queue. 
+
+Values of 0 indicate that a node has never been pushed before. Values of 1 indicate that a node has already been in the hashmap previously. 
+
+Definition at line \mbox{\hyperlink{a00017_source_l00038}{38}} of file \mbox{\hyperlink{a00017_source}{unique\+\_\+queue.\+h}}.
+
+\mbox{\Hypertarget{a01249_a042595ba3856fb6912dbf5c6692daa75}\label{a01249_a042595ba3856fb6912dbf5c6692daa75}} 
+\index{HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}!node\_queue@{node\_queue}}
+\index{node\_queue@{node\_queue}!HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{node\_queue}{node\_queue}}
+{\footnotesize\ttfamily std\+::queue$<$\mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}}$>$ HF\+::\+Graph\+Generator\+::\+Unique\+Queue\+::node\+\_\+queue\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The underlying queue. 
+
+
+
+Definition at line \mbox{\hyperlink{a00017_source_l00031}{31}} of file \mbox{\hyperlink{a00017_source}{unique\+\_\+queue.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00014_source_l00057}{clear\+Queue()}}, \mbox{\hyperlink{a00014_source_l00047}{force\+Push()}}, \mbox{\hyperlink{a00014_source_l00025}{pop()}}, \mbox{\hyperlink{a00014_source_l00034}{pop\+From\+Dict()}}, \mbox{\hyperlink{a00014_source_l00064}{pop\+Many()}}, \mbox{\hyperlink{a00014_source_l00011}{push()}}, and \mbox{\hyperlink{a00014_source_l00032}{size()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/analysismethods/src/\mbox{\hyperlink{a00017}{unique\+\_\+queue.\+h}}\item 
+Cpp/analysismethods/src/\mbox{\hyperlink{a00014}{unique\+\_\+queue.\+cpp}}\end{DoxyCompactItemize}

@@ -1,180 +1,114 @@
-\hypertarget{a01397}{}\doxysection{nanort\+::B\+V\+H\+Node$<$ T $>$ Class Template Reference}
-\label{a01397}\index{nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}}
+\hypertarget{a01397}{}\doxysection{nanort\+::BVHBuild\+Statistics Class Reference}
+\label{a01397}\index{nanort::BVHBuildStatistics@{nanort::BVHBuildStatistics}}
+
+
+BVH build statistics.  
+
+
 
 
 {\ttfamily \#include $<$nanort.\+h$>$}
 
 
 
-Collaboration diagram for nanort\+::B\+V\+H\+Node$<$ T $>$\+:
+Collaboration diagram for nanort\+::BVHBuild\+Statistics\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=209pt]{a01395}
+\includegraphics[width=246pt]{a01395}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a01397_a964e0ed93e80e09b263758e664602531}{B\+V\+H\+Node}} ()
-\item 
-\mbox{\hyperlink{a01397_a316e4a3009889c449c12a1edfc728471}{B\+V\+H\+Node}} (const \mbox{\hyperlink{a01397}{B\+V\+H\+Node}} \&rhs)
-\item 
-\mbox{\hyperlink{a01397}{B\+V\+H\+Node}} \& \mbox{\hyperlink{a01397_a674a5203d9b475d9ad82a2f6e50b7af2}{operator=}} (const \mbox{\hyperlink{a01397}{B\+V\+H\+Node}} \&rhs)
-\item 
-\mbox{\hyperlink{a01397_a3b683331c334d464bdb0a9a6b6929e9c}{$\sim$\+B\+V\+H\+Node}} ()
+\mbox{\hyperlink{a01397_a617c0ee4563bc5d60e81fe1b66a422a8}{BVHBuild\+Statistics}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-T \mbox{\hyperlink{a01397_aedf8d457346c647c9eaeafc163fb7592}{bmin}} \mbox{[}3\mbox{]}
+unsigned int \mbox{\hyperlink{a01397_a7ffd6278400de90a262d5bb83589c1c1}{max\+\_\+tree\+\_\+depth}}
 \item 
-T \mbox{\hyperlink{a01397_af2fef5c1935e999a409fe8173741f7d9}{bmax}} \mbox{[}3\mbox{]}
+unsigned int \mbox{\hyperlink{a01397_a42b219665f02f3eaa89c008d0215336d}{num\+\_\+leaf\+\_\+nodes}}
 \item 
-int \mbox{\hyperlink{a01397_a21a298034fec1fe031c54bb3a6a6fa5e}{flag}}
+unsigned int \mbox{\hyperlink{a01397_ae95201c13555ea6ccb454f86ace83f5f}{num\+\_\+branch\+\_\+nodes}}
 \item 
-int \mbox{\hyperlink{a01397_a6988b1df6a0fc7523ea0ed099cd0495c}{axis}}
-\item 
-unsigned int \mbox{\hyperlink{a01397_ac307a0b8a7a2eb48b13d28a93b6603e5}{data}} \mbox{[}2\mbox{]}
+float \mbox{\hyperlink{a01397_a985cb8c800bd91ceaedd28174df4ed0d}{build\+\_\+secs}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$typename T = float$>$\newline
-class nanort\+::\+B\+V\+H\+Node$<$ T $>$}
+BVH build statistics. 
 
-
-
-Definition at line 505 of file nanort.\+h.
+Definition at line \mbox{\hyperlink{a00161_source_l00592}{592}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{a01397_a964e0ed93e80e09b263758e664602531}\label{a01397_a964e0ed93e80e09b263758e664602531}} 
-\index{nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}!BVHNode@{BVHNode}}
-\index{BVHNode@{BVHNode}!nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{BVHNode()}{BVHNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
-\mbox{\hyperlink{a01397}{nanort\+::\+B\+V\+H\+Node}}$<$ T $>$\+::\mbox{\hyperlink{a01397}{B\+V\+H\+Node}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\Hypertarget{a01397_a617c0ee4563bc5d60e81fe1b66a422a8}\label{a01397_a617c0ee4563bc5d60e81fe1b66a422a8}} 
+\index{nanort::BVHBuildStatistics@{nanort::BVHBuildStatistics}!BVHBuildStatistics@{BVHBuildStatistics}}
+\index{BVHBuildStatistics@{BVHBuildStatistics}!nanort::BVHBuildStatistics@{nanort::BVHBuildStatistics}}
+\doxysubsubsection{\texorpdfstring{BVHBuildStatistics()}{BVHBuildStatistics()}}
+{\footnotesize\ttfamily nanort\+::\+BVHBuild\+Statistics\+::\+BVHBuild\+Statistics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 507 of file nanort.\+h.
-
-\mbox{\Hypertarget{a01397_a316e4a3009889c449c12a1edfc728471}\label{a01397_a316e4a3009889c449c12a1edfc728471}} 
-\index{nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}!BVHNode@{BVHNode}}
-\index{BVHNode@{BVHNode}!nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{BVHNode()}{BVHNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
-\mbox{\hyperlink{a01397}{nanort\+::\+B\+V\+H\+Node}}$<$ T $>$\+::\mbox{\hyperlink{a01397}{B\+V\+H\+Node}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01397}{B\+V\+H\+Node}}$<$ T $>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line 508 of file nanort.\+h.
-
-\mbox{\Hypertarget{a01397_a3b683331c334d464bdb0a9a6b6929e9c}\label{a01397_a3b683331c334d464bdb0a9a6b6929e9c}} 
-\index{nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}!````~BVHNode@{$\sim$BVHNode}}
-\index{````~BVHNode@{$\sim$BVHNode}!nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{$\sim$BVHNode()}{~BVHNode()}}
-{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
-\mbox{\hyperlink{a01397}{nanort\+::\+B\+V\+H\+Node}}$<$ T $>$\+::$\sim$\mbox{\hyperlink{a01397}{B\+V\+H\+Node}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line 540 of file nanort.\+h.
-
-
-
-\doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a01397_a674a5203d9b475d9ad82a2f6e50b7af2}\label{a01397_a674a5203d9b475d9ad82a2f6e50b7af2}} 
-\index{nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}!operator=@{operator=}}
-\index{operator=@{operator=}!nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
-\mbox{\hyperlink{a01397}{B\+V\+H\+Node}}\& \mbox{\hyperlink{a01397}{nanort\+::\+B\+V\+H\+Node}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01397}{B\+V\+H\+Node}}$<$ T $>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line 523 of file nanort.\+h.
+Definition at line \mbox{\hyperlink{a00161_source_l00600}{600}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{a01397_a6988b1df6a0fc7523ea0ed099cd0495c}\label{a01397_a6988b1df6a0fc7523ea0ed099cd0495c}} 
-\index{nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}!axis@{axis}}
-\index{axis@{axis}!nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{axis}{axis}}
-{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
-int \mbox{\hyperlink{a01397}{nanort\+::\+B\+V\+H\+Node}}$<$ T $>$\+::axis}
+\mbox{\Hypertarget{a01397_a985cb8c800bd91ceaedd28174df4ed0d}\label{a01397_a985cb8c800bd91ceaedd28174df4ed0d}} 
+\index{nanort::BVHBuildStatistics@{nanort::BVHBuildStatistics}!build\_secs@{build\_secs}}
+\index{build\_secs@{build\_secs}!nanort::BVHBuildStatistics@{nanort::BVHBuildStatistics}}
+\doxysubsubsection{\texorpdfstring{build\_secs}{build\_secs}}
+{\footnotesize\ttfamily float nanort\+::\+BVHBuild\+Statistics\+::build\+\_\+secs}
 
 
 
-Definition at line 546 of file nanort.\+h.
+Definition at line \mbox{\hyperlink{a00161_source_l00597}{597}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
+
+\mbox{\Hypertarget{a01397_a7ffd6278400de90a262d5bb83589c1c1}\label{a01397_a7ffd6278400de90a262d5bb83589c1c1}} 
+\index{nanort::BVHBuildStatistics@{nanort::BVHBuildStatistics}!max\_tree\_depth@{max\_tree\_depth}}
+\index{max\_tree\_depth@{max\_tree\_depth}!nanort::BVHBuildStatistics@{nanort::BVHBuildStatistics}}
+\doxysubsubsection{\texorpdfstring{max\_tree\_depth}{max\_tree\_depth}}
+{\footnotesize\ttfamily unsigned int nanort\+::\+BVHBuild\+Statistics\+::max\+\_\+tree\+\_\+depth}
 
 
 
-Referenced by nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Build\+Tree(), nanort\+::\+B\+V\+H\+Node$<$ vertex\+\_\+t $>$\+::\+B\+V\+H\+Node(), nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+List\+Node\+Intersections(), nanort\+::\+B\+V\+H\+Node$<$ vertex\+\_\+t $>$\+::operator=(), and nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Traverse().
-
-\mbox{\Hypertarget{a01397_af2fef5c1935e999a409fe8173741f7d9}\label{a01397_af2fef5c1935e999a409fe8173741f7d9}} 
-\index{nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}!bmax@{bmax}}
-\index{bmax@{bmax}!nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{bmax}{bmax}}
-{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
-T \mbox{\hyperlink{a01397}{nanort\+::\+B\+V\+H\+Node}}$<$ T $>$\+::bmax\mbox{[}3\mbox{]}}
+Definition at line \mbox{\hyperlink{a00161_source_l00594}{594}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
 
 
-Definition at line 543 of file nanort.\+h.
+Referenced by \mbox{\hyperlink{a00161_source_l01771}{nanort\+::\+BVHAccel$<$ T $>$\+::\+Build\+Tree()}}.
+
+\mbox{\Hypertarget{a01397_ae95201c13555ea6ccb454f86ace83f5f}\label{a01397_ae95201c13555ea6ccb454f86ace83f5f}} 
+\index{nanort::BVHBuildStatistics@{nanort::BVHBuildStatistics}!num\_branch\_nodes@{num\_branch\_nodes}}
+\index{num\_branch\_nodes@{num\_branch\_nodes}!nanort::BVHBuildStatistics@{nanort::BVHBuildStatistics}}
+\doxysubsubsection{\texorpdfstring{num\_branch\_nodes}{num\_branch\_nodes}}
+{\footnotesize\ttfamily unsigned int nanort\+::\+BVHBuild\+Statistics\+::num\+\_\+branch\+\_\+nodes}
 
 
 
-Referenced by nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Build\+Tree(), nanort\+::\+B\+V\+H\+Node$<$ vertex\+\_\+t $>$\+::\+B\+V\+H\+Node(), nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+List\+Node\+Intersections(), nanort\+::\+B\+V\+H\+Node$<$ vertex\+\_\+t $>$\+::operator=(), and nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Traverse().
-
-\mbox{\Hypertarget{a01397_aedf8d457346c647c9eaeafc163fb7592}\label{a01397_aedf8d457346c647c9eaeafc163fb7592}} 
-\index{nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}!bmin@{bmin}}
-\index{bmin@{bmin}!nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{bmin}{bmin}}
-{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
-T \mbox{\hyperlink{a01397}{nanort\+::\+B\+V\+H\+Node}}$<$ T $>$\+::bmin\mbox{[}3\mbox{]}}
+Definition at line \mbox{\hyperlink{a00161_source_l00596}{596}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
 
 
-Definition at line 542 of file nanort.\+h.
+Referenced by \mbox{\hyperlink{a00161_source_l01771}{nanort\+::\+BVHAccel$<$ T $>$\+::\+Build\+Tree()}}.
+
+\mbox{\Hypertarget{a01397_a42b219665f02f3eaa89c008d0215336d}\label{a01397_a42b219665f02f3eaa89c008d0215336d}} 
+\index{nanort::BVHBuildStatistics@{nanort::BVHBuildStatistics}!num\_leaf\_nodes@{num\_leaf\_nodes}}
+\index{num\_leaf\_nodes@{num\_leaf\_nodes}!nanort::BVHBuildStatistics@{nanort::BVHBuildStatistics}}
+\doxysubsubsection{\texorpdfstring{num\_leaf\_nodes}{num\_leaf\_nodes}}
+{\footnotesize\ttfamily unsigned int nanort\+::\+BVHBuild\+Statistics\+::num\+\_\+leaf\+\_\+nodes}
 
 
 
-Referenced by nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Build\+Tree(), nanort\+::\+B\+V\+H\+Node$<$ vertex\+\_\+t $>$\+::\+B\+V\+H\+Node(), nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+List\+Node\+Intersections(), nanort\+::\+B\+V\+H\+Node$<$ vertex\+\_\+t $>$\+::operator=(), and nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Traverse().
-
-\mbox{\Hypertarget{a01397_ac307a0b8a7a2eb48b13d28a93b6603e5}\label{a01397_ac307a0b8a7a2eb48b13d28a93b6603e5}} 
-\index{nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}!data@{data}}
-\index{data@{data}!nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{data}{data}}
-{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
-unsigned int \mbox{\hyperlink{a01397}{nanort\+::\+B\+V\+H\+Node}}$<$ T $>$\+::data\mbox{[}2\mbox{]}}
+Definition at line \mbox{\hyperlink{a00161_source_l00595}{595}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
 
 
-Definition at line 555 of file nanort.\+h.
-
-
-
-Referenced by nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Build\+Tree(), nanort\+::\+B\+V\+H\+Node$<$ vertex\+\_\+t $>$\+::\+B\+V\+H\+Node(), nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+List\+Node\+Intersections(), nanort\+::\+B\+V\+H\+Node$<$ vertex\+\_\+t $>$\+::operator=(), nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Test\+Leaf\+Node(), nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Test\+Leaf\+Node\+Intersections(), and nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Traverse().
-
-\mbox{\Hypertarget{a01397_a21a298034fec1fe031c54bb3a6a6fa5e}\label{a01397_a21a298034fec1fe031c54bb3a6a6fa5e}} 
-\index{nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}!flag@{flag}}
-\index{flag@{flag}!nanort::BVHNode$<$ T $>$@{nanort::BVHNode$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{flag}{flag}}
-{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
-int \mbox{\hyperlink{a01397}{nanort\+::\+B\+V\+H\+Node}}$<$ T $>$\+::flag}
-
-
-
-Definition at line 545 of file nanort.\+h.
-
-
-
-Referenced by nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Build\+Tree(), nanort\+::\+B\+V\+H\+Node$<$ vertex\+\_\+t $>$\+::\+B\+V\+H\+Node(), nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+List\+Node\+Intersections(), nanort\+::\+B\+V\+H\+Node$<$ vertex\+\_\+t $>$\+::operator=(), and nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Traverse().
+Referenced by \mbox{\hyperlink{a00161_source_l01771}{nanort\+::\+BVHAccel$<$ T $>$\+::\+Build\+Tree()}}.
 
 
 

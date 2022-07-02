@@ -1,0 +1,84 @@
+\hypertarget{a00110_source}{}\doxysection{HFExceptions.\+h}
+\label{a00110_source}\index{Cpp/exceptions/src/HFExceptions.h@{Cpp/exceptions/src/HFExceptions.h}}
+\mbox{\hyperlink{a00110}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00008}00008 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00009}00009 }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00010}00010 \textcolor{preprocessor}{\#include <exception>}}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00011}00011 \textcolor{preprocessor}{\#include <cstring>}}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00012}00012 \textcolor{preprocessor}{\#include <stdexcept>}}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00013}00013 }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00022}\mbox{\hyperlink{a00402}{00022}} \textcolor{keyword}{namespace }\mbox{\hyperlink{a00402}{HF::Exceptions}}\{}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00031}\mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051}{00031}}     \textcolor{keyword}{enum} \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051}{HF\_STATUS}} \{}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00032}\mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}{00032}}         \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}{OK}} = 1,                   }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00033}00033 }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00034}00034         \textcolor{comment}{// Special Codes}}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00035}\mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051acd7712929c704f3ad7d7af9113654098}{00035}}         \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051acd7712929c704f3ad7d7af9113654098}{NOT\_IMPLEMENTED}} = -\/54,   }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00036}00036 }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00037}00037         \textcolor{comment}{// Error Codes }}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00038}\mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a5bfa31d727681298e6c4cea74c848ddf}{00038}}         \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a5bfa31d727681298e6c4cea74c848ddf}{GENERIC\_ERROR}} = 0,     }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00039}\mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a42b2a897f1b46ae086e3965e22f0ed58}{00039}}         \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a42b2a897f1b46ae086e3965e22f0ed58}{NOT\_FOUND}} = -\/1,            }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00040}\mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a06ef98037b48ddc9685ab0d7519495b1}{00040}}         \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a06ef98037b48ddc9685ab0d7519495b1}{INVALID\_OBJ}} = -\/2,        }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00041}\mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051ab9036b1fec7e201bf970944267471d35}{00041}}         \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051ab9036b1fec7e201bf970944267471d35}{NO\_GRAPH}} = -\/3,          }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00042}\mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a6ffda360ff38334d4b03fb61abfd1aa0}{00042}}         \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a6ffda360ff38334d4b03fb61abfd1aa0}{INVALID\_COST}} = -\/4,      }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00043}\mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a4ac9bf1100834909081553685467dfc1}{00043}}         \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a4ac9bf1100834909081553685467dfc1}{MISSING\_DEPEND}} = -\/5,  }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00044}\mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a3b0d9d3819413f7a74bb5238725dd832}{00044}}         \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a3b0d9d3819413f7a74bb5238725dd832}{OUT\_OF\_MEMORY}} = -\/6,        }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00045}\mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a33fe75a4991277e4ed8c0f88f3e5db06}{00045}}         \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a33fe75a4991277e4ed8c0f88f3e5db06}{MALFORMED\_DB}} = -\/7,      }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00046}\mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a9626c67d85e20eea56e5a7efc2f6310f}{00046}}         \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a9626c67d85e20eea56e5a7efc2f6310f}{DB\_BUSY}} = -\/8,            }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00047}\mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051ab31440d86dbcfa007f7c8121dcbeea85}{00047}}         \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051ab31440d86dbcfa007f7c8121dcbeea85}{INVALID\_PTR}} = -\/9,        }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00048}\mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051ad3084ed4c756294f67f316d74668eddb}{00048}}         \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051ad3084ed4c756294f67f316d74668eddb}{OUT\_OF\_RANGE}} = -\/10,     }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00049}\mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051af22cf512deb6784a81a27a8ec5316be9}{00049}}         \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051af22cf512deb6784a81a27a8ec5316be9}{NO\_PATH}} = -\/11,           }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00050}\mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051ac3c4e6d2ddd3114367249bada3039594}{00050}}         \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051ac3c4e6d2ddd3114367249bada3039594}{NO\_COST}} = -\/12,           }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00051}\mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a68604d986ab7a0b460b7246d00371345}{00051}}         \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a68604d986ab7a0b460b7246d00371345}{NOT\_COMPRESSED}} = -\/13, }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00052}00052     \};}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00053}00053 }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00055}\mbox{\hyperlink{a01253}{00055}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a01253}{FileNotFound}} : \textcolor{keyword}{public} std::exception}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00056}00056     \{}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00057}\mbox{\hyperlink{a01253_aa6b93c6760f8e1a2ade896762c58db13}{00057}}         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{a01253_aa6b93c6760f8e1a2ade896762c58db13}{what}}() \textcolor{keyword}{const} throw ()}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00058}00058         \{}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00059}00059             \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}Couldn't find the given file!"{}};}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00060}00060         \}}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00061}00061     \};}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00062}00062 }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00064}\mbox{\hyperlink{a01257}{00064}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a01257}{InvalidOBJ}} : \textcolor{keyword}{public} std::exception}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00065}00065     \{}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00066}\mbox{\hyperlink{a01257_a90f3ff4fef24c0bcfa90169d40d5c0e4}{00066}}         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{a01257_a90f3ff4fef24c0bcfa90169d40d5c0e4}{what}}() \textcolor{keyword}{const} throw ()}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00067}00067         \{}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00068}00068             \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}The obj given couldn't be read!"{}};}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00069}00069         \}}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00070}00070     \};}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00071}00071 }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00073}\mbox{\hyperlink{a01261}{00073}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a01261}{MissingDependency}} : \textcolor{keyword}{public} std::exception}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00074}00074     \{}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00075}\mbox{\hyperlink{a01261_aac10ab390c8020181a0e2e9eec2f6e62}{00075}}         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{a01261_aac10ab390c8020181a0e2e9eec2f6e62}{what}}() \textcolor{keyword}{const} throw ()}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00076}00076         \{}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00077}00077             \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}C++ Exception"{}};}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00078}00078         \}}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00079}00079     \};}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00080}00080 }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00081}00081     \textcolor{comment}{/* \(\backslash\)brief This functionality has not been implemented yet. */}}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00082}\mbox{\hyperlink{a01265}{00082}}     \textcolor{keyword}{class }\mbox{\hyperlink{a01265}{NotImplemented}} : \textcolor{keyword}{public} std::logic\_error}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00083}00083     \{}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00084}00084     \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00085}\mbox{\hyperlink{a01265_ae3d4a15c54ef7036170e2f3b3a8d31c9}{00085}}         \mbox{\hyperlink{a01265_ae3d4a15c54ef7036170e2f3b3a8d31c9}{NotImplemented}}() : \mbox{\hyperlink{a00395}{std}}::logic\_error(\textcolor{stringliteral}{"{}Function not yet implemented"{}}) \{ \};}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00086}00086     \};}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00087}00087 }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00089}\mbox{\hyperlink{a01269}{00089}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a01269}{NoCost}} : \textcolor{keyword}{public} std::exception}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00090}00090     \{}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00091}\mbox{\hyperlink{a01269_a87a6374ad931bdac8c6ce88e120e1eaf}{00091}}         std::string \mbox{\hyperlink{a01269_a87a6374ad931bdac8c6ce88e120e1eaf}{cost\_type}};}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00092}\mbox{\hyperlink{a01269_a628e4ab383f4e35646df1d523060a1b9}{00092}}         \mbox{\hyperlink{a01269_a628e4ab383f4e35646df1d523060a1b9}{NoCost}}(\textcolor{keyword}{const} std::string\& cost\_name) \{}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00093}00093             \mbox{\hyperlink{a01269_a87a6374ad931bdac8c6ce88e120e1eaf}{cost\_type}} = \textcolor{stringliteral}{"{}Cost type "{}} + cost\_name + \textcolor{stringliteral}{"{} doesn't exist in the graph!"{}};}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00094}00094         \}}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00095}00095 }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00096}\mbox{\hyperlink{a01269_ae078272c8807f1c907a693e584732143}{00096}}         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{a01269_ae078272c8807f1c907a693e584732143}{what}}() \textcolor{keyword}{const} throw ()}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00097}00097         \{}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00098}00098             \textcolor{keywordflow}{return} \mbox{\hyperlink{a01269_a87a6374ad931bdac8c6ce88e120e1eaf}{cost\_type}}.c\_str();}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00099}00099         \}}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00100}00100     \};}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00101}00101 }
+\DoxyCodeLine{\Hypertarget{a00110_source_l00102}00102 \}}
+\DoxyCodeLine{\Hypertarget{a00110_source_l00103}00103 }
+
+\end{DoxyCode}

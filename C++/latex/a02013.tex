@@ -1,65 +1,171 @@
-\hypertarget{a02013}{}\doxysection{std\+::less$<$\+::nlohmann\+::detail\+::value\+\_\+t $>$ Struct Reference}
-\label{a02013}\index{std::less$<$::nlohmann::detail::value\_t $>$@{std::less$<$::nlohmann::detail::value\_t $>$}}
+\hypertarget{a02013}{}\doxysection{HF\+::Spatial\+Structures\+::Path\+Member Struct Reference}
+\label{a02013}\index{HF::SpatialStructures::PathMember@{HF::SpatialStructures::PathMember}}
 
 
-specialization for std\+::less$<$value\+\_\+t$>$  
-
-
-
-
-{\ttfamily \#include $<$json.\+hpp$>$}
-
-\doxysubsection*{Public Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-bool \mbox{\hyperlink{a02013_a10d3fea50edf7b15ead8f4ceeb006000}{operator()}} (\mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985}{nlohmann\+::detail\+::value\+\_\+t}} lhs, \mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985}{nlohmann\+::detail\+::value\+\_\+t}} rhs) const noexcept
-\begin{DoxyCompactList}\small\item\em compare two value\+\_\+t enum values \end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\doxysubsection{Detailed Description}
-specialization for std\+::less$<$value\+\_\+t$>$ 
-
-\begin{DoxyNote}{Note}
-\+: do not remove the space after \textquotesingle{}$<$\textquotesingle{}, see \href{https://github.com/nlohmann/json/pull/679}{\texttt{ https\+://github.\+com/nlohmann/json/pull/679}} 
-\end{DoxyNote}
-
-
-Definition at line 25205 of file json.\+hpp.
+The ID of a node, and the cost cost to the node after it.  
 
 
 
-\doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a02013_a10d3fea50edf7b15ead8f4ceeb006000}\label{a02013_a10d3fea50edf7b15ead8f4ceeb006000}} 
-\index{std::less$<$::nlohmann::detail::value\_t $>$@{std::less$<$::nlohmann::detail::value\_t $>$}!operator()@{operator()}}
-\index{operator()@{operator()}!std::less$<$::nlohmann::detail::value\_t $>$@{std::less$<$::nlohmann::detail::value\_t $>$}}
-\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
-{\footnotesize\ttfamily bool std\+::less$<$\+::\mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985}{nlohmann\+::detail\+::value\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985}{nlohmann\+::detail\+::value\+\_\+t}}}]{lhs,  }\item[{\mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985}{nlohmann\+::detail\+::value\+\_\+t}}}]{rhs }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+{\ttfamily \#include $<$path.\+h$>$}
 
 
 
-compare two value\+\_\+t enum values 
-
-\begin{DoxySince}{Since}
-version 3.\+0.\+0 
-\end{DoxySince}
-
-
-Definition at line 25211 of file json.\+hpp.
-
-
-
-References nlohmann\+::detail\+::operator$<$().
-
-Here is the call graph for this function\+:
+Collaboration diagram for HF\+::Spatial\+Structures\+::Path\+Member\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a02013_a10d3fea50edf7b15ead8f4ceeb006000_cgraph}
+\includegraphics[width=190pt]{a02011}
 \end{center}
 \end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{a02013_af59604b398e925b0b24030a00dd92f59}{operator==}} (const \mbox{\hyperlink{a02013}{Path\+Member}} \&p2) const
+\begin{DoxyCompactList}\small\item\em Compare the id and cost of this node with p2. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02013_a7b021c0273c2d084fe2caa29aeca22ab}{operator!=}} (const \mbox{\hyperlink{a02013}{Path\+Member}} \&p2) const
+\begin{DoxyCompactList}\small\item\em Determines if this pathmember amd p2 do NOT have equal cost/node values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{a02013_aa854e4b8d04fc62d8e09cff48ba95d68}{cost}}
+\begin{DoxyCompactList}\small\item\em Cost of traversing to the next path member in the path. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a02013_aed2cf97b3136ad0929cdd3c5c2b96e1c}{node}}
+\begin{DoxyCompactList}\small\item\em ID of the node this represents in the graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The ID of a node, and the cost cost to the node after it. 
+
+Definition at line \mbox{\hyperlink{a00215_source_l00019}{19}} of file \mbox{\hyperlink{a00215_source}{path.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a02013_a7b021c0273c2d084fe2caa29aeca22ab}\label{a02013_a7b021c0273c2d084fe2caa29aeca22ab}} 
+\index{HF::SpatialStructures::PathMember@{HF::SpatialStructures::PathMember}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!HF::SpatialStructures::PathMember@{HF::SpatialStructures::PathMember}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool HF\+::\+Spatial\+Structures\+::\+Path\+Member\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02013}{Path\+Member}} \&}]{p2 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Determines if this pathmember amd p2 do NOT have equal cost/node values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p2} & The \mbox{\hyperlink{a02013}{Path\+Member}} to compare with this pathmember. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if p1 and p2 do NOT have equivalent cost/node values, false otherwise. 
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}path.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p2 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} is\_true = p1 != p2;}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} is\_false = p0 != p1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// applies the inverse of operator== to evaluate operator!= since fields of p1 and}}
+\DoxyCodeLine{\textcolor{comment}{// p2 have different values, is\_true is in fact, true is\_false evaluates to true.}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00215_source_l00070}{70}} of file \mbox{\hyperlink{a00215_source}{path.\+h}}.
+
+\mbox{\Hypertarget{a02013_af59604b398e925b0b24030a00dd92f59}\label{a02013_af59604b398e925b0b24030a00dd92f59}} 
+\index{HF::SpatialStructures::PathMember@{HF::SpatialStructures::PathMember}!operator==@{operator==}}
+\index{operator==@{operator==}!HF::SpatialStructures::PathMember@{HF::SpatialStructures::PathMember}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool HF\+::\+Spatial\+Structures\+::\+Path\+Member\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02013}{Path\+Member}} \&}]{p2 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compare the id and cost of this node with p2. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p2} & The \mbox{\hyperlink{a02013}{Path\+Member}} to compare with this node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if p1 and p2 have equivalent cost and node values, false otherwise. 
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}path.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}} p2 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} is\_true = p1 == p2;}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} is\_false = p0 == p1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// cost and node fields of p1 and p2 are identical, so is\_true evaluates true}}
+\DoxyCodeLine{\textcolor{comment}{// is\_false evaluates false, since fields of p0 and p1 do not have matching values}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00215_source_l00041}{41}} of file \mbox{\hyperlink{a00215_source}{path.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00215_source_l00020}{cost}}, \mbox{\hyperlink{a00215_source_l00021}{node}}, and \mbox{\hyperlink{a00185_source_l00030}{HF\+::\+Spatial\+Structures\+::\+ROUNDING\+\_\+\+PRECISION}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02013_aa854e4b8d04fc62d8e09cff48ba95d68}\label{a02013_aa854e4b8d04fc62d8e09cff48ba95d68}} 
+\index{HF::SpatialStructures::PathMember@{HF::SpatialStructures::PathMember}!cost@{cost}}
+\index{cost@{cost}!HF::SpatialStructures::PathMember@{HF::SpatialStructures::PathMember}}
+\doxysubsubsection{\texorpdfstring{cost}{cost}}
+{\footnotesize\ttfamily float HF\+::\+Spatial\+Structures\+::\+Path\+Member\+::cost}
+
+
+
+Cost of traversing to the next path member in the path. 
+
+
+
+Definition at line \mbox{\hyperlink{a00215_source_l00020}{20}} of file \mbox{\hyperlink{a00215_source}{path.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00215_source_l00041}{operator==()}}.
+
+\mbox{\Hypertarget{a02013_aed2cf97b3136ad0929cdd3c5c2b96e1c}\label{a02013_aed2cf97b3136ad0929cdd3c5c2b96e1c}} 
+\index{HF::SpatialStructures::PathMember@{HF::SpatialStructures::PathMember}!node@{node}}
+\index{node@{node}!HF::SpatialStructures::PathMember@{HF::SpatialStructures::PathMember}}
+\doxysubsubsection{\texorpdfstring{node}{node}}
+{\footnotesize\ttfamily int HF\+::\+Spatial\+Structures\+::\+Path\+Member\+::node}
+
+
+
+ID of the node this represents in the graph. 
+
+
+
+Definition at line \mbox{\hyperlink{a00215_source_l00021}{21}} of file \mbox{\hyperlink{a00215_source}{path.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00215_source_l00041}{operator==()}}.
+
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Cpp/spatialstructures/src/\mbox{\hyperlink{a00206}{json.\+hpp}}\end{DoxyCompactItemize}
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00215}{path.\+h}}\end{DoxyCompactItemize}

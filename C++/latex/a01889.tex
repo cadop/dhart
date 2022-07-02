@@ -1,196 +1,97 @@
-\hypertarget{a01889}{}\doxysection{nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$ Class Template Reference}
-\label{a01889}\index{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$@{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$}}
+\hypertarget{a01889}{}\doxysection{nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter\+\_\+factory\texorpdfstring{$<$}{<} Iterator\+Type, enable\+\_\+if\+\_\+t\texorpdfstring{$<$}{<} is\+\_\+iterator\+\_\+of\+\_\+multibyte\texorpdfstring{$<$}{<} Iterator\+Type \texorpdfstring{$>$}{>}\+::value \texorpdfstring{$>$}{>} \texorpdfstring{$>$}{>} Struct Template Reference}
+\label{a01889}\index{nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$@{nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$}}
 
 
 {\ttfamily \#include $<$json.\+hpp$>$}
 
-
-
-Collaboration diagram for nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a01887}
-\end{center}
-\end{figure}
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-using \mbox{\hyperlink{a01889_a7b9f8684206b5dadf0e96986577dfc24}{char\+\_\+type}} = char
+using \mbox{\hyperlink{a01889_a1c42a47cd6cd71146cf2851d76165610}{iterator\+\_\+type}} = Iterator\+Type
+\item 
+using \mbox{\hyperlink{a01889_aff521be1855964b6ec371eed2ca2590f}{char\+\_\+type}} = typename std\+::iterator\+\_\+traits$<$ \mbox{\hyperlink{a01889_a1c42a47cd6cd71146cf2851d76165610}{iterator\+\_\+type}} $>$\+::value\+\_\+type
+\item 
+using \mbox{\hyperlink{a01889_afd0218fc0657b5e04ab81ccc9dcda03d}{base\+\_\+adapter\+\_\+type}} = \mbox{\hyperlink{a01861}{iterator\+\_\+input\+\_\+adapter}}$<$ \mbox{\hyperlink{a01889_a1c42a47cd6cd71146cf2851d76165610}{iterator\+\_\+type}} $>$
+\item 
+using \mbox{\hyperlink{a01889_ae9fc94b1b95c5d4afd1ab3f9ccb93c1a}{adapter\+\_\+type}} = \mbox{\hyperlink{a01877}{wide\+\_\+string\+\_\+input\+\_\+adapter}}$<$ \mbox{\hyperlink{a01889_afd0218fc0657b5e04ab81ccc9dcda03d}{base\+\_\+adapter\+\_\+type}}, \mbox{\hyperlink{a01889_aff521be1855964b6ec371eed2ca2590f}{char\+\_\+type}} $>$
 \end{DoxyCompactItemize}
-\doxysubsection*{Public Member Functions}
+\doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a01889_aa12146f16f0a22ae3d23bd4af7460fcd}{wide\+\_\+string\+\_\+input\+\_\+adapter}} (Base\+Input\+Adapter base)
-\item 
-std\+::char\+\_\+traits$<$ char $>$\+::int\+\_\+type \mbox{\hyperlink{a01889_a50f9436820b9caa9708ea69e2ba0230b}{get\+\_\+character}} () noexcept
+static \mbox{\hyperlink{a01889_ae9fc94b1b95c5d4afd1ab3f9ccb93c1a}{adapter\+\_\+type}} \mbox{\hyperlink{a01889_aae2354d80ae95214a9da99c495003f6c}{create}} (Iterator\+Type first, Iterator\+Type last)
 \end{DoxyCompactItemize}
-\doxysubsection*{Private Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-{\footnotesize template$<$size\+\_\+t T$>$ }\\\mbox{\hyperlink{a00411_a59fca69799f6b9e366710cb9043aa77d}{void}} \mbox{\hyperlink{a01889_a1e797f94449c5c3e68ab468d8caf0db6}{fill\+\_\+buffer}} ()
-\end{DoxyCompactItemize}
-\doxysubsection*{Private Attributes}
-\begin{DoxyCompactItemize}
-\item 
-Base\+Input\+Adapter \mbox{\hyperlink{a01889_a6951ed130bc49fbee6e434b62ed187ac}{base\+\_\+adapter}}
-\item 
-std\+::array$<$ std\+::char\+\_\+traits$<$ char $>$\+::int\+\_\+type, 4 $>$ \mbox{\hyperlink{a01889_af6bded96214b2fe8edd142d92141550e}{utf8\+\_\+bytes}} = \{\{0, 0, 0, 0\}\}
-\begin{DoxyCompactList}\small\item\em a buffer for U\+T\+F-\/8 bytes \end{DoxyCompactList}\item 
-std\+::size\+\_\+t \mbox{\hyperlink{a01889_a2a1884713fedff6c17cdbbe63070d1ac}{utf8\+\_\+bytes\+\_\+index}} = 0
-\begin{DoxyCompactList}\small\item\em index to the utf8\+\_\+codes array for the next valid byte \end{DoxyCompactList}\item 
-std\+::size\+\_\+t \mbox{\hyperlink{a01889_a8966550e615e62978b01d3a252b9c649}{utf8\+\_\+bytes\+\_\+filled}} = 0
-\begin{DoxyCompactList}\small\item\em number of valid bytes in the utf8\+\_\+codes array \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$typename Base\+Input\+Adapter, typename Wide\+Char\+Type$>$\newline
-class nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$}
+\subsubsection*{template$<$typename Iterator\+Type$>$\newline
+struct nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter\+\_\+factory$<$ Iterator\+Type, enable\+\_\+if\+\_\+t$<$ is\+\_\+iterator\+\_\+of\+\_\+multibyte$<$ Iterator\+Type $>$\+::value $>$ $>$}
 
 
-
-Definition at line 5005 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l05073}{5073}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
 \doxysubsection{Member Typedef Documentation}
-\mbox{\Hypertarget{a01889_a7b9f8684206b5dadf0e96986577dfc24}\label{a01889_a7b9f8684206b5dadf0e96986577dfc24}} 
-\index{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$@{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$}!char\_type@{char\_type}}
-\index{char\_type@{char\_type}!nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$@{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$}}
+\mbox{\Hypertarget{a01889_ae9fc94b1b95c5d4afd1ab3f9ccb93c1a}\label{a01889_ae9fc94b1b95c5d4afd1ab3f9ccb93c1a}} 
+\index{nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$@{nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$}!adapter\_type@{adapter\_type}}
+\index{adapter\_type@{adapter\_type}!nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$@{nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$}}
+\doxysubsubsection{\texorpdfstring{adapter\_type}{adapter\_type}}
+{\footnotesize\ttfamily template$<$typename Iterator\+Type $>$ \\
+using \mbox{\hyperlink{a01881}{nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter\+\_\+factory}}$<$ Iterator\+Type, \mbox{\hyperlink{a00411_a02bcbc878bee413f25b985ada771aa9c}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{a01885}{is\+\_\+iterator\+\_\+of\+\_\+multibyte}}$<$ Iterator\+Type $>$\+::value $>$ $>$\+::adapter\+\_\+type =  \mbox{\hyperlink{a01877}{wide\+\_\+string\+\_\+input\+\_\+adapter}}$<$\mbox{\hyperlink{a01889_afd0218fc0657b5e04ab81ccc9dcda03d}{base\+\_\+adapter\+\_\+type}}, \mbox{\hyperlink{a01889_aff521be1855964b6ec371eed2ca2590f}{char\+\_\+type}}$>$}
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l05078}{5078}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+\mbox{\Hypertarget{a01889_afd0218fc0657b5e04ab81ccc9dcda03d}\label{a01889_afd0218fc0657b5e04ab81ccc9dcda03d}} 
+\index{nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$@{nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$}!base\_adapter\_type@{base\_adapter\_type}}
+\index{base\_adapter\_type@{base\_adapter\_type}!nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$@{nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$}}
+\doxysubsubsection{\texorpdfstring{base\_adapter\_type}{base\_adapter\_type}}
+{\footnotesize\ttfamily template$<$typename Iterator\+Type $>$ \\
+using \mbox{\hyperlink{a01881}{nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter\+\_\+factory}}$<$ Iterator\+Type, \mbox{\hyperlink{a00411_a02bcbc878bee413f25b985ada771aa9c}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{a01885}{is\+\_\+iterator\+\_\+of\+\_\+multibyte}}$<$ Iterator\+Type $>$\+::value $>$ $>$\+::base\+\_\+adapter\+\_\+type =  \mbox{\hyperlink{a01861}{iterator\+\_\+input\+\_\+adapter}}$<$\mbox{\hyperlink{a01889_a1c42a47cd6cd71146cf2851d76165610}{iterator\+\_\+type}}$>$}
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l05077}{5077}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+\mbox{\Hypertarget{a01889_aff521be1855964b6ec371eed2ca2590f}\label{a01889_aff521be1855964b6ec371eed2ca2590f}} 
+\index{nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$@{nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$}!char\_type@{char\_type}}
+\index{char\_type@{char\_type}!nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$@{nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$}}
 \doxysubsubsection{\texorpdfstring{char\_type}{char\_type}}
-{\footnotesize\ttfamily template$<$typename Base\+Input\+Adapter , typename Wide\+Char\+Type $>$ \\
-using \mbox{\hyperlink{a01889}{nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter}}$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::\mbox{\hyperlink{a01889_a7b9f8684206b5dadf0e96986577dfc24}{char\+\_\+type}} =  char}
+{\footnotesize\ttfamily template$<$typename Iterator\+Type $>$ \\
+using \mbox{\hyperlink{a01881}{nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter\+\_\+factory}}$<$ Iterator\+Type, \mbox{\hyperlink{a00411_a02bcbc878bee413f25b985ada771aa9c}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{a01885}{is\+\_\+iterator\+\_\+of\+\_\+multibyte}}$<$ Iterator\+Type $>$\+::value $>$ $>$\+::char\+\_\+type =  typename std\+::iterator\+\_\+traits$<$\mbox{\hyperlink{a01889_a1c42a47cd6cd71146cf2851d76165610}{iterator\+\_\+type}}$>$\+::value\+\_\+type}
 
 
 
-Definition at line 5008 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l05076}{5076}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+\mbox{\Hypertarget{a01889_a1c42a47cd6cd71146cf2851d76165610}\label{a01889_a1c42a47cd6cd71146cf2851d76165610}} 
+\index{nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$@{nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$}!iterator\_type@{iterator\_type}}
+\index{iterator\_type@{iterator\_type}!nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$@{nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$}}
+\doxysubsubsection{\texorpdfstring{iterator\_type}{iterator\_type}}
+{\footnotesize\ttfamily template$<$typename Iterator\+Type $>$ \\
+using \mbox{\hyperlink{a01881}{nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter\+\_\+factory}}$<$ Iterator\+Type, \mbox{\hyperlink{a00411_a02bcbc878bee413f25b985ada771aa9c}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{a01885}{is\+\_\+iterator\+\_\+of\+\_\+multibyte}}$<$ Iterator\+Type $>$\+::value $>$ $>$\+::iterator\+\_\+type =  Iterator\+Type}
 
 
 
-\doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{a01889_aa12146f16f0a22ae3d23bd4af7460fcd}\label{a01889_aa12146f16f0a22ae3d23bd4af7460fcd}} 
-\index{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$@{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$}!wide\_string\_input\_adapter@{wide\_string\_input\_adapter}}
-\index{wide\_string\_input\_adapter@{wide\_string\_input\_adapter}!nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$@{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$}}
-\doxysubsubsection{\texorpdfstring{wide\_string\_input\_adapter()}{wide\_string\_input\_adapter()}}
-{\footnotesize\ttfamily template$<$typename Base\+Input\+Adapter , typename Wide\+Char\+Type $>$ \\
-\mbox{\hyperlink{a01889}{nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter}}$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::\mbox{\hyperlink{a01889}{wide\+\_\+string\+\_\+input\+\_\+adapter}} (\begin{DoxyParamCaption}\item[{Base\+Input\+Adapter}]{base }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line 5010 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l05075}{5075}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a01889_a1e797f94449c5c3e68ab468d8caf0db6}\label{a01889_a1e797f94449c5c3e68ab468d8caf0db6}} 
-\index{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$@{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$}!fill\_buffer@{fill\_buffer}}
-\index{fill\_buffer@{fill\_buffer}!nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$@{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$}}
-\doxysubsubsection{\texorpdfstring{fill\_buffer()}{fill\_buffer()}}
-{\footnotesize\ttfamily template$<$typename Base\+Input\+Adapter , typename Wide\+Char\+Type $>$ \\
-template$<$size\+\_\+t T$>$ \\
-\mbox{\hyperlink{a00411_a59fca69799f6b9e366710cb9043aa77d}{void}} \mbox{\hyperlink{a01889}{nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter}}$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::fill\+\_\+buffer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+\mbox{\Hypertarget{a01889_aae2354d80ae95214a9da99c495003f6c}\label{a01889_aae2354d80ae95214a9da99c495003f6c}} 
+\index{nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$@{nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$}!create@{create}}
+\index{create@{create}!nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$@{nlohmann::detail::iterator\_input\_adapter\_factory$<$ IteratorType, enable\_if\_t$<$ is\_iterator\_of\_multibyte$<$ IteratorType $>$::value $>$ $>$}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily template$<$typename Iterator\+Type $>$ \\
+static \mbox{\hyperlink{a01889_ae9fc94b1b95c5d4afd1ab3f9ccb93c1a}{adapter\+\_\+type}} \mbox{\hyperlink{a01881}{nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter\+\_\+factory}}$<$ Iterator\+Type, \mbox{\hyperlink{a00411_a02bcbc878bee413f25b985ada771aa9c}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{a01885}{is\+\_\+iterator\+\_\+of\+\_\+multibyte}}$<$ Iterator\+Type $>$\+::value $>$ $>$\+::create (\begin{DoxyParamCaption}\item[{Iterator\+Type}]{first,  }\item[{Iterator\+Type}]{last }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
-Definition at line 5034 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l05080}{5080}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-References nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::base\+\_\+adapter, nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::utf8\+\_\+bytes, nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::utf8\+\_\+bytes\+\_\+filled, and nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::utf8\+\_\+bytes\+\_\+index.
-
-\mbox{\Hypertarget{a01889_a50f9436820b9caa9708ea69e2ba0230b}\label{a01889_a50f9436820b9caa9708ea69e2ba0230b}} 
-\index{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$@{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$}!get\_character@{get\_character}}
-\index{get\_character@{get\_character}!nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$@{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$}}
-\doxysubsubsection{\texorpdfstring{get\_character()}{get\_character()}}
-{\footnotesize\ttfamily template$<$typename Base\+Input\+Adapter , typename Wide\+Char\+Type $>$ \\
-std\+::char\+\_\+traits$<$char$>$\+::int\+\_\+type \mbox{\hyperlink{a01889}{nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter}}$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::get\+\_\+character (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
-
-
-
-Definition at line 5013 of file json.\+hpp.
-
-
-
-References J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+RT, nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::utf8\+\_\+bytes, nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::utf8\+\_\+bytes\+\_\+filled, and nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::utf8\+\_\+bytes\+\_\+index.
-
-
-
-\doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{a01889_a6951ed130bc49fbee6e434b62ed187ac}\label{a01889_a6951ed130bc49fbee6e434b62ed187ac}} 
-\index{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$@{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$}!base\_adapter@{base\_adapter}}
-\index{base\_adapter@{base\_adapter}!nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$@{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$}}
-\doxysubsubsection{\texorpdfstring{base\_adapter}{base\_adapter}}
-{\footnotesize\ttfamily template$<$typename Base\+Input\+Adapter , typename Wide\+Char\+Type $>$ \\
-Base\+Input\+Adapter \mbox{\hyperlink{a01889}{nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter}}$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::base\+\_\+adapter\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Definition at line 5031 of file json.\+hpp.
-
-
-
-Referenced by nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::fill\+\_\+buffer().
-
-\mbox{\Hypertarget{a01889_af6bded96214b2fe8edd142d92141550e}\label{a01889_af6bded96214b2fe8edd142d92141550e}} 
-\index{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$@{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$}!utf8\_bytes@{utf8\_bytes}}
-\index{utf8\_bytes@{utf8\_bytes}!nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$@{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$}}
-\doxysubsubsection{\texorpdfstring{utf8\_bytes}{utf8\_bytes}}
-{\footnotesize\ttfamily template$<$typename Base\+Input\+Adapter , typename Wide\+Char\+Type $>$ \\
-std\+::array$<$std\+::char\+\_\+traits$<$char$>$\+::int\+\_\+type, 4$>$ \mbox{\hyperlink{a01889}{nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter}}$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::utf8\+\_\+bytes = \{\{0, 0, 0, 0\}\}\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-a buffer for U\+T\+F-\/8 bytes 
-
-
-
-Definition at line 5040 of file json.\+hpp.
-
-
-
-Referenced by nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::fill\+\_\+buffer(), and nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::get\+\_\+character().
-
-\mbox{\Hypertarget{a01889_a8966550e615e62978b01d3a252b9c649}\label{a01889_a8966550e615e62978b01d3a252b9c649}} 
-\index{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$@{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$}!utf8\_bytes\_filled@{utf8\_bytes\_filled}}
-\index{utf8\_bytes\_filled@{utf8\_bytes\_filled}!nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$@{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$}}
-\doxysubsubsection{\texorpdfstring{utf8\_bytes\_filled}{utf8\_bytes\_filled}}
-{\footnotesize\ttfamily template$<$typename Base\+Input\+Adapter , typename Wide\+Char\+Type $>$ \\
-std\+::size\+\_\+t \mbox{\hyperlink{a01889}{nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter}}$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::utf8\+\_\+bytes\+\_\+filled = 0\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-number of valid bytes in the utf8\+\_\+codes array 
-
-
-
-Definition at line 5045 of file json.\+hpp.
-
-
-
-Referenced by nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::fill\+\_\+buffer(), and nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::get\+\_\+character().
-
-\mbox{\Hypertarget{a01889_a2a1884713fedff6c17cdbbe63070d1ac}\label{a01889_a2a1884713fedff6c17cdbbe63070d1ac}} 
-\index{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$@{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$}!utf8\_bytes\_index@{utf8\_bytes\_index}}
-\index{utf8\_bytes\_index@{utf8\_bytes\_index}!nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$@{nlohmann::detail::wide\_string\_input\_adapter$<$ BaseInputAdapter, WideCharType $>$}}
-\doxysubsubsection{\texorpdfstring{utf8\_bytes\_index}{utf8\_bytes\_index}}
-{\footnotesize\ttfamily template$<$typename Base\+Input\+Adapter , typename Wide\+Char\+Type $>$ \\
-std\+::size\+\_\+t \mbox{\hyperlink{a01889}{nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter}}$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::utf8\+\_\+bytes\+\_\+index = 0\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-index to the utf8\+\_\+codes array for the next valid byte 
-
-
-
-Definition at line 5043 of file json.\+hpp.
-
-
-
-Referenced by nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::fill\+\_\+buffer(), and nlohmann\+::detail\+::wide\+\_\+string\+\_\+input\+\_\+adapter$<$ Base\+Input\+Adapter, Wide\+Char\+Type $>$\+::get\+\_\+character().
-
-
-
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
 Cpp/spatialstructures/src/\mbox{\hyperlink{a00206}{json.\+hpp}}\end{DoxyCompactItemize}

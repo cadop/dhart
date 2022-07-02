@@ -1,213 +1,358 @@
-\hypertarget{a01481}{}\doxysection{HF\+::Spatial\+Structures\+::Edge\+Set Struct Reference}
-\label{a01481}\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
+\hypertarget{a01481}{}\doxysection{HF\+::Spatial\+Structures\+::Edge\+Cost\+Set Class Reference}
+\label{a01481}\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
 
 
-A collection of edges and a parent.  
-
-
-
-
-{\ttfamily \#include $<$Edge.\+h$>$}
+A set of edge costs for a graph.  
 
 
 
-Collaboration diagram for HF\+::Spatial\+Structures\+::Edge\+Set\+:
+
+{\ttfamily \#include $<$graph.\+h$>$}
+
+
+
+Collaboration diagram for HF\+::Spatial\+Structures\+::Edge\+Cost\+Set\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=269pt]{a01479}
+\includegraphics[width=190pt]{a01479}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a01481_af6ea24f6930a23300942e17de55c5611}{Edge\+Set}} ()
-\begin{DoxyCompactList}\small\item\em Empty Constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01481_a27b89d87c58a2e2775b430c9a27f1477}{Edge\+Set}} (int \mbox{\hyperlink{a01481_a1cf561c1c38a93316f15ac2ab29fc8f4}{parent}}, const std\+::vector$<$ \mbox{\hyperlink{a01477}{Int\+Edge}} $>$ \&edges)
-\begin{DoxyCompactList}\small\item\em Construct an edge set with a list of int edges and a parent. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{a01481_aefd67fc0614e2bca2eb54194452c2253}{size}} () const
-\begin{DoxyCompactList}\small\item\em Get the number of children in this edgeset. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a01481_a9ce7cfb064de84654c518905ec76b7e0}{Add\+Edges}} (const std\+::vector$<$ \mbox{\hyperlink{a01477}{Int\+Edge}} $>$ \&edges)
-\begin{DoxyCompactList}\small\item\em Add a set of edges to the array of children. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{a01481_a1ede402c01f651faf1cfea6a09a908b2}{operator==}} (const \mbox{\hyperlink{a01481}{Edge\+Set}} \&E\+S2) const
-\begin{DoxyCompactList}\small\item\em Check the equality of two edge sets. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
+\mbox{\hyperlink{a01481_aaaab10e7584343084e41889ee9858111}{Edge\+Cost\+Set}} ()
+\begin{DoxyCompactList}\small\item\em Construct an empty edge cost set. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01481_a292cb98e857b8ae2606395ed57ebcec8}{Edge\+Cost\+Set}} (int \mbox{\hyperlink{a01481_abc5ff8ee3175dca75cacbfbd592907db}{size}})
+\begin{DoxyCompactList}\small\item\em Create an edge cost set and allocate a specific size. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01481_abc5ff8ee3175dca75cacbfbd592907db}{size}} () const
+\begin{DoxyCompactList}\small\item\em Get the size of this edge matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01481_a22bf925d64a8ab8c0920d668068dc3db}{Resize\+If\+Needed}} (int new\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Resize this edge matrix if needed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01481_a3cbcc68757254cc1a56efb4aa9a20e44}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clear all values from this edge cost set. \end{DoxyCompactList}\item 
+float \& \mbox{\hyperlink{a01481_a383475da303d0b59bedfa2a83f1487b4}{operator\mbox{[}$\,$\mbox{]}}} (int i)
+\begin{DoxyCompactList}\small\item\em Index internal values array. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01481_a4b139518bc0939554df19e83c8e0b916}{bounds\+\_\+check}} (int i) const
+\item 
+float \mbox{\hyperlink{a01481_a3ab14e57d0bb9b4ee68f7a58b0a568ec}{operator\mbox{[}$\,$\mbox{]}}} (int i) const
+\begin{DoxyCompactList}\small\item\em Index internal values array. \end{DoxyCompactList}\item 
+float $\ast$ \mbox{\hyperlink{a01481_a1dbef69c08db4137463175a46043547d}{Get\+Ptr}} ()
+\begin{DoxyCompactList}\small\item\em Get the pointer to the start of this array. \end{DoxyCompactList}\item 
+const float $\ast$ \mbox{\hyperlink{a01481_aff0b1e0be6be4c65abd0c05717131e14}{Get\+Ptr}} () const
+\begin{DoxyCompactList}\small\item\em Get the pointer to the start of this array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{a01481_a1cf561c1c38a93316f15ac2ab29fc8f4}{parent}}
-\begin{DoxyCompactList}\small\item\em Identifier of parent node. \end{DoxyCompactList}\item 
-std\+::vector$<$ \mbox{\hyperlink{a01477}{Int\+Edge}} $>$ \mbox{\hyperlink{a01481_ae0ed1fa60810e109100548a03e10259c}{children}}
-\begin{DoxyCompactList}\small\item\em vector of \mbox{\hyperlink{a01477}{Int\+Edge}} (children) \end{DoxyCompactList}\end{DoxyCompactItemize}
+std\+::vector$<$ float $>$ \mbox{\hyperlink{a01481_a0eebad11ce129d669da0e51bbae04aee}{costs}}
+\begin{DoxyCompactList}\small\item\em Array of costs to be used like eigen\textquotesingle{}s internal indices array. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-A collection of edges and a parent. 
+A set of edge costs for a graph. 
 
-\begin{DoxyRemark}{Remarks}
-This can to represent a node and its edges without repeating any information such as parent\+\_\+id or node objects. 
-\end{DoxyRemark}
+Arrays that can be swapped in and out of the array\textquotesingle{}s indices. 
 
-
-Definition at line 77 of file Edge.\+h.
+Definition at line \mbox{\hyperlink{a00203_source_l00375}{375}} of file \mbox{\hyperlink{a00203_source}{graph.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{a01481_af6ea24f6930a23300942e17de55c5611}\label{a01481_af6ea24f6930a23300942e17de55c5611}} 
-\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!EdgeSet@{EdgeSet}}
-\index{EdgeSet@{EdgeSet}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
-\doxysubsubsection{\texorpdfstring{EdgeSet()}{EdgeSet()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Edge\+Set\+::\+Edge\+Set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\Hypertarget{a01481_aaaab10e7584343084e41889ee9858111}\label{a01481_aaaab10e7584343084e41889ee9858111}} 
+\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!EdgeCostSet@{EdgeCostSet}}
+\index{EdgeCostSet@{EdgeCostSet}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
+\doxysubsubsection{\texorpdfstring{EdgeCostSet()}{EdgeCostSet()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily HF\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::\+Edge\+Cost\+Set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Empty Constructor. 
+Construct an empty edge cost set. 
 
 
 
-Definition at line 82 of file Edge.\+h.
+Definition at line \mbox{\hyperlink{a00203_source_l00381}{381}} of file \mbox{\hyperlink{a00203_source}{graph.\+h}}.
+
+\mbox{\Hypertarget{a01481_a292cb98e857b8ae2606395ed57ebcec8}\label{a01481_a292cb98e857b8ae2606395ed57ebcec8}} 
+\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!EdgeCostSet@{EdgeCostSet}}
+\index{EdgeCostSet@{EdgeCostSet}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
+\doxysubsubsection{\texorpdfstring{EdgeCostSet()}{EdgeCostSet()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily HF\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::\+Edge\+Cost\+Set (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-References parent.
-
-\mbox{\Hypertarget{a01481_a27b89d87c58a2e2775b430c9a27f1477}\label{a01481_a27b89d87c58a2e2775b430c9a27f1477}} 
-\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!EdgeSet@{EdgeSet}}
-\index{EdgeSet@{EdgeSet}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
-\doxysubsubsection{\texorpdfstring{EdgeSet()}{EdgeSet()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Edge\+Set\+::\+Edge\+Set (\begin{DoxyParamCaption}\item[{int}]{parent,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a01477}{Int\+Edge}} $>$ \&}]{edges }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Create an edge cost set and allocate a specific size. 
 
 
+\begin{DoxyParams}{Parameters}
+{\em size} & Size of this cost set to be preallocated upon construction. ~\newline
+ \\
+\hline
+\end{DoxyParams}
 
-Construct an edge set with a list of int edges and a parent. 
 
-
-
-Definition at line 86 of file Edge.\+h.
+Definition at line \mbox{\hyperlink{a00203_source_l00388}{388}} of file \mbox{\hyperlink{a00203_source}{graph.\+h}}.
 
 
 
-References Add\+Edges(), and parent.
+References \mbox{\hyperlink{a00203_source_l00403}{Resize\+If\+Needed()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a01481_a27b89d87c58a2e2775b430c9a27f1477_cgraph}
+\includegraphics[width=350pt]{a01481_a292cb98e857b8ae2606395ed57ebcec8_cgraph}
 \end{center}
 \end{figure}
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a01481_a9ce7cfb064de84654c518905ec76b7e0}\label{a01481_a9ce7cfb064de84654c518905ec76b7e0}} 
-\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!AddEdges@{AddEdges}}
-\index{AddEdges@{AddEdges}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
-\doxysubsubsection{\texorpdfstring{AddEdges()}{AddEdges()}}
-{\footnotesize\ttfamily void H\+F\+::\+Spatial\+Structures\+::\+Edge\+Set\+::\+Add\+Edges (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{a01477}{Int\+Edge}} $>$ \&}]{edges }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\Hypertarget{a01481_a4b139518bc0939554df19e83c8e0b916}\label{a01481_a4b139518bc0939554df19e83c8e0b916}} 
+\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!bounds\_check@{bounds\_check}}
+\index{bounds\_check@{bounds\_check}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
+\doxysubsubsection{\texorpdfstring{bounds\_check()}{bounds\_check()}}
+{\footnotesize\ttfamily bool HF\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::bounds\+\_\+check (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Add a set of edges to the array of children. 
+Definition at line \mbox{\hyperlink{a00203_source_l00429}{429}} of file \mbox{\hyperlink{a00203_source}{graph.\+h}}.
 
 
 
-Definition at line 95 of file Edge.\+h.
+References \mbox{\hyperlink{a00203_source_l00394}{size()}}.
 
 
 
-References children.
+Referenced by \mbox{\hyperlink{a00203_source_l00424}{operator\mbox{[}$\,$\mbox{]}()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01481_a4b139518bc0939554df19e83c8e0b916_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01481_a4b139518bc0939554df19e83c8e0b916_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01481_a3cbcc68757254cc1a56efb4aa9a20e44}\label{a01481_a3cbcc68757254cc1a56efb4aa9a20e44}} 
+\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!Clear@{Clear}}
+\index{Clear@{Clear}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily void HF\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::\+Clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Referenced by Edge\+Set().
+Clear all values from this edge cost set. 
+
+
+
+Definition at line \mbox{\hyperlink{a00203_source_l00417}{417}} of file \mbox{\hyperlink{a00203_source}{graph.\+h}}.
+
+\mbox{\Hypertarget{a01481_a1dbef69c08db4137463175a46043547d}\label{a01481_a1dbef69c08db4137463175a46043547d}} 
+\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!GetPtr@{GetPtr}}
+\index{GetPtr@{GetPtr}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
+\doxysubsubsection{\texorpdfstring{GetPtr()}{GetPtr()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily float $\ast$ HF\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::\+Get\+Ptr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the pointer to the start of this array. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the value of this \mbox{\hyperlink{a01481}{Edge\+Cost\+Set}}\textquotesingle{}s internal costs array 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00203_source_l00448}{448}} of file \mbox{\hyperlink{a00203_source}{graph.\+h}}.
+
+\mbox{\Hypertarget{a01481_aff0b1e0be6be4c65abd0c05717131e14}\label{a01481_aff0b1e0be6be4c65abd0c05717131e14}} 
+\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!GetPtr@{GetPtr}}
+\index{GetPtr@{GetPtr}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
+\doxysubsubsection{\texorpdfstring{GetPtr()}{GetPtr()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const float $\ast$ HF\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::\+Get\+Ptr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the pointer to the start of this array. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the value of this \mbox{\hyperlink{a01481}{Edge\+Cost\+Set}}\textquotesingle{}s internal costs array 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00203_source_l00458}{458}} of file \mbox{\hyperlink{a00203_source}{graph.\+h}}.
+
+\mbox{\Hypertarget{a01481_a383475da303d0b59bedfa2a83f1487b4}\label{a01481_a383475da303d0b59bedfa2a83f1487b4}} 
+\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily float \& HF\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Index internal values array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & index to get the cost of \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the value at index i in costs. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00203_source_l00424}{424}} of file \mbox{\hyperlink{a00203_source}{graph.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00203_source_l00429}{bounds\+\_\+check()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01481_a383475da303d0b59bedfa2a83f1487b4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01481_a3ab14e57d0bb9b4ee68f7a58b0a568ec}\label{a01481_a3ab14e57d0bb9b4ee68f7a58b0a568ec}} 
+\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float HF\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Index internal values array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & index to get the cost of \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the value at index i in costs. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00203_source_l00438}{438}} of file \mbox{\hyperlink{a00203_source}{graph.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00203_source_l00429}{bounds\+\_\+check()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01481_a3ab14e57d0bb9b4ee68f7a58b0a568ec_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01481_a22bf925d64a8ab8c0920d668068dc3db}\label{a01481_a22bf925d64a8ab8c0920d668068dc3db}} 
+\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!ResizeIfNeeded@{ResizeIfNeeded}}
+\index{ResizeIfNeeded@{ResizeIfNeeded}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
+\doxysubsubsection{\texorpdfstring{ResizeIfNeeded()}{ResizeIfNeeded()}}
+{\footnotesize\ttfamily void HF\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::\+Resize\+If\+Needed (\begin{DoxyParamCaption}\item[{int}]{new\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resize this edge matrix if needed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+size} & new size of the array to allocate to\\
+\hline
+\end{DoxyParams}
+If size is less than the current size, this function doesn\textquotesingle{}t do anything. All new values are defaulted to NAN. 
+
+Definition at line \mbox{\hyperlink{a00203_source_l00403}{403}} of file \mbox{\hyperlink{a00203_source}{graph.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00203_source_l00377}{costs}}, and \mbox{\hyperlink{a00203_source_l00394}{size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00203_source_l00388}{Edge\+Cost\+Set()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01481_a22bf925d64a8ab8c0920d668068dc3db_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01481_a22bf925d64a8ab8c0920d668068dc3db_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01481_abc5ff8ee3175dca75cacbfbd592907db}\label{a01481_abc5ff8ee3175dca75cacbfbd592907db}} 
+\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!size@{size}}
+\index{size@{size}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily int HF\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the size of this edge matrix. 
+
+\begin{DoxyReturn}{Returns}
+how many values this matrix can hold, or the size of its internal costs array. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00203_source_l00394}{394}} of file \mbox{\hyperlink{a00203_source}{graph.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00203_source_l00429}{bounds\+\_\+check()}}, and \mbox{\hyperlink{a00203_source_l00403}{Resize\+If\+Needed()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a01481_a9ce7cfb064de84654c518905ec76b7e0_icgraph}
+\includegraphics[width=350pt]{a01481_abc5ff8ee3175dca75cacbfbd592907db_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{a01481_a1ede402c01f651faf1cfea6a09a908b2}\label{a01481_a1ede402c01f651faf1cfea6a09a908b2}} 
-\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!operator==@{operator==}}
-\index{operator==@{operator==}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
-\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
-{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Edge\+Set\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01481}{Edge\+Set}} \&}]{E\+S2 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Check the equality of two edge sets. 
-
-
-
-Definition at line 107 of file Edge.\+h.
-
-
-
-References children, and parent.
-
-\mbox{\Hypertarget{a01481_aefd67fc0614e2bca2eb54194452c2253}\label{a01481_aefd67fc0614e2bca2eb54194452c2253}} 
-\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!size@{size}}
-\index{size@{size}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
-\doxysubsubsection{\texorpdfstring{size()}{size()}}
-{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+Edge\+Set\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Get the number of children in this edgeset. 
-
-
-
-Definition at line 92 of file Edge.\+h.
-
-
-
-References children.
-
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{a01481_ae0ed1fa60810e109100548a03e10259c}\label{a01481_ae0ed1fa60810e109100548a03e10259c}} 
-\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!children@{children}}
-\index{children@{children}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
-\doxysubsubsection{\texorpdfstring{children}{children}}
-{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{a01477}{Int\+Edge}}$>$ H\+F\+::\+Spatial\+Structures\+::\+Edge\+Set\+::children}
+\mbox{\Hypertarget{a01481_a0eebad11ce129d669da0e51bbae04aee}\label{a01481_a0eebad11ce129d669da0e51bbae04aee}} 
+\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!costs@{costs}}
+\index{costs@{costs}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
+\doxysubsubsection{\texorpdfstring{costs}{costs}}
+{\footnotesize\ttfamily std\+::vector$<$float$>$ HF\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::costs\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-vector of \mbox{\hyperlink{a01477}{Int\+Edge}} (children) 
+Array of costs to be used like eigen\textquotesingle{}s internal indices array. 
 
 
 
-Definition at line 79 of file Edge.\+h.
+Definition at line \mbox{\hyperlink{a00203_source_l00377}{377}} of file \mbox{\hyperlink{a00203_source}{graph.\+h}}.
 
 
 
-Referenced by Add\+Edges(), operator==(), and size().
-
-\mbox{\Hypertarget{a01481_a1cf561c1c38a93316f15ac2ab29fc8f4}\label{a01481_a1cf561c1c38a93316f15ac2ab29fc8f4}} 
-\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!parent@{parent}}
-\index{parent@{parent}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
-\doxysubsubsection{\texorpdfstring{parent}{parent}}
-{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+Edge\+Set\+::parent}
+Referenced by \mbox{\hyperlink{a00203_source_l00403}{Resize\+If\+Needed()}}.
 
 
 
-Identifier of parent node. 
-
-
-
-Definition at line 78 of file Edge.\+h.
-
-
-
-Referenced by Edge\+Set(), and operator==().
-
-
-
-The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Cpp/spatialstructures/src/\mbox{\hyperlink{a00197}{Edge.\+h}}\end{DoxyCompactItemize}
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00203}{graph.\+h}}\end{DoxyCompactItemize}

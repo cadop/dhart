@@ -1,165 +1,138 @@
-\hypertarget{a01361}{}\doxysection{HF\+::Ray\+Tracer\+::Hit\+Struct$<$ numeric\+\_\+type $>$ Struct Template Reference}
-\label{a01361}\index{HF::RayTracer::HitStruct$<$ numeric\_type $>$@{HF::RayTracer::HitStruct$<$ numeric\_type $>$}}
+\hypertarget{a01361}{}\doxysection{nanort\+::Stack\+Allocator\texorpdfstring{$<$}{<} T, stack\+\_\+capacity \texorpdfstring{$>$}{>}\+::Source Struct Reference}
+\label{a01361}\index{nanort::StackAllocator$<$ T, stack\_capacity $>$::Source@{nanort::StackAllocator$<$ T, stack\_capacity $>$::Source}}
 
 
-A simple hit struct to carry all relevant information about hits.  
-
-
-
-
-{\ttfamily \#include $<$Hit\+Struct.\+h$>$}
+{\ttfamily \#include $<$nanort.\+h$>$}
 
 
 
-Collaboration diagram for HF\+::Ray\+Tracer\+::Hit\+Struct$<$ numeric\+\_\+type $>$\+:
+Collaboration diagram for nanort\+::Stack\+Allocator\texorpdfstring{$<$}{<} T, stack\+\_\+capacity \texorpdfstring{$>$}{>}\+::Source\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=212pt]{a01359}
+\includegraphics[width=253pt]{a01359}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a01361_a92e88a8bd11804536d214e6c4af49b2e}{Hit\+Struct}} ()
+\mbox{\hyperlink{a01361_a38ed74046bc9ec6d9d8c6f28b2ed93ee}{Source}} ()
 \item 
-\mbox{\hyperlink{a01361_a95c75a6e6c497e4a67bba48a59c280e3}{Hit\+Struct}} (numeric\+\_\+type in\+\_\+distance, int in\+\_\+meshid)
+T $\ast$ \mbox{\hyperlink{a01361_a7b32e78fcb2d7476011e4222abbc1943}{stack\+\_\+buffer}} ()
 \item 
-bool \mbox{\hyperlink{a01361_a3d86c2c8d8e0ec6bf63a653ec89807a8}{Did\+Hit}} () const
-\begin{DoxyCompactList}\small\item\em Determine whether or not this hitstruct contains a hit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+const T $\ast$ \mbox{\hyperlink{a01361_a33fc79f562de8940c185880ec11384e4}{stack\+\_\+buffer}} () const
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-numeric\+\_\+type \mbox{\hyperlink{a01361_a6fbe94ce3a7514a37415d28ff0500b64}{distance}}
-\begin{DoxyCompactList}\small\item\em Distance from the origin point to the hit point. Set to -\/1 if no hit was recorded. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{a01361_a7c49a19e480ba9797c9da3d2acd2221d}{meshid}}
-\begin{DoxyCompactList}\small\item\em The ID of the hit mesh. Set to -\/1 if no hit was recorded. \end{DoxyCompactList}\end{DoxyCompactItemize}
+char \mbox{\hyperlink{a01361_a305996e6c091358dcf5526b65b1889b2}{stack\+\_\+buffer\+\_\+}} \mbox{[}sizeof(T\mbox{[}stack\+\_\+capacity\mbox{]})\mbox{]}
+\item 
+bool \mbox{\hyperlink{a01361_ae9ae5f1c043a2a5fcd6df58108e67182}{used\+\_\+stack\+\_\+buffer\+\_\+}}
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$typename numeric\+\_\+type = double$>$\newline
-struct H\+F\+::\+Ray\+Tracer\+::\+Hit\+Struct$<$ numeric\+\_\+type $>$}
-
-A simple hit struct to carry all relevant information about hits. 
+\subsubsection*{template$<$typename T, size\+\_\+t stack\+\_\+capacity$>$\newline
+struct nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::\+Source}
 
 
-
-Definition at line 7 of file Hit\+Struct.\+h.
+Definition at line \mbox{\hyperlink{a00161_source_l00146}{146}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{a01361_a92e88a8bd11804536d214e6c4af49b2e}\label{a01361_a92e88a8bd11804536d214e6c4af49b2e}} 
-\index{HF::RayTracer::HitStruct$<$ numeric\_type $>$@{HF::RayTracer::HitStruct$<$ numeric\_type $>$}!HitStruct@{HitStruct}}
-\index{HitStruct@{HitStruct}!HF::RayTracer::HitStruct$<$ numeric\_type $>$@{HF::RayTracer::HitStruct$<$ numeric\_type $>$}}
-\doxysubsubsection{\texorpdfstring{HitStruct()}{HitStruct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename numeric\+\_\+type  = double$>$ \\
-\mbox{\hyperlink{a01361}{H\+F\+::\+Ray\+Tracer\+::\+Hit\+Struct}}$<$ numeric\+\_\+type $>$\+::\mbox{\hyperlink{a01361}{Hit\+Struct}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\Hypertarget{a01361_a38ed74046bc9ec6d9d8c6f28b2ed93ee}\label{a01361_a38ed74046bc9ec6d9d8c6f28b2ed93ee}} 
+\index{nanort::StackAllocator$<$ T, stack\_capacity $>$::Source@{nanort::StackAllocator$<$ T, stack\_capacity $>$::Source}!Source@{Source}}
+\index{Source@{Source}!nanort::StackAllocator$<$ T, stack\_capacity $>$::Source@{nanort::StackAllocator$<$ T, stack\_capacity $>$::Source}}
+\doxysubsubsection{\texorpdfstring{Source()}{Source()}}
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t stack\+\_\+capacity$>$ \\
+\mbox{\hyperlink{a01357}{nanort\+::\+Stack\+Allocator}}$<$ T, stack\+\_\+capacity $>$\+::\+Source\+::\+Source (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 11 of file Hit\+Struct.\+h.
-
-\mbox{\Hypertarget{a01361_a95c75a6e6c497e4a67bba48a59c280e3}\label{a01361_a95c75a6e6c497e4a67bba48a59c280e3}} 
-\index{HF::RayTracer::HitStruct$<$ numeric\_type $>$@{HF::RayTracer::HitStruct$<$ numeric\_type $>$}!HitStruct@{HitStruct}}
-\index{HitStruct@{HitStruct}!HF::RayTracer::HitStruct$<$ numeric\_type $>$@{HF::RayTracer::HitStruct$<$ numeric\_type $>$}}
-\doxysubsubsection{\texorpdfstring{HitStruct()}{HitStruct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename numeric\+\_\+type  = double$>$ \\
-\mbox{\hyperlink{a01361}{H\+F\+::\+Ray\+Tracer\+::\+Hit\+Struct}}$<$ numeric\+\_\+type $>$\+::\mbox{\hyperlink{a01361}{Hit\+Struct}} (\begin{DoxyParamCaption}\item[{numeric\+\_\+type}]{in\+\_\+distance,  }\item[{int}]{in\+\_\+meshid }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line 13 of file Hit\+Struct.\+h.
+Definition at line \mbox{\hyperlink{a00161_source_l00147}{147}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a01361_a3d86c2c8d8e0ec6bf63a653ec89807a8}\label{a01361_a3d86c2c8d8e0ec6bf63a653ec89807a8}} 
-\index{HF::RayTracer::HitStruct$<$ numeric\_type $>$@{HF::RayTracer::HitStruct$<$ numeric\_type $>$}!DidHit@{DidHit}}
-\index{DidHit@{DidHit}!HF::RayTracer::HitStruct$<$ numeric\_type $>$@{HF::RayTracer::HitStruct$<$ numeric\_type $>$}}
-\doxysubsubsection{\texorpdfstring{DidHit()}{DidHit()}}
-{\footnotesize\ttfamily template$<$typename numeric\+\_\+type  = double$>$ \\
-bool \mbox{\hyperlink{a01361}{H\+F\+::\+Ray\+Tracer\+::\+Hit\+Struct}}$<$ numeric\+\_\+type $>$\+::Did\+Hit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\Hypertarget{a01361_a7b32e78fcb2d7476011e4222abbc1943}\label{a01361_a7b32e78fcb2d7476011e4222abbc1943}} 
+\index{nanort::StackAllocator$<$ T, stack\_capacity $>$::Source@{nanort::StackAllocator$<$ T, stack\_capacity $>$::Source}!stack\_buffer@{stack\_buffer}}
+\index{stack\_buffer@{stack\_buffer}!nanort::StackAllocator$<$ T, stack\_capacity $>$::Source@{nanort::StackAllocator$<$ T, stack\_capacity $>$::Source}}
+\doxysubsubsection{\texorpdfstring{stack\_buffer()}{stack\_buffer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t stack\+\_\+capacity$>$ \\
+T $\ast$ \mbox{\hyperlink{a01357}{nanort\+::\+Stack\+Allocator}}$<$ T, stack\+\_\+capacity $>$\+::\+Source\+::stack\+\_\+buffer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Determine whether or not this hitstruct contains a hit. 
-
-\begin{DoxyReturn}{Returns}
-True if the point hit, false if it did not 
-\end{DoxyReturn}
-
-
-Definition at line 17 of file Hit\+Struct.\+h.
+Definition at line \mbox{\hyperlink{a00161_source_l00150}{150}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
 
 
-References H\+F\+::\+Ray\+Tracer\+::\+Did\+Intersect().
+References \mbox{\hyperlink{a00161_source_l00165}{nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::\+Source\+::stack\+\_\+buffer\+\_\+}}.
 
 
 
-Referenced by H\+F\+::\+Graph\+Generator\+::\+Check\+Ray(), H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Intersect\+Output\+Arguments(), and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Point\+Intersection().
+Referenced by \mbox{\hyperlink{a00161_source_l00202}{nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::allocate()}}, and \mbox{\hyperlink{a00161_source_l00215}{nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::deallocate()}}.
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a01361_a3d86c2c8d8e0ec6bf63a653ec89807a8_cgraph}
-\end{center}
-\end{figure}
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a01361_a3d86c2c8d8e0ec6bf63a653ec89807a8_icgraph}
+\includegraphics[width=342pt]{a01361_a7b32e78fcb2d7476011e4222abbc1943_icgraph}
 \end{center}
 \end{figure}
+\mbox{\Hypertarget{a01361_a33fc79f562de8940c185880ec11384e4}\label{a01361_a33fc79f562de8940c185880ec11384e4}} 
+\index{nanort::StackAllocator$<$ T, stack\_capacity $>$::Source@{nanort::StackAllocator$<$ T, stack\_capacity $>$::Source}!stack\_buffer@{stack\_buffer}}
+\index{stack\_buffer@{stack\_buffer}!nanort::StackAllocator$<$ T, stack\_capacity $>$::Source@{nanort::StackAllocator$<$ T, stack\_capacity $>$::Source}}
+\doxysubsubsection{\texorpdfstring{stack\_buffer()}{stack\_buffer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t stack\+\_\+capacity$>$ \\
+const T $\ast$ \mbox{\hyperlink{a01357}{nanort\+::\+Stack\+Allocator}}$<$ T, stack\+\_\+capacity $>$\+::\+Source\+::stack\+\_\+buffer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00161_source_l00151}{151}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00161_source_l00165}{nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::\+Source\+::stack\+\_\+buffer\+\_\+}}.
+
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{a01361_a6fbe94ce3a7514a37415d28ff0500b64}\label{a01361_a6fbe94ce3a7514a37415d28ff0500b64}} 
-\index{HF::RayTracer::HitStruct$<$ numeric\_type $>$@{HF::RayTracer::HitStruct$<$ numeric\_type $>$}!distance@{distance}}
-\index{distance@{distance}!HF::RayTracer::HitStruct$<$ numeric\_type $>$@{HF::RayTracer::HitStruct$<$ numeric\_type $>$}}
-\doxysubsubsection{\texorpdfstring{distance}{distance}}
-{\footnotesize\ttfamily template$<$typename numeric\+\_\+type  = double$>$ \\
-numeric\+\_\+type \mbox{\hyperlink{a01361}{H\+F\+::\+Ray\+Tracer\+::\+Hit\+Struct}}$<$ numeric\+\_\+type $>$\+::distance}
+\mbox{\Hypertarget{a01361_a305996e6c091358dcf5526b65b1889b2}\label{a01361_a305996e6c091358dcf5526b65b1889b2}} 
+\index{nanort::StackAllocator$<$ T, stack\_capacity $>$::Source@{nanort::StackAllocator$<$ T, stack\_capacity $>$::Source}!stack\_buffer\_@{stack\_buffer\_}}
+\index{stack\_buffer\_@{stack\_buffer\_}!nanort::StackAllocator$<$ T, stack\_capacity $>$::Source@{nanort::StackAllocator$<$ T, stack\_capacity $>$::Source}}
+\doxysubsubsection{\texorpdfstring{stack\_buffer\_}{stack\_buffer\_}}
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t stack\+\_\+capacity$>$ \\
+char \mbox{\hyperlink{a01357}{nanort\+::\+Stack\+Allocator}}$<$ T, stack\+\_\+capacity $>$\+::\+Source\+::stack\+\_\+buffer\+\_\+\mbox{[}sizeof(T\mbox{[}stack\+\_\+capacity\mbox{]})\mbox{]}}
 
 
 
-Distance from the origin point to the hit point. Set to -\/1 if no hit was recorded. 
+Definition at line \mbox{\hyperlink{a00161_source_l00165}{165}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
 
 
-Definition at line 8 of file Hit\+Struct.\+h.
+Referenced by \mbox{\hyperlink{a00161_source_l00150}{nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::\+Source\+::stack\+\_\+buffer()}}.
+
+\mbox{\Hypertarget{a01361_ae9ae5f1c043a2a5fcd6df58108e67182}\label{a01361_ae9ae5f1c043a2a5fcd6df58108e67182}} 
+\index{nanort::StackAllocator$<$ T, stack\_capacity $>$::Source@{nanort::StackAllocator$<$ T, stack\_capacity $>$::Source}!used\_stack\_buffer\_@{used\_stack\_buffer\_}}
+\index{used\_stack\_buffer\_@{used\_stack\_buffer\_}!nanort::StackAllocator$<$ T, stack\_capacity $>$::Source@{nanort::StackAllocator$<$ T, stack\_capacity $>$::Source}}
+\doxysubsubsection{\texorpdfstring{used\_stack\_buffer\_}{used\_stack\_buffer\_}}
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t stack\+\_\+capacity$>$ \\
+bool \mbox{\hyperlink{a01357}{nanort\+::\+Stack\+Allocator}}$<$ T, stack\+\_\+capacity $>$\+::\+Source\+::used\+\_\+stack\+\_\+buffer\+\_\+}
 
 
 
-Referenced by H\+F\+::\+Graph\+Generator\+::\+Check\+Ray(), H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Intersect(), H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Intersect\+Output\+Arguments(), H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Point\+Intersection(), and Precise\+Intersection().
-
-\mbox{\Hypertarget{a01361_a7c49a19e480ba9797c9da3d2acd2221d}\label{a01361_a7c49a19e480ba9797c9da3d2acd2221d}} 
-\index{HF::RayTracer::HitStruct$<$ numeric\_type $>$@{HF::RayTracer::HitStruct$<$ numeric\_type $>$}!meshid@{meshid}}
-\index{meshid@{meshid}!HF::RayTracer::HitStruct$<$ numeric\_type $>$@{HF::RayTracer::HitStruct$<$ numeric\_type $>$}}
-\doxysubsubsection{\texorpdfstring{meshid}{meshid}}
-{\footnotesize\ttfamily template$<$typename numeric\+\_\+type  = double$>$ \\
-int \mbox{\hyperlink{a01361}{H\+F\+::\+Ray\+Tracer\+::\+Hit\+Struct}}$<$ numeric\+\_\+type $>$\+::meshid}
+Definition at line \mbox{\hyperlink{a00161_source_l00169}{169}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
 
 
-The ID of the hit mesh. Set to -\/1 if no hit was recorded. 
-
-
-
-Definition at line 9 of file Hit\+Struct.\+h.
-
-
-
-Referenced by H\+F\+::\+Graph\+Generator\+::\+Check\+Ray(), H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Intersect(), and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Intersect\+Output\+Arguments().
+Referenced by \mbox{\hyperlink{a00161_source_l00202}{nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::allocate()}}, and \mbox{\hyperlink{a00161_source_l00215}{nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::deallocate()}}.
 
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Cpp/raytracer/src/\mbox{\hyperlink{a00152}{Hit\+Struct.\+h}}\end{DoxyCompactItemize}
+Cpp/raytracer/src/\mbox{\hyperlink{a00161}{nanort.\+h}}\end{DoxyCompactItemize}

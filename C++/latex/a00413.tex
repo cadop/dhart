@@ -8,34 +8,34 @@ implements the Grisu2 algorithm for binary to decimal floating-\/point conversio
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{a00413_a01993}{boundaries}}
+struct \mbox{\hyperlink{a00413_a01981}{boundaries}}
 \item 
-struct \mbox{\hyperlink{a00413_a01997}{cached\+\_\+power}}
+struct \mbox{\hyperlink{a00413_a01985}{cached\+\_\+power}}
 \item 
-struct \mbox{\hyperlink{a01989}{diyfp}}
+struct \mbox{\hyperlink{a01977}{diyfp}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 {\footnotesize template$<$typename Target , typename Source $>$ }\\Target \mbox{\hyperlink{a00413_a1c5d30eb51e5e994a3f48bde104d2ce8}{reinterpret\+\_\+bits}} (const Source source)
 \item 
-{\footnotesize template$<$typename Float\+Type $>$ }\\\mbox{\hyperlink{a00413_a01993}{boundaries}} \mbox{\hyperlink{a00413_a22b6e37654ac93c6d0d9c06ec1bf5ded}{compute\+\_\+boundaries}} (Float\+Type value)
+{\footnotesize template$<$typename Float\+Type $>$ }\\\mbox{\hyperlink{a00413_a01981}{boundaries}} \mbox{\hyperlink{a00413_a22b6e37654ac93c6d0d9c06ec1bf5ded}{compute\+\_\+boundaries}} (Float\+Type value)
 \item 
-\mbox{\hyperlink{a00413_a01997}{cached\+\_\+power}} \mbox{\hyperlink{a00413_adbf329a18c5cf854a3477327afd2200b}{get\+\_\+cached\+\_\+power\+\_\+for\+\_\+binary\+\_\+exponent}} (int e)
+\mbox{\hyperlink{a00413_a01985}{cached\+\_\+power}} \mbox{\hyperlink{a00413_adbf329a18c5cf854a3477327afd2200b}{get\+\_\+cached\+\_\+power\+\_\+for\+\_\+binary\+\_\+exponent}} (int e)
 \item 
 int \mbox{\hyperlink{a00413_a36ded358763b5dbcea9867660fbe4e28}{find\+\_\+largest\+\_\+pow10}} (const std\+::uint32\+\_\+t n, std\+::uint32\+\_\+t \&pow10)
 \item 
-\mbox{\hyperlink{a00411_a59fca69799f6b9e366710cb9043aa77d}{void}} \mbox{\hyperlink{a00413_a5bc841e0bee12fd6489d49cf7bd07bb4}{grisu2\+\_\+round}} (char $\ast$buf, int len, std\+::uint64\+\_\+t dist, std\+::uint64\+\_\+t delta, std\+::uint64\+\_\+t rest, std\+::uint64\+\_\+t ten\+\_\+k)
+void \mbox{\hyperlink{a00413_a5bc841e0bee12fd6489d49cf7bd07bb4}{grisu2\+\_\+round}} (char $\ast$buf, int len, std\+::uint64\+\_\+t dist, std\+::uint64\+\_\+t delta, std\+::uint64\+\_\+t rest, std\+::uint64\+\_\+t ten\+\_\+k)
 \item 
-\mbox{\hyperlink{a00411_a59fca69799f6b9e366710cb9043aa77d}{void}} \mbox{\hyperlink{a00413_a9b899c72b0e1e3dd46d75c2b4e6bcdfb}{grisu2\+\_\+digit\+\_\+gen}} (char $\ast$buffer, int \&length, int \&decimal\+\_\+exponent, \mbox{\hyperlink{a01989}{diyfp}} M\+\_\+minus, \mbox{\hyperlink{a01989}{diyfp}} w, \mbox{\hyperlink{a01989}{diyfp}} M\+\_\+plus)
+void \mbox{\hyperlink{a00413_a9b899c72b0e1e3dd46d75c2b4e6bcdfb}{grisu2\+\_\+digit\+\_\+gen}} (char $\ast$buffer, int \&length, int \&decimal\+\_\+exponent, \mbox{\hyperlink{a01977}{diyfp}} M\+\_\+minus, \mbox{\hyperlink{a01977}{diyfp}} w, \mbox{\hyperlink{a01977}{diyfp}} M\+\_\+plus)
 \item 
-\mbox{\hyperlink{a00411_a59fca69799f6b9e366710cb9043aa77d}{void}} \mbox{\hyperlink{a00413_a05b681dcb8569b9784c6dccfadb01633}{grisu2}} (char $\ast$buf, int \&len, int \&decimal\+\_\+exponent, \mbox{\hyperlink{a01989}{diyfp}} m\+\_\+minus, \mbox{\hyperlink{a01989}{diyfp}} v, \mbox{\hyperlink{a01989}{diyfp}} m\+\_\+plus)
+void \mbox{\hyperlink{a00413_a05b681dcb8569b9784c6dccfadb01633}{grisu2}} (char $\ast$buf, int \&len, int \&decimal\+\_\+exponent, \mbox{\hyperlink{a01977}{diyfp}} m\+\_\+minus, \mbox{\hyperlink{a01977}{diyfp}} v, \mbox{\hyperlink{a01977}{diyfp}} m\+\_\+plus)
 \item 
-{\footnotesize template$<$typename Float\+Type $>$ }\\\mbox{\hyperlink{a00411_a59fca69799f6b9e366710cb9043aa77d}{void}} \mbox{\hyperlink{a00413_aab7a9670a4f4704a5d0347ad7588576b}{grisu2}} (char $\ast$buf, int \&len, int \&decimal\+\_\+exponent, Float\+Type value)
+{\footnotesize template$<$typename Float\+Type $>$ }\\void \mbox{\hyperlink{a00413_aab7a9670a4f4704a5d0347ad7588576b}{grisu2}} (char $\ast$buf, int \&len, int \&decimal\+\_\+exponent, Float\+Type value)
 \item 
-\mbox{\hyperlink{a00206_a5f2aaec3b681d0a72f7d6e90b70cdcd1}{J\+S\+O\+N\+\_\+\+H\+E\+D\+L\+E\+Y\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+N\+O\+N\+\_\+\+N\+U\+LL}} char $\ast$ \mbox{\hyperlink{a00413_ad90f19ed10d8133b727df4b9bc5ddf5c}{append\+\_\+exponent}} (char $\ast$buf, int e)
+\mbox{\hyperlink{a00206_a5f2aaec3b681d0a72f7d6e90b70cdcd1}{JSON\+\_\+\+HEDLEY\+\_\+\+RETURNS\+\_\+\+NON\+\_\+\+NULL}} char $\ast$ \mbox{\hyperlink{a00413_a78ad745d14b79fc65714c9938981faf6}{append\+\_\+exponent}} (char $\ast$buf, int e)
 \begin{DoxyCompactList}\small\item\em appends a decimal representation of e to buf \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00206_a5f2aaec3b681d0a72f7d6e90b70cdcd1}{J\+S\+O\+N\+\_\+\+H\+E\+D\+L\+E\+Y\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+N\+O\+N\+\_\+\+N\+U\+LL}} char $\ast$ \mbox{\hyperlink{a00413_ab441f2761e33839ca48bc2225e14a2a9}{format\+\_\+buffer}} (char $\ast$buf, int len, int decimal\+\_\+exponent, int min\+\_\+exp, int max\+\_\+exp)
+\mbox{\hyperlink{a00206_a5f2aaec3b681d0a72f7d6e90b70cdcd1}{JSON\+\_\+\+HEDLEY\+\_\+\+RETURNS\+\_\+\+NON\+\_\+\+NULL}} char $\ast$ \mbox{\hyperlink{a00413_a0986c3e015db045df89506436f19e07c}{format\+\_\+buffer}} (char $\ast$buf, int len, int decimal\+\_\+exponent, int min\+\_\+exp, int max\+\_\+exp)
 \begin{DoxyCompactList}\small\item\em prettify v = buf $\ast$ 10$^\wedge$decimal\+\_\+exponent \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -51,20 +51,19 @@ implements the Grisu2 algorithm for binary to decimal floating-\/point conversio
 
 This implementation is a slightly modified version of the reference implementation which may be obtained from \href{http://florian.loitsch.com/publications}{\texttt{ http\+://florian.\+loitsch.\+com/publications}} (bench.\+tar.\+gz).
 
-The code is distributed under the M\+IT license, Copyright (c) 2009 Florian Loitsch.
+The code is distributed under the MIT license, Copyright (c) 2009 Florian Loitsch.
 
 For a detailed description of the algorithm see\+:
 
-\mbox{[}1\mbox{]} Loitsch, \char`\"{}\+Printing Floating-\/\+Point Numbers Quickly and Accurately with
-    Integers\char`\"{}, Proceedings of the A\+CM S\+I\+G\+P\+L\+AN 2010 Conference on Programming Language Design and Implementation, P\+L\+DI 2010 \mbox{[}2\mbox{]} Burger, Dybvig, \char`\"{}\+Printing Floating-\/\+Point Numbers Quickly and Accurately\char`\"{}, Proceedings of the A\+CM S\+I\+G\+P\+L\+AN 1996 Conference on Programming Language Design and Implementation, P\+L\+DI 1996 
+\mbox{[}1\mbox{]} Loitsch, \char`\"{}\+Printing Floating-\/\+Point Numbers Quickly and Accurately with     Integers\char`\"{}, Proceedings of the ACM SIGPLAN 2010 Conference on Programming Language Design and Implementation, PLDI 2010 \mbox{[}2\mbox{]} Burger, Dybvig, \char`\"{}\+Printing Floating-\/\+Point Numbers Quickly and Accurately\char`\"{}, Proceedings of the ACM SIGPLAN 1996 Conference on Programming Language Design and Implementation, PLDI 1996 
 
 \doxysubsection{Class Documentation}
-\index{nlohmann::detail::dtoa\_impl::boundaries@{nlohmann::detail::dtoa\_impl::boundaries}}\label{a01993}
-\Hypertarget{a00413_a01993}
+\index{nlohmann::detail::dtoa\_impl::boundaries@{nlohmann::detail::dtoa\_impl::boundaries}}\label{a01981}
+\Hypertarget{a00413_a01981}
 \doxysubsubsection{struct nlohmann\+::detail\+::dtoa\+\_\+impl\+::boundaries}
 
 
-Definition at line 14507 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l14507}{14507}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
@@ -73,35 +72,35 @@ Collaboration diagram for nlohmann\+::detail\+::dtoa\+\_\+impl\+::boundaries\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=218pt]{a01991}
+\includegraphics[width=197pt]{a01979}
 \end{center}
 \end{figure}
 \begin{DoxyFields}{Class Members}
 \mbox{\Hypertarget{a00413_aec4e5028333c01f3229062f31ce16763}\label{a00413_aec4e5028333c01f3229062f31ce16763}} 
-\mbox{\hyperlink{a01989}{diyfp}}&
+\mbox{\hyperlink{a01977}{diyfp}}&
 minus&
 \\
 \hline
 
 \mbox{\Hypertarget{a00413_a3321ae2816a6ec5250a0d8e29f798232}\label{a00413_a3321ae2816a6ec5250a0d8e29f798232}} 
-\mbox{\hyperlink{a01989}{diyfp}}&
+\mbox{\hyperlink{a01977}{diyfp}}&
 plus&
 \\
 \hline
 
 \mbox{\Hypertarget{a00413_ad1668c60aeade5f2557fafed8b8aee1a}\label{a00413_ad1668c60aeade5f2557fafed8b8aee1a}} 
-\mbox{\hyperlink{a01989}{diyfp}}&
+\mbox{\hyperlink{a01977}{diyfp}}&
 w&
 \\
 \hline
 
 \end{DoxyFields}
-\index{nlohmann::detail::dtoa\_impl::cached\_power@{nlohmann::detail::dtoa\_impl::cached\_power}}\label{a01997}
-\Hypertarget{a00413_a01997}
+\index{nlohmann::detail::dtoa\_impl::cached\_power@{nlohmann::detail::dtoa\_impl::cached\_power}}\label{a01985}
+\Hypertarget{a00413_a01985}
 \doxysubsubsection{struct nlohmann\+::detail\+::dtoa\+\_\+impl\+::cached\+\_\+power}
 
 
-Definition at line 14646 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l14646}{14646}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
@@ -110,7 +109,7 @@ Collaboration diagram for nlohmann\+::detail\+::dtoa\+\_\+impl\+::cached\+\_\+po
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=207pt]{a01995}
+\includegraphics[width=193pt]{a01983}
 \end{center}
 \end{figure}
 \begin{DoxyFields}{Class Members}
@@ -136,11 +135,11 @@ k&
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{a00413_ad90f19ed10d8133b727df4b9bc5ddf5c}\label{a00413_ad90f19ed10d8133b727df4b9bc5ddf5c}} 
+\mbox{\Hypertarget{a00413_a78ad745d14b79fc65714c9938981faf6}\label{a00413_a78ad745d14b79fc65714c9938981faf6}} 
 \index{nlohmann::detail::dtoa\_impl@{nlohmann::detail::dtoa\_impl}!append\_exponent@{append\_exponent}}
 \index{append\_exponent@{append\_exponent}!nlohmann::detail::dtoa\_impl@{nlohmann::detail::dtoa\_impl}}
 \doxysubsubsection{\texorpdfstring{append\_exponent()}{append\_exponent()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00206_a5f2aaec3b681d0a72f7d6e90b70cdcd1}{J\+S\+O\+N\+\_\+\+H\+E\+D\+L\+E\+Y\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+N\+O\+N\+\_\+\+N\+U\+LL}} char$\ast$ nlohmann\+::detail\+::dtoa\+\_\+impl\+::append\+\_\+exponent (\begin{DoxyParamCaption}\item[{char $\ast$}]{buf,  }\item[{int}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00206_a5f2aaec3b681d0a72f7d6e90b70cdcd1}{JSON\+\_\+\+HEDLEY\+\_\+\+RETURNS\+\_\+\+NON\+\_\+\+NULL}} char $\ast$ nlohmann\+::detail\+::dtoa\+\_\+impl\+::append\+\_\+exponent (\begin{DoxyParamCaption}\item[{char $\ast$}]{buf,  }\item[{int}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -150,26 +149,26 @@ appends a decimal representation of e to buf
 a pointer to the element following the exponent. 
 \end{DoxyReturn}
 \begin{DoxyPrecond}{Precondition}
--\/1000 $<$ e $<$ 1000 
+-\/1000 \texorpdfstring{$<$}{<} e \texorpdfstring{$<$}{<} 1000 
 \end{DoxyPrecond}
 
 
-Definition at line 15262 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l15262}{15262}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-References J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+RT.
+References \mbox{\hyperlink{a00206_source_l02100}{JSON\+\_\+\+ASSERT}}.
 
 
 
-Referenced by format\+\_\+buffer().
+Referenced by \mbox{\hyperlink{a00206_source_l15314}{format\+\_\+buffer()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a00413_ad90f19ed10d8133b727df4b9bc5ddf5c_icgraph}
+\includegraphics[width=350pt]{a00413_a78ad745d14b79fc65714c9938981faf6_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{a00413_a22b6e37654ac93c6d0d9c06ec1bf5ded}\label{a00413_a22b6e37654ac93c6d0d9c06ec1bf5ded}} 
@@ -177,7 +176,7 @@ Here is the caller graph for this function\+:
 \index{compute\_boundaries@{compute\_boundaries}!nlohmann::detail::dtoa\_impl@{nlohmann::detail::dtoa\_impl}}
 \doxysubsubsection{\texorpdfstring{compute\_boundaries()}{compute\_boundaries()}}
 {\footnotesize\ttfamily template$<$typename Float\+Type $>$ \\
-\mbox{\hyperlink{a00413_a01993}{boundaries}} nlohmann\+::detail\+::dtoa\+\_\+impl\+::compute\+\_\+boundaries (\begin{DoxyParamCaption}\item[{Float\+Type}]{value }\end{DoxyParamCaption})}
+\mbox{\hyperlink{a00413_a01981}{boundaries}} nlohmann\+::detail\+::dtoa\+\_\+impl\+::compute\+\_\+boundaries (\begin{DoxyParamCaption}\item[{Float\+Type}]{value }\end{DoxyParamCaption})}
 
 Compute the (normalized) diyfp representing the input number \textquotesingle{}value\textquotesingle{} and its boundaries.
 
@@ -186,15 +185,15 @@ value must be finite and positive
 \end{DoxyPrecond}
 
 
-Definition at line 14521 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l14521}{14521}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-References nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::e, nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::f, J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+RT, nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::normalize(), nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::normalize\+\_\+to(), and nlohmann\+::detail\+::value.
+References \mbox{\hyperlink{a00206_source_l14394}{nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::e}}, \mbox{\hyperlink{a00206_source_l14393}{nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::f}}, \mbox{\hyperlink{a00206_source_l02100}{JSON\+\_\+\+ASSERT}}, \mbox{\hyperlink{a00206_source_l14479}{nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::normalize()}}, \mbox{\hyperlink{a00206_source_l14496}{nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::normalize\+\_\+to()}}, and \mbox{\hyperlink{a00411_a2fb6dae6578e06ae73ca0d7cc8512b1aa2063c1608d6e0baf80249c42e2be5804}{nlohmann\+::detail\+::value}}.
 
 
 
-Referenced by grisu2().
+Referenced by \mbox{\hyperlink{a00206_source_l15222}{grisu2()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -218,13 +217,13 @@ Here is the caller graph for this function\+:
 \doxysubsubsection{\texorpdfstring{find\_largest\_pow10()}{find\_largest\_pow10()}}
 {\footnotesize\ttfamily int nlohmann\+::detail\+::dtoa\+\_\+impl\+::find\+\_\+largest\+\_\+pow10 (\begin{DoxyParamCaption}\item[{const std\+::uint32\+\_\+t}]{n,  }\item[{std\+::uint32\+\_\+t \&}]{pow10 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-For n != 0, returns k, such that pow10 \+:= 10$^\wedge$(k-\/1) $<$= n $<$ 10$^\wedge$k. For n == 0, returns 1 and sets pow10 \+:= 1. 
+For n != 0, returns k, such that pow10 \+:= 10$^\wedge$(k-\/1) \texorpdfstring{$<$}{<}= n \texorpdfstring{$<$}{<} 10$^\wedge$k. For n == 0, returns 1 and sets pow10 \+:= 1. 
 
-Definition at line 14824 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l14824}{14824}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-Referenced by grisu2\+\_\+digit\+\_\+gen().
+Referenced by \mbox{\hyperlink{a00206_source_l14921}{grisu2\+\_\+digit\+\_\+gen()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -234,11 +233,11 @@ Here is the caller graph for this function\+:
 \includegraphics[width=350pt]{a00413_a36ded358763b5dbcea9867660fbe4e28_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{a00413_ab441f2761e33839ca48bc2225e14a2a9}\label{a00413_ab441f2761e33839ca48bc2225e14a2a9}} 
+\mbox{\Hypertarget{a00413_a0986c3e015db045df89506436f19e07c}\label{a00413_a0986c3e015db045df89506436f19e07c}} 
 \index{nlohmann::detail::dtoa\_impl@{nlohmann::detail::dtoa\_impl}!format\_buffer@{format\_buffer}}
 \index{format\_buffer@{format\_buffer}!nlohmann::detail::dtoa\_impl@{nlohmann::detail::dtoa\_impl}}
 \doxysubsubsection{\texorpdfstring{format\_buffer()}{format\_buffer()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00206_a5f2aaec3b681d0a72f7d6e90b70cdcd1}{J\+S\+O\+N\+\_\+\+H\+E\+D\+L\+E\+Y\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+N\+O\+N\+\_\+\+N\+U\+LL}} char$\ast$ nlohmann\+::detail\+::dtoa\+\_\+impl\+::format\+\_\+buffer (\begin{DoxyParamCaption}\item[{char $\ast$}]{buf,  }\item[{int}]{len,  }\item[{int}]{decimal\+\_\+exponent,  }\item[{int}]{min\+\_\+exp,  }\item[{int}]{max\+\_\+exp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00206_a5f2aaec3b681d0a72f7d6e90b70cdcd1}{JSON\+\_\+\+HEDLEY\+\_\+\+RETURNS\+\_\+\+NON\+\_\+\+NULL}} char $\ast$ nlohmann\+::detail\+::dtoa\+\_\+impl\+::format\+\_\+buffer (\begin{DoxyParamCaption}\item[{char $\ast$}]{buf,  }\item[{int}]{len,  }\item[{int}]{decimal\+\_\+exponent,  }\item[{int}]{min\+\_\+exp,  }\item[{int}]{max\+\_\+exp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -247,28 +246,28 @@ prettify v = buf $\ast$ 10$^\wedge$decimal\+\_\+exponent
 If v is in the range \mbox{[}10$^\wedge$min\+\_\+exp, 10$^\wedge$max\+\_\+exp) it will be printed in fixed-\/point notation. Otherwise it will be printed in exponential notation.
 
 \begin{DoxyPrecond}{Precondition}
-min\+\_\+exp $<$ 0 
+min\+\_\+exp \texorpdfstring{$<$}{<} 0 
 
-max\+\_\+exp $>$ 0 
+max\+\_\+exp \texorpdfstring{$>$}{>} 0 
 \end{DoxyPrecond}
 
 
-Definition at line 15314 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l15314}{15314}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-References append\+\_\+exponent(), and J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+RT.
+References \mbox{\hyperlink{a00206_source_l15262}{append\+\_\+exponent()}}, and \mbox{\hyperlink{a00206_source_l02100}{JSON\+\_\+\+ASSERT}}.
 
 
 
-Referenced by nlohmann\+::detail\+::to\+\_\+chars().
+Referenced by \mbox{\hyperlink{a00206_source_l15399}{nlohmann\+::detail\+::to\+\_\+chars()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a00413_ab441f2761e33839ca48bc2225e14a2a9_cgraph}
+\includegraphics[width=350pt]{a00413_a0986c3e015db045df89506436f19e07c_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:
@@ -276,28 +275,28 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a00413_ab441f2761e33839ca48bc2225e14a2a9_icgraph}
+\includegraphics[width=350pt]{a00413_a0986c3e015db045df89506436f19e07c_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{a00413_adbf329a18c5cf854a3477327afd2200b}\label{a00413_adbf329a18c5cf854a3477327afd2200b}} 
 \index{nlohmann::detail::dtoa\_impl@{nlohmann::detail::dtoa\_impl}!get\_cached\_power\_for\_binary\_exponent@{get\_cached\_power\_for\_binary\_exponent}}
 \index{get\_cached\_power\_for\_binary\_exponent@{get\_cached\_power\_for\_binary\_exponent}!nlohmann::detail::dtoa\_impl@{nlohmann::detail::dtoa\_impl}}
 \doxysubsubsection{\texorpdfstring{get\_cached\_power\_for\_binary\_exponent()}{get\_cached\_power\_for\_binary\_exponent()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00413_a01997}{cached\+\_\+power}} nlohmann\+::detail\+::dtoa\+\_\+impl\+::get\+\_\+cached\+\_\+power\+\_\+for\+\_\+binary\+\_\+exponent (\begin{DoxyParamCaption}\item[{int}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00413_a01985}{cached\+\_\+power}} nlohmann\+::detail\+::dtoa\+\_\+impl\+::get\+\_\+cached\+\_\+power\+\_\+for\+\_\+binary\+\_\+exponent (\begin{DoxyParamCaption}\item[{int}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 For a normalized diyfp w = f $\ast$ 2$^\wedge$e, this function returns a (normalized) cached power-\/of-\/ten c = f\+\_\+c $\ast$ 2$^\wedge$e\+\_\+c, such that the exponent of the product w $\ast$ c satisfies (Definition 3.\+2 from \mbox{[}1\mbox{]}) \begin{DoxyVerb} alpha <= e_c + e + q <= gamma.
 \end{DoxyVerb}
  
 
-Definition at line 14660 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l14660}{14660}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-References nlohmann\+::detail\+::dtoa\+\_\+impl\+::cached\+\_\+power\+::e, J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+RT, k\+Alpha, and k\+Gamma.
+References \mbox{\hyperlink{a00206_source_l14649}{nlohmann\+::detail\+::dtoa\+\_\+impl\+::cached\+\_\+power\+::e}}, \mbox{\hyperlink{a00206_source_l02100}{JSON\+\_\+\+ASSERT}}, \mbox{\hyperlink{a00206_source_l14643}{k\+Alpha}}, and \mbox{\hyperlink{a00206_source_l14644}{k\+Gamma}}.
 
 
 
-Referenced by grisu2().
+Referenced by \mbox{\hyperlink{a00206_source_l15162}{grisu2()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -311,19 +310,19 @@ Here is the caller graph for this function\+:
 \index{nlohmann::detail::dtoa\_impl@{nlohmann::detail::dtoa\_impl}!grisu2@{grisu2}}
 \index{grisu2@{grisu2}!nlohmann::detail::dtoa\_impl@{nlohmann::detail::dtoa\_impl}}
 \doxysubsubsection{\texorpdfstring{grisu2()}{grisu2()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00411_a59fca69799f6b9e366710cb9043aa77d}{void}} nlohmann\+::detail\+::dtoa\+\_\+impl\+::grisu2 (\begin{DoxyParamCaption}\item[{char $\ast$}]{buf,  }\item[{int \&}]{len,  }\item[{int \&}]{decimal\+\_\+exponent,  }\item[{\mbox{\hyperlink{a01989}{diyfp}}}]{m\+\_\+minus,  }\item[{\mbox{\hyperlink{a01989}{diyfp}}}]{v,  }\item[{\mbox{\hyperlink{a01989}{diyfp}}}]{m\+\_\+plus }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void nlohmann\+::detail\+::dtoa\+\_\+impl\+::grisu2 (\begin{DoxyParamCaption}\item[{char $\ast$}]{buf,  }\item[{int \&}]{len,  }\item[{int \&}]{decimal\+\_\+exponent,  }\item[{\mbox{\hyperlink{a01977}{diyfp}}}]{m\+\_\+minus,  }\item[{\mbox{\hyperlink{a01977}{diyfp}}}]{v,  }\item[{\mbox{\hyperlink{a01977}{diyfp}}}]{m\+\_\+plus }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-v = buf $\ast$ 10$^\wedge$decimal\+\_\+exponent len is the length of the buffer (number of decimal digits) The buffer must be large enough, i.\+e. $>$= max\+\_\+digits10. 
+v = buf $\ast$ 10$^\wedge$decimal\+\_\+exponent len is the length of the buffer (number of decimal digits) The buffer must be large enough, i.\+e. \texorpdfstring{$>$}{>}= max\+\_\+digits10. 
 
-Definition at line 15162 of file json.\+hpp.
-
-
-
-References nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::e, nlohmann\+::detail\+::dtoa\+\_\+impl\+::cached\+\_\+power\+::e, nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::f, nlohmann\+::detail\+::dtoa\+\_\+impl\+::cached\+\_\+power\+::f, get\+\_\+cached\+\_\+power\+\_\+for\+\_\+binary\+\_\+exponent(), grisu2\+\_\+digit\+\_\+gen(), J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+RT, nlohmann\+::detail\+::dtoa\+\_\+impl\+::cached\+\_\+power\+::k, and nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::mul().
+Definition at line \mbox{\hyperlink{a00206_source_l15162}{15162}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-Referenced by grisu2(), and nlohmann\+::detail\+::to\+\_\+chars().
+References \mbox{\hyperlink{a00206_source_l14394}{nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::e}}, \mbox{\hyperlink{a00206_source_l14649}{nlohmann\+::detail\+::dtoa\+\_\+impl\+::cached\+\_\+power\+::e}}, \mbox{\hyperlink{a00206_source_l14393}{nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::f}}, \mbox{\hyperlink{a00206_source_l14648}{nlohmann\+::detail\+::dtoa\+\_\+impl\+::cached\+\_\+power\+::f}}, \mbox{\hyperlink{a00206_source_l14660}{get\+\_\+cached\+\_\+power\+\_\+for\+\_\+binary\+\_\+exponent()}}, \mbox{\hyperlink{a00206_source_l14921}{grisu2\+\_\+digit\+\_\+gen()}}, \mbox{\hyperlink{a00206_source_l02100}{JSON\+\_\+\+ASSERT}}, \mbox{\hyperlink{a00206_source_l14650}{nlohmann\+::detail\+::dtoa\+\_\+impl\+::cached\+\_\+power\+::k}}, and \mbox{\hyperlink{a00206_source_l14414}{nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::mul()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00206_source_l15222}{grisu2()}}, and \mbox{\hyperlink{a00206_source_l15399}{nlohmann\+::detail\+::to\+\_\+chars()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -346,15 +345,15 @@ Here is the caller graph for this function\+:
 \index{grisu2@{grisu2}!nlohmann::detail::dtoa\_impl@{nlohmann::detail::dtoa\_impl}}
 \doxysubsubsection{\texorpdfstring{grisu2()}{grisu2()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename Float\+Type $>$ \\
-\mbox{\hyperlink{a00411_a59fca69799f6b9e366710cb9043aa77d}{void}} nlohmann\+::detail\+::dtoa\+\_\+impl\+::grisu2 (\begin{DoxyParamCaption}\item[{char $\ast$}]{buf,  }\item[{int \&}]{len,  }\item[{int \&}]{decimal\+\_\+exponent,  }\item[{Float\+Type}]{value }\end{DoxyParamCaption})}
+void nlohmann\+::detail\+::dtoa\+\_\+impl\+::grisu2 (\begin{DoxyParamCaption}\item[{char $\ast$}]{buf,  }\item[{int \&}]{len,  }\item[{int \&}]{decimal\+\_\+exponent,  }\item[{Float\+Type}]{value }\end{DoxyParamCaption})}
 
-v = buf $\ast$ 10$^\wedge$decimal\+\_\+exponent len is the length of the buffer (number of decimal digits) The buffer must be large enough, i.\+e. $>$= max\+\_\+digits10. 
+v = buf $\ast$ 10$^\wedge$decimal\+\_\+exponent len is the length of the buffer (number of decimal digits) The buffer must be large enough, i.\+e. \texorpdfstring{$>$}{>}= max\+\_\+digits10. 
 
-Definition at line 15222 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l15222}{15222}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-References compute\+\_\+boundaries(), grisu2(), J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+RT, nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::k\+Precision, nlohmann\+::detail\+::dtoa\+\_\+impl\+::boundaries\+::minus, nlohmann\+::detail\+::dtoa\+\_\+impl\+::boundaries\+::plus, nlohmann\+::detail\+::value, and nlohmann\+::detail\+::dtoa\+\_\+impl\+::boundaries\+::w.
+References \mbox{\hyperlink{a00206_source_l14521}{compute\+\_\+boundaries()}}, \mbox{\hyperlink{a00206_source_l15162}{grisu2()}}, \mbox{\hyperlink{a00206_source_l02100}{JSON\+\_\+\+ASSERT}}, \mbox{\hyperlink{a00206_source_l14391}{nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::k\+Precision}}, \mbox{\hyperlink{a00206_source_l14510}{nlohmann\+::detail\+::dtoa\+\_\+impl\+::boundaries\+::minus}}, \mbox{\hyperlink{a00206_source_l14511}{nlohmann\+::detail\+::dtoa\+\_\+impl\+::boundaries\+::plus}}, \mbox{\hyperlink{a00411_a2fb6dae6578e06ae73ca0d7cc8512b1aa2063c1608d6e0baf80249c42e2be5804}{nlohmann\+::detail\+::value}}, and \mbox{\hyperlink{a00206_source_l14509}{nlohmann\+::detail\+::dtoa\+\_\+impl\+::boundaries\+::w}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -368,19 +367,19 @@ Here is the call graph for this function\+:
 \index{nlohmann::detail::dtoa\_impl@{nlohmann::detail::dtoa\_impl}!grisu2\_digit\_gen@{grisu2\_digit\_gen}}
 \index{grisu2\_digit\_gen@{grisu2\_digit\_gen}!nlohmann::detail::dtoa\_impl@{nlohmann::detail::dtoa\_impl}}
 \doxysubsubsection{\texorpdfstring{grisu2\_digit\_gen()}{grisu2\_digit\_gen()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00411_a59fca69799f6b9e366710cb9043aa77d}{void}} nlohmann\+::detail\+::dtoa\+\_\+impl\+::grisu2\+\_\+digit\+\_\+gen (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{int \&}]{length,  }\item[{int \&}]{decimal\+\_\+exponent,  }\item[{\mbox{\hyperlink{a01989}{diyfp}}}]{M\+\_\+minus,  }\item[{\mbox{\hyperlink{a01989}{diyfp}}}]{w,  }\item[{\mbox{\hyperlink{a01989}{diyfp}}}]{M\+\_\+plus }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void nlohmann\+::detail\+::dtoa\+\_\+impl\+::grisu2\+\_\+digit\+\_\+gen (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{int \&}]{length,  }\item[{int \&}]{decimal\+\_\+exponent,  }\item[{\mbox{\hyperlink{a01977}{diyfp}}}]{M\+\_\+minus,  }\item[{\mbox{\hyperlink{a01977}{diyfp}}}]{w,  }\item[{\mbox{\hyperlink{a01977}{diyfp}}}]{M\+\_\+plus }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Generates V = buffer $\ast$ 10$^\wedge$decimal\+\_\+exponent, such that M-\/ $<$= V $<$= M+. M-\/ and M+ must be normalized and share the same exponent -\/60 $<$= e $<$= -\/32. 
+Generates V = buffer $\ast$ 10$^\wedge$decimal\+\_\+exponent, such that M-\/ \texorpdfstring{$<$}{<}= V \texorpdfstring{$<$}{<}= M+. M-\/ and M+ must be normalized and share the same exponent -\/60 \texorpdfstring{$<$}{<}= e \texorpdfstring{$<$}{<}= -\/32. 
 
-Definition at line 14921 of file json.\+hpp.
-
-
-
-References nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::e, nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::f, find\+\_\+largest\+\_\+pow10(), grisu2\+\_\+round(), J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+RT, k\+Alpha, k\+Gamma, and nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::sub().
+Definition at line \mbox{\hyperlink{a00206_source_l14921}{14921}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-Referenced by grisu2().
+References \mbox{\hyperlink{a00206_source_l14394}{nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::e}}, \mbox{\hyperlink{a00206_source_l14393}{nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::f}}, \mbox{\hyperlink{a00206_source_l14824}{find\+\_\+largest\+\_\+pow10()}}, \mbox{\hyperlink{a00206_source_l14880}{grisu2\+\_\+round()}}, \mbox{\hyperlink{a00206_source_l02100}{JSON\+\_\+\+ASSERT}}, \mbox{\hyperlink{a00206_source_l14643}{k\+Alpha}}, \mbox{\hyperlink{a00206_source_l14644}{k\+Gamma}}, and \mbox{\hyperlink{a00206_source_l14402}{nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::sub()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00206_source_l15162}{grisu2()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -402,19 +401,19 @@ Here is the caller graph for this function\+:
 \index{nlohmann::detail::dtoa\_impl@{nlohmann::detail::dtoa\_impl}!grisu2\_round@{grisu2\_round}}
 \index{grisu2\_round@{grisu2\_round}!nlohmann::detail::dtoa\_impl@{nlohmann::detail::dtoa\_impl}}
 \doxysubsubsection{\texorpdfstring{grisu2\_round()}{grisu2\_round()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00411_a59fca69799f6b9e366710cb9043aa77d}{void}} nlohmann\+::detail\+::dtoa\+\_\+impl\+::grisu2\+\_\+round (\begin{DoxyParamCaption}\item[{char $\ast$}]{buf,  }\item[{int}]{len,  }\item[{std\+::uint64\+\_\+t}]{dist,  }\item[{std\+::uint64\+\_\+t}]{delta,  }\item[{std\+::uint64\+\_\+t}]{rest,  }\item[{std\+::uint64\+\_\+t}]{ten\+\_\+k }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void nlohmann\+::detail\+::dtoa\+\_\+impl\+::grisu2\+\_\+round (\begin{DoxyParamCaption}\item[{char $\ast$}]{buf,  }\item[{int}]{len,  }\item[{std\+::uint64\+\_\+t}]{dist,  }\item[{std\+::uint64\+\_\+t}]{delta,  }\item[{std\+::uint64\+\_\+t}]{rest,  }\item[{std\+::uint64\+\_\+t}]{ten\+\_\+k }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 14880 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l14880}{14880}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-References J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+RT.
+References \mbox{\hyperlink{a00206_source_l02100}{JSON\+\_\+\+ASSERT}}.
 
 
 
-Referenced by grisu2\+\_\+digit\+\_\+gen().
+Referenced by \mbox{\hyperlink{a00206_source_l14921}{grisu2\+\_\+digit\+\_\+gen()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -433,7 +432,7 @@ Target nlohmann\+::detail\+::dtoa\+\_\+impl\+::reinterpret\+\_\+bits (\begin{Dox
 
 
 
-Definition at line 14380 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l14380}{14380}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
@@ -446,11 +445,11 @@ Definition at line 14380 of file json.\+hpp.
 
 
 
-Definition at line 14643 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l14643}{14643}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-Referenced by get\+\_\+cached\+\_\+power\+\_\+for\+\_\+binary\+\_\+exponent(), and grisu2\+\_\+digit\+\_\+gen().
+Referenced by \mbox{\hyperlink{a00206_source_l14660}{get\+\_\+cached\+\_\+power\+\_\+for\+\_\+binary\+\_\+exponent()}}, and \mbox{\hyperlink{a00206_source_l14921}{grisu2\+\_\+digit\+\_\+gen()}}.
 
 \mbox{\Hypertarget{a00413_a4a750fcc38da1ce68b7e25ab3a230e20}\label{a00413_a4a750fcc38da1ce68b7e25ab3a230e20}} 
 \index{nlohmann::detail::dtoa\_impl@{nlohmann::detail::dtoa\_impl}!kGamma@{kGamma}}
@@ -460,9 +459,9 @@ Referenced by get\+\_\+cached\+\_\+power\+\_\+for\+\_\+binary\+\_\+exponent(), a
 
 
 
-Definition at line 14644 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l14644}{14644}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-Referenced by get\+\_\+cached\+\_\+power\+\_\+for\+\_\+binary\+\_\+exponent(), and grisu2\+\_\+digit\+\_\+gen().
+Referenced by \mbox{\hyperlink{a00206_source_l14660}{get\+\_\+cached\+\_\+power\+\_\+for\+\_\+binary\+\_\+exponent()}}, and \mbox{\hyperlink{a00206_source_l14921}{grisu2\+\_\+digit\+\_\+gen()}}.
 

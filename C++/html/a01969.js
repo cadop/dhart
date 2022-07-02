@@ -1,7 +1,8 @@
 var a01969 =
 [
-    [ "output_vector_adapter", "a01969.html#a9c4fbf88fda356837038ec30a264cd3e", null ],
-    [ "write_character", "a01969.html#af6a22d4210bb7bc2da66021300ddd6db", null ],
-    [ "write_characters", "a01969.html#ad6f6c461dec7bedd5359454dc22fc9aa", null ],
-    [ "v", "a01969.html#a9b1ed9fba14e671ae1abb6692560ef3f", null ]
+    [ "output_adapter", "a01969.html#a05a30a77b568fd84676078d938cbd484", null ],
+    [ "output_adapter", "a01969.html#a43b3ba852e6a2c3f4d312543bb04c00d", null ],
+    [ "output_adapter", "a01969.html#a6ad59d1ec534383b430cd7ef8a518539", null ],
+    [ "operator output_adapter_t< CharType >", "a01969.html#a5fdac7aec8ade2f4bb0b5df30550d90c", null ],
+    [ "oa", "a01969.html#a323c18d74d6680faafec6dc3ace825e2", null ]
 ];

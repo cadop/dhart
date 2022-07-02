@@ -1,0 +1,116 @@
+\hypertarget{a01325}{}\doxysection{HF\+::Pathfinding\+::Boost\+Graph\+Deleter Struct Reference}
+\label{a01325}\index{HF::Pathfinding::BoostGraphDeleter@{HF::Pathfinding::BoostGraphDeleter}}
+
+
+Deleter for the \mbox{\hyperlink{a01317}{Boost\+Graph}}.  
+
+
+
+
+{\ttfamily \#include $<$path\+\_\+finder.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{a01325_a9a83be18f095f5e04d287412cc4bd1d5}{operator()}} (\mbox{\hyperlink{a01317}{Boost\+Graph}} $\ast$bg) const
+\begin{DoxyCompactList}\small\item\em Delete a boost graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Deleter for the \mbox{\hyperlink{a01317}{Boost\+Graph}}. 
+
+\begin{DoxyRemark}{Remarks}
+\mbox{\hyperlink{a01325}{Boost\+Graph\+Deleter}} is needed by std\+::unique\+\_\+ptr to destroy a \mbox{\hyperlink{a01317}{Boost\+Graph}}; it is not meant to be called directly.
+
+Implementation based on standard library reference for unique pointer \href{https://en.cppreference.com/w/cpp/memory/unique_ptr}{\texttt{ https\+://en.\+cppreference.\+com/w/cpp/memory/unique\+\_\+ptr}}
+\end{DoxyRemark}
+\begin{DoxyWarning}{Warning}
+\mbox{\hyperlink{a01325}{Boost\+Graph\+Deleter}} is only for use with std\+::unique\+\_\+ptr. You do not want to pass the address of a stack-\/allocated \mbox{\hyperlink{a01317}{Boost\+Graph}} to \mbox{\hyperlink{a01325_a9a83be18f095f5e04d287412cc4bd1d5}{Boost\+Graph\+Deleter.\+operator()()}}. Boost\+Graph\+Deleter.\+operator() calls operator delete on the (\mbox{\hyperlink{a01317}{Boost\+Graph}} $\ast$) argument, and passing the address of a stack-\/allocated \mbox{\hyperlink{a01317}{Boost\+Graph}} for said argument will result in undefined behavior.
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00406_ae2106e09eb44d681fbc6c0f66a3d3ac4}{Create\+Boost\+Graph}} for \mbox{\hyperlink{a01325}{Boost\+Graph\+Deleter}}\textquotesingle{}s intended use. 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{a00140_source_l00053}{53}} of file \mbox{\hyperlink{a00140_source}{path\+\_\+finder.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01325_a9a83be18f095f5e04d287412cc4bd1d5}\label{a01325_a9a83be18f095f5e04d287412cc4bd1d5}} 
+\index{HF::Pathfinding::BoostGraphDeleter@{HF::Pathfinding::BoostGraphDeleter}!operator()@{operator()}}
+\index{operator()@{operator()}!HF::Pathfinding::BoostGraphDeleter@{HF::Pathfinding::BoostGraphDeleter}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily void HF\+::\+Pathfinding\+::\+Boost\+Graph\+Deleter\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01317}{Boost\+Graph}} $\ast$}]{bg }\end{DoxyParamCaption}) const}
+
+
+
+Delete a boost graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bg} & Pointer to the boost graph to delete. \\
+\hline
+\end{DoxyParams}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}path\_finder.h"{}, \#include "{}boost\_graph.h"{}, \#include}}
+\DoxyCodeLine{\textcolor{comment}{// "{}node.h"{}, \#include "{}graph.h"{}, and \#include <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// For this example, we must have a BoostGraph instance to use with}}
+\DoxyCodeLine{\textcolor{comment}{// BoostGraphDeleter. In order to create a BoostGraph, we must first create a}}
+\DoxyCodeLine{\textcolor{comment}{// Graph instance first. We must prepare the nodes, their edges, and the weights}}
+\DoxyCodeLine{\textcolor{comment}{// (distances) of each edge.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f);}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed}}
+\DoxyCodeLine{\textcolor{comment}{// by reference}}
+\DoxyCodeLine{\mbox{\hyperlink{a01485}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Passing Graph graph to BoostGraph bg, by reference}}
+\DoxyCodeLine{\mbox{\hyperlink{a01317}{HF::Pathfinding::BoostGraph}} bg(graph);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Read below on BoostGraphDeleter -\/-\/ this is important.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// BoostGraphDeleter is needed by std::unique\_ptr to destroy a BoostGraph; it is}}
+\DoxyCodeLine{\textcolor{comment}{// not meant to be called directly. You do not want to pass the address of a}}
+\DoxyCodeLine{\textcolor{comment}{// stack-\/allocated BoostGraph to BoostGraphDeleter::operator().}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// BoostGraphDeleter's operator() calls operator delete on the (BoostGraph *)}}
+\DoxyCodeLine{\textcolor{comment}{// argument, and passing the address of a stack-\/allocated BoostGraph for said}}
+\DoxyCodeLine{\textcolor{comment}{// argument will result in undefined behavior.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// In other words, do \_\_not\_\_ do the following:}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01325}{HF::Pathfinding::BoostGraphDeleter}} bg\_deleter;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a stack-\/allocated BoostGraph from a HF::SpatialStructures::Graph graph}}
+\DoxyCodeLine{\mbox{\hyperlink{a01317}{HF::Pathfinding::BoostGraph}} boostGraph(graph);  \textcolor{comment}{// not created using operator new}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Using a BoostGraphDeleter on the (address of a) stack-\/allocated BoostGraph}}
+\DoxyCodeLine{bg\_deleter(\&boostGraph);                        \textcolor{comment}{// calls operator delete for a (BoostGraph *)}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00137_source_l00325}{325}} of file \mbox{\hyperlink{a00137_source}{path\+\_\+finder.\+cpp}}.
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/pathfinding/src/\mbox{\hyperlink{a00140}{path\+\_\+finder.\+h}}\item 
+Cpp/pathfinding/src/\mbox{\hyperlink{a00137}{path\+\_\+finder.\+cpp}}\end{DoxyCompactItemize}

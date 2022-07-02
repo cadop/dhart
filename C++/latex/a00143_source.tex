@@ -1,0 +1,616 @@
+\hypertarget{a00143_source}{}\doxysection{embree\+\_\+raytracer.\+cpp}
+\label{a00143_source}\index{Cpp/raytracer/src/embree\_raytracer.cpp@{Cpp/raytracer/src/embree\_raytracer.cpp}}
+\mbox{\hyperlink{a00143}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00008}00008 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00146}{embree\_raytracer.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00009}00009 \textcolor{preprocessor}{\#include <corecrt\_math\_defines.h>}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00010}00010 \textcolor{preprocessor}{\#include <functional>}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00011}00011 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00012}00012 \textcolor{preprocessor}{\#include <thread>}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00013}00013 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00014}00014 \textcolor{preprocessor}{\#include <robin\_hood.h>}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00015}00015 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00016}00016 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00119}{meshinfo.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00017}00017 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00170}{RayRequest.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00018}00018 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00110}{HFExceptions.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00019}00019 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00020}00020 \textcolor{keyword}{using }std::vector;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00021}00021 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00022}00022 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00398}{HF::RayTracer}} \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00024}00024     \textcolor{keyword}{template} <\textcolor{keyword}{typename} numeric1, \textcolor{keyword}{typename} numeric2, \textcolor{keyword}{typename} dist\_type = \textcolor{keywordtype}{float}>}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00025}\mbox{\hyperlink{a00398_a864ebcf0023de27e610ee897de5436c2}{00025}}     \textcolor{keyword}{inline} RTCRayHit \mbox{\hyperlink{a00398_a864ebcf0023de27e610ee897de5436c2}{ConstructHit}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00026}00026         numeric1 x, numeric1 y, numeric1 z,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00027}00027         numeric2 dx, numeric2 dy, numeric2 dz,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00028}00028         dist\_type distance = -\/1.0f, \textcolor{keywordtype}{int} mesh\_id = -\/1) }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00029}00029     \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00030}00030         \textcolor{comment}{// Define an Embree hit data type to store results}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00031}00031         RTCRayHit hit;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00032}00032 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00033}00033         \textcolor{comment}{// Use the referenced values of the x,y,z position as the ray origin}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00034}00034         hit.ray.org\_x = x; hit.ray.org\_y = y; hit.ray.org\_z = z;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00035}00035         \textcolor{comment}{// Define the directions }}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00036}00036         hit.ray.dir\_x = dx; hit.ray.dir\_y = dy; hit.ray.dir\_z = dz;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00037}00037 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00038}00038         hit.ray.tnear = 0.00000001f; \textcolor{comment}{// The start of the ray segment}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00039}00039         hit.ray.tfar = distance > 0 ? distance : INFINITY; \textcolor{comment}{// The end of the ray segment}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00040}00040         hit.ray.time = 0.0f; \textcolor{comment}{// Time of ray for motion blur, unrelated to our package}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00041}00041 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00042}00042         hit.hit.geomID = RTC\_INVALID\_GEOMETRY\_ID;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00043}00043         hit.hit.primID = -\/1;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00044}00044 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00045}00045         \textcolor{keywordflow}{return} hit;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00046}00046     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00047}00047 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00048}00048     \textcolor{keyword}{template} <\textcolor{keyword}{typename} numeric1, \textcolor{keyword}{typename} numeric2, \textcolor{keyword}{typename} dist\_type = \textcolor{keywordtype}{float}>}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00049}\mbox{\hyperlink{a00398_a76e5d26b5063f0e5b49b4ba835f1da93}{00049}}     \textcolor{keyword}{inline} RTCRay \mbox{\hyperlink{a00398_a76e5d26b5063f0e5b49b4ba835f1da93}{ConstructRay}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00050}00050         numeric1 x, numeric1 y, numeric1 z,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00051}00051         numeric2 dx, numeric2 dy, numeric2 dz,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00052}00052         dist\_type distance = -\/1.0f, \textcolor{keywordtype}{int} mesh\_id = -\/1)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00053}00053     \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00054}00054         RTCRay ray;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00055}00055         ray.org\_x = x; ray.org\_y = y; ray.org\_z = z;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00056}00056         ray.dir\_x = dx; ray.dir\_y = dy; ray.dir\_z = dz;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00057}00057 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00058}00058         ray.tnear = 0.0000001f;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00059}00059         ray.tfar = (distance > 0) ? distance : INFINITY;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00060}00060         ray.time = 0.0f;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00061}00061         ray.flags = 0;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00062}00062             }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00063}00063         \textcolor{keywordflow}{return} ray;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00064}00064     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00070}\mbox{\hyperlink{a00398_a19e11d13f73136d6819b8abee57b0fd9}{00070}}     RTCError \mbox{\hyperlink{a00398_a19e11d13f73136d6819b8abee57b0fd9}{CheckState}}(RTCDevice\& device) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00071}00071         \textcolor{keywordflow}{return} rtcGetDeviceError(device);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00072}00072     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00073}00073 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00074}00074     \textcolor{keyword}{using }std::vector;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00078}\mbox{\hyperlink{a00398_aad8e270f026ac9dd20ee294b2b1a21de}{00078}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a00398_a01333}{Vertex}} \{ \textcolor{keywordtype}{float} \mbox{\hyperlink{a00398_aad8e270f026ac9dd20ee294b2b1a21de}{x}}, \mbox{\hyperlink{a00398_aa27c7b22316499f43093c2b7768c06ea}{y}}, \mbox{\hyperlink{a00398_ab8599cc6220e686dac319622f7d2f364}{z}}; \};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00079}00079 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00083}\mbox{\hyperlink{a00398_a504a02b108984ddfa3f521cf40b17e61}{00083}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a00398_a01337}{Triangle}} \{ \textcolor{keywordtype}{int} \mbox{\hyperlink{a00398_a504a02b108984ddfa3f521cf40b17e61}{v0}}, \mbox{\hyperlink{a00398_afc086ccfe3fc951af959d905056358c4}{v1}}, \mbox{\hyperlink{a00398_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}{v2}}; \};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00084}00084     }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00093}\mbox{\hyperlink{a00398_a732eb910d06064bea04e6a959fd235f0}{00093}}     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a00398_a732eb910d06064bea04e6a959fd235f0}{vectorsToBuffers}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00094}00094         \textcolor{keyword}{const} std::vector<std::array<float, 3>>\& vertices,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00095}00095         std::vector<Triangle>\& Tribuffer,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00096}00096         std::vector<Vertex>\& Vbuffer}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00097}00097     ) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00098}00098         robin\_hood::unordered\_map <std::array<float, 3>, \textcolor{keywordtype}{int}> index\_map;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00099}00099         }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00100}00100         \textcolor{keywordtype}{int} next\_id = 0;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00101}00101         \textcolor{keywordtype}{int} vertsize = vertices.size();}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00102}00102 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00103}00103         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < vertsize; i += 3) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00104}00104             std::array<int, 3> ids;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00105}00105 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00106}00106             \textcolor{comment}{//  Get the ids for the next 3 vertices}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00107}00107             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < 3; k++)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00108}00108             \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00109}00109                 \textcolor{keyword}{auto} vert = vertices[i + k];}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00110}00110                 \textcolor{keywordtype}{int} current\_id;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00111}00111 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00112}00112                 \textcolor{comment}{// Get ID from index map, or create a new ID if one doesn't exist}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00113}00113                 \textcolor{keywordflow}{if} (index\_map.count(vert) > 0)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00114}00114                     current\_id = index\_map[vert];}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00115}00115                 \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00116}00116                     index\_map[vert] = next\_id;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00117}00117                     current\_id = next\_id;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00118}00118 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00119}00119                     \textcolor{comment}{// Store new vertex in the vertex buffer}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00120}00120                     Vbuffer.emplace\_back(\mbox{\hyperlink{a00398_a01333}{Vertex}}\{ vert[0], vert[1], vert[2] \});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00121}00121                     next\_id++;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00122}00122                 \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00123}00123                 ids[k] = current\_id;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00124}00124             \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00125}00125             \textcolor{comment}{// Store new triangle in the triangle buffer.}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00126}00126             Tribuffer.emplace\_back(\mbox{\hyperlink{a00398_a01337}{Triangle}}\{ ids[0], ids[1], ids[2] \});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00127}00127         \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00128}00128     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00129}00129 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00142}\mbox{\hyperlink{a00398_aac8c0b245ea813969c50b6496cc67945}{00142}}     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a00398_aac8c0b245ea813969c50b6496cc67945}{buffersToStructs}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00143}00143         std::vector<float>\& in\_vertices,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00144}00144         std::vector<int>\& in\_indices,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00145}00145         std::vector<Vertex>\& out\_vertices,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00146}00146         std::vector<Triangle>\& out\_triangles}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00147}00147     ) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00148}00148         out\_vertices.resize(in\_vertices.size() / 3);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00149}00149         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < in\_vertices.size(); i += 3) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00150}00150             out\_vertices[i / 3] = \mbox{\hyperlink{a00398_a01333}{Vertex}}\{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00151}00151                 in\_vertices[i],}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00152}00152                 in\_vertices[i + 1],}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00153}00153                 in\_vertices[i + 2]}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00154}00154             \};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00155}00155         \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00156}00156 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00157}00157         out\_triangles.resize(in\_indices.size() / 3);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00158}00158         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < in\_indices.size(); i += 3) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00159}00159             out\_triangles[i / 3] = \mbox{\hyperlink{a00398_a01337}{Triangle}}\{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00160}00160                 in\_indices[i],}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00161}00161                 in\_indices[i + 1],}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00162}00162                 in\_indices[i + 2]}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00163}00163             \};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00164}00164         \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00165}00165     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00166}00166 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00167}\mbox{\hyperlink{a01345_aec975d50cd4a80c595e611db321713b8}{00167}}     \mbox{\hyperlink{a01345_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer::EmbreeRayTracer}}(\textcolor{keywordtype}{bool} use\_precise)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00168}00168     \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00169}00169         this-\/>use\_precise = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00170}00170         \mbox{\hyperlink{a01345_a19527943d1afe002c1105cb3b3691ca7}{SetupScene}}();}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00171}00171     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00172}00172 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00173}\mbox{\hyperlink{a01345_a0a3fa22a253ce3a7738f01286c11f589}{00173}}     \mbox{\hyperlink{a01345_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer::EmbreeRayTracer}}(std::vector<\mbox{\hyperlink{a01285}{HF::Geometry::MeshInfo<float>}}>\& MI, \textcolor{keywordtype}{bool} use\_precise) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00174}00174         \textcolor{comment}{// Throw if MI's size is less than 0}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00175}00175         this-\/>use\_precise = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00176}00176 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00177}00177         \textcolor{keywordflow}{if} (MI.empty())}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00178}00178             \textcolor{keywordflow}{throw} std::logic\_error(\textcolor{stringliteral}{"{}Embree Ray Tracer was passed an empty vector of mesh info!"{}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00179}00179 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00180}00180         \mbox{\hyperlink{a01345_a19527943d1afe002c1105cb3b3691ca7}{SetupScene}}();}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00181}00181 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00182}00182         \mbox{\hyperlink{a01345_a6425a0f8f4a3ef8073e734ceb745cd1e}{AddMesh}}(MI, \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00183}00183     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00184}00184 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00185}\mbox{\hyperlink{a01345_a06d9f03f0a10fb1f185bfa8a3a4bc056}{00185}}     \mbox{\hyperlink{a01345_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer::EmbreeRayTracer}}(\mbox{\hyperlink{a01285}{HF::Geometry::MeshInfo<float>}}\& MI, \textcolor{keywordtype}{bool} use\_precise) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00186}00186         \mbox{\hyperlink{a01345_a19527943d1afe002c1105cb3b3691ca7}{SetupScene}}();}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00187}00187         this-\/>use\_precise = \mbox{\hyperlink{a01345_a10fe757b08ab77289cfd945b29d14b89}{use\_precise}};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00188}00188         \mbox{\hyperlink{a01345_a6425a0f8f4a3ef8073e734ceb745cd1e}{AddMesh}}(MI, \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00189}00189     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00190}00190 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00191}\mbox{\hyperlink{a01345_a19527943d1afe002c1105cb3b3691ca7}{00191}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{a01345_a19527943d1afe002c1105cb3b3691ca7}{EmbreeRayTracer::SetupScene}}() \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00192}00192         \mbox{\hyperlink{a01345_a5608742889ff45a0294fdf21e5a85b2e}{device}} = rtcNewDevice(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00193}00193         \mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}} = rtcNewScene(\mbox{\hyperlink{a01345_a5608742889ff45a0294fdf21e5a85b2e}{device}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00194}00194         rtcSetSceneBuildQuality(\mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}}, RTC\_BUILD\_QUALITY\_HIGH);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00195}00195         rtcSetSceneFlags(\mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}}, RTC\_SCENE\_FLAG\_ROBUST);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00196}00196 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00197}00197         rtcInitIntersectContext(\&\mbox{\hyperlink{a01345_a01968c52807e6930909b7f9c31f45e80}{context}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00198}00198     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00199}00199 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00200}\mbox{\hyperlink{a01345_abb8661ead02def167ed72228eccd4705}{00200}}     \mbox{\hyperlink{a01345_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer::EmbreeRayTracer}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01345}{EmbreeRayTracer}}\& ERT2)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00201}00201     \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00202}00202         \textcolor{comment}{// Copy over pointers to relevant embree objects}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00203}00203         \mbox{\hyperlink{a01345_a5608742889ff45a0294fdf21e5a85b2e}{device}} = ERT2.\mbox{\hyperlink{a01345_a5608742889ff45a0294fdf21e5a85b2e}{device}};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00204}00204         \mbox{\hyperlink{a01345_a01968c52807e6930909b7f9c31f45e80}{context}} = ERT2.\mbox{\hyperlink{a01345_a01968c52807e6930909b7f9c31f45e80}{context}};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00205}00205         \mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}} = ERT2.\mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00206}00206         \mbox{\hyperlink{a01345_a3a243ef02c74fc6df958a4fd2506e7cc}{geometry}} = ERT2.\mbox{\hyperlink{a01345_a3a243ef02c74fc6df958a4fd2506e7cc}{geometry}};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00207}00207 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00208}00208         \textcolor{comment}{// Increment embree's internal refrence counter.}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00209}00209         rtcRetainScene(\mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00210}00210         rtcRetainDevice(\mbox{\hyperlink{a01345_a5608742889ff45a0294fdf21e5a85b2e}{device}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00211}00211     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00212}00212 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00213}\mbox{\hyperlink{a01345_a6ee1e15bc515878b156bc6a3778f8033}{00213}}     \textcolor{keywordtype}{int} \mbox{\hyperlink{a01345_a6ee1e15bc515878b156bc6a3778f8033}{EmbreeRayTracer::InsertGeom}}(RTCGeometry\& geom, \textcolor{keywordtype}{int} \textcolor{keywordtype}{id})}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00214}00214     \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00215}00215         \textcolor{keywordflow}{if} (\textcolor{keywordtype}{id} >= 0) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00216}00216             rtcAttachGeometryByID(\mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}}, geom, \textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00217}00217 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00218}00218             \textcolor{comment}{// If we're attaching by ID, then we must check to see if the ID already exists.}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00219}00219             \textcolor{comment}{// If it does already exist, then we'll have to just add it without specifying any ID}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00220}00220             RTCError error = \mbox{\hyperlink{a00398_a19e11d13f73136d6819b8abee57b0fd9}{CheckState}}(\mbox{\hyperlink{a01345_a5608742889ff45a0294fdf21e5a85b2e}{device}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00221}00221 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00222}00222             \textcolor{comment}{// Don't know the specific error that will be raised here (Documentation just states some error code)}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00223}00223             \textcolor{keywordflow}{if} (error != RTCError::RTC\_ERROR\_NONE)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00224}00224                 \textcolor{keywordflow}{return} \mbox{\hyperlink{a01345_a6ee1e15bc515878b156bc6a3778f8033}{InsertGeom}}(geom);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00225}00225         \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00226}00226     }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00227}00227         \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(rtcAttachGeometry(\mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}}, geom));}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00228}00228     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00229}00229 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00230}\mbox{\hyperlink{a00398_a16f9f26b0140f023ce820ec55e38c66b}{00230}}     \textcolor{keyword}{inline} \mbox{\hyperlink{a01341}{Vector3D}} \mbox{\hyperlink{a00398_a16f9f26b0140f023ce820ec55e38c66b}{cross}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01341}{Vector3D}}\& x, \textcolor{keyword}{const} \mbox{\hyperlink{a01341}{Vector3D}}\& y) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00231}00231         \textcolor{keywordflow}{return} \mbox{\hyperlink{a01341}{Vector3D}}\{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00232}00232             x.\mbox{\hyperlink{a01341_af7128e46fb0f8d5ef3e4a7355e9f959f}{y}} * y.\mbox{\hyperlink{a01341_af6ea0d409b5b9d4833f6a745d4624477}{z}} -\/ y.\mbox{\hyperlink{a01341_af7128e46fb0f8d5ef3e4a7355e9f959f}{y}} * x.\mbox{\hyperlink{a01341_af6ea0d409b5b9d4833f6a745d4624477}{z}},}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00233}00233             x.\mbox{\hyperlink{a01341_af6ea0d409b5b9d4833f6a745d4624477}{z}} * y.\mbox{\hyperlink{a01341_a8dc6f75dc73e95942cca436c146cb83c}{x}} -\/ y.\mbox{\hyperlink{a01341_af6ea0d409b5b9d4833f6a745d4624477}{z}} * x.\mbox{\hyperlink{a01341_a8dc6f75dc73e95942cca436c146cb83c}{x}},}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00234}00234             x.\mbox{\hyperlink{a01341_a8dc6f75dc73e95942cca436c146cb83c}{x}} * y.\mbox{\hyperlink{a01341_af7128e46fb0f8d5ef3e4a7355e9f959f}{y}} -\/ y.\mbox{\hyperlink{a01341_a8dc6f75dc73e95942cca436c146cb83c}{x}} * x.\mbox{\hyperlink{a01341_af7128e46fb0f8d5ef3e4a7355e9f959f}{y}}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00235}00235         \};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00236}00236     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00237}00237 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00238}\mbox{\hyperlink{a00398_ae551c109488ce94d0a568712b50da689}{00238}}     \textcolor{keyword}{inline} \textcolor{keywordtype}{double} \mbox{\hyperlink{a00398_ae551c109488ce94d0a568712b50da689}{dot}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01341}{Vector3D}}\& v1, \textcolor{keyword}{const} \mbox{\hyperlink{a01341}{Vector3D}}\& v2) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00239}00239         \textcolor{keywordflow}{return} (v1.\mbox{\hyperlink{a01341_a8dc6f75dc73e95942cca436c146cb83c}{x}} * v2.\mbox{\hyperlink{a01341_a8dc6f75dc73e95942cca436c146cb83c}{x}} + v1.\mbox{\hyperlink{a01341_af7128e46fb0f8d5ef3e4a7355e9f959f}{y}} * v2.\mbox{\hyperlink{a01341_af7128e46fb0f8d5ef3e4a7355e9f959f}{y}} + v1.\mbox{\hyperlink{a01341_af6ea0d409b5b9d4833f6a745d4624477}{z}} * v2.\mbox{\hyperlink{a01341_af6ea0d409b5b9d4833f6a745d4624477}{z}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00240}00240     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00241}00241 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00242}\mbox{\hyperlink{a00398_ac419170961bff9b1236fe017f6bc3289}{00242}}     \textcolor{keyword}{inline} \mbox{\hyperlink{a01341}{Vector3D}} \mbox{\hyperlink{a00398_ac419170961bff9b1236fe017f6bc3289}{InvertVector}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01341}{Vector3D}}\& V) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00243}00243         \textcolor{keywordflow}{return} \mbox{\hyperlink{a01341}{Vector3D}}\{ -\/V.\mbox{\hyperlink{a01341_a8dc6f75dc73e95942cca436c146cb83c}{x}}, -\/V.\mbox{\hyperlink{a01341_af7128e46fb0f8d5ef3e4a7355e9f959f}{y}}, -\/V.\mbox{\hyperlink{a01341_af6ea0d409b5b9d4833f6a745d4624477}{z}} \};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00244}00244     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00245}00245 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00246}00246 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00247}\mbox{\hyperlink{a00398_a9498ae7ffabd8c5bca4026374ac862e9}{00247}}     \textcolor{keywordtype}{double} \mbox{\hyperlink{a00398_a9498ae7ffabd8c5bca4026374ac862e9}{RayTriangleIntersection}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00248}00248         \textcolor{keyword}{const} \mbox{\hyperlink{a01341}{Vector3D}}\& origin,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00249}00249         \textcolor{keyword}{const} \mbox{\hyperlink{a01341}{Vector3D}}\& direction,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00250}00250         \textcolor{keyword}{const} \mbox{\hyperlink{a01341}{Vector3D}}\& v1,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00251}00251         \textcolor{keyword}{const} \mbox{\hyperlink{a01341}{Vector3D}}\& v2,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00252}00252         \textcolor{keyword}{const} \mbox{\hyperlink{a01341}{Vector3D}}\& v3)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00253}00253     \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00254}00254 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00255}00255         \textcolor{keyword}{const} \textcolor{keywordtype}{double} EPSILON = 0.0000001;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00256}00256         \textcolor{keyword}{const} \mbox{\hyperlink{a01341}{Vector3D}} inverted\_direction = direction;\textcolor{comment}{//InvertVector(direction);}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00257}00257 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00258}00258         \textcolor{keyword}{const} \mbox{\hyperlink{a01341}{Vector3D}} edge1 = v2 -\/ v1;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00259}00259         \textcolor{keyword}{const} \mbox{\hyperlink{a01341}{Vector3D}} edge2 = v3 -\/ v1;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00260}00260         \textcolor{keyword}{const} \mbox{\hyperlink{a01341}{Vector3D}} h = \mbox{\hyperlink{a00398_a16f9f26b0140f023ce820ec55e38c66b}{cross}}(inverted\_direction, edge2);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00261}00261         \textcolor{keyword}{const} \textcolor{keywordtype}{double} a = \mbox{\hyperlink{a00398_ae551c109488ce94d0a568712b50da689}{dot}}(edge1, h);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00262}00262 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00263}00263         \textcolor{comment}{// This ray is parallel to this triangle.}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00264}00264         \textcolor{keywordflow}{if} (a > -\/EPSILON \&\& a < EPSILON)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00265}00265             \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00266}00266 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00267}00267         \textcolor{keyword}{const} \textcolor{keywordtype}{double} f = 1.0 / a;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00268}00268         \textcolor{keyword}{const} \mbox{\hyperlink{a01341}{Vector3D}} s = origin -\/ v1;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00269}00269         \textcolor{keyword}{const} \textcolor{keywordtype}{double} u = f * \mbox{\hyperlink{a00398_ae551c109488ce94d0a568712b50da689}{dot}}(s, h);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00270}00270         \textcolor{keywordflow}{if} (u < 0.0 || u > 1.0)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00271}00271             \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00272}00272 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00273}00273         \textcolor{keyword}{const} \mbox{\hyperlink{a01341}{Vector3D}} q = \mbox{\hyperlink{a00398_a16f9f26b0140f023ce820ec55e38c66b}{cross}}(s, edge1);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00274}00274         \textcolor{keyword}{const} \textcolor{keywordtype}{double} v = f * \mbox{\hyperlink{a00398_ae551c109488ce94d0a568712b50da689}{dot}}(direction, q);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00275}00275         \textcolor{keywordflow}{if} (v < 0.0 || u + v > 1.0)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00276}00276             \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00277}00277 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00278}00278         \textcolor{comment}{// At this stage we can compute t to find out where the intersection point is on the line.}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00279}00279         \textcolor{keywordtype}{double} t\_hit = f * \mbox{\hyperlink{a00398_ae551c109488ce94d0a568712b50da689}{dot}}(edge2, q);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00280}00280         \textcolor{keywordflow}{return} t\_hit;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00281}00281     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00282}00282 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00283}\mbox{\hyperlink{a01345_a28032c693ac330c5b11bc2a877b04c75}{00283}}     \textcolor{keywordtype}{double} \mbox{\hyperlink{a01345_a28032c693ac330c5b11bc2a877b04c75}{EmbreeRayTracer::CalculatePreciseDistance}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00284}00284         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} geom\_id,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00285}00285         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} prim\_id, }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00286}00286         \textcolor{keyword}{const} \mbox{\hyperlink{a01341}{Vector3D}} \& origin, }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00287}00287         \textcolor{keyword}{const} \mbox{\hyperlink{a01341}{Vector3D}} \& direction)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00288}00288 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00289}00289         \textcolor{comment}{// Get the triangle intersected by this hit}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00290}00290         \textcolor{keyword}{auto} triangle = this-\/>\mbox{\hyperlink{a01345_a619072a17db71253fc9ce3bdf1ba1920}{GetTriangle}}(geom\_id, prim\_id);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00291}00291 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00292}00292         \textcolor{comment}{// Perform the raytriangle intersection}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00293}00293         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00398_a9498ae7ffabd8c5bca4026374ac862e9}{RayTriangleIntersection}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00294}00294             origin,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00295}00295             direction,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00296}00296             triangle[0],}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00297}00297             triangle[1],}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00298}00298             triangle[2]}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00299}00299         );}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00300}00300     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00301}00301 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00302}\mbox{\hyperlink{a01345_a99f9cf2231668b40902c19d6b886865a}{00302}}     \mbox{\hyperlink{a01345_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer::EmbreeRayTracer}}(\textcolor{keyword}{const} std::vector<std::array<float, 3>>\& geometry) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00303}00303         \mbox{\hyperlink{a01345_a19527943d1afe002c1105cb3b3691ca7}{SetupScene}}();}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00304}00304 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00305}00305         \textcolor{comment}{// Set Setup buffers}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00306}00306         std::vector<Triangle> tris;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00307}00307         std::vector<Vertex> verts;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00308}00308         \mbox{\hyperlink{a00398_a732eb910d06064bea04e6a959fd235f0}{vectorsToBuffers}}(\mbox{\hyperlink{a01345_a3a243ef02c74fc6df958a4fd2506e7cc}{geometry}}, tris, verts);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00309}00309 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00310}00310         RTCGeometry inserted\_geom = \mbox{\hyperlink{a01345_aa602f6c44fa5230477642942ebc3216e}{ConstructGeometryFromBuffers}}(tris, verts);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00311}00311         \textcolor{comment}{// Cast to triangle/vertex structs so we can operate on them.  This trick is from the embree tutorial}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00312}00312         \mbox{\hyperlink{a01345_a6ee1e15bc515878b156bc6a3778f8033}{InsertGeom}}(inserted\_geom);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00313}00313 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00314}00314         rtcCommitScene(\mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00315}00315     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00316}00316 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00317}\mbox{\hyperlink{a01345_a6425a0f8f4a3ef8073e734ceb745cd1e}{00317}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01345_a6425a0f8f4a3ef8073e734ceb745cd1e}{EmbreeRayTracer::AddMesh}}(std::vector<std::array<float, 3>>\& Mesh, \textcolor{keywordtype}{int} ID, \textcolor{keywordtype}{bool} Commit)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00318}00318     \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00319}00319         \textcolor{comment}{// Set Setup buffers}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00320}00320         std::vector<Triangle> tris; std::vector<Vertex> verts;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00321}00321         \mbox{\hyperlink{a00398_a732eb910d06064bea04e6a959fd235f0}{vectorsToBuffers}}(Mesh, tris, verts);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00322}00322 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00323}00323         \textcolor{comment}{// Add the geometry to embree as a geometry object}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00324}00324         \textcolor{keyword}{auto} geom = \mbox{\hyperlink{a01345_aa602f6c44fa5230477642942ebc3216e}{ConstructGeometryFromBuffers}}(tris, verts);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00325}00325 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00326}00326         \textcolor{comment}{// Add the geometry by ID}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00327}00327         \textcolor{keywordtype}{int} added\_id = \mbox{\hyperlink{a01345_a6ee1e15bc515878b156bc6a3778f8033}{InsertGeom}}(geom);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00328}00328 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00329}00329         \textcolor{comment}{// Commit the scene if specified}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00330}00330         \textcolor{keywordflow}{if} (Commit)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00331}00331             rtcCommitScene(\mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00332}00332 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00333}00333         \textcolor{comment}{// Return False if it's id didn't need to be changed, true otherwise.}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00334}00334         \textcolor{keywordflow}{return} (added\_id == ID);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00335}00335     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00336}00336 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00337}\mbox{\hyperlink{a01345_aa602f6c44fa5230477642942ebc3216e}{00337}}     RTCGeometry \mbox{\hyperlink{a01345_aa602f6c44fa5230477642942ebc3216e}{EmbreeRayTracer::ConstructGeometryFromBuffers}}(vector<Triangle>\& tris, vector<Vertex>\& verts) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00338}00338         \textcolor{comment}{// Create new geometry object}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00339}00339         RTCGeometry geom = rtcNewGeometry(\mbox{\hyperlink{a01345_a5608742889ff45a0294fdf21e5a85b2e}{device}}, RTC\_GEOMETRY\_TYPE\_TRIANGLE);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00340}00340 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00341}00341         \textcolor{comment}{// Allocate it's triangle and index buffers in embree}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00342}00342         \mbox{\hyperlink{a01345_a6eced6bbe321079476603f7e7ef97ed8}{triangles}} = \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{a00398_a01337}{Triangle}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00343}00343             rtcSetNewGeometryBuffer(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00344}00344                 geom,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00345}00345                 RTC\_BUFFER\_TYPE\_INDEX,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00346}00346                 0,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00347}00347                 RTC\_FORMAT\_UINT3,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00348}00348                 \textcolor{keyword}{sizeof}(\mbox{\hyperlink{a00398_a01337}{Triangle}}),}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00349}00349                 tris.size() + 1}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00350}00350             )}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00351}00351             );}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00352}00352         \mbox{\hyperlink{a01345_a62b06bf58c3b134de8f271fbc778e412}{Vertices}} = \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{a00398_a01333}{Vertex}}*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00353}00353             rtcSetNewGeometryBuffer(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00354}00354                 geom,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00355}00355                 RTC\_BUFFER\_TYPE\_VERTEX,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00356}00356                 0,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00357}00357                 RTC\_FORMAT\_FLOAT3,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00358}00358                 \textcolor{keyword}{sizeof}(\mbox{\hyperlink{a00398_a01333}{Vertex}}),}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00359}00359                 verts.size() + 1}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00360}00360             )}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00361}00361             );}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00362}00362 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00363}00363         \textcolor{comment}{// Move data from input tris/verts into buffers}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00364}00364         std::move(tris.begin(), tris.end(), \mbox{\hyperlink{a01345_a6eced6bbe321079476603f7e7ef97ed8}{triangles}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00365}00365         std::move(verts.begin(), verts.end(), \mbox{\hyperlink{a01345_a62b06bf58c3b134de8f271fbc778e412}{Vertices}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00366}00366 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00367}00367         \textcolor{comment}{// Add a reference to this geometry to internal array of geometry.}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00368}00368         \mbox{\hyperlink{a01345_a3a243ef02c74fc6df958a4fd2506e7cc}{geometry}}.push\_back(geom);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00369}00369         }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00370}00370         \textcolor{comment}{// Commit this geometry to finalize the process then return}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00371}00371         rtcCommitGeometry(geom);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00372}00372 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00373}00373         \textcolor{keywordflow}{return} geom;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00374}00374     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00375}00375 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00376}\mbox{\hyperlink{a01345_ad5389e05e451a8d8820c4deea886db3f}{00376}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01345_a6425a0f8f4a3ef8073e734ceb745cd1e}{EmbreeRayTracer::AddMesh}}(\mbox{\hyperlink{a01285}{HF::Geometry::MeshInfo<float>}}\& Mesh, \textcolor{keywordtype}{bool} Commit) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00377}00377 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00378}00378         \textcolor{keywordflow}{if} (Mesh.\mbox{\hyperlink{a01285_a5fa8cc590a7bd0764a7903ed521e2fc4}{NumTris}}() < 1 || Mesh.\mbox{\hyperlink{a01285_a70a6f6b9270d47e0b8428cdc15b707d3}{NumVerts}}() < 1) }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00379}00379             \textcolor{keywordflow}{throw} \mbox{\hyperlink{a01257}{HF::Exceptions::InvalidOBJ}}();}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00380}00380         \textcolor{comment}{// Get vertex and triangle data from the mesh}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00381}00381 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00382}00382         std::vector<Triangle> tris; std::vector<Vertex> verts;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00383}00383         \textcolor{keyword}{auto} indices = Mesh.\mbox{\hyperlink{a01285_afddea10734ba213b2bb5cc148c24c942}{getRawIndices}}(); \textcolor{keyword}{auto} vertices = Mesh.\mbox{\hyperlink{a01285_af2d1b696c55aa036cff585d2e7eba50b}{GetIndexedVertices}}();}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00384}00384         \mbox{\hyperlink{a00398_aac8c0b245ea813969c50b6496cc67945}{buffersToStructs}}(vertices, indices, verts, tris);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00385}00385 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00386}00386         \textcolor{comment}{// Construct geometry using embree}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00387}00387         \textcolor{keyword}{auto} geom = \mbox{\hyperlink{a01345_aa602f6c44fa5230477642942ebc3216e}{ConstructGeometryFromBuffers}}(tris, verts);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00388}00388 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00389}00389         \textcolor{comment}{// Add the Mesh to the scene and update it's ID}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00390}00390         Mesh.\mbox{\hyperlink{a01285_a5259d58812a4a21b93703a27732f684e}{meshid}} = \mbox{\hyperlink{a01345_a6ee1e15bc515878b156bc6a3778f8033}{InsertGeom}}(geom, Mesh.\mbox{\hyperlink{a01285_a5259d58812a4a21b93703a27732f684e}{meshid}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00391}00391 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00392}00392         \textcolor{comment}{// commit if specified}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00393}00393         \textcolor{keywordflow}{if} (Commit)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00394}00394             rtcCommitScene(\mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00395}00395 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00396}00396         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00397}00397     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00398}00398 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00399}\mbox{\hyperlink{a01345_a3d478f577e30d1b437421224134b5a38}{00399}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01345_a6425a0f8f4a3ef8073e734ceb745cd1e}{EmbreeRayTracer::AddMesh}}(std::vector<\mbox{\hyperlink{a01285}{HF::Geometry::MeshInfo<float>}}>\& Meshes, \textcolor{keywordtype}{bool} Commit)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00400}00400     \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00401}00401         \textcolor{comment}{// Add every mesh in a loop}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00402}00402         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& mesh : Meshes)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00403}00403             \mbox{\hyperlink{a01345_a6425a0f8f4a3ef8073e734ceb745cd1e}{AddMesh}}(mesh, \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00404}00404 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00405}00405         \textcolor{comment}{// Commit at the end to save performance}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00406}00406         \textcolor{keywordflow}{if} (Commit)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00407}00407             rtcCommitScene(\mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00408}00408 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00409}00409         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00410}00410     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00411}00411 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00412}\mbox{\hyperlink{a01345_aa8424b274c7c5d0598ff13b49ac8c8d2}{00412}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01345_aa8424b274c7c5d0598ff13b49ac8c8d2}{EmbreeRayTracer::PointIntersection}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00413}00413         std::array<float, 3>\& origin,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00414}00414         \textcolor{keyword}{const} std::array<float, 3>\& dir,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00415}00415         \textcolor{keywordtype}{float} distance,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00416}00416         \textcolor{keywordtype}{int} mesh\_id}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00417}00417     ) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00418}00418         \textcolor{keywordflow}{return} \mbox{\hyperlink{a01345_aa8424b274c7c5d0598ff13b49ac8c8d2}{PointIntersection}}(origin[0], origin[1], origin[2], dir[0], dir[1], dir[2], distance, mesh\_id);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00419}00419     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00420}00420 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00421}\mbox{\hyperlink{a01345_a8de15e23054b0b579087acc48616149f}{00421}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01345_aa8424b274c7c5d0598ff13b49ac8c8d2}{EmbreeRayTracer::PointIntersection}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00422}00422             \textcolor{keywordtype}{float}\& x,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00423}00423             \textcolor{keywordtype}{float}\& y,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00424}00424             \textcolor{keywordtype}{float}\& z,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00425}00425             \textcolor{keywordtype}{float} dx,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00426}00426             \textcolor{keywordtype}{float} dy,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00427}00427             \textcolor{keywordtype}{float} dz,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00428}00428             \textcolor{keywordtype}{float} distance,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00429}00429             \textcolor{keywordtype}{int} mesh\_id) }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00430}00430     \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00431}00431         \mbox{\hyperlink{a01349}{HitStruct<float>}} res = Intersect<float>(x, y, z, dx, dy, dz, distance, mesh\_id);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00432}00432 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00433}00433         \textcolor{comment}{// If the ray did hit, update the node position by translating the distance along the directions}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00434}00434         \textcolor{comment}{// This REQUIRES a normalized vector}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00435}00435         \textcolor{comment}{// Translate the point along the direction vector }}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00436}00436         \textcolor{keywordflow}{if} (res.\mbox{\hyperlink{a01349_a3d86c2c8d8e0ec6bf63a653ec89807a8}{DidHit}}()) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00437}00437             x = x + (dx * res.\mbox{\hyperlink{a01349_a6fbe94ce3a7514a37415d28ff0500b64}{distance}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00438}00438             y = y + (dy * res.\mbox{\hyperlink{a01349_a6fbe94ce3a7514a37415d28ff0500b64}{distance}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00439}00439             z = z + (dz * res.\mbox{\hyperlink{a01349_a6fbe94ce3a7514a37415d28ff0500b64}{distance}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00440}00440 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00441}00441             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00442}00442         \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00443}00443         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00444}00444             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00445}00445     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00446}00446 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00447}\mbox{\hyperlink{a00398_a6e20c473674ea46f649ef827818841d2}{00447}}     \textcolor{keyword}{inline} \mbox{\hyperlink{a01341}{Vector3D}} \mbox{\hyperlink{a00398_a6e20c473674ea46f649ef827818841d2}{GetPointFromBuffer}}(\textcolor{keywordtype}{int} index, \mbox{\hyperlink{a00398_a01333}{Vertex}}* buffer) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00448}00448         \textcolor{keywordflow}{return}  \mbox{\hyperlink{a01341}{Vector3D}}\{buffer[index].\mbox{\hyperlink{a00398_aad8e270f026ac9dd20ee294b2b1a21de}{x}}, buffer[index].\mbox{\hyperlink{a00398_aa27c7b22316499f43093c2b7768c06ea}{y}},buffer[index].\mbox{\hyperlink{a00398_ab8599cc6220e686dac319622f7d2f364}{z}}\};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00449}00449     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00450}00450 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00451}\mbox{\hyperlink{a01345_a619072a17db71253fc9ce3bdf1ba1920}{00451}}     std::array<Vector3D, 3> \mbox{\hyperlink{a01345_a619072a17db71253fc9ce3bdf1ba1920}{EmbreeRayTracer::GetTriangle}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} geomID, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} primID)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00452}00452 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00453}00453         \textcolor{comment}{// Get the index buffer for the geometry at geomID}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00454}00454         \mbox{\hyperlink{a00398_a01337}{Triangle}}* index\_buffer = \textcolor{keyword}{reinterpret\_cast<}\mbox{\hyperlink{a00398_a01337}{Triangle}}*\textcolor{keyword}{>}(rtcGetGeometryBufferData(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00455}00455             rtcGetGeometry(this-\/>\mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}}, geomID),}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00456}00456             RTCBufferType::RTC\_BUFFER\_TYPE\_INDEX,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00457}00457             0}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00458}00458         ));}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00459}00459 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00460}00460         \textcolor{comment}{// Get the indices of the 3 vertices that form this triangle from thig}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00461}00461         \textcolor{comment}{// geometry's index buffer}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00462}00462         \textcolor{keywordtype}{int} v1\_index = index\_buffer[primID].\mbox{\hyperlink{a00398_a504a02b108984ddfa3f521cf40b17e61}{v0}};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00463}00463         \textcolor{keywordtype}{int} v2\_index = index\_buffer[primID].\mbox{\hyperlink{a00398_afc086ccfe3fc951af959d905056358c4}{v1}};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00464}00464         \textcolor{keywordtype}{int} v3\_index = index\_buffer[primID].\mbox{\hyperlink{a00398_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}{v2}};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00465}00465 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00466}00466         \textcolor{comment}{// Get a pointer to this geometry's vertex buffer}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00467}00467         \mbox{\hyperlink{a00398_a01333}{Vertex}} * vertex\_buffer = \textcolor{keyword}{reinterpret\_cast<}\mbox{\hyperlink{a00398_a01333}{Vertex}} *\textcolor{keyword}{>}(rtcGetGeometryBufferData(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00468}00468             rtcGetGeometry(this-\/>\mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}}, geomID),}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00469}00469             RTCBufferType::RTC\_BUFFER\_TYPE\_VERTEX,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00470}00470             0}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00471}00471         ));}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00472}00472 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00473}00473         \textcolor{comment}{// Get the vertices at these indices from the vertex buffer.}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00474}00474         \textcolor{keywordflow}{return} std::array<Vector3D, 3>\{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00475}00475                 \mbox{\hyperlink{a00398_a6e20c473674ea46f649ef827818841d2}{GetPointFromBuffer}}(v1\_index, vertex\_buffer),}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00476}00476                 \mbox{\hyperlink{a00398_a6e20c473674ea46f649ef827818841d2}{GetPointFromBuffer}}(v2\_index, vertex\_buffer),}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00477}00477                 \mbox{\hyperlink{a00398_a6e20c473674ea46f649ef827818841d2}{GetPointFromBuffer}}(v3\_index, vertex\_buffer)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00478}00478         \};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00479}00479     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00480}00480 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00481}\mbox{\hyperlink{a01345_a0c4abe0d3160c1a59231e0ae492fe537}{00481}}     std::vector<char> \mbox{\hyperlink{a01345_a0c4abe0d3160c1a59231e0ae492fe537}{EmbreeRayTracer::PointIntersections}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00482}00482         std::vector<std::array<float, 3>>\& origins,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00483}00483         std::vector<std::array<float, 3>>\& directions,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00484}00484         \textcolor{keywordtype}{bool} use\_parallel,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00485}00485         \textcolor{keywordtype}{float} max\_distance,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00486}00486         \textcolor{keywordtype}{int} mesh\_id}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00487}00487     ) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00488}00488         std::vector<char> out\_results(origins.size());}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00489}00489 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00490}00490         \textcolor{comment}{// Allow users to shoot multiple rays with a single direction or origin}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00491}00491         \textcolor{keywordflow}{if} (origins.size() > 1 \&\& directions.size() > 1) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00492}00492 \textcolor{preprocessor}{\#pragma omp parallel for if(use\_parallel) schedule(dynamic)}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00493}00493             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < origins.size(); i++) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00494}00494                 \textcolor{keyword}{auto}\& org = origins[i];}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00495}00495                 \textcolor{keyword}{auto}\& dir = directions[i];}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00496}00496                 out\_results[i] = \mbox{\hyperlink{a01345_aa8424b274c7c5d0598ff13b49ac8c8d2}{PointIntersection}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00497}00497                     org[0], org[1], org[2],}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00498}00498                     dir[0], dir[1], dir[2],}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00499}00499                     max\_distance, mesh\_id}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00500}00500                 );}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00501}00501             \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00502}00502         \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00503}00503 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00504}00504         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (origins.size() > 1 \&\& directions.size() == 1) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00505}00505             \textcolor{keyword}{const} \textcolor{keyword}{auto}\& dir = directions[0];}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00506}00506 \textcolor{preprocessor}{\#pragma omp parallel for if(use\_parallel) schedule(dynamic)}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00507}00507             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < origins.size(); i++) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00508}00508                 \textcolor{keyword}{auto}\& org = origins[i];}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00509}00509                 out\_results[i] = \mbox{\hyperlink{a01345_aa8424b274c7c5d0598ff13b49ac8c8d2}{PointIntersection}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00510}00510                     org[0], org[1], org[2],}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00511}00511                     dir[0], dir[1], dir[2],}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00512}00512                     max\_distance, mesh\_id}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00513}00513                 );}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00514}00514             \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00515}00515         \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00516}00516 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00517}00517         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (origins.size() == 1 \&\& directions.size() > 1) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00518}00518             out\_results.resize(directions.size());}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00519}00519 \textcolor{preprocessor}{\#pragma omp parallel for if(use\_parallel) schedule(dynamic)}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00520}00520             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < directions.size(); i++) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00521}00521                 \textcolor{keyword}{auto} org = origins[0];}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00522}00522                 \textcolor{keyword}{auto}\& dir = directions[i];}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00523}00523                 \textcolor{keywordtype}{bool} did\_hit = \mbox{\hyperlink{a01345_aa8424b274c7c5d0598ff13b49ac8c8d2}{PointIntersection}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00524}00524                     org[0], org[1], org[2],}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00525}00525                     dir[0], dir[1], dir[2],}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00526}00526                     max\_distance, mesh\_id}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00527}00527                 );}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00528}00528                 \textcolor{keywordflow}{if} (did\_hit) \textcolor{comment}{// Directions is the output array in this case}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00529}00529                 \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00530}00530                     directions[i][0] = org[0];}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00531}00531                     directions[i][1] = org[1];}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00532}00532                     directions[i][2] = org[2];}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00533}00533                 \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00534}00534                 out\_results[i] = did\_hit;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00535}00535             \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00536}00536         \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00537}00537         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00538}00538             \textcolor{keywordflow}{throw} std::exception(\textcolor{stringliteral}{"{}Incorrect usage of castrays"{}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00539}00539         \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00540}00540 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00541}00541         \textcolor{keywordflow}{return} out\_results;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00542}00542     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00543}00543 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00544}\mbox{\hyperlink{a01345_ae3341adf12ae91e33f1188a434d8e28d}{00544}}     RTCRayHit \mbox{\hyperlink{a01345_ae3341adf12ae91e33f1188a434d8e28d}{EmbreeRayTracer::Intersect\_IMPL}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00545}00545         \textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} z,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00546}00546         \textcolor{keywordtype}{float} dx, \textcolor{keywordtype}{float} dy, \textcolor{keywordtype}{float} dz,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00547}00547         \textcolor{keywordtype}{float} max\_distance, \textcolor{keywordtype}{int} mesh\_id)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00548}00548     \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00549}00549         RTCRayHit hit = \mbox{\hyperlink{a00398_a864ebcf0023de27e610ee897de5436c2}{ConstructHit}}(x, y, z, dx, dy, dz);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00550}00550 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00551}00551         rtcIntersect1(\mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}}, \&\mbox{\hyperlink{a01345_a01968c52807e6930909b7f9c31f45e80}{context}}, \&hit);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00552}00552 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00553}00553         \textcolor{keywordflow}{return} hit;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00554}00554     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00555}00555 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00556}\mbox{\hyperlink{a01345_a7b06460e537c22386fa5a9af2701591a}{00556}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01345_ade19fda460dadd98769b347840bd305a}{EmbreeRayTracer::Occluded\_IMPL}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00557}00557         \textcolor{keyword}{const} std::array<float, 3>\& origin,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00558}00558         \textcolor{keyword}{const} std::array<float, 3>\& direction,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00559}00559         \textcolor{keywordtype}{float} max\_dist}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00560}00560     ) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00561}00561         \textcolor{keywordflow}{return} \mbox{\hyperlink{a01345_ade19fda460dadd98769b347840bd305a}{Occluded\_IMPL}}(origin[0], origin[1], origin[2], direction[0], direction[1], direction[2]);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00562}00562     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00563}00563 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00564}\mbox{\hyperlink{a01345_af718d171387e217f3c2172f795abfb90}{00564}}     std::vector<char> \mbox{\hyperlink{a01345_af718d171387e217f3c2172f795abfb90}{EmbreeRayTracer::Occlusions}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00565}00565         \textcolor{keyword}{const} std::vector<std::array<float, 3>>\& origins,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00566}00566         \textcolor{keyword}{const} std::vector<std::array<float, 3>>\& directions,}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00567}00567         \textcolor{keywordtype}{float} max\_distance, \textcolor{keywordtype}{bool} use\_parallel)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00568}00568     \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00569}00569         std::vector<char> out\_array;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00570}00570         \textcolor{keywordtype}{int} cores = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>} (std::thread::hardware\_concurrency());}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00571}00571         \textcolor{keywordflow}{if} (origins.size() < cores || directions.size() < cores)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00572}00572             \textcolor{comment}{// Don't use more cores than there are rays. This caused a hard to find bug earlier.}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00573}00573             \textcolor{comment}{// Doesn't seem to happen with the other ray types. (race condition?)}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00574}00574             omp\_set\_num\_threads(min(max(origins.size(), directions.size()), cores));}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00575}00575 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00576}00576         \textcolor{keywordflow}{if} (directions.size() > 1 \&\& origins.size() > 1) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00577}00577             out\_array.resize(origins.size());}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00578}00578 \textcolor{preprocessor}{\#pragma omp parallel for if(use\_parallel) schedule(dynamic)}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00579}00579             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < origins.size(); i++) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00580}00580                 out\_array[i] = \mbox{\hyperlink{a01345_ade19fda460dadd98769b347840bd305a}{Occluded\_IMPL}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00581}00581                     origins[i][0], origins[i][1], origins[i][2],}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00582}00582                     directions[i][0], directions[i][1], directions[i][2],}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00583}00583                     max\_distance, -\/1}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00584}00584                 );}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00585}00585             \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00586}00586         \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00587}00587         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (directions.size() > 1 \&\& origins.size() == 1) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00588}00588             out\_array.resize(directions.size());}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00589}00589             \textcolor{keyword}{const} \textcolor{keyword}{auto}\& origin = origins[0];}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00590}00590             printf(\textcolor{stringliteral}{"{}Using multidirection, single origin\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00591}00591 \textcolor{preprocessor}{\#pragma omp parallel for if(use\_parallel) schedule(dynamic)}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00592}00592             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < directions.size(); i++) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00593}00593                 \textcolor{keyword}{const} \textcolor{keyword}{auto}\& direction = directions[i];}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00594}00594                 out\_array[i] = \mbox{\hyperlink{a01345_ade19fda460dadd98769b347840bd305a}{Occluded\_IMPL}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00595}00595                     origin[0], origin[1], origin[2],}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00596}00596                     direction[0], direction[1], direction[2],}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00597}00597                     max\_distance, -\/1}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00598}00598                 );}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00599}00599             \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00600}00600         \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00601}00601         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (directions.size() == 1 \&\& origins.size() > 1)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00602}00602         \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00603}00603             out\_array.resize(origins.size());}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00604}00604             \textcolor{keyword}{const} \textcolor{keyword}{auto}\& direction = directions[0];}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00605}00605 \textcolor{preprocessor}{\#pragma omp parallel for if(use\_parallel) schedule(dynamic)}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00606}00606             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < origins.size(); i++) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00607}00607                 \textcolor{keyword}{const} \textcolor{keyword}{auto}\& origin = origins[i];}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00608}00608                 out\_array[i] = \mbox{\hyperlink{a01345_ade19fda460dadd98769b347840bd305a}{Occluded\_IMPL}}(}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00609}00609                     origin[0], origin[1], origin[2],}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00610}00610                     direction[0], direction[1], direction[2],}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00611}00611                     max\_distance, -\/1}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00612}00612                 );}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00613}00613             \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00614}00614         \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00615}00615         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (directions.size() == 1 \&\& origins.size() == 1) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00616}00616             out\_array = \{ \mbox{\hyperlink{a01345_ade19fda460dadd98769b347840bd305a}{Occluded\_IMPL}}(origins[0], directions[0], max\_distance) \};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00617}00617         \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00618}00618         \textcolor{keywordflow}{return} out\_array;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00619}00619     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00620}00620 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00621}\mbox{\hyperlink{a01345_ade19fda460dadd98769b347840bd305a}{00621}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01345_ade19fda460dadd98769b347840bd305a}{EmbreeRayTracer::Occluded\_IMPL}}(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} z, \textcolor{keywordtype}{float} dx, \textcolor{keywordtype}{float} dy, \textcolor{keywordtype}{float} dz, \textcolor{keywordtype}{float} distance, \textcolor{keywordtype}{int} mesh\_id)}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00622}00622     \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00623}00623         \textcolor{keyword}{auto} ray = \mbox{\hyperlink{a00398_a76e5d26b5063f0e5b49b4ba835f1da93}{ConstructRay}}(x, y, z, dx, dy, dz, distance);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00624}00624         rtcOccluded1(\mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}}, \&\mbox{\hyperlink{a01345_a01968c52807e6930909b7f9c31f45e80}{context}}, \&ray);}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00625}00625         \textcolor{keywordflow}{return} ray.tfar == -\/INFINITY;}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00626}00626     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00627}00627 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00628}00628     \textcolor{comment}{// Increment reference counters to prevent destruction when this thing goes out of scope}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00629}\mbox{\hyperlink{a01345_a70b9c1baf8390d8114c541d6a2ccb4f4}{00629}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{a01345_a70b9c1baf8390d8114c541d6a2ccb4f4}{EmbreeRayTracer::operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01345}{EmbreeRayTracer}}\& ERT2) \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00630}00630 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00631}00631         this-\/>\mbox{\hyperlink{a01345_a10fe757b08ab77289cfd945b29d14b89}{use\_precise}} = ERT2.\mbox{\hyperlink{a01345_a10fe757b08ab77289cfd945b29d14b89}{use\_precise}};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00632}00632         \mbox{\hyperlink{a01345_a5608742889ff45a0294fdf21e5a85b2e}{device}} = ERT2.\mbox{\hyperlink{a01345_a5608742889ff45a0294fdf21e5a85b2e}{device}};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00633}00633         \mbox{\hyperlink{a01345_a01968c52807e6930909b7f9c31f45e80}{context}} = ERT2.\mbox{\hyperlink{a01345_a01968c52807e6930909b7f9c31f45e80}{context}};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00634}00634         \mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}} = ERT2.\mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00635}00635         \mbox{\hyperlink{a01345_a3a243ef02c74fc6df958a4fd2506e7cc}{geometry}} = ERT2.\mbox{\hyperlink{a01345_a3a243ef02c74fc6df958a4fd2506e7cc}{geometry}};}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00636}00636 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00637}00637         rtcRetainScene(\mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00638}00638         rtcRetainDevice(\mbox{\hyperlink{a01345_a5608742889ff45a0294fdf21e5a85b2e}{device}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00639}00639     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00640}00640 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00641}\mbox{\hyperlink{a01345_a2948458e764f0294996c91b00356073e}{00641}}     \mbox{\hyperlink{a01345_a2948458e764f0294996c91b00356073e}{EmbreeRayTracer::\string~EmbreeRayTracer}}() \{}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00642}00642         rtcReleaseScene(\mbox{\hyperlink{a01345_a7c66f28f5b889021767745d198661da0}{scene}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00643}00643         rtcReleaseDevice(\mbox{\hyperlink{a01345_a5608742889ff45a0294fdf21e5a85b2e}{device}});}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00644}00644     \}}
+\DoxyCodeLine{\Hypertarget{a00143_source_l00645}00645 }
+\DoxyCodeLine{\Hypertarget{a00143_source_l00646}00646 \}}
+
+\end{DoxyCode}

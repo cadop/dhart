@@ -1,648 +1,976 @@
-\hypertarget{a02005}{}\doxysection{nlohmann\+::basic\+\_\+json\+::json\+\_\+value Union Reference}
-\label{a02005}\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\hypertarget{a02005}{}\doxysection{HF\+::Spatial\+Structures\+::Node Struct Reference}
+\label{a02005}\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
 
 
-a J\+S\+ON value  
+A point in space with an ID.  
 
 
 
 
-Collaboration diagram for nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+:
+{\ttfamily \#include $<$node.\+h$>$}
+
+
+
+Collaboration diagram for HF\+::Spatial\+Structures\+::Node\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a02003}
+\includegraphics[width=219pt]{a02003}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a02005_addaa9da9958343a8687079c6c8561828}{json\+\_\+value}} ()=default
-\begin{DoxyCompactList}\small\item\em default constructor (for null values) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02005_a359b6d7bdd95150e28a21c2def590b3b}{json\+\_\+value}} (\mbox{\hyperlink{a01605_a8cc04e22d7ef18efd2d34bc04eb6a1b2}{boolean\+\_\+t}} v) noexcept
-\begin{DoxyCompactList}\small\item\em constructor for booleans \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02005_a7bd504626c862a55f3e464089390be61}{json\+\_\+value}} (\mbox{\hyperlink{a01605_ab227d71ad47b6ed6a3acae52dedbb49d}{number\+\_\+integer\+\_\+t}} v) noexcept
-\begin{DoxyCompactList}\small\item\em constructor for numbers (integer) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02005_a356100d324dddcc0ed1bdcca086bc809}{json\+\_\+value}} (\mbox{\hyperlink{a01605_a440094de5ef4e119b2771b549b33da70}{number\+\_\+unsigned\+\_\+t}} v) noexcept
-\begin{DoxyCompactList}\small\item\em constructor for numbers (unsigned) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02005_a5f3f88981a4c2a2a19aeb650e37bb117}{json\+\_\+value}} (\mbox{\hyperlink{a01605_ade1eb06e9fc3ff2ba1efd709b94b401d}{number\+\_\+float\+\_\+t}} v) noexcept
-\begin{DoxyCompactList}\small\item\em constructor for numbers (floating-\/point) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02005_a5b3c9b26efff2a7e4ff417df750db888}{json\+\_\+value}} (\mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985}{value\+\_\+t}} t)
-\begin{DoxyCompactList}\small\item\em constructor for empty values of a given type \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02005_a7d36046b1d3a41021459229963aa906d}{json\+\_\+value}} (const \mbox{\hyperlink{a01605_a561057a2cc70397ad0ab890745d1d7c7}{string\+\_\+t}} \&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
-\begin{DoxyCompactList}\small\item\em constructor for strings \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02005_a16cf11cea854b7d33ece1204c044d91d}{json\+\_\+value}} (\mbox{\hyperlink{a01605_a561057a2cc70397ad0ab890745d1d7c7}{string\+\_\+t}} \&\&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
-\begin{DoxyCompactList}\small\item\em constructor for rvalue strings \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02005_a9d5a9dd88cf61a0fa90fec56d035273d}{json\+\_\+value}} (const \mbox{\hyperlink{a01605_a949272bf6af5eb8eab9675505422f5b3}{object\+\_\+t}} \&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
-\begin{DoxyCompactList}\small\item\em constructor for objects \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02005_a03d2d3f64da9403ffc2393c4b419e514}{json\+\_\+value}} (\mbox{\hyperlink{a01605_a949272bf6af5eb8eab9675505422f5b3}{object\+\_\+t}} \&\&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
-\begin{DoxyCompactList}\small\item\em constructor for rvalue objects \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02005_a11a68bfcc7bd3623023594705788f25b}{json\+\_\+value}} (const \mbox{\hyperlink{a01605_a69524b1f8f42c0a81b86cee3fc54e034}{array\+\_\+t}} \&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
-\begin{DoxyCompactList}\small\item\em constructor for arrays \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02005_ae9a619d174aa0f8020847e965db7752d}{json\+\_\+value}} (\mbox{\hyperlink{a01605_a69524b1f8f42c0a81b86cee3fc54e034}{array\+\_\+t}} \&\&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
-\begin{DoxyCompactList}\small\item\em constructor for rvalue arrays \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02005_a9bfee5458a35e4b1d259797bb142bb12}{json\+\_\+value}} (const typename \mbox{\hyperlink{a01861_a4d27e8633c5a5e3b49dd4ccb06515713}{binary\+\_\+t\+::container\+\_\+type}} \&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
-\begin{DoxyCompactList}\small\item\em constructor for binary arrays \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02005_ae6cfc1f8254912522487a3596a030f8b}{json\+\_\+value}} (typename \mbox{\hyperlink{a01861_a4d27e8633c5a5e3b49dd4ccb06515713}{binary\+\_\+t\+::container\+\_\+type}} \&\&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
-\begin{DoxyCompactList}\small\item\em constructor for rvalue binary arrays \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02005_a2807432b367e5bd4e49f76c206b5cecf}{json\+\_\+value}} (const \mbox{\hyperlink{a01605_acbf51bc13484009ed204bd78a498355e}{binary\+\_\+t}} \&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
-\begin{DoxyCompactList}\small\item\em constructor for binary arrays (internal type) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a02005_a15baffa618c4e5bacd7daf7bba0f8e74}{json\+\_\+value}} (\mbox{\hyperlink{a01605_acbf51bc13484009ed204bd78a498355e}{binary\+\_\+t}} \&\&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
-\begin{DoxyCompactList}\small\item\em constructor for rvalue binary arrays (internal type) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a02005_a394e69339c27a67170aacb49e36243ea}{destroy}} (\mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985}{value\+\_\+t}} t) noexcept
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{a02005_a3d229a53bb7328f88649fd48e6098b5d}{Node}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. Every element contained is defaulted to NAN. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005_a5e6500cbe9a1c29ebca5045dceebe9d6}{Node}} (float \mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}}, float \mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}}, float \mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}}, int ID=-\/1)
+\begin{DoxyCompactList}\small\item\em Create a node without an ID. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005_a7d3f18b093670b7696aa1aecf8adab00}{Node}} (const std\+::array$<$ float, 3 $>$ \&position)
+\begin{DoxyCompactList}\small\item\em Create a node from an array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005_afc1e769b57e880909a11178bb8654adf}{Node}} (const std\+::array$<$ float, 3 $>$ \&position, \mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cc}{NODE\+\_\+\+TYPE}} t, int \mbox{\hyperlink{a02005_a8212d00e6913abf0ca6fec1f2624b677}{id}})
+\begin{DoxyCompactList}\small\item\em Constructor to create a node with a different NODE\+\_\+\+TYPE. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{a02005_abbd66b566460f9557a373b5fbcc30bb1}{distance\+To}} (const \mbox{\hyperlink{a02005}{Node}} \&n2) const
+\begin{DoxyCompactList}\small\item\em Calculate the distance between this node and n2. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{a02005_a260ab9e9763234dab08decfc2aa6bf63}{angle\+To}} (const \mbox{\hyperlink{a02005}{Node}} \&n2) const
+\begin{DoxyCompactList}\small\item\em Calculate the angle between node 1 and n2 \end{DoxyCompactList}\item 
+std\+::array$<$ float, 3 $>$ \mbox{\hyperlink{a02005_ad3f7898ef3178eef0c3579869a7f5c67}{direction\+To}} (const \mbox{\hyperlink{a02005}{Node}} \&n2) const
+\begin{DoxyCompactList}\small\item\em Get the direction between this node and another node \end{DoxyCompactList}\item 
+std\+::array$<$ float, 3 $>$ \mbox{\hyperlink{a02005_a51c4642674d54d02b8600f7ffeb45670}{get\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Returns the x,y,z of this node as an array of 3 floats. \end{DoxyCompactList}\item 
+float \& \mbox{\hyperlink{a02005_a556efc898ddc67b64fff560d0c7b5a0a}{operator\mbox{[}$\,$\mbox{]}}} (int i)
+\begin{DoxyCompactList}\small\item\em Directly access a nodes\textquotesingle{}s position as if it were an array of 3 floats, \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{a02005_ae3e88bd4eecfdbd93431953ed07b8a7b}{operator\mbox{[}$\,$\mbox{]}}} (int i) const
+\begin{DoxyCompactList}\small\item\em Access a nodes\textquotesingle{}s position, by value. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02005_af687c2e97fffe3b7d14e3cfa8af3e5cd}{operator==}} (const \mbox{\hyperlink{a02005}{Node}} \&n2) const
+\begin{DoxyCompactList}\small\item\em Check if this node occupies the same space as n2. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02005_a6137878845816e2fe8ecbe1215c490fd}{operator!=}} (const \mbox{\hyperlink{a02005}{Node}} \&n2) const
+\begin{DoxyCompactList}\small\item\em See operator==, checks if this node does NOT occupy the same space as n2. 
+\begin{DoxyParams}{Parameters}
+{\em n2} & \mbox{\hyperlink{a02005}{Node}} to compare with this node.\\
+\hline
+\end{DoxyParams}
+\end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005}{Node}} \mbox{\hyperlink{a02005_ad58a4eb9f0a15c645eedf668d9bcec54}{operator-\/}} (const \mbox{\hyperlink{a02005}{Node}} \&n2) const
+\begin{DoxyCompactList}\small\item\em Creates a node from the vector subtraction of this node and n2\textquotesingle{}s position. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005}{Node}} \mbox{\hyperlink{a02005_a064540b380fc6251bdf6d740abf7a169}{operator+}} (const \mbox{\hyperlink{a02005}{Node}} \&n2) const
+\begin{DoxyCompactList}\small\item\em Creates a new node from the vector addition of this node and n2. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005}{Node}} \mbox{\hyperlink{a02005_a099271bad26dd059037f3c84459058e0}{operator$\ast$}} (const \mbox{\hyperlink{a02005}{Node}} \&n2) const
+\begin{DoxyCompactList}\small\item\em Creates a new node from the dot product of this node and n2. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02005_a1d74d883b7291a760908f3dc81783b3d}{operator$<$}} (const \mbox{\hyperlink{a02005}{Node}} \&n2) const
+\begin{DoxyCompactList}\small\item\em Determines if this node\textquotesingle{}s id (an integer) is less than n2\textquotesingle{}s id. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02005_a7547e73076e40bb880261574216e4251}{operator$<$}} (const \mbox{\hyperlink{a02005}{Node}} \&n2)
+\begin{DoxyCompactList}\small\item\em Determines if this node\textquotesingle{}s id (an integer) is less than n2\textquotesingle{}s id. const qualification omitted for std\+::sort. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a02005_a9d67cccc8b0fc57d61390da493149790}{operator$>$}} (const \mbox{\hyperlink{a02005}{Node}} \&n2) const
+\begin{DoxyCompactList}\small\item\em Determines if this node\textquotesingle{}s id (an integer) is greater than n2\textquotesingle{}s id \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a01605_a949272bf6af5eb8eab9675505422f5b3}{object\+\_\+t}} $\ast$ \mbox{\hyperlink{a02005_a9a17d18e60b32adfe4f7f978d3ab5f15}{object}}
-\begin{DoxyCompactList}\small\item\em object (stored with pointer to save storage) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01605_a69524b1f8f42c0a81b86cee3fc54e034}{array\+\_\+t}} $\ast$ \mbox{\hyperlink{a02005_a230c40872531081809d0265a45e1a3be}{array}}
-\begin{DoxyCompactList}\small\item\em array (stored with pointer to save storage) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01605_a561057a2cc70397ad0ab890745d1d7c7}{string\+\_\+t}} $\ast$ \mbox{\hyperlink{a02005_a9eb894164977ae59922dddc11e1d901d}{string}}
-\begin{DoxyCompactList}\small\item\em string (stored with pointer to save storage) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01605_acbf51bc13484009ed204bd78a498355e}{binary\+\_\+t}} $\ast$ \mbox{\hyperlink{a02005_a5e02afb384ff616835e7756c54385015}{binary}}
-\begin{DoxyCompactList}\small\item\em binary (stored with pointer to save storage) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01605_a8cc04e22d7ef18efd2d34bc04eb6a1b2}{boolean\+\_\+t}} \mbox{\hyperlink{a02005_a10e0feb275d431d984cefd4b293d42d5}{boolean}}
-\begin{DoxyCompactList}\small\item\em boolean \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01605_ab227d71ad47b6ed6a3acae52dedbb49d}{number\+\_\+integer\+\_\+t}} \mbox{\hyperlink{a02005_a36022bc146c1c190fb77f51ab654964d}{number\+\_\+integer}}
-\begin{DoxyCompactList}\small\item\em number (integer) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01605_a440094de5ef4e119b2771b549b33da70}{number\+\_\+unsigned\+\_\+t}} \mbox{\hyperlink{a02005_a9a865e1935c91145c9d73aa1d925ce6b}{number\+\_\+unsigned}}
-\begin{DoxyCompactList}\small\item\em number (unsigned integer) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01605_ade1eb06e9fc3ff2ba1efd709b94b401d}{number\+\_\+float\+\_\+t}} \mbox{\hyperlink{a02005_a685ff0842614609b61fd634a6c958ca6}{number\+\_\+float}}
-\begin{DoxyCompactList}\small\item\em number (floating-\/point) \end{DoxyCompactList}\end{DoxyCompactItemize}
+float \mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}}
+\item 
+float \mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}}
+\item 
+float \mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}}
+\begin{DoxyCompactList}\small\item\em Cartesian coordinates x, y, z. \end{DoxyCompactList}\item 
+short \mbox{\hyperlink{a02005_a3894a51f72b82cea2d6675a91fcb39cf}{type}} = \mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}{GRAPH}}
+\begin{DoxyCompactList}\small\item\em Unused. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a02005_a8212d00e6913abf0ca6fec1f2624b677}{id}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a02005}{Node}} identifier. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-a J\+S\+ON value 
+A point in space with an ID. 
 
-The actual storage for a J\+S\+ON value of the \mbox{\hyperlink{a01605}{basic\+\_\+json}} class. This union combines the different storage types for the J\+S\+ON value types defined in \mbox{\hyperlink{a01605_a4e43b685789a169bca7e69b3104c86d1}{value\+\_\+t}}.
-
-\tabulinesep=1mm
-\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
-\hline
-\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ J\+S\+ON type }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ value\+\_\+t type }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ used type  }\\\cline{1-3}
-\endfirsthead
-\hline
-\endfoot
-\hline
-\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ J\+S\+ON type }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ value\+\_\+t type }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ used type  }\\\cline{1-3}
-\endhead
-object &object &pointer to \mbox{\hyperlink{a01605_a949272bf6af5eb8eab9675505422f5b3}{object\+\_\+t}}  \\\cline{1-3}
-array &array &pointer to \mbox{\hyperlink{a01605_a69524b1f8f42c0a81b86cee3fc54e034}{array\+\_\+t}}  \\\cline{1-3}
-string &string &pointer to \mbox{\hyperlink{a01605_a561057a2cc70397ad0ab890745d1d7c7}{string\+\_\+t}}  \\\cline{1-3}
-boolean &boolean &\mbox{\hyperlink{a01605_a8cc04e22d7ef18efd2d34bc04eb6a1b2}{boolean\+\_\+t}}  \\\cline{1-3}
-number &number\+\_\+integer &\mbox{\hyperlink{a01605_ab227d71ad47b6ed6a3acae52dedbb49d}{number\+\_\+integer\+\_\+t}}  \\\cline{1-3}
-number &number\+\_\+unsigned &\mbox{\hyperlink{a01605_a440094de5ef4e119b2771b549b33da70}{number\+\_\+unsigned\+\_\+t}}  \\\cline{1-3}
-number &number\+\_\+float &\mbox{\hyperlink{a01605_ade1eb06e9fc3ff2ba1efd709b94b401d}{number\+\_\+float\+\_\+t}}  \\\cline{1-3}
-binary &binary &pointer to \mbox{\hyperlink{a01605_acbf51bc13484009ed204bd78a498355e}{binary\+\_\+t}}  \\\cline{1-3}
-null &null &{\itshape no value is stored}  \\\cline{1-3}
-\end{longtabu}
-
-
-\begin{DoxyNote}{Note}
-Variable-\/length types (objects, arrays, and strings) are stored as pointers. The size of the union should not exceed 64 bits if the default value types are used.
-\end{DoxyNote}
-\begin{DoxySince}{Since}
-version 1.\+0.\+0 
-\end{DoxySince}
-
-
-Definition at line 17450 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00209_source_l00038}{38}} of file \mbox{\hyperlink{a00209_source}{node.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{a02005_addaa9da9958343a8687079c6c8561828}\label{a02005_addaa9da9958343a8687079c6c8561828}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
-\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/16]}}
-{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+\mbox{\Hypertarget{a02005_a3d229a53bb7328f88649fd48e6098b5d}\label{a02005_a3d229a53bb7328f88649fd48e6098b5d}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!Node@{Node}}
+\index{Node@{Node}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily HF\+::\+Spatial\+Structures\+::\+Node\+::\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
-default constructor (for null values) 
+Default constructor. Every element contained is defaulted to NAN. 
 
-\mbox{\Hypertarget{a02005_a359b6d7bdd95150e28a21c2def590b3b}\label{a02005_a359b6d7bdd95150e28a21c2def590b3b}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
-\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/16]}}
-{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01605_a8cc04e22d7ef18efd2d34bc04eb6a1b2}{boolean\+\_\+t}}}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}node.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node(); \textcolor{comment}{// all fields initialized to NAN            }}
 
+\end{DoxyCode}
+ 
 
-constructor for booleans 
+Definition at line \mbox{\hyperlink{a03488_source_l00015}{15}} of file \mbox{\hyperlink{a03488_source}{node.\+cpp}}.
 
 
 
-Definition at line 17472 of file json.\+hpp.
+References \mbox{\hyperlink{a00209_source_l00040}{x}}, \mbox{\hyperlink{a00209_source_l00040}{y}}, and \mbox{\hyperlink{a00209_source_l00040}{z}}.
 
-\mbox{\Hypertarget{a02005_a7bd504626c862a55f3e464089390be61}\label{a02005_a7bd504626c862a55f3e464089390be61}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
-\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [3/16]}}
-{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01605_ab227d71ad47b6ed6a3acae52dedbb49d}{number\+\_\+integer\+\_\+t}}}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 
-
-constructor for numbers (integer) 
-
-
-
-Definition at line 17474 of file json.\+hpp.
-
-\mbox{\Hypertarget{a02005_a356100d324dddcc0ed1bdcca086bc809}\label{a02005_a356100d324dddcc0ed1bdcca086bc809}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
-\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [4/16]}}
-{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01605_a440094de5ef4e119b2771b549b33da70}{number\+\_\+unsigned\+\_\+t}}}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
-
-
-
-constructor for numbers (unsigned) 
-
-
-
-Definition at line 17476 of file json.\+hpp.
-
-\mbox{\Hypertarget{a02005_a5f3f88981a4c2a2a19aeb650e37bb117}\label{a02005_a5f3f88981a4c2a2a19aeb650e37bb117}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
-\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [5/16]}}
-{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01605_ade1eb06e9fc3ff2ba1efd709b94b401d}{number\+\_\+float\+\_\+t}}}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
-
-
-
-constructor for numbers (floating-\/point) 
-
-
-
-Definition at line 17478 of file json.\+hpp.
-
-\mbox{\Hypertarget{a02005_a5b3c9b26efff2a7e4ff417df750db888}\label{a02005_a5b3c9b26efff2a7e4ff417df750db888}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
-\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [6/16]}}
-{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985}{value\+\_\+t}}}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-constructor for empty values of a given type 
-
-
-
-Definition at line 17480 of file json.\+hpp.
-
-
-
-References nlohmann\+::detail\+::array, array, nlohmann\+::detail\+::binary, binary, nlohmann\+::detail\+::boolean, nlohmann\+::detail\+::other\+\_\+error\+::create(), J\+S\+O\+N\+\_\+\+H\+E\+D\+L\+E\+Y\+\_\+\+U\+N\+L\+I\+K\+E\+LY, J\+S\+O\+N\+\_\+\+T\+H\+R\+OW, nlohmann\+::detail\+::null, nlohmann\+::detail\+::number\+\_\+float, number\+\_\+float, nlohmann\+::detail\+::number\+\_\+integer, number\+\_\+integer, nlohmann\+::detail\+::number\+\_\+unsigned, number\+\_\+unsigned, nlohmann\+::detail\+::object, and nlohmann\+::detail\+::string.
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a02005_a5b3c9b26efff2a7e4ff417df750db888_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a02005_a7d36046b1d3a41021459229963aa906d}\label{a02005_a7d36046b1d3a41021459229963aa906d}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
-\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [7/16]}}
-{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01605_a561057a2cc70397ad0ab890745d1d7c7}{string\+\_\+t}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-constructor for strings 
-
-
-
-Definition at line 17551 of file json.\+hpp.
-
-
-
-References nlohmann\+::basic\+\_\+json\+::value().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a02005_a7d36046b1d3a41021459229963aa906d_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a02005_a16cf11cea854b7d33ece1204c044d91d}\label{a02005_a16cf11cea854b7d33ece1204c044d91d}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
-\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [8/16]}}
-{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01605_a561057a2cc70397ad0ab890745d1d7c7}{string\+\_\+t}} \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-constructor for rvalue strings 
-
-
-
-Definition at line 17557 of file json.\+hpp.
-
-
-
-References nlohmann\+::basic\+\_\+json\+::value().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a02005_a16cf11cea854b7d33ece1204c044d91d_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a02005_a9d5a9dd88cf61a0fa90fec56d035273d}\label{a02005_a9d5a9dd88cf61a0fa90fec56d035273d}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
-\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [9/16]}}
-{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01605_a949272bf6af5eb8eab9675505422f5b3}{object\+\_\+t}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-constructor for objects 
-
-
-
-Definition at line 17563 of file json.\+hpp.
-
-
-
-References nlohmann\+::basic\+\_\+json\+::value().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a02005_a9d5a9dd88cf61a0fa90fec56d035273d_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a02005_a03d2d3f64da9403ffc2393c4b419e514}\label{a02005_a03d2d3f64da9403ffc2393c4b419e514}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
-\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [10/16]}}
-{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01605_a949272bf6af5eb8eab9675505422f5b3}{object\+\_\+t}} \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-constructor for rvalue objects 
-
-
-
-Definition at line 17569 of file json.\+hpp.
-
-
-
-References nlohmann\+::basic\+\_\+json\+::value().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a02005_a03d2d3f64da9403ffc2393c4b419e514_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a02005_a11a68bfcc7bd3623023594705788f25b}\label{a02005_a11a68bfcc7bd3623023594705788f25b}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
-\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [11/16]}}
-{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01605_a69524b1f8f42c0a81b86cee3fc54e034}{array\+\_\+t}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-constructor for arrays 
-
-
-
-Definition at line 17575 of file json.\+hpp.
-
-
-
-References array, and nlohmann\+::basic\+\_\+json\+::value().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a02005_a11a68bfcc7bd3623023594705788f25b_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a02005_ae9a619d174aa0f8020847e965db7752d}\label{a02005_ae9a619d174aa0f8020847e965db7752d}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
-\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [12/16]}}
-{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01605_a69524b1f8f42c0a81b86cee3fc54e034}{array\+\_\+t}} \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-constructor for rvalue arrays 
-
-
-
-Definition at line 17581 of file json.\+hpp.
-
-
-
-References array, and nlohmann\+::basic\+\_\+json\+::value().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a02005_ae9a619d174aa0f8020847e965db7752d_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a02005_a9bfee5458a35e4b1d259797bb142bb12}\label{a02005_a9bfee5458a35e4b1d259797bb142bb12}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
-\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [13/16]}}
-{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{const typename \mbox{\hyperlink{a01861_a4d27e8633c5a5e3b49dd4ccb06515713}{binary\+\_\+t\+::container\+\_\+type}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-constructor for binary arrays 
-
-
-
-Definition at line 17587 of file json.\+hpp.
-
-
-
-References binary, and nlohmann\+::basic\+\_\+json\+::value().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a02005_a9bfee5458a35e4b1d259797bb142bb12_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a02005_ae6cfc1f8254912522487a3596a030f8b}\label{a02005_ae6cfc1f8254912522487a3596a030f8b}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
-\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [14/16]}}
-{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{typename \mbox{\hyperlink{a01861_a4d27e8633c5a5e3b49dd4ccb06515713}{binary\+\_\+t\+::container\+\_\+type}} \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-constructor for rvalue binary arrays 
-
-
-
-Definition at line 17593 of file json.\+hpp.
-
-
-
-References binary, and nlohmann\+::basic\+\_\+json\+::value().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a02005_ae6cfc1f8254912522487a3596a030f8b_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a02005_a2807432b367e5bd4e49f76c206b5cecf}\label{a02005_a2807432b367e5bd4e49f76c206b5cecf}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
-\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [15/16]}}
-{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01605_acbf51bc13484009ed204bd78a498355e}{binary\+\_\+t}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-constructor for binary arrays (internal type) 
-
-
-
-Definition at line 17599 of file json.\+hpp.
-
-
-
-References binary, and nlohmann\+::basic\+\_\+json\+::value().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a02005_a2807432b367e5bd4e49f76c206b5cecf_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a02005_a15baffa618c4e5bacd7daf7bba0f8e74}\label{a02005_a15baffa618c4e5bacd7daf7bba0f8e74}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
-\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [16/16]}}
-{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01605_acbf51bc13484009ed204bd78a498355e}{binary\+\_\+t}} \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-constructor for rvalue binary arrays (internal type) 
-
-
-
-Definition at line 17605 of file json.\+hpp.
-
-
-
-References binary, and nlohmann\+::basic\+\_\+json\+::value().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a02005_a15baffa618c4e5bacd7daf7bba0f8e74_cgraph}
-\end{center}
-\end{figure}
-
-
-\doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a02005_a394e69339c27a67170aacb49e36243ea}\label{a02005_a394e69339c27a67170aacb49e36243ea}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!destroy@{destroy}}
-\index{destroy@{destroy}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{destroy()}{destroy()}}
-{\footnotesize\ttfamily void nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985}{value\+\_\+t}}}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
-
-
-
-Definition at line 17610 of file json.\+hpp.
-
-
-
-References nlohmann\+::detail\+::array, array, nlohmann\+::detail\+::binary, binary, nlohmann\+::detail\+::object, object, and nlohmann\+::detail\+::string.
-
-
-
-Referenced by nlohmann\+::basic\+\_\+json\+::$\sim$basic\+\_\+json().
+Referenced by \mbox{\hyperlink{a03488_source_l00114}{operator$\ast$()}}, \mbox{\hyperlink{a03488_source_l00104}{operator+()}}, and \mbox{\hyperlink{a03488_source_l00100}{operator-\/()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a02005_a394e69339c27a67170aacb49e36243ea_icgraph}
+\includegraphics[width=336pt]{a02005_a3d229a53bb7328f88649fd48e6098b5d_icgraph}
 \end{center}
 \end{figure}
+\mbox{\Hypertarget{a02005_a5e6500cbe9a1c29ebca5045dceebe9d6}\label{a02005_a5e6500cbe9a1c29ebca5045dceebe9d6}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!Node@{Node}}
+\index{Node@{Node}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily HF\+::\+Spatial\+Structures\+::\+Node\+::\+Node (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{float}]{z,  }\item[{int}]{ID = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+Create a node without an ID. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X coordinate.\\
+\hline
+{\em y} & Y coordinate.\\
+\hline
+{\em z} & Z coordinate.\\
+\hline
+{\em id} & ID of the node \\
+\hline
+\end{DoxyParams}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}node.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2);   \textcolor{comment}{// default ID is -\/1}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a03488_source_l00022}{22}} of file \mbox{\hyperlink{a03488_source}{node.\+cpp}}.
+
+\mbox{\Hypertarget{a02005_a7d3f18b093670b7696aa1aecf8adab00}\label{a02005_a7d3f18b093670b7696aa1aecf8adab00}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!Node@{Node}}
+\index{Node@{Node}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily HF\+::\+Spatial\+Structures\+::\+Node\+::\+Node (\begin{DoxyParamCaption}\item[{const std\+::array$<$ float, 3 $>$ \&}]{position }\end{DoxyParamCaption})}
+
+
+
+Create a node from an array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & An array of 3 floats for x,y,z.\\
+\hline
+\end{DoxyParams}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}node.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::array<float, 3> pos = \{ 12.0, 23.1, 34.2 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node(pos);      \textcolor{comment}{// id == -\/1, type == NODE\_TYPE::GRAPH}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a03488_source_l00024}{24}} of file \mbox{\hyperlink{a03488_source}{node.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00030}{HF\+::\+Spatial\+Structures\+::\+GRAPH}}, \mbox{\hyperlink{a00209_source_l00041}{type}}, \mbox{\hyperlink{a00209_source_l00040}{x}}, \mbox{\hyperlink{a00209_source_l00040}{y}}, and \mbox{\hyperlink{a00209_source_l00040}{z}}.
+
+\mbox{\Hypertarget{a02005_afc1e769b57e880909a11178bb8654adf}\label{a02005_afc1e769b57e880909a11178bb8654adf}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!Node@{Node}}
+\index{Node@{Node}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily HF\+::\+Spatial\+Structures\+::\+Node\+::\+Node (\begin{DoxyParamCaption}\item[{const std\+::array$<$ float, 3 $>$ \&}]{position,  }\item[{\mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cc}{NODE\+\_\+\+TYPE}}}]{t,  }\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+Constructor to create a node with a different NODE\+\_\+\+TYPE. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cc}{NODE\+\_\+\+TYPE}}
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}node.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::array<float, 3> pos = \{ 12.0, 23.1, 34.2 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node(pos, \mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}{HF::SpatialStructures::NODE\_TYPE::GRAPH}}, 456);}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a03488_source_l00032}{32}} of file \mbox{\hyperlink{a03488_source}{node.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00041}{type}}, \mbox{\hyperlink{a00209_source_l00040}{x}}, \mbox{\hyperlink{a00209_source_l00040}{y}}, and \mbox{\hyperlink{a00209_source_l00040}{z}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a02005_a260ab9e9763234dab08decfc2aa6bf63}\label{a02005_a260ab9e9763234dab08decfc2aa6bf63}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!angleTo@{angleTo}}
+\index{angleTo@{angleTo}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{angleTo()}{angleTo()}}
+{\footnotesize\ttfamily float HF\+::\+Spatial\+Structures\+::\+Node\+::angle\+To (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02005}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+
+
+
+Calculate the angle between node 1 and n2 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n2} & \mbox{\hyperlink{a02005}{Node}} to calculate direction to \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Angle between this node and n2
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{TODO code sample: line 40 of node.cpp -\/ \textcolor{stringliteral}{'This needs an actual angle formula'}}
+
+\end{DoxyCode}
+ \mbox{\Hypertarget{a02005_ad3f7898ef3178eef0c3579869a7f5c67}\label{a02005_ad3f7898ef3178eef0c3579869a7f5c67}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!directionTo@{directionTo}}
+\index{directionTo@{directionTo}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{directionTo()}{directionTo()}}
+{\footnotesize\ttfamily std\+::array$<$ float, 3 $>$ HF\+::\+Spatial\+Structures\+::\+Node\+::direction\+To (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02005}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+
+
+
+Get the direction between this node and another node 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n2} & The node to get the direction to \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an array of 3 floats indicating a direction
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}node.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::array<float, 3> direction\_vector = node\_0.directionTo(node\_1);}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a03488_source_l00131}{131}} of file \mbox{\hyperlink{a03488_source}{node.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a03488_source_l00123}{HF\+::\+Spatial\+Structures\+::\+Normalize()}}, \mbox{\hyperlink{a00209_source_l00040}{x}}, \mbox{\hyperlink{a00209_source_l00040}{y}}, and \mbox{\hyperlink{a00209_source_l00040}{z}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00188_source_l00096}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Energy\+Expenditure()}}, \mbox{\hyperlink{a00191_source_l00231}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Get\+Perpendicular\+Edges()}}, and \mbox{\hyperlink{a00026_source_l00103}{HF\+::\+Visibility\+Graph\+::\+Is\+Occlusion\+Between()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{a02005_ad3f7898ef3178eef0c3579869a7f5c67_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02005_ad3f7898ef3178eef0c3579869a7f5c67_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02005_abbd66b566460f9557a373b5fbcc30bb1}\label{a02005_abbd66b566460f9557a373b5fbcc30bb1}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!distanceTo@{distanceTo}}
+\index{distanceTo@{distanceTo}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{distanceTo()}{distanceTo()}}
+{\footnotesize\ttfamily float HF\+::\+Spatial\+Structures\+::\+Node\+::distance\+To (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02005}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+
+
+
+Calculate the distance between this node and n2. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n2} & Note to calculate the distance to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Distance between this node and n2.
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}node.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
+\DoxyCodeLine{\textcolor{keywordtype}{float} \mbox{\hyperlink{a00409_a355d486f17db42f6c56411cc53f76aec}{euclidean\_distance}} = node\_0.distanceTo(node\_1);}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a03488_source_l00040}{40}} of file \mbox{\hyperlink{a03488_source}{node.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00040}{x}}, \mbox{\hyperlink{a00209_source_l00040}{y}}, and \mbox{\hyperlink{a00209_source_l00040}{z}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00026_source_l00128}{HF\+::\+Visibility\+Graph\+::\+All\+To\+All()}}, \mbox{\hyperlink{a00026_source_l00252}{HF\+::\+Visibility\+Graph\+::\+All\+To\+All\+Undirected()}}, \mbox{\hyperlink{a00188_source_l00096}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Energy\+Expenditure()}}, \mbox{\hyperlink{a00026_source_l00189}{HF\+::\+Visibility\+Graph\+::\+Group\+To\+Group()}}, and \mbox{\hyperlink{a00026_source_l00103}{HF\+::\+Visibility\+Graph\+::\+Is\+Occlusion\+Between()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02005_abbd66b566460f9557a373b5fbcc30bb1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02005_a51c4642674d54d02b8600f7ffeb45670}\label{a02005_a51c4642674d54d02b8600f7ffeb45670}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!getArray@{getArray}}
+\index{getArray@{getArray}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{getArray()}{getArray()}}
+{\footnotesize\ttfamily std\+::array$<$ float, 3 $>$ HF\+::\+Spatial\+Structures\+::\+Node\+::get\+Array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the x,y,z of this node as an array of 3 floats. 
+
+\begin{DoxyReturn}{Returns}
+The x,y, and z coordinates of this node as an array of floats.
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}node.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node(12.0, 23.1, 34.2, 456);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// An array is created from within the getArray() member function}}
+\DoxyCodeLine{std::array<float, 3> arr = node.getArray();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// ref\_arr and ref\_node have the same value, but}}
+\DoxyCodeLine{\textcolor{comment}{// refer to different locations in memory -\/-\/ }}
+\DoxyCodeLine{\textcolor{comment}{// arr does not consist of the same memory locations as}}
+\DoxyCodeLine{\textcolor{comment}{// that of the coordinate fields within node.}}
+\DoxyCodeLine{\textcolor{keywordtype}{float}\& ref\_arr = arr[0];}
+\DoxyCodeLine{\textcolor{keywordtype}{float}\& ref\_node = node.x;}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a03488_source_l00141}{141}} of file \mbox{\hyperlink{a03488_source}{node.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00040}{x}}, \mbox{\hyperlink{a00209_source_l00040}{y}}, and \mbox{\hyperlink{a00209_source_l00040}{z}}.
+
+\mbox{\Hypertarget{a02005_a6137878845816e2fe8ecbe1215c490fd}\label{a02005_a6137878845816e2fe8ecbe1215c490fd}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool HF\+::\+Spatial\+Structures\+::\+Node\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02005}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+
+
+
+See operator==, checks if this node does NOT occupy the same space as n2. 
+\begin{DoxyParams}{Parameters}
+{\em n2} & \mbox{\hyperlink{a02005}{Node}} to compare with this node.\\
+\hline
+\end{DoxyParams}
+
+
+\begin{DoxyReturn}{Returns}
+True if the distance between n1 and n2 greator greater than or equal to Rounding Precision, false otherwise.
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}node.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Does the inverse of operator==.}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} different\_positions = node\_0 != node\_1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (different\_positions) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}Different positions"{}} << std::endl;}
+\DoxyCodeLine{\} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}Occupies the same space"{}} << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// different\_positions evaluates to true}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a03488_source_l00096}{96}} of file \mbox{\hyperlink{a03488_source}{node.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a03488_source_l00083}{operator==()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{a02005_a6137878845816e2fe8ecbe1215c490fd_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02005_a099271bad26dd059037f3c84459058e0}\label{a02005_a099271bad26dd059037f3c84459058e0}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02005}{Node}} HF\+::\+Spatial\+Structures\+::\+Node\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02005}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+
+
+
+Creates a new node from the dot product of this node and n2. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n2} & Second factor of dot product, N1 (dot) N2\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A node with the values obtained from the dot product of N1 and N2
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}node.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_2 = node\_1 * node\_0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// node\_2 has values (x = 543.6, y = 1302.84, z = 2308.5, id = -\/1, type = NODE\_TYPE::GRAPH)}}
+\DoxyCodeLine{\textcolor{comment}{// id and type are given default values as per Node::Node(const std::array<float, 3>\& position)}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a03488_source_l00114}{114}} of file \mbox{\hyperlink{a03488_source}{node.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a03488_source_l00015}{Node()}}, \mbox{\hyperlink{a00209_source_l00040}{x}}, \mbox{\hyperlink{a00209_source_l00040}{y}}, and \mbox{\hyperlink{a00209_source_l00040}{z}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{a02005_a099271bad26dd059037f3c84459058e0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02005_a064540b380fc6251bdf6d740abf7a169}\label{a02005_a064540b380fc6251bdf6d740abf7a169}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator+@{operator+}}
+\index{operator+@{operator+}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02005}{Node}} HF\+::\+Spatial\+Structures\+::\+Node\+::operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02005}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+
+
+
+Creates a new node from the vector addition of this node and n2. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n2} & \mbox{\hyperlink{a02005}{Node}} to add to n1\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A node with the values obtained from n1 + n2
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}node.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_2 = node\_1 + node\_0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// node\_2 has values (x = 57.3, y = 79.5, z = 101.7, id = -\/1, type = NODE\_TYPE::GRAPH)}}
+\DoxyCodeLine{\textcolor{comment}{// id and type are given default values as per Node::Node(const std::array<float, 3>\& position)}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a03488_source_l00104}{104}} of file \mbox{\hyperlink{a03488_source}{node.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a03488_source_l00015}{Node()}}, \mbox{\hyperlink{a00209_source_l00040}{x}}, \mbox{\hyperlink{a00209_source_l00040}{y}}, and \mbox{\hyperlink{a00209_source_l00040}{z}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{a02005_a064540b380fc6251bdf6d740abf7a169_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02005_ad58a4eb9f0a15c645eedf668d9bcec54}\label{a02005_ad58a4eb9f0a15c645eedf668d9bcec54}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02005}{Node}} HF\+::\+Spatial\+Structures\+::\+Node\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02005}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+
+
+
+Creates a node from the vector subtraction of this node and n2\textquotesingle{}s position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n2} & \mbox{\hyperlink{a02005}{Node}} to subtract from this node.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A node with the values obtained from n1 -\/ n2
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}node.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_2 = node\_1 -\/ node\_0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// node\_2 has values (x = 33.3, y = 33.3, z = 33.3, id = -\/1, type = NODE\_TYPE::GRAPH)}}
+\DoxyCodeLine{\textcolor{comment}{// id and type are given default values as per Node::Node(const std::array<float, 3>\& position)}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a03488_source_l00100}{100}} of file \mbox{\hyperlink{a03488_source}{node.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a03488_source_l00015}{Node()}}, \mbox{\hyperlink{a00209_source_l00040}{x}}, \mbox{\hyperlink{a00209_source_l00040}{y}}, and \mbox{\hyperlink{a00209_source_l00040}{z}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{a02005_ad58a4eb9f0a15c645eedf668d9bcec54_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02005_a7547e73076e40bb880261574216e4251}\label{a02005_a7547e73076e40bb880261574216e4251}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool HF\+::\+Spatial\+Structures\+::\+Node\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02005}{Node}} \&}]{n2 }\end{DoxyParamCaption})}
+
+
+
+Determines if this node\textquotesingle{}s id (an integer) is less than n2\textquotesingle{}s id. const qualification omitted for std\+::sort. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n2} & \mbox{\hyperlink{a02005}{Node}} whose id will be compared with n1\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this node\textquotesingle{}s id is less than n2\textquotesingle{}s id, false otherwise
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}node.h"{}, and \#include <algorithm>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// For this example, we are not concerned about the node coordinates.}}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_0(0.0, 0.0, 0.0, 3);}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_1(0.0, 0.0, 0.0, 1);}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_2(0.0, 0.0, 0.0, 2);}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_3(0.0, 0.0, 0.0, 0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> vec\{ node\_0, node\_1, node\_2, node\_3 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// operator< sorts Node by ID, in non-\/decreasing order}}
+\DoxyCodeLine{std::sort(vec.begin(), vec.end());  \textcolor{comment}{// uses natural ordering through operator<, non-\/const}}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node>::iterator it = vec.begin();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{while} (it != vec.end()) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}Node ID: "{}} << it-\/>id << std::endl;}
+\DoxyCodeLine{    \(\backslash\)++it;}
+\DoxyCodeLine{\} \textcolor{comment}{// Node ID will print in order by ID, from smallest to largest}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a03488_source_l00119}{119}} of file \mbox{\hyperlink{a03488_source}{node.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00042}{id}}.
+
+\mbox{\Hypertarget{a02005_a1d74d883b7291a760908f3dc81783b3d}\label{a02005_a1d74d883b7291a760908f3dc81783b3d}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool HF\+::\+Spatial\+Structures\+::\+Node\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02005}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+
+
+
+Determines if this node\textquotesingle{}s id (an integer) is less than n2\textquotesingle{}s id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n2} & \mbox{\hyperlink{a02005}{Node}} to compare against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this node\textquotesingle{}s id is less than n2\textquotesingle{}s id, false otherwise
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}node.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// operator< compares ID fields of node\_0 and node\_1}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} compare = node\_0 < node\_1;     \textcolor{comment}{// evaluates to true, since 456 < 789}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a03488_source_l00118}{118}} of file \mbox{\hyperlink{a03488_source}{node.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00042}{id}}.
+
+\mbox{\Hypertarget{a02005_af687c2e97fffe3b7d14e3cfa8af3e5cd}\label{a02005_af687c2e97fffe3b7d14e3cfa8af3e5cd}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator==@{operator==}}
+\index{operator==@{operator==}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool HF\+::\+Spatial\+Structures\+::\+Node\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02005}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+
+
+
+Check if this node occupies the same space as n2. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n2} & \mbox{\hyperlink{a02005}{Node}} to compare with n1\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the distance between n1 and n2 is less than Rounding Precision, false otherwise.
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}node.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} same\_position = node\_0 == node\_1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (same\_position) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}Occupies the same space"{}} << std::endl;}
+\DoxyCodeLine{\} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}Different positions"{}} << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// same\_position evaluates to false}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a03488_source_l00083}{83}} of file \mbox{\hyperlink{a03488_source}{node.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00185_source_l00030}{HF\+::\+Spatial\+Structures\+::\+ROUNDING\+\_\+\+PRECISION}}, \mbox{\hyperlink{a00209_source_l00040}{x}}, \mbox{\hyperlink{a00209_source_l00040}{y}}, and \mbox{\hyperlink{a00209_source_l00040}{z}}.
+
+
+
+Referenced by \mbox{\hyperlink{a03488_source_l00096}{operator!=()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{a02005_af687c2e97fffe3b7d14e3cfa8af3e5cd_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02005_a9d67cccc8b0fc57d61390da493149790}\label{a02005_a9d67cccc8b0fc57d61390da493149790}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily bool HF\+::\+Spatial\+Structures\+::\+Node\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02005}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+
+
+
+Determines if this node\textquotesingle{}s id (an integer) is greater than n2\textquotesingle{}s id 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n2} & \mbox{\hyperlink{a02005}{Node}} whose id will be compared with n1\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if n1\textquotesingle{}s id is greater than n2\textquotesingle{}s id, false otherwise
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}node.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// operator< compares ID fields of node\_0 and node\_1}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} compare = node\_0 > node\_1; \textcolor{comment}{// evaluates to false, since 456 < 789}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a03488_source_l00120}{120}} of file \mbox{\hyperlink{a03488_source}{node.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00042}{id}}.
+
+\mbox{\Hypertarget{a02005_a556efc898ddc67b64fff560d0c7b5a0a}\label{a02005_a556efc898ddc67b64fff560d0c7b5a0a}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily float \& HF\+::\+Spatial\+Structures\+::\+Node\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+
+
+Directly access a nodes\textquotesingle{}s position as if it were an array of 3 floats, 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Index. 0 = x, 1 = y, 2 = z\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to the member float for the requested coordinate
+\end{DoxyReturn}
+
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::exception} & i was greater than 2 or less than 0.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00386__todo000028}{Todo}}]Exception should be std\+::out\+\_\+of\+\_\+range to match other functionality\end{DoxyRefDesc}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}node.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node(12.0, 23.1, 34.2, 456);    \textcolor{comment}{// (x, y, z), ID}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{float}\& position = node[1];          \textcolor{comment}{// access by reference}}
+\DoxyCodeLine{position = 93.5;                    \textcolor{comment}{// node.y is now 93.5}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a03488_source_l00051}{51}} of file \mbox{\hyperlink{a03488_source}{node.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00040}{x}}, \mbox{\hyperlink{a00209_source_l00040}{y}}, and \mbox{\hyperlink{a00209_source_l00040}{z}}.
+
+\mbox{\Hypertarget{a02005_ae3e88bd4eecfdbd93431953ed07b8a7b}\label{a02005_ae3e88bd4eecfdbd93431953ed07b8a7b}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float HF\+::\+Spatial\+Structures\+::\+Node\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption}) const}
+
+
+
+Access a nodes\textquotesingle{}s position, by value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Index. 0 = x, 1 = y, 2 = z\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the value (copy) of the member float for the requested coordinate
+\end{DoxyReturn}
+
+
+\begin{DoxyRemark}{Remarks}
+Unlike the non-\/const version of this function, this will actually allow the caller to change the value of x, y, or z. Will automatically be selected if the node isn\textquotesingle{}t const.
+\end{DoxyRemark}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::exception} & i was greater than 2 or less than 0.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00386__todo000029}{Todo}}]Exception should be std\+::out\+\_\+of\+\_\+range to match other functionality\end{DoxyRefDesc}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}node.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node(12.0, 23.1, 34.2, 456);    \textcolor{comment}{// (x, y, z), ID}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{float} position = node[1];           \textcolor{comment}{// access by reference}}
+\DoxyCodeLine{position = 93.5                     \textcolor{comment}{// node.y is still 23.1}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a03488_source_l00067}{67}} of file \mbox{\hyperlink{a03488_source}{node.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00040}{x}}, \mbox{\hyperlink{a00209_source_l00040}{y}}, and \mbox{\hyperlink{a00209_source_l00040}{z}}.
+
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{a02005_a230c40872531081809d0265a45e1a3be}\label{a02005_a230c40872531081809d0265a45e1a3be}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!array@{array}}
-\index{array@{array}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{array}{array}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01605_a69524b1f8f42c0a81b86cee3fc54e034}{array\+\_\+t}}$\ast$ nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::array}
+\mbox{\Hypertarget{a02005_a8212d00e6913abf0ca6fec1f2624b677}\label{a02005_a8212d00e6913abf0ca6fec1f2624b677}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!id@{id}}
+\index{id@{id}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{id}{id}}
+{\footnotesize\ttfamily int HF\+::\+Spatial\+Structures\+::\+Node\+::id}
 
 
 
-array (stored with pointer to save storage) 
+\mbox{\hyperlink{a02005}{Node}} identifier. 
 
 
 
-Definition at line 17455 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00209_source_l00042}{42}} of file \mbox{\hyperlink{a00209_source}{node.\+h}}.
 
 
 
-Referenced by nlohmann\+::basic\+\_\+json\+::assert\+\_\+invariant(), nlohmann\+::basic\+\_\+json\+::at(), nlohmann\+::basic\+\_\+json\+::basic\+\_\+json(), nlohmann\+::basic\+\_\+json\+::clear(), destroy(), nlohmann\+::basic\+\_\+json\+::emplace\+\_\+back(), nlohmann\+::basic\+\_\+json\+::empty(), nlohmann\+::basic\+\_\+json\+::erase(), nlohmann\+::basic\+\_\+json\+::get\+\_\+impl\+\_\+ptr(), nlohmann\+::basic\+\_\+json\+::insert\+\_\+iterator(), json\+\_\+value(), nlohmann\+::basic\+\_\+json\+::max\+\_\+size(), nlohmann\+::basic\+\_\+json\+::operator\mbox{[}$\,$\mbox{]}(), nlohmann\+::basic\+\_\+json\+::push\+\_\+back(), nlohmann\+::basic\+\_\+json\+::size(), and nlohmann\+::basic\+\_\+json\+::swap().
+Referenced by \mbox{\hyperlink{a00188_source_l00189}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Cross\+Slope()}}, \mbox{\hyperlink{a00188_source_l00096}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Energy\+Expenditure()}}, \mbox{\hyperlink{a03488_source_l00118}{operator$<$()}}, and \mbox{\hyperlink{a03488_source_l00120}{operator$>$()}}.
 
-\mbox{\Hypertarget{a02005_a5e02afb384ff616835e7756c54385015}\label{a02005_a5e02afb384ff616835e7756c54385015}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!binary@{binary}}
-\index{binary@{binary}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{binary}{binary}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01605_acbf51bc13484009ed204bd78a498355e}{binary\+\_\+t}}$\ast$ nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::binary}
+\mbox{\Hypertarget{a02005_a3894a51f72b82cea2d6675a91fcb39cf}\label{a02005_a3894a51f72b82cea2d6675a91fcb39cf}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!type@{type}}
+\index{type@{type}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily short HF\+::\+Spatial\+Structures\+::\+Node\+::type = \mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}{GRAPH}}}
 
 
 
-binary (stored with pointer to save storage) 
+Unused. 
 
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cc}{NODE\+\_\+\+TYPE}} for more infomration about this. 
+\end{DoxySeeAlso}
 
 
-Definition at line 17459 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00209_source_l00041}{41}} of file \mbox{\hyperlink{a00209_source}{node.\+h}}.
 
 
 
-Referenced by nlohmann\+::basic\+\_\+json\+::assert\+\_\+invariant(), nlohmann\+::basic\+\_\+json\+::basic\+\_\+json(), nlohmann\+::basic\+\_\+json\+::clear(), destroy(), nlohmann\+::basic\+\_\+json\+::erase(), nlohmann\+::basic\+\_\+json\+::get\+\_\+impl\+\_\+ptr(), json\+\_\+value(), and nlohmann\+::basic\+\_\+json\+::swap().
+Referenced by \mbox{\hyperlink{a03488_source_l00024}{Node()}}.
 
-\mbox{\Hypertarget{a02005_a10e0feb275d431d984cefd4b293d42d5}\label{a02005_a10e0feb275d431d984cefd4b293d42d5}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!boolean@{boolean}}
-\index{boolean@{boolean}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{boolean}{boolean}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01605_a8cc04e22d7ef18efd2d34bc04eb6a1b2}{boolean\+\_\+t}} nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::boolean}
+\mbox{\Hypertarget{a02005_a78dfebaa44da09b03d7ca15445c8d222}\label{a02005_a78dfebaa44da09b03d7ca15445c8d222}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!x@{x}}
+\index{x@{x}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily float HF\+::\+Spatial\+Structures\+::\+Node\+::x}
 
 
 
-boolean 
+Definition at line \mbox{\hyperlink{a00209_source_l00040}{40}} of file \mbox{\hyperlink{a00209_source}{node.\+h}}.
 
 
 
-Definition at line 17461 of file json.\+hpp.
+Referenced by \mbox{\hyperlink{a03488_source_l00015}{Node()}}, \mbox{\hyperlink{a03488_source_l00131}{direction\+To()}}, \mbox{\hyperlink{a03488_source_l00040}{distance\+To()}}, \mbox{\hyperlink{a03488_source_l00141}{get\+Array()}}, \mbox{\hyperlink{a03488_source_l00114}{operator$\ast$()}}, \mbox{\hyperlink{a03488_source_l00104}{operator+()}}, \mbox{\hyperlink{a03488_source_l00100}{operator-\/()}}, \mbox{\hyperlink{a00209_source_l00433}{std\+::operator$<$$<$()}}, \mbox{\hyperlink{a03488_source_l00083}{operator==()}}, and \mbox{\hyperlink{a03488_source_l00051}{operator\mbox{[}$\,$\mbox{]}()}}.
 
+\mbox{\Hypertarget{a02005_a41981fb2cc6dc0edb787f921188702b0}\label{a02005_a41981fb2cc6dc0edb787f921188702b0}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!y@{y}}
+\index{y@{y}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily float HF\+::\+Spatial\+Structures\+::\+Node\+::y}
 
 
-Referenced by nlohmann\+::basic\+\_\+json\+::basic\+\_\+json(), nlohmann\+::basic\+\_\+json\+::clear(), nlohmann\+::basic\+\_\+json\+::get\+\_\+impl(), and nlohmann\+::basic\+\_\+json\+::get\+\_\+impl\+\_\+ptr().
 
-\mbox{\Hypertarget{a02005_a685ff0842614609b61fd634a6c958ca6}\label{a02005_a685ff0842614609b61fd634a6c958ca6}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!number\_float@{number\_float}}
-\index{number\_float@{number\_float}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{number\_float}{number\_float}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01605_ade1eb06e9fc3ff2ba1efd709b94b401d}{number\+\_\+float\+\_\+t}} nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::number\+\_\+float}
+Definition at line \mbox{\hyperlink{a00209_source_l00040}{40}} of file \mbox{\hyperlink{a00209_source}{node.\+h}}.
 
 
 
-number (floating-\/point) 
+Referenced by \mbox{\hyperlink{a03488_source_l00015}{Node()}}, \mbox{\hyperlink{a03488_source_l00131}{direction\+To()}}, \mbox{\hyperlink{a03488_source_l00040}{distance\+To()}}, \mbox{\hyperlink{a03488_source_l00141}{get\+Array()}}, \mbox{\hyperlink{a03488_source_l00114}{operator$\ast$()}}, \mbox{\hyperlink{a03488_source_l00104}{operator+()}}, \mbox{\hyperlink{a03488_source_l00100}{operator-\/()}}, \mbox{\hyperlink{a00209_source_l00433}{std\+::operator$<$$<$()}}, \mbox{\hyperlink{a03488_source_l00083}{operator==()}}, and \mbox{\hyperlink{a03488_source_l00051}{operator\mbox{[}$\,$\mbox{]}()}}.
 
+\mbox{\Hypertarget{a02005_a495b47689917e0395ce96ee01d3f5ed3}\label{a02005_a495b47689917e0395ce96ee01d3f5ed3}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!z@{z}}
+\index{z@{z}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{z}{z}}
+{\footnotesize\ttfamily float HF\+::\+Spatial\+Structures\+::\+Node\+::z}
 
 
-Definition at line 17467 of file json.\+hpp.
 
+Cartesian coordinates x, y, z. 
 
 
-Referenced by nlohmann\+::basic\+\_\+json\+::basic\+\_\+json(), nlohmann\+::basic\+\_\+json\+::clear(), nlohmann\+::basic\+\_\+json\+::get\+\_\+impl\+\_\+ptr(), and json\+\_\+value().
 
-\mbox{\Hypertarget{a02005_a36022bc146c1c190fb77f51ab654964d}\label{a02005_a36022bc146c1c190fb77f51ab654964d}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!number\_integer@{number\_integer}}
-\index{number\_integer@{number\_integer}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{number\_integer}{number\_integer}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01605_ab227d71ad47b6ed6a3acae52dedbb49d}{number\+\_\+integer\+\_\+t}} nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::number\+\_\+integer}
+Definition at line \mbox{\hyperlink{a00209_source_l00040}{40}} of file \mbox{\hyperlink{a00209_source}{node.\+h}}.
 
 
 
-number (integer) 
+Referenced by \mbox{\hyperlink{a03488_source_l00015}{Node()}}, \mbox{\hyperlink{a00188_source_l00189}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Cross\+Slope()}}, \mbox{\hyperlink{a03488_source_l00131}{direction\+To()}}, \mbox{\hyperlink{a03488_source_l00040}{distance\+To()}}, \mbox{\hyperlink{a03488_source_l00141}{get\+Array()}}, \mbox{\hyperlink{a03488_source_l00114}{operator$\ast$()}}, \mbox{\hyperlink{a03488_source_l00104}{operator+()}}, \mbox{\hyperlink{a03488_source_l00100}{operator-\/()}}, \mbox{\hyperlink{a00209_source_l00433}{std\+::operator$<$$<$()}}, \mbox{\hyperlink{a03488_source_l00083}{operator==()}}, and \mbox{\hyperlink{a03488_source_l00051}{operator\mbox{[}$\,$\mbox{]}()}}.
 
 
 
-Definition at line 17463 of file json.\+hpp.
-
-
-
-Referenced by nlohmann\+::basic\+\_\+json\+::basic\+\_\+json(), nlohmann\+::basic\+\_\+json\+::clear(), nlohmann\+::basic\+\_\+json\+::get\+\_\+impl\+\_\+ptr(), and json\+\_\+value().
-
-\mbox{\Hypertarget{a02005_a9a865e1935c91145c9d73aa1d925ce6b}\label{a02005_a9a865e1935c91145c9d73aa1d925ce6b}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!number\_unsigned@{number\_unsigned}}
-\index{number\_unsigned@{number\_unsigned}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{number\_unsigned}{number\_unsigned}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01605_a440094de5ef4e119b2771b549b33da70}{number\+\_\+unsigned\+\_\+t}} nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::number\+\_\+unsigned}
-
-
-
-number (unsigned integer) 
-
-
-
-Definition at line 17465 of file json.\+hpp.
-
-
-
-Referenced by nlohmann\+::basic\+\_\+json\+::basic\+\_\+json(), nlohmann\+::basic\+\_\+json\+::clear(), nlohmann\+::basic\+\_\+json\+::get\+\_\+impl\+\_\+ptr(), and json\+\_\+value().
-
-\mbox{\Hypertarget{a02005_a9a17d18e60b32adfe4f7f978d3ab5f15}\label{a02005_a9a17d18e60b32adfe4f7f978d3ab5f15}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!object@{object}}
-\index{object@{object}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{object}{object}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01605_a949272bf6af5eb8eab9675505422f5b3}{object\+\_\+t}}$\ast$ nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::object}
-
-
-
-object (stored with pointer to save storage) 
-
-
-
-Definition at line 17453 of file json.\+hpp.
-
-
-
-Referenced by nlohmann\+::basic\+\_\+json\+::assert\+\_\+invariant(), nlohmann\+::basic\+\_\+json\+::at(), nlohmann\+::basic\+\_\+json\+::basic\+\_\+json(), nlohmann\+::basic\+\_\+json\+::clear(), nlohmann\+::basic\+\_\+json\+::contains(), nlohmann\+::basic\+\_\+json\+::count(), destroy(), nlohmann\+::basic\+\_\+json\+::emplace(), nlohmann\+::basic\+\_\+json\+::empty(), nlohmann\+::basic\+\_\+json\+::erase(), nlohmann\+::basic\+\_\+json\+::find(), nlohmann\+::basic\+\_\+json\+::get\+\_\+impl\+\_\+ptr(), nlohmann\+::basic\+\_\+json\+::insert(), nlohmann\+::basic\+\_\+json\+::max\+\_\+size(), nlohmann\+::basic\+\_\+json\+::operator\mbox{[}$\,$\mbox{]}(), nlohmann\+::basic\+\_\+json\+::patch(), nlohmann\+::basic\+\_\+json\+::push\+\_\+back(), nlohmann\+::basic\+\_\+json\+::size(), nlohmann\+::basic\+\_\+json\+::swap(), and nlohmann\+::basic\+\_\+json\+::update().
-
-\mbox{\Hypertarget{a02005_a9eb894164977ae59922dddc11e1d901d}\label{a02005_a9eb894164977ae59922dddc11e1d901d}} 
-\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!string@{string}}
-\index{string@{string}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
-\doxysubsubsection{\texorpdfstring{string}{string}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01605_a561057a2cc70397ad0ab890745d1d7c7}{string\+\_\+t}}$\ast$ nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::string}
-
-
-
-string (stored with pointer to save storage) 
-
-
-
-Definition at line 17457 of file json.\+hpp.
-
-
-
-Referenced by nlohmann\+::basic\+\_\+json\+::assert\+\_\+invariant(), nlohmann\+::basic\+\_\+json\+::basic\+\_\+json(), nlohmann\+::basic\+\_\+json\+::clear(), nlohmann\+::basic\+\_\+json\+::erase(), nlohmann\+::basic\+\_\+json\+::get\+\_\+impl\+\_\+ptr(), and nlohmann\+::basic\+\_\+json\+::swap().
-
-
-
-The documentation for this union was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Cpp/spatialstructures/src/\mbox{\hyperlink{a00206}{json.\+hpp}}\end{DoxyCompactItemize}
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00209}{node.\+h}}\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a03488}{node.\+cpp}}\end{DoxyCompactItemize}

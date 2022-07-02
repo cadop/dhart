@@ -7,6 +7,5 @@ var dir_882abde7eca0231e2bae1ceefe5e858a =
     [ "pathfinding", "dir_0e02576f053bf9c676481922c38373d1.html", "dir_0e02576f053bf9c676481922c38373d1" ],
     [ "raytracer", "dir_1061d284018fbd45bbbfc991ca095c8e.html", "dir_1061d284018fbd45bbbfc991ca095c8e" ],
     [ "snippets", "dir_f07d1d5eed6d32fd9119c46008b53704.html", "dir_f07d1d5eed6d32fd9119c46008b53704" ],
-    [ "spatialstructures", "dir_66731bdf74d76a38b2c500ac62cfdf48.html", "dir_66731bdf74d76a38b2c500ac62cfdf48" ],
-    [ "tests", "dir_5d715898c03dcdb47bf950c413823cbf.html", "dir_5d715898c03dcdb47bf950c413823cbf" ]
+    [ "spatialstructures", "dir_66731bdf74d76a38b2c500ac62cfdf48.html", "dir_66731bdf74d76a38b2c500ac62cfdf48" ]
 ];

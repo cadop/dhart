@@ -1,4 +1,4 @@
 var a01277 =
 [
-    [ "NotImplemented", "a01277.html#ae3d4a15c54ef7036170e2f3b3a8d31c9", null ]
+    [ "operator()", "a01277.html#afb0661eb1c8c1113e135274672e3026c", null ]
 ];

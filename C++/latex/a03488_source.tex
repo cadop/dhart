@@ -1,0 +1,146 @@
+\hypertarget{a03488_source}{}\doxysection{node.\+cpp}
+\label{a03488_source}\index{Cpp/spatialstructures/src/node.cpp@{Cpp/spatialstructures/src/node.cpp}}
+\mbox{\hyperlink{a03488}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00008}00008 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00209}{node.h}}>}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00009}00009 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00185}{Constants.h}}>}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00010}00010 \textcolor{preprocessor}{\#include <exception>}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00011}00011 \textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00012}00012 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00013}00013 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00396}{HF}} \{}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00014}00014     \textcolor{keyword}{namespace }SpatialStructures \{}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00015}\mbox{\hyperlink{a02005_a3d229a53bb7328f88649fd48e6098b5d}{00015}}         \mbox{\hyperlink{a02005_a3d229a53bb7328f88649fd48e6098b5d}{Node::Node}}() \{}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00016}00016             \mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}} = NAN;}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00017}00017             \mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}} = NAN;}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00018}00018             \mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}} = NAN;}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00019}00019             \textcolor{keywordtype}{id} = NAN;}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00020}00020         \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00021}00021 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00022}\mbox{\hyperlink{a02005_a5e6500cbe9a1c29ebca5045dceebe9d6}{00022}}         \mbox{\hyperlink{a02005_a3d229a53bb7328f88649fd48e6098b5d}{Node::Node}}(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} z, \textcolor{keywordtype}{int} \textcolor{keywordtype}{id}) : x(x), y(y), z(z), id(id) \{\};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00023}00023         }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00024}\mbox{\hyperlink{a02005_a7d3f18b093670b7696aa1aecf8adab00}{00024}}         \mbox{\hyperlink{a02005_a3d229a53bb7328f88649fd48e6098b5d}{Node::Node}}(\textcolor{keyword}{const} std::array<float, 3>\& position) \{}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00025}00025             \mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}} = position[0];}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00026}00026             \mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}} = position[1];}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00027}00027             \mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}} = position[2];}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00028}00028             \textcolor{keywordtype}{id} = -\/1;}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00029}00029             \mbox{\hyperlink{a02005_a3894a51f72b82cea2d6675a91fcb39cf}{type}} = \mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}{NODE\_TYPE::GRAPH}};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00030}00030         \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00031}00031 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00032}\mbox{\hyperlink{a02005_afc1e769b57e880909a11178bb8654adf}{00032}}         \mbox{\hyperlink{a02005_a3d229a53bb7328f88649fd48e6098b5d}{Node::Node}}(\textcolor{keyword}{const} std::array<float, 3>\& position, \mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cc}{NODE\_TYPE}} t, \textcolor{keywordtype}{int} \textcolor{keywordtype}{id}) \{}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00033}00033             \textcolor{keywordtype}{id} = -\/1;}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00034}00034             \mbox{\hyperlink{a02005_a3894a51f72b82cea2d6675a91fcb39cf}{type}} = t;}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00035}00035             \mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}} = position[0];}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00036}00036             \mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}} = position[1];}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00037}00037             \mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}} = position[2];}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00038}00038         \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00039}00039 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00040}\mbox{\hyperlink{a02005_abbd66b566460f9557a373b5fbcc30bb1}{00040}}         \textcolor{keywordtype}{float} \mbox{\hyperlink{a02005_abbd66b566460f9557a373b5fbcc30bb1}{Node::distanceTo}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& n2)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00041}00041             \textcolor{keywordflow}{return}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00042}00042                 sqrtf(pow((\mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}} -\/ n2.\mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}}), 2) +}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00043}00043                     pow((\mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}} -\/ n2.\mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}}), 2) +}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00044}00044                     pow((\mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}} -\/ n2.\mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}}), 2)}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00045}00045                 );}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00046}00046         \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00047}00047 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00048}00048         \textcolor{comment}{//TODO: This needs an actual angle formula}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00049}00049         \textcolor{comment}{//float Node::angleTo(const Node\& n2) const \{ return glm::angle(glm::normalize(getV3() -\/ n2.getV3()), glm::vec3(0.0f, 0.0f, 1.0f)); \}}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00050}00050 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00051}\mbox{\hyperlink{a02005_a556efc898ddc67b64fff560d0c7b5a0a}{00051}}         \textcolor{keywordtype}{float}\& \mbox{\hyperlink{a02005_a556efc898ddc67b64fff560d0c7b5a0a}{Node::operator[]}}(\textcolor{keywordtype}{int} i) \{}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00052}00052             \textcolor{keywordflow}{switch} (i) \{}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00053}00053             \textcolor{keywordflow}{case} 0:}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00054}00054                 \textcolor{keywordflow}{return} \mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00055}00055                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00056}00056             \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00057}00057                 \textcolor{keywordflow}{return} \mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00058}00058                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00059}00059             \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00060}00060                 \textcolor{keywordflow}{return} \mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00061}00061                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00062}00062             \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00063}00063                 \textcolor{keywordflow}{throw} std::exception(); \textcolor{comment}{//TODO: Make this a custom human factors exception}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00064}00064             \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00065}00065         \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00066}00066 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00067}\mbox{\hyperlink{a02005_ae3e88bd4eecfdbd93431953ed07b8a7b}{00067}}         \textcolor{keywordtype}{float} \mbox{\hyperlink{a02005_a556efc898ddc67b64fff560d0c7b5a0a}{Node::operator[]}}(\textcolor{keywordtype}{int} i)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00068}00068             \textcolor{keywordflow}{switch} (i) \{}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00069}00069             \textcolor{keywordflow}{case} 0:}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00070}00070                 \textcolor{keywordflow}{return} \mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00071}00071                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00072}00072             \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00073}00073                 \textcolor{keywordflow}{return} \mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00074}00074                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00075}00075             \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00076}00076                 \textcolor{keywordflow}{return} \mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00077}00077                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00078}00078             \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00079}00079                 \textcolor{keywordflow}{throw} std::exception(); \textcolor{comment}{// TODO: Make this a custom human factors exception}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00080}00080             \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00081}00081         \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00082}00082 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00083}\mbox{\hyperlink{a02005_af687c2e97fffe3b7d14e3cfa8af3e5cd}{00083}}         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a02005_af687c2e97fffe3b7d14e3cfa8af3e5cd}{Node::operator==}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& n2)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00084}00084             \textcolor{keyword}{const} \textcolor{keywordtype}{float} dist = sqrtf(powf(n2.\mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}} -\/ \mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}}, 2) + powf(n2.\mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}} -\/ \mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}}, 2)  + powf(n2.\mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}} -\/ \mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}}, 2));}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00085}00085             \textcolor{keywordflow}{return} dist < \mbox{\hyperlink{a00399_a0140105869479399be75147c8f77e724}{ROUNDING\_PRECISION}};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00086}00086         \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00087}00087 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00088}00088         \textcolor{comment}{//TODO: How will we handle this?}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00089}00089         \textcolor{comment}{//inline bool Node::operator==(const Node\& n2) const \{ return distanceTo(n2) <= ROUNDING\_PRECISION(); \}}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00090}00090         \textcolor{comment}{//inline void Node::operator=(const std::array<float, 3>\& n2) \{}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00091}00091         \textcolor{comment}{//  x = n2[0];}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00092}00092         \textcolor{comment}{//  y = n2[1];}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00093}00093         \textcolor{comment}{//  z = n2[2];}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00094}00094         \textcolor{comment}{//\}}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00095}00095 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00096}\mbox{\hyperlink{a02005_a6137878845816e2fe8ecbe1215c490fd}{00096}}         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a02005_a6137878845816e2fe8ecbe1215c490fd}{Node::operator!=}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& n2)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} !\mbox{\hyperlink{a02005_af687c2e97fffe3b7d14e3cfa8af3e5cd}{operator==}}(n2); \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00097}00097 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00098}00098         \textcolor{comment}{// inline expansion of operator-\/ does not work}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00099}00099         \textcolor{comment}{//inline Node Node::operator-\/(const Node\& n2)const \{ return Node(x -\/ n2.x, y -\/ n2.y, z -\/ n2.z); \}}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00100}\mbox{\hyperlink{a02005_ad58a4eb9f0a15c645eedf668d9bcec54}{00100}}         \mbox{\hyperlink{a02005}{Node}} \mbox{\hyperlink{a02005_ad58a4eb9f0a15c645eedf668d9bcec54}{Node::operator-\/}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& n2)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{a02005_a3d229a53bb7328f88649fd48e6098b5d}{Node}}(\mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}} -\/ n2.\mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}}, \mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}} -\/ n2.\mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}}, \mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}} -\/ n2.\mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}}); \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00101}00101         }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00102}00102         \textcolor{comment}{// inline expansion of operator+ does not work}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00103}00103 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00104}\mbox{\hyperlink{a02005_a064540b380fc6251bdf6d740abf7a169}{00104}}         \mbox{\hyperlink{a02005}{Node}} \mbox{\hyperlink{a02005_a064540b380fc6251bdf6d740abf7a169}{Node::operator+}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& n2)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{a02005_a3d229a53bb7328f88649fd48e6098b5d}{Node}}(\mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}} + n2.\mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}}, \mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}} + n2.\mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}}, \mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}} + n2.\mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}}); \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00105}00105 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00106}00106         \textcolor{comment}{// TODO: Dot product?}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00107}00107         \textcolor{comment}{// inline expansion of operator* does not work}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00108}00108         \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00109}00109 \textcolor{comment}{        inline Node Node::operator*(const Node\& n2) const \{}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00110}00110 \textcolor{comment}{            return Node(x * n2.x, y * n2.y, z * n2.z);}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00111}00111 \textcolor{comment}{        \}}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00112}00112 \textcolor{comment}{        */}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00113}00113 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00114}\mbox{\hyperlink{a02005_a099271bad26dd059037f3c84459058e0}{00114}}         \mbox{\hyperlink{a02005}{Node}} \mbox{\hyperlink{a02005_a099271bad26dd059037f3c84459058e0}{Node::operator*}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& n2)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00115}00115             \textcolor{keywordflow}{return} \mbox{\hyperlink{a02005_a3d229a53bb7328f88649fd48e6098b5d}{Node}}(\mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}} * n2.\mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}}, \mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}} * n2.\mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}}, \mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}} * n2.\mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}});}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00116}00116         \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00117}00117 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00118}\mbox{\hyperlink{a02005_a1d74d883b7291a760908f3dc81783b3d}{00118}}         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a02005_a1d74d883b7291a760908f3dc81783b3d}{Node::operator<}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& n2)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \textcolor{keywordtype}{id} < n2.\mbox{\hyperlink{a02005_a8212d00e6913abf0ca6fec1f2624b677}{id}}; \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00119}\mbox{\hyperlink{a02005_a7547e73076e40bb880261574216e4251}{00119}}         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a02005_a1d74d883b7291a760908f3dc81783b3d}{Node::operator<}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& n2)\{\textcolor{keywordflow}{return} \textcolor{keywordtype}{id} < n2.\mbox{\hyperlink{a02005_a8212d00e6913abf0ca6fec1f2624b677}{id}};    \} \textcolor{comment}{// This needs to exist for std sort}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00120}\mbox{\hyperlink{a02005_a9d67cccc8b0fc57d61390da493149790}{00120}}         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a02005_a9d67cccc8b0fc57d61390da493149790}{Node::operator>}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& n2)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \textcolor{keywordtype}{id} > n2.\mbox{\hyperlink{a02005_a8212d00e6913abf0ca6fec1f2624b677}{id}}; \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00121}00121 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00122}00122         \textcolor{comment}{// Normalize the vector by reference}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00123}\mbox{\hyperlink{a00399_ad9a8f0f70b3f60ac5cb7889885d851d1}{00123}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a00399_ad9a8f0f70b3f60ac5cb7889885d851d1}{Normalize}}(std::array<float, 3>\& vector) \{}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00124}00124             \textcolor{keyword}{auto} magnitude = sqrtf(powf(vector[0], 2) + powf(vector[1], 2) + powf(vector[2], 2));}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00125}00125             vector[0] = vector[0] / magnitude; }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00126}00126             vector[1] = vector[1] / magnitude; }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00127}00127             vector[2] = vector[2] / magnitude;}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00128}00128         \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00129}00129 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00130}00130         \textcolor{comment}{// Get the normalized direction between two points in space}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00131}\mbox{\hyperlink{a02005_ad3f7898ef3178eef0c3579869a7f5c67}{00131}}         std::array<float, 3> \mbox{\hyperlink{a02005_ad3f7898ef3178eef0c3579869a7f5c67}{Node::directionTo}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& n2)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00132}00132             std::array<float, 3> direction\_vector;}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00133}00133             direction\_vector[0] = n2.\mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}} -\/ \mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00134}00134             direction\_vector[1] = n2.\mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}} -\/ \mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00135}00135             direction\_vector[2] = n2.\mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}} -\/ \mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00136}00136 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00137}00137             \mbox{\hyperlink{a00399_ad9a8f0f70b3f60ac5cb7889885d851d1}{Normalize}}(direction\_vector);}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00138}00138             \textcolor{keywordflow}{return} direction\_vector;}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00139}00139         \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00140}00140 }
+\DoxyCodeLine{\Hypertarget{a03488_source_l00141}\mbox{\hyperlink{a02005_a51c4642674d54d02b8600f7ffeb45670}{00141}}         std::array<float, 3> \mbox{\hyperlink{a02005_a51c4642674d54d02b8600f7ffeb45670}{Node::getArray}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00142}00142             \textcolor{keywordflow}{return} std::array<float, 3>\{\mbox{\hyperlink{a02005_a78dfebaa44da09b03d7ca15445c8d222}{x}}, \mbox{\hyperlink{a02005_a41981fb2cc6dc0edb787f921188702b0}{y}}, \mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}}\};}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00143}00143         \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00144}00144     \}}
+\DoxyCodeLine{\Hypertarget{a03488_source_l00145}00145 \}}
+
+\end{DoxyCode}

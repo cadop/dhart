@@ -21,7 +21,7 @@ var class_human_factors_1_1_spatial_structures_1_1_native_methods =
     [ "C_GetCSRPointers", "class_human_factors_1_1_spatial_structures_1_1_native_methods.html#a6ed59ccf6ca4b02b79b12b724afddce9", null ],
     [ "C_GetEdgeCost", "class_human_factors_1_1_spatial_structures_1_1_native_methods.html#a182becf6bcb9045968fd8c04f12e64f8", null ],
     [ "C_GetGraphSize", "class_human_factors_1_1_spatial_structures_1_1_native_methods.html#aa70dd1817ef11d81c5fa288c1e9f43cd", null ],
-    [ "C_GetNodeAttributes", "class_human_factors_1_1_spatial_structures_1_1_native_methods.html#aca85eef5976c0f0f2710e8dba6484322", null ],
+    [ "C_GetNodeAttributes", "class_human_factors_1_1_spatial_structures_1_1_native_methods.html#a7160b5cf4d206050c1cff267af4c55df", null ],
     [ "C_GetNodeID", "class_human_factors_1_1_spatial_structures_1_1_native_methods.html#a68e058036911bb82800f422627523259", null ],
     [ "C_GetNodes", "class_human_factors_1_1_spatial_structures_1_1_native_methods.html#a020dc5849f92921ab948b4788534f857", null ],
     [ "CalculateAndStoreCrossSlope", "class_human_factors_1_1_spatial_structures_1_1_native_methods.html#ad010aa1e47fcdfd4d6ea8a0008ccfdf8", null ],

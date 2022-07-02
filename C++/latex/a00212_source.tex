@@ -1,0 +1,60 @@
+\hypertarget{a00212_source}{}\doxysection{path.\+cpp}
+\label{a00212_source}\index{Cpp/spatialstructures/src/path.cpp@{Cpp/spatialstructures/src/path.cpp}}
+\mbox{\hyperlink{a00212}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{a00212_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{a00212_source_l00008}00008 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00215}{path.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00009}00009 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00010}00010 }
+\DoxyCodeLine{\Hypertarget{a00212_source_l00011}00011 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00399}{HF::SpatialStructures}} \{}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00012}\mbox{\hyperlink{a02017_a55ded4e02787eb739770ebe28ef386a9}{00012}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{a02017_a55ded4e02787eb739770ebe28ef386a9}{Path::AddNode}}(\textcolor{keywordtype}{int} node, \textcolor{keywordtype}{float} cost) \{}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00013}00013         \mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}}.push\_back(\mbox{\hyperlink{a02013}{PathMember}}\{ cost, node \});}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00014}00014     \}}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00015}00015 }
+\DoxyCodeLine{\Hypertarget{a00212_source_l00016}\mbox{\hyperlink{a02017_a3066bac2d76b5c8a28b35a8d1f6ace71}{00016}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a02017_a3066bac2d76b5c8a28b35a8d1f6ace71}{Path::empty}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00017}00017         \textcolor{keywordflow}{return} \mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}}.size() == 0;}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00018}00018     \}}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00019}00019 }
+\DoxyCodeLine{\Hypertarget{a00212_source_l00020}\mbox{\hyperlink{a02017_a28f61f0f57b38a5249a11a725d9d692b}{00020}}     \textcolor{keywordtype}{int} \mbox{\hyperlink{a02017_a28f61f0f57b38a5249a11a725d9d692b}{Path::size}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00021}00021         \textcolor{keywordflow}{return} \mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}}.size();}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00022}00022     \}}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{a00212_source_l00024}\mbox{\hyperlink{a02017_adf2bad9ac73dbdc436c365654d54ad98}{00024}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{a02017_adf2bad9ac73dbdc436c365654d54ad98}{Path::Reverse}}() \{}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00025}00025         std::reverse(\mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}}.begin(), \mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}}.end());}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00026}00026     \}}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00027}00027 }
+\DoxyCodeLine{\Hypertarget{a00212_source_l00028}\mbox{\hyperlink{a02017_ac8cd7f5bcbaf0f399ce196c8967ae87e}{00028}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a02017_ac8cd7f5bcbaf0f399ce196c8967ae87e}{Path::operator==}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02017}{Path}}\& P2)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00029}00029 }
+\DoxyCodeLine{\Hypertarget{a00212_source_l00030}00030         \textcolor{comment}{// Return early if the sizes of this and P2 don't match}}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00031}00031         \textcolor{keywordflow}{if} (P2.\mbox{\hyperlink{a02017_a28f61f0f57b38a5249a11a725d9d692b}{size}}() != this-\/>size()) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00032}00032 }
+\DoxyCodeLine{\Hypertarget{a00212_source_l00033}00033         \textcolor{comment}{// Otherwise, comapre elements one by one}}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00034}00034         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < this-\/>\mbox{\hyperlink{a02017_a28f61f0f57b38a5249a11a725d9d692b}{size}}(); i++)}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00035}00035         \{}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00036}00036             \textcolor{keyword}{auto} our\_pm = (*this)[i];}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00037}00037             \textcolor{keyword}{auto} their\_pm = P2[i];}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00038}00038 }
+\DoxyCodeLine{\Hypertarget{a00212_source_l00039}00039             \textcolor{keywordflow}{if} (our\_pm != their\_pm)}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00040}00040                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00041}00041         \}}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00042}00042 }
+\DoxyCodeLine{\Hypertarget{a00212_source_l00043}00043         \textcolor{comment}{// If we've gotten this far, then all path members}}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00044}00044         \textcolor{comment}{// must be equal.}}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00045}00045         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00046}00046     \}}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00047}00047 }
+\DoxyCodeLine{\Hypertarget{a00212_source_l00048}\mbox{\hyperlink{a02017_a4bbba8e48932e990cc6d523ac628765a}{00048}}     \mbox{\hyperlink{a02013}{PathMember}} \mbox{\hyperlink{a02017_a4bbba8e48932e990cc6d523ac628765a}{Path::operator[]}}(\textcolor{keywordtype}{int} i)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00049}00049         \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}}[i];}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00050}00050     \}}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00051}00051 }
+\DoxyCodeLine{\Hypertarget{a00212_source_l00052}00052     Path::Path(\textcolor{keyword}{const} std::vector<PathMember> \& pm) \{}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00053}00053         this-\/>\mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}} = pm;}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00054}00054     \}}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00055}00055 }
+\DoxyCodeLine{\Hypertarget{a00212_source_l00056}\mbox{\hyperlink{a02017_a942cb49007bbeb5588e2d526c68bdcf9}{00056}}     \mbox{\hyperlink{a02013}{PathMember}} * \mbox{\hyperlink{a02017_a942cb49007bbeb5588e2d526c68bdcf9}{Path::GetPMPointer}}() \{}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00057}00057         \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{a02017_a864cebbf4e5d7c135c501a63d42f8708}{members}}.data();}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00058}00058     \}}
+\DoxyCodeLine{\Hypertarget{a00212_source_l00059}00059 \}}
+
+\end{DoxyCode}

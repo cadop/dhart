@@ -1,137 +1,127 @@
-\hypertarget{a01493}{}\doxysection{HF\+::Spatial\+Structures\+::Edge\+Cost\+Set Class Reference}
-\label{a01493}\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
+\hypertarget{a01493}{}\doxysection{nlohmann\+::detail\+::exception Class Reference}
+\label{a01493}\index{nlohmann::detail::exception@{nlohmann::detail::exception}}
 
 
-A set of edge costs for a graph.  
-
-
-
-
-{\ttfamily \#include $<$graph.\+h$>$}
+general exception of the \mbox{\hyperlink{a01593}{basic\+\_\+json}} class  
 
 
 
-Collaboration diagram for HF\+::Spatial\+Structures\+::Edge\+Cost\+Set\+:
+
+{\ttfamily \#include $<$json.\+hpp$>$}
+
+
+
+Inheritance diagram for nlohmann\+::detail\+::exception\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=199pt]{a01491}
+\includegraphics[width=350pt]{a01492}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for nlohmann\+::detail\+::exception\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{a01491}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a01493_aaaab10e7584343084e41889ee9858111}{Edge\+Cost\+Set}} ()
-\begin{DoxyCompactList}\small\item\em Construct an empty edge cost set. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01493_a292cb98e857b8ae2606395ed57ebcec8}{Edge\+Cost\+Set}} (int \mbox{\hyperlink{a01493_abc5ff8ee3175dca75cacbfbd592907db}{size}})
-\begin{DoxyCompactList}\small\item\em Create an edge cost set and allocate a specific size. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{a01493_abc5ff8ee3175dca75cacbfbd592907db}{size}} () const
-\begin{DoxyCompactList}\small\item\em Get the size of this edge matrix. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a01493_a22bf925d64a8ab8c0920d668068dc3db}{Resize\+If\+Needed}} (int new\+\_\+size)
-\begin{DoxyCompactList}\small\item\em Resize this edge matrix if needed. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a01493_a3cbcc68757254cc1a56efb4aa9a20e44}{Clear}} ()
-\begin{DoxyCompactList}\small\item\em Clear all values from this edge cost set. \end{DoxyCompactList}\item 
-float \& \mbox{\hyperlink{a01493_a00e5f38c203be4eb8659dbffd719c39f}{operator\mbox{[}$\,$\mbox{]}}} (int i)
-\begin{DoxyCompactList}\small\item\em Index internal values array. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{a01493_a4b139518bc0939554df19e83c8e0b916}{bounds\+\_\+check}} (int i) const
+\mbox{\hyperlink{a00206_a5f2aaec3b681d0a72f7d6e90b70cdcd1}{JSON\+\_\+\+HEDLEY\+\_\+\+RETURNS\+\_\+\+NON\+\_\+\+NULL}} const char $\ast$ \mbox{\hyperlink{a01493_addadc3b85ddf1a8256c49577e9834e47}{what}} () const noexcept override
+\begin{DoxyCompactList}\small\item\em returns the explanatory string \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
 \item 
-float \mbox{\hyperlink{a01493_a3ab14e57d0bb9b4ee68f7a58b0a568ec}{operator\mbox{[}$\,$\mbox{]}}} (int i) const
-\begin{DoxyCompactList}\small\item\em Index internal values array. \end{DoxyCompactList}\item 
-float $\ast$ \mbox{\hyperlink{a01493_adef3af2669b740adbd450540e7a2fb41}{Get\+Ptr}} ()
-\begin{DoxyCompactList}\small\item\em Get the pointer to the start of this array. \end{DoxyCompactList}\item 
-const float $\ast$ \mbox{\hyperlink{a01493_a6a58eea8a5450f10bbdcdaca99d0438e}{Get\+Ptr}} () const
-\begin{DoxyCompactList}\small\item\em Get the pointer to the start of this array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+const int \mbox{\hyperlink{a01493_a0d4589a3fb54e81646d986c05efa3b9a}{id}}
+\begin{DoxyCompactList}\small\item\em the id of the exception \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01493_ae323ad0d53bc724414c2233164e65657}{exception}} (int id\+\_\+, const char $\ast$what\+\_\+arg)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \mbox{\hyperlink{a01493_abf41a7e9178356314082284e6cfea278}{name}} (const std\+::string \&ename, int id\+\_\+)
+\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::vector$<$ float $>$ \mbox{\hyperlink{a01493_a0eebad11ce129d669da0e51bbae04aee}{costs}}
-\begin{DoxyCompactList}\small\item\em Array of costs to be used like eigen\textquotesingle{}s internal indices array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+std\+::runtime\+\_\+error \mbox{\hyperlink{a01493_ad54778dc4f125488cbce8ec276dfdde2}{m}}
+\begin{DoxyCompactList}\small\item\em an exception object as storage for error messages \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-A set of edge costs for a graph. 
+general exception of the \mbox{\hyperlink{a01593}{basic\+\_\+json}} class 
 
-Arrays that can be swapped in and out of the array\textquotesingle{}s indices. 
+This class is an extension of {\ttfamily std\+::exception} objects with a member {\itshape id} for exception ids. It is used as the base class for all exceptions thrown by the \mbox{\hyperlink{a01593}{basic\+\_\+json}} class. This class can hence be used as \char`\"{}wildcard\char`\"{} to catch exceptions.
 
-Definition at line 375 of file graph.\+h.
+Subclasses\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a01497}{parse\+\_\+error}} for exceptions indicating a parse error
+\item \mbox{\hyperlink{a01501}{invalid\+\_\+iterator}} for exceptions indicating errors with iterators
+\item \mbox{\hyperlink{a01505}{type\+\_\+error}} for exceptions indicating executing a member function with a wrong type
+\item \mbox{\hyperlink{a01509}{out\+\_\+of\+\_\+range}} for exceptions indicating access out of the defined range
+\item \mbox{\hyperlink{a01513}{other\+\_\+error}} for exceptions indicating other library errors
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Note}
+To have nothrow-\/copy-\/constructible exceptions, we internally use {\ttfamily std\+::runtime\+\_\+error} which can cope with arbitrary-\/length error messages. Intermediate strings are built with static functions and then passed to the actual constructor. 
+\end{DoxyNote}
+@liveexample\{The following code shows how arbitrary library exceptions can be caught.,exception\}
+
+\begin{DoxySince}{Since}
+version 3.\+0.\+0 
+\end{DoxySince}
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l02352}{2352}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{a01493_aaaab10e7584343084e41889ee9858111}\label{a01493_aaaab10e7584343084e41889ee9858111}} 
-\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!EdgeCostSet@{EdgeCostSet}}
-\index{EdgeCostSet@{EdgeCostSet}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
-\doxysubsubsection{\texorpdfstring{EdgeCostSet()}{EdgeCostSet()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::\+Edge\+Cost\+Set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\Hypertarget{a01493_ae323ad0d53bc724414c2233164e65657}\label{a01493_ae323ad0d53bc724414c2233164e65657}} 
+\index{nlohmann::detail::exception@{nlohmann::detail::exception}!exception@{exception}}
+\index{exception@{exception}!nlohmann::detail::exception@{nlohmann::detail::exception}}
+\doxysubsubsection{\texorpdfstring{exception()}{exception()}}
+{\footnotesize\ttfamily nlohmann\+::detail\+::exception\+::exception (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+,  }\item[{const char $\ast$}]{what\+\_\+arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
-Construct an empty edge cost set. 
+Definition at line \mbox{\hyperlink{a00206_source_l02367}{2367}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
-
-
-Definition at line 381 of file graph.\+h.
-
-\mbox{\Hypertarget{a01493_a292cb98e857b8ae2606395ed57ebcec8}\label{a01493_a292cb98e857b8ae2606395ed57ebcec8}} 
-\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!EdgeCostSet@{EdgeCostSet}}
-\index{EdgeCostSet@{EdgeCostSet}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
-\doxysubsubsection{\texorpdfstring{EdgeCostSet()}{EdgeCostSet()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::\+Edge\+Cost\+Set (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Create an edge cost set and allocate a specific size. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em size} & Size of this cost set to be preallocated upon construction. ~\newline
- \\
-\hline
-\end{DoxyParams}
-
-
-Definition at line 388 of file graph.\+h.
-
-
-
-References Resize\+If\+Needed().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a01493_a292cb98e857b8ae2606395ed57ebcec8_cgraph}
-\end{center}
-\end{figure}
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a01493_a4b139518bc0939554df19e83c8e0b916}\label{a01493_a4b139518bc0939554df19e83c8e0b916}} 
-\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!bounds\_check@{bounds\_check}}
-\index{bounds\_check@{bounds\_check}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
-\doxysubsubsection{\texorpdfstring{bounds\_check()}{bounds\_check()}}
-{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::bounds\+\_\+check (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\Hypertarget{a01493_abf41a7e9178356314082284e6cfea278}\label{a01493_abf41a7e9178356314082284e6cfea278}} 
+\index{nlohmann::detail::exception@{nlohmann::detail::exception}!name@{name}}
+\index{name@{name}!nlohmann::detail::exception@{nlohmann::detail::exception}}
+\doxysubsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily static std\+::string nlohmann\+::detail\+::exception\+::name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{ename,  }\item[{int}]{id\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 
-Definition at line 429 of file graph.\+h.
+Definition at line \mbox{\hyperlink{a00206_source_l02369}{2369}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-References size().
+References \mbox{\hyperlink{a00206_source_l25172}{nlohmann\+::to\+\_\+string()}}.
 
 
 
-Referenced by operator\mbox{[}$\,$\mbox{]}().
+Referenced by \mbox{\hyperlink{a00206_source_l02436}{nlohmann\+::detail\+::parse\+\_\+error\+::create()}}, \mbox{\hyperlink{a00206_source_l02513}{nlohmann\+::detail\+::invalid\+\_\+iterator\+::create()}}, \mbox{\hyperlink{a00206_source_l02567}{nlohmann\+::detail\+::type\+\_\+error\+::create()}}, \mbox{\hyperlink{a00206_source_l02614}{nlohmann\+::detail\+::out\+\_\+of\+\_\+range\+::create()}}, and \mbox{\hyperlink{a00206_source_l02652}{nlohmann\+::detail\+::other\+\_\+error\+::create()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a01493_a4b139518bc0939554df19e83c8e0b916_cgraph}
+\includegraphics[width=350pt]{a01493_abf41a7e9178356314082284e6cfea278_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:
@@ -139,220 +129,64 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a01493_a4b139518bc0939554df19e83c8e0b916_icgraph}
+\includegraphics[height=550pt]{a01493_abf41a7e9178356314082284e6cfea278_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{a01493_a3cbcc68757254cc1a56efb4aa9a20e44}\label{a01493_a3cbcc68757254cc1a56efb4aa9a20e44}} 
-\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!Clear@{Clear}}
-\index{Clear@{Clear}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
-\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
-{\footnotesize\ttfamily void H\+F\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::\+Clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\Hypertarget{a01493_addadc3b85ddf1a8256c49577e9834e47}\label{a01493_addadc3b85ddf1a8256c49577e9834e47}} 
+\index{nlohmann::detail::exception@{nlohmann::detail::exception}!what@{what}}
+\index{what@{what}!nlohmann::detail::exception@{nlohmann::detail::exception}}
+\doxysubsubsection{\texorpdfstring{what()}{what()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00206_a5f2aaec3b681d0a72f7d6e90b70cdcd1}{JSON\+\_\+\+HEDLEY\+\_\+\+RETURNS\+\_\+\+NON\+\_\+\+NULL}} const char $\ast$ nlohmann\+::detail\+::exception\+::what (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [noexcept]}}
 
 
 
-Clear all values from this edge cost set. 
+returns the explanatory string 
 
 
 
-Definition at line 417 of file graph.\+h.
+Definition at line \mbox{\hyperlink{a00206_source_l02357}{2357}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
-\mbox{\Hypertarget{a01493_adef3af2669b740adbd450540e7a2fb41}\label{a01493_adef3af2669b740adbd450540e7a2fb41}} 
-\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!GetPtr@{GetPtr}}
-\index{GetPtr@{GetPtr}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
-\doxysubsubsection{\texorpdfstring{GetPtr()}{GetPtr()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily float$\ast$ H\+F\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::\+Get\+Ptr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
+References \mbox{\hyperlink{a00206_source_l02376}{m}}.
 
-Get the pointer to the start of this array. 
-
-\begin{DoxyReturn}{Returns}
-a pointer to the value of this \mbox{\hyperlink{a01493}{Edge\+Cost\+Set}}\textquotesingle{}s internal costs array 
-\end{DoxyReturn}
-
-
-Definition at line 448 of file graph.\+h.
-
-\mbox{\Hypertarget{a01493_a6a58eea8a5450f10bbdcdaca99d0438e}\label{a01493_a6a58eea8a5450f10bbdcdaca99d0438e}} 
-\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!GetPtr@{GetPtr}}
-\index{GetPtr@{GetPtr}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
-\doxysubsubsection{\texorpdfstring{GetPtr()}{GetPtr()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily const float$\ast$ H\+F\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::\+Get\+Ptr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Get the pointer to the start of this array. 
-
-\begin{DoxyReturn}{Returns}
-a pointer to the value of this \mbox{\hyperlink{a01493}{Edge\+Cost\+Set}}\textquotesingle{}s internal costs array 
-\end{DoxyReturn}
-
-
-Definition at line 458 of file graph.\+h.
-
-\mbox{\Hypertarget{a01493_a00e5f38c203be4eb8659dbffd719c39f}\label{a01493_a00e5f38c203be4eb8659dbffd719c39f}} 
-\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!operator\mbox{[}\mbox{]}@{operator[]}}
-\index{operator\mbox{[}\mbox{]}@{operator[]}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
-\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily float\& H\+F\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Index internal values array. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em i} & index to get the cost of \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-the value at index i in costs. 
-\end{DoxyReturn}
-
-
-Definition at line 424 of file graph.\+h.
-
-
-
-References bounds\+\_\+check().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a01493_a00e5f38c203be4eb8659dbffd719c39f_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a01493_a3ab14e57d0bb9b4ee68f7a58b0a568ec}\label{a01493_a3ab14e57d0bb9b4ee68f7a58b0a568ec}} 
-\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!operator\mbox{[}\mbox{]}@{operator[]}}
-\index{operator\mbox{[}\mbox{]}@{operator[]}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
-\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily float H\+F\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Index internal values array. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em i} & index to get the cost of \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-the value at index i in costs. 
-\end{DoxyReturn}
-
-
-Definition at line 438 of file graph.\+h.
-
-
-
-References bounds\+\_\+check().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a01493_a3ab14e57d0bb9b4ee68f7a58b0a568ec_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a01493_a22bf925d64a8ab8c0920d668068dc3db}\label{a01493_a22bf925d64a8ab8c0920d668068dc3db}} 
-\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!ResizeIfNeeded@{ResizeIfNeeded}}
-\index{ResizeIfNeeded@{ResizeIfNeeded}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
-\doxysubsubsection{\texorpdfstring{ResizeIfNeeded()}{ResizeIfNeeded()}}
-{\footnotesize\ttfamily void H\+F\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::\+Resize\+If\+Needed (\begin{DoxyParamCaption}\item[{int}]{new\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Resize this edge matrix if needed. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em new\+\_\+size} & new size of the array to allocate to\\
-\hline
-\end{DoxyParams}
-If size is less than the current size, this function doesn\textquotesingle{}t do anything. All new values are defaulted to N\+AN. 
-
-Definition at line 403 of file graph.\+h.
-
-
-
-References costs, and size().
-
-
-
-Referenced by Edge\+Cost\+Set().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a01493_a22bf925d64a8ab8c0920d668068dc3db_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a01493_a22bf925d64a8ab8c0920d668068dc3db_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a01493_abc5ff8ee3175dca75cacbfbd592907db}\label{a01493_abc5ff8ee3175dca75cacbfbd592907db}} 
-\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!size@{size}}
-\index{size@{size}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
-\doxysubsubsection{\texorpdfstring{size()}{size()}}
-{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Get the size of this edge matrix. 
-
-\begin{DoxyReturn}{Returns}
-how many values this matrix can hold, or the size of its internal costs array. 
-\end{DoxyReturn}
-
-
-Definition at line 394 of file graph.\+h.
-
-
-
-Referenced by bounds\+\_\+check(), and Resize\+If\+Needed().
-
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a01493_abc5ff8ee3175dca75cacbfbd592907db_icgraph}
-\end{center}
-\end{figure}
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{a01493_a0eebad11ce129d669da0e51bbae04aee}\label{a01493_a0eebad11ce129d669da0e51bbae04aee}} 
-\index{HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}!costs@{costs}}
-\index{costs@{costs}!HF::SpatialStructures::EdgeCostSet@{HF::SpatialStructures::EdgeCostSet}}
-\doxysubsubsection{\texorpdfstring{costs}{costs}}
-{\footnotesize\ttfamily std\+::vector$<$float$>$ H\+F\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set\+::costs\hspace{0.3cm}{\ttfamily [private]}}
+\mbox{\Hypertarget{a01493_a0d4589a3fb54e81646d986c05efa3b9a}\label{a01493_a0d4589a3fb54e81646d986c05efa3b9a}} 
+\index{nlohmann::detail::exception@{nlohmann::detail::exception}!id@{id}}
+\index{id@{id}!nlohmann::detail::exception@{nlohmann::detail::exception}}
+\doxysubsubsection{\texorpdfstring{id}{id}}
+{\footnotesize\ttfamily const int nlohmann\+::detail\+::exception\+::id}
 
 
 
-Array of costs to be used like eigen\textquotesingle{}s internal indices array. 
+the id of the exception 
 
 
 
-Definition at line 377 of file graph.\+h.
+Definition at line \mbox{\hyperlink{a00206_source_l02363}{2363}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+\mbox{\Hypertarget{a01493_ad54778dc4f125488cbce8ec276dfdde2}\label{a01493_ad54778dc4f125488cbce8ec276dfdde2}} 
+\index{nlohmann::detail::exception@{nlohmann::detail::exception}!m@{m}}
+\index{m@{m}!nlohmann::detail::exception@{nlohmann::detail::exception}}
+\doxysubsubsection{\texorpdfstring{m}{m}}
+{\footnotesize\ttfamily std\+::runtime\+\_\+error nlohmann\+::detail\+::exception\+::m\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Referenced by Resize\+If\+Needed().
+an exception object as storage for error messages 
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l02376}{2376}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00206_source_l02357}{what()}}.
 
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Cpp/spatialstructures/src/\mbox{\hyperlink{a00203}{graph.\+h}}\end{DoxyCompactItemize}
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00206}{json.\+hpp}}\end{DoxyCompactItemize}

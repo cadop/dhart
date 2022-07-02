@@ -1,20 +1,14 @@
 var a01457 =
 [
-    [ "double3", "a01457.html#aeb66195888426c63e17d15395cb16136", null ],
-    [ "double3", "a01457.html#aab022a67d983126e06cfd7c98ba6b213", null ],
-    [ "double3", "a01457.html#ad316645efaca2fdc62af4cdab8685d30", null ],
-    [ "length", "a01457.html#a364fec354bd42c719be24bce9115400a", null ],
-    [ "neg", "a01457.html#aa9469a197d7b23d54811dd45fb7fc719", null ],
-    [ "normalize", "a01457.html#a207734478ce98772b226cbbd715902dd", null ],
-    [ "operator*", "a01457.html#aeb81f3663f06409fd4a990788a373062", null ],
-    [ "operator*", "a01457.html#abe98e17394908fa0b6db4f3cd6bbb52f", null ],
-    [ "operator+", "a01457.html#a946b0c048bdc441f58fdea464be2b1df", null ],
-    [ "operator+=", "a01457.html#a12f9b32a9c60b1a9f911a778d5f4e268", null ],
-    [ "operator-", "a01457.html#a59ea40cffd2d7698a0abdc5b467eb587", null ],
-    [ "operator/", "a01457.html#aabbfb9b8c3511d380b2036bcd019cac7", null ],
-    [ "operator[]", "a01457.html#a8d37fe70f4631770b5ca3f20121c7a80", null ],
-    [ "operator[]", "a01457.html#ad10b20e13c6d3446e0dc871fcc98a6d0", null ],
-    [ "x", "a01457.html#a8f182f964ffbb7801eb7d7e98a9b9683", null ],
-    [ "y", "a01457.html#a99d7008b61f129b3864b821fe7fbc115", null ],
-    [ "z", "a01457.html#aa273109f9d239a50d598dbb519ef90c6", null ]
+    [ "RayRequest", "a01457.html#aa41ca1aa01157b95c74a95d3f203d5a5", null ],
+    [ "didHit", "a01457.html#a30c3195e1d348017345b122c3073c098", null ],
+    [ "distance", "a01457.html#a10641f49f8fd0f9f29dac750dd8d9b69", null ],
+    [ "dx", "a01457.html#af388eb4e3eeff840623ce2a1fac46f40", null ],
+    [ "dy", "a01457.html#a65d6987e4467b1a9a90ec55fb7b40802", null ],
+    [ "dz", "a01457.html#a19414b2ee8bbe63fd56b8403a434c41b", null ],
+    [ "mesh_id", "a01457.html#a1216778f37ab07dcf08cec70d56885c5", null ],
+    [ "was_cast", "a01457.html#a86d351155983dd40759ce97a4e9b9f23", null ],
+    [ "x", "a01457.html#a4535d344c959c75fa7e73aae041616d0", null ],
+    [ "y", "a01457.html#a554b79bac3eee6e2613c25da41e729e5", null ],
+    [ "z", "a01457.html#a83259db3fdbc447512a4a12a6c6d8d46", null ]
 ];

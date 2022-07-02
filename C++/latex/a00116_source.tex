@@ -1,0 +1,317 @@
+\hypertarget{a00116_source}{}\doxysection{meshinfo.\+cpp}
+\label{a00116_source}\index{Cpp/objloader/src/meshinfo.cpp@{Cpp/objloader/src/meshinfo.cpp}}
+\mbox{\hyperlink{a00116}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00008}00008 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00119}{meshinfo.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00009}00009 \textcolor{preprocessor}{\#include <Geometry>}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00010}00010 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00110}{HFExceptions.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00011}00011 \textcolor{preprocessor}{\#include <math.h>}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00012}00012 \textcolor{preprocessor}{\#include <corecrt\_math\_defines.h>}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00013}00013 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00014}00014 \textcolor{preprocessor}{\#include <robin\_hood.h>}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00015}00015 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00016}00016 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00017}\mbox{\hyperlink{a00116_a525335710b53cb064ca56b936120431e}{00017}} \textcolor{preprocessor}{\#define \_USE\_MATH\_DEFINES}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00018}00018 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00019}00019 \textcolor{keyword}{using }std::array;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00020}00020 \textcolor{keyword}{using }std::vector;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00021}\mbox{\hyperlink{a00403}{00021}} \textcolor{keyword}{namespace }\mbox{\hyperlink{a00403}{HF::Geometry}} \{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00022}00022     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00023}00023     \mbox{\hyperlink{a01285_a88794dcefee25f12c1b8dd3e7a6455d1}{MeshInfo<T>::MeshInfo}}(\textcolor{keyword}{const} vector<array<T, 3>>\& vertices, \textcolor{keywordtype}{int} \textcolor{keywordtype}{id}, std::string name)}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00024}00024     \{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00025}00025         \textcolor{comment}{// Throw if the input array has no values in it. }}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00026}00026         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} n = vertices.size();}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00027}00027         \textcolor{keywordflow}{if} (vertices.size() < 1) \textcolor{keywordflow}{throw} \mbox{\hyperlink{a01257}{HF::Exceptions::InvalidOBJ}}(); \textcolor{comment}{// Doesn't have any valid geometry}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00029}00029         \textcolor{comment}{//AddVerts(vertices);}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00030}00030         VectorsToBuffers(vertices);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00031}00031 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00032}00032         \textcolor{comment}{// Throw if a NAN was placed into the mesh. }}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00033}00033         \textcolor{keywordflow}{if} (verts.hasNaN()) \textcolor{keywordflow}{throw} \mbox{\hyperlink{a01257}{HF::Exceptions::InvalidOBJ}}();}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00034}00034     }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00035}00035         meshid = id;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00036}00036         this-\/>name = name;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00037}00037     \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00038}00038 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00039}00039     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00040}\mbox{\hyperlink{a01285_a4b96bdff36d61d0a16b09872736b7d16}{00040}}     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01285_a4b96bdff36d61d0a16b09872736b7d16}{MeshInfo<T>::SetVert}}(\textcolor{keywordtype}{int} index, T x, T y, T z)}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00041}00041     \{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00042}00042         \textcolor{comment}{// the () operator is overloaded for eigen to index the array}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00043}00043         \textcolor{comment}{// For example array(row, col) will index the value at row, col.}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00044}00044         verts(0, index) = x;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00045}00045         verts(1, index) = y;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00046}00046         verts(2, index) = z;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00047}00047     \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00048}00048 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00049}00049 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00072}00072     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00073}\mbox{\hyperlink{a00403_aca0d05b15d2503073b9f668f330f7871}{00073}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{a00403_aca0d05b15d2503073b9f668f330f7871}{IndexRawVertices}}(}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00074}00074         \textcolor{keyword}{const} vector<array<T, 3>>\& vertices,}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00075}00075         vector<int>\& mapped\_indexes,}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00076}00076         vector<T>\& mapped\_vertices}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00077}00077     ) \{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00078}00078         \textcolor{comment}{// Create a hashmap to map vertices to indices.}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00079}00079         robin\_hood::unordered\_map <array<T, 3>, \textcolor{keywordtype}{int}> index\_map;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00080}00080         \textcolor{keywordtype}{int} next\_id = 0;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00081}00081 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00082}00082         \textcolor{keywordtype}{int} vertsize = vertices.size();}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00083}00083         }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00084}00084         \textcolor{comment}{// Iterate through every 3 vertexes in vertices}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00085}00085         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < vertsize; i += 3) \{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00086}00086             array<int, 3> ids;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00087}00087 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00088}00088             \textcolor{comment}{// Iterate through every 3 vertexes in vertices. }}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00089}00089             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < 3; k++)}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00090}00090             \{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00091}00091                 \textcolor{comment}{// Get the vertex at this position}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00092}00092                 \textcolor{keyword}{const} \textcolor{keyword}{auto}\& vert = vertices[i + k];}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00093}00093                 \textcolor{keywordtype}{int} current\_id;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00094}00094 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00095}00095                 \textcolor{comment}{// Get ID from index map, or create a new ID if one doesn't exist}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00096}00096                 \textcolor{keywordflow}{if} (index\_map.count(vert) > 0)}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00097}00097                     current\_id = index\_map[vert];}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00098}00098                 \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00099}00099 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00100}00100                     \textcolor{comment}{// store the id in the hashmap for this vertex.}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00101}00101                     index\_map[vert] = next\_id;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00102}00102                     current\_id = next\_id;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00103}00103 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00104}00104                     \textcolor{comment}{// If this is a new vertex, add it the mapped\_vertices vector}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00105}00105                     mapped\_vertices.push\_back(vert[0]);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00106}00106                     mapped\_vertices.push\_back(vert[1]);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00107}00107                     mapped\_vertices.push\_back(vert[2]);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00108}00108                     next\_id++;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00109}00109                 \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00110}00110                 \textcolor{comment}{// Store this new ID in the array.}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00111}00111                 ids[k] = current\_id;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00112}00112             \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00113}00113 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00114}00114             \textcolor{comment}{// Push the indexes back into the triangle array}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00115}00115             mapped\_indexes.push\_back(ids[0]);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00116}00116             mapped\_indexes.push\_back(ids[1]);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00117}00117             mapped\_indexes.push\_back(ids[2]);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00118}00118         \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00119}00119     \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00120}00120 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00121}00121     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00122}\mbox{\hyperlink{a01285_a94f1d056602f383463d151d528f54436}{00122}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{a01285_a94f1d056602f383463d151d528f54436}{MeshInfo<T>::VectorsToBuffers}}(\textcolor{keyword}{const} vector<array<T, 3>>\& vertices)}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00123}00123     \{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00124}00124         \textcolor{comment}{// Create and fill vectors}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00125}00125         vector<int> mapped\_indexes; vector<T> mapped\_vertices;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00126}00126         \mbox{\hyperlink{a00403_aca0d05b15d2503073b9f668f330f7871}{IndexRawVertices}}(vertices, mapped\_indexes, mapped\_vertices);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00127}00127 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00128}00128         \textcolor{comment}{// This OBJ isn't valid if the following doesn't hold}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00129}00129         \textcolor{keywordflow}{if} (!(mapped\_indexes.size() \% 3 == 0))}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00130}00130             \textcolor{keywordflow}{throw} \mbox{\hyperlink{a01257}{HF::Exceptions::InvalidOBJ}}();}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00131}00131 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00132}00132         \textcolor{comment}{// Copy contents into index and vertex vectors into matrices.}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00133}00133         verts.resize(3, mapped\_vertices.size() / 3);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00134}00134         indices.resize(3, mapped\_indexes.size() / 3);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00135}00135         std::move(mapped\_vertices.begin(), mapped\_vertices.end(), verts.data());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00136}00136         std::move(mapped\_indexes.begin(), mapped\_indexes.end(), indices.data());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00137}00137     \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00138}00138 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00139}00139     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00140}00140     \mbox{\hyperlink{a01285_a88794dcefee25f12c1b8dd3e7a6455d1}{MeshInfo<T>::MeshInfo}}(}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00141}00141         \textcolor{keyword}{const} vector<T>\& in\_vertices,}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00142}00142         \textcolor{keyword}{const} vector<int>\& in\_indexes,}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00143}00143         \textcolor{keywordtype}{int} \textcolor{keywordtype}{id},}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00144}00144         std::string name}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00145}00145     ) \{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00146}00146         \textcolor{comment}{// If the size of vertices or the size of indexes aren't multiples of 3}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00147}00147         \textcolor{comment}{// then we can easily rule this out as an invalid mesh}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00148}00148         \textcolor{keywordflow}{if} (in\_vertices.size() \% 3 != 0 || in\_indexes.size() \% 3 != 0)}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00149}00149             \textcolor{keywordflow}{throw} \mbox{\hyperlink{a01257}{HF::Exceptions::InvalidOBJ}}();}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00150}00150 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00151}00151         \textcolor{comment}{// Resize verts and indices, then std::move valuees into them.}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00152}00152         verts.resize(3, in\_vertices.size() / 3);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00153}00153         indices.resize(3, in\_indexes.size() / 3);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00154}00154         std::move(in\_vertices.begin(), in\_vertices.end(), verts.data());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00155}00155         std::move(in\_indexes.begin(), in\_indexes.end(), indices.data());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00156}00156 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00157}00157         meshid = id;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00158}00158         this-\/>name = name;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00159}00159     \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00160}00160 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00161}00161     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00162}\mbox{\hyperlink{a01285_a05d1a3ebca83e841e8902baaecc59930}{00162}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{a01285_a05d1a3ebca83e841e8902baaecc59930}{MeshInfo<T>::AddVerts}}(\textcolor{keyword}{const} vector<array<T, 3>>\& in\_vertices)}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00163}00163     \{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00164}00164         \textcolor{keywordflow}{if} (in\_vertices.size() \% 3 != 0) \textcolor{keywordflow}{throw} \mbox{\hyperlink{a01257}{HF::Exceptions::InvalidOBJ}}(); \textcolor{comment}{// Incomplete triangle}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00165}00165 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00166}00166         verts.resize(3, (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(verts.cols()) + in\_vertices.size()));}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00167}00167 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00168}00168         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < in\_vertices.size(); i++) \{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00169}00169             \textcolor{keyword}{auto}\& vertex = in\_vertices[i];}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00170}00170             verts(0, i) = vertex[0];}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00171}00171             verts(1, i) = vertex[1];}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00172}00172             verts(2, i) = vertex[2];}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00173}00173         \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00174}00174         \textcolor{keywordflow}{if} (verts.hasNaN()) \textcolor{keywordflow}{throw} std::exception(\textcolor{stringliteral}{"{}Creation of mesh info failed"{}});}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00175}00175     \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00176}00176 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00177}00177     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00178}\mbox{\hyperlink{a01285_a70a6f6b9270d47e0b8428cdc15b707d3}{00178}}     \textcolor{keywordtype}{int} \mbox{\hyperlink{a01285_a70a6f6b9270d47e0b8428cdc15b707d3}{MeshInfo<T>::NumVerts}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(verts.cols()); \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00179}00179 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00180}00180     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00181}\mbox{\hyperlink{a01285_a5fa8cc590a7bd0764a7903ed521e2fc4}{00181}}     \textcolor{keywordtype}{int} \mbox{\hyperlink{a01285_a5fa8cc590a7bd0764a7903ed521e2fc4}{MeshInfo<T>::NumTris}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(indices.cols()); \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00182}00182 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00183}00183     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00184}\mbox{\hyperlink{a01285_af1152233ddbd8fac736f761347e6d3b8}{00184}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{a01285_af1152233ddbd8fac736f761347e6d3b8}{MeshInfo<T>::ConvertToRhinoCoordinates}}()}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00185}00185     \{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00186}00186         Eigen::AngleAxis<T> yrot(0.5f * \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(M\_PI), Eigen::Vector3<T>::UnitX());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00187}00187         Eigen::Quaternion<T> quat;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00188}00188         quat = yrot;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00189}00189         quat.normalize();}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00190}00190         verts = yrot.toRotationMatrix() * verts;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00191}00191         \textcolor{comment}{//auto newer\_matrix = new\_matrix.eval();}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00192}00192         \textcolor{keywordflow}{if} (!verts.allFinite()) \textcolor{keywordflow}{throw} std::exception(\textcolor{stringliteral}{"{}Verts has NAN"{}});}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00193}00193     \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00194}00194 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00195}00195     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00196}\mbox{\hyperlink{a01285_a5f067dbc661b07c1762b402da03f2041}{00196}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{a01285_a5f067dbc661b07c1762b402da03f2041}{MeshInfo<T>::ConvertToOBJCoordinates}}()}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00197}00197     \{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00198}00198         Eigen::AngleAxis<T> yrot(-\/0.5f * \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(M\_PI), Eigen::Vector3<T>::UnitX());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00199}00199         Eigen::Quaternion<T> quat;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00200}00200         quat = yrot;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00201}00201         quat.normalize();}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00202}00202         Eigen::Matrix3<T> rotation\_matrix = yrot.toRotationMatrix();}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00203}00203         assert(!rotation\_matrix.hasNaN());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00204}00204         verts = (rotation\_matrix * verts);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00205}00205         assert(!verts.hasNaN());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00206}00206     \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00207}00207 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00208}00208     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00209}\mbox{\hyperlink{a01285_a235d49e5a5a4d20d78db7adb854fb9e1}{00209}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{a01285_a235d49e5a5a4d20d78db7adb854fb9e1}{MeshInfo<T>::PerformRotation}}(T rx, T ry, T rz)}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00210}00210     \{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00211}00211         \textcolor{comment}{// Convert to radians}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00212}00212         T radian\_ratio = \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(M\_PI) / 180.00f;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00213}00213         rx *= radian\_ratio; ry *= radian\_ratio; rz *= radian\_ratio;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00214}00214 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00215}00215         \textcolor{comment}{// Implementation based on }}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00216}00216         \textcolor{comment}{// https://stackoverflow.com/questions/21412169/creating-\/a-\/rotation-\/matrix-\/with-\/pitch-\/yaw-\/roll-\/using-\/eigen}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00217}00217         Eigen::AngleAxis<T> rollAngle(rz, Eigen::Vector3<T>::UnitZ());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00218}00218         Eigen::AngleAxis<T> yawAngle(ry, Eigen::Vector3<T>::UnitY());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00219}00219         Eigen::AngleAxis<T> pitchAngle(rx, Eigen::Vector3<T>::UnitX());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00220}00220 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00221}00221 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00222}00222         \textcolor{comment}{// Create a quaternion from the angles, normalize it, then}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00223}00223         \textcolor{comment}{// convert it to a rotation matrix.}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00224}00224         Eigen::Quaternion<T> q = (rollAngle * yawAngle * pitchAngle);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00225}00225         q.normalize();}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00226}00226         Eigen::Matrix3<T> rotation\_matrix = q.toRotationMatrix();}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00227}00227 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00229}00229         \textcolor{comment}{// Assert that we didn't create any NANS or infinite values}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00230}00230         assert(rotation\_matrix.allFinite());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00231}00231 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00232}00232         \textcolor{comment}{// Apply the rotation matrix to verts}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00233}00233         verts = (rotation\_matrix * verts);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00234}00234 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00235}00235         \textcolor{comment}{// Once again assert that we didn't create any nans or infinite numbers.}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00236}00236         assert(verts.allFinite());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00238}00238     \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00239}00239 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00240}00240     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00241}\mbox{\hyperlink{a01285_a1d69139377d33e748903a33f6f1b760c}{00241}}     \textcolor{keywordtype}{int} \mbox{\hyperlink{a01285_a1d69139377d33e748903a33f6f1b760c}{MeshInfo<T>::GetMeshID}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} meshid; \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00242}00242 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00243}00243     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00244}\mbox{\hyperlink{a01285_af2d1b696c55aa036cff585d2e7eba50b}{00244}}     vector<T> \mbox{\hyperlink{a01285_af2d1b696c55aa036cff585d2e7eba50b}{MeshInfo<T>::GetIndexedVertices}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00245}00245 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00246}00246         \textcolor{comment}{// Preallocate space for all vertices}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00247}00247         vector<T> out\_array(verts.size());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00248}00248         }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00249}00249         \textcolor{comment}{// Copy verts into it}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00250}00250         std::copy(verts.data(), verts.data() + verts.size(), out\_array.begin());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00251}00251         }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00252}00252         \textcolor{keywordflow}{return} out\_array;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00253}00253     \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00254}00254 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00255}00255     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00256}\mbox{\hyperlink{a01285_afddea10734ba213b2bb5cc148c24c942}{00256}}     vector<int> \mbox{\hyperlink{a01285_afddea10734ba213b2bb5cc148c24c942}{MeshInfo<T>::getRawIndices}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00257}00257 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00258}00258         vector<int> out\_array(indices.size());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00259}00259         std::copy(indices.data(), indices.data() + indices.size(), out\_array.begin());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00260}00260         \textcolor{keywordflow}{return} out\_array;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00261}00261     \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00262}00262 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00263}00263     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00264}\mbox{\hyperlink{a01285_a2fb2b5e7e5815794cb37c9b1e95260e8}{00264}}     vector<std::array<T,3>> \mbox{\hyperlink{a01285_a2fb2b5e7e5815794cb37c9b1e95260e8}{MeshInfo<T>::GetUnindexedVertices}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00265}00265 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00266}00266         \textcolor{comment}{// Preallocate an array 3x the size of the triangle matrix}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00267}00267         \textcolor{keywordtype}{int} tri\_count = NumTris();}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00268}00268         vector<array<T, 3>>out\_array(tri\_count * 3);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00269}00269 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00270}00270         \textcolor{comment}{// Fill arrays with values of vertices}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00271}00271         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < tri\_count; i++)}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00272}00272         \{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00273}00273             \textcolor{keyword}{const} \textcolor{keywordtype}{int} offset = i * 3;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00274}00274             out\_array[offset] = (*this)[indices(0, i)];}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00275}00275             out\_array[offset + 1] = (*this)[indices(1, i)];}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00276}00276             out\_array[offset + 2] = (*this)[indices(2, i)];}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00277}00277         \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00278}00278         \textcolor{keywordflow}{return} out\_array;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00279}00279     \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00280}00280 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00281}00281     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00282}\mbox{\hyperlink{a01285_a2d0621b715f7e4dd8d8e236ac3d5e6c0}{00282}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{a01285_a2d0621b715f7e4dd8d8e236ac3d5e6c0}{MeshInfo<T>::SetMeshID}}(\textcolor{keywordtype}{int} new\_id) \{ meshid = new\_id; \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00283}00283 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00284}00284     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00285}\mbox{\hyperlink{a01285_a275ccfb3fa910f416463c3c97c8699c1}{00285}}     array<T, 3> \mbox{\hyperlink{a01285_a275ccfb3fa910f416463c3c97c8699c1}{MeshInfo<T>::operator[]}}(\textcolor{keywordtype}{int} i)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00286}00286 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00287}00287         \textcolor{comment}{// Throw if going beyond the array bounds}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00288}00288         \textcolor{keywordflow}{if} (i < 0 || i > NumVerts()) \textcolor{keywordflow}{throw} std::exception(\textcolor{stringliteral}{"{}Out of range on index"{}});}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00289}00289     }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00290}00290         \textcolor{comment}{// Create and return out array.}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00291}00291         array<T, 3> out\_array;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00292}00292         out\_array[0] = verts(0, i);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00293}00293         out\_array[1] = verts(1, i);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00294}00294         out\_array[2] = verts(2, i);}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00295}00295         \textcolor{keywordflow}{return} out\_array;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00296}00296     \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00297}00297 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00305}00305     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00306}\mbox{\hyperlink{a00403_aa99106d1e4908e4385773774fb482b4f}{00306}}     T \mbox{\hyperlink{a00403_aa99106d1e4908e4385773774fb482b4f}{arrayDist}}(\textcolor{keyword}{const} array<T, 3> from, \textcolor{keyword}{const} array<T, 3>\& to) \{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00307}00307         \textcolor{keywordflow}{return} sqrtf(powf(from[0] -\/ to[0], 2) + powf(from[1] -\/ to[1], 2) + powf(from[2] -\/ to[2], 2));}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00308}00308     \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00309}00309     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00310}\mbox{\hyperlink{a01285_a1f8f4ab434e4e32ea48656a9345fa9f3}{00310}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01285_a1f8f4ab434e4e32ea48656a9345fa9f3}{MeshInfo<T>::operator==}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01285}{MeshInfo}}\& M2)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00311}00311 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00312}00312         \textcolor{comment}{// Get out quickly if the number of vertices do not match}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00313}00313         \textcolor{keywordflow}{if} (NumVerts() != M2.\mbox{\hyperlink{a01285_a70a6f6b9270d47e0b8428cdc15b707d3}{NumVerts}}()) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00314}00314 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00315}00315         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < NumVerts(); i++) \{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00316}00316             \textcolor{keyword}{auto} this\_array = (*this)[i];}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00317}00317             \textcolor{keyword}{auto} that\_array = M2[i];}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00318}00318 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00319}00319             \textcolor{keywordflow}{if} (!(\mbox{\hyperlink{a00403_aa99106d1e4908e4385773774fb482b4f}{arrayDist}}(this\_array, that\_array) < 0.001))}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00320}00320                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00321}00321         \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00322}00322         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00323}00323     \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00324}00324 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00325}00325     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00326}\mbox{\hyperlink{a01285_a9ca41370061bec524b5c84d689114e41}{00326}}     \textcolor{keyword}{const} \mbox{\hyperlink{a01281}{array\_and\_size<int>}} \mbox{\hyperlink{a01285_a9ca41370061bec524b5c84d689114e41}{MeshInfo<T>::GetIndexPointer}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00327}00327         \mbox{\hyperlink{a01281}{array\_and\_size<int>}} ret\_array;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00328}00328 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00329}00329         ret\_array.\mbox{\hyperlink{a01281_aac2cc3466ba798ea434a2c855f86a5dc}{size}} = indices.size();}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00330}00330         ret\_array.\mbox{\hyperlink{a01281_a08a18687fbab39a7f68557da7ae40b8a}{data}} = \textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{int}*\textcolor{keyword}{>}(indices.data());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00331}00331         }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00332}00332         \textcolor{keywordflow}{return} ret\_array;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00333}00333     \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00334}00334 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00335}00335     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00336}\mbox{\hyperlink{a01285_aa88fe8bcfc24db635994e529fac008da}{00336}}     \textcolor{keyword}{const} \mbox{\hyperlink{a01281}{array\_and\_size<T>}} \mbox{\hyperlink{a01285_aa88fe8bcfc24db635994e529fac008da}{MeshInfo<T>::GetVertexPointer}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00337}00337         \mbox{\hyperlink{a01281}{array\_and\_size<T>}} ret\_array;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00338}00338 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00339}00339         ret\_array.\mbox{\hyperlink{a01281_aac2cc3466ba798ea434a2c855f86a5dc}{size}} = verts.size();}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00340}00340         ret\_array.\mbox{\hyperlink{a01281_a08a18687fbab39a7f68557da7ae40b8a}{data}} = \textcolor{keyword}{const\_cast<}T*\textcolor{keyword}{>}(verts.data());}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00341}00341 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00342}00342         \textcolor{keywordflow}{return} ret\_array;}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00343}00343     \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00344}00344 \}}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00345}00345 \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{a01285}{HF::Geometry::MeshInfo<double>}};}
+\DoxyCodeLine{\Hypertarget{a00116_source_l00346}00346 }
+\DoxyCodeLine{\Hypertarget{a00116_source_l00347}00347 \textcolor{keyword}{template} \textcolor{keyword}{class }\mbox{\hyperlink{a01285}{HF::Geometry::MeshInfo<float>}};}
+
+\end{DoxyCode}

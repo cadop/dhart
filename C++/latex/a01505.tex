@@ -1,8 +1,8 @@
-\hypertarget{a01505}{}\doxysection{nlohmann\+::detail\+::exception Class Reference}
-\label{a01505}\index{nlohmann::detail::exception@{nlohmann::detail::exception}}
+\hypertarget{a01505}{}\doxysection{nlohmann\+::detail\+::type\+\_\+error Class Reference}
+\label{a01505}\index{nlohmann::detail::type\_error@{nlohmann::detail::type\_error}}
 
 
-general exception of the \mbox{\hyperlink{a01605}{basic\+\_\+json}} class  
+exception indicating executing a member function with a wrong type  
 
 
 
@@ -11,117 +11,146 @@ general exception of the \mbox{\hyperlink{a01605}{basic\+\_\+json}} class
 
 
 
-Inheritance diagram for nlohmann\+::detail\+::exception\+:
+Inheritance diagram for nlohmann\+::detail\+::type\+\_\+error\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a01504}
+\includegraphics[width=216pt]{a01504}
 \end{center}
 \end{figure}
 
 
-Collaboration diagram for nlohmann\+::detail\+::exception\+:
+Collaboration diagram for nlohmann\+::detail\+::type\+\_\+error\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=291pt]{a01503}
+\includegraphics[width=276pt]{a01503}
 \end{center}
 \end{figure}
-\doxysubsection*{Public Member Functions}
+\doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-const \mbox{\hyperlink{a00206_a5f2aaec3b681d0a72f7d6e90b70cdcd1}{J\+S\+O\+N\+\_\+\+H\+E\+D\+L\+E\+Y\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+N\+O\+N\+\_\+\+N\+U\+LL}} char $\ast$ \mbox{\hyperlink{a01505_a11fe48748e811531614c84883b00ccd5}{what}} () const noexcept override
-\begin{DoxyCompactList}\small\item\em returns the explanatory string \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
-\begin{DoxyCompactItemize}
-\item 
-const int \mbox{\hyperlink{a01505_a0d4589a3fb54e81646d986c05efa3b9a}{id}}
-\begin{DoxyCompactList}\small\item\em the id of the exception \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Protected Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\hyperlink{a01505_ae323ad0d53bc724414c2233164e65657}{exception}} (int id\+\_\+, const char $\ast$what\+\_\+arg)
+static \mbox{\hyperlink{a01505}{type\+\_\+error}} \mbox{\hyperlink{a01505_aecc083aea4b698c33d042670ba50c10f}{create}} (int id\+\_\+, const std\+::string \&what\+\_\+arg)
 \end{DoxyCompactItemize}
-\doxysubsection*{Static Protected Member Functions}
+\doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static std\+::string \mbox{\hyperlink{a01505_abf41a7e9178356314082284e6cfea278}{name}} (const std\+::string \&ename, int id\+\_\+)
+\mbox{\hyperlink{a01505_aa01edaa0bf18b853368f0b900e485cd7}{type\+\_\+error}} (int id\+\_\+, const char $\ast$what\+\_\+arg)
 \end{DoxyCompactItemize}
-\doxysubsection*{Private Attributes}
-\begin{DoxyCompactItemize}
-\item 
-std\+::runtime\+\_\+error \mbox{\hyperlink{a01505_ad54778dc4f125488cbce8ec276dfdde2}{m}}
-\begin{DoxyCompactList}\small\item\em an exception object as storage for error messages \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-general exception of the \mbox{\hyperlink{a01605}{basic\+\_\+json}} class 
+exception indicating executing a member function with a wrong type 
 
-This class is an extension of {\ttfamily std\+::exception} objects with a member {\itshape id} for exception ids. It is used as the base class for all exceptions thrown by the \mbox{\hyperlink{a01605}{basic\+\_\+json}} class. This class can hence be used as \char`\"{}wildcard\char`\"{} to catch exceptions.
+This exception is thrown in case of a type error; that is, a library function is executed on a JSON value whose type does not match the expected semantics.
 
-Subclasses\+:
-\begin{DoxyItemize}
-\item \mbox{\hyperlink{a01509}{parse\+\_\+error}} for exceptions indicating a parse error
-\item \mbox{\hyperlink{a01513}{invalid\+\_\+iterator}} for exceptions indicating errors with iterators
-\item \mbox{\hyperlink{a01517}{type\+\_\+error}} for exceptions indicating executing a member function with a wrong type
-\item \mbox{\hyperlink{a01521}{out\+\_\+of\+\_\+range}} for exceptions indicating access out of the defined range
-\item \mbox{\hyperlink{a01525}{other\+\_\+error}} for exceptions indicating other library errors
-\end{DoxyItemize}
+Exceptions have ids 3xx.
 
-\begin{DoxyNote}{Note}
-To have nothrow-\/copy-\/constructible exceptions, we internally use {\ttfamily std\+::runtime\+\_\+error} which can cope with arbitrary-\/length error messages. Intermediate strings are built with static functions and then passed to the actual constructor. 
-\end{DoxyNote}
-@liveexample\{The following code shows how arbitrary library exceptions can be caught.,exception\}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ name / id   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ example message   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ description    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ name / id   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ example message   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ description    }\\\cline{1-3}
+\endhead
+json.\+exception.\+type\+\_\+error.\+301   &cannot create object from initializer list   &To create an object from an initializer list, the initializer list must consist only of a list of pairs whose first element is a string. When this constraint is violated, an array is created instead.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+302   &type must be object, but is array   &During implicit or explicit value conversion, the JSON type must be compatible to the target type. For instance, a JSON string can only be converted into string types, but not into numbers or boolean types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+303   &incompatible Reference\+Type for get\+\_\+ref, actual type is object   &To retrieve a reference to a value stored in a \mbox{\hyperlink{a01593}{basic\+\_\+json}} object with get\+\_\+ref, the type of the reference must match the value type. For instance, for a JSON array, the {\itshape Reference\+Type} must be array\+\_\+t \&.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+304   &cannot use at() with string   &The at() member functions can only be executed for certain JSON types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+305   &cannot use operator\mbox{[}\mbox{]} with string   &The operator\mbox{[}\mbox{]} member functions can only be executed for certain JSON types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+306   &cannot use value() with string   &The value() member functions can only be executed for certain JSON types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+307   &cannot use erase() with string   &The erase() member functions can only be executed for certain JSON types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+308   &cannot use push\+\_\+back() with string   &The push\+\_\+back() and operator+= member functions can only be executed for certain JSON types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+309   &cannot use insert() with   &The insert() member functions can only be executed for certain JSON types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+310   &cannot use swap() with number   &The swap() member functions can only be executed for certain JSON types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+311   &cannot use emplace\+\_\+back() with string   &The emplace\+\_\+back() member function can only be executed for certain JSON types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+312   &cannot use update() with string   &The update() member functions can only be executed for certain JSON types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+313   &invalid value to unflatten   &The unflatten function converts an object whose keys are JSON Pointers back into an arbitrary nested JSON value. The JSON Pointers must not overlap, because then the resulting value would not be well defined.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+314   &only objects can be unflattened   &The unflatten function only works for an object whose keys are JSON Pointers.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+315   &values in object must be primitive   &The unflatten function only works for an object whose keys are JSON Pointers and whose values are primitive.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+316   &invalid UTF-\/8 byte at index 10\+: 0x7E   &The dump function only works with UTF-\/8 encoded strings; that is, if you assign a {\ttfamily std\+::string} to a JSON value, make sure it is UTF-\/8 encoded.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+317   &JSON value cannot be serialized to requested format   &The dynamic type of the object cannot be represented in the requested serialization format (e.\+g. a raw {\ttfamily true} or {\ttfamily null} JSON object cannot be serialized to BSON)   \\\cline{1-3}
+\end{longtabu}
 
+
+@liveexample\{The following code shows how a {\ttfamily \mbox{\hyperlink{a01505}{type\+\_\+error}}} exception can be caught.,\mbox{\hyperlink{a01505}{type\+\_\+error}}\}
+
+\begin{DoxySeeAlso}{See also}
+-\/ \mbox{\hyperlink{a01493}{exception}} for the base class of the library exceptions 
+
+-\/ \mbox{\hyperlink{a01497}{parse\+\_\+error}} for exceptions indicating a parse error 
+
+-\/ \mbox{\hyperlink{a01501}{invalid\+\_\+iterator}} for exceptions indicating errors with iterators 
+
+-\/ \mbox{\hyperlink{a01509}{out\+\_\+of\+\_\+range}} for exceptions indicating access out of the defined range 
+
+-\/ \mbox{\hyperlink{a01513}{other\+\_\+error}} for exceptions indicating other library errors
+\end{DoxySeeAlso}
 \begin{DoxySince}{Since}
 version 3.\+0.\+0 
 \end{DoxySince}
 
 
-Definition at line 2352 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l02564}{2564}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{a01505_ae323ad0d53bc724414c2233164e65657}\label{a01505_ae323ad0d53bc724414c2233164e65657}} 
-\index{nlohmann::detail::exception@{nlohmann::detail::exception}!exception@{exception}}
-\index{exception@{exception}!nlohmann::detail::exception@{nlohmann::detail::exception}}
-\doxysubsubsection{\texorpdfstring{exception()}{exception()}}
-{\footnotesize\ttfamily nlohmann\+::detail\+::exception\+::exception (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+,  }\item[{const char $\ast$}]{what\+\_\+arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+\mbox{\Hypertarget{a01505_aa01edaa0bf18b853368f0b900e485cd7}\label{a01505_aa01edaa0bf18b853368f0b900e485cd7}} 
+\index{nlohmann::detail::type\_error@{nlohmann::detail::type\_error}!type\_error@{type\_error}}
+\index{type\_error@{type\_error}!nlohmann::detail::type\_error@{nlohmann::detail::type\_error}}
+\doxysubsubsection{\texorpdfstring{type\_error()}{type\_error()}}
+{\footnotesize\ttfamily nlohmann\+::detail\+::type\+\_\+error\+::type\+\_\+error (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+,  }\item[{const char $\ast$}]{what\+\_\+arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
-Definition at line 2367 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l02575}{2575}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
+
+
+Referenced by \mbox{\hyperlink{a00206_source_l02567}{create()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01505_aa01edaa0bf18b853368f0b900e485cd7_icgraph}
+\end{center}
+\end{figure}
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a01505_abf41a7e9178356314082284e6cfea278}\label{a01505_abf41a7e9178356314082284e6cfea278}} 
-\index{nlohmann::detail::exception@{nlohmann::detail::exception}!name@{name}}
-\index{name@{name}!nlohmann::detail::exception@{nlohmann::detail::exception}}
-\doxysubsubsection{\texorpdfstring{name()}{name()}}
-{\footnotesize\ttfamily static std\+::string nlohmann\+::detail\+::exception\+::name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{ename,  }\item[{int}]{id\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [protected]}}
+\mbox{\Hypertarget{a01505_aecc083aea4b698c33d042670ba50c10f}\label{a01505_aecc083aea4b698c33d042670ba50c10f}} 
+\index{nlohmann::detail::type\_error@{nlohmann::detail::type\_error}!create@{create}}
+\index{create@{create}!nlohmann::detail::type\_error@{nlohmann::detail::type\_error}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{a01505}{type\+\_\+error}} nlohmann\+::detail\+::type\+\_\+error\+::create (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+,  }\item[{const std\+::string \&}]{what\+\_\+arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
-Definition at line 2369 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l02567}{2567}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-References nlohmann\+::to\+\_\+string().
+References \mbox{\hyperlink{a00206_source_l02575}{type\+\_\+error()}}, and \mbox{\hyperlink{a00206_source_l02369}{nlohmann\+::detail\+::exception\+::name()}}.
 
 
 
-Referenced by nlohmann\+::detail\+::parse\+\_\+error\+::create(), nlohmann\+::detail\+::invalid\+\_\+iterator\+::create(), nlohmann\+::detail\+::type\+\_\+error\+::create(), nlohmann\+::detail\+::out\+\_\+of\+\_\+range\+::create(), and nlohmann\+::detail\+::other\+\_\+error\+::create().
+Referenced by \mbox{\hyperlink{a00206_source_l18087}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::basic\+\_\+json()}}, \mbox{\hyperlink{a00206_source_l19793}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::at()}}, \mbox{\hyperlink{a00206_source_l15817}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+escaped()}}, \mbox{\hyperlink{a00206_source_l21954}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::emplace()}}, \mbox{\hyperlink{a00206_source_l21901}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::emplace\+\_\+back()}}, \mbox{\hyperlink{a00206_source_l20516}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::erase()}}, \mbox{\hyperlink{a00206_source_l03426}{nlohmann\+::detail\+::from\+\_\+json()}}, \mbox{\hyperlink{a00206_source_l11934}{nlohmann\+::json\+\_\+pointer$<$ Basic\+Json\+Type $>$\+::get\+\_\+and\+\_\+create()}}, \mbox{\hyperlink{a00206_source_l03440}{nlohmann\+::detail\+::get\+\_\+arithmetic\+\_\+value()}}, \mbox{\hyperlink{a00206_source_l19735}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::get\+\_\+binary()}}, \mbox{\hyperlink{a00206_source_l19183}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::get\+\_\+impl()}}, \mbox{\hyperlink{a00206_source_l19301}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::get\+\_\+ref\+\_\+impl()}}, \mbox{\hyperlink{a00206_source_l22022}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::insert()}}, \mbox{\hyperlink{a00206_source_l19988}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::operator\mbox{[}$\,$\mbox{]}()}}, \mbox{\hyperlink{a00206_source_l21713}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::push\+\_\+back()}}, \mbox{\hyperlink{a00206_source_l22419}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::swap()}}, \mbox{\hyperlink{a00206_source_l12447}{nlohmann\+::json\+\_\+pointer$<$ Basic\+Json\+Type $>$\+::unflatten()}}, \mbox{\hyperlink{a00206_source_l22257}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::update()}}, \mbox{\hyperlink{a00206_source_l20279}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::value()}}, and \mbox{\hyperlink{a00206_source_l12773}{nlohmann\+::detail\+::binary\+\_\+writer$<$ Basic\+Json\+Type, Char\+Type $>$\+::write\+\_\+bson()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a01505_abf41a7e9178356314082284e6cfea278_cgraph}
+\includegraphics[width=350pt]{a01505_aecc083aea4b698c33d042670ba50c10f_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:
@@ -129,62 +158,9 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=550pt]{a01505_abf41a7e9178356314082284e6cfea278_icgraph}
+\includegraphics[width=350pt]{a01505_aecc083aea4b698c33d042670ba50c10f_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{a01505_a11fe48748e811531614c84883b00ccd5}\label{a01505_a11fe48748e811531614c84883b00ccd5}} 
-\index{nlohmann::detail::exception@{nlohmann::detail::exception}!what@{what}}
-\index{what@{what}!nlohmann::detail::exception@{nlohmann::detail::exception}}
-\doxysubsubsection{\texorpdfstring{what()}{what()}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{a00206_a5f2aaec3b681d0a72f7d6e90b70cdcd1}{J\+S\+O\+N\+\_\+\+H\+E\+D\+L\+E\+Y\+\_\+\+R\+E\+T\+U\+R\+N\+S\+\_\+\+N\+O\+N\+\_\+\+N\+U\+LL}} char$\ast$ nlohmann\+::detail\+::exception\+::what (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [noexcept]}}
-
-
-
-returns the explanatory string 
-
-
-
-Definition at line 2357 of file json.\+hpp.
-
-
-
-References m.
-
-
-
-\doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{a01505_a0d4589a3fb54e81646d986c05efa3b9a}\label{a01505_a0d4589a3fb54e81646d986c05efa3b9a}} 
-\index{nlohmann::detail::exception@{nlohmann::detail::exception}!id@{id}}
-\index{id@{id}!nlohmann::detail::exception@{nlohmann::detail::exception}}
-\doxysubsubsection{\texorpdfstring{id}{id}}
-{\footnotesize\ttfamily const int nlohmann\+::detail\+::exception\+::id}
-
-
-
-the id of the exception 
-
-
-
-Definition at line 2363 of file json.\+hpp.
-
-\mbox{\Hypertarget{a01505_ad54778dc4f125488cbce8ec276dfdde2}\label{a01505_ad54778dc4f125488cbce8ec276dfdde2}} 
-\index{nlohmann::detail::exception@{nlohmann::detail::exception}!m@{m}}
-\index{m@{m}!nlohmann::detail::exception@{nlohmann::detail::exception}}
-\doxysubsubsection{\texorpdfstring{m}{m}}
-{\footnotesize\ttfamily std\+::runtime\+\_\+error nlohmann\+::detail\+::exception\+::m\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-an exception object as storage for error messages 
-
-
-
-Definition at line 2376 of file json.\+hpp.
-
-
-
-Referenced by what().
-
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

@@ -1,167 +1,155 @@
-\hypertarget{a01461}{}\doxysection{nano\+R\+T\+\_\+\+Data Class Reference}
-\label{a01461}\index{nanoRT\_Data@{nanoRT\_Data}}
+\hypertarget{a01461}{}\doxysection{HF\+::Spatial\+Structures\+::Edge Struct Reference}
+\label{a01461}\index{HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}}
 
 
-{\ttfamily \#include $<$ray\+\_\+data.\+h$>$}
+A connection to a child node.  
 
 
 
-Inheritance diagram for nano\+R\+T\+\_\+\+Data\+:
+
+{\ttfamily \#include $<$Edge.\+h$>$}
+
+
+
+Collaboration diagram for HF\+::Spatial\+Structures\+::Edge\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=280pt]{a01460}
-\end{center}
-\end{figure}
-
-
-Collaboration diagram for nano\+R\+T\+\_\+\+Data\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a01459}
+\includegraphics[width=294pt]{a01459}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a01461_a2383cbed15c0012ff96ebc4da296af0a}{nano\+R\+T\+\_\+\+Data}} ()=delete
-\item 
-\mbox{\hyperlink{a01461_a0ae198ce1631e5d96a2fa44ccd4d1acc}{nano\+R\+T\+\_\+\+Data}} (\mbox{\hyperlink{a00404_a01285}{H\+F\+::nano\+Geom\+::\+Mesh}} $\ast$\mbox{\hyperlink{a01461_a949f0f10008ed14b2183510786efe24e}{mesh}})
-\item 
-\mbox{\hyperlink{a01461_a0300eeb238ac5748f98b59b9a262450d}{$\sim$nano\+R\+T\+\_\+\+Data}} ()
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{a01461_aef0cf597e116d00ae3f4826578c14e7e}{Edge}} (const \mbox{\hyperlink{a02005}{Node}} \&Child, float Score=0, \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935e}{STEP}} Step\+\_\+\+Type=\mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a}{NONE}})
+\begin{DoxyCompactList}\small\item\em Construct a new edge to child. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01461_a5334b25fe2ee17fa77c29253db4123f2}{Edge}} ()
+\begin{DoxyCompactList}\small\item\em Default Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a00404_a01285}{H\+F\+::nano\+Geom\+::\+Mesh}} $\ast$ \mbox{\hyperlink{a01461_a949f0f10008ed14b2183510786efe24e}{mesh}}
-\item 
-\mbox{\hyperlink{a01393}{nanort\+::\+Ray}}$<$ \mbox{\hyperlink{a00001_a02273}{double}} $>$ \mbox{\hyperlink{a01461_ab057f30627ea451e58b9c6cd2d39134a}{ray}}
-\item 
-\mbox{\hyperlink{a00408_a01441}{nanort\+::\+Triangle\+Intersection}}$<$ \mbox{\hyperlink{a00001_a02273}{double}} $>$ \mbox{\hyperlink{a01461_af9f21fbf5a65e0b29495fff58e466c57}{hit}}
-\item 
-\mbox{\hyperlink{a00001_a02273}{double}} \mbox{\hyperlink{a01461_a08d942806f986d3ceef1bf276e043cb3}{dist}} = -\/1
-\item 
-\mbox{\hyperlink{a00001_a02273}{double}} \mbox{\hyperlink{a01461_aed0de5480c190a177f5adf4ee086719d}{point}} \mbox{[}3\mbox{]} = \{ -\/1,-\/1,-\/1 \}
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{a02005}{Node}} \mbox{\hyperlink{a01461_a7194f21733a2251ec083b3c448ad0484}{child}}
+\begin{DoxyCompactList}\small\item\em The child node for this edge. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935e}{STEP}} \mbox{\hyperlink{a01461_a79b64af5b0377c99c5020a603e1464c5}{step\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Step required to traverse this edge. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{a01461_a8ac634140d603f7471f059d5845e9467}{score}}
+\begin{DoxyCompactList}\small\item\em The cost required to traverse this edge. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
+A connection to a child node. 
+
+\begin{DoxyRemark}{Remarks}
+To save memory, edge contains no parent node. This is usually because edges can be placed in arrays to match the order of parent nodes. 
+\end{DoxyRemark}
 
 
-Definition at line 76 of file ray\+\_\+data.\+h.
+Definition at line \mbox{\hyperlink{a00197_source_l00029}{29}} of file \mbox{\hyperlink{a00197_source}{Edge.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{a01461_a2383cbed15c0012ff96ebc4da296af0a}\label{a01461_a2383cbed15c0012ff96ebc4da296af0a}} 
-\index{nanoRT\_Data@{nanoRT\_Data}!nanoRT\_Data@{nanoRT\_Data}}
-\index{nanoRT\_Data@{nanoRT\_Data}!nanoRT\_Data@{nanoRT\_Data}}
-\doxysubsubsection{\texorpdfstring{nanoRT\_Data()}{nanoRT\_Data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily nano\+R\+T\+\_\+\+Data\+::nano\+R\+T\+\_\+\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
-
-\mbox{\Hypertarget{a01461_a0ae198ce1631e5d96a2fa44ccd4d1acc}\label{a01461_a0ae198ce1631e5d96a2fa44ccd4d1acc}} 
-\index{nanoRT\_Data@{nanoRT\_Data}!nanoRT\_Data@{nanoRT\_Data}}
-\index{nanoRT\_Data@{nanoRT\_Data}!nanoRT\_Data@{nanoRT\_Data}}
-\doxysubsubsection{\texorpdfstring{nanoRT\_Data()}{nanoRT\_Data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily nano\+R\+T\+\_\+\+Data\+::nano\+R\+T\+\_\+\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00404_a01285}{H\+F\+::nano\+Geom\+::\+Mesh}} $\ast$}]{mesh }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{a01461_aef0cf597e116d00ae3f4826578c14e7e}\label{a01461_aef0cf597e116d00ae3f4826578c14e7e}} 
+\index{HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}!Edge@{Edge}}
+\index{Edge@{Edge}!HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}}
+\doxysubsubsection{\texorpdfstring{Edge()}{Edge()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily HF\+::\+Spatial\+Structures\+::\+Edge\+::\+Edge (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02005}{Node}} \&}]{Child,  }\item[{float}]{Score = {\ttfamily 0},  }\item[{\mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935e}{STEP}}}]{Step\+\_\+\+Type = {\ttfamily \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a}{NONE}}} }\end{DoxyParamCaption})}
 
 
 
-Definition at line 10 of file nanort\+\_\+raytracer.\+cpp.
+Construct a new edge to child. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Child} & The node being traversed to. \\
+\hline
+{\em Score} & The cost to traverse from parent to child. \\
+\hline
+{\em Step\+\_\+\+Type} & The type of step required to traverse from parent to child. \\
+\hline
+\end{DoxyParams}
 
 
 
-References nanort\+::\+Ray$<$ T $>$\+::dir, hit, nanort\+::\+Ray$<$ T $>$\+::max\+\_\+t, mesh, nanort\+::\+Ray$<$ T $>$\+::min\+\_\+t, nanort\+::\+Ray$<$ T $>$\+::org, nanort\+::\+Triangle\+Intersection$<$ T $>$\+::prim\+\_\+id, ray, nanort\+::\+Triangle\+Intersection$<$ T $>$\+::t, nanort\+::\+Triangle\+Intersection$<$ T $>$\+::u, and nanort\+::\+Triangle\+Intersection$<$ T $>$\+::v.
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}Edge.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} node(12.0, 23.1, 34.2, 456);}
+\DoxyCodeLine{\textcolor{keywordtype}{float} \mbox{\hyperlink{a01461_a8ac634140d603f7471f059d5845e9467}{score}} = 4.3f;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01461}{HF::SpatialStructures::Edge}} edge(node, \mbox{\hyperlink{a01461_a8ac634140d603f7471f059d5845e9467}{score}}, \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9}{STEP::NOT\_CONNECTED}});}
 
-\mbox{\Hypertarget{a01461_a0300eeb238ac5748f98b59b9a262450d}\label{a01461_a0300eeb238ac5748f98b59b9a262450d}} 
-\index{nanoRT\_Data@{nanoRT\_Data}!````~nanoRT\_Data@{$\sim$nanoRT\_Data}}
-\index{````~nanoRT\_Data@{$\sim$nanoRT\_Data}!nanoRT\_Data@{nanoRT\_Data}}
-\doxysubsubsection{\texorpdfstring{$\sim$nanoRT\_Data()}{~nanoRT\_Data()}}
-{\footnotesize\ttfamily nano\+R\+T\+\_\+\+Data\+::$\sim$nano\+R\+T\+\_\+\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00194_source_l00012}{12}} of file \mbox{\hyperlink{a00194_source}{edge.\+cpp}}.
+
+\mbox{\Hypertarget{a01461_a5334b25fe2ee17fa77c29253db4123f2}\label{a01461_a5334b25fe2ee17fa77c29253db4123f2}} 
+\index{HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}!Edge@{Edge}}
+\index{Edge@{Edge}!HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}}
+\doxysubsubsection{\texorpdfstring{Edge()}{Edge()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily HF\+::\+Spatial\+Structures\+::\+Edge\+::\+Edge (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 38 of file nanort\+\_\+raytracer.\+cpp.
+Default Constructor. 
 
 
 
-References H\+F\+::nano\+Geom\+::\+Mesh\+::faces, mesh, and H\+F\+::nano\+Geom\+::\+Mesh\+::vertices.
+Definition at line \mbox{\hyperlink{a00197_source_l00053}{53}} of file \mbox{\hyperlink{a00197_source}{Edge.\+h}}.
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{a01461_a08d942806f986d3ceef1bf276e043cb3}\label{a01461_a08d942806f986d3ceef1bf276e043cb3}} 
-\index{nanoRT\_Data@{nanoRT\_Data}!dist@{dist}}
-\index{dist@{dist}!nanoRT\_Data@{nanoRT\_Data}}
-\doxysubsubsection{\texorpdfstring{dist}{dist}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00001_a02273}{double}} nano\+R\+T\+\_\+\+Data\+::dist = -\/1}
+\mbox{\Hypertarget{a01461_a7194f21733a2251ec083b3c448ad0484}\label{a01461_a7194f21733a2251ec083b3c448ad0484}} 
+\index{HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}!child@{child}}
+\index{child@{child}!HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}}
+\doxysubsubsection{\texorpdfstring{child}{child}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02005}{Node}} HF\+::\+Spatial\+Structures\+::\+Edge\+::child}
 
 
 
-Definition at line 90 of file ray\+\_\+data.\+h.
-
-\mbox{\Hypertarget{a01461_af9f21fbf5a65e0b29495fff58e466c57}\label{a01461_af9f21fbf5a65e0b29495fff58e466c57}} 
-\index{nanoRT\_Data@{nanoRT\_Data}!hit@{hit}}
-\index{hit@{hit}!nanoRT\_Data@{nanoRT\_Data}}
-\doxysubsubsection{\texorpdfstring{hit}{hit}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00408_a01441}{nanort\+::\+Triangle\+Intersection}}$<$\mbox{\hyperlink{a00001_a02273}{double}}$>$ nano\+R\+T\+\_\+\+Data\+::hit}
+The child node for this edge. 
 
 
 
-Definition at line 88 of file ray\+\_\+data.\+h.
+Definition at line \mbox{\hyperlink{a00197_source_l00030}{30}} of file \mbox{\hyperlink{a00197_source}{Edge.\+h}}.
+
+\mbox{\Hypertarget{a01461_a8ac634140d603f7471f059d5845e9467}\label{a01461_a8ac634140d603f7471f059d5845e9467}} 
+\index{HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}!score@{score}}
+\index{score@{score}!HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}}
+\doxysubsubsection{\texorpdfstring{score}{score}}
+{\footnotesize\ttfamily float HF\+::\+Spatial\+Structures\+::\+Edge\+::score}
 
 
 
-Referenced by nano\+R\+T\+\_\+\+Data(), H\+F\+::nano\+Geom\+::nano\+R\+T\+\_\+\+Intersect(), and T\+E\+S\+T().
-
-\mbox{\Hypertarget{a01461_a949f0f10008ed14b2183510786efe24e}\label{a01461_a949f0f10008ed14b2183510786efe24e}} 
-\index{nanoRT\_Data@{nanoRT\_Data}!mesh@{mesh}}
-\index{mesh@{mesh}!nanoRT\_Data@{nanoRT\_Data}}
-\doxysubsubsection{\texorpdfstring{mesh}{mesh}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00404_a01285}{H\+F\+::nano\+Geom\+::\+Mesh}}$\ast$ nano\+R\+T\+\_\+\+Data\+::mesh}
+The cost required to traverse this edge. 
 
 
 
-Definition at line 84 of file ray\+\_\+data.\+h.
+Definition at line \mbox{\hyperlink{a00197_source_l00032}{32}} of file \mbox{\hyperlink{a00197_source}{Edge.\+h}}.
+
+\mbox{\Hypertarget{a01461_a79b64af5b0377c99c5020a603e1464c5}\label{a01461_a79b64af5b0377c99c5020a603e1464c5}} 
+\index{HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}!step\_type@{step\_type}}
+\index{step\_type@{step\_type}!HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}}
+\doxysubsubsection{\texorpdfstring{step\_type}{step\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935e}{STEP}} HF\+::\+Spatial\+Structures\+::\+Edge\+::step\+\_\+type}
 
 
 
-Referenced by nano\+R\+T\+\_\+\+Data(), and $\sim$nano\+R\+T\+\_\+\+Data().
+Step required to traverse this edge. 
 
-\mbox{\Hypertarget{a01461_aed0de5480c190a177f5adf4ee086719d}\label{a01461_aed0de5480c190a177f5adf4ee086719d}} 
-\index{nanoRT\_Data@{nanoRT\_Data}!point@{point}}
-\index{point@{point}!nanoRT\_Data@{nanoRT\_Data}}
-\doxysubsubsection{\texorpdfstring{point}{point}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00001_a02273}{double}} nano\+R\+T\+\_\+\+Data\+::point\mbox{[}3\mbox{]} = \{ -\/1,-\/1,-\/1 \}}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935e}{STEP}} for info on every step type. 
+\end{DoxySeeAlso}
 
 
-
-Definition at line 91 of file ray\+\_\+data.\+h.
+Definition at line \mbox{\hyperlink{a00197_source_l00031}{31}} of file \mbox{\hyperlink{a00197_source}{Edge.\+h}}.
 
 
 
-Referenced by H\+F\+::nano\+Geom\+::nano\+R\+T\+\_\+\+Intersect(), and T\+E\+S\+T().
-
-\mbox{\Hypertarget{a01461_ab057f30627ea451e58b9c6cd2d39134a}\label{a01461_ab057f30627ea451e58b9c6cd2d39134a}} 
-\index{nanoRT\_Data@{nanoRT\_Data}!ray@{ray}}
-\index{ray@{ray}!nanoRT\_Data@{nanoRT\_Data}}
-\doxysubsubsection{\texorpdfstring{ray}{ray}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01393}{nanort\+::\+Ray}}$<$\mbox{\hyperlink{a00001_a02273}{double}}$>$ nano\+R\+T\+\_\+\+Data\+::ray}
-
-
-
-Definition at line 86 of file ray\+\_\+data.\+h.
-
-
-
-Referenced by nano\+R\+T\+\_\+\+Data(), H\+F\+::nano\+Geom\+::nano\+R\+T\+\_\+\+Intersect(), and T\+E\+S\+T().
-
-
-
-The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Cpp/raytracer/src/\mbox{\hyperlink{a00167}{ray\+\_\+data.\+h}}\item 
-Cpp/raytracer/src/\mbox{\hyperlink{a02919}{nanort\+\_\+raytracer.\+cpp}}\end{DoxyCompactItemize}
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00197}{Edge.\+h}}\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00194}{edge.\+cpp}}\end{DoxyCompactItemize}

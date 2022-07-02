@@ -1,8 +1,8 @@
 var a01373 =
 [
-    [ "Source", "a01373.html#a38ed74046bc9ec6d9d8c6f28b2ed93ee", null ],
-    [ "stack_buffer", "a01373.html#a374c0c85cce3ef3a24d045e6485e4284", null ],
-    [ "stack_buffer", "a01373.html#a54a0aec427b7ae56a1965f3450eaa23b", null ],
-    [ "stack_buffer_", "a01373.html#a305996e6c091358dcf5526b65b1889b2", null ],
-    [ "used_stack_buffer_", "a01373.html#ae9ae5f1c043a2a5fcd6df58108e67182", null ]
+    [ "StackVector", "a01373.html#aa382716d7837c894d720b14cd5493b8e", null ],
+    [ "StackVector", "a01373.html#a2f020ab95e8e128a252bd969c6ec2ab2", null ],
+    [ "operator=", "a01373.html#a7541fa2868c6bf906284917a04a3f2c3", null ],
+    [ "operator[]", "a01373.html#ad87863b8de65943ea9dd6fa36d400aed", null ],
+    [ "operator[]", "a01373.html#a721b9dd781613c055cb47fd4522a150f", null ]
 ];

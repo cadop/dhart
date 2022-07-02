@@ -1,247 +1,213 @@
-\hypertarget{a01329}{}\doxysection{HF\+::Pathfinding\+::Boost\+Graph Class Reference}
-\label{a01329}\index{HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}}
+\hypertarget{a01329}{}\doxysection{HF\+::Pathfinding\+::Distance\+And\+Predecessor Struct Reference}
+\label{a01329}\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
 
 
-A graph usable with the Boost\+Graph\+Library.  
-
-
-
-
-{\ttfamily \#include $<$boost\+\_\+graph.\+h$>$}
+Holds and maintains a distance and predecessor matrix.  
 
 
 
-Collaboration diagram for HF\+::Pathfinding\+::Boost\+Graph\+:
+
+{\ttfamily \#include $<$path\+\_\+finder.\+h$>$}
+
+
+
+Collaboration diagram for HF\+::Pathfinding\+::Distance\+And\+Predecessor\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a01327}
+\includegraphics[width=344pt]{a01327}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a01329_ac7878a25105aec59a116942a717d71b4}{Boost\+Graph}} (const \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} \&graph, const std\+::string \&cost\+\_\+type=\char`\"{}\char`\"{})
-\begin{DoxyCompactList}\small\item\em Create a boost graph from a \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01329_a9626c462cdaa2b8d869e7a4311c51b7d}{$\sim$\+Boost\+Graph}} ()
-\begin{DoxyCompactList}\small\item\em Explicit Destructor required for \mbox{\hyperlink{a01337}{Boost\+Graph\+Deleter}} to work in \mbox{\hyperlink{a00140}{path\+\_\+finder.\+h}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{a01329_a9d9e98ea5eedd5b876cb0da9c17eedf4}{Distance\+And\+Predecessor}} (int \mbox{\hyperlink{a01329_afae801900e74d0d1389988e8163f293a}{size}})
+\begin{DoxyCompactList}\small\item\em Create and allocate a pair of distance and predecessor arrays. \end{DoxyCompactList}\item 
+float $\ast$ \mbox{\hyperlink{a01329_a7237256578bb77a912babbc2f777756c}{Get\+Row\+Of\+Dist}} (int i)
+\begin{DoxyCompactList}\small\item\em Get a pointer to the beginning of the ith row of the distance array. \end{DoxyCompactList}\item 
+int $\ast$ \mbox{\hyperlink{a01329_a4ab3579abd7bd4f18456e8e5022b51ca}{Get\+Row\+Of\+Pred}} (int i)
+\begin{DoxyCompactList}\small\item\em Get a pointer to the beginning of the ith row of the predecessor array. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a00406_a9314d552e0a8092644fa080c9945bd25}{graph\+\_\+t}} \mbox{\hyperlink{a01329_a8af65de831cc2255b7ad2069791124ef}{g}}
-\begin{DoxyCompactList}\small\item\em The underlying graph in boost. \end{DoxyCompactList}\item 
-std\+::vector$<$ \mbox{\hyperlink{a00406_aff4215affd9d683505478f5b7dcc1804}{vertex\+\_\+descriptor}} $>$ \mbox{\hyperlink{a01329_ac7b026041a385cf55c089944a02e0c1d}{p}}
-\begin{DoxyCompactList}\small\item\em Vertex array preallocated to the number of nodes in the graph. \end{DoxyCompactList}\item 
-std\+::vector$<$ \mbox{\hyperlink{a00001_a02273}{double}} $>$ \mbox{\hyperlink{a01329_a45e623a31de17dd7eba2e849822fc692}{d}}
-\begin{DoxyCompactList}\small\item\em Distance array preallocated to the number of nodes in the graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+std\+::vector$<$ float $>$ $\ast$ \mbox{\hyperlink{a01329_ad9494246039332f91b21d77a70cb7318}{dist}}
+\item 
+std\+::vector$<$ int $>$ $\ast$ \mbox{\hyperlink{a01329_a2c8df39d6c2778163d32e53d803baf56}{pred}}
+\item 
+int \mbox{\hyperlink{a01329_afae801900e74d0d1389988e8163f293a}{size}} = 0
+\begin{DoxyCompactList}\small\item\em Number of rows and colums. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-A graph usable with the Boost\+Graph\+Library. 
+Holds and maintains a distance and predecessor matrix. 
 
-Contains a C\+SR in boost created from a graph in Human\+Factors. This is necessary for using any of the Boost\+Graph\+Library functions.
-
-\begin{DoxyInvariant}{Invariant}
-This class will always carry a valid boost graph.
-\end{DoxyInvariant}
 \begin{DoxyRemark}{Remarks}
-None of the memebers of this class should need to be modified after the class is created. This is intended to be a pseudo-\/wrapper to make the \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} usable with boost. You can read more about the boost graph libary in the official boost documentation\+: \href{https://www.boost.org/doc/libs/1_73_0/libs/graph/doc/quick_tour.html}{\texttt{ https\+://www.\+boost.\+org/doc/libs/1\+\_\+73\+\_\+0/libs/graph/doc/quick\+\_\+tour.\+html}} Boost\textquotesingle{}s graphs can be difficult to use due to the extensive use of templates. This limits their usage outside of the H\+F\+::\+Pathfinder, so there aren\textquotesingle{}t any functions to interact with the boost graph after creation.
+This is mostly used for the implementation of Generate\+Distance\+And\+Predecessor.
 \end{DoxyRemark}
-\begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} for a graph that\textquotesingle{}s better supported in Human\+Factors. 
-
-\mbox{\hyperlink{a00406_a9314d552e0a8092644fa080c9945bd25}{graph\+\_\+t}} for info about the graph in \mbox{\hyperlink{a00407}{boost}} this class holds. 
-\end{DoxySeeAlso}
+\begin{DoxyWarning}{Warning}
+This object does NOT delete it\textquotesingle{}s internal arrays upon destruction. It\textquotesingle{}s the owner\textquotesingle{}s responsibility to do this! 
+\end{DoxyWarning}
 
 
-Definition at line 166 of file boost\+\_\+graph.\+h.
+Definition at line \mbox{\hyperlink{a00140_source_l00409}{409}} of file \mbox{\hyperlink{a00140_source}{path\+\_\+finder.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{a01329_ac7878a25105aec59a116942a717d71b4}\label{a01329_ac7878a25105aec59a116942a717d71b4}} 
-\index{HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}!BoostGraph@{BoostGraph}}
-\index{BoostGraph@{BoostGraph}!HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}}
-\doxysubsubsection{\texorpdfstring{BoostGraph()}{BoostGraph()}}
-{\footnotesize\ttfamily H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+::\+Boost\+Graph (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} \&}]{graph,  }\item[{const std\+::string \&}]{cost\+\_\+type = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{a01329_a9d9e98ea5eedd5b876cb0da9c17eedf4}\label{a01329_a9d9e98ea5eedd5b876cb0da9c17eedf4}} 
+\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}!DistanceAndPredecessor@{DistanceAndPredecessor}}
+\index{DistanceAndPredecessor@{DistanceAndPredecessor}!HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
+\doxysubsubsection{\texorpdfstring{DistanceAndPredecessor()}{DistanceAndPredecessor()}}
+{\footnotesize\ttfamily HF\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::\+Distance\+And\+Predecessor (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Create a boost graph from a \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}}. 
+Create and allocate a pair of distance and predecessor arrays. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em graph} & Graph to create a graph in boost from. \\
-\hline
-{\em cost\+\_\+type} & The name of the cost set in {\ttfamily graph} that will be used to construct this boost graph Leaving this as blank will use the cost type the graph was constructed with.\\
+{\em size} & Number of rows and columns. Size of each array will be this to the power of 2\\
 \hline
 \end{DoxyParams}
-Every edge and node in the graph is used to create a graph in Boost. This will also allocate space equal to the number of nodes in g for this class\textquotesingle{}s p and d arrays for use in Find\+Path as an optimization.
+All arrays will be initialized with NAN as their default values 
 
-\begin{DoxyPrecond}{Precondition}
-1) If {\ttfamily cost\+\_\+type} is specified, and is not an empty string, then {\ttfamily cost\+\_\+type} must be the key of an already created cost in {\ttfamily graph}. 
+Definition at line \mbox{\hyperlink{a00140_source_l00423}{423}} of file \mbox{\hyperlink{a00140_source}{path\+\_\+finder.\+h}}.
 
-2) {\ttfamily graph} must be compressed.
-\end{DoxyPrecond}
 
-\begin{DoxyExceptions}{Exceptions}
-{\em \mbox{\hyperlink{a01281}{H\+F\+::\+Exceptions\+::\+No\+Cost}}} & if {\ttfamily cost\+\_\+type} was not left blank and no cost type with the key {\ttfamily cost\+\_\+type} exists in {\ttfamily graph}.\\
+
+References \mbox{\hyperlink{a00140_source_l00410}{dist}}, \mbox{\hyperlink{a00140_source_l00411}{pred}}, and \mbox{\hyperlink{a00140_source_l00413}{size}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01329_a7237256578bb77a912babbc2f777756c}\label{a01329_a7237256578bb77a912babbc2f777756c}} 
+\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}!GetRowOfDist@{GetRowOfDist}}
+\index{GetRowOfDist@{GetRowOfDist}!HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
+\doxysubsubsection{\texorpdfstring{GetRowOfDist()}{GetRowOfDist()}}
+{\footnotesize\ttfamily float $\ast$ HF\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::\+Get\+Row\+Of\+Dist (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get a pointer to the beginning of the ith row of the distance array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Index of the row to get.\\
 \hline
-\end{DoxyExceptions}
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the beginning of row i. 
+\end{DoxyReturn}
 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "boost\_graph.h", \#include "node.h", \#include "graph.h",}}
-\DoxyCodeLine{\textcolor{comment}{// and \#include <vector>}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// In order to create a BoostGraph, we must first create a Graph instance first.}}
-\DoxyCodeLine{\textcolor{comment}{// We must prepare the nodes, their edges, and the weights (distances) of each edge.}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f);}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
-\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
-\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
-\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed}}
-\DoxyCodeLine{\textcolor{comment}{// by reference}}
-\DoxyCodeLine{\mbox{\hyperlink{a01497}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Passing Graph graph to BoostGraph bg, by reference}}
-\DoxyCodeLine{\mbox{\hyperlink{a01329}{HF::Pathfinding::BoostGraph}} bg(graph);}
-\end{DoxyCode}
- 
 
-Definition at line 23 of file boost\+\_\+graph.\+cpp.
+Definition at line \mbox{\hyperlink{a00140_source_l00439}{439}} of file \mbox{\hyperlink{a00140_source}{path\+\_\+finder.\+h}}.
 
 
 
-References d, g, H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Edges(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Max\+I\+D(), p, H\+F\+::\+Spatial\+Structures\+::\+Graph\+::size(), and H\+F\+::\+Pathfinding\+::\+Edge\+\_\+\+Cost\+::weight.
+References \mbox{\hyperlink{a00140_source_l00410}{dist}}, and \mbox{\hyperlink{a00140_source_l00413}{size}}.
 
-Here is the call graph for this function\+:
+
+
+Referenced by \mbox{\hyperlink{a00137_source_l00267}{HF\+::\+Pathfinding\+::\+Generate\+Distance\+And\+Pred()}}, and \mbox{\hyperlink{a00140_source_l00621}{operator$<$$<$()}}.
+
+Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a01329_ac7878a25105aec59a116942a717d71b4_cgraph}
+\includegraphics[width=350pt]{a01329_a7237256578bb77a912babbc2f777756c_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{a01329_a9626c462cdaa2b8d869e7a4311c51b7d}\label{a01329_a9626c462cdaa2b8d869e7a4311c51b7d}} 
-\index{HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}!````~BoostGraph@{$\sim$BoostGraph}}
-\index{````~BoostGraph@{$\sim$BoostGraph}!HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}}
-\doxysubsubsection{\texorpdfstring{$\sim$BoostGraph()}{~BoostGraph()}}
-{\footnotesize\ttfamily H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+::$\sim$\+Boost\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+\mbox{\Hypertarget{a01329_a4ab3579abd7bd4f18456e8e5022b51ca}\label{a01329_a4ab3579abd7bd4f18456e8e5022b51ca}} 
+\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}!GetRowOfPred@{GetRowOfPred}}
+\index{GetRowOfPred@{GetRowOfPred}!HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
+\doxysubsubsection{\texorpdfstring{GetRowOfPred()}{GetRowOfPred()}}
+{\footnotesize\ttfamily int $\ast$ HF\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::\+Get\+Row\+Of\+Pred (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Explicit Destructor required for \mbox{\hyperlink{a01337}{Boost\+Graph\+Deleter}} to work in \mbox{\hyperlink{a00140}{path\+\_\+finder.\+h}}. 
+Get a pointer to the beginning of the ith row of the predecessor array. 
 
-Calls the default destruction behavior.
 
-\begin{DoxyWarning}{Warning}
-Do not modify this function! This class is still using the default destructor, but unique pointer requires the destructor to be declared.
-\end{DoxyWarning}
+\begin{DoxyParams}{Parameters}
+{\em i} & Index of the row to get.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the beginning of row i. 
+\end{DoxyReturn}
 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "boost\_graph.h", \#include "node.h", \#include "graph.h",}}
-\DoxyCodeLine{\textcolor{comment}{// and \#include <vector>}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// In order to create a BoostGraph, we must first create a Graph instance first.}}
-\DoxyCodeLine{\textcolor{comment}{// We must prepare the nodes, their edges, and the weights (distances) of each edge.}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f);}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
-\DoxyCodeLine{\mbox{\hyperlink{a02017}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
-\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
-\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
-\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed}}
-\DoxyCodeLine{\textcolor{comment}{// by reference}}
-\DoxyCodeLine{\mbox{\hyperlink{a01497}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Begin scope}}
-\DoxyCodeLine{\{}
-\DoxyCodeLine{    \textcolor{comment}{// Create a BoostGraph bg, from a Graph graph (passing g by reference)}}
-\DoxyCodeLine{    \mbox{\hyperlink{a01329}{HF::Pathfinding::BoostGraph}} bg(graph);}
-\DoxyCodeLine{\}}
-\DoxyCodeLine{\textcolor{comment}{// End scope}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// When bg goes out of scope, BoostGraph::\string~BoostGraph is called An explicit call}}
-\DoxyCodeLine{\textcolor{comment}{// to BoostGraph::\string~BoostGraph is also made when invoking operator delete on a}}
-\DoxyCodeLine{\textcolor{comment}{// (BoostGraph *)}}
-\end{DoxyCode}
- 
+
+Definition at line \mbox{\hyperlink{a00140_source_l00453}{453}} of file \mbox{\hyperlink{a00140_source}{path\+\_\+finder.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00140_source_l00411}{pred}}, and \mbox{\hyperlink{a00140_source_l00413}{size}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00137_source_l00267}{HF\+::\+Pathfinding\+::\+Generate\+Distance\+And\+Pred()}}, and \mbox{\hyperlink{a00140_source_l00621}{operator$<$$<$()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01329_a4ab3579abd7bd4f18456e8e5022b51ca_icgraph}
+\end{center}
+\end{figure}
+
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{a01329_a45e623a31de17dd7eba2e849822fc692}\label{a01329_a45e623a31de17dd7eba2e849822fc692}} 
-\index{HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}!d@{d}}
-\index{d@{d}!HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}}
-\doxysubsubsection{\texorpdfstring{d}{d}}
-{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{a00001_a02273}{double}}$>$ H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+::d}
+\mbox{\Hypertarget{a01329_ad9494246039332f91b21d77a70cb7318}\label{a01329_ad9494246039332f91b21d77a70cb7318}} 
+\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}!dist@{dist}}
+\index{dist@{dist}!HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
+\doxysubsubsection{\texorpdfstring{dist}{dist}}
+{\footnotesize\ttfamily std\+::vector$<$float$>$$\ast$ HF\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::dist}
 
 
 
-Distance array preallocated to the number of nodes in the graph. 
+Definition at line \mbox{\hyperlink{a00140_source_l00410}{410}} of file \mbox{\hyperlink{a00140_source}{path\+\_\+finder.\+h}}.
 
 
 
-Definition at line 170 of file boost\+\_\+graph.\+h.
+Referenced by \mbox{\hyperlink{a00140_source_l00423}{Distance\+And\+Predecessor()}}, \mbox{\hyperlink{a00356_source_l00171}{Calculate\+Distance\+And\+Predecessor()}}, and \mbox{\hyperlink{a00140_source_l00439}{Get\+Row\+Of\+Dist()}}.
+
+\mbox{\Hypertarget{a01329_a2c8df39d6c2778163d32e53d803baf56}\label{a01329_a2c8df39d6c2778163d32e53d803baf56}} 
+\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}!pred@{pred}}
+\index{pred@{pred}!HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
+\doxysubsubsection{\texorpdfstring{pred}{pred}}
+{\footnotesize\ttfamily std\+::vector$<$int$>$$\ast$ HF\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::pred}
 
 
 
-Referenced by Boost\+Graph().
-
-\mbox{\Hypertarget{a01329_a8af65de831cc2255b7ad2069791124ef}\label{a01329_a8af65de831cc2255b7ad2069791124ef}} 
-\index{HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}!g@{g}}
-\index{g@{g}!HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}}
-\doxysubsubsection{\texorpdfstring{g}{g}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00406_a9314d552e0a8092644fa080c9945bd25}{graph\+\_\+t}} H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+::g}
+Definition at line \mbox{\hyperlink{a00140_source_l00411}{411}} of file \mbox{\hyperlink{a00140_source}{path\+\_\+finder.\+h}}.
 
 
 
-The underlying graph in boost. 
+Referenced by \mbox{\hyperlink{a00140_source_l00423}{Distance\+And\+Predecessor()}}, \mbox{\hyperlink{a00356_source_l00171}{Calculate\+Distance\+And\+Predecessor()}}, and \mbox{\hyperlink{a00140_source_l00453}{Get\+Row\+Of\+Pred()}}.
+
+\mbox{\Hypertarget{a01329_afae801900e74d0d1389988e8163f293a}\label{a01329_afae801900e74d0d1389988e8163f293a}} 
+\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}!size@{size}}
+\index{size@{size}!HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily int HF\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::size = 0}
 
 
 
-Definition at line 168 of file boost\+\_\+graph.\+h.
+Number of rows and colums. 
 
 
 
-Referenced by Boost\+Graph(), H\+F\+::\+Pathfinding\+::\+Find\+Path(), H\+F\+::\+Pathfinding\+::\+Find\+Paths(), H\+F\+::\+Pathfinding\+::\+Generate\+Distance\+And\+Pred(), H\+F\+::\+Pathfinding\+::\+Insert\+Paths\+Into\+Array(), and T\+E\+S\+T().
-
-\mbox{\Hypertarget{a01329_ac7b026041a385cf55c089944a02e0c1d}\label{a01329_ac7b026041a385cf55c089944a02e0c1d}} 
-\index{HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}!p@{p}}
-\index{p@{p}!HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}}
-\doxysubsubsection{\texorpdfstring{p}{p}}
-{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{a00406_aff4215affd9d683505478f5b7dcc1804}{vertex\+\_\+descriptor}}$>$ H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+::p}
+Definition at line \mbox{\hyperlink{a00140_source_l00413}{413}} of file \mbox{\hyperlink{a00140_source}{path\+\_\+finder.\+h}}.
 
 
 
-Vertex array preallocated to the number of nodes in the graph. 
+Referenced by \mbox{\hyperlink{a00140_source_l00423}{Distance\+And\+Predecessor()}}, \mbox{\hyperlink{a00140_source_l00439}{Get\+Row\+Of\+Dist()}}, \mbox{\hyperlink{a00140_source_l00453}{Get\+Row\+Of\+Pred()}}, and \mbox{\hyperlink{a00140_source_l00621}{operator$<$$<$()}}.
 
 
 
-Definition at line 169 of file boost\+\_\+graph.\+h.
-
-
-
-Referenced by Boost\+Graph(), H\+F\+::\+Pathfinding\+::\+Generate\+Distance\+And\+Pred(), and H\+F\+::\+Pathfinding\+::\+Insert\+All\+To\+All\+Paths\+Into\+Array().
-
-
-
-The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Cpp/pathfinding/src/\mbox{\hyperlink{a00134}{boost\+\_\+graph.\+h}}\item 
-Cpp/pathfinding/src/\mbox{\hyperlink{a00131}{boost\+\_\+graph.\+cpp}}\end{DoxyCompactItemize}
+Cpp/pathfinding/src/\mbox{\hyperlink{a00140}{path\+\_\+finder.\+h}}\end{DoxyCompactItemize}

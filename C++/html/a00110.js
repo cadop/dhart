@@ -1,10 +1,10 @@
 var a00110 =
 [
-    [ "FileNotFound", "a01265.html", "a01265" ],
-    [ "InvalidOBJ", "a01269.html", "a01269" ],
-    [ "MissingDependency", "a01273.html", "a01273" ],
-    [ "NotImplemented", "a01277.html", "a01277" ],
-    [ "NoCost", "a01281.html", "a01281" ],
+    [ "HF::Exceptions::FileNotFound", "a01253.html", "a01253" ],
+    [ "HF::Exceptions::InvalidOBJ", "a01257.html", "a01257" ],
+    [ "HF::Exceptions::MissingDependency", "a01261.html", "a01261" ],
+    [ "HF::Exceptions::NotImplemented", "a01265.html", "a01265" ],
+    [ "HF::Exceptions::NoCost", "a01269.html", "a01269" ],
     [ "HF_STATUS", "a00110.html#aed53c233beb1d9ec1b0c5fc2bfbb1051", [
       [ "OK", "a00110.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d", null ],
       [ "NOT_IMPLEMENTED", "a00110.html#aed53c233beb1d9ec1b0c5fc2bfbb1051acd7712929c704f3ad7d7af9113654098", null ],

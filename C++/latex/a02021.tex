@@ -1,53 +1,109 @@
-\hypertarget{a02021}{}\doxysection{std\+::hash$<$ HF\+::Spatial\+Structures\+::Node $>$ Struct Reference}
-\label{a02021}\index{std::hash$<$ HF::SpatialStructures::Node $>$@{std::hash$<$ HF::SpatialStructures::Node $>$}}
+\hypertarget{a02021}{}\doxysection{Ray\+Result Struct Reference}
+\label{a02021}\index{RayResult@{RayResult}}
 
 
-Hash this node by combining the hashes of all of it\textquotesingle{}s position elements.  
-
-
-
-
-{\ttfamily \#include $<$node.\+h$>$}
-
-\doxysubsection*{Public Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-std\+::size\+\_\+t \mbox{\hyperlink{a02021_ae698fc86d39e9e05ca2f030654fa45ca}{operator()}} (const \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&k) const noexcept
-\end{DoxyCompactItemize}
-
-
-\doxysubsection{Detailed Description}
-Hash this node by combining the hashes of all of it\textquotesingle{}s position elements. 
-
-Definition at line 421 of file node.\+h.
+The result of firing a ray at an object. Contains distance to the hitpoint and the ID of the mesh.  
 
 
 
-\doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a02021_ae698fc86d39e9e05ca2f030654fa45ca}\label{a02021_ae698fc86d39e9e05ca2f030654fa45ca}} 
-\index{std::hash$<$ HF::SpatialStructures::Node $>$@{std::hash$<$ HF::SpatialStructures::Node $>$}!operator()@{operator()}}
-\index{operator()@{operator()}!std::hash$<$ HF::SpatialStructures::Node $>$@{std::hash$<$ HF::SpatialStructures::Node $>$}}
-\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
-{\footnotesize\ttfamily std\+::size\+\_\+t std\+::hash$<$ \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&}]{k }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+{\ttfamily \#include $<$raytracer\+\_\+\+C.\+h$>$}
 
 
 
-Definition at line 423 of file node.\+h.
-
-
-
-References std\+::hash\+\_\+combine\+\_\+impl().
-
-Here is the call graph for this function\+:
+Collaboration diagram for Ray\+Result\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a02021_ae698fc86d39e9e05ca2f030654fa45ca_cgraph}
+\includegraphics[width=181pt]{a02019}
 \end{center}
 \end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename N , typename V $>$ }\\void \mbox{\hyperlink{a02021_a1407239fc0cc25bafcc3559d0a9d26bb}{Set\+Hit}} (const N \&node, const V \&direction, float dist, int mid)
+\begin{DoxyCompactList}\small\item\em Update this result based on the ray intersection. Similar structures can be created to support different sethit functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{a02021_afff68ebcccf0c6fc2bb1a8ec39009dc6}{distance}} = -\/1
+\item 
+int \mbox{\hyperlink{a02021_a8396dcd612c36b2d5c0deb61adc137f5}{meshid}} = -\/1
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The result of firing a ray at an object. Contains distance to the hitpoint and the ID of the mesh. 
+
+Definition at line \mbox{\hyperlink{a00365_source_l00089}{89}} of file \mbox{\hyperlink{a00365_source}{raytracer\+\_\+\+C.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a02021_a1407239fc0cc25bafcc3559d0a9d26bb}\label{a02021_a1407239fc0cc25bafcc3559d0a9d26bb}} 
+\index{RayResult@{RayResult}!SetHit@{SetHit}}
+\index{SetHit@{SetHit}!RayResult@{RayResult}}
+\doxysubsubsection{\texorpdfstring{SetHit()}{SetHit()}}
+{\footnotesize\ttfamily template$<$typename N , typename V $>$ \\
+void Ray\+Result\+::\+Set\+Hit (\begin{DoxyParamCaption}\item[{const N \&}]{node,  }\item[{const V \&}]{direction,  }\item[{float}]{dist,  }\item[{int}]{mid }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update this result based on the ray intersection. Similar structures can be created to support different sethit functions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Not used for this structure \\
+\hline
+{\em direction} & Not used for this structure \\
+\hline
+{\em dist} & Distance from node to the hit\+\_\+point \\
+\hline
+{\em mid} & ID of the hit mesh \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{a00365_source_l00103}{103}} of file \mbox{\hyperlink{a00365_source}{raytracer\+\_\+\+C.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00365_source_l00090}{distance}}, and \mbox{\hyperlink{a00365_source_l00091}{meshid}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02021_afff68ebcccf0c6fc2bb1a8ec39009dc6}\label{a02021_afff68ebcccf0c6fc2bb1a8ec39009dc6}} 
+\index{RayResult@{RayResult}!distance@{distance}}
+\index{distance@{distance}!RayResult@{RayResult}}
+\doxysubsubsection{\texorpdfstring{distance}{distance}}
+{\footnotesize\ttfamily float Ray\+Result\+::distance = -\/1}
+
+
+
+Definition at line \mbox{\hyperlink{a00365_source_l00090}{90}} of file \mbox{\hyperlink{a00365_source}{raytracer\+\_\+\+C.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00365_source_l00103}{Set\+Hit()}}.
+
+\mbox{\Hypertarget{a02021_a8396dcd612c36b2d5c0deb61adc137f5}\label{a02021_a8396dcd612c36b2d5c0deb61adc137f5}} 
+\index{RayResult@{RayResult}!meshid@{meshid}}
+\index{meshid@{meshid}!RayResult@{RayResult}}
+\doxysubsubsection{\texorpdfstring{meshid}{meshid}}
+{\footnotesize\ttfamily int Ray\+Result\+::meshid = -\/1}
+
+
+
+Definition at line \mbox{\hyperlink{a00365_source_l00091}{91}} of file \mbox{\hyperlink{a00365_source}{raytracer\+\_\+\+C.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00365_source_l00103}{Set\+Hit()}}.
+
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Cpp/spatialstructures/src/\mbox{\hyperlink{a00209}{node.\+h}}\end{DoxyCompactItemize}
+Cinterface/\mbox{\hyperlink{a00365}{raytracer\+\_\+\+C.\+h}}\end{DoxyCompactItemize}

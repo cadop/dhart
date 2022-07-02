@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['x_1651',['x',['../a00398.html#aad8e270f026ac9dd20ee294b2b1a21de',1,'HF::RayTracer::Vertex::x()'],['../a01353.html#a8dc6f75dc73e95942cca436c146cb83c',1,'HF::RayTracer::Vector3D::x()'],['../a01457.html#a8f182f964ffbb7801eb7d7e98a9b9683',1,'HF::RayTracer::double3::x()'],['../a01469.html#a4535d344c959c75fa7e73aae041616d0',1,'HF::RayTracer::RayRequest::x()'],['../a02017.html#a78dfebaa44da09b03d7ca15445c8d222',1,'HF::SpatialStructures::Node::x()'],['../a01389.html#a245ee0e429d5695c33ea29ccbe1792ec',1,'nanort::real3::x()']]]
+  ['y_0',['y',['../a00398.html#aa27c7b22316499f43093c2b7768c06ea',1,'HF::RayTracer::Vertex::y()'],['../a01341.html#af7128e46fb0f8d5ef3e4a7355e9f959f',1,'HF::RayTracer::Vector3D::y()'],['../a01445.html#a99d7008b61f129b3864b821fe7fbc115',1,'HF::RayTracer::double3::y()'],['../a01457.html#a554b79bac3eee6e2613c25da41e729e5',1,'HF::RayTracer::RayRequest::y()'],['../a02005.html#a41981fb2cc6dc0edb787f921188702b0',1,'HF::SpatialStructures::Node::y()'],['../a01377.html#af92059bf1d44c9bf67c90ca2d46be17e',1,'nanort::real3::y()']]]
 ];

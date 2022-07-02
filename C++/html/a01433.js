@@ -1,13 +1,28 @@
 var a01433 =
 [
-    [ "TriangleSAHPred", "a01433.html#a9650f6d351ac3df4eebf0c3101a78a0b", null ],
-    [ "TriangleSAHPred", "a01433.html#a3f78790b2623dedc78de58273fe63465", null ],
-    [ "operator()", "a01433.html#ab990c49c5a9bc9037e378e615ae96e8c", null ],
-    [ "operator=", "a01433.html#a1bd2c8fa19940d2301c1b28feb5e82e9", null ],
-    [ "Set", "a01433.html#a20476d86c33567f87874a9e6e0a639ea", null ],
-    [ "axis_", "a01433.html#aa0607edac35ea7ee2ce6536483a1d969", null ],
-    [ "faces_", "a01433.html#a1b40fbb2b832ee1bd929bc76ca08256a", null ],
-    [ "pos_", "a01433.html#a384c28581fe8e53b84e2b6a288fede94", null ],
-    [ "vertex_stride_bytes_", "a01433.html#a1562971080d1d2c4360a9de0bede9a28", null ],
-    [ "vertices_", "a01433.html#ad74375fe9bf1778ca16d15f756e61504", null ]
+    [ "RayCoeff", "a01433.html#a01437", [
+      [ "kx", "a01433.html#a9e85b4e367c2390c4654ec819a75741d", null ],
+      [ "ky", "a01433.html#acecad1b0d9d78eb0c2e41813c5b1427c", null ],
+      [ "kz", "a01433.html#a7b93948ffe60a4f465b487b8e505707e", null ],
+      [ "Sx", "a01433.html#a2cac34b6bd01583a2ff88af0eb6f1c86", null ],
+      [ "Sy", "a01433.html#aa79bacc86198f6bca3cd7aafbee465d5", null ],
+      [ "Sz", "a01433.html#aec0f701c604c6521b99d57b5ff3b0c39", null ]
+    ] ],
+    [ "TriangleIntersector", "a01433.html#a2181f19ddf2184cc93d1dc31103b9949", null ],
+    [ "GetT", "a01433.html#a5eda5bed00b03898ad719cde8653d3ea", null ],
+    [ "Intersect", "a01433.html#ac392e9a3133446809b902a178ea9092b", null ],
+    [ "PostTraversal", "a01433.html#a543bcb67cbb100f2cb49a0b224d75dfe", null ],
+    [ "PrepareTraversal", "a01433.html#a10ab05ab1f92e4c1cda2da4f6de5fc59", null ],
+    [ "Update", "a01433.html#a6b108535e10b320d287c853eb2e3142e", null ],
+    [ "faces_", "a01433.html#af15783141ac090475a0ab5511f7e37ea", null ],
+    [ "prim_id_", "a01433.html#a382f51475802db6e426e7ca1dcd49f19", null ],
+    [ "ray_coeff_", "a01433.html#ae57ba6626c926b2a9479dd3d013425b7", null ],
+    [ "ray_org_", "a01433.html#acc4cab87b7ed0b510dc0ddccbf2ab949", null ],
+    [ "t_", "a01433.html#a50523ac73f73b22be639163ef9dacc80", null ],
+    [ "t_min_", "a01433.html#adf2c8cac44aea278d3bb840b65cf72ad", null ],
+    [ "trace_options_", "a01433.html#a6d0ea73ee3e801f2d4d14807f2d35008", null ],
+    [ "u_", "a01433.html#acad6ff219fd226b6fdf8735cfa35cbbb", null ],
+    [ "v_", "a01433.html#a1330de9010bc5c0129fafe90d94375c4", null ],
+    [ "vertex_stride_bytes_", "a01433.html#a1782017f63d67ebf1e63bc56b7f4d13b", null ],
+    [ "vertices_", "a01433.html#a2cb6f374b8f26629e3c01bc1d5b49281", null ]
 ];

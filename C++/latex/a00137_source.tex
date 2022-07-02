@@ -1,0 +1,324 @@
+\hypertarget{a00137_source}{}\doxysection{path\+\_\+finder.\+cpp}
+\label{a00137_source}\index{Cpp/pathfinding/src/path\_finder.cpp@{Cpp/pathfinding/src/path\_finder.cpp}}
+\mbox{\hyperlink{a00137}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00008}00008 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00009}00009 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00140}{path\_finder.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00010}00010 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00011}00011 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00012}00012 \textcolor{preprocessor}{\#include <robin\_hood.h>}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00013}00013 \textcolor{preprocessor}{\#include<omp.h>}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00014}00014 \textcolor{preprocessor}{\#include<thread>}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00015}00015 \textcolor{preprocessor}{\#include<math.h>}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00016}00016 \textcolor{preprocessor}{\#include<execution>}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00017}00017 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00018}00018 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00019}00019 \textcolor{preprocessor}{\#include <boost/graph/dijkstra\_shortest\_paths.hpp>}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00020}00020 \textcolor{preprocessor}{\#include <boost/graph/breadth\_first\_search.hpp>}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00021}00021 \textcolor{preprocessor}{\#include <boost/graph/dijkstra\_shortest\_paths\_no\_color\_map.hpp>}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00022}00022 \textcolor{preprocessor}{\#include <boost/exception/exception.hpp>}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00023}00023 \textcolor{preprocessor}{\#include <boost/math/special\_functions/fpclassify.hpp>}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00024}00024 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00025}00025 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00134}{boost\_graph.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00026}00026 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00215}{path.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00027}00027 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00028}00028 \textcolor{keyword}{using namespace }\mbox{\hyperlink{a00399}{HF::SpatialStructures}};}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00029}00029 \textcolor{keyword}{using namespace }\mbox{\hyperlink{a00406}{HF::Pathfinding}};}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00030}00030 \textcolor{keyword}{using }std::vector;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00031}00031 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00032}00032 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00406}{HF::Pathfinding}} \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00048}\mbox{\hyperlink{a01321}{00048}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a01321}{DistPred}} \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00049}\mbox{\hyperlink{a01321_a079f5d82f75c505b08814a29cad55802}{00049}}         std::vector<float> \mbox{\hyperlink{a01321_a079f5d82f75c505b08814a29cad55802}{distance}}; }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00050}\mbox{\hyperlink{a01321_aefde8462d19db0960757cfbfd3825c8b}{00050}}         std::vector<vertex\_descriptor> \mbox{\hyperlink{a01321_aefde8462d19db0960757cfbfd3825c8b}{predecessor}};}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00051}00051 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00055}\mbox{\hyperlink{a01321_aa1bf8223e3be61f7863eaf5df3d91295}{00055}}         \mbox{\hyperlink{a01321_aa1bf8223e3be61f7863eaf5df3d91295}{DistPred}}() \{\};}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00056}00056 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00061}\mbox{\hyperlink{a01321_acaae6c520377c845aa80013da3a3a869}{00061}}         \mbox{\hyperlink{a01321_acaae6c520377c845aa80013da3a3a869}{DistPred}}(\textcolor{keywordtype}{int} n) \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00062}00062             \mbox{\hyperlink{a01321_a079f5d82f75c505b08814a29cad55802}{distance}}.resize(n);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00063}00063             \mbox{\hyperlink{a01321_aefde8462d19db0960757cfbfd3825c8b}{predecessor}}.resize(n);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00064}00064         \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00065}00065     \};}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00066}00066 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00078}\mbox{\hyperlink{a00406_a977e4c93a977ab4e9e784d1e6fec79f4}{00078}}     \textcolor{keyword}{inline} \mbox{\hyperlink{a02017}{Path}} \mbox{\hyperlink{a00406_a977e4c93a977ab4e9e784d1e6fec79f4}{ConstructShortestPathFromPred}}(}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00079}00079         \textcolor{keywordtype}{int} start,}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00080}00080         \textcolor{keywordtype}{int} end,}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00081}00081         \textcolor{keyword}{const} std::vector<size\_t>\& pred,}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00082}00082         \textcolor{keyword}{const} std::vector<float>\& distances}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00083}00083     ) \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00084}00084 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00085}00085         \textcolor{comment}{// Create a new path and add the end point.}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00086}00086         \mbox{\hyperlink{a02017}{Path}} p;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00087}00087         p.\mbox{\hyperlink{a02017_a55ded4e02787eb739770ebe28ef386a9}{AddNode}}(end, 0);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00088}00088 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00089}00089         \textcolor{comment}{// Return an empty path if there's no path from start to end indicated by the predecessor's}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00090}00090         \textcolor{comment}{// value for the current node being the current node.}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00091}00091         \textcolor{keywordtype}{int} current\_node = end;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00092}00092         \textcolor{keywordflow}{if} (pred[current\_node] == current\_node) \textcolor{keywordflow}{return} \mbox{\hyperlink{a02017}{Path}}\{\};}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00093}00093 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00094}00094         \textcolor{keywordtype}{float} last\_cost = distances[current\_node];}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00095}00095 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00096}00096         \textcolor{comment}{// Follow the predecessor matrix from end to start}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00097}00097         \textcolor{keywordflow}{while} (current\_node != start) \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00098}00098 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00099}00099             \textcolor{comment}{// If this is triggered, there's something wrong with this algorithm because the path}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00100}00100             \textcolor{comment}{// suddenly has more nodes than there are in the entire graph.}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00101}00101             \textcolor{keywordflow}{if} (p.\mbox{\hyperlink{a02017_a28f61f0f57b38a5249a11a725d9d692b}{size}}() > pred.size())}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00102}00102                 \textcolor{keywordflow}{throw} std::exception(\textcolor{stringliteral}{"{}Path included more nodes than contaiend in the graph!"{}});}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00103}00103 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00104}00104             \textcolor{comment}{// Get the next node from the predecessor matrix}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00105}00105             \textcolor{keywordtype}{int} next\_node = pred[current\_node];}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00106}00106 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00107}00107             \textcolor{comment}{// Get the current cost for traversing the graph so far.}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00108}00108             \textcolor{keywordtype}{float} current\_cost = distances[next\_node];}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00109}00109 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00110}00110             \textcolor{comment}{// Subtract the last cost from the graph to get the cost of traversing this node}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00111}00111             \textcolor{keywordtype}{float} de\_facto\_cost = last\_cost -\/ current\_cost;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00112}00112 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00113}00113             \textcolor{comment}{// Add this node to the list}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00114}00114             p.\mbox{\hyperlink{a02017_a55ded4e02787eb739770ebe28ef386a9}{AddNode}}(next\_node, de\_facto\_cost);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00115}00115 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00116}00116             \textcolor{comment}{// Save this node and cost as the last node/cost}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00117}00117             last\_cost = current\_cost;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00118}00118             current\_node = next\_node;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00119}00119         \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00120}00120 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00121}00121         \textcolor{comment}{// Flip the order of this since this algorithm generates it from end to start}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00122}00122         p.\mbox{\hyperlink{a02017_adf2bad9ac73dbdc436c365654d54ad98}{Reverse}}();}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00123}00123         \textcolor{keywordflow}{return} p;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00124}00124     \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00125}00125 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00133}\mbox{\hyperlink{a00406_a322ac32effd41c99359b82df0890e34a}{00133}}     \textcolor{keyword}{inline} \mbox{\hyperlink{a02017}{Path}} \mbox{\hyperlink{a00406_a977e4c93a977ab4e9e784d1e6fec79f4}{ConstructShortestPathFromPred}}(\textcolor{keywordtype}{int} start, \textcolor{keywordtype}{int} end, \textcolor{keyword}{const} \mbox{\hyperlink{a01321}{DistPred}}\& dist\_pred) \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00134}00134         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00406_a977e4c93a977ab4e9e784d1e6fec79f4}{ConstructShortestPathFromPred}}(start, end, dist\_pred.\mbox{\hyperlink{a01321_aefde8462d19db0960757cfbfd3825c8b}{predecessor}}, dist\_pred.\mbox{\hyperlink{a01321_a079f5d82f75c505b08814a29cad55802}{distance}});}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00135}00135     \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00136}00136 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00146}\mbox{\hyperlink{a00406_a9f6490539108da057db2486295458886}{00146}}     \textcolor{keyword}{inline} \mbox{\hyperlink{a01321}{DistPred}} \mbox{\hyperlink{a00406_a9f6490539108da057db2486295458886}{BuildDistanceAndPredecessor}}(\textcolor{keyword}{const} \mbox{\hyperlink{a00406_a9314d552e0a8092644fa080c9945bd25}{graph\_t}}\& g, \textcolor{keywordtype}{int} \textcolor{keywordtype}{id}) \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00147}00147 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00148}00148         \textcolor{comment}{// Construct an isntance of DistPred that can hold every node in the graph}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00149}00149         \textcolor{keywordtype}{int} n = num\_vertices(g);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00150}00150         \mbox{\hyperlink{a01321}{DistPred}} dist\_pred(n);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00151}00151 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00152}00152         \textcolor{comment}{// Give boost a reference to the array in distpred}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00153}00153         \textcolor{keyword}{auto} pm = boost::predecessor\_map(\&dist\_pred.\mbox{\hyperlink{a01321_aefde8462d19db0960757cfbfd3825c8b}{predecessor}}[0]);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00154}00154         \mbox{\hyperlink{a00406_a4dc50f188646ed884b58b3e26c7932a5}{vertex\_descriptor}} start\_vertex = vertex(\textcolor{keywordtype}{id}, g);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00155}00155 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00156}00156         \textcolor{comment}{// Fill distpred's distance and predecssor arrays with info from the graph}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00157}00157         dijkstra\_shortest\_paths\_no\_color\_map(}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00158}00158             g,}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00159}00159             start\_vertex,}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00160}00160             pm.distance\_map(\&dist\_pred.\mbox{\hyperlink{a01321_a079f5d82f75c505b08814a29cad55802}{distance}}[0]).weight\_map(\mbox{\hyperlink{a00411_acc422c11342b31368f610b6f96fcedc6}{boost::get}}(\&\mbox{\hyperlink{a00406_aefea62ffa2c7078ac7d9f2eefaa96e07}{Edge\_Cost::weight}}, g))}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00161}00161         );}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00162}00162 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00163}00163         \textcolor{keywordflow}{return} dist\_pred;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00164}00164     \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00165}00165 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00166}\mbox{\hyperlink{a00406_a47d06b1c4bd84f4d0a7519ea0e96ff02}{00166}}     \mbox{\hyperlink{a02017}{Path}} \mbox{\hyperlink{a00406_a47d06b1c4bd84f4d0a7519ea0e96ff02}{FindPath}}(\mbox{\hyperlink{a01317}{BoostGraph}}* bg, \textcolor{keywordtype}{int} start\_id, \textcolor{keywordtype}{int} end\_id)}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00167}00167     \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00168}00168         \textcolor{comment}{// Get a reference to the graph contained by this boost graph}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00169}00169         \textcolor{keyword}{const} \mbox{\hyperlink{a00406_a9314d552e0a8092644fa080c9945bd25}{graph\_t}}\& graph = bg-\/>\mbox{\hyperlink{a01317_a8af65de831cc2255b7ad2069791124ef}{g}};}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00170}00170         }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00171}00171         \textcolor{comment}{// Build the distance and predecessor arrays for the node at start\_id}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00172}00172         \textcolor{keyword}{auto} dist\_pred = \mbox{\hyperlink{a00406_a9f6490539108da057db2486295458886}{BuildDistanceAndPredecessor}}(graph, start\_id);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00173}00173 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00174}00174         \textcolor{comment}{// Construct the shortest path using the predecessor and distance arrays}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00175}00175         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00406_a977e4c93a977ab4e9e784d1e6fec79f4}{ConstructShortestPathFromPred}}(start\_id, end\_id, dist\_pred.predecessor, dist\_pred.distance);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00176}00176     \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00177}00177 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00178}\mbox{\hyperlink{a00406_a15badb9d0a17849de7b21105605c9c91}{00178}}     vector<Path> \mbox{\hyperlink{a00406_a15badb9d0a17849de7b21105605c9c91}{FindPaths}}( \mbox{\hyperlink{a01317}{BoostGraph}} * bg, \textcolor{keyword}{const} vector<int> \& start\_points, \textcolor{keyword}{const} vector<int> \& end\_points)}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00179}00179     \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00180}00180         \textcolor{comment}{// Get the graph from bg}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00181}00181         \textcolor{keyword}{const} \mbox{\hyperlink{a00406_a9314d552e0a8092644fa080c9945bd25}{graph\_t}}\& graph = bg-\/>\mbox{\hyperlink{a01317_a8af65de831cc2255b7ad2069791124ef}{g}};}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00182}00182         vector<Path> paths(start\_points.size());}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00183}00183         }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00184}00184         \textcolor{comment}{// Generate predecessor matrices for every unique start point}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00185}00185         robin\_hood::unordered\_map<int, DistPred> dpm;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00186}00186         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} start\_point : start\_points) }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00187}00187             \textcolor{keywordflow}{if} (dpm.count(start\_point) == 0)}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00188}00188                 dpm[start\_point] = \mbox{\hyperlink{a00406_a9f6490539108da057db2486295458886}{BuildDistanceAndPredecessor}}(graph, start\_point);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00189}00189 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00190}00190         \textcolor{comment}{//Create shortestpaths for start\_end pair}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00191}00191         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < start\_points.size(); i++) \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00192}00192             \textcolor{keywordtype}{int} start = start\_points[i];}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00193}00193             \textcolor{keywordtype}{int} end = end\_points[i];}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00194}00194             \textcolor{keyword}{const} \textcolor{keyword}{auto}\& dist\_pred = dpm[start];}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00195}00195 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00196}00196             paths[i] = \mbox{\hyperlink{a00406_a977e4c93a977ab4e9e784d1e6fec79f4}{ConstructShortestPathFromPred}}(start, end, dist\_pred);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00197}00197         \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00198}00198         \textcolor{keywordflow}{return} paths;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00199}00199     \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00200}00200 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00201}\mbox{\hyperlink{a00406_a417084c97d0672af2da7739157a9d8c0}{00201}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{a00406_a417084c97d0672af2da7739157a9d8c0}{InsertPathsIntoArray}}(}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00202}00202         \textcolor{keyword}{const} \mbox{\hyperlink{a01317}{BoostGraph}} * bg,}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00203}00203         \textcolor{keyword}{const} std::vector<int>\& start\_points,}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00204}00204         \textcolor{keyword}{const} std::vector<int>\& end\_points,}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00205}00205         \mbox{\hyperlink{a02017}{HF::SpatialStructures::Path}}** out\_paths,}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00206}00206         \mbox{\hyperlink{a02013}{HF::SpatialStructures::PathMember}}** out\_path\_members,}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00207}00207         \textcolor{keywordtype}{int}* out\_sizes}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00208}00208     ) \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00209}00209         \textcolor{comment}{// Get graph from boost graph}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00210}00210         \textcolor{keyword}{const} \mbox{\hyperlink{a00406_a9314d552e0a8092644fa080c9945bd25}{graph\_t}}\& graph = bg-\/>\mbox{\hyperlink{a01317_a8af65de831cc2255b7ad2069791124ef}{g}};}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00211}00211         robin\_hood::unordered\_map<int, DistPred> dpm;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00212}00212 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00213}00213         \textcolor{comment}{// Use maximum number of cores for this machine}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00214}00214         \textcolor{keywordtype}{int} core\_count = std::thread::hardware\_concurrency();}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00215}00215         \textcolor{keywordtype}{int} cores\_to\_use = std::min(core\_count-\/1, \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(start\_points.size()));}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00216}00216         omp\_set\_num\_threads(cores\_to\_use);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00217}00217 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00218}00218         \textcolor{comment}{// Copy and sort the input array of starting points}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00219}00219         std::vector<int> start\_copy = start\_points;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00220}00220         std::sort(std::execution::par\_unseq, start\_copy.begin(),start\_copy.end());}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00221}00221         }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00222}00222         \textcolor{comment}{// Remove all duplicates, effectively creating an array of unique start ids}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00223}00223         std::vector<int> unique\_starts;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00224}00224         std::unique\_copy(start\_copy.begin(), start\_copy.end(), std::back\_inserter(unique\_starts));}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00225}00225 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00226}00226         \textcolor{comment}{// Preallocate entries for the hash map in sequence so we don't corrupt the heap trying to}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00227}00227         \textcolor{comment}{// add elements in parallel.}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00228}00228         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} uc : unique\_starts)}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00229}00229             dpm.emplace(std::pair<int, DistPred>\{uc, \mbox{\hyperlink{a01321}{DistPred}}()\});}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00230}00230 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00231}00231         \textcolor{comment}{// Build predecessor and distance matrices for each unique start point in parallel}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00232}00232 \textcolor{preprocessor}{    \#pragma omp parallel for schedule(dynamic) if (unique\_starts.size() > cores\_to\_use \&\& cores\_to\_use > 4)}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00233}00233         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < unique\_starts.size(); i++) \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00234}00234             \textcolor{keywordtype}{int} start\_point = unique\_starts[i];}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00235}00235             dpm[start\_point] = \mbox{\hyperlink{a00406_a9f6490539108da057db2486295458886}{BuildDistanceAndPredecessor}}(graph, start\_point);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00236}00236         \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00237}00237 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00238}00238         \textcolor{comment}{// Create paths in parallel.}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00239}00239 \textcolor{preprocessor}{\#pragma omp parallel for schedule(dynamic) if (cores\_to\_use > 4)}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00240}00240         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < start\_points.size(); i++) \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00241}00241 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00242}00242             \textcolor{comment}{// Get the start and end point for this path}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00243}00243             \textcolor{keywordtype}{int} start = start\_points[i];}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00244}00244             \textcolor{keywordtype}{int} end = end\_points[i];}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00245}00245 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00246}00246             \textcolor{comment}{// Get a reference to the distance and predecessor array for this start point.}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00247}00247             \textcolor{keyword}{const} \textcolor{keyword}{auto}\& dist\_pred = dpm[start];}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00248}00248 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00249}00249             \textcolor{comment}{// Construct the shortest path, store a point for it in out\_paths at index i}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00250}00250             out\_paths[i] = \textcolor{keyword}{new} \mbox{\hyperlink{a02017}{Path}}(\mbox{\hyperlink{a00406_a977e4c93a977ab4e9e784d1e6fec79f4}{ConstructShortestPathFromPred}}(start, end, dist\_pred));}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00251}00251 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00252}00252             \textcolor{comment}{// Store a pointer to that path's PathMembers in out\_path\_members}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00253}00253             out\_path\_members[i] = out\_paths[i]-\/>\mbox{\hyperlink{a02017_a942cb49007bbeb5588e2d526c68bdcf9}{GetPMPointer}}();}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00254}00254 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00255}00255             \textcolor{comment}{// Store the size of the path's PathMembers in index i of out\_sizes}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00256}00256             out\_sizes[i] = out\_paths[i]-\/>\mbox{\hyperlink{a02017_a28f61f0f57b38a5249a11a725d9d692b}{size}}();}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00257}00257 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00258}00258             \textcolor{comment}{// If the size of the path is zero, delete the path and set it's pointer to a null}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00259}00259             \textcolor{comment}{// pointer in the output array.}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00260}00260             \textcolor{keywordflow}{if} (out\_sizes[i] == 0) \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00261}00261                 \textcolor{keyword}{delete} (out\_paths[i]);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00262}00262                 out\_paths[i] = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00263}00263             \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00264}00264         \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00265}00265     \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00266}00266 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00267}\mbox{\hyperlink{a00406_ab58662be8e56c333d74d60a823e810e3}{00267}}     \mbox{\hyperlink{a01329}{DistanceAndPredecessor}} \mbox{\hyperlink{a00406_ab58662be8e56c333d74d60a823e810e3}{GenerateDistanceAndPred}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01317}{BoostGraph}}\& bg)}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00268}00268     \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00269}00269         \textcolor{keyword}{const} \textcolor{keyword}{auto} \& g = bg.\mbox{\hyperlink{a01317_a8af65de831cc2255b7ad2069791124ef}{g}};}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00270}00270 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00271}00271         \textcolor{comment}{// Generate distance and predecessor matricies}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00272}00272         \textcolor{keyword}{const} \textcolor{keywordtype}{int} num\_nodes = bg.\mbox{\hyperlink{a01317_ac7b026041a385cf55c089944a02e0c1d}{p}}.size();}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00273}00273         \mbox{\hyperlink{a01329}{DistanceAndPredecessor}} out\_distpred(num\_nodes);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00274}00274         }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00275}00275         \textcolor{comment}{// Iterate through every row in the array}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00276}00276 \textcolor{preprocessor}{        \#pragma omp parallel for schedule(dynamic)}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00277}00277         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} row = 0; row < num\_nodes; row++) \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00278}00278     }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00279}00279             \textcolor{comment}{// Get pointers to the beginning of the row for both matricies}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00280}00280             \textcolor{keywordtype}{float}* dist\_row\_start = out\_distpred.\mbox{\hyperlink{a01329_a7237256578bb77a912babbc2f777756c}{GetRowOfDist}}(row);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00281}00281             \textcolor{keywordtype}{int}* pred\_row\_start = out\_distpred.\mbox{\hyperlink{a01329_a4ab3579abd7bd4f18456e8e5022b51ca}{GetRowOfPred}}(row);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00282}00282 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00283}00283             \textcolor{comment}{// Give boost a reference to the array in distpred}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00284}00284             \textcolor{keyword}{auto} pm = boost::predecessor\_map(pred\_row\_start);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00285}00285 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00286}00286             \textcolor{comment}{// Get the descriptor of the starting vertex}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00287}00287             \mbox{\hyperlink{a00406_a4dc50f188646ed884b58b3e26c7932a5}{vertex\_descriptor}} start\_vertex = vertex(row, g);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00288}00288 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00289}00289             \textcolor{comment}{// calculate the shortest path using the row of the distance and predecessor arrays.}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00290}00290             \textcolor{comment}{// Boost should fill these when calculating the distance/predecessor matricies}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00291}00291             dijkstra\_shortest\_paths\_no\_color\_map(}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00292}00292                 g,}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00293}00293                 start\_vertex,}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00294}00294                 pm.distance\_map(dist\_row\_start).weight\_map(\mbox{\hyperlink{a00411_acc422c11342b31368f610b6f96fcedc6}{boost::get}}(\&\mbox{\hyperlink{a00406_aefea62ffa2c7078ac7d9f2eefaa96e07}{Edge\_Cost::weight}}, g))}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00295}00295             );}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00296}00296 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00297}00297             \textcolor{comment}{// The documentation of boost kind of lies here. An infinite cost is not infinite,}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00298}00298             \textcolor{comment}{// as their pseudo code would lead you to believe. Actually it's setting the value}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00299}00299             \textcolor{comment}{// of the distance matrix for paths that can`t be created to the value}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00300}00300             \textcolor{comment}{// of std::numeric\_limits<float>::max. This should be a NAN for the sake of readability. }}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00301}00301             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < num\_nodes; i++)}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00302}00302             \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00303}00303                 \textcolor{keywordtype}{float} \& dist\_element = dist\_row\_start[i];}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00304}00304                 \textcolor{keywordtype}{int} \& pred\_element = pred\_row\_start[i];}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00305}00305 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00306}00306                 \textcolor{comment}{// If the predecessor element is not not in the range of nodes,}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00307}00307                 \textcolor{comment}{// this is boost trying to signal to us that there is no connection}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00308}00308                 \textcolor{comment}{// between these nodes, so put a NAN there. }}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00309}00309                 \textcolor{keywordflow}{if} (dist\_element == std::numeric\_limits<float>::max()) \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00310}00310                     pred\_element = -\/1; \textcolor{comment}{// Ints have no way of representing NaN}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00311}00311                     dist\_element = -\/1;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00312}00312                 \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00313}00313             \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00314}00314         \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00315}00315 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00316}00316         \textcolor{keywordflow}{return} out\_distpred;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00317}00317         }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00318}00318     \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00319}00319 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00320}\mbox{\hyperlink{a00406_ae2106e09eb44d681fbc6c0f66a3d3ac4}{00320}}     std::unique\_ptr<BoostGraph, BoostGraphDeleter> \mbox{\hyperlink{a00406_ae2106e09eb44d681fbc6c0f66a3d3ac4}{CreateBoostGraph}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01485}{Graph}}\& g, \textcolor{keyword}{const} std::string \& cost\_type) \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00321}00321         \textcolor{comment}{// Construct a new boost graph using g, then wrap it in a unique pointer. }}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00322}00322         \textcolor{keywordflow}{return} std::unique\_ptr<BoostGraph, BoostGraphDeleter>(\textcolor{keyword}{new} \mbox{\hyperlink{a01317}{BoostGraph}}(g, cost\_type));}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00323}00323     \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00324}00324 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00325}\mbox{\hyperlink{a01325_a9a83be18f095f5e04d287412cc4bd1d5}{00325}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{a01325_a9a83be18f095f5e04d287412cc4bd1d5}{BoostGraphDeleter::operator()}}(\mbox{\hyperlink{a01317}{BoostGraph}}* bg)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00326}00326         \textcolor{keyword}{delete} bg;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00327}00327     \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00328}00328 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00329}\mbox{\hyperlink{a00406_a69bd3efcc13788e7c4be43b67d6002e5}{00329}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{a00406_a69bd3efcc13788e7c4be43b67d6002e5}{InsertAllToAllPathsIntoArray}}(\mbox{\hyperlink{a01317}{BoostGraph}}* bg, \mbox{\hyperlink{a02017}{Path}}** out\_paths, \mbox{\hyperlink{a02013}{PathMember}}** out\_path\_members, \textcolor{keywordtype}{int}* out\_sizes) \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00330}00330         \textcolor{keywordtype}{size\_t} node\_count = bg-\/>\mbox{\hyperlink{a01317_ac7b026041a385cf55c089944a02e0c1d}{p}}.size();}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00331}00331         \textcolor{keywordtype}{size\_t} max\_path = node\_count * node\_count;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00332}00332 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00333}00333         std::vector<int> start\_points(max\_path);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00334}00334         std::vector<int> end\_points(max\_path);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00335}00335 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00336}00336         \textcolor{keywordtype}{int} curr\_id = 0;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00337}00337 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00338}00338         \textcolor{comment}{// Populate the start points,}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00339}00339         \textcolor{comment}{// size will be (node\_count)\string^2}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00340}00340         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < node\_count; i++) \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00341}00341             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < node\_count; k++) \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00342}00342                 start\_points[curr\_id++] = i;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00343}00343             \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00344}00344         \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00345}00345 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00346}00346         curr\_id = 0;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00347}00347 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00348}00348         \textcolor{comment}{// Populate the end points,}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00349}00349         \textcolor{comment}{// size will be (node\_count)\string^2}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00350}00350         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < node\_count; i++) \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00351}00351             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < node\_count; k++) \{}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00352}00352                 end\_points[curr\_id++] = k;}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00353}00353             \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00354}00354         \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00355}00355 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00356}00356         \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00357}00357 \textcolor{comment}{            The idea is that}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00358}00358 \textcolor{comment}{                start\_points[0] and end\_points[0]}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00359}00359 \textcolor{comment}{                will be the path from 0 to 0,}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00360}00360 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00361}00361 \textcolor{comment}{                start\_points[1] and end\_points[1]}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00362}00362 \textcolor{comment}{                will be the path from 0 to 1}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00363}00363 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00364}00364 \textcolor{comment}{                start\_points[2] and end\_points[2]}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00365}00365 \textcolor{comment}{                will be the path from 0 to 2,}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00366}00366 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00367}00367 \textcolor{comment}{                ...etc...}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00368}00368 \textcolor{comment}{        */}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00369}00369 }
+\DoxyCodeLine{\Hypertarget{a00137_source_l00370}00370         \textcolor{comment}{// Run InsertPathsIntoArray and mutate out\_paths, out\_path\_members, and out\_sizes}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00371}00371         \mbox{\hyperlink{a00406_a417084c97d0672af2da7739157a9d8c0}{InsertPathsIntoArray}}(bg, start\_points, end\_points, out\_paths, out\_path\_members, out\_sizes);}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00372}00372     \}}
+\DoxyCodeLine{\Hypertarget{a00137_source_l00373}00373 \}}
+
+\end{DoxyCode}

@@ -1,249 +1,806 @@
-\hypertarget{a01989}{}\doxysection{nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp Struct Reference}
-\label{a01989}\index{nlohmann::detail::dtoa\_impl::diyfp@{nlohmann::detail::dtoa\_impl::diyfp}}
+\hypertarget{a01989}{}\doxysection{nlohmann\+::detail\+::serializer\texorpdfstring{$<$}{<} Basic\+Json\+Type \texorpdfstring{$>$}{>} Class Template Reference}
+\label{a01989}\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
 
 
 {\ttfamily \#include $<$json.\+hpp$>$}
 
 
 
-Collaboration diagram for nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+:
+Collaboration diagram for nlohmann\+::detail\+::serializer\texorpdfstring{$<$}{<} Basic\+Json\+Type \texorpdfstring{$>$}{>}\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=218pt]{a01987}
+\includegraphics[width=350pt]{a01987}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-constexpr \mbox{\hyperlink{a01989_ad8798a8823a49c8412f0fada9892c918}{diyfp}} (std\+::uint64\+\_\+t f\+\_\+, int e\+\_\+) noexcept
+\mbox{\hyperlink{a01989_ac010525281d97867ee842da37294fe83}{serializer}} (\mbox{\hyperlink{a00411_a9b680ddfb58f27eb53a67229447fc556}{output\+\_\+adapter\+\_\+t}}$<$ char $>$ s, const char ichar, \mbox{\hyperlink{a00411_a5a76b60b26dc8c47256a996d18d967df}{error\+\_\+handler\+\_\+t}} error\+\_\+handler\+\_\+=\mbox{\hyperlink{a00411_a5a76b60b26dc8c47256a996d18d967dfa2133fd717402a7966ee88d06f9e0b792}{error\+\_\+handler\+\_\+t\+::strict}})
+\item 
+\mbox{\hyperlink{a01989_ae3771351ec4cb892bec707edeb56dc31}{serializer}} (const \mbox{\hyperlink{a01989}{serializer}} \&)=delete
+\item 
+\mbox{\hyperlink{a01989}{serializer}} \& \mbox{\hyperlink{a01989_a80d865009268108161afe318a30aff5e}{operator=}} (const \mbox{\hyperlink{a01989}{serializer}} \&)=delete
+\item 
+\mbox{\hyperlink{a01989_a28081304e70cca6b3042c101ee5c498c}{serializer}} (\mbox{\hyperlink{a01989}{serializer}} \&\&)=delete
+\item 
+\mbox{\hyperlink{a01989}{serializer}} \& \mbox{\hyperlink{a01989_a2fb91f0b3479c5603b45e8a4c1f6673e}{operator=}} (\mbox{\hyperlink{a01989}{serializer}} \&\&)=delete
+\item 
+\mbox{\hyperlink{a01989_aa6c62b51cbebb185307df851dc0167f0}{$\sim$serializer}} ()=default
+\item 
+void \mbox{\hyperlink{a01989_a95460ebd1a535a543e5a0ec52e00f48b}{dump}} (const Basic\+Json\+Type \&val, const bool pretty\+\_\+print, const bool ensure\+\_\+ascii, const unsigned int indent\+\_\+step, const unsigned int current\+\_\+indent=0)
+\begin{DoxyCompactList}\small\item\em internal implementation of the serialization function \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{a01989_ad08aa54fac1dd0a453320c54137d45ba}{string\+\_\+t}} = typename Basic\+Json\+Type\+::string\+\_\+t
+\item 
+using \mbox{\hyperlink{a01989_a460c6794fbabbb2ae83380e987a6c030}{number\+\_\+float\+\_\+t}} = typename Basic\+Json\+Type\+::number\+\_\+float\+\_\+t
+\item 
+using \mbox{\hyperlink{a01989_ae7b1df1c70bdec1371f297567726a198}{number\+\_\+integer\+\_\+t}} = typename Basic\+Json\+Type\+::number\+\_\+integer\+\_\+t
+\item 
+using \mbox{\hyperlink{a01989_a16c7b7a726a38ff0c06dce7ba7968391}{number\+\_\+unsigned\+\_\+t}} = typename Basic\+Json\+Type\+::number\+\_\+unsigned\+\_\+t
+\item 
+using \mbox{\hyperlink{a01989_aaaec32f2fec57db422019a11994f7bb5}{binary\+\_\+char\+\_\+t}} = typename Basic\+Json\+Type\+::binary\+\_\+t\+::value\+\_\+type
 \end{DoxyCompactItemize}
-\doxysubsection*{Static Public Member Functions}
+\doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static \mbox{\hyperlink{a01989}{diyfp}} \mbox{\hyperlink{a01989_aeb26771af54ad73598c1a0430d65d884}{sub}} (const \mbox{\hyperlink{a01989}{diyfp}} \&x, const \mbox{\hyperlink{a01989}{diyfp}} \&y) noexcept
-\begin{DoxyCompactList}\small\item\em returns x -\/ y \end{DoxyCompactList}\item 
-static \mbox{\hyperlink{a01989}{diyfp}} \mbox{\hyperlink{a01989_aa5f250d12ce89c81fdb08900c6a823e8}{mul}} (const \mbox{\hyperlink{a01989}{diyfp}} \&x, const \mbox{\hyperlink{a01989}{diyfp}} \&y) noexcept
-\begin{DoxyCompactList}\small\item\em returns x $\ast$ y \end{DoxyCompactList}\item 
-static \mbox{\hyperlink{a01989}{diyfp}} \mbox{\hyperlink{a01989_a2246b5b40c7c6992153ef174063d6aa6}{normalize}} (\mbox{\hyperlink{a01989}{diyfp}} x) noexcept
-\begin{DoxyCompactList}\small\item\em normalize x such that the significand is $>$= 2$^\wedge$(q-\/1) \end{DoxyCompactList}\item 
-static \mbox{\hyperlink{a01989}{diyfp}} \mbox{\hyperlink{a01989_a6b6665e467ebabe0c0f7418d3fe4b118}{normalize\+\_\+to}} (const \mbox{\hyperlink{a01989}{diyfp}} \&x, const int target\+\_\+exponent) noexcept
-\begin{DoxyCompactList}\small\item\em normalize x such that the result has the exponent E \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
-\begin{DoxyCompactItemize}
+void \mbox{\hyperlink{a01989_ac1f8d1165b44149bd8be397dce68ea05}{dump\+\_\+escaped}} (const \mbox{\hyperlink{a01989_ad08aa54fac1dd0a453320c54137d45ba}{string\+\_\+t}} \&s, const bool ensure\+\_\+ascii)
+\begin{DoxyCompactList}\small\item\em dump escaped string \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{a01989_a10692e98ea1f5a64de1d0b8e0e724b99}{count\+\_\+digits}} (\mbox{\hyperlink{a01989_a16c7b7a726a38ff0c06dce7ba7968391}{number\+\_\+unsigned\+\_\+t}} x) noexcept
+\begin{DoxyCompactList}\small\item\em count digits \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Number\+Type , \mbox{\hyperlink{a00411_a02bcbc878bee413f25b985ada771aa9c}{detail\+::enable\+\_\+if\+\_\+t}}$<$ std\+::is\+\_\+same$<$ Number\+Type, \mbox{\hyperlink{a01989_a16c7b7a726a38ff0c06dce7ba7968391}{number\+\_\+unsigned\+\_\+t}} $>$\+::value$\vert$$\vert$std\+::is\+\_\+same$<$ Number\+Type, \mbox{\hyperlink{a01989_ae7b1df1c70bdec1371f297567726a198}{number\+\_\+integer\+\_\+t}} $>$\+::value$\vert$$\vert$std\+::is\+\_\+same$<$ Number\+Type, \mbox{\hyperlink{a01989_aaaec32f2fec57db422019a11994f7bb5}{binary\+\_\+char\+\_\+t}} $>$\+::value, int $>$  = 0$>$ }\\void \mbox{\hyperlink{a01989_a944f6dea8dbe2961da145d2f62fa2c2f}{dump\+\_\+integer}} (Number\+Type x)
+\begin{DoxyCompactList}\small\item\em dump an integer \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01989_a6d652a3bfa581cf1cd7790d6d11ea52f}{dump\+\_\+float}} (\mbox{\hyperlink{a01989_a460c6794fbabbb2ae83380e987a6c030}{number\+\_\+float\+\_\+t}} x)
+\begin{DoxyCompactList}\small\item\em dump a floating-\/point number \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01989_a24b0fe45dc774441237bde198a133d8a}{dump\+\_\+float}} (\mbox{\hyperlink{a01989_a460c6794fbabbb2ae83380e987a6c030}{number\+\_\+float\+\_\+t}} x, std\+::true\+\_\+type)
 \item 
-std\+::uint64\+\_\+t \mbox{\hyperlink{a01989_aea90459e340a231ca31d46946803ef51}{f}} = 0
+void \mbox{\hyperlink{a01989_a331dad892fc00313f928fdaa6bc8f849}{dump\+\_\+float}} (\mbox{\hyperlink{a01989_a460c6794fbabbb2ae83380e987a6c030}{number\+\_\+float\+\_\+t}} x, std\+::false\+\_\+type)
 \item 
-int \mbox{\hyperlink{a01989_ae22e170815983961447c429f324c944d}{e}} = 0
+\mbox{\hyperlink{a01989_a16c7b7a726a38ff0c06dce7ba7968391}{number\+\_\+unsigned\+\_\+t}} \mbox{\hyperlink{a01989_a45bcb8ea41e4db5461e979d4b1d5e5e7}{remove\+\_\+sign}} (\mbox{\hyperlink{a01989_a16c7b7a726a38ff0c06dce7ba7968391}{number\+\_\+unsigned\+\_\+t}} x)
+\item 
+\mbox{\hyperlink{a01989_a16c7b7a726a38ff0c06dce7ba7968391}{number\+\_\+unsigned\+\_\+t}} \mbox{\hyperlink{a01989_aecc9c3f809a94a07010ea01d9c5a0c42}{remove\+\_\+sign}} (\mbox{\hyperlink{a01989_ae7b1df1c70bdec1371f297567726a198}{number\+\_\+integer\+\_\+t}} x) noexcept
 \end{DoxyCompactItemize}
-\doxysubsection*{Static Public Attributes}
+\doxysubsection*{Static Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static constexpr int \mbox{\hyperlink{a01989_a03682754b06ed4f30b263119eecc2d52}{k\+Precision}} = 64
+static std\+::uint8\+\_\+t \mbox{\hyperlink{a01989_abdcc4fd1dc5d3afb6c0817e4c89b1242}{decode}} (std\+::uint8\+\_\+t \&state, std\+::uint32\+\_\+t \&codep, const std\+::uint8\+\_\+t byte) noexcept
+\begin{DoxyCompactList}\small\item\em check whether a string is UTF-\/8 encoded \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00411_a9b680ddfb58f27eb53a67229447fc556}{output\+\_\+adapter\+\_\+t}}$<$ char $>$ \mbox{\hyperlink{a01989_acf3c88660d3cbc65fc71c4d84f2a9f59}{o}} = nullptr
+\begin{DoxyCompactList}\small\item\em the output of the serializer \end{DoxyCompactList}\item 
+std\+::array$<$ char, 64 $>$ \mbox{\hyperlink{a01989_a1a9d8b344a6cb47728a3519693ec03d1}{number\+\_\+buffer}} \{\{\}\}
+\begin{DoxyCompactList}\small\item\em a (hopefully) large enough character buffer \end{DoxyCompactList}\item 
+const std\+::lconv $\ast$ \mbox{\hyperlink{a01989_a1952945b7652afb59d3903cc8457a589}{loc}} = nullptr
+\begin{DoxyCompactList}\small\item\em the locale \end{DoxyCompactList}\item 
+const char \mbox{\hyperlink{a01989_a78a6ae833bb6cf7f00cb0d51db114b14}{thousands\+\_\+sep}} = \textquotesingle{}\textbackslash{}0\textquotesingle{}
+\begin{DoxyCompactList}\small\item\em the locale\textquotesingle{}s thousand separator character \end{DoxyCompactList}\item 
+const char \mbox{\hyperlink{a01989_a311e5d6f4b31d5be0eb3c0cb20b6965a}{decimal\+\_\+point}} = \textquotesingle{}\textbackslash{}0\textquotesingle{}
+\begin{DoxyCompactList}\small\item\em the locale\textquotesingle{}s decimal point character \end{DoxyCompactList}\item 
+std\+::array$<$ char, 512 $>$ \mbox{\hyperlink{a01989_a9c9b7ca63a66e59e5e7ffe8a2acf5c8f}{string\+\_\+buffer}} \{\{\}\}
+\begin{DoxyCompactList}\small\item\em string buffer \end{DoxyCompactList}\item 
+const char \mbox{\hyperlink{a01989_a9a55e6b028d09676fe35aefa0c72ea5b}{indent\+\_\+char}}
+\begin{DoxyCompactList}\small\item\em the indentation character \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01989_ad08aa54fac1dd0a453320c54137d45ba}{string\+\_\+t}} \mbox{\hyperlink{a01989_ae9268a10d88a5526e32735a55a132fc6}{indent\+\_\+string}}
+\begin{DoxyCompactList}\small\item\em the indentation string \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{a00411_a5a76b60b26dc8c47256a996d18d967df}{error\+\_\+handler\+\_\+t}} \mbox{\hyperlink{a01989_a09d5a046fb0f7cb61977d6e5fbe8b3a1}{error\+\_\+handler}}
+\begin{DoxyCompactList}\small\item\em error\+\_\+handler how to react on decoding errors \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr std\+::uint8\+\_\+t \mbox{\hyperlink{a01989_a2311a8c756c4a119aa82cd55301d13bc}{UTF8\+\_\+\+ACCEPT}} = 0
+\item 
+static constexpr std\+::uint8\+\_\+t \mbox{\hyperlink{a01989_a833bd5805e4380549f4e21c304820d6d}{UTF8\+\_\+\+REJECT}} = 1
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Basic\+Json\+Type$>$\newline
+class nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$}
 
 
-Definition at line 14389 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l15477}{15477}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{a01989_aaaec32f2fec57db422019a11994f7bb5}\label{a01989_aaaec32f2fec57db422019a11994f7bb5}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!binary\_char\_t@{binary\_char\_t}}
+\index{binary\_char\_t@{binary\_char\_t}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{binary\_char\_t}{binary\_char\_t}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+using \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::binary\+\_\+char\+\_\+t =  typename Basic\+Json\+Type\+::binary\+\_\+t\+::value\+\_\+type\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l15483}{15483}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+\mbox{\Hypertarget{a01989_a460c6794fbabbb2ae83380e987a6c030}\label{a01989_a460c6794fbabbb2ae83380e987a6c030}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!number\_float\_t@{number\_float\_t}}
+\index{number\_float\_t@{number\_float\_t}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{number\_float\_t}{number\_float\_t}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+using \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::number\+\_\+float\+\_\+t =  typename Basic\+Json\+Type\+::number\+\_\+float\+\_\+t\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l15480}{15480}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+\mbox{\Hypertarget{a01989_ae7b1df1c70bdec1371f297567726a198}\label{a01989_ae7b1df1c70bdec1371f297567726a198}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!number\_integer\_t@{number\_integer\_t}}
+\index{number\_integer\_t@{number\_integer\_t}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{number\_integer\_t}{number\_integer\_t}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+using \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::number\+\_\+integer\+\_\+t =  typename Basic\+Json\+Type\+::number\+\_\+integer\+\_\+t\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l15481}{15481}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+\mbox{\Hypertarget{a01989_a16c7b7a726a38ff0c06dce7ba7968391}\label{a01989_a16c7b7a726a38ff0c06dce7ba7968391}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!number\_unsigned\_t@{number\_unsigned\_t}}
+\index{number\_unsigned\_t@{number\_unsigned\_t}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{number\_unsigned\_t}{number\_unsigned\_t}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+using \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::number\+\_\+unsigned\+\_\+t =  typename Basic\+Json\+Type\+::number\+\_\+unsigned\+\_\+t\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l15482}{15482}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+\mbox{\Hypertarget{a01989_ad08aa54fac1dd0a453320c54137d45ba}\label{a01989_ad08aa54fac1dd0a453320c54137d45ba}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!string\_t@{string\_t}}
+\index{string\_t@{string\_t}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{string\_t}{string\_t}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+using \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::string\+\_\+t =  typename Basic\+Json\+Type\+::string\+\_\+t\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l15479}{15479}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{a01989_ad8798a8823a49c8412f0fada9892c918}\label{a01989_ad8798a8823a49c8412f0fada9892c918}} 
-\index{nlohmann::detail::dtoa\_impl::diyfp@{nlohmann::detail::dtoa\_impl::diyfp}!diyfp@{diyfp}}
-\index{diyfp@{diyfp}!nlohmann::detail::dtoa\_impl::diyfp@{nlohmann::detail::dtoa\_impl::diyfp}}
-\doxysubsubsection{\texorpdfstring{diyfp()}{diyfp()}}
-{\footnotesize\ttfamily constexpr nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::diyfp (\begin{DoxyParamCaption}\item[{std\+::uint64\+\_\+t}]{f\+\_\+,  }\item[{int}]{e\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+\mbox{\Hypertarget{a01989_ac010525281d97867ee842da37294fe83}\label{a01989_ac010525281d97867ee842da37294fe83}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!serializer@{serializer}}
+\index{serializer@{serializer}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{serializer()}{serializer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+\mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::serializer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00411_a9b680ddfb58f27eb53a67229447fc556}{output\+\_\+adapter\+\_\+t}}$<$ char $>$}]{s,  }\item[{const char}]{ichar,  }\item[{\mbox{\hyperlink{a00411_a5a76b60b26dc8c47256a996d18d967df}{error\+\_\+handler\+\_\+t}}}]{error\+\_\+handler\+\_\+ = {\ttfamily \mbox{\hyperlink{a00411_a5a76b60b26dc8c47256a996d18d967dfa2133fd717402a7966ee88d06f9e0b792}{error\+\_\+handler\+\_\+t\+::strict}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em s} & output stream to serialize to \\
+\hline
+\mbox{\texttt{ in}}  & {\em ichar} & indentation character to use \\
+\hline
+\mbox{\texttt{ in}}  & {\em error\+\_\+handler\+\_\+} & how to react on decoding errors \\
+\hline
+\end{DoxyParams}
 
-Definition at line 14396 of file json.\+hpp.
+
+Definition at line \mbox{\hyperlink{a00206_source_l15493}{15493}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+\mbox{\Hypertarget{a01989_ae3771351ec4cb892bec707edeb56dc31}\label{a01989_ae3771351ec4cb892bec707edeb56dc31}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!serializer@{serializer}}
+\index{serializer@{serializer}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{serializer()}{serializer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+\mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::serializer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01989}{serializer}}$<$ Basic\+Json\+Type $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{a01989_a28081304e70cca6b3042c101ee5c498c}\label{a01989_a28081304e70cca6b3042c101ee5c498c}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!serializer@{serializer}}
+\index{serializer@{serializer}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{serializer()}{serializer()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+\mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::serializer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01989}{serializer}}$<$ Basic\+Json\+Type $>$ \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{a01989_aa6c62b51cbebb185307df851dc0167f0}\label{a01989_aa6c62b51cbebb185307df851dc0167f0}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!````~serializer@{$\sim$serializer}}
+\index{````~serializer@{$\sim$serializer}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$serializer()}{~serializer()}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+\mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::$\sim$\mbox{\hyperlink{a01989}{serializer}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a01989_aa5f250d12ce89c81fdb08900c6a823e8}\label{a01989_aa5f250d12ce89c81fdb08900c6a823e8}} 
-\index{nlohmann::detail::dtoa\_impl::diyfp@{nlohmann::detail::dtoa\_impl::diyfp}!mul@{mul}}
-\index{mul@{mul}!nlohmann::detail::dtoa\_impl::diyfp@{nlohmann::detail::dtoa\_impl::diyfp}}
-\doxysubsubsection{\texorpdfstring{mul()}{mul()}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{a01989}{diyfp}} nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::mul (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01989}{diyfp}} \&}]{x,  }\item[{const \mbox{\hyperlink{a01989}{diyfp}} \&}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [noexcept]}}
+\mbox{\Hypertarget{a01989_a10692e98ea1f5a64de1d0b8e0e724b99}\label{a01989_a10692e98ea1f5a64de1d0b8e0e724b99}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!count\_digits@{count\_digits}}
+\index{count\_digits@{count\_digits}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{count\_digits()}{count\_digits()}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+unsigned int \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::count\+\_\+digits (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01989_a16c7b7a726a38ff0c06dce7ba7968391}{number\+\_\+unsigned\+\_\+t}}}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [noexcept]}}
 
 
 
-returns x $\ast$ y 
+count digits 
 
+Count the number of decimal (base 10) digits for an input unsigned integer.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em x} & unsigned integer number to count its digits \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+number of decimal digits 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l16073}{16073}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00206_source_l16113}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+integer()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01989_a10692e98ea1f5a64de1d0b8e0e724b99_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01989_abdcc4fd1dc5d3afb6c0817e4c89b1242}\label{a01989_abdcc4fd1dc5d3afb6c0817e4c89b1242}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!decode@{decode}}
+\index{decode@{decode}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{decode()}{decode()}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+static std\+::uint8\+\_\+t \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::decode (\begin{DoxyParamCaption}\item[{std\+::uint8\+\_\+t \&}]{state,  }\item[{std\+::uint32\+\_\+t \&}]{codep,  }\item[{const std\+::uint8\+\_\+t}]{byte }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}, {\ttfamily [noexcept]}}
+
+
+
+check whether a string is UTF-\/8 encoded 
+
+The function checks each byte of a string whether it is UTF-\/8 encoded. The result of the check is stored in the {\itshape state} parameter. The function must be called initially with state 0 (accept). State 1 means the string must be rejected, because the current byte is not allowed. If the string is completely processed, but the state is non-\/zero, the string ended prematurely; that is, the last byte indicated more bytes should have followed.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em state} & the state of the decoding \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em codep} & codepoint (valid only if resulting state is UTF8\+\_\+\+ACCEPT) \\
+\hline
+\mbox{\texttt{ in}}  & {\em byte} & next byte to decode \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+new state
+\end{DoxyReturn}
 \begin{DoxyNote}{Note}
-The result is rounded. (Only the upper q bits are returned.) 
+The function has been edited\+: a std\+::array is used.
 \end{DoxyNote}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2008-\/2009 Bjoern Hoehrmann \href{mailto:bjoern@hoehrmann.de}{\texttt{ bjoern@hoehrmann.\+de}} 
+\end{DoxyCopyright}
+\begin{DoxySeeAlso}{See also}
+\href{http://bjoern.hoehrmann.de/utf-8/decoder/dfa/}{\texttt{ http\+://bjoern.\+hoehrmann.\+de/utf-\/8/decoder/dfa/}} 
+\end{DoxySeeAlso}
 
 
-Definition at line 14414 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l16298}{16298}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-References k\+Precision.
+References \mbox{\hyperlink{a00206_source_l02100}{JSON\+\_\+\+ASSERT}}, and \mbox{\hyperlink{a00206_source_l15484}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::\+UTF8\+\_\+\+ACCEPT}}.
 
 
 
-Referenced by nlohmann\+::detail\+::dtoa\+\_\+impl\+::grisu2().
+Referenced by \mbox{\hyperlink{a00206_source_l15817}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+escaped()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a01989_aa5f250d12ce89c81fdb08900c6a823e8_icgraph}
+\includegraphics[width=350pt]{a01989_abdcc4fd1dc5d3afb6c0817e4c89b1242_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{a01989_a2246b5b40c7c6992153ef174063d6aa6}\label{a01989_a2246b5b40c7c6992153ef174063d6aa6}} 
-\index{nlohmann::detail::dtoa\_impl::diyfp@{nlohmann::detail::dtoa\_impl::diyfp}!normalize@{normalize}}
-\index{normalize@{normalize}!nlohmann::detail::dtoa\_impl::diyfp@{nlohmann::detail::dtoa\_impl::diyfp}}
-\doxysubsubsection{\texorpdfstring{normalize()}{normalize()}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{a01989}{diyfp}} nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::normalize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01989}{diyfp}}}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [noexcept]}}
+\mbox{\Hypertarget{a01989_a95460ebd1a535a543e5a0ec52e00f48b}\label{a01989_a95460ebd1a535a543e5a0ec52e00f48b}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!dump@{dump}}
+\index{dump@{dump}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{dump()}{dump()}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+void \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::dump (\begin{DoxyParamCaption}\item[{const Basic\+Json\+Type \&}]{val,  }\item[{const bool}]{pretty\+\_\+print,  }\item[{const bool}]{ensure\+\_\+ascii,  }\item[{const unsigned int}]{indent\+\_\+step,  }\item[{const unsigned int}]{current\+\_\+indent = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-normalize x such that the significand is $>$= 2$^\wedge$(q-\/1) 
+internal implementation of the serialization function 
 
-\begin{DoxyPrecond}{Precondition}
-x.\+f != 0 
-\end{DoxyPrecond}
+This function is called by the public member function dump and organizes the serialization internally. The indentation level is propagated as additional parameter. In case of arrays and objects, the function is called recursively.
 
 
-Definition at line 14479 of file json.\+hpp.
+\begin{DoxyItemize}
+\item strings and object keys are escaped using {\ttfamily escape\+\_\+string()}
+\item integer numbers are converted implicitly via {\ttfamily operator\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}}
+\item floating-\/point numbers are converted to a string using {\ttfamily \char`\"{}\%g\char`\"{}} format
+\item binary values are serialized as objects containing the subtype and the byte array
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em val} & value to serialize \\
+\hline
+\mbox{\texttt{ in}}  & {\em pretty\+\_\+print} & whether the output shall be pretty-\/printed \\
+\hline
+\mbox{\texttt{ in}}  & {\em ensure\+\_\+ascii} & If {\itshape ensure\+\_\+ascii} is true, all non-\/\+ASCII characters in the output are escaped with {\ttfamily \textbackslash{}u\+XXXX} sequences, and the result consists of ASCII characters only. \\
+\hline
+\mbox{\texttt{ in}}  & {\em indent\+\_\+step} & the indent level \\
+\hline
+\mbox{\texttt{ in}}  & {\em current\+\_\+indent} & the current indent level (only used internally) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l15533}{15533}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-References J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+RT.
+References \mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985af1f713c9e000f5d3f280adbd124df4f5}{nlohmann\+::detail\+::array}}, \mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985a9d7183f16acce70658f686ae7f1a4d20}{nlohmann\+::detail\+::binary}}, \mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985a84e2c64f38f78ba3ea5c905ab5a2da27}{nlohmann\+::detail\+::boolean}}, \mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985a94708897ec9db8647dfe695714c98e46}{nlohmann\+::detail\+::discarded}}, \mbox{\hyperlink{a00206_source_l15533}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump()}}, \mbox{\hyperlink{a00206_source_l15817}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+escaped()}}, \mbox{\hyperlink{a00206_source_l16199}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+float()}}, \mbox{\hyperlink{a00206_source_l16113}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+integer()}}, \mbox{\hyperlink{a00206_source_l16378}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::indent\+\_\+string}}, \mbox{\hyperlink{a00206_source_l02100}{JSON\+\_\+\+ASSERT}}, \mbox{\hyperlink{a00206_source_l01401}{JSON\+\_\+\+HEDLEY\+\_\+\+UNLIKELY}}, \mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985a37a6259cc0c1dae299a7866489dff0bd}{nlohmann\+::detail\+::null}}, \mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985ad9966ecb59667235a57b4b999a649eef}{nlohmann\+::detail\+::number\+\_\+float}}, \mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985a5763da164f8659d94a56e29df64b4bcc}{nlohmann\+::detail\+::number\+\_\+integer}}, \mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985adce7cc8ec29055c4158828921f2f265e}{nlohmann\+::detail\+::number\+\_\+unsigned}}, \mbox{\hyperlink{a00206_source_l16360}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::o}}, \mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985aa8cfde6331bd59eb2ac96f8911c4b666}{nlohmann\+::detail\+::object}}, and \mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985ab45cffe084dd3d20d928bee85e7b0f21}{nlohmann\+::detail\+::string}}.
 
 
 
-Referenced by nlohmann\+::detail\+::dtoa\+\_\+impl\+::compute\+\_\+boundaries().
+Referenced by \mbox{\hyperlink{a00206_source_l15533}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump()}}, and \mbox{\hyperlink{a00206_source_l18759}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::dump()}}.
 
-Here is the caller graph for this function\+:
+Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a01989_a2246b5b40c7c6992153ef174063d6aa6_icgraph}
+\includegraphics[width=350pt]{a01989_a95460ebd1a535a543e5a0ec52e00f48b_cgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{a01989_a6b6665e467ebabe0c0f7418d3fe4b118}\label{a01989_a6b6665e467ebabe0c0f7418d3fe4b118}} 
-\index{nlohmann::detail::dtoa\_impl::diyfp@{nlohmann::detail::dtoa\_impl::diyfp}!normalize\_to@{normalize\_to}}
-\index{normalize\_to@{normalize\_to}!nlohmann::detail::dtoa\_impl::diyfp@{nlohmann::detail::dtoa\_impl::diyfp}}
-\doxysubsubsection{\texorpdfstring{normalize\_to()}{normalize\_to()}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{a01989}{diyfp}} nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::normalize\+\_\+to (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01989}{diyfp}} \&}]{x,  }\item[{const int}]{target\+\_\+exponent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [noexcept]}}
-
-
-
-normalize x such that the result has the exponent E 
-
-\begin{DoxyPrecond}{Precondition}
-e $>$= x.\+e and the upper e -\/ x.\+e bits of x.\+f must be zero. 
-\end{DoxyPrecond}
-
-
-Definition at line 14496 of file json.\+hpp.
-
-
-
-References e, and J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+RT.
-
-
-
-Referenced by nlohmann\+::detail\+::dtoa\+\_\+impl\+::compute\+\_\+boundaries().
-
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a01989_a6b6665e467ebabe0c0f7418d3fe4b118_icgraph}
+\includegraphics[width=350pt]{a01989_a95460ebd1a535a543e5a0ec52e00f48b_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{a01989_aeb26771af54ad73598c1a0430d65d884}\label{a01989_aeb26771af54ad73598c1a0430d65d884}} 
-\index{nlohmann::detail::dtoa\_impl::diyfp@{nlohmann::detail::dtoa\_impl::diyfp}!sub@{sub}}
-\index{sub@{sub}!nlohmann::detail::dtoa\_impl::diyfp@{nlohmann::detail::dtoa\_impl::diyfp}}
-\doxysubsubsection{\texorpdfstring{sub()}{sub()}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{a01989}{diyfp}} nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::sub (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01989}{diyfp}} \&}]{x,  }\item[{const \mbox{\hyperlink{a01989}{diyfp}} \&}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [noexcept]}}
+\mbox{\Hypertarget{a01989_ac1f8d1165b44149bd8be397dce68ea05}\label{a01989_ac1f8d1165b44149bd8be397dce68ea05}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!dump\_escaped@{dump\_escaped}}
+\index{dump\_escaped@{dump\_escaped}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{dump\_escaped()}{dump\_escaped()}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+void \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::dump\+\_\+escaped (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01989_ad08aa54fac1dd0a453320c54137d45ba}{string\+\_\+t}} \&}]{s,  }\item[{const bool}]{ensure\+\_\+ascii }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
-returns x -\/ y 
+dump escaped string 
 
-\begin{DoxyPrecond}{Precondition}
-x.\+e == y.\+e and x.\+f $>$= y.\+f 
-\end{DoxyPrecond}
+Escape a string by replacing certain special characters by a sequence of an escape character (backslash) and another character and other control characters by a sequence of \char`\"{}\textbackslash{}u\char`\"{} followed by a four-\/digit hex representation. The escaped string is written to output stream {\itshape o}.
 
 
-Definition at line 14402 of file json.\+hpp.
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em s} & the string to escape \\
+\hline
+\mbox{\texttt{ in}}  & {\em ensure\+\_\+ascii} & whether to escape non-\/\+ASCII characters with \textbackslash{}u\+XXXX sequences\\
+\hline
+\end{DoxyParams}
+@complexity Linear in the length of string {\itshape s}. 
+
+Definition at line \mbox{\hyperlink{a00206_source_l15817}{15817}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-References J\+S\+O\+N\+\_\+\+A\+S\+S\+E\+RT.
+References \mbox{\hyperlink{a00206_source_l02567}{nlohmann\+::detail\+::type\+\_\+error\+::create()}}, \mbox{\hyperlink{a00206_source_l16298}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::decode()}}, \mbox{\hyperlink{a00206_source_l16381}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::error\+\_\+handler}}, \mbox{\hyperlink{a00411_a5a76b60b26dc8c47256a996d18d967dfa567bc1d268f135496de3d5b946b691f3}{nlohmann\+::detail\+::ignore}}, \mbox{\hyperlink{a00206_source_l02100}{JSON\+\_\+\+ASSERT}}, \mbox{\hyperlink{a00206_source_l01400}{JSON\+\_\+\+HEDLEY\+\_\+\+LIKELY}}, \mbox{\hyperlink{a00206_source_l02071}{JSON\+\_\+\+THROW}}, \mbox{\hyperlink{a00206_source_l16360}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::o}}, \mbox{\hyperlink{a00411_a5a76b60b26dc8c47256a996d18d967dfa9dde360102c103867bd2f45872f1129c}{nlohmann\+::detail\+::replace}}, \mbox{\hyperlink{a00411_a5a76b60b26dc8c47256a996d18d967dfa2133fd717402a7966ee88d06f9e0b792}{nlohmann\+::detail\+::strict}}, \mbox{\hyperlink{a00206_source_l16373}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::string\+\_\+buffer}}, \mbox{\hyperlink{a00206_source_l14278}{nlohmann\+::detail\+::binary\+\_\+writer$<$ Basic\+Json\+Type, Char\+Type $>$\+::to\+\_\+char\+\_\+type()}}, \mbox{\hyperlink{a00206_source_l25172}{nlohmann\+::to\+\_\+string()}}, \mbox{\hyperlink{a00206_source_l15484}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::\+UTF8\+\_\+\+ACCEPT}}, and \mbox{\hyperlink{a00206_source_l15485}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::\+UTF8\+\_\+\+REJECT}}.
 
 
 
-Referenced by nlohmann\+::detail\+::dtoa\+\_\+impl\+::grisu2\+\_\+digit\+\_\+gen().
+Referenced by \mbox{\hyperlink{a00206_source_l15533}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01989_ac1f8d1165b44149bd8be397dce68ea05_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01989_ac1f8d1165b44149bd8be397dce68ea05_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01989_a6d652a3bfa581cf1cd7790d6d11ea52f}\label{a01989_a6d652a3bfa581cf1cd7790d6d11ea52f}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!dump\_float@{dump\_float}}
+\index{dump\_float@{dump\_float}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{dump\_float()}{dump\_float()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+void \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::dump\+\_\+float (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01989_a460c6794fbabbb2ae83380e987a6c030}{number\+\_\+float\+\_\+t}}}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+dump a floating-\/point number 
+
+Dump a given floating-\/point number to output stream {\itshape o}. Works internally with {\itshape number\+\_\+buffer}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em x} & floating-\/point number to dump \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l16199}{16199}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00206_source_l16199}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+float()}}, and \mbox{\hyperlink{a00206_source_l16360}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::o}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00206_source_l15533}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump()}}, and \mbox{\hyperlink{a00206_source_l16199}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+float()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{a01989_a6d652a3bfa581cf1cd7790d6d11ea52f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01989_a6d652a3bfa581cf1cd7790d6d11ea52f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01989_a331dad892fc00313f928fdaa6bc8f849}\label{a01989_a331dad892fc00313f928fdaa6bc8f849}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!dump\_float@{dump\_float}}
+\index{dump\_float@{dump\_float}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{dump\_float()}{dump\_float()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+void \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::dump\+\_\+float (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01989_a460c6794fbabbb2ae83380e987a6c030}{number\+\_\+float\+\_\+t}}}]{x,  }\item[{std\+::false\+\_\+type}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l16228}{16228}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00206_source_l16370}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::decimal\+\_\+point}}, \mbox{\hyperlink{a00206_source_l02100}{JSON\+\_\+\+ASSERT}}, \mbox{\hyperlink{a00206_source_l16363}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::number\+\_\+buffer}}, \mbox{\hyperlink{a00206_source_l16360}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::o}}, and \mbox{\hyperlink{a00206_source_l16368}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::thousands\+\_\+sep}}.
+
+\mbox{\Hypertarget{a01989_a24b0fe45dc774441237bde198a133d8a}\label{a01989_a24b0fe45dc774441237bde198a133d8a}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!dump\_float@{dump\_float}}
+\index{dump\_float@{dump\_float}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{dump\_float()}{dump\_float()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+void \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::dump\+\_\+float (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01989_a460c6794fbabbb2ae83380e987a6c030}{number\+\_\+float\+\_\+t}}}]{x,  }\item[{std\+::true\+\_\+type}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l16220}{16220}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00206_source_l16363}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::number\+\_\+buffer}}, \mbox{\hyperlink{a00206_source_l16360}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::o}}, and \mbox{\hyperlink{a00206_source_l15399}{nlohmann\+::detail\+::to\+\_\+chars()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01989_a24b0fe45dc774441237bde198a133d8a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01989_a944f6dea8dbe2961da145d2f62fa2c2f}\label{a01989_a944f6dea8dbe2961da145d2f62fa2c2f}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!dump\_integer@{dump\_integer}}
+\index{dump\_integer@{dump\_integer}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{dump\_integer()}{dump\_integer()}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+template$<$typename Number\+Type , \mbox{\hyperlink{a00411_a02bcbc878bee413f25b985ada771aa9c}{detail\+::enable\+\_\+if\+\_\+t}}$<$ std\+::is\+\_\+same$<$ Number\+Type, \mbox{\hyperlink{a01989_a16c7b7a726a38ff0c06dce7ba7968391}{number\+\_\+unsigned\+\_\+t}} $>$\+::value$\vert$$\vert$std\+::is\+\_\+same$<$ Number\+Type, \mbox{\hyperlink{a01989_ae7b1df1c70bdec1371f297567726a198}{number\+\_\+integer\+\_\+t}} $>$\+::value$\vert$$\vert$std\+::is\+\_\+same$<$ Number\+Type, \mbox{\hyperlink{a01989_aaaec32f2fec57db422019a11994f7bb5}{binary\+\_\+char\+\_\+t}} $>$\+::value, int $>$  = 0$>$ \\
+void \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::dump\+\_\+integer (\begin{DoxyParamCaption}\item[{Number\+Type}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+dump an integer 
+
+Dump a given integer to output stream {\itshape o}. Works internally with {\itshape number\+\_\+buffer}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em x} & integer number (signed or unsigned) to dump \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Number\+Type} & either {\itshape number\+\_\+integer\+\_\+t} or {\itshape number\+\_\+unsigned\+\_\+t} \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l16113}{16113}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00206_source_l16073}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::count\+\_\+digits()}}, \mbox{\hyperlink{a00206_source_l02100}{JSON\+\_\+\+ASSERT}}, \mbox{\hyperlink{a00206_source_l16363}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::number\+\_\+buffer}}, \mbox{\hyperlink{a00206_source_l16360}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::o}}, and \mbox{\hyperlink{a00206_source_l16337}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::remove\+\_\+sign()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00206_source_l15533}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01989_a944f6dea8dbe2961da145d2f62fa2c2f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01989_a944f6dea8dbe2961da145d2f62fa2c2f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01989_a80d865009268108161afe318a30aff5e}\label{a01989_a80d865009268108161afe318a30aff5e}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+\mbox{\hyperlink{a01989}{serializer}} \& \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01989}{serializer}}$<$ Basic\+Json\+Type $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{a01989_a2fb91f0b3479c5603b45e8a4c1f6673e}\label{a01989_a2fb91f0b3479c5603b45e8a4c1f6673e}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+\mbox{\hyperlink{a01989}{serializer}} \& \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01989}{serializer}}$<$ Basic\+Json\+Type $>$ \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{a01989_aecc9c3f809a94a07010ea01d9c5a0c42}\label{a01989_aecc9c3f809a94a07010ea01d9c5a0c42}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!remove\_sign@{remove\_sign}}
+\index{remove\_sign@{remove\_sign}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{remove\_sign()}{remove\_sign()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+\mbox{\hyperlink{a01989_a16c7b7a726a38ff0c06dce7ba7968391}{number\+\_\+unsigned\+\_\+t}} \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::remove\+\_\+sign (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01989_ae7b1df1c70bdec1371f297567726a198}{number\+\_\+integer\+\_\+t}}}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l16352}{16352}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00206_source_l02100}{JSON\+\_\+\+ASSERT}}.
+
+\mbox{\Hypertarget{a01989_a45bcb8ea41e4db5461e979d4b1d5e5e7}\label{a01989_a45bcb8ea41e4db5461e979d4b1d5e5e7}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!remove\_sign@{remove\_sign}}
+\index{remove\_sign@{remove\_sign}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{remove\_sign()}{remove\_sign()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+\mbox{\hyperlink{a01989_a16c7b7a726a38ff0c06dce7ba7968391}{number\+\_\+unsigned\+\_\+t}} \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::remove\+\_\+sign (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01989_a16c7b7a726a38ff0c06dce7ba7968391}{number\+\_\+unsigned\+\_\+t}}}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l16337}{16337}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00206_source_l02100}{JSON\+\_\+\+ASSERT}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00206_source_l16113}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+integer()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a01989_aeb26771af54ad73598c1a0430d65d884_icgraph}
+\includegraphics[width=350pt]{a01989_a45bcb8ea41e4db5461e979d4b1d5e5e7_icgraph}
 \end{center}
 \end{figure}
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{a01989_ae22e170815983961447c429f324c944d}\label{a01989_ae22e170815983961447c429f324c944d}} 
-\index{nlohmann::detail::dtoa\_impl::diyfp@{nlohmann::detail::dtoa\_impl::diyfp}!e@{e}}
-\index{e@{e}!nlohmann::detail::dtoa\_impl::diyfp@{nlohmann::detail::dtoa\_impl::diyfp}}
-\doxysubsubsection{\texorpdfstring{e}{e}}
-{\footnotesize\ttfamily int nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::e = 0}
+\mbox{\Hypertarget{a01989_a311e5d6f4b31d5be0eb3c0cb20b6965a}\label{a01989_a311e5d6f4b31d5be0eb3c0cb20b6965a}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!decimal\_point@{decimal\_point}}
+\index{decimal\_point@{decimal\_point}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{decimal\_point}{decimal\_point}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+const char \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::decimal\+\_\+point = \textquotesingle{}\textbackslash{}0\textquotesingle{}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 14394 of file json.\+hpp.
+the locale\textquotesingle{}s decimal point character 
 
 
 
-Referenced by nlohmann\+::detail\+::dtoa\+\_\+impl\+::compute\+\_\+boundaries(), nlohmann\+::detail\+::dtoa\+\_\+impl\+::grisu2(), nlohmann\+::detail\+::dtoa\+\_\+impl\+::grisu2\+\_\+digit\+\_\+gen(), and normalize\+\_\+to().
-
-\mbox{\Hypertarget{a01989_aea90459e340a231ca31d46946803ef51}\label{a01989_aea90459e340a231ca31d46946803ef51}} 
-\index{nlohmann::detail::dtoa\_impl::diyfp@{nlohmann::detail::dtoa\_impl::diyfp}!f@{f}}
-\index{f@{f}!nlohmann::detail::dtoa\_impl::diyfp@{nlohmann::detail::dtoa\_impl::diyfp}}
-\doxysubsubsection{\texorpdfstring{f}{f}}
-{\footnotesize\ttfamily std\+::uint64\+\_\+t nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::f = 0}
+Definition at line \mbox{\hyperlink{a00206_source_l16370}{16370}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-Definition at line 14393 of file json.\+hpp.
+Referenced by \mbox{\hyperlink{a00206_source_l16228}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+float()}}.
+
+\mbox{\Hypertarget{a01989_a09d5a046fb0f7cb61977d6e5fbe8b3a1}\label{a01989_a09d5a046fb0f7cb61977d6e5fbe8b3a1}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!error\_handler@{error\_handler}}
+\index{error\_handler@{error\_handler}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{error\_handler}{error\_handler}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+const \mbox{\hyperlink{a00411_a5a76b60b26dc8c47256a996d18d967df}{error\+\_\+handler\+\_\+t}} \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::error\+\_\+handler\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Referenced by nlohmann\+::detail\+::dtoa\+\_\+impl\+::compute\+\_\+boundaries(), nlohmann\+::detail\+::dtoa\+\_\+impl\+::grisu2(), and nlohmann\+::detail\+::dtoa\+\_\+impl\+::grisu2\+\_\+digit\+\_\+gen().
-
-\mbox{\Hypertarget{a01989_a03682754b06ed4f30b263119eecc2d52}\label{a01989_a03682754b06ed4f30b263119eecc2d52}} 
-\index{nlohmann::detail::dtoa\_impl::diyfp@{nlohmann::detail::dtoa\_impl::diyfp}!kPrecision@{kPrecision}}
-\index{kPrecision@{kPrecision}!nlohmann::detail::dtoa\_impl::diyfp@{nlohmann::detail::dtoa\_impl::diyfp}}
-\doxysubsubsection{\texorpdfstring{kPrecision}{kPrecision}}
-{\footnotesize\ttfamily constexpr int nlohmann\+::detail\+::dtoa\+\_\+impl\+::diyfp\+::k\+Precision = 64\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+error\+\_\+handler how to react on decoding errors 
 
 
 
-Definition at line 14391 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l16381}{16381}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-Referenced by nlohmann\+::detail\+::dtoa\+\_\+impl\+::grisu2(), and mul().
+Referenced by \mbox{\hyperlink{a00206_source_l15817}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+escaped()}}.
+
+\mbox{\Hypertarget{a01989_a9a55e6b028d09676fe35aefa0c72ea5b}\label{a01989_a9a55e6b028d09676fe35aefa0c72ea5b}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!indent\_char@{indent\_char}}
+\index{indent\_char@{indent\_char}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{indent\_char}{indent\_char}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+const char \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::indent\+\_\+char\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+the indentation character 
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l16376}{16376}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+\mbox{\Hypertarget{a01989_ae9268a10d88a5526e32735a55a132fc6}\label{a01989_ae9268a10d88a5526e32735a55a132fc6}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!indent\_string@{indent\_string}}
+\index{indent\_string@{indent\_string}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{indent\_string}{indent\_string}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+\mbox{\hyperlink{a01989_ad08aa54fac1dd0a453320c54137d45ba}{string\+\_\+t}} \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::indent\+\_\+string\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the indentation string 
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l16378}{16378}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00206_source_l15533}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump()}}.
+
+\mbox{\Hypertarget{a01989_a1952945b7652afb59d3903cc8457a589}\label{a01989_a1952945b7652afb59d3903cc8457a589}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!loc@{loc}}
+\index{loc@{loc}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{loc}{loc}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+const std\+::lconv$\ast$ \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::loc = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the locale 
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l16366}{16366}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+\mbox{\Hypertarget{a01989_a1a9d8b344a6cb47728a3519693ec03d1}\label{a01989_a1a9d8b344a6cb47728a3519693ec03d1}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!number\_buffer@{number\_buffer}}
+\index{number\_buffer@{number\_buffer}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{number\_buffer}{number\_buffer}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+std\+::array$<$char, 64$>$ \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::number\+\_\+buffer \{\{\}\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+a (hopefully) large enough character buffer 
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l16363}{16363}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00206_source_l16220}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+float()}}, and \mbox{\hyperlink{a00206_source_l16113}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+integer()}}.
+
+\mbox{\Hypertarget{a01989_acf3c88660d3cbc65fc71c4d84f2a9f59}\label{a01989_acf3c88660d3cbc65fc71c4d84f2a9f59}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!o@{o}}
+\index{o@{o}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{o}{o}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+\mbox{\hyperlink{a00411_a9b680ddfb58f27eb53a67229447fc556}{output\+\_\+adapter\+\_\+t}}$<$char$>$ \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::o = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the output of the serializer 
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l16360}{16360}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00206_source_l15533}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump()}}, \mbox{\hyperlink{a00206_source_l15817}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+escaped()}}, \mbox{\hyperlink{a00206_source_l16199}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+float()}}, and \mbox{\hyperlink{a00206_source_l16113}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+integer()}}.
+
+\mbox{\Hypertarget{a01989_a9c9b7ca63a66e59e5e7ffe8a2acf5c8f}\label{a01989_a9c9b7ca63a66e59e5e7ffe8a2acf5c8f}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!string\_buffer@{string\_buffer}}
+\index{string\_buffer@{string\_buffer}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{string\_buffer}{string\_buffer}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+std\+::array$<$char, 512$>$ \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::string\+\_\+buffer \{\{\}\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+string buffer 
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l16373}{16373}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00206_source_l15817}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+escaped()}}.
+
+\mbox{\Hypertarget{a01989_a78a6ae833bb6cf7f00cb0d51db114b14}\label{a01989_a78a6ae833bb6cf7f00cb0d51db114b14}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!thousands\_sep@{thousands\_sep}}
+\index{thousands\_sep@{thousands\_sep}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{thousands\_sep}{thousands\_sep}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+const char \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::thousands\+\_\+sep = \textquotesingle{}\textbackslash{}0\textquotesingle{}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the locale\textquotesingle{}s thousand separator character 
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l16368}{16368}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00206_source_l16228}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+float()}}.
+
+\mbox{\Hypertarget{a01989_a2311a8c756c4a119aa82cd55301d13bc}\label{a01989_a2311a8c756c4a119aa82cd55301d13bc}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!UTF8\_ACCEPT@{UTF8\_ACCEPT}}
+\index{UTF8\_ACCEPT@{UTF8\_ACCEPT}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{UTF8\_ACCEPT}{UTF8\_ACCEPT}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+constexpr std\+::uint8\+\_\+t \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::\+UTF8\+\_\+\+ACCEPT = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l15484}{15484}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00206_source_l16298}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::decode()}}, and \mbox{\hyperlink{a00206_source_l15817}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+escaped()}}.
+
+\mbox{\Hypertarget{a01989_a833bd5805e4380549f4e21c304820d6d}\label{a01989_a833bd5805e4380549f4e21c304820d6d}} 
+\index{nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}!UTF8\_REJECT@{UTF8\_REJECT}}
+\index{UTF8\_REJECT@{UTF8\_REJECT}!nlohmann::detail::serializer$<$ BasicJsonType $>$@{nlohmann::detail::serializer$<$ BasicJsonType $>$}}
+\doxysubsubsection{\texorpdfstring{UTF8\_REJECT}{UTF8\_REJECT}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type $>$ \\
+constexpr std\+::uint8\+\_\+t \mbox{\hyperlink{a01989}{nlohmann\+::detail\+::serializer}}$<$ Basic\+Json\+Type $>$\+::\+UTF8\+\_\+\+REJECT = 1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l15485}{15485}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00206_source_l15817}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+escaped()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
 Cpp/spatialstructures/src/\mbox{\hyperlink{a00206}{json.\+hpp}}\end{DoxyCompactItemize}

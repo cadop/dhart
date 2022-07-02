@@ -1,302 +1,213 @@
-\hypertarget{a01469}{}\doxysection{HF\+::Ray\+Tracer\+::Ray\+Request Struct Reference}
-\label{a01469}\index{HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}}
+\hypertarget{a01469}{}\doxysection{HF\+::Spatial\+Structures\+::Edge\+Set Struct Reference}
+\label{a01469}\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
 
 
-{\ttfamily \#include $<$Ray\+Request.\+h$>$}
+A collection of edges and a parent.  
 
 
 
-Collaboration diagram for HF\+::Ray\+Tracer\+::Ray\+Request\+:
+
+{\ttfamily \#include $<$Edge.\+h$>$}
+
+
+
+Collaboration diagram for HF\+::Spatial\+Structures\+::Edge\+Set\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=281pt]{a01467}
+\includegraphics[width=267pt]{a01467}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a01469_aa41ca1aa01157b95c74a95d3f203d5a5}{Ray\+Request}} (float \mbox{\hyperlink{a01469_a4535d344c959c75fa7e73aae041616d0}{x}}, float \mbox{\hyperlink{a01469_a554b79bac3eee6e2613c25da41e729e5}{y}}, float \mbox{\hyperlink{a01469_a83259db3fdbc447512a4a12a6c6d8d46}{z}}, float \mbox{\hyperlink{a01469_af388eb4e3eeff840623ce2a1fac46f40}{dx}}, float \mbox{\hyperlink{a01469_a65d6987e4467b1a9a90ec55fb7b40802}{dy}}, float \mbox{\hyperlink{a01469_a19414b2ee8bbe63fd56b8403a434c41b}{dz}}, float \mbox{\hyperlink{a02916_a2d7c64a990ab1f4e06dfd5ac3e903433}{Distance}}=-\/1)
-\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{a01469}{Ray\+Request}} from origin points (x, y, z) and destination points (dx, dy, dz), as well as a starting distance for the ray. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{a01469_a30c3195e1d348017345b122c3073c098}{did\+Hit}} ()
-\begin{DoxyCompactList}\small\item\em Default constructor, empty code block. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{a01469_af6ea24f6930a23300942e17de55c5611}{Edge\+Set}} ()
+\begin{DoxyCompactList}\small\item\em Empty Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01469_a27b89d87c58a2e2775b430c9a27f1477}{Edge\+Set}} (int \mbox{\hyperlink{a01469_a1cf561c1c38a93316f15ac2ab29fc8f4}{parent}}, const std\+::vector$<$ \mbox{\hyperlink{a01465}{Int\+Edge}} $>$ \&edges)
+\begin{DoxyCompactList}\small\item\em Construct an edge set with a list of int edges and a parent. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01469_aefd67fc0614e2bca2eb54194452c2253}{size}} () const
+\begin{DoxyCompactList}\small\item\em Get the number of children in this edgeset. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01469_a9ce7cfb064de84654c518905ec76b7e0}{Add\+Edges}} (const std\+::vector$<$ \mbox{\hyperlink{a01465}{Int\+Edge}} $>$ \&edges)
+\begin{DoxyCompactList}\small\item\em Add a set of edges to the array of children. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01469_a1ede402c01f651faf1cfea6a09a908b2}{operator==}} (const \mbox{\hyperlink{a01469}{Edge\+Set}} \&ES2) const
+\begin{DoxyCompactList}\small\item\em Check the equality of two edge sets. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-float \mbox{\hyperlink{a01469_a4535d344c959c75fa7e73aae041616d0}{x}}
-\item 
-float \mbox{\hyperlink{a01469_a554b79bac3eee6e2613c25da41e729e5}{y}}
-\item 
-float \mbox{\hyperlink{a01469_a83259db3fdbc447512a4a12a6c6d8d46}{z}}
-\begin{DoxyCompactList}\small\item\em X, Y, and Z origin points. \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{a01469_af388eb4e3eeff840623ce2a1fac46f40}{dx}}
-\item 
-float \mbox{\hyperlink{a01469_a65d6987e4467b1a9a90ec55fb7b40802}{dy}}
-\item 
-float \mbox{\hyperlink{a01469_a19414b2ee8bbe63fd56b8403a434c41b}{dz}}
-\begin{DoxyCompactList}\small\item\em X, Y and Z direction to cast the ray in. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{a01469_a86d351155983dd40759ce97a4e9b9f23}{was\+\_\+cast}} = false
-\begin{DoxyCompactList}\small\item\em Whether this ray was cast or not. \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{a01469_a10641f49f8fd0f9f29dac750dd8d9b69}{distance}} = -\/1
-\begin{DoxyCompactList}\small\item\em Before firing\+: the maximum distance of the ray. After firing\+: distance to the hitpoint or -\/9999 on miss. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{a01469_a1216778f37ab07dcf08cec70d56885c5}{mesh\+\_\+id}} = -\/1
-\begin{DoxyCompactList}\small\item\em The ID of the hit mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+int \mbox{\hyperlink{a01469_a1cf561c1c38a93316f15ac2ab29fc8f4}{parent}}
+\begin{DoxyCompactList}\small\item\em Identifier of parent node. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{a01465}{Int\+Edge}} $>$ \mbox{\hyperlink{a01469_ae0ed1fa60810e109100548a03e10259c}{children}}
+\begin{DoxyCompactList}\small\item\em vector of \mbox{\hyperlink{a01465}{Int\+Edge}} (children) \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
+A collection of edges and a parent. 
+
+\begin{DoxyRemark}{Remarks}
+This can to represent a node and its edges without repeating any information such as parent\+\_\+id or node objects. 
+\end{DoxyRemark}
 
 
-Definition at line 13 of file Ray\+Request.\+h.
+Definition at line \mbox{\hyperlink{a00197_source_l00077}{77}} of file \mbox{\hyperlink{a00197_source}{Edge.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{a01469_aa41ca1aa01157b95c74a95d3f203d5a5}\label{a01469_aa41ca1aa01157b95c74a95d3f203d5a5}} 
-\index{HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}!RayRequest@{RayRequest}}
-\index{RayRequest@{RayRequest}!HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}}
-\doxysubsubsection{\texorpdfstring{RayRequest()}{RayRequest()}}
-{\footnotesize\ttfamily H\+F\+::\+Ray\+Tracer\+::\+Ray\+Request\+::\+Ray\+Request (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{float}]{z,  }\item[{float}]{dx,  }\item[{float}]{dy,  }\item[{float}]{dz,  }\item[{float}]{Distance = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{a01469_af6ea24f6930a23300942e17de55c5611}\label{a01469_af6ea24f6930a23300942e17de55c5611}} 
+\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!EdgeSet@{EdgeSet}}
+\index{EdgeSet@{EdgeSet}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
+\doxysubsubsection{\texorpdfstring{EdgeSet()}{EdgeSet()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily HF\+::\+Spatial\+Structures\+::\+Edge\+Set\+::\+Edge\+Set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Constructs a \mbox{\hyperlink{a01469}{Ray\+Request}} from origin points (x, y, z) and destination points (dx, dy, dz), as well as a starting distance for the ray. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em x} & The x origin coordinate\\
-\hline
-{\em y} & The y origin coordinate\\
-\hline
-{\em z} & The z origin coordinate\\
-\hline
-{\em dx} & The x destination coordinate\\
-\hline
-{\em dy} & The y destination coordinate\\
-\hline
-{\em dz} & The z destination coordinate\\
-\hline
-{\em Distance} & The maximum distance of the ray (upon construction)\\
-\hline
-\end{DoxyParams}
+Empty Constructor. 
 
 
 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// Requires \#include "RayRequest.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// For brevity}}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01469}{HF::RayTracer::RayRequest}};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Prepare RayRequest's parameters}}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} x\_in = 0.0;}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} y\_in = 0.0;}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} z\_in = 0.0;}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} dx\_in = 1.0;}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} dy\_in = 1.0;}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} dz\_in = 2.0;}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} distance\_in = 10.0;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create the RayRequest}}
-\DoxyCodeLine{\mbox{\hyperlink{a01469_aa41ca1aa01157b95c74a95d3f203d5a5}{RayRequest}} request(x\_in, y\_in, z\_in, dx\_in, dy\_in, dz\_in, distance\_in);}
-\end{DoxyCode}
- 
+Definition at line \mbox{\hyperlink{a00197_source_l00082}{82}} of file \mbox{\hyperlink{a00197_source}{Edge.\+h}}.
 
-Definition at line 10 of file Ray\+Request.\+cpp.
 
+
+References \mbox{\hyperlink{a00197_source_l00078}{parent}}.
+
+\mbox{\Hypertarget{a01469_a27b89d87c58a2e2775b430c9a27f1477}\label{a01469_a27b89d87c58a2e2775b430c9a27f1477}} 
+\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!EdgeSet@{EdgeSet}}
+\index{EdgeSet@{EdgeSet}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
+\doxysubsubsection{\texorpdfstring{EdgeSet()}{EdgeSet()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily HF\+::\+Spatial\+Structures\+::\+Edge\+Set\+::\+Edge\+Set (\begin{DoxyParamCaption}\item[{int}]{parent,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a01465}{Int\+Edge}} $>$ \&}]{edges }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct an edge set with a list of int edges and a parent. 
+
+
+
+Definition at line \mbox{\hyperlink{a00197_source_l00086}{86}} of file \mbox{\hyperlink{a00197_source}{Edge.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00197_source_l00095}{Add\+Edges()}}, and \mbox{\hyperlink{a00197_source_l00078}{parent}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{a01469_a27b89d87c58a2e2775b430c9a27f1477_cgraph}
+\end{center}
+\end{figure}
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a01469_a30c3195e1d348017345b122c3073c098}\label{a01469_a30c3195e1d348017345b122c3073c098}} 
-\index{HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}!didHit@{didHit}}
-\index{didHit@{didHit}!HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}}
-\doxysubsubsection{\texorpdfstring{didHit()}{didHit()}}
-{\footnotesize\ttfamily bool H\+F\+::\+Ray\+Tracer\+::\+Ray\+Request\+::did\+Hit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{a01469_a9ce7cfb064de84654c518905ec76b7e0}\label{a01469_a9ce7cfb064de84654c518905ec76b7e0}} 
+\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!AddEdges@{AddEdges}}
+\index{AddEdges@{AddEdges}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
+\doxysubsubsection{\texorpdfstring{AddEdges()}{AddEdges()}}
+{\footnotesize\ttfamily void HF\+::\+Spatial\+Structures\+::\+Edge\+Set\+::\+Add\+Edges (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{a01465}{Int\+Edge}} $>$ \&}]{edges }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Default constructor, empty code block. 
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// Requires \#include "RayRequest.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// For brevity}}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01469}{HF::RayTracer::RayRequest}};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create the RayRequest (no arguments)}}
-\DoxyCodeLine{\mbox{\hyperlink{a01469_aa41ca1aa01157b95c74a95d3f203d5a5}{RayRequest}} request;}
-\end{DoxyCode}
-
-
-Tells if the rayrequest it or not. If true, the hit was successful, false otherwise. Rays that weren\textquotesingle{}t cast yet are considered as not hitting.
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// Requires \#include "RayRequest.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// For brevity}}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01469}{HF::RayTracer::RayRequest}};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Prepare RayRequest's parameters}}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} x\_in = 0.0;}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} y\_in = 0.0;}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} z\_in = 0.0;}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} dx\_in = 1.0;}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} dy\_in = 1.0;}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} dz\_in = 2.0;}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} distance\_in = 10.0;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create the RayRequest}}
-\DoxyCodeLine{\mbox{\hyperlink{a01469_aa41ca1aa01157b95c74a95d3f203d5a5}{RayRequest}} request(x\_in, y\_in, z\_in, dx\_in, dy\_in, dz\_in, distance\_in);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Use didHit}}
-\DoxyCodeLine{\textcolor{keywordflow}{if} (request.didHit()) \{}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Hit"} << std::endl;}
-\DoxyCodeLine{\}}
-\DoxyCodeLine{\textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Miss"} << std::endl;}
-\DoxyCodeLine{\}}
-\end{DoxyCode}
-
-
-{\ttfamily $>$$>$$>$Miss}~\newline
-
-
-Definition at line 13 of file Ray\+Request.\+cpp.
+Add a set of edges to the array of children. 
 
 
 
-References C\+Interface\+Tests\+::mesh\+\_\+id.
+Definition at line \mbox{\hyperlink{a00197_source_l00095}{95}} of file \mbox{\hyperlink{a00197_source}{Edge.\+h}}.
 
 
 
-Referenced by T\+E\+S\+T().
+References \mbox{\hyperlink{a00197_source_l00079}{children}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00197_source_l00086}{Edge\+Set()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=305pt]{a01469_a30c3195e1d348017345b122c3073c098_icgraph}
+\includegraphics[width=337pt]{a01469_a9ce7cfb064de84654c518905ec76b7e0_icgraph}
 \end{center}
 \end{figure}
+\mbox{\Hypertarget{a01469_a1ede402c01f651faf1cfea6a09a908b2}\label{a01469_a1ede402c01f651faf1cfea6a09a908b2}} 
+\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!operator==@{operator==}}
+\index{operator==@{operator==}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool HF\+::\+Spatial\+Structures\+::\+Edge\+Set\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01469}{Edge\+Set}} \&}]{ES2 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check the equality of two edge sets. 
+
+
+
+Definition at line \mbox{\hyperlink{a00197_source_l00107}{107}} of file \mbox{\hyperlink{a00197_source}{Edge.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00197_source_l00079}{children}}, and \mbox{\hyperlink{a00197_source_l00078}{parent}}.
+
+\mbox{\Hypertarget{a01469_aefd67fc0614e2bca2eb54194452c2253}\label{a01469_aefd67fc0614e2bca2eb54194452c2253}} 
+\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!size@{size}}
+\index{size@{size}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily int HF\+::\+Spatial\+Structures\+::\+Edge\+Set\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the number of children in this edgeset. 
+
+
+
+Definition at line \mbox{\hyperlink{a00197_source_l00092}{92}} of file \mbox{\hyperlink{a00197_source}{Edge.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00197_source_l00079}{children}}.
+
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{a01469_a10641f49f8fd0f9f29dac750dd8d9b69}\label{a01469_a10641f49f8fd0f9f29dac750dd8d9b69}} 
-\index{HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}!distance@{distance}}
-\index{distance@{distance}!HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}}
-\doxysubsubsection{\texorpdfstring{distance}{distance}}
-{\footnotesize\ttfamily float H\+F\+::\+Ray\+Tracer\+::\+Ray\+Request\+::distance = -\/1}
+\mbox{\Hypertarget{a01469_ae0ed1fa60810e109100548a03e10259c}\label{a01469_ae0ed1fa60810e109100548a03e10259c}} 
+\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!children@{children}}
+\index{children@{children}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
+\doxysubsubsection{\texorpdfstring{children}{children}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{a01465}{Int\+Edge}}$>$ HF\+::\+Spatial\+Structures\+::\+Edge\+Set\+::children}
 
 
 
-Before firing\+: the maximum distance of the ray. After firing\+: distance to the hitpoint or -\/9999 on miss. 
+vector of \mbox{\hyperlink{a01465}{Int\+Edge}} (children) 
 
 
 
-Definition at line 17 of file Ray\+Request.\+h.
-
-\mbox{\Hypertarget{a01469_af388eb4e3eeff840623ce2a1fac46f40}\label{a01469_af388eb4e3eeff840623ce2a1fac46f40}} 
-\index{HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}!dx@{dx}}
-\index{dx@{dx}!HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}}
-\doxysubsubsection{\texorpdfstring{dx}{dx}}
-{\footnotesize\ttfamily float H\+F\+::\+Ray\+Tracer\+::\+Ray\+Request\+::dx}
+Definition at line \mbox{\hyperlink{a00197_source_l00079}{79}} of file \mbox{\hyperlink{a00197_source}{Edge.\+h}}.
 
 
 
-Definition at line 15 of file Ray\+Request.\+h.
+Referenced by \mbox{\hyperlink{a00197_source_l00095}{Add\+Edges()}}, \mbox{\hyperlink{a00197_source_l00107}{operator==()}}, and \mbox{\hyperlink{a00197_source_l00092}{size()}}.
 
-\mbox{\Hypertarget{a01469_a65d6987e4467b1a9a90ec55fb7b40802}\label{a01469_a65d6987e4467b1a9a90ec55fb7b40802}} 
-\index{HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}!dy@{dy}}
-\index{dy@{dy}!HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}}
-\doxysubsubsection{\texorpdfstring{dy}{dy}}
-{\footnotesize\ttfamily float H\+F\+::\+Ray\+Tracer\+::\+Ray\+Request\+::dy}
-
-
-
-Definition at line 15 of file Ray\+Request.\+h.
-
-\mbox{\Hypertarget{a01469_a19414b2ee8bbe63fd56b8403a434c41b}\label{a01469_a19414b2ee8bbe63fd56b8403a434c41b}} 
-\index{HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}!dz@{dz}}
-\index{dz@{dz}!HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}}
-\doxysubsubsection{\texorpdfstring{dz}{dz}}
-{\footnotesize\ttfamily float H\+F\+::\+Ray\+Tracer\+::\+Ray\+Request\+::dz}
+\mbox{\Hypertarget{a01469_a1cf561c1c38a93316f15ac2ab29fc8f4}\label{a01469_a1cf561c1c38a93316f15ac2ab29fc8f4}} 
+\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!parent@{parent}}
+\index{parent@{parent}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
+\doxysubsubsection{\texorpdfstring{parent}{parent}}
+{\footnotesize\ttfamily int HF\+::\+Spatial\+Structures\+::\+Edge\+Set\+::parent}
 
 
 
-X, Y and Z direction to cast the ray in. 
+Identifier of parent node. 
 
 
 
-Definition at line 15 of file Ray\+Request.\+h.
-
-\mbox{\Hypertarget{a01469_a1216778f37ab07dcf08cec70d56885c5}\label{a01469_a1216778f37ab07dcf08cec70d56885c5}} 
-\index{HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}!mesh\_id@{mesh\_id}}
-\index{mesh\_id@{mesh\_id}!HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}}
-\doxysubsubsection{\texorpdfstring{mesh\_id}{mesh\_id}}
-{\footnotesize\ttfamily int H\+F\+::\+Ray\+Tracer\+::\+Ray\+Request\+::mesh\+\_\+id = -\/1}
+Definition at line \mbox{\hyperlink{a00197_source_l00078}{78}} of file \mbox{\hyperlink{a00197_source}{Edge.\+h}}.
 
 
 
-The ID of the hit mesh. 
+Referenced by \mbox{\hyperlink{a00197_source_l00082}{Edge\+Set()}}, and \mbox{\hyperlink{a00197_source_l00107}{operator==()}}.
 
 
 
-Definition at line 18 of file Ray\+Request.\+h.
-
-\mbox{\Hypertarget{a01469_a86d351155983dd40759ce97a4e9b9f23}\label{a01469_a86d351155983dd40759ce97a4e9b9f23}} 
-\index{HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}!was\_cast@{was\_cast}}
-\index{was\_cast@{was\_cast}!HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}}
-\doxysubsubsection{\texorpdfstring{was\_cast}{was\_cast}}
-{\footnotesize\ttfamily bool H\+F\+::\+Ray\+Tracer\+::\+Ray\+Request\+::was\+\_\+cast = false}
-
-
-
-Whether this ray was cast or not. 
-
-
-
-Definition at line 16 of file Ray\+Request.\+h.
-
-\mbox{\Hypertarget{a01469_a4535d344c959c75fa7e73aae041616d0}\label{a01469_a4535d344c959c75fa7e73aae041616d0}} 
-\index{HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}!x@{x}}
-\index{x@{x}!HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}}
-\doxysubsubsection{\texorpdfstring{x}{x}}
-{\footnotesize\ttfamily float H\+F\+::\+Ray\+Tracer\+::\+Ray\+Request\+::x}
-
-
-
-Definition at line 14 of file Ray\+Request.\+h.
-
-\mbox{\Hypertarget{a01469_a554b79bac3eee6e2613c25da41e729e5}\label{a01469_a554b79bac3eee6e2613c25da41e729e5}} 
-\index{HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}!y@{y}}
-\index{y@{y}!HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}}
-\doxysubsubsection{\texorpdfstring{y}{y}}
-{\footnotesize\ttfamily float H\+F\+::\+Ray\+Tracer\+::\+Ray\+Request\+::y}
-
-
-
-Definition at line 14 of file Ray\+Request.\+h.
-
-\mbox{\Hypertarget{a01469_a83259db3fdbc447512a4a12a6c6d8d46}\label{a01469_a83259db3fdbc447512a4a12a6c6d8d46}} 
-\index{HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}!z@{z}}
-\index{z@{z}!HF::RayTracer::RayRequest@{HF::RayTracer::RayRequest}}
-\doxysubsubsection{\texorpdfstring{z}{z}}
-{\footnotesize\ttfamily float H\+F\+::\+Ray\+Tracer\+::\+Ray\+Request\+::z}
-
-
-
-X, Y, and Z origin points. 
-
-
-
-Definition at line 14 of file Ray\+Request.\+h.
-
-
-
-The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Cpp/raytracer/src/\mbox{\hyperlink{a00173}{Ray\+Request.\+h}}\item 
-Cpp/raytracer/src/\mbox{\hyperlink{a00170}{Ray\+Request.\+cpp}}\end{DoxyCompactItemize}
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00197}{Edge.\+h}}\end{DoxyCompactItemize}

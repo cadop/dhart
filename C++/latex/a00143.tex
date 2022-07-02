@@ -1,0 +1,153 @@
+\hypertarget{a00143}{}\doxysection{Cpp/raytracer/src/embree\+\_\+raytracer.cpp File Reference}
+\label{a00143}\index{Cpp/raytracer/src/embree\_raytracer.cpp@{Cpp/raytracer/src/embree\_raytracer.cpp}}
+
+
+Contains implementation for the \mbox{\hyperlink{a01345}{Embree\+Ray\+Tracer}}  
+
+
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
+{\ttfamily \#include $<$corecrt\+\_\+math\+\_\+defines.\+h$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$robin\+\_\+hood.\+h$>$}\newline
+{\ttfamily \#include $<$meshinfo.\+h$>$}\newline
+{\ttfamily \#include $<$Ray\+Request.\+h$>$}\newline
+{\ttfamily \#include $<$HFExceptions.\+h$>$}\newline
+Include dependency graph for embree\+\_\+raytracer.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00144}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a00398_a01333}{HF\+::\+Ray\+Tracer\+::\+Vertex}}
+\begin{DoxyCompactList}\small\item\em A vertex. Used internally in Embree.  \mbox{\hyperlink{a00398_a01333}{More...}}\end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00398_a01337}{HF\+::\+Ray\+Tracer\+::\+Triangle}}
+\begin{DoxyCompactList}\small\item\em A triangle. Used internally in Embree.  \mbox{\hyperlink{a00398_a01337}{More...}}\end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{a00396}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{a00398}{HF\+::\+Ray\+Tracer}}
+\begin{DoxyCompactList}\small\item\em Cast rays to determine if and where they intersect geometry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename numeric1 , typename numeric2 , typename dist\+\_\+type  = float$>$ }\\RTCRay\+Hit \mbox{\hyperlink{a00398_a864ebcf0023de27e610ee897de5436c2}{HF\+::\+Ray\+Tracer\+::\+Construct\+Hit}} (numeric1 x, numeric1 y, numeric1 z, numeric2 dx, numeric2 dy, numeric2 dz, dist\+\_\+type distance=-\/1.\+0f, int mesh\+\_\+id=-\/1)
+\item 
+{\footnotesize template$<$typename numeric1 , typename numeric2 , typename dist\+\_\+type  = float$>$ }\\RTCRay \mbox{\hyperlink{a00398_a76e5d26b5063f0e5b49b4ba835f1da93}{HF\+::\+Ray\+Tracer\+::\+Construct\+Ray}} (numeric1 x, numeric1 y, numeric1 z, numeric2 dx, numeric2 dy, numeric2 dz, dist\+\_\+type distance=-\/1.\+0f, int mesh\+\_\+id=-\/1)
+\item 
+RTCError \mbox{\hyperlink{a00398_a19e11d13f73136d6819b8abee57b0fd9}{HF\+::\+Ray\+Tracer\+::\+Check\+State}} (RTCDevice \&device)
+\begin{DoxyCompactList}\small\item\em Check an embree device for errors. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00398_a732eb910d06064bea04e6a959fd235f0}{HF\+::\+Ray\+Tracer\+::vectors\+To\+Buffers}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&vertices, std\+::vector$<$ Triangle $>$ \&Tribuffer, std\+::vector$<$ Vertex $>$ \&Vbuffer)
+\begin{DoxyCompactList}\small\item\em Index a list of verticies and place them into a triangle and vertex buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00398_aac8c0b245ea813969c50b6496cc67945}{HF\+::\+Ray\+Tracer\+::buffers\+To\+Structs}} (std\+::vector$<$ float $>$ \&in\+\_\+vertices, std\+::vector$<$ int $>$ \&in\+\_\+indices, std\+::vector$<$ Vertex $>$ \&out\+\_\+vertices, std\+::vector$<$ Triangle $>$ \&out\+\_\+triangles)
+\begin{DoxyCompactList}\small\item\em Package raw arrays of floats and indices in buffers to the required Embree types. \end{DoxyCompactList}\item 
+Vector3D \mbox{\hyperlink{a00398_a16f9f26b0140f023ce820ec55e38c66b}{HF\+::\+Ray\+Tracer\+::cross}} (const Vector3D \&x, const Vector3D \&y)
+\item 
+\mbox{\hyperlink{a00001_a02073}{double}} \mbox{\hyperlink{a00398_ae551c109488ce94d0a568712b50da689}{HF\+::\+Ray\+Tracer\+::dot}} (const Vector3D \&v1, const Vector3D \&v2)
+\item 
+Vector3D \mbox{\hyperlink{a00398_ac419170961bff9b1236fe017f6bc3289}{HF\+::\+Ray\+Tracer\+::\+Invert\+Vector}} (const Vector3D \&V)
+\item 
+\mbox{\hyperlink{a00001_a02073}{double}} \mbox{\hyperlink{a00398_a9498ae7ffabd8c5bca4026374ac862e9}{HF\+::\+Ray\+Tracer\+::\+Ray\+Triangle\+Intersection}} (const Vector3D \&origin, const Vector3D \&direction, const Vector3D \&v1, const Vector3D \&v2, const Vector3D \&v3)
+\begin{DoxyCompactList}\small\item\em Determine the distance between a ray\textquotesingle{}s origin and it\textquotesingle{}s point of intersection with a triangle. \end{DoxyCompactList}\item 
+Vector3D \mbox{\hyperlink{a00398_a6e20c473674ea46f649ef827818841d2}{HF\+::\+Ray\+Tracer\+::\+Get\+Point\+From\+Buffer}} (int index, Vertex $\ast$buffer)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains implementation for the \mbox{\hyperlink{a01345}{Embree\+Ray\+Tracer}} 
+
+\begin{DoxyAuthor}{Author}
+TBA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+26 Jun 2020 
+\end{DoxyDate}
+
+
+Definition in file \mbox{\hyperlink{a00143_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+\doxysubsection{Class Documentation}
+\index{HF::RayTracer::Vertex@{HF::RayTracer::Vertex}}\label{a01333}
+\Hypertarget{a00398_a01333}
+\doxysubsubsection{struct HF\+::Ray\+Tracer\+::Vertex}
+A vertex. Used internally in Embree. 
+
+Definition at line \mbox{\hyperlink{a00143_source_l00078}{78}} of file \mbox{\hyperlink{a00143_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+Collaboration diagram for HF\+::Ray\+Tracer\+::Vertex\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{a01331}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00398_aad8e270f026ac9dd20ee294b2b1a21de}\label{a00398_aad8e270f026ac9dd20ee294b2b1a21de}} 
+float&
+x&
+\\
+\hline
+
+\mbox{\Hypertarget{a00398_aa27c7b22316499f43093c2b7768c06ea}\label{a00398_aa27c7b22316499f43093c2b7768c06ea}} 
+float&
+y&
+\\
+\hline
+
+\mbox{\Hypertarget{a00398_ab8599cc6220e686dac319622f7d2f364}\label{a00398_ab8599cc6220e686dac319622f7d2f364}} 
+float&
+z&
+\\
+\hline
+
+\end{DoxyFields}
+\index{HF::RayTracer::Triangle@{HF::RayTracer::Triangle}}\label{a01337}
+\Hypertarget{a00398_a01337}
+\doxysubsubsection{struct HF\+::Ray\+Tracer\+::Triangle}
+A triangle. Used internally in Embree. 
+
+Definition at line \mbox{\hyperlink{a00143_source_l00083}{83}} of file \mbox{\hyperlink{a00143_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+Collaboration diagram for HF\+::Ray\+Tracer\+::Triangle\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=199pt]{a01335}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00398_a504a02b108984ddfa3f521cf40b17e61}\label{a00398_a504a02b108984ddfa3f521cf40b17e61}} 
+int&
+v0&
+\\
+\hline
+
+\mbox{\Hypertarget{a00398_afc086ccfe3fc951af959d905056358c4}\label{a00398_afc086ccfe3fc951af959d905056358c4}} 
+int&
+v1&
+\\
+\hline
+
+\mbox{\Hypertarget{a00398_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}\label{a00398_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}} 
+int&
+v2&
+\\
+\hline
+
+\end{DoxyFields}

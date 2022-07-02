@@ -1,47 +1,72 @@
-\hypertarget{a01641}{}\doxysection{nlohmann\+::detail\+::is\+\_\+getable$<$ Basic\+Json\+Type, T $>$ Struct Template Reference}
-\label{a01641}\index{nlohmann::detail::is\_getable$<$ BasicJsonType, T $>$@{nlohmann::detail::is\_getable$<$ BasicJsonType, T $>$}}
+\hypertarget{a01641}{}\doxysection{nlohmann\+::detail\+::has\+\_\+non\+\_\+default\+\_\+from\+\_\+json\texorpdfstring{$<$}{<} Basic\+Json\+Type, T, enable\+\_\+if\+\_\+t\texorpdfstring{$<$}{<} !is\+\_\+basic\+\_\+json\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+::value \texorpdfstring{$>$}{>} \texorpdfstring{$>$}{>} Struct Template Reference}
+\label{a01641}\index{nlohmann::detail::has\_non\_default\_from\_json$<$ BasicJsonType, T, enable\_if\_t$<$ "!is\_basic\_json$<$ T $>$::value $>$ $>$@{nlohmann::detail::has\_non\_default\_from\_json$<$ BasicJsonType, T, enable\_if\_t$<$ "!is\_basic\_json$<$ T $>$::value $>$ $>$}}
 
 
 {\ttfamily \#include $<$json.\+hpp$>$}
 
 
 
-Collaboration diagram for nlohmann\+::detail\+::is\+\_\+getable$<$ Basic\+Json\+Type, T $>$\+:
+Collaboration diagram for nlohmann\+::detail\+::has\+\_\+non\+\_\+default\+\_\+from\+\_\+json\texorpdfstring{$<$}{<} Basic\+Json\+Type, T, enable\+\_\+if\+\_\+t\texorpdfstring{$<$}{<} !is\+\_\+basic\+\_\+json\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+::value \texorpdfstring{$>$}{>} \texorpdfstring{$>$}{>}\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=242pt]{a01639}
+\includegraphics[width=217pt]{a01639}
 \end{center}
 \end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{a01641_a4bcee5e52902d3011df08cf0233e5e10}{serializer}} = typename Basic\+Json\+Type\+::template json\+\_\+serializer$<$ T, void $>$
+\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static constexpr bool \mbox{\hyperlink{a01641_a2150b5b5398683147928a61c99cd0070}{value}} = \mbox{\hyperlink{a00411_a9135fcf616d6ac6e231a86e0a055ac44}{is\+\_\+detected}}$<$\mbox{\hyperlink{a00411_ab4d22cdb6521ee3508db496dea66711e}{get\+\_\+template\+\_\+function}}, const Basic\+Json\+Type\&, T$>$\+::value
+static constexpr bool \mbox{\hyperlink{a01641_a5d5bc2b9f1c107696d64d92cf6b5d0d7}{value}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$typename Basic\+Json\+Type, typename T$>$\newline
-struct nlohmann\+::detail\+::is\+\_\+getable$<$ Basic\+Json\+Type, T $>$}
+struct nlohmann\+::detail\+::has\+\_\+non\+\_\+default\+\_\+from\+\_\+json$<$ Basic\+Json\+Type, T, enable\+\_\+if\+\_\+t$<$ !is\+\_\+basic\+\_\+json$<$ T $>$\+::value $>$ $>$}
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l03063}{3063}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
-Definition at line 3041 of file json.\+hpp.
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{a01641_a4bcee5e52902d3011df08cf0233e5e10}\label{a01641_a4bcee5e52902d3011df08cf0233e5e10}} 
+\index{nlohmann::detail::has\_non\_default\_from\_json$<$ BasicJsonType, T, enable\_if\_t$<$ "!is\_basic\_json$<$ T $>$::value $>$ $>$@{nlohmann::detail::has\_non\_default\_from\_json$<$ BasicJsonType, T, enable\_if\_t$<$ "!is\_basic\_json$<$ T $>$::value $>$ $>$}!serializer@{serializer}}
+\index{serializer@{serializer}!nlohmann::detail::has\_non\_default\_from\_json$<$ BasicJsonType, T, enable\_if\_t$<$ "!is\_basic\_json$<$ T $>$::value $>$ $>$@{nlohmann::detail::has\_non\_default\_from\_json$<$ BasicJsonType, T, enable\_if\_t$<$ "!is\_basic\_json$<$ T $>$::value $>$ $>$}}
+\doxysubsubsection{\texorpdfstring{serializer}{serializer}}
+{\footnotesize\ttfamily template$<$typename Basic\+Json\+Type , typename T $>$ \\
+using \mbox{\hyperlink{a01637}{nlohmann\+::detail\+::has\+\_\+non\+\_\+default\+\_\+from\+\_\+json}}$<$ Basic\+Json\+Type, T, \mbox{\hyperlink{a00411_a02bcbc878bee413f25b985ada771aa9c}{enable\+\_\+if\+\_\+t}}$<$ !\mbox{\hyperlink{a01605}{is\+\_\+basic\+\_\+json}}$<$ T $>$\mbox{\hyperlink{a01641_a5d5bc2b9f1c107696d64d92cf6b5d0d7}{\+::value}} $>$ $>$\+::serializer =  typename Basic\+Json\+Type\+::template json\+\_\+serializer$<$T, void$>$}
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l03065}{3065}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{a01641_a2150b5b5398683147928a61c99cd0070}\label{a01641_a2150b5b5398683147928a61c99cd0070}} 
-\index{nlohmann::detail::is\_getable$<$ BasicJsonType, T $>$@{nlohmann::detail::is\_getable$<$ BasicJsonType, T $>$}!value@{value}}
-\index{value@{value}!nlohmann::detail::is\_getable$<$ BasicJsonType, T $>$@{nlohmann::detail::is\_getable$<$ BasicJsonType, T $>$}}
+\mbox{\Hypertarget{a01641_a5d5bc2b9f1c107696d64d92cf6b5d0d7}\label{a01641_a5d5bc2b9f1c107696d64d92cf6b5d0d7}} 
+\index{nlohmann::detail::has\_non\_default\_from\_json$<$ BasicJsonType, T, enable\_if\_t$<$ "!is\_basic\_json$<$ T $>$::value $>$ $>$@{nlohmann::detail::has\_non\_default\_from\_json$<$ BasicJsonType, T, enable\_if\_t$<$ "!is\_basic\_json$<$ T $>$::value $>$ $>$}!value@{value}}
+\index{value@{value}!nlohmann::detail::has\_non\_default\_from\_json$<$ BasicJsonType, T, enable\_if\_t$<$ "!is\_basic\_json$<$ T $>$::value $>$ $>$@{nlohmann::detail::has\_non\_default\_from\_json$<$ BasicJsonType, T, enable\_if\_t$<$ "!is\_basic\_json$<$ T $>$::value $>$ $>$}}
 \doxysubsubsection{\texorpdfstring{value}{value}}
 {\footnotesize\ttfamily template$<$typename Basic\+Json\+Type , typename T $>$ \\
-constexpr bool \mbox{\hyperlink{a01641}{nlohmann\+::detail\+::is\+\_\+getable}}$<$ Basic\+Json\+Type, T $>$\+::value = \mbox{\hyperlink{a00411_a9135fcf616d6ac6e231a86e0a055ac44}{is\+\_\+detected}}$<$\mbox{\hyperlink{a00411_ab4d22cdb6521ee3508db496dea66711e}{get\+\_\+template\+\_\+function}}, const Basic\+Json\+Type\&, T$>$\+::value\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+constexpr bool \mbox{\hyperlink{a01637}{nlohmann\+::detail\+::has\+\_\+non\+\_\+default\+\_\+from\+\_\+json}}$<$ Basic\+Json\+Type, T, \mbox{\hyperlink{a00411_a02bcbc878bee413f25b985ada771aa9c}{enable\+\_\+if\+\_\+t}}$<$ !\mbox{\hyperlink{a01605}{is\+\_\+basic\+\_\+json}}$<$ T $>$\+::value $>$ $>$\+::value\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{        \mbox{\hyperlink{a00411_a7542b4dbac07817fd4849ecfa4619def}{is\_detected\_exact}}<T, \mbox{\hyperlink{a00411_a1711ee5cef66a0523055c8d9f024f322}{from\_json\_function}}, \mbox{\hyperlink{a01641_a4bcee5e52902d3011df08cf0233e5e10}{serializer}},}
+\DoxyCodeLine{        \textcolor{keyword}{const} BasicJsonType\&>\mbox{\hyperlink{a01641_a5d5bc2b9f1c107696d64d92cf6b5d0d7}{::value}}}
+
+\end{DoxyCode}
 
 
-
-Definition at line 3043 of file json.\+hpp.
+Definition at line \mbox{\hyperlink{a00206_source_l03067}{3067}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 

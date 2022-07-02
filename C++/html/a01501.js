@@ -1,7 +1,5 @@
 var a01501 =
 [
-    [ "operator size_t", "a01501.html#ac9ad1e0f143f162e2e0c979cd678d683", null ],
-    [ "chars_read_current_line", "a01501.html#a74df94563dd32102152ceb8c6d9041d8", null ],
-    [ "chars_read_total", "a01501.html#a94cf85cd91d478c20ae143eba906ea1a", null ],
-    [ "lines_read", "a01501.html#a4bbad8bc2c0d17c1b61c3ce729908b71", null ]
+    [ "invalid_iterator", "a01501.html#adf4a6697420f3bddb4addfc0b98f6ee2", null ],
+    [ "create", "a01501.html#a4e849260a3caa1b288c7e619130c6c09", null ]
 ];

@@ -1,6 +1,6 @@
 var hierarchy =
 [
-    [ "ApplicationException", null, [
+    [ "System.ApplicationException", null, [
       [ "HumanFactors.Exceptions.InvalidCostOperation", "class_human_factors_1_1_exceptions_1_1_invalid_cost_operation.html", null ],
       [ "HumanFactors.Exceptions.InvalidMeshException", "class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception.html", null ],
       [ "HumanFactors.Exceptions.LogicError", "class_human_factors_1_1_exceptions_1_1_logic_error.html", null ]
@@ -42,14 +42,14 @@ var hierarchy =
       [ "HumanFactors.RayTracing.RayResults", "class_human_factors_1_1_ray_tracing_1_1_ray_results.html", null ]
     ] ],
     [ "HumanFactors.NativeUtils.NativeConstants", "class_human_factors_1_1_native_utils_1_1_native_constants.html", null ],
-    [ "HumanFactors.RayTracing.NativeMethods", "class_human_factors_1_1_ray_tracing_1_1_native_methods.html", null ],
-    [ "HumanFactors.ViewAnalysis.NativeMethods", "class_human_factors_1_1_view_analysis_1_1_native_methods.html", null ],
-    [ "HumanFactors.GraphGenerator.NativeMethods", "class_human_factors_1_1_graph_generator_1_1_native_methods.html", null ],
     [ "HumanFactors.Geometry.NativeMethods", "class_human_factors_1_1_geometry_1_1_native_methods.html", null ],
-    [ "HumanFactors.VisibilityGraph.NativeMethods", "class_human_factors_1_1_visibility_graph_1_1_native_methods.html", null ],
-    [ "HumanFactors.SpatialStructures.NativeMethods", "class_human_factors_1_1_spatial_structures_1_1_native_methods.html", null ],
+    [ "HumanFactors.GraphGenerator.NativeMethods", "class_human_factors_1_1_graph_generator_1_1_native_methods.html", null ],
     [ "HumanFactors.NativeUtils.CommonNativeArrays.NativeMethods", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_native_methods.html", null ],
     [ "HumanFactors.Pathfinding.NativeMethods", "class_human_factors_1_1_pathfinding_1_1_native_methods.html", null ],
+    [ "HumanFactors.RayTracing.NativeMethods", "class_human_factors_1_1_ray_tracing_1_1_native_methods.html", null ],
+    [ "HumanFactors.SpatialStructures.NativeMethods", "class_human_factors_1_1_spatial_structures_1_1_native_methods.html", null ],
+    [ "HumanFactors.ViewAnalysis.NativeMethods", "class_human_factors_1_1_view_analysis_1_1_native_methods.html", null ],
+    [ "HumanFactors.VisibilityGraph.NativeMethods", "class_human_factors_1_1_visibility_graph_1_1_native_methods.html", null ],
     [ "HumanFactors.SpatialStructures.Node", "struct_human_factors_1_1_spatial_structures_1_1_node.html", null ],
     [ "HumanFactors.Geometry.OBJLoader", "class_human_factors_1_1_geometry_1_1_o_b_j_loader.html", null ],
     [ "HumanFactors.Pathfinding.PathMember", "struct_human_factors_1_1_pathfinding_1_1_path_member.html", null ],

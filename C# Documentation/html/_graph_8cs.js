@@ -1,8 +1,8 @@
 var _graph_8cs =
 [
-    [ "CostAlgorithmNames", "class_human_factors_1_1_spatial_structures_1_1_cost_algorithm_names.html", "class_human_factors_1_1_spatial_structures_1_1_cost_algorithm_names" ],
-    [ "Graph", "class_human_factors_1_1_spatial_structures_1_1_graph.html", "class_human_factors_1_1_spatial_structures_1_1_graph" ],
-    [ "CostAlgorithms", "class_human_factors_1_1_spatial_structures_1_1_cost_algorithms.html", "class_human_factors_1_1_spatial_structures_1_1_cost_algorithms" ],
+    [ "HumanFactors.SpatialStructures.CostAlgorithmNames", "class_human_factors_1_1_spatial_structures_1_1_cost_algorithm_names.html", "class_human_factors_1_1_spatial_structures_1_1_cost_algorithm_names" ],
+    [ "HumanFactors.SpatialStructures.Graph", "class_human_factors_1_1_spatial_structures_1_1_graph.html", "class_human_factors_1_1_spatial_structures_1_1_graph" ],
+    [ "HumanFactors.SpatialStructures.CostAlgorithms", "class_human_factors_1_1_spatial_structures_1_1_cost_algorithms.html", "class_human_factors_1_1_spatial_structures_1_1_cost_algorithms" ],
     [ "Direction", "_graph_8cs.html#abcf592e043e02805b6f3fa202346d9cc", [
       [ "INCOMING", "_graph_8cs.html#abcf592e043e02805b6f3fa202346d9ccafb4081bff9f77d65456ceb00b153e4d4", null ],
       [ "OUTGOING", "_graph_8cs.html#abcf592e043e02805b6f3fa202346d9cca1741b869c82993c62163223d8fefbba4", null ],

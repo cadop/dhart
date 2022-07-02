@@ -1,7 +1,7 @@
 var a01893 =
 [
-    [ "adapter_type", "a01893.html#a264935c57ca29dfb5153ade55266d1fa", null ],
-    [ "char_type", "a01893.html#a1439c0eda85f5f67199374d3254b8f2a", null ],
-    [ "iterator_type", "a01893.html#a37663ca283012236415d53145da1a0f9", null ],
-    [ "create", "a01893.html#a1d3a80249cf837448966319310be9ec4", null ]
+    [ "span_input_adapter", "a01893.html#a3a328a45b2c2c87145106ce4b2d02365", null ],
+    [ "span_input_adapter", "a01893.html#a714c6cf8e15b9af4e1723d9f7f92d4c8", null ],
+    [ "get", "a01893.html#a20f57e8bfcf0afb40e8c02f34080784e", null ],
+    [ "ia", "a01893.html#a3e223a7784502be20ace441e84f8cf43", null ]
 ];

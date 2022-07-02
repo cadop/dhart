@@ -1,0 +1,312 @@
+\hypertarget{a01233}{}\doxysection{HF\+::Graph\+Generator\+::Geometry\+Flag\+Map Struct Reference}
+\label{a01233}\index{HF::GraphGenerator::GeometryFlagMap@{HF::GraphGenerator::GeometryFlagMap}}
+
+
+Manages rules and ids for different types of geometry in the graph generator.  
+
+
+
+
+{\ttfamily \#include $<$graph\+\_\+generator.\+h$>$}
+
+
+
+Collaboration diagram for HF\+::Graph\+Generator\+::Geometry\+Flag\+Map\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{a01231}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{a01233_a5f5b32d65d3d43143915633c8411acaf}{Set\+Geometry\+Ids}} (const std\+::vector$<$ int $>$ \&obstacle\+\_\+geometry, const std\+::vector$<$ int $>$ \&walkable\+\_\+geometry)
+\begin{DoxyCompactList}\small\item\em Set geometry ids as being walkable or obstacles. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01233_a48c10aea7aea3c6ba9723a6d47c0b989}{Has\+Key}} (int id) const
+\begin{DoxyCompactList}\small\item\em Check if this id exists in the dictionary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{HIT\+\_\+\+FLAG}} \mbox{\hyperlink{a01233_ae62d356ebdf806113eed7cbe701b3eaa}{operator\mbox{[}$\,$\mbox{]}}} (int id) const
+\begin{DoxyCompactList}\small\item\em Get the flag of the geometry in this hit dictionary. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01233_ac9dab2d023f758ccf718d1e7c8f98e31}{Set}} (int id, \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{HIT\+\_\+\+FLAG}} flag)
+\begin{DoxyCompactList}\small\item\em Set the value of a key in the internal dictionary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207}{Geometry\+Filter\+Mode}} \mbox{\hyperlink{a01233_a8284a2c40aa9b0a5db59916d32b75659}{Mode}} = \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207abd38aa552d58d6dee7dc932c374f0e04}{Geometry\+Filter\+Mode\+::\+ALL\+\_\+\+INTERSECTIONS}}
+\begin{DoxyCompactList}\small\item\em Filter mode of this \mbox{\hyperlink{a01233}{Geometry\+Flag\+Map}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{a01233_aa6023b7a8de09fb747bd049938f1e5b8}{Determine\+Filter\+Mode}} (const std\+::vector$<$ int $>$ \&walkable, const std\+::vector$<$ int $>$ \&obstacle)
+\begin{DoxyCompactList}\small\item\em Set the filter mode of this \mbox{\hyperlink{a01233}{Geometry\+Flag\+Map}} based on the input types. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00397_adacfd76227db1d19cad7c15a8dde7330}{hashmap}} \mbox{\hyperlink{a01233_acd66c73f6b20a2e06f48a31e24f6e4c3}{internal\+\_\+dictionary}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages rules and ids for different types of geometry in the graph generator. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207}{Geometry\+Filter\+Mode}} for more info about each mode of this struct 
+
+\mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{HIT\+\_\+\+FLAG}} for info about the different geometry flags 
+
+\mbox{\hyperlink{a00397_ab731d597ee2a843f7b7cb1ccbae67782}{Check\+Geometry\+ID}} for using this struct to check the results of an intersection 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{a00008_source_l00157}{157}} of file \mbox{\hyperlink{a00008_source}{graph\+\_\+generator.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01233_aa6023b7a8de09fb747bd049938f1e5b8}\label{a01233_aa6023b7a8de09fb747bd049938f1e5b8}} 
+\index{HF::GraphGenerator::GeometryFlagMap@{HF::GraphGenerator::GeometryFlagMap}!DetermineFilterMode@{DetermineFilterMode}}
+\index{DetermineFilterMode@{DetermineFilterMode}!HF::GraphGenerator::GeometryFlagMap@{HF::GraphGenerator::GeometryFlagMap}}
+\doxysubsubsection{\texorpdfstring{DetermineFilterMode()}{DetermineFilterMode()}}
+{\footnotesize\ttfamily void HF\+::\+Graph\+Generator\+::\+Geometry\+Flag\+Map\+::\+Determine\+Filter\+Mode (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ int $>$ \&}]{walkable,  }\item[{const std\+::vector$<$ int $>$ \&}]{obstacle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Set the filter mode of this \mbox{\hyperlink{a01233}{Geometry\+Flag\+Map}} based on the input types. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em walkable} & Array of walkable geometry IDs \\
+\hline
+{\em obstacle} & Array of obstacle geometry IDs\\
+\hline
+\end{DoxyParams}
+If the walkable array is empty, then set the mode to obstacles only. If the obstacle and the walkable arrays are empty set the mode to none If both obstacle and walkable arrays are specified, set this mode to obstacles and floors.
+
+\begin{DoxyPostcond}{Postcondition}
+Sets the filter type for this hit\+\_\+dict to the appropriate value for the number of elements in walkable and obstacle 
+\end{DoxyPostcond}
+
+
+Definition at line \mbox{\hyperlink{a00008_source_l00176}{176}} of file \mbox{\hyperlink{a00008_source}{graph\+\_\+generator.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207abd38aa552d58d6dee7dc932c374f0e04}{HF\+::\+Graph\+Generator\+::\+ALL\+\_\+\+INTERSECTIONS}}, \mbox{\hyperlink{a00008_source_l00189}{Mode}}, \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207adb49be99500731a1909db6bcf395d27f}{HF\+::\+Graph\+Generator\+::\+OBSTACLES\+\_\+\+AND\+\_\+\+FLOORS}}, and \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207ac78656cbac82f2af0177cfe76dd1aa12}{HF\+::\+Graph\+Generator\+::\+OBSTACLES\+\_\+\+ONLY}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00008_source_l00200}{Set\+Geometry\+Ids()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01233_aa6023b7a8de09fb747bd049938f1e5b8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01233_a48c10aea7aea3c6ba9723a6d47c0b989}\label{a01233_a48c10aea7aea3c6ba9723a6d47c0b989}} 
+\index{HF::GraphGenerator::GeometryFlagMap@{HF::GraphGenerator::GeometryFlagMap}!HasKey@{HasKey}}
+\index{HasKey@{HasKey}!HF::GraphGenerator::GeometryFlagMap@{HF::GraphGenerator::GeometryFlagMap}}
+\doxysubsubsection{\texorpdfstring{HasKey()}{HasKey()}}
+{\footnotesize\ttfamily bool HF\+::\+Graph\+Generator\+::\+Geometry\+Flag\+Map\+::\+Has\+Key (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if this id exists in the dictionary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & ID to check for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the ID exists, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00008_source_l00219}{219}} of file \mbox{\hyperlink{a00008_source}{graph\+\_\+generator.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00008_source_l00160}{internal\+\_\+dictionary}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00008_source_l00236}{operator\mbox{[}$\,$\mbox{]}()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01233_a48c10aea7aea3c6ba9723a6d47c0b989_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01233_ae62d356ebdf806113eed7cbe701b3eaa}\label{a01233_ae62d356ebdf806113eed7cbe701b3eaa}} 
+\index{HF::GraphGenerator::GeometryFlagMap@{HF::GraphGenerator::GeometryFlagMap}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!HF::GraphGenerator::GeometryFlagMap@{HF::GraphGenerator::GeometryFlagMap}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{HIT\+\_\+\+FLAG}} HF\+::\+Graph\+Generator\+::\+Geometry\+Flag\+Map\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the flag of the geometry in this hit dictionary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & ID of geometry to get the hitflag of\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The flag assigned to {\ttfamily id} in Set\+Geometry\+IDs or HIT\+\_\+\+FLAG\+::\+NO\+\_\+\+FLAG if no flag was ever assigned to {\ttfamily id}
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+Unlike the standard square brackets operator of std\+::unordered\+\_\+map, this gaurantees no memory is allocated. Note that this can\textquotesingle{}t be used to assign keys. 
+\end{DoxyRemark}
+
+
+Definition at line \mbox{\hyperlink{a00008_source_l00236}{236}} of file \mbox{\hyperlink{a00008_source}{graph\+\_\+generator.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00008_source_l00219}{Has\+Key()}}, \mbox{\hyperlink{a00008_source_l00160}{internal\+\_\+dictionary}}, and \mbox{\hyperlink{a00008_source_l00125}{HF\+::\+Graph\+Generator\+::\+NO\+\_\+\+FLAG}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01233_ae62d356ebdf806113eed7cbe701b3eaa_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01233_ac9dab2d023f758ccf718d1e7c8f98e31}\label{a01233_ac9dab2d023f758ccf718d1e7c8f98e31}} 
+\index{HF::GraphGenerator::GeometryFlagMap@{HF::GraphGenerator::GeometryFlagMap}!Set@{Set}}
+\index{Set@{Set}!HF::GraphGenerator::GeometryFlagMap@{HF::GraphGenerator::GeometryFlagMap}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}}
+{\footnotesize\ttfamily void HF\+::\+Graph\+Generator\+::\+Geometry\+Flag\+Map\+::\+Set (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{\mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{HIT\+\_\+\+FLAG}}}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the value of a key in the internal dictionary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & ID to set as\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+Next call to \mbox{[}\mbox{]} for this object with {\ttfamily id} will return {\ttfamily flag}. If {\ttfamily id} already has been assigned a flag, the value will be updated to {\ttfamily flag}. ~\newline
+ 
+\end{DoxyPostcond}
+
+
+Definition at line \mbox{\hyperlink{a00008_source_l00249}{249}} of file \mbox{\hyperlink{a00008_source}{graph\+\_\+generator.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00008_source_l00160}{internal\+\_\+dictionary}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00008_source_l00200}{Set\+Geometry\+Ids()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01233_ac9dab2d023f758ccf718d1e7c8f98e31_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01233_a5f5b32d65d3d43143915633c8411acaf}\label{a01233_a5f5b32d65d3d43143915633c8411acaf}} 
+\index{HF::GraphGenerator::GeometryFlagMap@{HF::GraphGenerator::GeometryFlagMap}!SetGeometryIds@{SetGeometryIds}}
+\index{SetGeometryIds@{SetGeometryIds}!HF::GraphGenerator::GeometryFlagMap@{HF::GraphGenerator::GeometryFlagMap}}
+\doxysubsubsection{\texorpdfstring{SetGeometryIds()}{SetGeometryIds()}}
+{\footnotesize\ttfamily void HF\+::\+Graph\+Generator\+::\+Geometry\+Flag\+Map\+::\+Set\+Geometry\+Ids (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ int $>$ \&}]{obstacle\+\_\+geometry,  }\item[{const std\+::vector$<$ int $>$ \&}]{walkable\+\_\+geometry }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set geometry ids as being walkable or obstacles. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obstacle\+\_\+geometry} & IDs of meshes to set as obstacles \\
+\hline
+{\em walkable\+\_\+geometry} & IDs of meshes to set as walkable\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+1) The filter mode for this hit\+\_\+dict will be set to the appropriate value for the inputs 
+
+2) All geometry in {\ttfamily obstacle\+\_\+geometry} will return HIT\+\_\+\+FLAG\+::\+OBSTACLES when calling operator \mbox{[}\mbox{]} and all geometry in {\ttfamily walkable\+\_\+geometry} will return HIT\+\_\+\+FLAG\+::\+FLOORS when calling operator\mbox{[}\mbox{]} 
+\end{DoxyPostcond}
+
+
+Definition at line \mbox{\hyperlink{a00008_source_l00200}{200}} of file \mbox{\hyperlink{a00008_source}{graph\+\_\+generator.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00008_source_l00176}{Determine\+Filter\+Mode()}}, \mbox{\hyperlink{a00008_source_l00127}{HF\+::\+Graph\+Generator\+::\+FLOORS}}, \mbox{\hyperlink{a00008_source_l00129}{HF\+::\+Graph\+Generator\+::\+OBSTACLES}}, and \mbox{\hyperlink{a00008_source_l00249}{Set()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00005_source_l00063}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Graph\+Generator()}}, and \mbox{\hyperlink{a00005_source_l00050}{HF\+::\+Graph\+Generator\+::setup\+RT()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01233_a5f5b32d65d3d43143915633c8411acaf_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01233_a5f5b32d65d3d43143915633c8411acaf_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01233_acd66c73f6b20a2e06f48a31e24f6e4c3}\label{a01233_acd66c73f6b20a2e06f48a31e24f6e4c3}} 
+\index{HF::GraphGenerator::GeometryFlagMap@{HF::GraphGenerator::GeometryFlagMap}!internal\_dictionary@{internal\_dictionary}}
+\index{internal\_dictionary@{internal\_dictionary}!HF::GraphGenerator::GeometryFlagMap@{HF::GraphGenerator::GeometryFlagMap}}
+\doxysubsubsection{\texorpdfstring{internal\_dictionary}{internal\_dictionary}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00397_adacfd76227db1d19cad7c15a8dde7330}{hashmap}} HF\+::\+Graph\+Generator\+::\+Geometry\+Flag\+Map\+::internal\+\_\+dictionary\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00008_source_l00160}{160}} of file \mbox{\hyperlink{a00008_source}{graph\+\_\+generator.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00008_source_l00219}{Has\+Key()}}, \mbox{\hyperlink{a00008_source_l00236}{operator\mbox{[}$\,$\mbox{]}()}}, and \mbox{\hyperlink{a00008_source_l00249}{Set()}}.
+
+\mbox{\Hypertarget{a01233_a8284a2c40aa9b0a5db59916d32b75659}\label{a01233_a8284a2c40aa9b0a5db59916d32b75659}} 
+\index{HF::GraphGenerator::GeometryFlagMap@{HF::GraphGenerator::GeometryFlagMap}!Mode@{Mode}}
+\index{Mode@{Mode}!HF::GraphGenerator::GeometryFlagMap@{HF::GraphGenerator::GeometryFlagMap}}
+\doxysubsubsection{\texorpdfstring{Mode}{Mode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207}{Geometry\+Filter\+Mode}} HF\+::\+Graph\+Generator\+::\+Geometry\+Flag\+Map\+::\+Mode = \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207abd38aa552d58d6dee7dc932c374f0e04}{Geometry\+Filter\+Mode\+::\+ALL\+\_\+\+INTERSECTIONS}}}
+
+
+
+Filter mode of this \mbox{\hyperlink{a01233}{Geometry\+Flag\+Map}}. 
+
+
+
+Definition at line \mbox{\hyperlink{a00008_source_l00189}{189}} of file \mbox{\hyperlink{a00008_source}{graph\+\_\+generator.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00011_source_l00126}{HF\+::\+Graph\+Generator\+::\+Check\+Geometry\+ID()}}, and \mbox{\hyperlink{a00008_source_l00176}{Determine\+Filter\+Mode()}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/analysismethods/src/\mbox{\hyperlink{a00008}{graph\+\_\+generator.\+h}}\end{DoxyCompactItemize}

@@ -1,161 +1,204 @@
-\hypertarget{a01421}{}\doxysection{nanort\+::Node\+Hit$<$ T $>$ Class Template Reference}
-\label{a01421}\index{nanort::NodeHit$<$ T $>$@{nanort::NodeHit$<$ T $>$}}
-
-
-Hit class for traversing nodes.  
-
-
+\hypertarget{a01421}{}\doxysection{nanort\+::Triangle\+SAHPred\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\label{a01421}\index{nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}}
 
 
 {\ttfamily \#include $<$nanort.\+h$>$}
 
 
 
-Collaboration diagram for nanort\+::Node\+Hit$<$ T $>$\+:
+Collaboration diagram for nanort\+::Triangle\+SAHPred\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=202pt]{a01419}
+\includegraphics[width=299pt]{a01419}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a01421_a3cbd27321bf1a64957b45dfdc1c7b99c}{Node\+Hit}} ()
+\mbox{\hyperlink{a01421_a9650f6d351ac3df4eebf0c3101a78a0b}{Triangle\+SAHPred}} (const T $\ast$vertices, const unsigned int $\ast$faces, size\+\_\+t vertex\+\_\+stride\+\_\+bytes)
 \item 
-\mbox{\hyperlink{a01421_a9d0f07cae0101f24e7a6fdfe71df597a}{Node\+Hit}} (const \mbox{\hyperlink{a01421}{Node\+Hit}}$<$ T $>$ \&rhs)
+\mbox{\hyperlink{a01421_a3f78790b2623dedc78de58273fe63465}{Triangle\+SAHPred}} (const \mbox{\hyperlink{a01421}{Triangle\+SAHPred}}$<$ T $>$ \&rhs)
 \item 
-\mbox{\hyperlink{a01421}{Node\+Hit}} \& \mbox{\hyperlink{a01421_a507359647dbdecdb51c5981cfbeb8b1f}{operator=}} (const \mbox{\hyperlink{a01421}{Node\+Hit}}$<$ T $>$ \&rhs)
+\mbox{\hyperlink{a01421}{Triangle\+SAHPred}}$<$ T $>$ \& \mbox{\hyperlink{a01421_aab471a1a6359638bcb78fb3c76f93fae}{operator=}} (const \mbox{\hyperlink{a01421}{Triangle\+SAHPred}}$<$ T $>$ \&rhs)
 \item 
-\mbox{\hyperlink{a01421_a5b6c8b38b0a393ab08dd024a2d341491}{$\sim$\+Node\+Hit}} ()
+void \mbox{\hyperlink{a01421_a20476d86c33567f87874a9e6e0a639ea}{Set}} (int axis, T pos) const
+\item 
+bool \mbox{\hyperlink{a01421_ab990c49c5a9bc9037e378e615ae96e8c}{operator()}} (unsigned int i) const
 \end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
+\doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-T \mbox{\hyperlink{a01421_aa90100ff87025e7758063bfa091afb7a}{t\+\_\+min}}
+int \mbox{\hyperlink{a01421_aa0607edac35ea7ee2ce6536483a1d969}{axis\+\_\+}}
 \item 
-T \mbox{\hyperlink{a01421_a298cb4f48a58dc6ab54e167d4c6d4063}{t\+\_\+max}}
+T \mbox{\hyperlink{a01421_a384c28581fe8e53b84e2b6a288fede94}{pos\+\_\+}}
 \item 
-unsigned int \mbox{\hyperlink{a01421_a28b7322499ae0aee999388858c42622d}{node\+\_\+id}}
+const T $\ast$ \mbox{\hyperlink{a01421_ad74375fe9bf1778ca16d15f756e61504}{vertices\+\_\+}}
+\item 
+const unsigned int $\ast$ \mbox{\hyperlink{a01421_a1b40fbb2b832ee1bd929bc76ca08256a}{faces\+\_\+}}
+\item 
+const size\+\_\+t \mbox{\hyperlink{a01421_a1562971080d1d2c4360a9de0bede9a28}{vertex\+\_\+stride\+\_\+bytes\+\_\+}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$typename T$>$\newline
-class nanort\+::\+Node\+Hit$<$ T $>$}
+\subsubsection*{template$<$typename T = float$>$\newline
+class nanort\+::\+Triangle\+SAHPred$<$ T $>$}
 
-Hit class for traversing nodes. 
 
-Stores hit information of node traversal. Node traversal is used for two-\/level ray tracing(efficient ray traversal of a scene hierarchy) 
-
-Definition at line 654 of file nanort.\+h.
+Definition at line \mbox{\hyperlink{a00161_source_l00871}{871}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{a01421_a3cbd27321bf1a64957b45dfdc1c7b99c}\label{a01421_a3cbd27321bf1a64957b45dfdc1c7b99c}} 
-\index{nanort::NodeHit$<$ T $>$@{nanort::NodeHit$<$ T $>$}!NodeHit@{NodeHit}}
-\index{NodeHit@{NodeHit}!nanort::NodeHit$<$ T $>$@{nanort::NodeHit$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{NodeHit()}{NodeHit()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename T $>$ \\
-\mbox{\hyperlink{a01421}{nanort\+::\+Node\+Hit}}$<$ T $>$\+::\mbox{\hyperlink{a01421}{Node\+Hit}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\Hypertarget{a01421_a9650f6d351ac3df4eebf0c3101a78a0b}\label{a01421_a9650f6d351ac3df4eebf0c3101a78a0b}} 
+\index{nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}!TriangleSAHPred@{TriangleSAHPred}}
+\index{TriangleSAHPred@{TriangleSAHPred}!nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{TriangleSAHPred()}{TriangleSAHPred()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
+\mbox{\hyperlink{a01421}{nanort\+::\+Triangle\+SAHPred}}$<$ T $>$\+::\+Triangle\+SAHPred (\begin{DoxyParamCaption}\item[{const T $\ast$}]{vertices,  }\item[{const unsigned int $\ast$}]{faces,  }\item[{size\+\_\+t}]{vertex\+\_\+stride\+\_\+bytes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 656 of file nanort.\+h.
+Definition at line \mbox{\hyperlink{a00161_source_l00873}{873}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
-\mbox{\Hypertarget{a01421_a9d0f07cae0101f24e7a6fdfe71df597a}\label{a01421_a9d0f07cae0101f24e7a6fdfe71df597a}} 
-\index{nanort::NodeHit$<$ T $>$@{nanort::NodeHit$<$ T $>$}!NodeHit@{NodeHit}}
-\index{NodeHit@{NodeHit}!nanort::NodeHit$<$ T $>$@{nanort::NodeHit$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{NodeHit()}{NodeHit()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename T $>$ \\
-\mbox{\hyperlink{a01421}{nanort\+::\+Node\+Hit}}$<$ T $>$\+::\mbox{\hyperlink{a01421}{Node\+Hit}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01421}{Node\+Hit}}$<$ T $>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line 661 of file nanort.\+h.
+\mbox{\Hypertarget{a01421_a3f78790b2623dedc78de58273fe63465}\label{a01421_a3f78790b2623dedc78de58273fe63465}} 
+\index{nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}!TriangleSAHPred@{TriangleSAHPred}}
+\index{TriangleSAHPred@{TriangleSAHPred}!nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{TriangleSAHPred()}{TriangleSAHPred()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
+\mbox{\hyperlink{a01421}{nanort\+::\+Triangle\+SAHPred}}$<$ T $>$\+::\+Triangle\+SAHPred (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01421}{Triangle\+SAHPred}}$<$ T $>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-References nanort\+::\+Node\+Hit$<$ T $>$\+::node\+\_\+id, nanort\+::\+Node\+Hit$<$ T $>$\+::t\+\_\+max, and nanort\+::\+Node\+Hit$<$ T $>$\+::t\+\_\+min.
-
-\mbox{\Hypertarget{a01421_a5b6c8b38b0a393ab08dd024a2d341491}\label{a01421_a5b6c8b38b0a393ab08dd024a2d341491}} 
-\index{nanort::NodeHit$<$ T $>$@{nanort::NodeHit$<$ T $>$}!````~NodeHit@{$\sim$NodeHit}}
-\index{````~NodeHit@{$\sim$NodeHit}!nanort::NodeHit$<$ T $>$@{nanort::NodeHit$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{$\sim$NodeHit()}{~NodeHit()}}
-{\footnotesize\ttfamily template$<$typename T $>$ \\
-\mbox{\hyperlink{a01421}{nanort\+::\+Node\+Hit}}$<$ T $>$\+::$\sim$\mbox{\hyperlink{a01421}{Node\+Hit}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line 675 of file nanort.\+h.
+Definition at line \mbox{\hyperlink{a00161_source_l00882}{882}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a01421_a507359647dbdecdb51c5981cfbeb8b1f}\label{a01421_a507359647dbdecdb51c5981cfbeb8b1f}} 
-\index{nanort::NodeHit$<$ T $>$@{nanort::NodeHit$<$ T $>$}!operator=@{operator=}}
-\index{operator=@{operator=}!nanort::NodeHit$<$ T $>$@{nanort::NodeHit$<$ T $>$}}
+\mbox{\Hypertarget{a01421_ab990c49c5a9bc9037e378e615ae96e8c}\label{a01421_ab990c49c5a9bc9037e378e615ae96e8c}} 
+\index{nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
+bool \mbox{\hyperlink{a01421}{nanort\+::\+Triangle\+SAHPred}}$<$ T $>$\+::operator() (\begin{DoxyParamCaption}\item[{unsigned int}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00161_source_l00904}{904}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00161_source_l00922}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::axis\+\_\+}}, \mbox{\hyperlink{a00161_source_l00925}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::faces\+\_\+}}, \mbox{\hyperlink{a00161_source_l00923}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::pos\+\_\+}}, \mbox{\hyperlink{a00161_source_l00926}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::vertex\+\_\+stride\+\_\+bytes\+\_\+}}, and \mbox{\hyperlink{a00161_source_l00924}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::vertices\+\_\+}}.
+
+\mbox{\Hypertarget{a01421_aab471a1a6359638bcb78fb3c76f93fae}\label{a01421_aab471a1a6359638bcb78fb3c76f93fae}} 
+\index{nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily template$<$typename T $>$ \\
-\mbox{\hyperlink{a01421}{Node\+Hit}}\& \mbox{\hyperlink{a01421}{nanort\+::\+Node\+Hit}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01421}{Node\+Hit}}$<$ T $>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
+\mbox{\hyperlink{a01421}{Triangle\+SAHPred}}$<$ T $>$ \& \mbox{\hyperlink{a01421}{nanort\+::\+Triangle\+SAHPred}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01421}{Triangle\+SAHPred}}$<$ T $>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 667 of file nanort.\+h.
+Definition at line \mbox{\hyperlink{a00161_source_l00889}{889}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
 
 
-References nanort\+::\+Node\+Hit$<$ T $>$\+::node\+\_\+id, nanort\+::\+Node\+Hit$<$ T $>$\+::t\+\_\+max, and nanort\+::\+Node\+Hit$<$ T $>$\+::t\+\_\+min.
+References \mbox{\hyperlink{a00161_source_l00922}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::axis\+\_\+}}, \mbox{\hyperlink{a00161_source_l00925}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::faces\+\_\+}}, \mbox{\hyperlink{a00161_source_l00923}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::pos\+\_\+}}, \mbox{\hyperlink{a00161_source_l00926}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::vertex\+\_\+stride\+\_\+bytes\+\_\+}}, and \mbox{\hyperlink{a00161_source_l00924}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::vertices\+\_\+}}.
+
+\mbox{\Hypertarget{a01421_a20476d86c33567f87874a9e6e0a639ea}\label{a01421_a20476d86c33567f87874a9e6e0a639ea}} 
+\index{nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}!Set@{Set}}
+\index{Set@{Set}!nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}}
+{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
+void \mbox{\hyperlink{a01421}{nanort\+::\+Triangle\+SAHPred}}$<$ T $>$\+::\+Set (\begin{DoxyParamCaption}\item[{int}]{axis,  }\item[{T}]{pos }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00161_source_l00899}{899}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00161_source_l00922}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::axis\+\_\+}}, and \mbox{\hyperlink{a00161_source_l00923}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::pos\+\_\+}}.
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{a01421_a28b7322499ae0aee999388858c42622d}\label{a01421_a28b7322499ae0aee999388858c42622d}} 
-\index{nanort::NodeHit$<$ T $>$@{nanort::NodeHit$<$ T $>$}!node\_id@{node\_id}}
-\index{node\_id@{node\_id}!nanort::NodeHit$<$ T $>$@{nanort::NodeHit$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{node\_id}{node\_id}}
-{\footnotesize\ttfamily template$<$typename T $>$ \\
-unsigned int \mbox{\hyperlink{a01421}{nanort\+::\+Node\+Hit}}$<$ T $>$\+::node\+\_\+id}
+\mbox{\Hypertarget{a01421_aa0607edac35ea7ee2ce6536483a1d969}\label{a01421_aa0607edac35ea7ee2ce6536483a1d969}} 
+\index{nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}!axis\_@{axis\_}}
+\index{axis\_@{axis\_}!nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{axis\_}{axis\_}}
+{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
+int \mbox{\hyperlink{a01421}{nanort\+::\+Triangle\+SAHPred}}$<$ T $>$\+::axis\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
 
 
 
-Definition at line 679 of file nanort.\+h.
+Definition at line \mbox{\hyperlink{a00161_source_l00922}{922}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
 
 
-Referenced by nanort\+::\+Node\+Hit$<$ T $>$\+::\+Node\+Hit(), nanort\+::\+Node\+Hit$<$ T $>$\+::operator=(), and nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Test\+Leaf\+Node\+Intersections().
+Referenced by \mbox{\hyperlink{a00161_source_l00904}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::operator()()}}, \mbox{\hyperlink{a00161_source_l00889}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::operator=()}}, and \mbox{\hyperlink{a00161_source_l00899}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::\+Set()}}.
 
-\mbox{\Hypertarget{a01421_a298cb4f48a58dc6ab54e167d4c6d4063}\label{a01421_a298cb4f48a58dc6ab54e167d4c6d4063}} 
-\index{nanort::NodeHit$<$ T $>$@{nanort::NodeHit$<$ T $>$}!t\_max@{t\_max}}
-\index{t\_max@{t\_max}!nanort::NodeHit$<$ T $>$@{nanort::NodeHit$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{t\_max}{t\_max}}
-{\footnotesize\ttfamily template$<$typename T $>$ \\
-T \mbox{\hyperlink{a01421}{nanort\+::\+Node\+Hit}}$<$ T $>$\+::t\+\_\+max}
-
-
-
-Definition at line 678 of file nanort.\+h.
+\mbox{\Hypertarget{a01421_a1b40fbb2b832ee1bd929bc76ca08256a}\label{a01421_a1b40fbb2b832ee1bd929bc76ca08256a}} 
+\index{nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}!faces\_@{faces\_}}
+\index{faces\_@{faces\_}!nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{faces\_}{faces\_}}
+{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
+const unsigned int$\ast$ \mbox{\hyperlink{a01421}{nanort\+::\+Triangle\+SAHPred}}$<$ T $>$\+::faces\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Referenced by nanort\+::\+Node\+Hit$<$ T $>$\+::\+Node\+Hit(), nanort\+::\+Node\+Hit$<$ T $>$\+::operator=(), and nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Test\+Leaf\+Node\+Intersections().
-
-\mbox{\Hypertarget{a01421_aa90100ff87025e7758063bfa091afb7a}\label{a01421_aa90100ff87025e7758063bfa091afb7a}} 
-\index{nanort::NodeHit$<$ T $>$@{nanort::NodeHit$<$ T $>$}!t\_min@{t\_min}}
-\index{t\_min@{t\_min}!nanort::NodeHit$<$ T $>$@{nanort::NodeHit$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{t\_min}{t\_min}}
-{\footnotesize\ttfamily template$<$typename T $>$ \\
-T \mbox{\hyperlink{a01421}{nanort\+::\+Node\+Hit}}$<$ T $>$\+::t\+\_\+min}
+Definition at line \mbox{\hyperlink{a00161_source_l00925}{925}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
 
 
-Definition at line 677 of file nanort.\+h.
+Referenced by \mbox{\hyperlink{a00161_source_l00904}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::operator()()}}, and \mbox{\hyperlink{a00161_source_l00889}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::operator=()}}.
+
+\mbox{\Hypertarget{a01421_a384c28581fe8e53b84e2b6a288fede94}\label{a01421_a384c28581fe8e53b84e2b6a288fede94}} 
+\index{nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}!pos\_@{pos\_}}
+\index{pos\_@{pos\_}!nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{pos\_}{pos\_}}
+{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
+T \mbox{\hyperlink{a01421}{nanort\+::\+Triangle\+SAHPred}}$<$ T $>$\+::pos\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
 
 
 
-Referenced by nanort\+::\+Node\+Hit$<$ T $>$\+::\+Node\+Hit(), nanort\+::\+Node\+Hit\+Comparator$<$ T $>$\+::operator()(), nanort\+::\+Node\+Hit$<$ T $>$\+::operator=(), and nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Test\+Leaf\+Node\+Intersections().
+Definition at line \mbox{\hyperlink{a00161_source_l00923}{923}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00161_source_l00904}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::operator()()}}, \mbox{\hyperlink{a00161_source_l00889}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::operator=()}}, and \mbox{\hyperlink{a00161_source_l00899}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::\+Set()}}.
+
+\mbox{\Hypertarget{a01421_a1562971080d1d2c4360a9de0bede9a28}\label{a01421_a1562971080d1d2c4360a9de0bede9a28}} 
+\index{nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}!vertex\_stride\_bytes\_@{vertex\_stride\_bytes\_}}
+\index{vertex\_stride\_bytes\_@{vertex\_stride\_bytes\_}!nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{vertex\_stride\_bytes\_}{vertex\_stride\_bytes\_}}
+{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
+const size\+\_\+t \mbox{\hyperlink{a01421}{nanort\+::\+Triangle\+SAHPred}}$<$ T $>$\+::vertex\+\_\+stride\+\_\+bytes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00161_source_l00926}{926}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00161_source_l00904}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::operator()()}}, and \mbox{\hyperlink{a00161_source_l00889}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::operator=()}}.
+
+\mbox{\Hypertarget{a01421_ad74375fe9bf1778ca16d15f756e61504}\label{a01421_ad74375fe9bf1778ca16d15f756e61504}} 
+\index{nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}!vertices\_@{vertices\_}}
+\index{vertices\_@{vertices\_}!nanort::TriangleSAHPred$<$ T $>$@{nanort::TriangleSAHPred$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{vertices\_}{vertices\_}}
+{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
+const T$\ast$ \mbox{\hyperlink{a01421}{nanort\+::\+Triangle\+SAHPred}}$<$ T $>$\+::vertices\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00161_source_l00924}{924}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00161_source_l00904}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::operator()()}}, and \mbox{\hyperlink{a00161_source_l00889}{nanort\+::\+Triangle\+SAHPred$<$ T $>$\+::operator=()}}.
 
 
 

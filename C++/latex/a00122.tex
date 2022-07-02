@@ -1,0 +1,110 @@
+\hypertarget{a00122}{}\doxysection{Cpp/objloader/src/objloader.cpp File Reference}
+\label{a00122}\index{Cpp/objloader/src/objloader.cpp@{Cpp/objloader/src/objloader.cpp}}
+
+
+Contains implementation for the \mbox{\hyperlink{a00403}{Geometry}} namespace.  
+
+
+{\ttfamily \#include $<$objloader.\+h$>$}\newline
+{\ttfamily \#include $<$Dense$>$}\newline
+{\ttfamily \#include $<$meshinfo.\+h$>$}\newline
+{\ttfamily \#include $<$tiny\+\_\+obj\+\_\+loader.\+h$>$}\newline
+{\ttfamily \#include $<$robin\+\_\+hood.\+h$>$}\newline
+{\ttfamily \#include $<$HFExceptions.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
+Include dependency graph for objloader.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00123}
+\end{center}
+\end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{a00396}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{a00404}{HF\+::nano\+Geom}}
+\item 
+namespace \mbox{\hyperlink{a00403}{HF\+::\+Geometry}}
+\begin{DoxyCompactList}\small\item\em Manipulate and load geometry from disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a00122_af14fac7fbc250522a78849d58d5b0811}{TINYOBJLOADER\+\_\+\+IMPLEMENTATION}}
+\begin{DoxyCompactList}\small\item\em This MUST be defined before importing tiny\+\_\+obj\+\_\+loader.\+h. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{a00122_ad1ceae03a73fd42494508a2d57eaf1fe}{TINYOBJLOADER\+\_\+\+USE\+\_\+\+DOUBLE}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{a00404_ad8e91aefa202de3abee6fd9914299e46}{HF\+::nano\+Geom\+::\+Load\+Obj}} (Mesh \&mesh, const char $\ast$filename)
+\item 
+tinyobj\+::\+Obj\+Reader \mbox{\hyperlink{a00403_aece9b1559429cfcd59fc5c60bc3dc5b1}{HF\+::\+Geometry\+::\+Create\+Reader}} (const std\+::string \&path)
+\item 
+{\footnotesize template$<$typename T $>$ }\\tinyobj\+\_\+shape$<$ T $>$ \mbox{\hyperlink{a00403_a1d0272a1cc56fb0cb8fa5a0b968797ed}{HF\+::\+Geometry\+::\+Make\+Shape}} (const tinyobj\+::shape\+\_\+t \&shape)
+\item 
+{\footnotesize template$<$typename T $>$ }\\vector$<$ tinyobj\+\_\+shape$<$ T $>$ $>$ \mbox{\hyperlink{a00403_a02e98028a7e54dc32b0f148f0b6d1ba5}{HF\+::\+Geometry\+::\+Make\+Shapes}} (const vector$<$ tinyobj\+::shape\+\_\+t $>$ \&shapes)
+\item 
+vector$<$ tinyobj\+\_\+material $>$ \mbox{\hyperlink{a00403_abc6b7e5052eb1564d1bb3c67d9f93031}{HF\+::\+Geometry\+::\+Make\+Materials}} (const vector$<$ tinyobj\+::material\+\_\+t $>$ \&materials)
+\item 
+tinyobj\+\_\+geometry$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ \mbox{\hyperlink{a00403_a9bbdc23c626ed431d5a084722c22f99f}{HF\+::\+Geometry\+::\+Load\+Meshes\+From\+Tiny\+OBJ}} (std\+::string path)
+\item 
+vector$<$ \mbox{\hyperlink{a00362_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}}$<$ float $>$ $>$ \mbox{\hyperlink{a00403_a06c0c11adb62f8b204e42f75ac1990ac}{HF\+::\+Geometry\+::\+Load\+Mesh\+Objects}} (std\+::string path, GROUP\+\_\+\+METHOD gm=ONLY\+\_\+\+FILE, bool change\+\_\+coords=false, int scale=1)
+\begin{DoxyCompactList}\small\item\em Create \mbox{\hyperlink{a01285}{Mesh\+Info}} instances from the OBJ at path. \end{DoxyCompactList}\item 
+vector$<$ array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00403_aec1df746155d224838048d3a43c2fe96}{HF\+::\+Geometry\+::\+Load\+Raw\+Vertices}} (std\+::string path)
+\begin{DoxyCompactList}\small\item\em Load a list of vertices directly from an OBJ file. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{a00403_adec2459f5c4ee10fd9d2154114d751de}{HF\+::\+Geometry\+::\+Get\+Test\+OBJPath}} (std\+::string key)
+\begin{DoxyCompactList}\small\item\em Get the path to the OBJ with the given key. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{a00362_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}}$<$ float $>$ $>$ \mbox{\hyperlink{a00403_a5e3b85fb47ef06f7693802f3fe90e996}{HF\+::\+Geometry\+::\+Load\+Mesh\+Objects}} (std\+::vector$<$ std\+::string $>$ \&path, GROUP\+\_\+\+METHOD gm=ONLY\+\_\+\+FILE, bool change\+\_\+coords=false, int scale=1)
+\begin{DoxyCompactList}\small\item\em Create \mbox{\hyperlink{a01285}{Mesh\+Info}} instances from the OBJ files in path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static robin\+\_\+hood\+::unordered\+\_\+map$<$ string, string $>$ \mbox{\hyperlink{a00403_a13874b607886c8f427b2a8f332148553}{HF\+::\+Geometry\+::test\+\_\+model\+\_\+paths}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains implementation for the \mbox{\hyperlink{a00403}{Geometry}} namespace. 
+
+\begin{DoxyAuthor}{Author}
+TBA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+16 Jun 2020 
+\end{DoxyDate}
+
+
+Definition in file \mbox{\hyperlink{a00122_source}{objloader.\+cpp}}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a00122_af14fac7fbc250522a78849d58d5b0811}\label{a00122_af14fac7fbc250522a78849d58d5b0811}} 
+\index{objloader.cpp@{objloader.cpp}!TINYOBJLOADER\_IMPLEMENTATION@{TINYOBJLOADER\_IMPLEMENTATION}}
+\index{TINYOBJLOADER\_IMPLEMENTATION@{TINYOBJLOADER\_IMPLEMENTATION}!objloader.cpp@{objloader.cpp}}
+\doxysubsubsection{\texorpdfstring{TINYOBJLOADER\_IMPLEMENTATION}{TINYOBJLOADER\_IMPLEMENTATION}}
+{\footnotesize\ttfamily \#define TINYOBJLOADER\+\_\+\+IMPLEMENTATION}
+
+
+
+This MUST be defined before importing tiny\+\_\+obj\+\_\+loader.\+h. 
+
+
+
+Definition at line \mbox{\hyperlink{a00122_source_l00011}{11}} of file \mbox{\hyperlink{a00122_source}{objloader.\+cpp}}.
+
+\mbox{\Hypertarget{a00122_ad1ceae03a73fd42494508a2d57eaf1fe}\label{a00122_ad1ceae03a73fd42494508a2d57eaf1fe}} 
+\index{objloader.cpp@{objloader.cpp}!TINYOBJLOADER\_USE\_DOUBLE@{TINYOBJLOADER\_USE\_DOUBLE}}
+\index{TINYOBJLOADER\_USE\_DOUBLE@{TINYOBJLOADER\_USE\_DOUBLE}!objloader.cpp@{objloader.cpp}}
+\doxysubsubsection{\texorpdfstring{TINYOBJLOADER\_USE\_DOUBLE}{TINYOBJLOADER\_USE\_DOUBLE}}
+{\footnotesize\ttfamily \#define TINYOBJLOADER\+\_\+\+USE\+\_\+\+DOUBLE}
+
+
+
+Definition at line \mbox{\hyperlink{a00122_source_l00012}{12}} of file \mbox{\hyperlink{a00122_source}{objloader.\+cpp}}.
+

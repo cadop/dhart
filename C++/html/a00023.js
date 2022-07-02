@@ -9,6 +9,6 @@ var a00023 =
     ] ],
     [ "Aggregate", "a00023.html#a38c197b654c753cb656ab60e88d65120", null ],
     [ "FibbonacciDistributePoints", "a00023.html#ga6ca336e3887ef82d17b0713c2bf862df", null ],
-    [ "SphericalRayshootWithAnyRTForDistance", "a00023.html#gad2ee55f78e191d1ff90e083ad49dc49e", null ],
-    [ "SphericalViewAnalysis", "a00023.html#gab99d16350ec1a4cac1dec3cbd731d7d8", null ]
+    [ "SphericalRayshootWithAnyRTForDistance", "a00023.html#ga78f77d24531d0fa55c9b60d7ec1bf32a", null ],
+    [ "SphericalViewAnalysis", "a00023.html#gaecaa04882696ac6d73173227bd28e91b", null ]
 ];

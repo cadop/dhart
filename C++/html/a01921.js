@@ -1,21 +1,10 @@
 var a01921 =
 [
-    [ "binary_t", "a01921.html#a56346d95ee4e539eaded2e6826fecf66", null ],
-    [ "number_float_t", "a01921.html#a5502f483fc60a1bcd73e0e46b6ab36e4", null ],
-    [ "number_integer_t", "a01921.html#a41876b17c0e8bdb55580eaf5e4e2ded8", null ],
-    [ "number_unsigned_t", "a01921.html#ae07454608ea6f3cfb765f95e3c850043", null ],
-    [ "string_t", "a01921.html#a3a8078bbf865ec355106f6048241609a", null ],
-    [ "binary", "a01921.html#a3d193985aac764f99398e3ae8ba0c5db", null ],
-    [ "boolean", "a01921.html#a3f5fe42a9b195de8d251d6d98d5ee92c", null ],
-    [ "end_array", "a01921.html#a22ef94ca5476a9563dcaca15b7d6e654", null ],
-    [ "end_object", "a01921.html#a919645fd1827a561a994d70a435e3f19", null ],
-    [ "key", "a01921.html#a59e1ea5e9c8d25346a564bf9287a5c2a", null ],
-    [ "null", "a01921.html#ad7ad55168af6e03ed8b844c94a17b9ce", null ],
-    [ "number_float", "a01921.html#aebf8800023eb20d472f111f86b189e60", null ],
-    [ "number_integer", "a01921.html#a976bf4ce6e9a2ffe48f683ddff80af00", null ],
-    [ "number_unsigned", "a01921.html#ad15b288f3351287edbe289502f595491", null ],
-    [ "parse_error", "a01921.html#a95bb3e8b6feaa523ecda8106fb5e38e3", null ],
-    [ "start_array", "a01921.html#a8238e8090cbb4ed8a22cbc97bfb833a5", null ],
-    [ "start_object", "a01921.html#a822bbca11a9fea0aa337018e351755f5", null ],
-    [ "string", "a01921.html#aaa69255e757a6ecc4403a2aa4931fc60", null ]
+    [ "binary_t", "a01921.html#ae6abc30644e683c20f8c2c4d63834fb8", null ],
+    [ "exception_t", "a01921.html#a6efa516f35d544cc8ce9a954f849fed1", null ],
+    [ "number_float_t", "a01921.html#a58d3205c8d3c7a01cc330374fa7976c5", null ],
+    [ "number_integer_t", "a01921.html#aa9a29390ca9810cee149510f586f5573", null ],
+    [ "number_unsigned_t", "a01921.html#a655c9b8038e51e5b9211e2419118644d", null ],
+    [ "string_t", "a01921.html#ad8e2e1427ff43536370b6db6ab83ae50", null ],
+    [ "value", "a01921.html#a8ab7e51087000e948b4a2492257484dc", null ]
 ];

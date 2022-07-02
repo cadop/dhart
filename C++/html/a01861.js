@@ -1,17 +1,10 @@
 var a01861 =
 [
-    [ "container_type", "a01861.html#a4d27e8633c5a5e3b49dd4ccb06515713", null ],
-    [ "byte_container_with_subtype", "a01861.html#a89c78caf8c7b54dc1bcfa4b0b23d2fc8", null ],
-    [ "byte_container_with_subtype", "a01861.html#a640b6dd55847e86dbb936f97b946170e", null ],
-    [ "byte_container_with_subtype", "a01861.html#a73dcae1798eab1b496936bfae7b4b9c0", null ],
-    [ "byte_container_with_subtype", "a01861.html#ac267e4fe960124976452bb46d7fe6792", null ],
-    [ "byte_container_with_subtype", "a01861.html#a7e3da6b709fc1ee661d298e74a29c06b", null ],
-    [ "clear_subtype", "a01861.html#a7b122b28ff2b8680557ca44ac9748e49", null ],
-    [ "has_subtype", "a01861.html#a9fc42fb07003bf7048c2f1fc79478e02", null ],
-    [ "operator!=", "a01861.html#a760bf39cc5477bc663d8bb3c44aabf6a", null ],
-    [ "operator==", "a01861.html#aee67fde9d3d571a07d5bb35df21c0555", null ],
-    [ "set_subtype", "a01861.html#aa1653b01b420607b359a3e8815b516c2", null ],
-    [ "subtype", "a01861.html#ac3ca9d09e55342f9588404e1dc2222f0", null ],
-    [ "m_has_subtype", "a01861.html#a69aa7a914a7a31b61d3a9567d74ddf7b", null ],
-    [ "m_subtype", "a01861.html#ae36c8f29f4f50a00962b0e9110ba2756", null ]
+    [ "char_type", "a01861.html#a7cc60e68767005322ab4b692c9dff283", null ],
+    [ "iterator_input_adapter", "a01861.html#a9423d7166b9e3092f149266acd064ba7", null ],
+    [ "empty", "a01861.html#ace7ba18b59cde50cbc53687034f649be", null ],
+    [ "get_character", "a01861.html#aaa21344e8f75f0a88d4e66f166c405bb", null ],
+    [ "wide_string_input_helper", "a01861.html#ab86106ba230f1542b94dcd96e6ab3221", null ],
+    [ "current", "a01861.html#a8abccad27590d381a94e474b16161938", null ],
+    [ "end", "a01861.html#a8aa29994ca6fdc0f8c96abf9151738ab", null ]
 ];

@@ -1,7 +1,7 @@
 var a00179 =
 [
-    [ "ConvertRawFloatArrayToPoints", "a00179.html#a2f5650b0bad6c47aa34fc2206433a34b", null ],
-    [ "ConvertRawIntArrayToPoints", "a00179.html#a353d5244f19898d13d1d38193ea6ef1e", null ],
+    [ "ConvertRawFloatArrayToPoints", "a00179.html#a603d456361c9737b88a091e6683db12b", null ],
+    [ "ConvertRawIntArrayToPoints", "a00179.html#ae995da63f3da32e08aee46c1b083f5b0", null ],
     [ "DestroyEdges", "a00392.html#gac46191088d698cc007a2176ab6b5674d", null ],
     [ "DestroyGraph", "a00392.html#ga645abacd11e1fa535f953344aaa77727", null ],
     [ "DestroyNodes", "a00392.html#ga87e9b9ecfc5293712d75f3cb8c992c77", null ],

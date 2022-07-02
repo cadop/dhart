@@ -1,0 +1,451 @@
+\hypertarget{a00203_source}{}\doxysection{graph.\+h}
+\label{a00203_source}\index{Cpp/spatialstructures/src/graph.h@{Cpp/spatialstructures/src/graph.h}}
+\mbox{\hyperlink{a00203}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00008}00008 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00009}00009 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00010}00010 \textcolor{preprocessor}{\#include <robin\_hood.h>}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00011}00011 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00012}00012 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00197}{Edge.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00013}00013 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00209}{Node.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00014}00014 \textcolor{preprocessor}{\#include <Eigen>}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00015}00015 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00016}00016 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00017}00017 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00405}{Eigen}} \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00018}00018 \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00019}00019 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00020}00020 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00399}{HF::SpatialStructures}} \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00021}\mbox{\hyperlink{a00399_a40b235356dfcdd3f2e1adc0f3c342007}{00021}}     \textcolor{keyword}{using }\mbox{\hyperlink{a00399_a40b235356dfcdd3f2e1adc0f3c342007}{EdgeMatrix}} = Eigen::SparseMatrix<float, 1>; }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00022}\mbox{\hyperlink{a00399_aaf74b9079d1b97124b8d1e4dae2cc13c}{00022}}     \textcolor{keyword}{using }\mbox{\hyperlink{a00399_aaf74b9079d1b97124b8d1e4dae2cc13c}{TempMatrix}} = Eigen::Map<const EdgeMatrix>;  }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00028}\mbox{\hyperlink{a00399_a6b23c0b2531c78f6d5049873c184f4f9}{00028}}     \textcolor{keyword}{enum class} \mbox{\hyperlink{a00399_a6b23c0b2531c78f6d5049873c184f4f9}{COST\_AGGREGATE}} : \textcolor{keywordtype}{int} \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00030}00030         SUM = 0,}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00032}00032         AVERAGE = 1,}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00034}00034         COUNT = 2}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00035}00035     \};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00036}00036 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00039}\mbox{\hyperlink{a00399_afac7c4ef1cb1104941f4d5a27973b47e}{00039}}     \textcolor{keyword}{enum class} \mbox{\hyperlink{a00399_afac7c4ef1cb1104941f4d5a27973b47e}{Direction}} : \textcolor{keywordtype}{int} \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00040}00040         \mbox{\hyperlink{a00399_afac7c4ef1cb1104941f4d5a27973b47eafb4081bff9f77d65456ceb00b153e4d4}{INCOMING}} = 0, \textcolor{comment}{//< Use the child node's attribute for the cost.}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00041}00041         \mbox{\hyperlink{a00399_afac7c4ef1cb1104941f4d5a27973b47ea1741b869c82993c62163223d8fefbba4}{OUTGOING}} = 1, \textcolor{comment}{//< Use the parent node's attribute as the cost.}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00042}00042         BOTH = 2    \textcolor{comment}{//< Add the parent and child's attributes for the cost.}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00043}00043     \};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00044}00044 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00045}00045 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00054}\mbox{\hyperlink{a01473}{00054}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a01473}{CSRPtrs}} \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00055}\mbox{\hyperlink{a01473_a67ae38cef6b322331f0e9100b3f480f8}{00055}}         \textcolor{keywordtype}{int} \mbox{\hyperlink{a01473_a67ae38cef6b322331f0e9100b3f480f8}{nnz}}; }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00056}\mbox{\hyperlink{a01473_ab7ef161d6dfc8b606c120cbf5181ed68}{00056}}         \textcolor{keywordtype}{int} \mbox{\hyperlink{a01473_ab7ef161d6dfc8b606c120cbf5181ed68}{rows}};   }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00057}\mbox{\hyperlink{a01473_a5aed9a3184fd7d7aded80c97c33e2dc5}{00057}}         \textcolor{keywordtype}{int} \mbox{\hyperlink{a01473_a5aed9a3184fd7d7aded80c97c33e2dc5}{cols}};   }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00058}00058 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00059}\mbox{\hyperlink{a01473_ab31bc5e69630e9101a82790c3a525386}{00059}}         \textcolor{keywordtype}{float}* \mbox{\hyperlink{a01473_ab31bc5e69630e9101a82790c3a525386}{data}};            }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00060}\mbox{\hyperlink{a01473_a49c0ac5c7fde9a797887699bc4670de4}{00060}}         \textcolor{keywordtype}{int}* \mbox{\hyperlink{a01473_a49c0ac5c7fde9a797887699bc4670de4}{outer\_indices}};        }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00061}\mbox{\hyperlink{a01473_a9a946e3ae6172a03c6a98e1dee39cc19}{00061}}         \textcolor{keywordtype}{int}* \mbox{\hyperlink{a01473_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\_indices}};        }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00062}00062 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00069}00069 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00093}\mbox{\hyperlink{a01473_a4665024245e559dac8c3d620372dc47e}{00093}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01473_a4665024245e559dac8c3d620372dc47e}{AreValid}}() \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00094}00094             \textcolor{keywordflow}{return} (\mbox{\hyperlink{a01473_ab31bc5e69630e9101a82790c3a525386}{data}} \&\& \mbox{\hyperlink{a01473_a49c0ac5c7fde9a797887699bc4670de4}{outer\_indices}} \&\& \mbox{\hyperlink{a01473_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\_indices}});}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00095}00095         \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00096}00096 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00103}00103 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00105}00105 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00111}\mbox{\hyperlink{a01473_a3a42a862aa57472ab5522a5490f3fe80}{00111}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{float}* \mbox{\hyperlink{a01473_a3a42a862aa57472ab5522a5490f3fe80}{CSRPtrs::data\_begin}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00112}00112             \textcolor{keywordflow}{return} \mbox{\hyperlink{a01473_ab31bc5e69630e9101a82790c3a525386}{data}} ? \mbox{\hyperlink{a01473_ab31bc5e69630e9101a82790c3a525386}{data}} : \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00113}00113         \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00114}00114 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00121}00121 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00122}00122         \textcolor{comment}{// If the data field has not been given an address, and/or the nnz field has not been given}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00123}00123         \textcolor{comment}{// a value, data\_end will return nullptr.}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00124}00124 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00130}00130         \textcolor{keyword}{inline} \textcolor{keywordtype}{float}* CSRPtrs::data\_end()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00131}00131             \textcolor{keywordflow}{if} (\mbox{\hyperlink{a01473_a67ae38cef6b322331f0e9100b3f480f8}{nnz}} > 0) \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00132}00132                 \textcolor{keywordflow}{return} \mbox{\hyperlink{a01473_ab31bc5e69630e9101a82790c3a525386}{data}} ? \mbox{\hyperlink{a01473_ab31bc5e69630e9101a82790c3a525386}{data}} + \mbox{\hyperlink{a01473_a67ae38cef6b322331f0e9100b3f480f8}{nnz}} : \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00133}00133             \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00134}00134 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00135}00135             \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00136}00136         \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00137}00137 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00144}00144 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00145}00145         \textcolor{comment}{// If the inner\_indices field has not been given an address, inner\_begin will return nullptr.}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00146}00146 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00153}\mbox{\hyperlink{a01473_a34ecfc584027a864e6fca17ba2f7f94b}{00153}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{int}* \mbox{\hyperlink{a01473_a34ecfc584027a864e6fca17ba2f7f94b}{CSRPtrs::inner\_begin}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00154}00154             \textcolor{keywordflow}{return} \mbox{\hyperlink{a01473_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\_indices}} ? \mbox{\hyperlink{a01473_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\_indices}} : \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00155}00155         \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00156}00156 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00163}00163 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00174}\mbox{\hyperlink{a01473_a21272c87c93bc4b15b9505584a317081}{00174}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{int}* \mbox{\hyperlink{a01473_a21272c87c93bc4b15b9505584a317081}{CSRPtrs::inner\_end}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00175}00175             \textcolor{keywordflow}{if} (\mbox{\hyperlink{a01473_a67ae38cef6b322331f0e9100b3f480f8}{nnz}} > 0) \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00176}00176                 \textcolor{keywordflow}{return} \mbox{\hyperlink{a01473_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\_indices}} ? \mbox{\hyperlink{a01473_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\_indices}} + \mbox{\hyperlink{a01473_a67ae38cef6b322331f0e9100b3f480f8}{nnz}} : \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00177}00177             \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00178}00178 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00179}00179             \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00180}00180         \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00181}00181 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00188}00188 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00189}00189         \textcolor{comment}{// If the outer\_indices field has not been given an address, outer\_begin will return nullptr.}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00190}00190 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00196}\mbox{\hyperlink{a01473_ac83226c8c6ee3e7f9a144609f6350bd8}{00196}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{int}* \mbox{\hyperlink{a01473_ac83226c8c6ee3e7f9a144609f6350bd8}{CSRPtrs::outer\_begin}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00197}00197             \textcolor{keywordflow}{return} \mbox{\hyperlink{a01473_a49c0ac5c7fde9a797887699bc4670de4}{outer\_indices}} ? \mbox{\hyperlink{a01473_a49c0ac5c7fde9a797887699bc4670de4}{outer\_indices}} : \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00198}00198         \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00199}00199 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00206}00206 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00207}00207         \textcolor{comment}{// If the outer\_end field has not been given an address, and/or the rows field has not been}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00208}00208         \textcolor{comment}{// given a value, outer\_end will return nullptr.}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00209}00209 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00215}\mbox{\hyperlink{a01473_a9f4f2c08ffdd412c65f76c8840cb4b20}{00215}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{int}* \mbox{\hyperlink{a01473_a9f4f2c08ffdd412c65f76c8840cb4b20}{CSRPtrs::outer\_end}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00216}00216             \textcolor{keywordflow}{if} (\mbox{\hyperlink{a01473_ab7ef161d6dfc8b606c120cbf5181ed68}{rows}} > 0) \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00217}00217                 \textcolor{keywordflow}{return} \mbox{\hyperlink{a01473_a49c0ac5c7fde9a797887699bc4670de4}{outer\_indices}} ? \mbox{\hyperlink{a01473_a49c0ac5c7fde9a797887699bc4670de4}{outer\_indices}} + \mbox{\hyperlink{a01473_ab7ef161d6dfc8b606c120cbf5181ed68}{rows}} : \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00218}00218             \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00219}00219 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00220}00220             \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00221}00221         \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00222}00222 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00232}00232 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00233}00233         \textcolor{comment}{// If the data field has not been given an address, or the rows field has not been given a}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00234}00234         \textcolor{comment}{// value, or row\_number >= rows, row\_begin will return nullptr.}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00235}00235 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00241}\mbox{\hyperlink{a01473_a0e02a514f11bbb19a05419484af4b3f8}{00241}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{float}* \mbox{\hyperlink{a01473_a0e02a514f11bbb19a05419484af4b3f8}{CSRPtrs::row\_begin}}(\textcolor{keywordtype}{int} row\_number)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00242}00242             \textcolor{keywordtype}{float}* begin = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00243}00243 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00244}00244             \textcolor{keywordflow}{if} (\mbox{\hyperlink{a01473_ab31bc5e69630e9101a82790c3a525386}{data}} \&\& \mbox{\hyperlink{a01473_ab7ef161d6dfc8b606c120cbf5181ed68}{rows}} > 0) \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00245}00245                 \textcolor{keywordflow}{if} (row\_number >= 0 \&\& row\_number < \mbox{\hyperlink{a01473_ab7ef161d6dfc8b606c120cbf5181ed68}{rows}}) \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00246}00246                     begin = \mbox{\hyperlink{a01473_ab31bc5e69630e9101a82790c3a525386}{data}} + \mbox{\hyperlink{a01473_a49c0ac5c7fde9a797887699bc4670de4}{outer\_indices}}[row\_number];}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00247}00247                 \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00248}00248             \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00249}00249 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00250}00250             \textcolor{keywordflow}{return} begin;}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00251}00251         \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00252}00252 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00265}00265 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00266}00266         \textcolor{comment}{// If the data field has not been given an address, or the rows field has not been given a}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00267}00267         \textcolor{comment}{// value, or row\_number >= rows, row\_end will return nullptr.}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00268}00268 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00274}\mbox{\hyperlink{a01473_ac3ed3f19fc802ef44942670740928cd4}{00274}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{float}* \mbox{\hyperlink{a01473_ac3ed3f19fc802ef44942670740928cd4}{CSRPtrs::row\_end}}(\textcolor{keywordtype}{int} row\_number)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00275}00275             \textcolor{keywordtype}{float}* end = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00276}00276             \textcolor{keyword}{const} \textcolor{keywordtype}{int} next\_row = row\_number + 1;}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00277}00277 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00278}00278             \textcolor{keywordflow}{if} (\mbox{\hyperlink{a01473_ab31bc5e69630e9101a82790c3a525386}{data}} \&\& \mbox{\hyperlink{a01473_ab7ef161d6dfc8b606c120cbf5181ed68}{rows}} > 0) \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00279}00279                 \textcolor{keywordflow}{if} (next\_row > 0 \&\& next\_row < \mbox{\hyperlink{a01473_ab7ef161d6dfc8b606c120cbf5181ed68}{rows}}) \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00280}00280                     end = \mbox{\hyperlink{a01473_ab31bc5e69630e9101a82790c3a525386}{data}} + \mbox{\hyperlink{a01473_a49c0ac5c7fde9a797887699bc4670de4}{outer\_indices}}[next\_row];}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00281}00281                 \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00282}00282                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (next\_row > 0 \&\& next\_row == \mbox{\hyperlink{a01473_ab7ef161d6dfc8b606c120cbf5181ed68}{rows}}) \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00283}00283                     end = data\_end();}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00284}00284                 \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00285}00285             \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00286}00286 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00287}00287             \textcolor{keywordflow}{return} end;}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00288}00288         \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00289}00289 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00302}00302 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00303}00303         \textcolor{comment}{// If the inner\_indices and/or outer\_indices field have not been given addresses, or}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00304}00304         \textcolor{comment}{// row\_number >= rows, col\_begin will return nullptr.}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00305}00305 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00312}\mbox{\hyperlink{a01473_a17d74f3082cb99fb68e12a8eae2e3f62}{00312}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{int}* \mbox{\hyperlink{a01473_a17d74f3082cb99fb68e12a8eae2e3f62}{CSRPtrs::col\_begin}}(\textcolor{keywordtype}{int} row\_number)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00313}00313             \textcolor{keywordtype}{int}* begin = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00314}00314 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00315}00315             \textcolor{keywordflow}{if} (\mbox{\hyperlink{a01473_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\_indices}} \&\& \mbox{\hyperlink{a01473_a49c0ac5c7fde9a797887699bc4670de4}{outer\_indices}}) \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00316}00316                 \textcolor{keywordflow}{if} (row\_number >= 0 \&\& row\_number < \mbox{\hyperlink{a01473_ab7ef161d6dfc8b606c120cbf5181ed68}{rows}}) \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00317}00317                     begin = \mbox{\hyperlink{a01473_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\_indices}} + \mbox{\hyperlink{a01473_a49c0ac5c7fde9a797887699bc4670de4}{outer\_indices}}[row\_number];}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00318}00318                 \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00319}00319             \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00320}00320 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00321}00321             \textcolor{keywordflow}{return} begin;}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00322}00322         \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00323}00323 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00335}00335 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00336}00336         \textcolor{comment}{// If the inner\_indices and/or outer\_indices field have not been given addresses, or}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00337}00337         \textcolor{comment}{// row\_number >= rows, col\_end will return nullptr.}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00338}00338 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00344}\mbox{\hyperlink{a01473_a0348d6bbf08513224514d9d2f11576bf}{00344}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{int}* \mbox{\hyperlink{a01473_a0348d6bbf08513224514d9d2f11576bf}{CSRPtrs::col\_end}}(\textcolor{keywordtype}{int} row\_number)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00345}00345             \textcolor{keywordtype}{int}* end = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00346}00346             \textcolor{keyword}{const} \textcolor{keywordtype}{int} next\_row = row\_number + 1;}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00347}00347 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00348}00348             \textcolor{keywordflow}{if} (\mbox{\hyperlink{a01473_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\_indices}} \&\& \mbox{\hyperlink{a01473_a49c0ac5c7fde9a797887699bc4670de4}{outer\_indices}}) \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00349}00349                 \textcolor{keywordflow}{if} (next\_row > 0 \&\& next\_row < \mbox{\hyperlink{a01473_ab7ef161d6dfc8b606c120cbf5181ed68}{rows}}) \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00350}00350                     end = \mbox{\hyperlink{a01473_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\_indices}} + \mbox{\hyperlink{a01473_a49c0ac5c7fde9a797887699bc4670de4}{outer\_indices}}[next\_row];}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00351}00351                 \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00352}00352                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (next\_row > 0 \&\& next\_row == \mbox{\hyperlink{a01473_ab7ef161d6dfc8b606c120cbf5181ed68}{rows}}) \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00353}00353                     end = inner\_end();}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00354}00354                 \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00355}00355             \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00356}00356             \textcolor{keywordflow}{return} end;}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00357}00357         \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00358}00358     \};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00359}00359 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00364}\mbox{\hyperlink{a00399}{00364}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a00399_a01477}{Subgraph}} \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00365}\mbox{\hyperlink{a00399_a2f8de99f10387d075d7d69336e4d5dd7}{00365}}         \mbox{\hyperlink{a02005}{Node}} \mbox{\hyperlink{a00399_a2f8de99f10387d075d7d69336e4d5dd7}{m\_parent}};                      }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00366}\mbox{\hyperlink{a00399_ac1403ade5ddeb5410a523871f96e1e64}{00366}}         std::vector<Edge> \mbox{\hyperlink{a00399_ac1403ade5ddeb5410a523871f96e1e64}{m\_edges}};           }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00367}00367     \};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00368}00368 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00375}\mbox{\hyperlink{a01481}{00375}}     \textcolor{keyword}{class }\mbox{\hyperlink{a01481}{EdgeCostSet}} \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00376}00376     \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00377}\mbox{\hyperlink{a01481_a0eebad11ce129d669da0e51bbae04aee}{00377}}         std::vector<float> \mbox{\hyperlink{a01481_a0eebad11ce129d669da0e51bbae04aee}{costs}}; }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00378}00378 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00379}00379     \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00381}\mbox{\hyperlink{a01481_aaaab10e7584343084e41889ee9858111}{00381}}         \mbox{\hyperlink{a01481_aaaab10e7584343084e41889ee9858111}{EdgeCostSet}}() \{ this-\/>costs.resize(0); \};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00382}00382 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00388}\mbox{\hyperlink{a01481_a292cb98e857b8ae2606395ed57ebcec8}{00388}}         \textcolor{keyword}{inline} \mbox{\hyperlink{a01481_a292cb98e857b8ae2606395ed57ebcec8}{EdgeCostSet}}(\textcolor{keywordtype}{int} \mbox{\hyperlink{a01481_abc5ff8ee3175dca75cacbfbd592907db}{size}}) \{ this-\/>\mbox{\hyperlink{a01481_a22bf925d64a8ab8c0920d668068dc3db}{ResizeIfNeeded}}(size); \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00389}00389 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00394}\mbox{\hyperlink{a01481_abc5ff8ee3175dca75cacbfbd592907db}{00394}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{a01481_abc5ff8ee3175dca75cacbfbd592907db}{size}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} this-\/>costs.size(); \};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00395}00395 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00403}\mbox{\hyperlink{a01481_a22bf925d64a8ab8c0920d668068dc3db}{00403}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01481_a22bf925d64a8ab8c0920d668068dc3db}{ResizeIfNeeded}}(\textcolor{keywordtype}{int} new\_size) \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00404}00404             \textcolor{keyword}{const} \textcolor{keywordtype}{int} old\_size = this-\/>\mbox{\hyperlink{a01481_abc5ff8ee3175dca75cacbfbd592907db}{size}}();}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00405}00405             \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{a01481_abc5ff8ee3175dca75cacbfbd592907db}{size}}() < new\_size)}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00406}00406             \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00407}00407                 \textcolor{comment}{// resize the cost array}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00408}00408                 this-\/>costs.resize(new\_size);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00409}00409 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00410}00410                 \textcolor{comment}{// fill new values with NAN}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00411}00411                 \textcolor{keyword}{const} \textcolor{keyword}{auto} start\_offset = \mbox{\hyperlink{a01481_a0eebad11ce129d669da0e51bbae04aee}{costs}}.begin() + old\_size;}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00412}00412                 std::fill(start\_offset, \mbox{\hyperlink{a01481_a0eebad11ce129d669da0e51bbae04aee}{costs}}.end(), NAN);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00413}00413             \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00414}00414         \};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00415}00415 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00417}\mbox{\hyperlink{a01481_a3cbcc68757254cc1a56efb4aa9a20e44}{00417}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01481_a3cbcc68757254cc1a56efb4aa9a20e44}{Clear}}() \{ this-\/>costs.clear(); \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00418}00418 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00424}\mbox{\hyperlink{a01481_a383475da303d0b59bedfa2a83f1487b4}{00424}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{float}\& \mbox{\hyperlink{a01481_a383475da303d0b59bedfa2a83f1487b4}{operator[]}}(\textcolor{keywordtype}{int} i) \{ }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00425}00425             assert(this-\/>\mbox{\hyperlink{a01481_a4b139518bc0939554df19e83c8e0b916}{bounds\_check}}(i));}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00426}00426             \textcolor{keywordflow}{return} this-\/>costs[i]; }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00427}00427         \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00428}00428 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00429}\mbox{\hyperlink{a01481_a4b139518bc0939554df19e83c8e0b916}{00429}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01481_a4b139518bc0939554df19e83c8e0b916}{bounds\_check}}(\textcolor{keywordtype}{int} i)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00430}00430             \textcolor{keywordflow}{return} !(i >= this-\/>\mbox{\hyperlink{a01481_abc5ff8ee3175dca75cacbfbd592907db}{size}}()) || (i < 0);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00431}00431         \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00432}00432 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00438}\mbox{\hyperlink{a01481_a3ab14e57d0bb9b4ee68f7a58b0a568ec}{00438}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{float} \mbox{\hyperlink{a01481_a3ab14e57d0bb9b4ee68f7a58b0a568ec}{operator[]}}(\textcolor{keywordtype}{int} i)\textcolor{keyword}{ const }\{ }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00439}00439             assert(this-\/>\mbox{\hyperlink{a01481_a4b139518bc0939554df19e83c8e0b916}{bounds\_check}}(i));}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00440}00440             \textcolor{keywordflow}{return} this-\/>costs[i]; }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00441}00441         \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00442}00442 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00448}\mbox{\hyperlink{a01481_a1dbef69c08db4137463175a46043547d}{00448}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{float}* \mbox{\hyperlink{a01481_a1dbef69c08db4137463175a46043547d}{GetPtr}}() \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00449}00449             assert(this-\/>costs.size() > 0);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00450}00450             \textcolor{keywordflow}{return} this-\/>costs.data();}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00451}00451         \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00452}00452         }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00458}\mbox{\hyperlink{a01481_aff0b1e0be6be4c65abd0c05717131e14}{00458}}         \textcolor{keyword}{inline} \textcolor{keyword}{const} \textcolor{keywordtype}{float}* \mbox{\hyperlink{a01481_aff0b1e0be6be4c65abd0c05717131e14}{GetPtr}}()\textcolor{keyword}{ const }\{ }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00459}00459             assert(this-\/>costs.size() > 0);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00460}00460             \textcolor{keywordflow}{return} this-\/>costs.data(); }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00461}00461         \}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00462}00462 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00463}00463     \};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00464}00464 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00486}\mbox{\hyperlink{a01485}{00486}}     \textcolor{keyword}{class }\mbox{\hyperlink{a01485}{Graph}} \{}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00487}\mbox{\hyperlink{a01485_acfe4780ebfdd7f66b9fa77a6f0301d52}{00487}}         \textcolor{keyword}{using }\mbox{\hyperlink{a01485_acfe4780ebfdd7f66b9fa77a6f0301d52}{NodeAttributeValueMap}} = robin\_hood::unordered\_map<int, std::string>;}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00488}00488 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00489}00489     \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00490}\mbox{\hyperlink{a01485_aaab13304c641df6fdcd3662d5c54dc78}{00490}}         \textcolor{keywordtype}{int} \mbox{\hyperlink{a01485_aaab13304c641df6fdcd3662d5c54dc78}{next\_id}} = 0;                             }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00491}\mbox{\hyperlink{a01485_ad59ab7164b64e3d78b7032b28c2c6663}{00491}}         std::vector<Node> \mbox{\hyperlink{a01485_ad59ab7164b64e3d78b7032b28c2c6663}{ordered\_nodes}};               }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00492}00492 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00493}00493         \textcolor{comment}{//robin\_hood::unordered\_map<int, int> id\_to\_ordered\_node; ///< Maps ids to indexes in ordered\_nodes.}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00494}\mbox{\hyperlink{a01485_a4da5e288f03773d18053c82731369b2a}{00494}}         robin\_hood::unordered\_map<Node, int> \mbox{\hyperlink{a01485_a4da5e288f03773d18053c82731369b2a}{idmap}};        }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00495}00495 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00496}\mbox{\hyperlink{a01485_a1cf07c256da74c2a03f81b4977364e85}{00496}}         std::vector<Eigen::Triplet<float>> \mbox{\hyperlink{a01485_a1cf07c256da74c2a03f81b4977364e85}{triplets}};    }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00497}\mbox{\hyperlink{a01485_a1cbd600663187d7cf985e9b6e7cea73f}{00497}}         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01485_a1cbd600663187d7cf985e9b6e7cea73f}{needs\_compression}} = \textcolor{keyword}{true};                 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00498}00498 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00499}\mbox{\hyperlink{a01485_aeec76d5e193267be65a42eb1794a3abb}{00499}}         robin\_hood::unordered\_map<std::string, NodeAttributeValueMap> \mbox{\hyperlink{a01485_aeec76d5e193267be65a42eb1794a3abb}{node\_attr\_map}}; }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00500}00500 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00501}\mbox{\hyperlink{a01485_a73aed491dde212682fe65e248114371b}{00501}}         std::string \mbox{\hyperlink{a01485_a73aed491dde212682fe65e248114371b}{active\_cost\_type}};                               }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00502}\mbox{\hyperlink{a01485_a0be5d62e01eabe7e1581d238cfb35ace}{00502}}         \mbox{\hyperlink{a00399_a40b235356dfcdd3f2e1adc0f3c342007}{EdgeMatrix}} \mbox{\hyperlink{a01485_a0be5d62e01eabe7e1581d238cfb35ace}{edge\_matrix}};                }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00503}00503 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00504}\mbox{\hyperlink{a01485_aba19080a765d7a09b0acbf8ffdcd1277}{00504}}         std::string \mbox{\hyperlink{a01485_aba19080a765d7a09b0acbf8ffdcd1277}{default\_cost}} = \textcolor{stringliteral}{"{}Distance"{}};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00505}\mbox{\hyperlink{a01485_a4db3f8505fa2e7a4a54060fede1770f6}{00505}}         std::unordered\_map<std::string, EdgeCostSet> \mbox{\hyperlink{a01485_a4db3f8505fa2e7a4a54060fede1770f6}{edge\_cost\_maps}}; }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00506}00506 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00513}\mbox{\hyperlink{a01485_aa0415ae8030d4c524f91538737155413}{00513}}         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01485_aa0415ae8030d4c524f91538737155413}{has\_cost\_arrays}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00514}00514 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00522}\mbox{\hyperlink{a01485_a4330f0c85299f975495124514354b271}{00522}}         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01485_a4330f0c85299f975495124514354b271}{nodes\_out\_of\_order}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00523}00523 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00541}\mbox{\hyperlink{a01485_afca147a681e4b39bc471e02d0f07eb37}{00541}}         \textcolor{keywordtype}{int} \mbox{\hyperlink{a01485_afca147a681e4b39bc471e02d0f07eb37}{getOrAssignID}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}} \& input\_node);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00542}00542 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00555}\mbox{\hyperlink{a01485_a133b6f44ac90ed6135752e32482b70f5}{00555}}         \textcolor{keywordtype}{int} \mbox{\hyperlink{a01485_a133b6f44ac90ed6135752e32482b70f5}{getOrAssignID}}(\textcolor{keywordtype}{int} input\_int);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00556}00556 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00570}\mbox{\hyperlink{a01485_a902d654a1c1b6d391c27c6c2bd618bbc}{00570}}         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01485_a902d654a1c1b6d391c27c6c2bd618bbc}{checkForEdge}}(\textcolor{keywordtype}{int} parent, \textcolor{keywordtype}{int} child) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00571}00571 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00589}\mbox{\hyperlink{a01485_ab8814e293547af636e63e45e400574de}{00589}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01485_ab8814e293547af636e63e45e400574de}{CSRAddOrUpdateEdge}}(\textcolor{keywordtype}{int} parent\_id, \textcolor{keywordtype}{int} child\_id, \textcolor{keywordtype}{float} cost);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00590}00590 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00599}\mbox{\hyperlink{a01485_a1c600a342694552e17cf8705d90163ef}{00599}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01485_a1c600a342694552e17cf8705d90163ef}{TripletsAddOrUpdateEdge}}(\textcolor{keywordtype}{int} parent\_id, \textcolor{keywordtype}{int} child\_id, \textcolor{keywordtype}{float} cost);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00600}00600 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00611}\mbox{\hyperlink{a01485_a174c4c57d4849cd014ec3b1e9cc474de}{00611}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01485_a174c4c57d4849cd014ec3b1e9cc474de}{ResizeIfNeeded}}();}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00612}00612 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00623}\mbox{\hyperlink{a01485_afb7fd113e4afe1d0eb01dd23d69b5ecd}{00623}}         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01485_afb7fd113e4afe1d0eb01dd23d69b5ecd}{hasKey}}(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00624}00624 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00634}\mbox{\hyperlink{a01485_a42d18ac87da28a676ec110d1d9c86b80}{00634}}         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01485_a42d18ac87da28a676ec110d1d9c86b80}{HasCostArray}}(\textcolor{keyword}{const} std::string \& key) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00635}00635 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00650}\mbox{\hyperlink{a01485_ac27c41b7325344570458ee4953bc3f2a}{00650}}         \mbox{\hyperlink{a01481}{EdgeCostSet}}\& \mbox{\hyperlink{a01485_ac27c41b7325344570458ee4953bc3f2a}{GetCostArray}}(\textcolor{keyword}{const} std::string\& key);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00651}00651 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00661}\mbox{\hyperlink{a01485_a83c1c898465d3ea1b1459e529fd10831}{00661}}         \mbox{\hyperlink{a01481}{EdgeCostSet}}\& \mbox{\hyperlink{a01485_a83c1c898465d3ea1b1459e529fd10831}{GetOrCreateCostType}}(\textcolor{keyword}{const} std::string\& name);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00662}00662 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00672}\mbox{\hyperlink{a01485_abe55b81687ef86e24646e19c5eeb771c}{00672}}         \mbox{\hyperlink{a01481}{EdgeCostSet}}\& \mbox{\hyperlink{a01485_abe55b81687ef86e24646e19c5eeb771c}{CreateCostArray}}(\textcolor{keyword}{const} std::string\& name);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00673}00673 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00686}\mbox{\hyperlink{a01485_af7154a2f031ebc633aa7d4b4339028d2}{00686}}         \textcolor{keyword}{const} \mbox{\hyperlink{a01481}{EdgeCostSet}}\& \mbox{\hyperlink{a01485_af7154a2f031ebc633aa7d4b4339028d2}{GetCostArray}}(\textcolor{keyword}{const} std::string\& key) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00687}00687 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00701}\mbox{\hyperlink{a01485_a1c6ed0440c3e83f18dc3c0393a4db63f}{00701}}         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01485_a1c6ed0440c3e83f18dc3c0393a4db63f}{IsDefaultName}}(\textcolor{keyword}{const} std::string\& name) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00702}00702 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00725}\mbox{\hyperlink{a01485_aaa6caefd044805f37078fa7218986cca}{00725}}         \textcolor{keywordtype}{int} \mbox{\hyperlink{a01485_aaa6caefd044805f37078fa7218986cca}{FindValueArrayIndex}}(\textcolor{keywordtype}{int} parent\_id, \textcolor{keywordtype}{int} child\_id) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00726}00726 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00738}\mbox{\hyperlink{a01485_ae4e5419a528f50749f8c98305f6b4390}{00738}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01485_ae4e5419a528f50749f8c98305f6b4390}{InsertEdgeIntoCostSet}}(\textcolor{keywordtype}{int} parent\_id, \textcolor{keywordtype}{int} child\_id, \textcolor{keywordtype}{float} score, \mbox{\hyperlink{a01481}{EdgeCostSet}}\& cost\_set);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00739}00739 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00748}\mbox{\hyperlink{a01485_a023c10dad1e62b235f80168ceb71c75a}{00748}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01485_a023c10dad1e62b235f80168ceb71c75a}{InsertEdgesIntoCostSet}}(\mbox{\hyperlink{a01481}{EdgeCostSet}}\& cost\_set, \textcolor{keyword}{const} std::vector<EdgeSet>\& es);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00749}00749 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00774}\mbox{\hyperlink{a01485_a17fd1ad405195ad5455c8bbad34816d3}{00774}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01485_a17fd1ad405195ad5455c8bbad34816d3}{InsertOrUpdateEdge}}(\textcolor{keywordtype}{int} parent\_id, \textcolor{keywordtype}{int} child\_id, \textcolor{keywordtype}{float} score, \textcolor{keyword}{const} std::string\& cost\_type);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00775}00775 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00790}\mbox{\hyperlink{a01485_a1106422ecd12416e8931a0e1f4b4fc50}{00790}}         \textcolor{keywordtype}{float} \mbox{\hyperlink{a01485_a1106422ecd12416e8931a0e1f4b4fc50}{GetCostForSet}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01481}{EdgeCostSet}}\& set, \textcolor{keywordtype}{int} parent\_id, \textcolor{keywordtype}{int} child\_id) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00791}00791 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00805}\mbox{\hyperlink{a01485_aa143ac9a9e8dbf23fec49a47ca01cdb2}{00805}}         std::vector<Edge> \mbox{\hyperlink{a01485_aa143ac9a9e8dbf23fec49a47ca01cdb2}{GetEdgesForNode}}(}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00806}00806             \textcolor{keywordtype}{int} parent\_id,}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00807}00807             \textcolor{keywordtype}{bool} undirected = \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00808}00808             \textcolor{keyword}{const} std::string\& cost\_type = \textcolor{stringliteral}{"{}"{}}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00809}00809         ) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00810}00810 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00824}\mbox{\hyperlink{a01485_a40581bf5c7751041e85e1763697cdb70}{00824}}         \mbox{\hyperlink{a00399_aaf74b9079d1b97124b8d1e4dae2cc13c}{TempMatrix}} \mbox{\hyperlink{a01485_a40581bf5c7751041e85e1763697cdb70}{MapCostMatrix}}(\textcolor{keyword}{const} std::string\& cost\_type) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00825}00825 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00827}\mbox{\hyperlink{a01485_a42f23c075c3a912a5c12b8d243f15f70}{00827}}         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01485_a42f23c075c3a912a5c12b8d243f15f70}{HasNodeAttribute}}(\textcolor{keyword}{const} std::string \& key) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00828}00828 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00829}00829     \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00879}\mbox{\hyperlink{a01485_a738bbf6e1d4d8eefd9884e7d117d4ef5}{00879}}         \mbox{\hyperlink{a01485_a738bbf6e1d4d8eefd9884e7d117d4ef5}{Graph}}(}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00880}00880             \textcolor{keyword}{const} std::vector<std::vector<int>>\& edges,}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00881}00881             \textcolor{keyword}{const} std::vector<std::vector<float>>\& distances,}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00882}00882             \textcolor{keyword}{const} std::vector<Node>\& \mbox{\hyperlink{a01485_aa70347b8a33b57c6f0a72d6eca4248d7}{Nodes}},}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00883}00883             \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{a01485_aba19080a765d7a09b0acbf8ffdcd1277}{default\_cost}} = \textcolor{stringliteral}{"{}Distance"{}}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00884}00884         );}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00885}00885 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00902}\mbox{\hyperlink{a01485_a2386d87722e4459b70dc2995a7bf2be4}{00902}}         \mbox{\hyperlink{a01485_a2386d87722e4459b70dc2995a7bf2be4}{Graph}}(\textcolor{keyword}{const} std::string\& default\_cost\_name = \textcolor{stringliteral}{"{}Distance"{}});}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00903}00903 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00942}\mbox{\hyperlink{a01485_af00121404a647b0d619f201cf9ebc797}{00942}}         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01485_af00121404a647b0d619f201cf9ebc797}{HasEdge}}(}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00943}00943             \textcolor{keyword}{const} std::array<float, 3>\& parent,}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00944}00944             \textcolor{keyword}{const} std::array<float, 3>\& child,}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00945}00945             \textcolor{keywordtype}{bool} undirected = \textcolor{keyword}{false}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00946}00946         ) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00947}00947 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00982}\mbox{\hyperlink{a01485_ab6bfa0a8e88ef1fdf54597597b1a1291}{00982}}         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01485_ab6bfa0a8e88ef1fdf54597597b1a1291}{HasEdge}}(}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00983}00983             \textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& parent,}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00984}00984             \textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& child,}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00985}00985             \textcolor{keyword}{const} \textcolor{keywordtype}{bool} undirected = \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00986}00986             \textcolor{keyword}{const} std::string cost\_type = \textcolor{stringliteral}{"{}"{}}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00987}00987         ) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00988}00988 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l00989}00989         \textcolor{comment}{/* \(\backslash\)brief Determine if the graph has an edge from parent to child.}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00990}00990 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00991}00991 \textcolor{comment}{            \(\backslash\)param parent Parent of the edge to check for.}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00992}00992 \textcolor{comment}{            \(\backslash\)param child Child of the edge to check for.}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00993}00993 \textcolor{comment}{            \(\backslash\)param undirected If true, look for an edge from child to parent as well.}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00994}00994 \textcolor{comment}{            \(\backslash\)returns True if an edge between parentand child exists}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00995}00995 \textcolor{comment}{            (also child and parent if undirected is true).}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00996}00996 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00997}00997 \textcolor{comment}{            \(\backslash\)exception std::exception if the graph is uncompressed.}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00998}00998 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l00999}00999 \textcolor{comment}{            \(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01000}01000 \textcolor{comment}{                // be sure to \#include "{}graph.h"{}}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01001}01001 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01002}01002 \textcolor{comment}{                // Create the nodes}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01003}01003 \textcolor{comment}{                HF::SpatialStructures::Node node\_0(1.0f, 1.0f, 2.0f);}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01004}01004 \textcolor{comment}{                HF::SpatialStructures::Node node\_1(2.0f, 3.0f, 4.0f, 5);}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01005}01005 \textcolor{comment}{                HF::SpatialStructures::Node node\_2(11.0f, 22.0f, 140.0f);}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01006}01006 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01007}01007 \textcolor{comment}{                // Create a container (vector) of nodes}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01008}01008 \textcolor{comment}{                std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01009}01009 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01010}01010 \textcolor{comment}{                // Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01011}01011 \textcolor{comment}{                std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01012}01012 \textcolor{comment}{                std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01013}01013 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01014}01014 \textcolor{comment}{                // Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01015}01015 \textcolor{comment}{                HF::SpatialStructures::Graph graph(edges, distances, nodes);}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01016}01016 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01017}01017 \textcolor{comment}{                // last argument can be true/false for undirected/directed graph respectively}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01018}01018 \textcolor{comment}{                bool has\_edge = graph.HasEdge(0, 1, true);}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01019}01019 \textcolor{comment}{            \(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01020}01020 \textcolor{comment}{        */}}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01021}\mbox{\hyperlink{a01485_a8932d45fe1608935afcdc20b462ec93b}{01021}}         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01485_a8932d45fe1608935afcdc20b462ec93b}{HasEdge}}(\textcolor{keywordtype}{int} parent, \textcolor{keywordtype}{int} child, \textcolor{keywordtype}{bool} undirected = \textcolor{keyword}{false}, \textcolor{keyword}{const} std::string\& cost\_type = \textcolor{stringliteral}{"{}"{}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01022}01022 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01029}01029 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01053}\mbox{\hyperlink{a01485_aa70347b8a33b57c6f0a72d6eca4248d7}{01053}}         std::vector<Node> \mbox{\hyperlink{a01485_aa70347b8a33b57c6f0a72d6eca4248d7}{Nodes}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01054}01054 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01064}01064 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01100}\mbox{\hyperlink{a01485_ac86208fa647a5a7fdbc18c0cd9d5d5a3}{01100}}         std::vector<Edge> \mbox{\hyperlink{a01485_ac86208fa647a5a7fdbc18c0cd9d5d5a3}{GetUndirectedEdges}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& N, \textcolor{keyword}{const} std::string\& cost\_type = \textcolor{stringliteral}{"{}"{}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01101}01101 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01108}01108 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01145}\mbox{\hyperlink{a01485_a1a26ebb794b444e2214cf0b0fed5a529}{01145}}         std::vector<EdgeSet> \mbox{\hyperlink{a01485_a1a26ebb794b444e2214cf0b0fed5a529}{GetEdges}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01146}01146     }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01152}\mbox{\hyperlink{a01485_ad5227cd95744b58551b9964975017a37}{01152}}         std::vector<IntEdge> \mbox{\hyperlink{a01485_ad5227cd95744b58551b9964975017a37}{GetIntEdges}}(\textcolor{keywordtype}{int} parent) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01153}01153 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01166}01166 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01204}\mbox{\hyperlink{a01485_a487b0b29dc7c554089e0255779218567}{01204}}         std::vector<float> \mbox{\hyperlink{a01485_a487b0b29dc7c554089e0255779218567}{AggregateGraph}}(\mbox{\hyperlink{a00399_a6b23c0b2531c78f6d5049873c184f4f9}{COST\_AGGREGATE}} agg\_type, \textcolor{keywordtype}{bool} directed = \textcolor{keyword}{true}, \textcolor{keyword}{const} std::string\& cost\_type = \textcolor{stringliteral}{"{}"{}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01247}\mbox{\hyperlink{a01485_a7c2ea4fda7d310b500456ff14527bab9}{01247}}         \textcolor{keyword}{const} std::vector<Edge> \mbox{\hyperlink{a01485_a7c2ea4fda7d310b500456ff14527bab9}{operator[]}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& n) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01248}01248 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01261}01261 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01303}\mbox{\hyperlink{a01485_a37be5c12e488072dea7fa1c8c64346f7}{01303}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01485_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& parent, \textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& child, \textcolor{keywordtype}{float} score = 1.0f, \textcolor{keyword}{const} std::string\& cost\_type = \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01304}01304 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01317}01317 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01368}\mbox{\hyperlink{a01485_a0584ab845d5c21979b1542651a4cf3aa}{01368}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01485_a0584ab845d5c21979b1542651a4cf3aa}{addEdge}}(\textcolor{keywordtype}{int} parent\_id, \textcolor{keywordtype}{int} child\_id, \textcolor{keywordtype}{float} score, \textcolor{keyword}{const} std::string\& cost\_type = \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01369}01369 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01379}01379 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01425}\mbox{\hyperlink{a01485_a4de020064d58c4ab376a26c30be863a3}{01425}}         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01485_a4de020064d58c4ab376a26c30be863a3}{hasKey}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& n) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01426}01426 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01433}01433 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01471}\mbox{\hyperlink{a01485_aeddbbec01c6354b7076f47f71fc1a220}{01471}}         std::vector<std::array<float, 3>> \mbox{\hyperlink{a01485_aeddbbec01c6354b7076f47f71fc1a220}{NodesAsFloat3}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01472}01472 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01479}01479 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01503}\mbox{\hyperlink{a01485_a2710af2a75976862d7a235793567d2f3}{01503}}         \textcolor{keywordtype}{int} \mbox{\hyperlink{a01485_a2710af2a75976862d7a235793567d2f3}{size}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01504}01504 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01514}\mbox{\hyperlink{a01485_a5d1505ad796c9f222c923a1a22980bb2}{01514}}         \textcolor{keywordtype}{int} \mbox{\hyperlink{a01485_a5d1505ad796c9f222c923a1a22980bb2}{MaxID}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01515}01515 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01522}01522 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01562}\mbox{\hyperlink{a01485_af59beedafb4af0ee99d54761e1c681fc}{01562}}         \textcolor{keywordtype}{int} \mbox{\hyperlink{a01485_af59beedafb4af0ee99d54761e1c681fc}{getID}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& node) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01563}01563 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01610}\mbox{\hyperlink{a01485_a41cece77d0eee98df39ecc6d3a366ec8}{01610}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01485_a41cece77d0eee98df39ecc6d3a366ec8}{Compress}}();}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01611}01611 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01621}01621 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01661}\mbox{\hyperlink{a01485_a7cd5d401dfbd61b3b075ca0ad63d959e}{01661}}         \mbox{\hyperlink{a01473}{CSRPtrs}} \mbox{\hyperlink{a01485_a7cd5d401dfbd61b3b075ca0ad63d959e}{GetCSRPointers}}(\textcolor{keyword}{const} std::string\& cost\_type = \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01662}01662 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01672}01672 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01701}\mbox{\hyperlink{a01485_a794c342603cefb342fdc698ba539b25f}{01701}}         \mbox{\hyperlink{a02005}{Node}} \mbox{\hyperlink{a01485_a794c342603cefb342fdc698ba539b25f}{NodeFromID}}(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01702}01702 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01706}01706 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01732}\mbox{\hyperlink{a01485_a994dbd15119eb6548d2e15f4de4b88a6}{01732}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01485_a994dbd15119eb6548d2e15f4de4b88a6}{Clear}}();}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01733}01733 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01743}01743 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01749}\mbox{\hyperlink{a01485_ae8abc9a6de7add5c18492fdd5d8b2066}{01749}}         std::vector<Node> \mbox{\hyperlink{a01485_ae8abc9a6de7add5c18492fdd5d8b2066}{GetChildren}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& n) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01750}01750 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01760}01760 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01766}\mbox{\hyperlink{a01485_a5b73c72a75c16e9565387d3bf391430f}{01766}}         std::vector<Node> \mbox{\hyperlink{a01485_a5b73c72a75c16e9565387d3bf391430f}{GetChildren}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} parent\_id) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01767}01767 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01777}\mbox{\hyperlink{a01485_a89250c619a726fd0adbd71778d166887}{01777}}         \mbox{\hyperlink{a00399_a01477}{Subgraph}} \mbox{\hyperlink{a01485_a89250c619a726fd0adbd71778d166887}{GetSubgraph}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& parent\_node, \textcolor{keyword}{const} std::string\& cost\_type = \textcolor{stringliteral}{"{}"{}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01778}01778 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01788}\mbox{\hyperlink{a01485_a9477544edee32c4bebc69ebedd96642a}{01788}}         \mbox{\hyperlink{a00399_a01477}{Subgraph}} \mbox{\hyperlink{a01485_a9477544edee32c4bebc69ebedd96642a}{GetSubgraph}}(\textcolor{keywordtype}{int} parent\_id, \textcolor{keyword}{const} std::string \& cost\_type = \textcolor{stringliteral}{"{}"{}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01789}01789 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01802}01802 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01808}\mbox{\hyperlink{a01485_a819ecd54d0148ddf867e6ca77fec8379}{01808}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01485_a819ecd54d0148ddf867e6ca77fec8379}{AddNodeAttribute}}(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id}, \textcolor{keyword}{const} std::string \& attribute, \textcolor{keyword}{const} std::string \& score);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01809}01809 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01823}01823 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01832}\mbox{\hyperlink{a01485_a306a0277ba1caa0aa4a1227e2f847f09}{01832}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01485_a306a0277ba1caa0aa4a1227e2f847f09}{AddNodeAttributes}}(\textcolor{keyword}{const} std::vector<int> \& \textcolor{keywordtype}{id}, \textcolor{keyword}{const} std::string \&  name, \textcolor{keyword}{const} std::vector<std::string> \& scores);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01833}01833 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01844}01844 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01850}\mbox{\hyperlink{a01485_aedd218785fbf6dabaa2fba2dca738618}{01850}}         std::vector<std::string> \mbox{\hyperlink{a01485_aedd218785fbf6dabaa2fba2dca738618}{GetNodeAttributes}}(std::string attribute) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01851}01851 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01858}01858 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01867}\mbox{\hyperlink{a01485_a0279f117df3d0d29d0a06301dac146a9}{01867}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01485_a0279f117df3d0d29d0a06301dac146a9}{ClearNodeAttributes}}(std::string name);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01868}01868 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01869}\mbox{\hyperlink{a01485_a0a73ceca4e8c54b18c6bba02e0a129ed}{01869}}         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01485_a0a73ceca4e8c54b18c6bba02e0a129ed}{DumpToJson}}(\textcolor{keyword}{const} std::string \& path);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01870}01870 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01889}\mbox{\hyperlink{a01485_a6f04c5320d4bf88120f8c5e31b0fb02a}{01889}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01485_a6f04c5320d4bf88120f8c5e31b0fb02a}{AddEdges}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01469}{EdgeSet}}\& edges, \textcolor{keyword}{const} std::string\& cost\_name = \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01890}01890 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01892}\mbox{\hyperlink{a01485_a4fb7f82bbc403885c378d0896c742443}{01892}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01485_a4fb7f82bbc403885c378d0896c742443}{AddEdges}}(\textcolor{keyword}{const} std::vector<EdgeSet>\& edges, \textcolor{keyword}{const} std::string\& cost\_name = \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01893}01893 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01901}\mbox{\hyperlink{a01485_ad398849b00a0eac24c0682935d8c7966}{01901}}         std::vector<EdgeSet> \mbox{\hyperlink{a01485_ad398849b00a0eac24c0682935d8c7966}{GetEdges}}(\textcolor{keyword}{const} std::string\& cost\_name) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01902}01902 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01908}\mbox{\hyperlink{a01485_a8803f69bbfaebcdae72680e01a90b94b}{01908}}         std::vector<std::string> \mbox{\hyperlink{a01485_a8803f69bbfaebcdae72680e01a90b94b}{GetCostTypes}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01909}01909         }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01924}\mbox{\hyperlink{a01485_a2bb134f68f988eeee4e0ba3e2a698852}{01924}}         \textcolor{keywordtype}{float} \mbox{\hyperlink{a01485_a2bb134f68f988eeee4e0ba3e2a698852}{GetCost}}(\textcolor{keywordtype}{int} parent\_id, \textcolor{keywordtype}{int} child\_id, \textcolor{keyword}{const} std::string\& cost\_type = \textcolor{stringliteral}{"{}"{}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01925}01925 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01943}\mbox{\hyperlink{a01485_a7fb8dbfe1b401c67d85e7a0f361ebd69}{01943}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01485_a6f04c5320d4bf88120f8c5e31b0fb02a}{Graph::AddEdges}}(\textcolor{keyword}{const} std::vector<std::vector<IntEdge>>\& edges, \textcolor{keyword}{const} std::string\& cost\_type);}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01944}01944 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01955}\mbox{\hyperlink{a01485_a8f51b29e611c7bb59a0f4242d6e01c73}{01955}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01485_a8f51b29e611c7bb59a0f4242d6e01c73}{ClearCostArrays}}(\textcolor{keyword}{const} std::string \& cost\_name = \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01956}01956 }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01971}\mbox{\hyperlink{a01485_acb6e9bc04bec84b28043c41c96139b1a}{01971}}         \textcolor{keywordtype}{void} \mbox{\hyperlink{a01485_acb6e9bc04bec84b28043c41c96139b1a}{AttrToCost}}(}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01972}01972             \textcolor{keyword}{const} std::string \& node\_attribute,}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01973}01973             \textcolor{keyword}{const} std::string \& cost\_to\_store\_as,}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01974}01974             \mbox{\hyperlink{a00399_afac7c4ef1cb1104941f4d5a27973b47e}{Direction}} consider = \mbox{\hyperlink{a00399_afac7c4ef1cb1104941f4d5a27973b47eafb4081bff9f77d65456ceb00b153e4d4}{Direction::INCOMING}});}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01975}01975         }
+\DoxyCodeLine{\Hypertarget{a00203_source_l01976}01976     \};}
+\DoxyCodeLine{\Hypertarget{a00203_source_l01977}01977 \}}
+
+\end{DoxyCode}

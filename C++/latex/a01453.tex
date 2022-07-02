@@ -1,139 +1,422 @@
-\hypertarget{a01453}{}\doxysection{nanort\+::Bin\+Buffer Struct Reference}
-\label{a01453}\index{nanort::BinBuffer@{nanort::BinBuffer}}
+\hypertarget{a01453}{}\doxysection{HF\+::Ray\+Tracer\+::Nano\+RTRay\+Tracer Class Reference}
+\label{a01453}\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
 
 
-{\ttfamily \#include $<$nanort.\+h$>$}
+{\ttfamily \#include $<$ray\+\_\+data.\+h$>$}
 
 
 
-Collaboration diagram for nanort\+::Bin\+Buffer\+:
+Collaboration diagram for HF\+::Ray\+Tracer\+::Nano\+RTRay\+Tracer\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=246pt]{a01451}
+\includegraphics[width=350pt]{a01451}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a01453_a7228554208709315e90ffe6c0f602570}{Bin\+Buffer}} (unsigned int size)
+\mbox{\hyperlink{a01453_a0229249855045b4fbf7097c31827f6e6}{Nano\+RTRay\+Tracer}} (const \mbox{\hyperlink{a01285}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ \&MI)
+\begin{DoxyCompactList}\small\item\em Construct a new raytracer with an instance of meshinfo. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01453_a7bc4330f5bce3674ee9c25c47db6e498}{Nano\+RTRay\+Tracer}} (const \mbox{\hyperlink{a01285}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ \&MI)
 \item 
-void \mbox{\hyperlink{a01453_a96069e46f2edbefc54ef89e5f1fc4996}{clear}} ()
+{\footnotesize template$<$typename point\+\_\+type , typename dist\+\_\+type  = real\+\_\+t$>$ }\\\mbox{\hyperlink{a01349}{Hit\+Struct}}$<$ \mbox{\hyperlink{a01453_af6564fb74a54253c436b4e2c3b74f06b}{real\+\_\+t}} $>$ \mbox{\hyperlink{a01453_a980fe63296fb23f96ceafc82789cff6c}{Intersect}} (const point\+\_\+type \&origin, const point\+\_\+type \&dir, dist\+\_\+type distance=-\/1.\+0, int mesh\+\_\+id=-\/1)
+\item 
+{\footnotesize template$<$typename point\+\_\+type $>$ }\\bool \mbox{\hyperlink{a01453_a026deea38d40b0980713e96869761ac5}{Occluded}} (const point\+\_\+type \&origin, const point\+\_\+type \&dir, float distance=-\/1, int mesh\+\_\+id=-\/1)
+\item 
+{\footnotesize template$<$typename point\+\_\+type $>$ }\\bool \mbox{\hyperlink{a01453_a2d5a5ae0fd9a0830b8eb14e5cd9ffd34}{Point\+Intersection}} (point\+\_\+type \&origin, const point\+\_\+type \&dir, float distance=-\/1, int mesh\+\_\+id=-\/1)
 \end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
+\doxysubsection*{Private Types}
 \begin{DoxyCompactItemize}
 \item 
-std\+::vector$<$ size\+\_\+t $>$ \mbox{\hyperlink{a01453_a89f49eeb82a62af3efe76b2a9f7676bf}{bin}}
+using \mbox{\hyperlink{a01453_a6b733e653df54b6bebafe31df7a6781a}{vertex\+\_\+t}} = \mbox{\hyperlink{a00001_a02073}{double}}
 \item 
-unsigned int \mbox{\hyperlink{a01453_a1066a0cd59a96b00ba19d4d17ce1757c}{bin\+\_\+size}}
+using \mbox{\hyperlink{a01453_af6564fb74a54253c436b4e2c3b74f06b}{real\+\_\+t}} = \mbox{\hyperlink{a00001_a02073}{double}}
 \item 
-unsigned int \mbox{\hyperlink{a01453_a88b63cb2d5eb0ad5aaaea638f5e784ed}{pad0}}
+using \mbox{\hyperlink{a01453_a79c23e38bd7c30bd37a5c634236d0115}{Intersection}} = \mbox{\hyperlink{a00408_a01429}{nanort\+::\+Triangle\+Intersection}}$<$ \mbox{\hyperlink{a01453_af6564fb74a54253c436b4e2c3b74f06b}{real\+\_\+t}} $>$
+\item 
+using \mbox{\hyperlink{a01453_aadda889460625a691bcdd56f594c8ea6}{Intersector}} = \mbox{\hyperlink{a01433}{nanort\+::\+Triangle\+Intersector}}$<$ \mbox{\hyperlink{a01453_a6b733e653df54b6bebafe31df7a6781a}{vertex\+\_\+t}}, \mbox{\hyperlink{a01453_a79c23e38bd7c30bd37a5c634236d0115}{Intersection}} $>$
+\item 
+using \mbox{\hyperlink{a01453_ae785a582313b8cbb31cdfbcf4f3a4623}{Nano\+BVH}} = \mbox{\hyperlink{a01417}{nanort\+::\+BVHAccel}}$<$ \mbox{\hyperlink{a01453_a6b733e653df54b6bebafe31df7a6781a}{vertex\+\_\+t}} $>$
+\item 
+using \mbox{\hyperlink{a01453_aa72ef9756028ab682645dc41e7e6707c}{Nano\+Ray}} = \mbox{\hyperlink{a01381}{nanort\+::\+Ray}}$<$ \mbox{\hyperlink{a01453_af6564fb74a54253c436b4e2c3b74f06b}{real\+\_\+t}} $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename dist\+\_\+type  = real\+\_\+t, typename N $>$ }\\\mbox{\hyperlink{a01453_aa72ef9756028ab682645dc41e7e6707c}{Nano\+Ray}} \mbox{\hyperlink{a01453_ac8f4b80f6198b4673377b2d098813ce4}{Construct\+Ray}} (const N \&origin, const N \&direction, dist\+\_\+type max\+\_\+dist=std\+::numeric\+\_\+limits$<$ dist\+\_\+type $>$\+::max())
+\item 
+\mbox{\hyperlink{a01453_a79c23e38bd7c30bd37a5c634236d0115}{Intersection}} \mbox{\hyperlink{a01453_a7aa768fa79aa76a2a70d2a5e348a2374}{Create\+Hit}} ()
+\item 
+{\footnotesize template$<$typename point\+\_\+type , typename dist\+\_\+type $>$ }\\void \mbox{\hyperlink{a01453_a13640190d89da1907a459657aa99eb60}{Move\+Point}} (point\+\_\+type \&point, const point\+\_\+type \&dir, dist\+\_\+type dist)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{a01453_aadda889460625a691bcdd56f594c8ea6}{Intersector}} $>$ \mbox{\hyperlink{a01453_a0481453571121245999f194dd8fdcb7b}{intersector}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a00398_a01337}{Triangle}} Intersector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01453_ae785a582313b8cbb31cdfbcf4f3a4623}{Nano\+BVH}} \mbox{\hyperlink{a01453_a4f0caa6e76a3db1d6d70529b753a20f6}{bvh}}
+\begin{DoxyCompactList}\small\item\em A Nano\+RT BVH. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{a01453_af6564fb74a54253c436b4e2c3b74f06b}{real\+\_\+t}} \mbox{\hyperlink{a01453_a5cc200a19023aba64bcc859c4b06f02f}{min\+\_\+dist}} = 0.\+0
+\item 
+std\+::vector$<$ \mbox{\hyperlink{a01453_af6564fb74a54253c436b4e2c3b74f06b}{real\+\_\+t}} $>$ \mbox{\hyperlink{a01453_a1dd268c8755f0a9dd72b2508164411a0}{vertices}}
+\item 
+std\+::vector$<$ unsigned int $>$ \mbox{\hyperlink{a01453_ab5a9d1b264633514d5323cc12eabbf1a}{indices}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 
 
-Definition at line 1201 of file nanort.\+h.
+Definition at line \mbox{\hyperlink{a00173_source_l00135}{135}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{a01453_a79c23e38bd7c30bd37a5c634236d0115}\label{a01453_a79c23e38bd7c30bd37a5c634236d0115}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!Intersection@{Intersection}}
+\index{Intersection@{Intersection}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{Intersection}{Intersection}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a01453_a79c23e38bd7c30bd37a5c634236d0115}{HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::\+Intersection}} =  \mbox{\hyperlink{a00408_a01429}{nanort\+::\+Triangle\+Intersection}}$<$\mbox{\hyperlink{a01453_af6564fb74a54253c436b4e2c3b74f06b}{real\+\_\+t}}$>$\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00173_source_l00140}{140}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
+
+\mbox{\Hypertarget{a01453_aadda889460625a691bcdd56f594c8ea6}\label{a01453_aadda889460625a691bcdd56f594c8ea6}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!Intersector@{Intersector}}
+\index{Intersector@{Intersector}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{Intersector}{Intersector}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a01453_aadda889460625a691bcdd56f594c8ea6}{HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::\+Intersector}} =  \mbox{\hyperlink{a01433}{nanort\+::\+Triangle\+Intersector}}$<$\mbox{\hyperlink{a01453_a6b733e653df54b6bebafe31df7a6781a}{vertex\+\_\+t}}, \mbox{\hyperlink{a01453_a79c23e38bd7c30bd37a5c634236d0115}{Intersection}}$>$\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00173_source_l00141}{141}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
+
+\mbox{\Hypertarget{a01453_ae785a582313b8cbb31cdfbcf4f3a4623}\label{a01453_ae785a582313b8cbb31cdfbcf4f3a4623}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!NanoBVH@{NanoBVH}}
+\index{NanoBVH@{NanoBVH}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{NanoBVH}{NanoBVH}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a01453_ae785a582313b8cbb31cdfbcf4f3a4623}{HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::\+Nano\+BVH}} =  \mbox{\hyperlink{a01417}{nanort\+::\+BVHAccel}}$<$\mbox{\hyperlink{a01453_a6b733e653df54b6bebafe31df7a6781a}{vertex\+\_\+t}}$>$\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00173_source_l00142}{142}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
+
+\mbox{\Hypertarget{a01453_aa72ef9756028ab682645dc41e7e6707c}\label{a01453_aa72ef9756028ab682645dc41e7e6707c}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!NanoRay@{NanoRay}}
+\index{NanoRay@{NanoRay}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{NanoRay}{NanoRay}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a01453_aa72ef9756028ab682645dc41e7e6707c}{HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::\+Nano\+Ray}} =  \mbox{\hyperlink{a01381}{nanort\+::\+Ray}}$<$\mbox{\hyperlink{a01453_af6564fb74a54253c436b4e2c3b74f06b}{real\+\_\+t}}$>$\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00173_source_l00143}{143}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
+
+\mbox{\Hypertarget{a01453_af6564fb74a54253c436b4e2c3b74f06b}\label{a01453_af6564fb74a54253c436b4e2c3b74f06b}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!real\_t@{real\_t}}
+\index{real\_t@{real\_t}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{real\_t}{real\_t}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a01453_af6564fb74a54253c436b4e2c3b74f06b}{HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::real\+\_\+t}} =  \mbox{\hyperlink{a00001_a02073}{double}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00173_source_l00139}{139}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
+
+\mbox{\Hypertarget{a01453_a6b733e653df54b6bebafe31df7a6781a}\label{a01453_a6b733e653df54b6bebafe31df7a6781a}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!vertex\_t@{vertex\_t}}
+\index{vertex\_t@{vertex\_t}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{vertex\_t}{vertex\_t}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a01453_a6b733e653df54b6bebafe31df7a6781a}{HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::vertex\+\_\+t}} =  \mbox{\hyperlink{a00001_a02073}{double}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00173_source_l00138}{138}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{a01453_a7228554208709315e90ffe6c0f602570}\label{a01453_a7228554208709315e90ffe6c0f602570}} 
-\index{nanort::BinBuffer@{nanort::BinBuffer}!BinBuffer@{BinBuffer}}
-\index{BinBuffer@{BinBuffer}!nanort::BinBuffer@{nanort::BinBuffer}}
-\doxysubsubsection{\texorpdfstring{BinBuffer()}{BinBuffer()}}
-{\footnotesize\ttfamily nanort\+::\+Bin\+Buffer\+::\+Bin\+Buffer (\begin{DoxyParamCaption}\item[{unsigned int}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+\mbox{\Hypertarget{a01453_a0229249855045b4fbf7097c31827f6e6}\label{a01453_a0229249855045b4fbf7097c31827f6e6}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!NanoRTRayTracer@{NanoRTRayTracer}}
+\index{NanoRTRayTracer@{NanoRTRayTracer}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{NanoRTRayTracer()}{NanoRTRayTracer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::\+Nano\+RTRay\+Tracer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01285}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ \&}]{MI }\end{DoxyParamCaption})}
 
 
 
-Definition at line 1202 of file nanort.\+h.
+Construct a new raytracer with an instance of meshinfo. 
 
 
 
-References bin, bin\+\_\+size, and clear().
+Definition at line \mbox{\hyperlink{a00164_source_l00122}{122}} of file \mbox{\hyperlink{a00164_source}{nanort\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00173_source_l00147}{bvh}}, \mbox{\hyperlink{a00116_source_l00326}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Index\+Pointer()}}, \mbox{\hyperlink{a00116_source_l00336}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Vertex\+Pointer()}}, \mbox{\hyperlink{a00173_source_l00151}{indices}}, \mbox{\hyperlink{a00173_source_l00146}{intersector}}, and \mbox{\hyperlink{a00173_source_l00150}{vertices}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=326pt]{a01453_a7228554208709315e90ffe6c0f602570_cgraph}
+\includegraphics[width=350pt]{a01453_a0229249855045b4fbf7097c31827f6e6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01453_a7bc4330f5bce3674ee9c25c47db6e498}\label{a01453_a7bc4330f5bce3674ee9c25c47db6e498}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!NanoRTRayTracer@{NanoRTRayTracer}}
+\index{NanoRTRayTracer@{NanoRTRayTracer}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{NanoRTRayTracer()}{NanoRTRayTracer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::\+Nano\+RTRay\+Tracer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01285}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ \&}]{MI }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{a00164_source_l00143}{143}} of file \mbox{\hyperlink{a00164_source}{nanort\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00173_source_l00147}{bvh}}, \mbox{\hyperlink{a00116_source_l00326}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Index\+Pointer()}}, \mbox{\hyperlink{a00116_source_l00336}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Vertex\+Pointer()}}, \mbox{\hyperlink{a00173_source_l00151}{indices}}, \mbox{\hyperlink{a00173_source_l00146}{intersector}}, and \mbox{\hyperlink{a00173_source_l00150}{vertices}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01453_a7bc4330f5bce3674ee9c25c47db6e498_cgraph}
 \end{center}
 \end{figure}
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a01453_a96069e46f2edbefc54ef89e5f1fc4996}\label{a01453_a96069e46f2edbefc54ef89e5f1fc4996}} 
-\index{nanort::BinBuffer@{nanort::BinBuffer}!clear@{clear}}
-\index{clear@{clear}!nanort::BinBuffer@{nanort::BinBuffer}}
-\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
-{\footnotesize\ttfamily void nanort\+::\+Bin\+Buffer\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\Hypertarget{a01453_ac8f4b80f6198b4673377b2d098813ce4}\label{a01453_ac8f4b80f6198b4673377b2d098813ce4}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!ConstructRay@{ConstructRay}}
+\index{ConstructRay@{ConstructRay}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{ConstructRay()}{ConstructRay()}}
+{\footnotesize\ttfamily template$<$typename dist\+\_\+type  = real\+\_\+t, typename N $>$ \\
+\mbox{\hyperlink{a01453_aa72ef9756028ab682645dc41e7e6707c}{Nano\+Ray}} HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::\+Construct\+Ray (\begin{DoxyParamCaption}\item[{const N \&}]{origin,  }\item[{const N \&}]{direction,  }\item[{dist\+\_\+type}]{max\+\_\+dist = {\ttfamily std\+:\+:numeric\+\_\+limits$<$dist\+\_\+type$>$\+:\+:max()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
-Definition at line 1208 of file nanort.\+h.
+Definition at line \mbox{\hyperlink{a00173_source_l00154}{154}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
 
 
 
-References bin, and bin\+\_\+size.
+References \mbox{\hyperlink{a00161_source_l00496}{nanort\+::\+Ray$<$ T $>$\+::dir}}, \mbox{\hyperlink{a00161_source_l00498}{nanort\+::\+Ray$<$ T $>$\+::max\+\_\+t}}, \mbox{\hyperlink{a00173_source_l00149}{min\+\_\+dist}}, \mbox{\hyperlink{a00161_source_l00497}{nanort\+::\+Ray$<$ T $>$\+::min\+\_\+t}}, and \mbox{\hyperlink{a00161_source_l00495}{nanort\+::\+Ray$<$ T $>$\+::org}}.
+
+\mbox{\Hypertarget{a01453_a7aa768fa79aa76a2a70d2a5e348a2374}\label{a01453_a7aa768fa79aa76a2a70d2a5e348a2374}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!CreateHit@{CreateHit}}
+\index{CreateHit@{CreateHit}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{CreateHit()}{CreateHit()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01453_a79c23e38bd7c30bd37a5c634236d0115}{Intersection}} HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::\+Create\+Hit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
-Referenced by Bin\+Buffer().
+Definition at line \mbox{\hyperlink{a00173_source_l00163}{163}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00161_source_l00979}{nanort\+::\+Triangle\+Intersection$<$ T $>$\+::prim\+\_\+id}}, \mbox{\hyperlink{a00161_source_l00978}{nanort\+::\+Triangle\+Intersection$<$ T $>$\+::t}}, \mbox{\hyperlink{a00161_source_l00974}{nanort\+::\+Triangle\+Intersection$<$ T $>$\+::u}}, and \mbox{\hyperlink{a00161_source_l00975}{nanort\+::\+Triangle\+Intersection$<$ T $>$\+::v}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00173_source_l00184}{Intersect()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=326pt]{a01453_a96069e46f2edbefc54ef89e5f1fc4996_icgraph}
+\includegraphics[width=350pt]{a01453_a7aa768fa79aa76a2a70d2a5e348a2374_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01453_a980fe63296fb23f96ceafc82789cff6c}\label{a01453_a980fe63296fb23f96ceafc82789cff6c}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!Intersect@{Intersect}}
+\index{Intersect@{Intersect}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{Intersect()}{Intersect()}}
+{\footnotesize\ttfamily template$<$typename point\+\_\+type , typename dist\+\_\+type  = real\+\_\+t$>$ \\
+\mbox{\hyperlink{a01349}{Hit\+Struct}}$<$ \mbox{\hyperlink{a01453_af6564fb74a54253c436b4e2c3b74f06b}{real\+\_\+t}} $>$ HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::\+Intersect (\begin{DoxyParamCaption}\item[{const point\+\_\+type \&}]{origin,  }\item[{const point\+\_\+type \&}]{dir,  }\item[{dist\+\_\+type}]{distance = {\ttfamily -\/1.0},  }\item[{int}]{mesh\+\_\+id = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00173_source_l00184}{184}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00173_source_l00147}{bvh}}, \mbox{\hyperlink{a00173_source_l00163}{Create\+Hit()}}, \mbox{\hyperlink{a00161_source_l00978}{nanort\+::\+Triangle\+Intersection$<$ T $>$\+::t}}, and \mbox{\hyperlink{a00161_source_l02505}{nanort\+::\+BVHAccel$<$ T $>$\+::\+Traverse()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00173_source_l00208}{Occluded()}}, and \mbox{\hyperlink{a00173_source_l00218}{Point\+Intersection()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01453_a980fe63296fb23f96ceafc82789cff6c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01453_a980fe63296fb23f96ceafc82789cff6c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01453_a13640190d89da1907a459657aa99eb60}\label{a01453_a13640190d89da1907a459657aa99eb60}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!MovePoint@{MovePoint}}
+\index{MovePoint@{MovePoint}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{MovePoint()}{MovePoint()}}
+{\footnotesize\ttfamily template$<$typename point\+\_\+type , typename dist\+\_\+type $>$ \\
+void HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::\+Move\+Point (\begin{DoxyParamCaption}\item[{point\+\_\+type \&}]{point,  }\item[{const point\+\_\+type \&}]{dir,  }\item[{dist\+\_\+type}]{dist }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00173_source_l00170}{170}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00173_source_l00218}{Point\+Intersection()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01453_a13640190d89da1907a459657aa99eb60_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01453_a026deea38d40b0980713e96869761ac5}\label{a01453_a026deea38d40b0980713e96869761ac5}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!Occluded@{Occluded}}
+\index{Occluded@{Occluded}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{Occluded()}{Occluded()}}
+{\footnotesize\ttfamily template$<$typename point\+\_\+type $>$ \\
+bool HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::\+Occluded (\begin{DoxyParamCaption}\item[{const point\+\_\+type \&}]{origin,  }\item[{const point\+\_\+type \&}]{dir,  }\item[{float}]{distance = {\ttfamily -\/1},  }\item[{int}]{mesh\+\_\+id = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00173_source_l00208}{208}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00173_source_l00184}{Intersect()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01453_a026deea38d40b0980713e96869761ac5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01453_a2d5a5ae0fd9a0830b8eb14e5cd9ffd34}\label{a01453_a2d5a5ae0fd9a0830b8eb14e5cd9ffd34}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!PointIntersection@{PointIntersection}}
+\index{PointIntersection@{PointIntersection}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{PointIntersection()}{PointIntersection()}}
+{\footnotesize\ttfamily template$<$typename point\+\_\+type $>$ \\
+bool HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::\+Point\+Intersection (\begin{DoxyParamCaption}\item[{point\+\_\+type \&}]{origin,  }\item[{const point\+\_\+type \&}]{dir,  }\item[{float}]{distance = {\ttfamily -\/1},  }\item[{int}]{mesh\+\_\+id = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00173_source_l00218}{218}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00173_source_l00184}{Intersect()}}, and \mbox{\hyperlink{a00173_source_l00170}{Move\+Point()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01453_a2d5a5ae0fd9a0830b8eb14e5cd9ffd34_cgraph}
 \end{center}
 \end{figure}
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{a01453_a89f49eeb82a62af3efe76b2a9f7676bf}\label{a01453_a89f49eeb82a62af3efe76b2a9f7676bf}} 
-\index{nanort::BinBuffer@{nanort::BinBuffer}!bin@{bin}}
-\index{bin@{bin}!nanort::BinBuffer@{nanort::BinBuffer}}
-\doxysubsubsection{\texorpdfstring{bin}{bin}}
-{\footnotesize\ttfamily std\+::vector$<$size\+\_\+t$>$ nanort\+::\+Bin\+Buffer\+::bin}
+\mbox{\Hypertarget{a01453_a4f0caa6e76a3db1d6d70529b753a20f6}\label{a01453_a4f0caa6e76a3db1d6d70529b753a20f6}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!bvh@{bvh}}
+\index{bvh@{bvh}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{bvh}{bvh}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01453_ae785a582313b8cbb31cdfbcf4f3a4623}{Nano\+BVH}} HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::bvh\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 1210 of file nanort.\+h.
+A Nano\+RT BVH. 
 
 
 
-Referenced by Bin\+Buffer(), clear(), nanort\+::\+Contribute\+Bin\+Buffer(), and nanort\+::\+Find\+Cut\+From\+Bin\+Buffer().
-
-\mbox{\Hypertarget{a01453_a1066a0cd59a96b00ba19d4d17ce1757c}\label{a01453_a1066a0cd59a96b00ba19d4d17ce1757c}} 
-\index{nanort::BinBuffer@{nanort::BinBuffer}!bin\_size@{bin\_size}}
-\index{bin\_size@{bin\_size}!nanort::BinBuffer@{nanort::BinBuffer}}
-\doxysubsubsection{\texorpdfstring{bin\_size}{bin\_size}}
-{\footnotesize\ttfamily unsigned int nanort\+::\+Bin\+Buffer\+::bin\+\_\+size}
+Definition at line \mbox{\hyperlink{a00173_source_l00147}{147}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
 
 
 
-Definition at line 1211 of file nanort.\+h.
+Referenced by \mbox{\hyperlink{a00164_source_l00122}{Nano\+RTRay\+Tracer()}}, and \mbox{\hyperlink{a00173_source_l00184}{Intersect()}}.
+
+\mbox{\Hypertarget{a01453_ab5a9d1b264633514d5323cc12eabbf1a}\label{a01453_ab5a9d1b264633514d5323cc12eabbf1a}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!indices@{indices}}
+\index{indices@{indices}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{indices}{indices}}
+{\footnotesize\ttfamily std\+::vector$<$unsigned int$>$ HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::indices\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Referenced by Bin\+Buffer(), clear(), nanort\+::\+Contribute\+Bin\+Buffer(), and nanort\+::\+Find\+Cut\+From\+Bin\+Buffer().
-
-\mbox{\Hypertarget{a01453_a88b63cb2d5eb0ad5aaaea638f5e784ed}\label{a01453_a88b63cb2d5eb0ad5aaaea638f5e784ed}} 
-\index{nanort::BinBuffer@{nanort::BinBuffer}!pad0@{pad0}}
-\index{pad0@{pad0}!nanort::BinBuffer@{nanort::BinBuffer}}
-\doxysubsubsection{\texorpdfstring{pad0}{pad0}}
-{\footnotesize\ttfamily unsigned int nanort\+::\+Bin\+Buffer\+::pad0}
+Definition at line \mbox{\hyperlink{a00173_source_l00151}{151}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
 
 
 
-Definition at line 1212 of file nanort.\+h.
+Referenced by \mbox{\hyperlink{a00164_source_l00122}{Nano\+RTRay\+Tracer()}}.
+
+\mbox{\Hypertarget{a01453_a0481453571121245999f194dd8fdcb7b}\label{a01453_a0481453571121245999f194dd8fdcb7b}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!intersector@{intersector}}
+\index{intersector@{intersector}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{intersector}{intersector}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{a01453_aadda889460625a691bcdd56f594c8ea6}{Intersector}}$>$ HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::intersector\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\mbox{\hyperlink{a00398_a01337}{Triangle}} Intersector. 
+
+
+
+Definition at line \mbox{\hyperlink{a00173_source_l00146}{146}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00164_source_l00122}{Nano\+RTRay\+Tracer()}}.
+
+\mbox{\Hypertarget{a01453_a5cc200a19023aba64bcc859c4b06f02f}\label{a01453_a5cc200a19023aba64bcc859c4b06f02f}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!min\_dist@{min\_dist}}
+\index{min\_dist@{min\_dist}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{min\_dist}{min\_dist}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{a01453_af6564fb74a54253c436b4e2c3b74f06b}{real\+\_\+t}} HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::min\+\_\+dist = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00173_source_l00149}{149}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00173_source_l00154}{Construct\+Ray()}}.
+
+\mbox{\Hypertarget{a01453_a1dd268c8755f0a9dd72b2508164411a0}\label{a01453_a1dd268c8755f0a9dd72b2508164411a0}} 
+\index{HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}!vertices@{vertices}}
+\index{vertices@{vertices}!HF::RayTracer::NanoRTRayTracer@{HF::RayTracer::NanoRTRayTracer}}
+\doxysubsubsection{\texorpdfstring{vertices}{vertices}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{a01453_af6564fb74a54253c436b4e2c3b74f06b}{real\+\_\+t}}$>$ HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::vertices\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00173_source_l00150}{150}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00164_source_l00122}{Nano\+RTRay\+Tracer()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Cpp/raytracer/src/\mbox{\hyperlink{a00161}{nanort.\+h}}\end{DoxyCompactItemize}
+Cpp/raytracer/src/\mbox{\hyperlink{a00173}{ray\+\_\+data.\+h}}\item 
+Cpp/raytracer/src/\mbox{\hyperlink{a00164}{nanort\+\_\+raytracer.\+cpp}}\end{DoxyCompactItemize}

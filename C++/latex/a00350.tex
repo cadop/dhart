@@ -4,7 +4,7 @@
 {\ttfamily \#include $<$objloader.\+h$>$}\newline
 {\ttfamily \#include $<$meshinfo.\+h$>$}\newline
 {\ttfamily \#include $<$vector$>$}\newline
-{\ttfamily \#include $<$H\+F\+Exceptions.\+h$>$}\newline
+{\ttfamily \#include $<$HFExceptions.\+h$>$}\newline
 {\ttfamily \#include $<$iostream$>$}\newline
 {\ttfamily \#include $<$cinterface\+\_\+utils.\+h$>$}\newline
 Include dependency graph for objloader\+\_\+\+C.\+cpp\+:
@@ -18,19 +18,19 @@ Include dependency graph for objloader\+\_\+\+C.\+cpp\+:
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00389_ga0805e80d13b29aeddc35f0bcf3f16a1a}{Load\+O\+BJ}} (const char $\ast$obj\+\_\+path, \mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5}{H\+F\+::\+Geometry\+::\+G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD}} gm, float xrot, float yrot, float zrot, \mbox{\hyperlink{a01297}{Mesh\+Info}}$<$ float $>$ $\ast$$\ast$$\ast$out\+\_\+data\+\_\+array, int $\ast$num\+\_\+meshes)
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00389_ga0805e80d13b29aeddc35f0bcf3f16a1a}{Load\+OBJ}} (const char $\ast$obj\+\_\+path, \mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5}{HF\+::\+Geometry\+::\+GROUP\+\_\+\+METHOD}} gm, float xrot, float yrot, float zrot, \mbox{\hyperlink{a01285}{Mesh\+Info}}$<$ float $>$ $\ast$$\ast$$\ast$out\+\_\+data\+\_\+array, int $\ast$num\+\_\+meshes)
 \begin{DoxyCompactList}\small\item\em Load an obj from the given path then rotate it by x,y, and z. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00389_ga6ac447e5805d3d7e65c9083ffa603cfe}{Store\+Mesh}} (\mbox{\hyperlink{a01297}{Mesh\+Info}}$<$ float $>$ $\ast$$\ast$out\+\_\+info, const int $\ast$indices, int num\+\_\+indices, const float $\ast$vertices, int num\+\_\+vertices, const char $\ast$name, int id)
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00389_ga6ac447e5805d3d7e65c9083ffa603cfe}{Store\+Mesh}} (\mbox{\hyperlink{a01285}{Mesh\+Info}}$<$ float $>$ $\ast$$\ast$out\+\_\+info, const int $\ast$indices, int num\+\_\+indices, const float $\ast$vertices, int num\+\_\+vertices, const char $\ast$name, int id)
 \begin{DoxyCompactList}\small\item\em Store a mesh in a format usable with Human\+Factors. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00389_ga907c8e39b159c8bad22645448bc97f57}{Rotate\+Mesh}} (\mbox{\hyperlink{a01297}{Mesh\+Info}}$<$ float $>$ $\ast$mesh\+\_\+to\+\_\+rotate, float xrot, float yrot, float zrot)
-\begin{DoxyCompactList}\small\item\em Rotate an existing mesh (\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00389_ga89fc0803b894e7fa218ae271c46fb434}{Get\+Verts\+And\+Tris}} (const \mbox{\hyperlink{a01297}{Mesh\+Info}}$<$ float $>$ $\ast$MI, int $\ast$$\ast$index\+\_\+out, int $\ast$num\+\_\+triangles, float $\ast$$\ast$vertex\+\_\+out, int $\ast$num\+\_\+vertices)
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00389_ga907c8e39b159c8bad22645448bc97f57}{Rotate\+Mesh}} (\mbox{\hyperlink{a01285}{Mesh\+Info}}$<$ float $>$ $\ast$mesh\+\_\+to\+\_\+rotate, float xrot, float yrot, float zrot)
+\begin{DoxyCompactList}\small\item\em Rotate an existing mesh (\mbox{\hyperlink{a01285}{HF\+::\+Geometry\+::\+Mesh\+Info}}) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00389_ga89fc0803b894e7fa218ae271c46fb434}{Get\+Verts\+And\+Tris}} (const \mbox{\hyperlink{a01285}{Mesh\+Info}}$<$ float $>$ $\ast$MI, int $\ast$$\ast$index\+\_\+out, int $\ast$num\+\_\+triangles, float $\ast$$\ast$vertex\+\_\+out, int $\ast$num\+\_\+vertices)
 \begin{DoxyCompactList}\small\item\em Get a pointer to and the size of a mesh\textquotesingle{}s triangle and vertex arrays. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00389_ga2a86bca57b3efdafeeb001a8ba36a212}{Get\+Mesh\+Name}} (const \mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$MI, char $\ast$$\ast$out\+\_\+name)
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00389_ga2a86bca57b3efdafeeb001a8ba36a212}{Get\+Mesh\+Name}} (const \mbox{\hyperlink{a01285}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$MI, char $\ast$$\ast$out\+\_\+name)
 \begin{DoxyCompactList}\small\item\em Get the name of a mesh. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00389_gaa07792b399e76e6101388bb6bbb96047}{Get\+Mesh\+ID}} (const \mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$MI, int $\ast$out\+\_\+id)
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00389_gaa07792b399e76e6101388bb6bbb96047}{Get\+Mesh\+ID}} (const \mbox{\hyperlink{a01285}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$MI, int $\ast$out\+\_\+id)
 \begin{DoxyCompactList}\small\item\em Get the ID of a mesh. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00389_ga0ef9f7e63f067546b527947d4678dcd5}{Destroy\+Mesh\+Info}} (\mbox{\hyperlink{a01297}{Mesh\+Info}}$<$ float $>$ $\ast$mesh\+\_\+to\+\_\+destroy)
-\begin{DoxyCompactList}\small\item\em Free the memory addressed by mesh\+\_\+to\+\_\+destroy, which was allocated by either \mbox{\hyperlink{a00389_ga0805e80d13b29aeddc35f0bcf3f16a1a}{Load\+O\+BJ}} or \mbox{\hyperlink{a00389_ga6ac447e5805d3d7e65c9083ffa603cfe}{Store\+Mesh}}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00389_ga9cb2dc8227bf88a06014493979b2b3e6}{Destroy\+Mesh\+Info\+Ptr\+Array}} (\mbox{\hyperlink{a01297}{Mesh\+Info}}$<$ float $>$ $\ast$$\ast$data\+\_\+array)
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00389_ga0ef9f7e63f067546b527947d4678dcd5}{Destroy\+Mesh\+Info}} (\mbox{\hyperlink{a01285}{Mesh\+Info}}$<$ float $>$ $\ast$mesh\+\_\+to\+\_\+destroy)
+\begin{DoxyCompactList}\small\item\em Free the memory addressed by mesh\+\_\+to\+\_\+destroy, which was allocated by either \mbox{\hyperlink{a00389_ga0805e80d13b29aeddc35f0bcf3f16a1a}{Load\+OBJ}} or \mbox{\hyperlink{a00389_ga6ac447e5805d3d7e65c9083ffa603cfe}{Store\+Mesh}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00389_ga9cb2dc8227bf88a06014493979b2b3e6}{Destroy\+Mesh\+Info\+Ptr\+Array}} (\mbox{\hyperlink{a01285}{Mesh\+Info}}$<$ float $>$ $\ast$$\ast$data\+\_\+array)
 \end{DoxyCompactItemize}

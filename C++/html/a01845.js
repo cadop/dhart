@@ -1,4 +1,4 @@
 var a01845 =
 [
-    [ "construct", "a01845.html#a7c3949672ddb45095cc2527635feef0b", null ]
+    [ "operator()", "a01845.html#aecfb5114c8a737fc89d98589482795b8", null ]
 ];

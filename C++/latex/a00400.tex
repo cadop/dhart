@@ -8,13 +8,13 @@ Analyze space from the perspective of observers within a 3D environment.
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} \{ \newline
-\mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba4905ac9d6a22bdfc1ae096094ce6248d}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+C\+O\+U\+NT}} = 0, 
-\mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+S\+UM}} = 1, 
-\mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba16de38737a9f8366e9b2042b4e9b6290}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+A\+V\+E\+R\+A\+GE}} = 2, 
-\mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba26a4b44a837bf97b972628509912b4a5}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+M\+AX}} = 3, 
-\newline
-\mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07bace31e2a082d17e038fcc6e3006166653}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+M\+IN}} = 4
+enum class \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{AGGREGATE\+\_\+\+TYPE}} \{ \newline
+\mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba4905ac9d6a22bdfc1ae096094ce6248d}{COUNT}} = 0
+, \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}{SUM}} = 1
+, \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba16de38737a9f8366e9b2042b4e9b6290}{AVERAGE}} = 2
+, \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba26a4b44a837bf97b972628509912b4a5}{MAX}} = 3
+, \newline
+\mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07bace31e2a082d17e038fcc6e3006166653}{MIN}} = 4
  \}
 \begin{DoxyCompactList}\small\item\em The type of aggregation to use for View\+Analysis\+Aggregate \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
@@ -26,15 +26,15 @@ void \mbox{\hyperlink{a00400_a38ed3d26d2fcc4bde1790c53eda3945a}{Normalize}} (std
 \begin{DoxyCompactList}\small\item\em Normalize a vector. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{a00400_a94327f2628a43ffe3dc4ab854e8aa20d}{Altitude\+Within\+Range}} (const std\+::array$<$ float, 3 $>$ \&vec, float max\+\_\+angle, float min\+\_\+angle)
 \item 
-vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00400_ad171585ac55c35e394e26a2f80364a0f}{Fibbonacci\+Dist}} (int num\+\_\+points, float upwards\+\_\+fov, float downward\+\_\+fov)
+vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00400_a5b45790c767b670bc00bf3fd2335159a}{Fibbonacci\+Dist}} (int num\+\_\+points, float upwards\+\_\+fov, float downward\+\_\+fov)
 \item 
 vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00393_ga6ca336e3887ef82d17b0713c2bf862df}{Fibbonacci\+Distribute\+Points}} (int num\+\_\+points, float upwards\+\_\+fov=50.\+0f, float downward\+\_\+fov=70.\+0f)
 \begin{DoxyCompactList}\small\item\em Evenly distribute a set of points around a sphere centered at the origin. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a00400_a38c197b654c753cb656ab60e88d65120}{Aggregate}} (float \&out\+\_\+total, float new\+\_\+value, const \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} agg\+\_\+type, int count=0)
+void \mbox{\hyperlink{a00400_a38c197b654c753cb656ab60e88d65120}{Aggregate}} (float \&out\+\_\+total, float new\+\_\+value, const \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{AGGREGATE\+\_\+\+TYPE}} agg\+\_\+type, int count=0)
 \item 
-{\footnotesize template$<$typename R\+ES , typename RT , typename N $>$ }\\std\+::vector$<$ R\+ES $>$ \mbox{\hyperlink{a00393_gab99d16350ec1a4cac1dec3cbd731d7d8}{Spherical\+View\+Analysis}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f)
+{\footnotesize template$<$typename RES , typename RT , typename N $>$ }\\std\+::vector$<$ RES $>$ \mbox{\hyperlink{a00393_gaecaa04882696ac6d73173227bd28e91b}{Spherical\+View\+Analysis}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f)
 \begin{DoxyCompactList}\small\item\em Conduct view analysis with any Raytracer in parallel. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename RT , typename N $>$ }\\std\+::vector$<$ float $>$ \mbox{\hyperlink{a00393_gad2ee55f78e191d1ff90e083ad49dc49e}{Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f, const \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} aggregation=\mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+S\+UM}})
+{\footnotesize template$<$typename RT , typename N $>$ }\\std\+::vector$<$ float $>$ \mbox{\hyperlink{a00393_ga78f77d24531d0fa55c9b60d7ec1bf32a}{Spherical\+Rayshoot\+With\+Any\+RTFor\+Distance}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f, const \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{AGGREGATE\+\_\+\+TYPE}} aggregation=\mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}{AGGREGATE\+\_\+\+TYPE\+::\+SUM}})
 \begin{DoxyCompactList}\small\item\em Conduct view analysis and recieve a summarized set of results for each node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -46,9 +46,9 @@ View Analysis contains a set of algorithms dedicated to evaluating the view of a
 \begin{DoxySeeAlso}{See also}
 \mbox{\hyperlink{a00393_ga6ca336e3887ef82d17b0713c2bf862df}{Fibbonacci\+Distribute\+Points}} for the algorithm used to equally distribute rays. 
 
-\mbox{\hyperlink{a00393_gab99d16350ec1a4cac1dec3cbd731d7d8}{Spherical\+View\+Analysis}} for a view analysis algorithm that returns the ID and distance to intersection point of every ray casted. 
+\mbox{\hyperlink{a00393_gaecaa04882696ac6d73173227bd28e91b}{Spherical\+View\+Analysis}} for a view analysis algorithm that returns the ID and distance to intersection point of every ray casted. 
 
-\mbox{\hyperlink{a00393_gad2ee55f78e191d1ff90e083ad49dc49e}{Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance}} for an algorithm that aggregates the results of view analysis into a score for each of the input observer points. 
+\mbox{\hyperlink{a00393_ga78f77d24531d0fa55c9b60d7ec1bf32a}{Spherical\+Rayshoot\+With\+Any\+RTFor\+Distance}} for an algorithm that aggregates the results of view analysis into a score for each of the input observer points. 
 \end{DoxySeeAlso}
 
 
@@ -57,37 +57,37 @@ View Analysis contains a set of algorithms dedicated to evaluating the view of a
 \index{HF::ViewAnalysis@{HF::ViewAnalysis}!AGGREGATE\_TYPE@{AGGREGATE\_TYPE}}
 \index{AGGREGATE\_TYPE@{AGGREGATE\_TYPE}!HF::ViewAnalysis@{HF::ViewAnalysis}}
 \doxysubsubsection{\texorpdfstring{AGGREGATE\_TYPE}{AGGREGATE\_TYPE}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{H\+F\+::\+View\+Analysis\+::\+A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}}\hspace{0.3cm}{\ttfamily [strong]}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{HF\+::\+View\+Analysis\+::\+AGGREGATE\+\_\+\+TYPE}}\hspace{0.3cm}{\ttfamily [strong]}}
 
 
 
 The type of aggregation to use for View\+Analysis\+Aggregate 
 
-Determines how to aggregate edges from the results of view analysis.\begin{DoxyEnumFields}{Enumerator}
+\begin{DoxyEnumFields}{Enumerator}
 \raisebox{\heightof{T}}[0pt][0pt]{\index{COUNT@{COUNT}!HF::ViewAnalysis@{HF::ViewAnalysis}}\index{HF::ViewAnalysis@{HF::ViewAnalysis}!COUNT@{COUNT}}}\mbox{\Hypertarget{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba4905ac9d6a22bdfc1ae096094ce6248d}\label{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba4905ac9d6a22bdfc1ae096094ce6248d}} 
-C\+O\+U\+NT&Total number of intersections. \\
+COUNT&Total number of intersections. \\
 \hline
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{SUM@{SUM}!HF::ViewAnalysis@{HF::ViewAnalysis}}\index{HF::ViewAnalysis@{HF::ViewAnalysis}!SUM@{SUM}}}\mbox{\Hypertarget{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}\label{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}} 
-S\+UM&Sum of the distance from the origin to all intersections. \\
+SUM&Sum of the distance from the origin to all intersections. \\
 \hline
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{AVERAGE@{AVERAGE}!HF::ViewAnalysis@{HF::ViewAnalysis}}\index{HF::ViewAnalysis@{HF::ViewAnalysis}!AVERAGE@{AVERAGE}}}\mbox{\Hypertarget{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba16de38737a9f8366e9b2042b4e9b6290}\label{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba16de38737a9f8366e9b2042b4e9b6290}} 
-A\+V\+E\+R\+A\+GE&Average distance from the origin to every intersection. \\
+AVERAGE&Average distance from the origin to every intersection. \\
 \hline
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{MAX@{MAX}!HF::ViewAnalysis@{HF::ViewAnalysis}}\index{HF::ViewAnalysis@{HF::ViewAnalysis}!MAX@{MAX}}}\mbox{\Hypertarget{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba26a4b44a837bf97b972628509912b4a5}\label{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba26a4b44a837bf97b972628509912b4a5}} 
-M\+AX&Maximum distance from the origin to any intersection. \\
+MAX&Maximum distance from the origin to any intersection. \\
 \hline
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{MIN@{MIN}!HF::ViewAnalysis@{HF::ViewAnalysis}}\index{HF::ViewAnalysis@{HF::ViewAnalysis}!MIN@{MIN}}}\mbox{\Hypertarget{a00400_a1fcaa17d2a8df8896a3b0447973bd07bace31e2a082d17e038fcc6e3006166653}\label{a00400_a1fcaa17d2a8df8896a3b0447973bd07bace31e2a082d17e038fcc6e3006166653}} 
-M\+IN&Minimum distance from the origin to any intersection. \\
+MIN&Minimum distance from the origin to any intersection. \\
 \hline
 
 \end{DoxyEnumFields}
 
 
-Definition at line 49 of file view\+\_\+analysis.\+h.
+Definition at line \mbox{\hyperlink{a00023_source_l00049}{49}} of file \mbox{\hyperlink{a00023_source}{view\+\_\+analysis.\+h}}.
 
 
 
@@ -96,13 +96,13 @@ Definition at line 49 of file view\+\_\+analysis.\+h.
 \index{HF::ViewAnalysis@{HF::ViewAnalysis}!Aggregate@{Aggregate}}
 \index{Aggregate@{Aggregate}!HF::ViewAnalysis@{HF::ViewAnalysis}}
 \doxysubsubsection{\texorpdfstring{Aggregate()}{Aggregate()}}
-{\footnotesize\ttfamily void H\+F\+::\+View\+Analysis\+::\+Aggregate (\begin{DoxyParamCaption}\item[{float \&}]{out\+\_\+total,  }\item[{float}]{new\+\_\+value,  }\item[{const \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}}}]{agg\+\_\+type,  }\item[{int}]{count = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void HF\+::\+View\+Analysis\+::\+Aggregate (\begin{DoxyParamCaption}\item[{float \&}]{out\+\_\+total,  }\item[{float}]{new\+\_\+value,  }\item[{const \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{AGGREGATE\+\_\+\+TYPE}}}]{agg\+\_\+type,  }\item[{int}]{count = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 
 
-Apply an aggregation to the given value.
+Apply an aggregation to the given value. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -117,13 +117,13 @@ Apply an aggregation to the given value.
 \end{DoxyParams}
 
 \begin{DoxyExceptions}{Exceptions}
-{\em std\+::out\+\_\+of\+\_\+range} & agg\+\_\+type didn\textquotesingle{}t match any valid A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE.\\
+{\em std\+::out\+\_\+of\+\_\+range} & agg\+\_\+type didn\textquotesingle{}t match any valid AGGREGATE\+\_\+\+TYPE.\\
 \hline
 \end{DoxyExceptions}
 
 
 This can be called in a loop to summarize the results of some calculation as new values become available. This avoids having to allocate entire arrays of values then calculating the result at the end. \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} for a list of supported aggregation types.
+\mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{AGGREGATE\+\_\+\+TYPE}} for a list of supported aggregation types.
 \end{DoxySeeAlso}
 \begin{DoxyNote}{Note}
 This function will likely not be very useful elsewhere since most of its functionality can be replaced by single function calls like std\+::min(a, b) or std\+::max(a,b). This was made a standalone function mostly to seperate calculating the result value from the implementation of the View Analysis itself.
@@ -131,11 +131,11 @@ This function will likely not be very useful elsewhere since most of its functio
 \begin{DoxyParagraph}{Example}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// Requires \#include "view\_analysis.h", \#include <numeric>}}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}view\_analysis.h"{}, \#include <numeric>}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Use this to save some space.}}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{HF::ViewAnalysis::AGGREGATE\_TYPE}};}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00400_a38c197b654c753cb656ab60e88d65120}{HF::ViewAnalysis::Aggregate}};}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{HF::ViewAnalysis::AGGREGATE\_TYPE}};}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a00400_a38c197b654c753cb656ab60e88d65120}{HF::ViewAnalysis::Aggregate}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Undef these since they will prevent us from calling numericlimits}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#undef min}}
@@ -150,50 +150,51 @@ This function will likely not be very useful elsewhere since most of its functio
 \DoxyCodeLine{    count += 1;}
 \DoxyCodeLine{    \mbox{\hyperlink{a00400_a38c197b654c753cb656ab60e88d65120}{Aggregate}}(total, val, \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba16de38737a9f8366e9b2042b4e9b6290}{AGGREGATE\_TYPE::AVERAGE}}, count);}
 \DoxyCodeLine{\}}
-\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"Average: "} << total << std::endl;}
+\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"{}Average: "{}} << total << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Calculate Sum}}
 \DoxyCodeLine{total = 0.0f;}
 \DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} val : values) \mbox{\hyperlink{a00400_a38c197b654c753cb656ab60e88d65120}{Aggregate}}(total, val, \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}{AGGREGATE\_TYPE::SUM}});}
-\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"Sum: "} << total << std::endl;}
+\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"{}Sum: "{}} << total << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Calculate Max. Start total at lowest possible float value to ensure}}
 \DoxyCodeLine{\textcolor{comment}{// it overwritten by the first element.}}
 \DoxyCodeLine{total = std::numeric\_limits<float>::min();}
 \DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} val : values) \mbox{\hyperlink{a00400_a38c197b654c753cb656ab60e88d65120}{Aggregate}}(total, val, \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba26a4b44a837bf97b972628509912b4a5}{AGGREGATE\_TYPE::MAX}});}
-\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"Max: "} << total << std::endl;}
+\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"{}Max: "{}} << total << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Calculate Min. Start total at highest possible float value to ensure}}
 \DoxyCodeLine{\textcolor{comment}{// it overwritten by the first element.}}
 \DoxyCodeLine{total = (std::numeric\_limits<float>::max());}
 \DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} val : values) \mbox{\hyperlink{a00400_a38c197b654c753cb656ab60e88d65120}{Aggregate}}(total, val, \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07bace31e2a082d17e038fcc6e3006166653}{AGGREGATE\_TYPE::MIN}});}
-\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"Min: "} << total << std::endl;}
+\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"{}Min: "{}} << total << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Calculate Count}}
 \DoxyCodeLine{total = 0.0f;}
 \DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} val : values) \mbox{\hyperlink{a00400_a38c197b654c753cb656ab60e88d65120}{Aggregate}}(total, val, \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba4905ac9d6a22bdfc1ae096094ce6248d}{AGGREGATE\_TYPE::COUNT}});}
-\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"Count: "} << total << std::endl;}
+\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"{}Count: "{}} << total << std::endl;}
+
 \end{DoxyCode}
 
 \end{DoxyParagraph}
-{\ttfamily $>$$>$$>$ Average\+: 3}~\newline
-{\ttfamily $>$$>$$>$ Sum\+: 15}~\newline
-{\ttfamily $>$$>$$>$ Max\+: 5}~\newline
-{\ttfamily $>$$>$$>$ Min\+: 1}~\newline
-{\ttfamily $>$$>$$>$ Count\+: 5}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Average\+: 3}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Sum\+: 15}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Max\+: 5}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Min\+: 1}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Count\+: 5}~\newline
  \begin{DoxyRefDesc}{Todo}
 \item[\mbox{\hyperlink{a00386__todo000003}{Todo}}]Min/\+Max and maybe the other functions should handle Na\+Ns for min/max to signal that no value already exists. The user can use the min and max numeric limits or zero for defaults like in the example, but it would be great to be able to use one value that would be reliably handled as default input for every case. \end{DoxyRefDesc}
 
 
-Definition at line 194 of file view\+\_\+analysis.\+h.
+Definition at line \mbox{\hyperlink{a00023_source_l00194}{194}} of file \mbox{\hyperlink{a00023_source}{view\+\_\+analysis.\+h}}.
 
 
 
-References A\+V\+E\+R\+A\+GE, C\+O\+U\+NT, M\+AX, M\+IN, and S\+UM.
+References \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba16de38737a9f8366e9b2042b4e9b6290}{AVERAGE}}, \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba4905ac9d6a22bdfc1ae096094ce6248d}{COUNT}}, \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba26a4b44a837bf97b972628509912b4a5}{MAX}}, \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07bace31e2a082d17e038fcc6e3006166653}{MIN}}, and \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}{SUM}}.
 
 
 
-Referenced by Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance(), and T\+E\+S\+T().
+Referenced by \mbox{\hyperlink{a00023_source_l00484}{Spherical\+Rayshoot\+With\+Any\+RTFor\+Distance()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -207,7 +208,7 @@ Here is the caller graph for this function\+:
 \index{HF::ViewAnalysis@{HF::ViewAnalysis}!AltitudeWithinRange@{AltitudeWithinRange}}
 \index{AltitudeWithinRange@{AltitudeWithinRange}!HF::ViewAnalysis@{HF::ViewAnalysis}}
 \doxysubsubsection{\texorpdfstring{AltitudeWithinRange()}{AltitudeWithinRange()}}
-{\footnotesize\ttfamily bool H\+F\+::\+View\+Analysis\+::\+Altitude\+Within\+Range (\begin{DoxyParamCaption}\item[{const std\+::array$<$ float, 3 $>$ \&}]{vec,  }\item[{float}]{max\+\_\+angle,  }\item[{float}]{min\+\_\+angle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool HF\+::\+View\+Analysis\+::\+Altitude\+Within\+Range (\begin{DoxyParamCaption}\item[{const std\+::array$<$ float, 3 $>$ \&}]{vec,  }\item[{float}]{max\+\_\+angle,  }\item[{float}]{min\+\_\+angle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Check if a vector\textquotesingle{}s altitude is between max and min angle.
 
@@ -225,11 +226,11 @@ True if vec\textquotesingle{}s altitude is between min and max angle, false if i
 \end{DoxyReturn}
 vec is converted to spherical coordinates to determine phi, which is then compared to max and min angle to calculate the result. 
 
-Definition at line 62 of file view\+\_\+analysis.\+cpp.
+Definition at line \mbox{\hyperlink{a00020_source_l00062}{62}} of file \mbox{\hyperlink{a00020_source}{view\+\_\+analysis.\+cpp}}.
 
 
 
-Referenced by Fibbonacci\+Dist().
+Referenced by \mbox{\hyperlink{a00020_source_l00084}{Fibbonacci\+Dist()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -243,7 +244,7 @@ Here is the caller graph for this function\+:
 \index{HF::ViewAnalysis@{HF::ViewAnalysis}!ConvertToRadians@{ConvertToRadians}}
 \index{ConvertToRadians@{ConvertToRadians}!HF::ViewAnalysis@{HF::ViewAnalysis}}
 \doxysubsubsection{\texorpdfstring{ConvertToRadians()}{ConvertToRadians()}}
-{\footnotesize\ttfamily constexpr float H\+F\+::\+View\+Analysis\+::\+Convert\+To\+Radians (\begin{DoxyParamCaption}\item[{float}]{num\+\_\+in\+\_\+degrees }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
+{\footnotesize\ttfamily constexpr float HF\+::\+View\+Analysis\+::\+Convert\+To\+Radians (\begin{DoxyParamCaption}\item[{float}]{num\+\_\+in\+\_\+degrees }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
 
 
 
@@ -251,11 +252,11 @@ Convert a number from degrees to radians.
 
 
 
-Definition at line 27 of file view\+\_\+analysis.\+cpp.
+Definition at line \mbox{\hyperlink{a00020_source_l00027}{27}} of file \mbox{\hyperlink{a00020_source}{view\+\_\+analysis.\+cpp}}.
 
 
 
-Referenced by Fibbonacci\+Dist().
+Referenced by \mbox{\hyperlink{a00020_source_l00084}{Fibbonacci\+Dist()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -265,11 +266,11 @@ Here is the caller graph for this function\+:
 \includegraphics[width=350pt]{a00400_a9dcf81751f63f5c7356a4f45159184bb_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{a00400_ad171585ac55c35e394e26a2f80364a0f}\label{a00400_ad171585ac55c35e394e26a2f80364a0f}} 
+\mbox{\Hypertarget{a00400_a5b45790c767b670bc00bf3fd2335159a}\label{a00400_a5b45790c767b670bc00bf3fd2335159a}} 
 \index{HF::ViewAnalysis@{HF::ViewAnalysis}!FibbonacciDist@{FibbonacciDist}}
 \index{FibbonacciDist@{FibbonacciDist}!HF::ViewAnalysis@{HF::ViewAnalysis}}
 \doxysubsubsection{\texorpdfstring{FibbonacciDist()}{FibbonacciDist()}}
-{\footnotesize\ttfamily vector$<$std\+::array$<$float, 3$>$ $>$ H\+F\+::\+View\+Analysis\+::\+Fibbonacci\+Dist (\begin{DoxyParamCaption}\item[{int}]{num\+\_\+points,  }\item[{float}]{upwards\+\_\+fov,  }\item[{float}]{downward\+\_\+fov }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily vector$<$ std\+::array$<$ float, 3 $>$ $>$ HF\+::\+View\+Analysis\+::\+Fibbonacci\+Dist (\begin{DoxyParamCaption}\item[{int}]{num\+\_\+points,  }\item[{float}]{upwards\+\_\+fov,  }\item[{float}]{downward\+\_\+fov }\end{DoxyParamCaption})}
 
 Equally distribute points on a sphere using Fibbonacci
 
@@ -289,22 +290,22 @@ Implementation is based on \href{https://stackoverflow.com/questions/9600801/eve
 \end{DoxySeeAlso}
 
 
-Definition at line 84 of file view\+\_\+analysis.\+cpp.
+Definition at line \mbox{\hyperlink{a00020_source_l00084}{84}} of file \mbox{\hyperlink{a00020_source}{view\+\_\+analysis.\+cpp}}.
 
 
 
-References Altitude\+Within\+Range(), Convert\+To\+Radians(), and Normalize().
+References \mbox{\hyperlink{a00020_source_l00062}{Altitude\+Within\+Range()}}, \mbox{\hyperlink{a00020_source_l00027}{Convert\+To\+Radians()}}, and \mbox{\hyperlink{a00020_source_l00033}{Normalize()}}.
 
 
 
-Referenced by Fibbonacci\+Distribute\+Points().
+Referenced by \mbox{\hyperlink{a00020_source_l00121}{Fibbonacci\+Distribute\+Points()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a00400_ad171585ac55c35e394e26a2f80364a0f_cgraph}
+\includegraphics[width=350pt]{a00400_a5b45790c767b670bc00bf3fd2335159a_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:
@@ -312,14 +313,14 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a00400_ad171585ac55c35e394e26a2f80364a0f_icgraph}
+\includegraphics[width=350pt]{a00400_a5b45790c767b670bc00bf3fd2335159a_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{a00400_a38ed3d26d2fcc4bde1790c53eda3945a}\label{a00400_a38ed3d26d2fcc4bde1790c53eda3945a}} 
 \index{HF::ViewAnalysis@{HF::ViewAnalysis}!Normalize@{Normalize}}
 \index{Normalize@{Normalize}!HF::ViewAnalysis@{HF::ViewAnalysis}}
 \doxysubsubsection{\texorpdfstring{Normalize()}{Normalize()}}
-{\footnotesize\ttfamily void H\+F\+::\+View\+Analysis\+::\+Normalize (\begin{DoxyParamCaption}\item[{std\+::array$<$ float, 3 $>$ \&}]{vec }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void HF\+::\+View\+Analysis\+::\+Normalize (\begin{DoxyParamCaption}\item[{std\+::array$<$ float, 3 $>$ \&}]{vec }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -332,11 +333,11 @@ Normalize a vector.
 \end{DoxyParams}
 
 
-Definition at line 33 of file view\+\_\+analysis.\+cpp.
+Definition at line \mbox{\hyperlink{a00020_source_l00033}{33}} of file \mbox{\hyperlink{a00020_source}{view\+\_\+analysis.\+cpp}}.
 
 
 
-Referenced by Fibbonacci\+Dist().
+Referenced by \mbox{\hyperlink{a00020_source_l00084}{Fibbonacci\+Dist()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak

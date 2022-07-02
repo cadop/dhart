@@ -1,48 +1,135 @@
-\hypertarget{a01425}{}\doxysection{nanort\+::Node\+Hit\+Comparator$<$ T $>$ Class Template Reference}
-\label{a01425}\index{nanort::NodeHitComparator$<$ T $>$@{nanort::NodeHitComparator$<$ T $>$}}
-
-
-Comparator object for \mbox{\hyperlink{a01421}{Node\+Hit}}.  
-
-
+\hypertarget{a01425}{}\doxysection{nanort\+::Triangle\+Mesh\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\label{a01425}\index{nanort::TriangleMesh$<$ T $>$@{nanort::TriangleMesh$<$ T $>$}}
 
 
 {\ttfamily \#include $<$nanort.\+h$>$}
 
+
+
+Collaboration diagram for nanort\+::Triangle\+Mesh\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{a01423}
+\end{center}
+\end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{a01425_ab04e7242a9fb89d851982610548dbd1d}{operator()}} (const \mbox{\hyperlink{a01421}{Node\+Hit}}$<$ T $>$ \&a, const \mbox{\hyperlink{a01421}{Node\+Hit}}$<$ T $>$ \&b)
+\mbox{\hyperlink{a01425_a32cd510ea8e0276dc5439c7a1796086f}{Triangle\+Mesh}} (const T $\ast$vertices, const unsigned int $\ast$faces, const size\+\_\+t vertex\+\_\+stride\+\_\+bytes)
+\item 
+void \mbox{\hyperlink{a01425_aba236136712b2ac9ed6a732a92649839}{Bounding\+Box}} (\mbox{\hyperlink{a01377}{real3}}$<$ T $>$ $\ast$bmin, \mbox{\hyperlink{a01377}{real3}}$<$ T $>$ $\ast$bmax, unsigned int prim\+\_\+index) const
+\begin{DoxyCompactList}\small\item\em Compute bounding box for {\ttfamily prim\+\_\+index}th triangle. This function is called for each primitive in BVH build. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const T $\ast$ \mbox{\hyperlink{a01425_ad54d35e1547503e0836ec80055edb321}{vertices\+\_\+}}
+\item 
+const unsigned int $\ast$ \mbox{\hyperlink{a01425_a9fa28231b36b157f04049ab7a322d084}{faces\+\_\+}}
+\item 
+const size\+\_\+t \mbox{\hyperlink{a01425_a9e61d3353019f001c7cebb5807bf6977}{vertex\+\_\+stride\+\_\+bytes\+\_\+}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$typename T$>$\newline
-class nanort\+::\+Node\+Hit\+Comparator$<$ T $>$}
+\subsubsection*{template$<$typename T = float$>$\newline
+class nanort\+::\+Triangle\+Mesh$<$ T $>$}
 
-Comparator object for \mbox{\hyperlink{a01421}{Node\+Hit}}. 
 
-Comparator object for finding nearest hit point in node traversal. 
+Definition at line \mbox{\hyperlink{a00161_source_l00931}{931}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
-Definition at line 688 of file nanort.\+h.
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01425_a32cd510ea8e0276dc5439c7a1796086f}\label{a01425_a32cd510ea8e0276dc5439c7a1796086f}} 
+\index{nanort::TriangleMesh$<$ T $>$@{nanort::TriangleMesh$<$ T $>$}!TriangleMesh@{TriangleMesh}}
+\index{TriangleMesh@{TriangleMesh}!nanort::TriangleMesh$<$ T $>$@{nanort::TriangleMesh$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{TriangleMesh()}{TriangleMesh()}}
+{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
+\mbox{\hyperlink{a01425}{nanort\+::\+Triangle\+Mesh}}$<$ T $>$\+::\+Triangle\+Mesh (\begin{DoxyParamCaption}\item[{const T $\ast$}]{vertices,  }\item[{const unsigned int $\ast$}]{faces,  }\item[{const size\+\_\+t}]{vertex\+\_\+stride\+\_\+bytes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00161_source_l00933}{933}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a01425_ab04e7242a9fb89d851982610548dbd1d}\label{a01425_ab04e7242a9fb89d851982610548dbd1d}} 
-\index{nanort::NodeHitComparator$<$ T $>$@{nanort::NodeHitComparator$<$ T $>$}!operator()@{operator()}}
-\index{operator()@{operator()}!nanort::NodeHitComparator$<$ T $>$@{nanort::NodeHitComparator$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
-{\footnotesize\ttfamily template$<$typename T $>$ \\
-bool \mbox{\hyperlink{a01425}{nanort\+::\+Node\+Hit\+Comparator}}$<$ T $>$\+::operator() (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01421}{Node\+Hit}}$<$ T $>$ \&}]{a,  }\item[{const \mbox{\hyperlink{a01421}{Node\+Hit}}$<$ T $>$ \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\Hypertarget{a01425_aba236136712b2ac9ed6a732a92649839}\label{a01425_aba236136712b2ac9ed6a732a92649839}} 
+\index{nanort::TriangleMesh$<$ T $>$@{nanort::TriangleMesh$<$ T $>$}!BoundingBox@{BoundingBox}}
+\index{BoundingBox@{BoundingBox}!nanort::TriangleMesh$<$ T $>$@{nanort::TriangleMesh$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{BoundingBox()}{BoundingBox()}}
+{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
+void \mbox{\hyperlink{a01425}{nanort\+::\+Triangle\+Mesh}}$<$ T $>$\+::\+Bounding\+Box (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01377}{real3}}$<$ T $>$ $\ast$}]{bmin,  }\item[{\mbox{\hyperlink{a01377}{real3}}$<$ T $>$ $\ast$}]{bmax,  }\item[{unsigned int}]{prim\+\_\+index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 690 of file nanort.\+h.
+Compute bounding box for {\ttfamily prim\+\_\+index}th triangle. This function is called for each primitive in BVH build. 
 
 
 
-References nanort\+::\+Node\+Hit$<$ T $>$\+::t\+\_\+min.
+Definition at line \mbox{\hyperlink{a00161_source_l00942}{942}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00161_source_l00967}{nanort\+::\+Triangle\+Mesh$<$ T $>$\+::faces\+\_\+}}, \mbox{\hyperlink{a00161_source_l00474}{nanort\+::get\+\_\+vertex\+\_\+addr()}}, \mbox{\hyperlink{a00161_source_l00968}{nanort\+::\+Triangle\+Mesh$<$ T $>$\+::vertex\+\_\+stride\+\_\+bytes\+\_\+}}, and \mbox{\hyperlink{a00161_source_l00966}{nanort\+::\+Triangle\+Mesh$<$ T $>$\+::vertices\+\_\+}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=341pt]{a01425_aba236136712b2ac9ed6a732a92649839_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01425_a9fa28231b36b157f04049ab7a322d084}\label{a01425_a9fa28231b36b157f04049ab7a322d084}} 
+\index{nanort::TriangleMesh$<$ T $>$@{nanort::TriangleMesh$<$ T $>$}!faces\_@{faces\_}}
+\index{faces\_@{faces\_}!nanort::TriangleMesh$<$ T $>$@{nanort::TriangleMesh$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{faces\_}{faces\_}}
+{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
+const unsigned int$\ast$ \mbox{\hyperlink{a01425}{nanort\+::\+Triangle\+Mesh}}$<$ T $>$\+::faces\+\_\+}
+
+
+
+Definition at line \mbox{\hyperlink{a00161_source_l00967}{967}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00161_source_l00942}{nanort\+::\+Triangle\+Mesh$<$ T $>$\+::\+Bounding\+Box()}}.
+
+\mbox{\Hypertarget{a01425_a9e61d3353019f001c7cebb5807bf6977}\label{a01425_a9e61d3353019f001c7cebb5807bf6977}} 
+\index{nanort::TriangleMesh$<$ T $>$@{nanort::TriangleMesh$<$ T $>$}!vertex\_stride\_bytes\_@{vertex\_stride\_bytes\_}}
+\index{vertex\_stride\_bytes\_@{vertex\_stride\_bytes\_}!nanort::TriangleMesh$<$ T $>$@{nanort::TriangleMesh$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{vertex\_stride\_bytes\_}{vertex\_stride\_bytes\_}}
+{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
+const size\+\_\+t \mbox{\hyperlink{a01425}{nanort\+::\+Triangle\+Mesh}}$<$ T $>$\+::vertex\+\_\+stride\+\_\+bytes\+\_\+}
+
+
+
+Definition at line \mbox{\hyperlink{a00161_source_l00968}{968}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00161_source_l00942}{nanort\+::\+Triangle\+Mesh$<$ T $>$\+::\+Bounding\+Box()}}.
+
+\mbox{\Hypertarget{a01425_ad54d35e1547503e0836ec80055edb321}\label{a01425_ad54d35e1547503e0836ec80055edb321}} 
+\index{nanort::TriangleMesh$<$ T $>$@{nanort::TriangleMesh$<$ T $>$}!vertices\_@{vertices\_}}
+\index{vertices\_@{vertices\_}!nanort::TriangleMesh$<$ T $>$@{nanort::TriangleMesh$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{vertices\_}{vertices\_}}
+{\footnotesize\ttfamily template$<$typename T  = float$>$ \\
+const T$\ast$ \mbox{\hyperlink{a01425}{nanort\+::\+Triangle\+Mesh}}$<$ T $>$\+::vertices\+\_\+}
+
+
+
+Definition at line \mbox{\hyperlink{a00161_source_l00966}{966}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00161_source_l00942}{nanort\+::\+Triangle\+Mesh$<$ T $>$\+::\+Bounding\+Box()}}.
 
 
 

@@ -1,0 +1,201 @@
+\hypertarget{a00023_source}{}\doxysection{view\+\_\+analysis.\+h}
+\label{a00023_source}\index{Cpp/analysismethods/src/view\_analysis.h@{Cpp/analysismethods/src/view\_analysis.h}}
+\mbox{\hyperlink{a00023}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00008}00008 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00009}00009 \textcolor{preprocessor}{\#include <array>}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00010}00010 \textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00011}00011 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00012}00012 \textcolor{preprocessor}{\#include <assert.h>}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00013}00013 \textcolor{preprocessor}{\#include <limits>}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00014}00014 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00015}00015 \textcolor{preprocessor}{\#ifndef VIEW\_ANALYSIS\_G}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00016}00016 \textcolor{preprocessor}{\#define VIEW\_ANALYSIS\_G}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00017}00017 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00018}00018 \textcolor{comment}{// Forward Declares}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00019}00019 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00396}{HF}} \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00020}00020     \textcolor{keyword}{namespace }SpatialStructures \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00021}00021         \textcolor{keyword}{struct }Node;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00022}00022     \}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00023}00023     \textcolor{keyword}{namespace }\mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{RayTracer}} \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00024}00024         \textcolor{keyword}{class }EmbreeRayTracer;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00025}00025         \textcolor{keyword}{struct }RayRequest;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00026}00026     \}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00027}00027 \}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00045}00045 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00400}{HF::ViewAnalysis}} \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00049}\mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{00049}}     \textcolor{keyword}{enum class} \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{AGGREGATE\_TYPE}} \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00051}00051         \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba4905ac9d6a22bdfc1ae096094ce6248d}{COUNT}} = 0,}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00053}00053         \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}{SUM}} = 1,}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00055}00055         \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba16de38737a9f8366e9b2042b4e9b6290}{AVERAGE}} = 2,}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00057}00057         \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba26a4b44a837bf97b972628509912b4a5}{MAX}} = 3,}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00059}00059         \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07bace31e2a082d17e038fcc6e3006166653}{MIN}} = 4}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00060}00060     \};}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00061}00061 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00066}00066     }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00068}00068 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00116}00116     std::vector<std::array<float, 3>> \mbox{\hyperlink{a00393_ga6ca336e3887ef82d17b0713c2bf862df}{FibbonacciDistributePoints}}(}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00117}00117         \textcolor{keywordtype}{int} num\_points,}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00118}00118         \textcolor{keywordtype}{float} upwards\_fov = 50.0f,}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00119}00119         \textcolor{keywordtype}{float} downward\_fov = 70.0f}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00120}00120     );}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00129}00129 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00194}\mbox{\hyperlink{a00400_a38c197b654c753cb656ab60e88d65120}{00194}}     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a00400_a38c197b654c753cb656ab60e88d65120}{Aggregate}}(\textcolor{keywordtype}{float}\& out\_total, \textcolor{keywordtype}{float} new\_value, \textcolor{keyword}{const} \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{AGGREGATE\_TYPE}} agg\_type, \textcolor{keywordtype}{int} count = 0) \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00195}00195         \textcolor{keywordflow}{switch} (agg\_type) \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00196}00196             \textcolor{keywordflow}{case} \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba4905ac9d6a22bdfc1ae096094ce6248d}{AGGREGATE\_TYPE::COUNT}}:}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00197}00197                 \textcolor{keywordflow}{if} (new\_value > 0) out\_total += 1;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00198}00198                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00199}00199             \textcolor{keywordflow}{case} \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}{AGGREGATE\_TYPE::SUM}}:}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00200}00200                 out\_total += new\_value;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00201}00201                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00202}00202             \textcolor{keywordflow}{case} \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba16de38737a9f8366e9b2042b4e9b6290}{AGGREGATE\_TYPE::AVERAGE}}: \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00203}00203                 \textcolor{keywordtype}{int} n = count -\/ 1;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00204}00204                 out\_total = (n * (out\_total)+new\_value) / count;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00205}00205                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00206}00206             \}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00207}00207             \textcolor{keywordflow}{case} \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba26a4b44a837bf97b972628509912b4a5}{AGGREGATE\_TYPE::MAX}}: \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00208}00208                 out\_total = std::max<float>(out\_total, new\_value);}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00209}00209                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00210}00210             \}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00211}00211             \textcolor{keywordflow}{case} \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07bace31e2a082d17e038fcc6e3006166653}{AGGREGATE\_TYPE::MIN}}: \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00212}00212                 out\_total = std::min<float>(out\_total, new\_value);}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00213}00213                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00214}00214             \}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00215}00215             \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00216}00216                 \textcolor{keywordflow}{throw} std::out\_of\_range(\textcolor{stringliteral}{"{}Unimplemented aggregation type"{}});}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00217}00217                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00218}00218         \} \textcolor{comment}{// End Switch}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00219}00219         assert(out\_total == 0 || isnormal(out\_total));}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00220}00220         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00221}00221     \}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00222}00222 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00233}00233 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00334}00334     \textcolor{keyword}{template} <\textcolor{keyword}{typename} RES, \textcolor{keyword}{typename} RT, \textcolor{keyword}{typename} N>}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00335}\mbox{\hyperlink{a00393_gaecaa04882696ac6d73173227bd28e91b}{00335}}     std::vector<RES> \mbox{\hyperlink{a00393_gaecaa04882696ac6d73173227bd28e91b}{SphericalViewAnalysis}}(}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00336}00336         RT\& ray\_tracer,}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00337}00337         \textcolor{keyword}{const} std::vector<N>\& Nodes,}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00338}00338         \textcolor{keywordtype}{int} num\_rays,}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00339}00339         \textcolor{keywordtype}{float} upward\_limit = 50.0f,}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00340}00340         \textcolor{keywordtype}{float} downward\_limit = 70.0f,}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00341}00341         \textcolor{keywordtype}{float} height = 1.7f)}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00342}00342     \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00343}00343         \textcolor{comment}{// Calculate directions then perform a quick check to see if we can even hold this vector}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00344}00344         \textcolor{keyword}{const} \textcolor{keyword}{auto} directions = \mbox{\hyperlink{a00393_ga6ca336e3887ef82d17b0713c2bf862df}{FibbonacciDistributePoints}}(num\_rays, upward\_limit, downward\_limit);}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00345}00345         \textcolor{keywordtype}{int} required\_vector\_size = directions.size() * Nodes.size();}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00346}00346         std::vector<RES> out\_results;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00347}00347 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00348}00348         \textcolor{comment}{// Throw if we can't fit the results into a single vector. This will change based on the implementation}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00349}00349         \textcolor{comment}{// of std::vector being used.}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00350}00350         \textcolor{keywordflow}{if} (out\_results.max\_size() < required\_vector\_size) \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00351}00351             std::cout << \textcolor{stringliteral}{"{}The desired view analysis setting exceed the maximum vector size!"{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00352}00352             \textcolor{keywordflow}{throw} std::bad\_array\_new\_length();}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00353}00353         \}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00354}00354         out\_results.resize(required\_vector\_size);}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00355}00355 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00356}00356         \textcolor{comment}{// Size of the vector is the number of rays}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00357}00357         num\_rays = directions.size();}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00358}00358 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00359}00359 \textcolor{preprocessor}{        \#pragma omp parallel}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00360}00360         \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00361}00361         \textcolor{comment}{// Start parallel intersections}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00362}00362 \textcolor{preprocessor}{        \#pragma omp for schedule(dynamic) }}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00363}00363             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < Nodes.size(); i++)}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00364}00364             \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00365}00365                 \textcolor{comment}{// Reset out values to temporarily store results. Kept private by defining here}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00366}00366                 \textcolor{keywordtype}{float} out\_distance = 0;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00367}00367                 \textcolor{keywordtype}{int} out\_mid = 0;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00368}00368 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00369}00369                 \textcolor{keyword}{auto} node = Nodes[i];}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00370}00370                 node[2] += height;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00371}00371                 \textcolor{keywordtype}{int} os = directions.size() * i;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00372}00372 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00373}00373                 \textcolor{comment}{// Iterate through every direction and cast a ray for it}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00374}00374                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < directions.size(); k++)}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00375}00375                 \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00376}00376                     \textcolor{keywordtype}{int} idx = os + k;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00377}00377                     \textcolor{comment}{// Call the result's SetHit if it intersected.}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00378}00378                     \textcolor{keywordflow}{if} (ray\_tracer.IntersectOutputArguments(node, directions[k], out\_distance, out\_mid))}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00379}00379                     \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00380}00380                         out\_results[idx].SetHit(node, directions[k], out\_distance, out\_mid);}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00381}00381                     \}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00382}00382                 \} \textcolor{comment}{// End direction loop}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00383}00383             \} \textcolor{comment}{// End node loop}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00384}00384         \} \textcolor{comment}{// End omp space}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00385}00385 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00386}00386         \textcolor{keywordflow}{return} out\_results;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00387}00387     \}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00388}00388 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00389}00389 \textcolor{comment}{// To use numeric limits, need to undefine max}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00390}00390 \textcolor{preprocessor}{\#undef max}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00391}00391 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00399}00399 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00483}00483     \textcolor{keyword}{template}<\textcolor{keyword}{typename} RT, \textcolor{keyword}{typename} N>}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00484}\mbox{\hyperlink{a00393_ga78f77d24531d0fa55c9b60d7ec1bf32a}{00484}}     std::vector<float> \mbox{\hyperlink{a00393_ga78f77d24531d0fa55c9b60d7ec1bf32a}{SphericalRayshootWithAnyRTForDistance}}(}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00485}00485         RT\& ray\_tracer,}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00486}00486         \textcolor{keyword}{const} std::vector<N>\& Nodes,}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00487}00487         \textcolor{keywordtype}{int} num\_rays,}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00488}00488         \textcolor{keywordtype}{float} upward\_limit = 50.0f,}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00489}00489         \textcolor{keywordtype}{float} downward\_limit = 70.0f,}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00490}00490         \textcolor{keywordtype}{float} height = 1.7f,}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00491}00491         \textcolor{keyword}{const} \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{AGGREGATE\_TYPE}} aggregation = \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}{AGGREGATE\_TYPE::SUM}})}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00492}00492     \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00493}00493         \textcolor{comment}{// Allocate score array and calculate directions}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00494}00494         std::vector<float> out\_scores(Nodes.size());}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00495}00495         \textcolor{keyword}{const} \textcolor{keyword}{auto} directions = \mbox{\hyperlink{a00393_ga6ca336e3887ef82d17b0713c2bf862df}{FibbonacciDistributePoints}}(num\_rays, upward\_limit, downward\_limit);}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00496}00496 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00497}00497 \textcolor{preprocessor}{        \#pragma omp parallel}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00498}00498         \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00499}00499             \textcolor{comment}{// Start parallel intersections}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00500}00500 \textcolor{preprocessor}{        \#pragma omp for schedule(dynamic) }}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00501}00501             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < Nodes.size(); i++)}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00502}00502             \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00503}00503                 \textcolor{keyword}{const} \textcolor{keyword}{auto}\& node = Nodes[i];}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00504}00504 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00505}00505                 \textcolor{comment}{// Get a reference to the value in the score array, reset score and count to zero}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00506}00506                 \textcolor{keywordtype}{float}\& score = out\_scores[i];}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00507}00507                 \textcolor{keywordtype}{int} count = 1;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00508}00508 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00509}00509                 \textcolor{comment}{// If the aggregation type is min, set the score to some large value}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00510}00510                 \textcolor{keywordflow}{if} (aggregation == \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07bace31e2a082d17e038fcc6e3006166653}{AGGREGATE\_TYPE::MIN}})\{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00511}00511                     score = std::numeric\_limits<float>::max();}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00512}00512                 \}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00513}00513                 \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00514}00514                     score = 0;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00515}00515                 \}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00516}00516 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00517}00517                 \textcolor{comment}{// Cast a ray for every direction in directions}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00518}00518                 \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& direction : directions)}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00519}00519                 \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00520}00520                     \textcolor{comment}{// Create a copy of the node to offset.}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00521}00521                     \textcolor{keyword}{auto} node\_copy = node;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00522}00522                     node\_copy[2] += height;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00523}00523                     \textcolor{comment}{//float distance = 0;}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00524}00524 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00525}00525                     \textcolor{comment}{// If the ray intersects any geometry, calculate distance to the intersection point}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00526}00526                     \textcolor{comment}{// then plug that into the aggregation method.}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00527}00527                     \textcolor{keywordflow}{if} (ray\_tracer.PointIntersection(}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00528}00528                             node\_copy[0], node\_copy[1], node\_copy[2],}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00529}00529                             direction[0], direction[1], direction[2]))}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00530}00530                     \{}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00531}00531                         \textcolor{comment}{// Add the height back to the original node so the distance check is accurate}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00532}00532                         \textcolor{keywordtype}{float} distance = sqrtf(}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00533}00533                                                   powf((node[0]        -\/ node\_copy[0]), 2) }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00534}00534                                                 + powf((node[1]        -\/ node\_copy[1]), 2) }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00535}00535                                                 + powf((node[2] + height -\/ node\_copy[2]), 2));}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00536}00536 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00537}00537                         \textcolor{comment}{// Based on aggregation method, check this new value against the last}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00538}00538                         \mbox{\hyperlink{a00400_a38c197b654c753cb656ab60e88d65120}{Aggregate}}(score, distance, aggregation, count);}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00539}00539                         count++;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00540}00540                     \}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00541}00541                 \}\textcolor{comment}{// End FOR over directions}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00542}00542             \} \textcolor{comment}{// End FOR over Nodes}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00543}00543         \}\textcolor{comment}{// End OMP}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00544}00544         \textcolor{keywordflow}{return} out\_scores;}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00545}00545     \}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00546}00546 \}}
+\DoxyCodeLine{\Hypertarget{a00023_source_l00547}00547 }
+\DoxyCodeLine{\Hypertarget{a00023_source_l00548}00548 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

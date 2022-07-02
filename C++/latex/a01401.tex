@@ -1,37 +1,122 @@
-\hypertarget{a01401}{}\doxysection{nanort\+::Intersect\+Comparator$<$ H $>$ Class Template Reference}
-\label{a01401}\index{nanort::IntersectComparator$<$ H $>$@{nanort::IntersectComparator$<$ H $>$}}
+\hypertarget{a01401}{}\doxysection{nanort\+::BVHTrace\+Options Class Reference}
+\label{a01401}\index{nanort::BVHTraceOptions@{nanort::BVHTraceOptions}}
+
+
+BVH trace option.  
+
+
 
 
 {\ttfamily \#include $<$nanort.\+h$>$}
 
+
+
+Collaboration diagram for nanort\+::BVHTrace\+Options\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=317pt]{a01399}
+\end{center}
+\end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{a01401_a67b3389f78ec232ce1a6bf03ebb16e2b}{operator()}} (const H \&a, const H \&b) const
+\mbox{\hyperlink{a01401_a981bb66c79e80b4b960dd080a2785d8d}{BVHTrace\+Options}} ()
 \end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \mbox{\hyperlink{a01401_aa2422cb4eb30dcc6b96800987fd9c5fc}{prim\+\_\+ids\+\_\+range}} \mbox{[}2\mbox{]}
+\item 
+unsigned int \mbox{\hyperlink{a01401_a0ad05887cb57228e022d46e95566b3ce}{skip\+\_\+prim\+\_\+id}}
+\item 
+bool \mbox{\hyperlink{a01401_adb2d2c476511d304304c4e763a818fc2}{cull\+\_\+back\+\_\+face}}
+\item 
+unsigned char \mbox{\hyperlink{a01401_a53e19da9babb86ca395845e4e782e8b6}{pad}} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Padding (not used) \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class H$>$\newline
-class nanort\+::\+Intersect\+Comparator$<$ H $>$}
+BVH trace option. 
+
+Definition at line \mbox{\hyperlink{a00161_source_l00610}{610}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
 
 
-Definition at line 559 of file nanort.\+h.
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01401_a981bb66c79e80b4b960dd080a2785d8d}\label{a01401_a981bb66c79e80b4b960dd080a2785d8d}} 
+\index{nanort::BVHTraceOptions@{nanort::BVHTraceOptions}!BVHTraceOptions@{BVHTraceOptions}}
+\index{BVHTraceOptions@{BVHTraceOptions}!nanort::BVHTraceOptions@{nanort::BVHTraceOptions}}
+\doxysubsubsection{\texorpdfstring{BVHTraceOptions()}{BVHTraceOptions()}}
+{\footnotesize\ttfamily nanort\+::\+BVHTrace\+Options\+::\+BVHTrace\+Options (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-\doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a01401_a67b3389f78ec232ce1a6bf03ebb16e2b}\label{a01401_a67b3389f78ec232ce1a6bf03ebb16e2b}} 
-\index{nanort::IntersectComparator$<$ H $>$@{nanort::IntersectComparator$<$ H $>$}!operator()@{operator()}}
-\index{operator()@{operator()}!nanort::IntersectComparator$<$ H $>$@{nanort::IntersectComparator$<$ H $>$}}
-\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
-{\footnotesize\ttfamily template$<$class H $>$ \\
-bool \mbox{\hyperlink{a01401}{nanort\+::\+Intersect\+Comparator}}$<$ H $>$\+::operator() (\begin{DoxyParamCaption}\item[{const H \&}]{a,  }\item[{const H \&}]{b }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+Definition at line \mbox{\hyperlink{a00161_source_l00623}{623}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
 
 
 
-Definition at line 561 of file nanort.\+h.
+References \mbox{\hyperlink{a00161_source_l00620}{cull\+\_\+back\+\_\+face}}, \mbox{\hyperlink{a00161_source_l00614}{prim\+\_\+ids\+\_\+range}}, and \mbox{\hyperlink{a00161_source_l00618}{skip\+\_\+prim\+\_\+id}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01401_adb2d2c476511d304304c4e763a818fc2}\label{a01401_adb2d2c476511d304304c4e763a818fc2}} 
+\index{nanort::BVHTraceOptions@{nanort::BVHTraceOptions}!cull\_back\_face@{cull\_back\_face}}
+\index{cull\_back\_face@{cull\_back\_face}!nanort::BVHTraceOptions@{nanort::BVHTraceOptions}}
+\doxysubsubsection{\texorpdfstring{cull\_back\_face}{cull\_back\_face}}
+{\footnotesize\ttfamily bool nanort\+::\+BVHTrace\+Options\+::cull\+\_\+back\+\_\+face}
+
+
+
+Definition at line \mbox{\hyperlink{a00161_source_l00620}{620}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00161_source_l00623}{BVHTrace\+Options()}}, and \mbox{\hyperlink{a00161_source_l01007}{nanort\+::\+Triangle\+Intersector$<$ T, H $>$\+::\+Intersect()}}.
+
+\mbox{\Hypertarget{a01401_a53e19da9babb86ca395845e4e782e8b6}\label{a01401_a53e19da9babb86ca395845e4e782e8b6}} 
+\index{nanort::BVHTraceOptions@{nanort::BVHTraceOptions}!pad@{pad}}
+\index{pad@{pad}!nanort::BVHTraceOptions@{nanort::BVHTraceOptions}}
+\doxysubsubsection{\texorpdfstring{pad}{pad}}
+{\footnotesize\ttfamily unsigned char nanort\+::\+BVHTrace\+Options\+::pad\mbox{[}3\mbox{]}}
+
+
+
+Padding (not used) 
+
+
+
+Definition at line \mbox{\hyperlink{a00161_source_l00621}{621}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
+
+\mbox{\Hypertarget{a01401_aa2422cb4eb30dcc6b96800987fd9c5fc}\label{a01401_aa2422cb4eb30dcc6b96800987fd9c5fc}} 
+\index{nanort::BVHTraceOptions@{nanort::BVHTraceOptions}!prim\_ids\_range@{prim\_ids\_range}}
+\index{prim\_ids\_range@{prim\_ids\_range}!nanort::BVHTraceOptions@{nanort::BVHTraceOptions}}
+\doxysubsubsection{\texorpdfstring{prim\_ids\_range}{prim\_ids\_range}}
+{\footnotesize\ttfamily unsigned int nanort\+::\+BVHTrace\+Options\+::prim\+\_\+ids\+\_\+range\mbox{[}2\mbox{]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00161_source_l00614}{614}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00161_source_l00623}{BVHTrace\+Options()}}, and \mbox{\hyperlink{a00161_source_l01007}{nanort\+::\+Triangle\+Intersector$<$ T, H $>$\+::\+Intersect()}}.
+
+\mbox{\Hypertarget{a01401_a0ad05887cb57228e022d46e95566b3ce}\label{a01401_a0ad05887cb57228e022d46e95566b3ce}} 
+\index{nanort::BVHTraceOptions@{nanort::BVHTraceOptions}!skip\_prim\_id@{skip\_prim\_id}}
+\index{skip\_prim\_id@{skip\_prim\_id}!nanort::BVHTraceOptions@{nanort::BVHTraceOptions}}
+\doxysubsubsection{\texorpdfstring{skip\_prim\_id}{skip\_prim\_id}}
+{\footnotesize\ttfamily unsigned int nanort\+::\+BVHTrace\+Options\+::skip\+\_\+prim\+\_\+id}
+
+
+
+Definition at line \mbox{\hyperlink{a00161_source_l00618}{618}} of file \mbox{\hyperlink{a00161_source}{nanort.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00161_source_l00623}{BVHTrace\+Options()}}, and \mbox{\hyperlink{a00161_source_l01007}{nanort\+::\+Triangle\+Intersector$<$ T, H $>$\+::\+Intersect()}}.
 
 
 

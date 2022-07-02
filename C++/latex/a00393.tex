@@ -1,42 +1,35 @@
 \hypertarget{a00393}{}\doxysection{View\+Analysis}
 \label{a00393}\index{ViewAnalysis@{ViewAnalysis}}
-
-
-Analyze the view from points in the environment.  
-
-
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00393_ga6ca336e3887ef82d17b0713c2bf862df}{H\+F\+::\+View\+Analysis\+::\+Fibbonacci\+Distribute\+Points}} (int num\+\_\+points, float upwards\+\_\+fov=50.\+0f, float downward\+\_\+fov=70.\+0f)
+vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00393_ga6ca336e3887ef82d17b0713c2bf862df}{HF\+::\+View\+Analysis\+::\+Fibbonacci\+Distribute\+Points}} (int num\+\_\+points, float upwards\+\_\+fov=50.\+0f, float downward\+\_\+fov=70.\+0f)
 \begin{DoxyCompactList}\small\item\em Evenly distribute a set of points around a sphere centered at the origin. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R\+ES , typename RT , typename N $>$ }\\std\+::vector$<$ R\+ES $>$ \mbox{\hyperlink{a00393_gab99d16350ec1a4cac1dec3cbd731d7d8}{H\+F\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f)
+{\footnotesize template$<$typename RES , typename RT , typename N $>$ }\\std\+::vector$<$ RES $>$ \mbox{\hyperlink{a00393_gaecaa04882696ac6d73173227bd28e91b}{HF\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f)
 \begin{DoxyCompactList}\small\item\em Conduct view analysis with any Raytracer in parallel. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename RT , typename N $>$ }\\std\+::vector$<$ float $>$ \mbox{\hyperlink{a00393_gad2ee55f78e191d1ff90e083ad49dc49e}{H\+F\+::\+View\+Analysis\+::\+Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f, const \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} aggregation=\mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+S\+UM}})
+{\footnotesize template$<$typename RT , typename N $>$ }\\std\+::vector$<$ float $>$ \mbox{\hyperlink{a00393_ga78f77d24531d0fa55c9b60d7ec1bf32a}{HF\+::\+View\+Analysis\+::\+Spherical\+Rayshoot\+With\+Any\+RTFor\+Distance}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f, const \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{AGGREGATE\+\_\+\+TYPE}} aggregation=\mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}{AGGREGATE\+\_\+\+TYPE\+::\+SUM}})
 \begin{DoxyCompactList}\small\item\em Conduct view analysis and recieve a summarized set of results for each node. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00393_gab6b8e3eab649b42ac014fb7d02d54892}{Sphereical\+View\+Analysis\+Aggregate}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$E\+RT, \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $\ast$node\+\_\+ptr, int node\+\_\+size, int max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, \mbox{\hyperlink{a00377_a8a1aa9474094ff70818051c921c0537f}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} AT, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+scores, float $\ast$$\ast$out\+\_\+scores\+\_\+ptr, int $\ast$out\+\_\+scores\+\_\+size)
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00393_gab6b8e3eab649b42ac014fb7d02d54892}{Sphereical\+View\+Analysis\+Aggregate}} (\mbox{\hyperlink{a01345}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ERT, \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} $\ast$node\+\_\+ptr, int node\+\_\+size, int max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, \mbox{\hyperlink{a00377_a8a1aa9474094ff70818051c921c0537f}{AGGREGATE\+\_\+\+TYPE}} AT, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+scores, float $\ast$$\ast$out\+\_\+scores\+\_\+ptr, int $\ast$out\+\_\+scores\+\_\+size)
 \begin{DoxyCompactList}\small\item\em Conduct view analysis, then aggregate the results. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00393_gaa4c5714c1e557ef83a03d447eb30c6d0}{Sphereical\+View\+Analysis\+Aggregate\+Flat}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$E\+RT, const float $\ast$node\+\_\+ptr, int node\+\_\+size, int max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, \mbox{\hyperlink{a00377_a8a1aa9474094ff70818051c921c0537f}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} AT, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+scores, float $\ast$$\ast$out\+\_\+scores\+\_\+ptr, int $\ast$out\+\_\+scores\+\_\+size)
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00393_gaa4c5714c1e557ef83a03d447eb30c6d0}{Sphereical\+View\+Analysis\+Aggregate\+Flat}} (\mbox{\hyperlink{a01345}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ERT, const float $\ast$node\+\_\+ptr, int node\+\_\+size, int max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, \mbox{\hyperlink{a00377_a8a1aa9474094ff70818051c921c0537f}{AGGREGATE\+\_\+\+TYPE}} AT, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+scores, float $\ast$$\ast$out\+\_\+scores\+\_\+ptr, int $\ast$out\+\_\+scores\+\_\+size)
 \begin{DoxyCompactList}\small\item\em Conduct view analysis, and aggregate the results. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00393_ga94d3ddc3981020e2852fc77e51266185}{Spherical\+View\+Analysis\+No\+Aggregate}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$E\+RT, const \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $\ast$node\+\_\+ptr, int node\+\_\+size, int $\ast$max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, std\+::vector$<$ \mbox{\hyperlink{a02045}{Ray\+Result}} $>$ $\ast$$\ast$out\+\_\+results, \mbox{\hyperlink{a02045}{Ray\+Result}} $\ast$$\ast$out\+\_\+results\+\_\+ptr)
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00393_ga94d3ddc3981020e2852fc77e51266185}{Spherical\+View\+Analysis\+No\+Aggregate}} (\mbox{\hyperlink{a01345}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ERT, const \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} $\ast$node\+\_\+ptr, int node\+\_\+size, int $\ast$max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, std\+::vector$<$ \mbox{\hyperlink{a02021}{Ray\+Result}} $>$ $\ast$$\ast$out\+\_\+results, \mbox{\hyperlink{a02021}{Ray\+Result}} $\ast$$\ast$out\+\_\+results\+\_\+ptr)
 \begin{DoxyCompactList}\small\item\em Perform view analysis, then get the distance and meshid for each individual ray casted. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00393_ga348af4492f3e4e7ffab6da3e86de3924}{Spherical\+View\+Analysis\+No\+Aggregate\+Flat}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$E\+RT, const float $\ast$node\+\_\+ptr, int node\+\_\+size, int $\ast$max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, std\+::vector$<$ \mbox{\hyperlink{a02045}{Ray\+Result}} $>$ $\ast$$\ast$out\+\_\+results, \mbox{\hyperlink{a02045}{Ray\+Result}} $\ast$$\ast$out\+\_\+results\+\_\+ptr)
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00393_ga348af4492f3e4e7ffab6da3e86de3924}{Spherical\+View\+Analysis\+No\+Aggregate\+Flat}} (\mbox{\hyperlink{a01345}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ERT, const float $\ast$node\+\_\+ptr, int node\+\_\+size, int $\ast$max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, std\+::vector$<$ \mbox{\hyperlink{a02021}{Ray\+Result}} $>$ $\ast$$\ast$out\+\_\+results, \mbox{\hyperlink{a02021}{Ray\+Result}} $\ast$$\ast$out\+\_\+results\+\_\+ptr)
 \begin{DoxyCompactList}\small\item\em Perform view analysis, and get the distance and meshid for each individual ray casted. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00393_gaf572b7bec28d55bf2c72719742703dff}{Spherical\+Distribute}} (int $\ast$num\+\_\+rays, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+direction\+\_\+vector, float $\ast$$\ast$out\+\_\+direction\+\_\+data, float upward\+\_\+fov, float downward\+\_\+fov)
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00393_gaf572b7bec28d55bf2c72719742703dff}{Spherical\+Distribute}} (int $\ast$num\+\_\+rays, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+direction\+\_\+vector, float $\ast$$\ast$out\+\_\+direction\+\_\+data, float upward\+\_\+fov, float downward\+\_\+fov)
 \begin{DoxyCompactList}\small\item\em Equally distribute points around a unit sphere. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Analyze the view from points in the environment. 
 
-
-
 \doxysubsection{Function Documentation}
 \mbox{\Hypertarget{a00393_ga6ca336e3887ef82d17b0713c2bf862df}\label{a00393_ga6ca336e3887ef82d17b0713c2bf862df}} 
 \index{ViewAnalysis@{ViewAnalysis}!FibbonacciDistributePoints@{FibbonacciDistributePoints}}
 \index{FibbonacciDistributePoints@{FibbonacciDistributePoints}!ViewAnalysis@{ViewAnalysis}}
 \doxysubsubsection{\texorpdfstring{FibbonacciDistributePoints()}{FibbonacciDistributePoints()}}
-{\footnotesize\ttfamily std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ H\+F\+::\+View\+Analysis\+::\+Fibbonacci\+Distribute\+Points (\begin{DoxyParamCaption}\item[{int}]{num\+\_\+points,  }\item[{float}]{upwards\+\_\+fov = {\ttfamily 50.0f},  }\item[{float}]{downward\+\_\+fov = {\ttfamily 70.0f} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ HF\+::\+View\+Analysis\+::\+Fibbonacci\+Distribute\+Points (\begin{DoxyParamCaption}\item[{int}]{num\+\_\+points,  }\item[{float}]{upwards\+\_\+fov = {\ttfamily 50.0f},  }\item[{float}]{downward\+\_\+fov = {\ttfamily 70.0f} }\end{DoxyParamCaption})}
 
 
 
@@ -61,16 +54,16 @@ A vector of arrays containing the x, y, and z coordinates of each point on the s
 \begin{DoxyNote}{Note}
 The number of points returned by this function will not exactly equal the amount of points specified by num\+\_\+points depending on the values of upwards\+\_\+fov and downward fov. More information is available below.
 \end{DoxyNote}
-\begin{DoxyParagraph}{How F\+OV is implemented}
-Every point is equally distributed on a sphere using a formula based on this stack overflow answer\+: \href{https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere}{\texttt{ https\+://stackoverflow.\+com/questions/9600801/evenly-\/distributing-\/n-\/points-\/on-\/a-\/sphere}}. This formula cannot easily be mapped to a specific vertical fov or cone, so instead this function will remove points that don\textquotesingle{}t meet the constraints. Discarding points causes the number of points generated to be less than the num\+\_\+rays argument, so the percentage of points discarded is calculated and a second run is performed with an adjusted num\+\_\+rays value to get as close as possible to the value specified in the argument. This approach will not result in an exact match to the num\+\_\+rays argument, and will run \mbox{\hyperlink{a00400_ad171585ac55c35e394e26a2f80364a0f}{Fibbonacci\+Dist}} twice.
+\begin{DoxyParagraph}{How FOV is implemented}
+Every point is equally distributed on a sphere using a formula based on this stack overflow answer\+: \href{https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere}{\texttt{ https\+://stackoverflow.\+com/questions/9600801/evenly-\/distributing-\/n-\/points-\/on-\/a-\/sphere}}. This formula cannot easily be mapped to a specific vertical fov or cone, so instead this function will remove points that don\textquotesingle{}t meet the constraints. Discarding points causes the number of points generated to be less than the num\+\_\+rays argument, so the percentage of points discarded is calculated and a second run is performed with an adjusted num\+\_\+rays value to get as close as possible to the value specified in the argument. This approach will not result in an exact match to the num\+\_\+rays argument, and will run \mbox{\hyperlink{a00400_a5b45790c767b670bc00bf3fd2335159a}{Fibbonacci\+Dist}} twice.
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{Example}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// Requires \#include "view\_analysis.h"}}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}view\_analysis.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// For brevity}}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00393_ga6ca336e3887ef82d17b0713c2bf862df}{HF::ViewAnalysis::FibbonacciDistributePoints}};}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a00393_ga6ca336e3887ef82d17b0713c2bf862df}{HF::ViewAnalysis::FibbonacciDistributePoints}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Prepare maximum number of points to distribute}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} size = 8;}
@@ -79,31 +72,32 @@ Every point is equally distributed on a sphere using a formula based on this sta
 \DoxyCodeLine{\textcolor{keyword}{auto} points = \mbox{\hyperlink{a00393_ga6ca336e3887ef82d17b0713c2bf862df}{FibbonacciDistributePoints}}(size, 90.0f, 90.0f);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Print number of points}}
-\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"Number of Points:"} << points.size() << std::endl;}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"{}Number of Points:"{}} << points.size() << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Iterate through results and print every point.}}
-\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"["};}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"{}["{}};}
 \DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < size; i++) \{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto}\& point =  points[i];}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"("} << point[0] << \textcolor{stringliteral}{", "} << point[1] << \textcolor{stringliteral}{", "} << point[2] << \textcolor{stringliteral}{")"};}
-\DoxyCodeLine{    \textcolor{keywordflow}{if} (i != size -\/ 1) std::cout << \textcolor{stringliteral}{", "};}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}("{}} << point[0] << \textcolor{stringliteral}{"{}, "{}} << point[1] << \textcolor{stringliteral}{"{}, "{}} << point[2] << \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (i != size -\/ 1) std::cout << \textcolor{stringliteral}{"{}, "{}};}
 \DoxyCodeLine{\}}
-\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"]"} << std::endl;}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"{}]"{}} << std::endl;}
+
 \end{DoxyCode}
 
 \end{DoxyParagraph}
-{\ttfamily $>$$>$$>$ Number of Points\+:8}~\newline
-{\ttfamily $>$$>$$>$ \mbox{[}(-\/0, -\/1, 0), (-\/0.\+304862, -\/0.\+75, -\/0.\+586992), (0.\+813476, -\/0.\+5, 0.\+29708), (-\/0.\+894994, -\/0.\+25, 0.\+369441),} {\ttfamily (0.\+423846, 0, -\/0.\+905734), (0.\+289781, 0.\+25, 0.\+923865), (-\/0.\+749296, 0.\+5, -\/0.\+43423), (0.\+64601, 0.\+75, -\/0.\+142025)\mbox{]}} 
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Number of Points\+:8}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} \mbox{[}(-\/0, -\/1, 0), (-\/0.\+304862, -\/0.\+75, -\/0.\+586992), (0.\+813476, -\/0.\+5, 0.\+29708), (-\/0.\+894994, -\/0.\+25, 0.\+369441),} {\ttfamily (0.\+423846, 0, -\/0.\+905734), (0.\+289781, 0.\+25, 0.\+923865), (-\/0.\+749296, 0.\+5, -\/0.\+43423), (0.\+64601, 0.\+75, -\/0.\+142025)\mbox{]}} 
 
-Definition at line 121 of file view\+\_\+analysis.\+cpp.
-
-
-
-References H\+F\+::\+View\+Analysis\+::\+Fibbonacci\+Dist().
+Definition at line \mbox{\hyperlink{a00020_source_l00121}{121}} of file \mbox{\hyperlink{a00020_source}{view\+\_\+analysis.\+cpp}}.
 
 
 
-Referenced by Spherical\+Distribute(), H\+F\+::\+View\+Analysis\+::\+Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance(), H\+F\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis(), and T\+E\+S\+T().
+References \mbox{\hyperlink{a00020_source_l00084}{HF\+::\+View\+Analysis\+::\+Fibbonacci\+Dist()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00374_source_l00126}{Spherical\+Distribute()}}, \mbox{\hyperlink{a00023_source_l00484}{HF\+::\+View\+Analysis\+::\+Spherical\+Rayshoot\+With\+Any\+RTFor\+Distance()}}, and \mbox{\hyperlink{a00023_source_l00335}{HF\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -125,7 +119,7 @@ Here is the caller graph for this function\+:
 \index{ViewAnalysis@{ViewAnalysis}!SphereicalViewAnalysisAggregate@{SphereicalViewAnalysisAggregate}}
 \index{SphereicalViewAnalysisAggregate@{SphereicalViewAnalysisAggregate}!ViewAnalysis@{ViewAnalysis}}
 \doxysubsubsection{\texorpdfstring{SphereicalViewAnalysisAggregate()}{SphereicalViewAnalysisAggregate()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Sphereical\+View\+Analysis\+Aggregate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{E\+RT,  }\item[{\mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $\ast$}]{node\+\_\+ptr,  }\item[{int}]{node\+\_\+size,  }\item[{int}]{max\+\_\+rays,  }\item[{float}]{upward\+\_\+fov,  }\item[{float}]{downward\+\_\+fov,  }\item[{float}]{height,  }\item[{\mbox{\hyperlink{a00377_a8a1aa9474094ff70818051c921c0537f}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}}}]{AT,  }\item[{std\+::vector$<$ float $>$ $\ast$$\ast$}]{out\+\_\+scores,  }\item[{float $\ast$$\ast$}]{out\+\_\+scores\+\_\+ptr,  }\item[{int $\ast$}]{out\+\_\+scores\+\_\+size }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Sphereical\+View\+Analysis\+Aggregate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01345}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ERT,  }\item[{\mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} $\ast$}]{node\+\_\+ptr,  }\item[{int}]{node\+\_\+size,  }\item[{int}]{max\+\_\+rays,  }\item[{float}]{upward\+\_\+fov,  }\item[{float}]{downward\+\_\+fov,  }\item[{float}]{height,  }\item[{\mbox{\hyperlink{a00377_a8a1aa9474094ff70818051c921c0537f}{AGGREGATE\+\_\+\+TYPE}}}]{AT,  }\item[{std\+::vector$<$ float $>$ $\ast$$\ast$}]{out\+\_\+scores,  }\item[{float $\ast$$\ast$}]{out\+\_\+scores\+\_\+ptr,  }\item[{int $\ast$}]{out\+\_\+scores\+\_\+size }\end{DoxyParamCaption})}
 
 
 
@@ -137,13 +131,13 @@ Conduct view analysis, then aggregate the results.
 
 
 \begin{DoxyParams}{Parameters}
-{\em E\+RT} & Raytracer containing the geometry to use for ray intersections. \\
+{\em ERT} & Raytracer containing the geometry to use for ray intersections. \\
 \hline
 {\em node\+\_\+ptr} & Observer points for the view analysis. \\
 \hline
 {\em node\+\_\+size} & Number of nodes in the array pointed to by node\+\_\+ptr.\\
 \hline
-{\em max\+\_\+rays} & Number of rays to cast for each node in node\+\_\+ptr. Note that this may cast fewer rays than max\+\_\+rays, depending on F\+OV restrictions.\\
+{\em max\+\_\+rays} & Number of rays to cast for each node in node\+\_\+ptr. Note that this may cast fewer rays than max\+\_\+rays, depending on FOV restrictions.\\
 \hline
 {\em upward\+\_\+fov} & Maximum degrees upward from the viewer\textquotesingle{}s eye level to consider. \\
 \hline
@@ -161,13 +155,13 @@ Conduct view analysis, then aggregate the results.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-H\+F\+::\+Status\+::\+OK on completion.
+HF\+::\+Status\+::\+OK on completion.
 \end{DoxyReturn}
 \begin{DoxyParagraph}{Caller\textquotesingle{}s Responsibility}
 The caller must call \mbox{\hyperlink{a00347_af77723a4383b278169e80cf0e361ec44}{Destroy\+Float\+Vector}} with out\+\_\+scores to free the memory allocated by this function.
 \end{DoxyParagraph}
 \begin{DoxyPrecond}{Precondition}
-1) E\+RT points to a valid raytracer created by Create\+Raytracer 
+1) ERT points to a valid raytracer created by Create\+Raytracer 
 
 2) node\+\_\+ptr contains a valid array of nodes with length equal to node\+\_\+size 
 
@@ -181,20 +175,20 @@ The caller must call \mbox{\hyperlink{a00347_af77723a4383b278169e80cf0e361ec44}{
 3) out\+\_\+scores\+\_\+size is updated to the length of the data held by out\+\_\+scores\+\_\+ptr
 \end{DoxyPostcond}
 \begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{a00386__todo000031}{Todo}}]Is there any situation where out\+\_\+scores\+\_\+size is smaller than node\+\_\+size?\end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00386__todo000030}{Todo}}]Is there any situation where out\+\_\+scores\+\_\+size is smaller than node\+\_\+size?\end{DoxyRefDesc}
 
 
 \begin{DoxySeeAlso}{See also}
 \mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
 
-\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
+\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a BVH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a BVH)
 
 \mbox{\hyperlink{}{Spherical\+View\+Analysis}} for an algorithm that returns the results of every ray casted instead of aggregating the results.
 
 \mbox{\hyperlink{}{Spherical\+View\+Analysis\+Aggregate\+Flat}} for a function that works on a flat array of floats instead of an array of nodes.
 \end{DoxySeeAlso}
 Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}}).~\newline
- Then, {\bfseries{create a B\+VH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
+ Then, {\bfseries{create a BVH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
 
 
 \begin{DoxyParagraph}{Example Code}
@@ -202,38 +196,125 @@ Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{
 \end{DoxyParagraph}
 Set up the parameters for the view analysis. 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Preparing the parameters for SphereicalViewAnalysisAggregate}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Define point to start ray}}
+\DoxyCodeLine{        \textcolor{comment}{// These are Cartesian coordinates.}}
+\DoxyCodeLine{        std::array<Node, 3> p1\{ Node(0.0f, 0.0f, 2.0f) \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Define direction to cast ray}}
+\DoxyCodeLine{        \textcolor{comment}{// These are vector components, not Cartesian coordinates.}}
+\DoxyCodeLine{        std::array<float, 3> dir \{ 0.0f, 0.0f, -\/1.0f \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// This is a container of nodes to be analyzed.}}
+\DoxyCodeLine{        \textcolor{comment}{// SphereicalViewAnalysisAggregate accepts a (Node *) parameter,}}
+\DoxyCodeLine{        \textcolor{comment}{// so a raw stack-\/allocated array will suffice.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// This may also be a pointer to a heap-\/allocated buffer}}
+\DoxyCodeLine{        \textcolor{comment}{// (which is owned by a vector<Node>, accessed via the vector<Node>::data() method).}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// ...or, it can be a pointer to memory allocated by the caller via operator new[node\_count]}}
+\DoxyCodeLine{        \textcolor{comment}{// (if this route is taken, be sure to release the memory with operator delete[] after use)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{int} node\_count = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(p1.size()); \textcolor{comment}{// should be the element count in nodes}}
+\DoxyCodeLine{        \textcolor{keywordtype}{int} ray\_count = 1000;               \textcolor{comment}{// will be mutated by SphereicalViewAnalysisAggregate}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{float} height = 1.7f;          \textcolor{comment}{// height to offset nodes from the ground, in meters}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{float} upward\_fov = 50.0f;     \textcolor{comment}{// default parameter is 50.0f in Python code}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{float} downward\_fov = 70.0f;   \textcolor{comment}{// default parameter is 70.0f in Python code}}
+
 \end{DoxyCodeInclude}
- Now you must prepare a pointer to a std\+::vector$<$float$>$, where the {\bfseries{aggregation results}} will be stored.~\newline
+
+
+Now you must prepare a pointer to a std\+::vector$<$float$>$, where the {\bfseries{aggregation results}} will be stored.~\newline
  You must also select the aggregate type. 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Declare a pointer to vector<float>, named aggregate\_results.}}
+\DoxyCodeLine{        \textcolor{comment}{// This pointer will point to memory on the free store,}}
+\DoxyCodeLine{        \textcolor{comment}{// allocated within SphereicalViewAnalysisAggregate.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// aggregate\_results\_data will point to the underlying buffer within *aggregate\_results,}}
+\DoxyCodeLine{        \textcolor{comment}{// which will be assigned inside SphereicalViewAnalysisAggregate.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Note that we must call operator delete on aggregate\_results when we are finished with it.}}
+\DoxyCodeLine{        std::vector<float>* aggregate\_results = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{        \textcolor{keywordtype}{float}* aggregate\_results\_data = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Will be equal to aggregate\_results-\/>size();}}
+\DoxyCodeLine{        \textcolor{keywordtype}{int} aggregate\_results\_size = -\/1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Select the aggregate type.}}
+\DoxyCodeLine{        \textcolor{comment}{// This determines how to aggregate the edges within the results of the view analysis.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// AGGREGATE\_TYPE::AVERAGE means that the edges will be aggregated}}
+\DoxyCodeLine{        \textcolor{comment}{// by the maximum distance from the origin point to its hit points.}}
+\DoxyCodeLine{        \mbox{\hyperlink{a00377_a8a1aa9474094ff70818051c921c0537f}{AGGREGATE\_TYPE}} agg\_type = \mbox{\hyperlink{a00377_a8a1aa9474094ff70818051c921c0537fa16de38737a9f8366e9b2042b4e9b6290}{AGGREGATE\_TYPE::AVERAGE}};}
+
 \end{DoxyCodeInclude}
- Now we are ready to call \mbox{\hyperlink{a00393_gab6b8e3eab649b42ac014fb7d02d54892}{Sphereical\+View\+Analysis\+Aggregate}} . 
+
+
+Now we are ready to call \mbox{\hyperlink{a00393_gab6b8e3eab649b42ac014fb7d02d54892}{Sphereical\+View\+Analysis\+Aggregate}} . 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        status = \mbox{\hyperlink{a00393_gab6b8e3eab649b42ac014fb7d02d54892}{SphereicalViewAnalysisAggregate}}(bvh,}
+\DoxyCodeLine{            p1.data(), node\_count, ray\_count,}
+\DoxyCodeLine{            upward\_fov, downward\_fov, height,}
+\DoxyCodeLine{            agg\_type,}
+\DoxyCodeLine{            \&aggregate\_results, \&aggregate\_results\_data, \&aggregate\_results\_size);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (status != 1) \{}
+\DoxyCodeLine{            \textcolor{comment}{// Error!}}
+\DoxyCodeLine{            std::cerr << \textcolor{stringliteral}{"{}Error at SphereicalViewAnalysisAggregate, code: "{}} << status << std::endl;}
+\DoxyCodeLine{        \}}
+
 \end{DoxyCodeInclude}
- We can output the contents of the {\bfseries{aggregate results vector}} to {\bfseries{stdout}} . 
+
+
+We can output the contents of the {\bfseries{aggregate results vector}} to {\bfseries{stdout}} . 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Print aggregate results vector (vector<float>)}}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"{}["{}};}
+\DoxyCodeLine{        \textcolor{keywordtype}{int} i = 0;}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} agg\_result : *aggregate\_results) \{}
+\DoxyCodeLine{            std::cout << agg\_result;}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (i < aggregate\_results-\/>size() -\/ 1) \{}
+\DoxyCodeLine{                std::cout << \textcolor{stringliteral}{"{}, "{}};}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{            ++i;}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"{}]"{}} << std::endl;}
+
 \end{DoxyCodeInclude}
- After using the view analysis results, its resources must be {\bfseries{relinquished}} . 
+
+
+After using the view analysis results, its resources must be {\bfseries{relinquished}} . 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Memory resource cleanup.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// destroy vector<float>}}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (aggregate\_results) \{}
+\DoxyCodeLine{            \textcolor{keyword}{delete} aggregate\_results;}
+\DoxyCodeLine{        \}}
+
 \end{DoxyCodeInclude}
- From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
+
+
+From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
  on how to free the remainder of the resources used for the view analysis --~\newline
- which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{}{H\+F\+::\+Raytracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
+ which are the (vector\texorpdfstring{$<$}{<}\mbox{\hyperlink{a01285}{HF\+::\+Geometry\+::\+Mesh\+Info}}\texorpdfstring{$>$}{>} $\ast$) and (\mbox{\hyperlink{}{HF\+::\+Raytracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
 
-{\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 00000293C\+C9\+C8650, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 00000293C3012\+D20, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ \mbox{[}7.\+43102, 0, 0\mbox{]}}~\newline
-
-
-Definition at line 17 of file view\+\_\+analysis\+\_\+\+C.\+cpp.
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Load\+OBJ loaded mesh successfully into loaded\+\_\+obj at address 00000293CC9\+C8650, code\+: 1}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 00000293C3012\+D20, code\+: 1}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} \mbox{[}7.\+43102, 0, 0\mbox{]}}~\newline
 
 
-
-References H\+F\+::\+Exceptions\+::\+OK, and H\+F\+::\+View\+Analysis\+::\+Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance().
+Definition at line \mbox{\hyperlink{a00374_source_l00017}{17}} of file \mbox{\hyperlink{a00374_source}{view\+\_\+analysis\+\_\+\+C.\+cpp}}.
 
 
 
-Referenced by C\+Interface\+Tests\+::\+T\+E\+S\+T(), and T\+E\+S\+T().
+References \mbox{\hyperlink{a00110_source_l00032}{HF\+::\+Exceptions\+::\+OK}}, and \mbox{\hyperlink{a00023_source_l00484}{HF\+::\+View\+Analysis\+::\+Spherical\+Rayshoot\+With\+Any\+RTFor\+Distance()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -243,19 +324,11 @@ Here is the call graph for this function\+:
 \includegraphics[width=350pt]{a00393_gab6b8e3eab649b42ac014fb7d02d54892_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00393_gab6b8e3eab649b42ac014fb7d02d54892_icgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{a00393_gaa4c5714c1e557ef83a03d447eb30c6d0}\label{a00393_gaa4c5714c1e557ef83a03d447eb30c6d0}} 
 \index{ViewAnalysis@{ViewAnalysis}!SphereicalViewAnalysisAggregateFlat@{SphereicalViewAnalysisAggregateFlat}}
 \index{SphereicalViewAnalysisAggregateFlat@{SphereicalViewAnalysisAggregateFlat}!ViewAnalysis@{ViewAnalysis}}
 \doxysubsubsection{\texorpdfstring{SphereicalViewAnalysisAggregateFlat()}{SphereicalViewAnalysisAggregateFlat()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Sphereical\+View\+Analysis\+Aggregate\+Flat (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{E\+RT,  }\item[{const float $\ast$}]{node\+\_\+ptr,  }\item[{int}]{node\+\_\+size,  }\item[{int}]{max\+\_\+rays,  }\item[{float}]{upward\+\_\+fov,  }\item[{float}]{downward\+\_\+fov,  }\item[{float}]{height,  }\item[{\mbox{\hyperlink{a00377_a8a1aa9474094ff70818051c921c0537f}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}}}]{AT,  }\item[{std\+::vector$<$ float $>$ $\ast$$\ast$}]{out\+\_\+scores,  }\item[{float $\ast$$\ast$}]{out\+\_\+scores\+\_\+ptr,  }\item[{int $\ast$}]{out\+\_\+scores\+\_\+size }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Sphereical\+View\+Analysis\+Aggregate\+Flat (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01345}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ERT,  }\item[{const float $\ast$}]{node\+\_\+ptr,  }\item[{int}]{node\+\_\+size,  }\item[{int}]{max\+\_\+rays,  }\item[{float}]{upward\+\_\+fov,  }\item[{float}]{downward\+\_\+fov,  }\item[{float}]{height,  }\item[{\mbox{\hyperlink{a00377_a8a1aa9474094ff70818051c921c0537f}{AGGREGATE\+\_\+\+TYPE}}}]{AT,  }\item[{std\+::vector$<$ float $>$ $\ast$$\ast$}]{out\+\_\+scores,  }\item[{float $\ast$$\ast$}]{out\+\_\+scores\+\_\+ptr,  }\item[{int $\ast$}]{out\+\_\+scores\+\_\+size }\end{DoxyParamCaption})}
 
 
 
@@ -267,7 +340,7 @@ Conduct view analysis, and aggregate the results.
 
 
 \begin{DoxyParams}{Parameters}
-{\em E\+RT} & Raytracer containing the geometry to use for ray intersections. \\
+{\em ERT} & Raytracer containing the geometry to use for ray intersections. \\
 \hline
 {\em node\+\_\+ptr} & Observer points for the view analysis. Each 3 floats represent the \{x, y, z\} of a new node. \\
 \hline
@@ -291,7 +364,7 @@ Conduct view analysis, and aggregate the results.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-H\+F\+::\+OK on completion.
+HF\+::\+OK on completion.
 \end{DoxyReturn}
 Similar to Spherical\+View\+Analysis but uses a flat array of floats instead of an array of nodes. This is to make the Spherical\+View\+Analysis function more accessible.
 
@@ -299,7 +372,7 @@ Similar to Spherical\+View\+Analysis but uses a flat array of floats instead of 
 The caller must call \mbox{\hyperlink{a00347_af77723a4383b278169e80cf0e361ec44}{Destroy\+Float\+Vector}} with out\+\_\+scores to free the memory allocated by this function.
 \end{DoxyParagraph}
 \begin{DoxyPrecond}{Precondition}
-1) E\+RT points to a valid raytracer created by Create\+Raytracer. 
+1) ERT points to a valid raytracer created by Create\+Raytracer. 
 
 2) node\+\_\+ptr contains a valid array of floats with length equal to node\+\_\+size $\ast$ 3. 
 
@@ -313,16 +386,16 @@ The caller must call \mbox{\hyperlink{a00347_af77723a4383b278169e80cf0e361ec44}{
 3) out\+\_\+scores\+\_\+size is updated to the length of the data held by out\+\_\+scores\+\_\+ptr.
 \end{DoxyPostcond}
 \begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{a00386__todo000032}{Todo}}]Is there any situation where out\+\_\+scores\+\_\+size is smaller than node\+\_\+size?\end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00386__todo000031}{Todo}}]Is there any situation where out\+\_\+scores\+\_\+size is smaller than node\+\_\+size?\end{DoxyRefDesc}
 
 
 \begin{DoxySeeAlso}{See also}
 \mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
 
-\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
+\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a BVH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a BVH)
 \end{DoxySeeAlso}
 Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}}).~\newline
- Then, {\bfseries{create a B\+VH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
+ Then, {\bfseries{create a BVH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
 
 
 \begin{DoxyParagraph}{Example}
@@ -330,38 +403,125 @@ Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{
 \end{DoxyParagraph}
 Set up the parameters for the view analysis. 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Preparing the parameters for SphericalViewAnalysisAggregateFlat}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Define point to start ray}}
+\DoxyCodeLine{        \textcolor{comment}{// These are Cartesian coordinates.}}
+\DoxyCodeLine{        std::array<float, 3> p1 \{ 0.0f, 0.0f, 2.0f \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Define direction to cast ray}}
+\DoxyCodeLine{        \textcolor{comment}{// These are vector components, not Cartesian coordinates.}}
+\DoxyCodeLine{        std::array<float, 3> dir \{ 0.0f, 0.0f, -\/1.0f \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// This is a container of nodes to be analyzed.}}
+\DoxyCodeLine{        \textcolor{comment}{// SphericalViewAnalysisAggregateFlat accepts a (Node *) parameter,}}
+\DoxyCodeLine{        \textcolor{comment}{// so a raw stack-\/allocated array will suffice.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// This may also be a pointer to a heap-\/allocated buffer}}
+\DoxyCodeLine{        \textcolor{comment}{// (which is owned by a vector<Node>, accessed via the vector<Node>::data() method).}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// ...or, it can be a pointer to memory allocated by the caller via operator new[node\_count]}}
+\DoxyCodeLine{        \textcolor{comment}{// (if this route is taken, be sure to release the memory with operator delete[] after use)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{int} node\_count = 1;           \textcolor{comment}{// should be the element count in nodes}}
+\DoxyCodeLine{        \textcolor{keywordtype}{int} ray\_count = 1000;               \textcolor{comment}{// will be mutated by SphericalViewAnalysisAggregateFlat}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{float} height = 1.7f;          \textcolor{comment}{// height to offset nodes from the ground, in meters}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{float} upward\_fov = 50.0f;     \textcolor{comment}{// default parameter is 50.0f in Python code}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{float} downward\_fov = 70.0f;   \textcolor{comment}{// default parameter is 70.0f in Python code}}
+
 \end{DoxyCodeInclude}
- Now you must prepare a pointer to a std\+::vector$<$float$>$, where the {\bfseries{aggregation results}} will be stored.~\newline
+
+
+Now you must prepare a pointer to a std\+::vector$<$float$>$, where the {\bfseries{aggregation results}} will be stored.~\newline
  You must also select the aggregate type. 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Declare a pointer to vector<float>, named aggregate\_results.}}
+\DoxyCodeLine{        \textcolor{comment}{// This pointer will point to memory on the free store,}}
+\DoxyCodeLine{        \textcolor{comment}{// allocated within SphericalViewAnalysisAggregateFlat.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// aggregate\_results\_data will point to the underlying buffer within *aggregate\_results,}}
+\DoxyCodeLine{        \textcolor{comment}{// which will be assigned inside SphericalViewAnalysisNoAggregateFlat.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Note that we must call operator delete on aggregate\_results when we are finished with it.}}
+\DoxyCodeLine{        std::vector<float>* aggregate\_results = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{        \textcolor{keywordtype}{float}* aggregate\_results\_data = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Will be equal to aggregate\_results-\/>size();}}
+\DoxyCodeLine{        \textcolor{keywordtype}{int} aggregate\_results\_size = -\/1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Select the aggregate type.}}
+\DoxyCodeLine{        \textcolor{comment}{// This determines how to aggregate the edges within the results of the view analysis.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// AGGREGATE\_TYPE::AVERAGE means that the edges will be aggregated}}
+\DoxyCodeLine{        \textcolor{comment}{// by the maximum distance from the origin point to its hit points.}}
+\DoxyCodeLine{        \mbox{\hyperlink{a00377_a8a1aa9474094ff70818051c921c0537f}{AGGREGATE\_TYPE}} agg\_type = \mbox{\hyperlink{a00377_a8a1aa9474094ff70818051c921c0537fa16de38737a9f8366e9b2042b4e9b6290}{AGGREGATE\_TYPE::AVERAGE}};}
+
 \end{DoxyCodeInclude}
- Now we are ready to call \mbox{\hyperlink{}{Spherical\+View\+Analysis\+Aggregate\+Flat}} . 
+
+
+Now we are ready to call \mbox{\hyperlink{}{Spherical\+View\+Analysis\+Aggregate\+Flat}} . 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        status = \mbox{\hyperlink{a00393_gaa4c5714c1e557ef83a03d447eb30c6d0}{SphereicalViewAnalysisAggregateFlat}}(bvh,}
+\DoxyCodeLine{            p1.data(), node\_count, ray\_count,}
+\DoxyCodeLine{            upward\_fov, downward\_fov, height,}
+\DoxyCodeLine{            agg\_type,}
+\DoxyCodeLine{            \&aggregate\_results, \&aggregate\_results\_data, \&aggregate\_results\_size);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (status != 1) \{}
+\DoxyCodeLine{            \textcolor{comment}{// Error!}}
+\DoxyCodeLine{            std::cerr << \textcolor{stringliteral}{"{}Error at SphereicalViewAnalysisAggregateFlat, code: "{}} << status << std::endl;}
+\DoxyCodeLine{        \}}
+
 \end{DoxyCodeInclude}
- We can output the contents of the {\bfseries{aggregate results vector}} to {\bfseries{stdout}}. 
+
+
+We can output the contents of the {\bfseries{aggregate results vector}} to {\bfseries{stdout}}. 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Print aggregate results vector (vector<float>)}}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"{}["{}};}
+\DoxyCodeLine{        \textcolor{keywordtype}{int} i = 0;}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} agg\_result : *aggregate\_results) \{}
+\DoxyCodeLine{            std::cout << agg\_result;}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (i < aggregate\_results-\/>size() -\/ 1) \{}
+\DoxyCodeLine{                std::cout << \textcolor{stringliteral}{"{}, "{}};}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{            ++i;}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"{}]"{}} << std::endl;}
+
 \end{DoxyCodeInclude}
- After using the view analysis results, its resources must be {\bfseries{relinquished}}. 
+
+
+After using the view analysis results, its resources must be {\bfseries{relinquished}}. 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Memory resource cleanup.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// destroy vector<float>}}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (aggregate\_results) \{}
+\DoxyCodeLine{            \textcolor{keyword}{delete} aggregate\_results;}
+\DoxyCodeLine{        \}}
+
 \end{DoxyCodeInclude}
- From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
+
+
+From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
  on how to free the remainder of the resources used for the view analysis --~\newline
- which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{}{H\+F\+::\+Raytracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
+ which are the (vector\texorpdfstring{$<$}{<}\mbox{\hyperlink{a01285}{HF\+::\+Geometry\+::\+Mesh\+Info}}\texorpdfstring{$>$}{>} $\ast$) and (\mbox{\hyperlink{}{HF\+::\+Raytracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
 
-{\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 00000293C\+C9\+C84\+D0, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 00000293C3012\+D20, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ \mbox{[}7.\+43102\mbox{]}}~\newline
-
-
-Definition at line 50 of file view\+\_\+analysis\+\_\+\+C.\+cpp.
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Load\+OBJ loaded mesh successfully into loaded\+\_\+obj at address 00000293CC9\+C84\+D0, code\+: 1}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 00000293C3012\+D20, code\+: 1}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} \mbox{[}7.\+43102\mbox{]}}~\newline
 
 
-
-References Convert\+Raw\+Float\+Array\+To\+Points(), H\+F\+::\+Exceptions\+::\+OK, and H\+F\+::\+View\+Analysis\+::\+Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance().
+Definition at line \mbox{\hyperlink{a00374_source_l00050}{50}} of file \mbox{\hyperlink{a00374_source}{view\+\_\+analysis\+\_\+\+C.\+cpp}}.
 
 
 
-Referenced by C\+Interface\+Tests\+::\+T\+E\+S\+T(), and T\+E\+S\+T().
+References \mbox{\hyperlink{a00179_source_l00024}{Convert\+Raw\+Float\+Array\+To\+Points()}}, \mbox{\hyperlink{a00110_source_l00032}{HF\+::\+Exceptions\+::\+OK}}, and \mbox{\hyperlink{a00023_source_l00484}{HF\+::\+View\+Analysis\+::\+Spherical\+Rayshoot\+With\+Any\+RTFor\+Distance()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -371,19 +531,11 @@ Here is the call graph for this function\+:
 \includegraphics[width=350pt]{a00393_gaa4c5714c1e557ef83a03d447eb30c6d0_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00393_gaa4c5714c1e557ef83a03d447eb30c6d0_icgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{a00393_gaf572b7bec28d55bf2c72719742703dff}\label{a00393_gaf572b7bec28d55bf2c72719742703dff}} 
 \index{ViewAnalysis@{ViewAnalysis}!SphericalDistribute@{SphericalDistribute}}
 \index{SphericalDistribute@{SphericalDistribute}!ViewAnalysis@{ViewAnalysis}}
 \doxysubsubsection{\texorpdfstring{SphericalDistribute()}{SphericalDistribute()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Spherical\+Distribute (\begin{DoxyParamCaption}\item[{int $\ast$}]{num\+\_\+rays,  }\item[{std\+::vector$<$ float $>$ $\ast$$\ast$}]{out\+\_\+direction\+\_\+vector,  }\item[{float $\ast$$\ast$}]{out\+\_\+direction\+\_\+data,  }\item[{float}]{upward\+\_\+fov,  }\item[{float}]{downward\+\_\+fov }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Spherical\+Distribute (\begin{DoxyParamCaption}\item[{int $\ast$}]{num\+\_\+rays,  }\item[{std\+::vector$<$ float $>$ $\ast$$\ast$}]{out\+\_\+direction\+\_\+vector,  }\item[{float $\ast$$\ast$}]{out\+\_\+direction\+\_\+data,  }\item[{float}]{upward\+\_\+fov,  }\item[{float}]{downward\+\_\+fov }\end{DoxyParamCaption})}
 
 
 
@@ -407,7 +559,7 @@ Equally distribute points around a unit sphere.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-H\+F\+::\+OK on completion.
+HF\+::\+OK on completion.
 \end{DoxyReturn}
 \begin{DoxyParagraph}{Caller\textquotesingle{}s Responsibility}
 The caller must call \mbox{\hyperlink{a00347_af77723a4383b278169e80cf0e361ec44}{Destroy\+Float\+Vector}} with out\+\_\+direction\+\_\+vector to free the memory allocated by this function.
@@ -424,7 +576,7 @@ out\+\_\+direction\+\_\+vector and out\+\_\+direction\+\_\+data must not be null
 2) num\+\_\+rays contains the number of points distributed by this function. This may be more or less than the original number depending on the limitations specified by upward and downward fov.
 \end{DoxyPostcond}
 \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH) 
+\mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a BVH) 
 
 \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh)
 \end{DoxySeeAlso}
@@ -434,38 +586,85 @@ out\+\_\+direction\+\_\+vector and out\+\_\+direction\+\_\+data must not be null
 Begin by {\bfseries{initializing}} input values\+:~\newline
  
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Set arguments}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{keywordtype}{int} num\_rays = 10;                          \textcolor{comment}{// number of points to distribute}}
+\DoxyCodeLine{        std::vector<float>* out\_float = \textcolor{keyword}{nullptr};    \textcolor{comment}{// output parameter for points generated}}
+\DoxyCodeLine{        \textcolor{keywordtype}{float}* out\_float\_data;                      \textcolor{comment}{// pointer to buffer within *out\_float}}
+\DoxyCodeLine{        \textcolor{keywordtype}{float} up\_fov = 90.0f;                       \textcolor{comment}{// max degrees upward from viewer's eye level to consider}}
+\DoxyCodeLine{        \textcolor{keywordtype}{float} down\_fov = 90.0f;                     \textcolor{comment}{// max degrees downward from viewer's eye level to consider}}
+
 \end{DoxyCodeInclude}
- We are now ready to call \mbox{\hyperlink{a00393_gaf572b7bec28d55bf2c72719742703dff}{Spherical\+Distribute}} . 
+
+
+We are now ready to call \mbox{\hyperlink{a00393_gaf572b7bec28d55bf2c72719742703dff}{Spherical\+Distribute}} . 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Call function}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{keyword}{auto} status = \mbox{\hyperlink{a00393_gaf572b7bec28d55bf2c72719742703dff}{SphericalDistribute}}(}
+\DoxyCodeLine{            \&num\_rays,}
+\DoxyCodeLine{            \&out\_float,}
+\DoxyCodeLine{            \&out\_float\_data,}
+\DoxyCodeLine{            up\_fov,}
+\DoxyCodeLine{            down\_fov}
+\DoxyCodeLine{        );}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (status != 1) \{}
+\DoxyCodeLine{            std::cerr << \textcolor{stringliteral}{"{}Error at SphericalDistribute, code: "{}} << status << std::endl;}
+\DoxyCodeLine{        \}}
+
 \end{DoxyCodeInclude}
- Let\textquotesingle{}s output the result, stored in {\bfseries{out\+\_\+float\+\_\+data}} (you can also access {\bfseries{$\ast$out\+\_\+float}}). 
+
+
+Let\textquotesingle{}s output the result, stored in {\bfseries{out\+\_\+float\+\_\+data}} (you can also access {\bfseries{$\ast$out\+\_\+float}}). 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Print results}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"{}Number of rays: "{}} << num\_rays << std::endl;}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < num\_rays; i++) \{}
+\DoxyCodeLine{            \textcolor{keywordtype}{int} os = i * 3;}
+\DoxyCodeLine{}
+\DoxyCodeLine{            std::cout << \textcolor{stringliteral}{"{}("{}}}
+\DoxyCodeLine{                << out\_float\_data[os] << \textcolor{stringliteral}{"{}, "{}}}
+\DoxyCodeLine{                << out\_float\_data[os + 1] << \textcolor{stringliteral}{"{}, "{}}}
+\DoxyCodeLine{                << out\_float\_data[os + 2] << \textcolor{stringliteral}{"{})"{}}}
+\DoxyCodeLine{                << std::endl;}
+\DoxyCodeLine{        \}}
+
 \end{DoxyCodeInclude}
- Make sure to destroy the resources addressed by {\bfseries{out\+\_\+float}} when you are finished with it. 
+
+
+Make sure to destroy the resources addressed by {\bfseries{out\+\_\+float}} when you are finished with it. 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Deallocate Memory}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \mbox{\hyperlink{a00344_af77723a4383b278169e80cf0e361ec44}{DestroyFloatVector}}(out\_float);}
+
 \end{DoxyCodeInclude}
- {\ttfamily $>$$>$$>$ Number of rays\+: 10}~\newline
-{\ttfamily $>$$>$$>$ (-\/0, -\/1, 0)}~\newline
-{\ttfamily $>$$>$$>$ (-\/0.\+276545, -\/0.\+8, -\/0.\+532469)}~\newline
-{\ttfamily $>$$>$$>$ (0.\+751457, -\/0.\+6, 0.\+27443)}~\newline
-{\ttfamily $>$$>$$>$ (-\/0.\+847177, -\/0.\+4, 0.\+349703)}~\newline
-{\ttfamily $>$$>$$>$ (0.\+415282, -\/0.\+2, -\/0.\+887435)}~\newline
-{\ttfamily $>$$>$$>$ (0.\+299284, 0, 0.\+954164)}~\newline
-{\ttfamily $>$$>$$>$ (-\/0.\+847731, 0.\+2, -\/0.\+491275)}~\newline
-{\ttfamily $>$$>$$>$ (0.\+895138, 0.\+4, -\/0.\+196795)}~\newline
-{\ttfamily $>$$>$$>$ (-\/0.\+460102, 0.\+6, 0.\+654451)}~\newline
-{\ttfamily $>$$>$$>$ (-\/0.\+0771074, 0.\+8, -\/0.\+595025)}~\newline
 
 
-Definition at line 126 of file view\+\_\+analysis\+\_\+\+C.\+cpp.
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Number of rays\+: 10}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} (-\/0, -\/1, 0)}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} (-\/0.\+276545, -\/0.\+8, -\/0.\+532469)}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} (0.\+751457, -\/0.\+6, 0.\+27443)}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} (-\/0.\+847177, -\/0.\+4, 0.\+349703)}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} (0.\+415282, -\/0.\+2, -\/0.\+887435)}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} (0.\+299284, 0, 0.\+954164)}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} (-\/0.\+847731, 0.\+2, -\/0.\+491275)}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} (0.\+895138, 0.\+4, -\/0.\+196795)}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} (-\/0.\+460102, 0.\+6, 0.\+654451)}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} (-\/0.\+0771074, 0.\+8, -\/0.\+595025)}~\newline
 
 
-
-References H\+F\+::\+View\+Analysis\+::\+Fibbonacci\+Distribute\+Points(), and H\+F\+::\+Exceptions\+::\+OK.
+Definition at line \mbox{\hyperlink{a00374_source_l00126}{126}} of file \mbox{\hyperlink{a00374_source}{view\+\_\+analysis\+\_\+\+C.\+cpp}}.
 
 
 
-Referenced by T\+E\+S\+T(), and C\+Interface\+Tests\+::\+T\+E\+S\+T().
+References \mbox{\hyperlink{a00020_source_l00121}{HF\+::\+View\+Analysis\+::\+Fibbonacci\+Distribute\+Points()}}, and \mbox{\hyperlink{a00110_source_l00032}{HF\+::\+Exceptions\+::\+OK}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -475,20 +674,12 @@ Here is the call graph for this function\+:
 \includegraphics[width=350pt]{a00393_gaf572b7bec28d55bf2c72719742703dff_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=348pt]{a00393_gaf572b7bec28d55bf2c72719742703dff_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00393_gad2ee55f78e191d1ff90e083ad49dc49e}\label{a00393_gad2ee55f78e191d1ff90e083ad49dc49e}} 
+\mbox{\Hypertarget{a00393_ga78f77d24531d0fa55c9b60d7ec1bf32a}\label{a00393_ga78f77d24531d0fa55c9b60d7ec1bf32a}} 
 \index{ViewAnalysis@{ViewAnalysis}!SphericalRayshootWithAnyRTForDistance@{SphericalRayshootWithAnyRTForDistance}}
 \index{SphericalRayshootWithAnyRTForDistance@{SphericalRayshootWithAnyRTForDistance}!ViewAnalysis@{ViewAnalysis}}
 \doxysubsubsection{\texorpdfstring{SphericalRayshootWithAnyRTForDistance()}{SphericalRayshootWithAnyRTForDistance()}}
 {\footnotesize\ttfamily template$<$typename RT , typename N $>$ \\
-std\+::vector$<$float$>$ H\+F\+::\+View\+Analysis\+::\+Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance (\begin{DoxyParamCaption}\item[{RT \&}]{ray\+\_\+tracer,  }\item[{const std\+::vector$<$ N $>$ \&}]{Nodes,  }\item[{int}]{num\+\_\+rays,  }\item[{float}]{upward\+\_\+limit = {\ttfamily 50.0f},  }\item[{float}]{downward\+\_\+limit = {\ttfamily 70.0f},  }\item[{float}]{height = {\ttfamily 1.7f},  }\item[{const \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}}}]{aggregation = {\ttfamily \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+S\+UM}}} }\end{DoxyParamCaption})}
+std\+::vector$<$ float $>$ HF\+::\+View\+Analysis\+::\+Spherical\+Rayshoot\+With\+Any\+RTFor\+Distance (\begin{DoxyParamCaption}\item[{RT \&}]{ray\+\_\+tracer,  }\item[{const std\+::vector$<$ N $>$ \&}]{Nodes,  }\item[{int}]{num\+\_\+rays,  }\item[{float}]{upward\+\_\+limit = {\ttfamily 50.0f},  }\item[{float}]{downward\+\_\+limit = {\ttfamily 70.0f},  }\item[{float}]{height = {\ttfamily 1.7f},  }\item[{const \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{AGGREGATE\+\_\+\+TYPE}}}]{aggregation = {\ttfamily \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}{AGGREGATE\+\_\+\+TYPE\+::\+SUM}}} }\end{DoxyParamCaption})}
 
 
 
@@ -540,22 +731,22 @@ The analysis performed by this function is identical to that described in Spheri
 \begin{DoxySeeAlso}{See also}
 \mbox{\hyperlink{a00393_ga6ca336e3887ef82d17b0713c2bf862df}{Fibbonacci\+Distribute\+Points}} For details on how the directions are calculated from num\+\_\+rays. 
 
-\mbox{\hyperlink{a00393_gab99d16350ec1a4cac1dec3cbd731d7d8}{Spherical\+View\+Analysis}} to get the result of every ray cast instead of summarizing the results. 
+\mbox{\hyperlink{a00393_gaecaa04882696ac6d73173227bd28e91b}{Spherical\+View\+Analysis}} to get the result of every ray cast instead of summarizing the results. 
 
-\mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} for a list of aggregation methods. 
+\mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{AGGREGATE\+\_\+\+TYPE}} for a list of aggregation methods. 
 
 \mbox{\hyperlink{a00400_a38c197b654c753cb656ab60e88d65120}{Aggregate}} for the implementation of all aggregation methods.
 \end{DoxySeeAlso}
 \begin{DoxyParagraph}{Example}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// Requires \#include "view\_analysis.h"}}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}view\_analysis.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Use this so we can fit within 80 characters}}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00393_gad2ee55f78e191d1ff90e083ad49dc49e}{HF::ViewAnalysis::SphericalRayshootWithAnyRTForDistance}};}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{HF::ViewAnalysis::AGGREGATE\_TYPE}};}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01357}{HF::RayTracer::EmbreeRayTracer}};}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00403_a4f0c57b862a0826821217d8c3ac849c4}{HF::Geometry::MeshInfo}};}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a00393_ga78f77d24531d0fa55c9b60d7ec1bf32a}{HF::ViewAnalysis::SphericalRayshootWithAnyRTForDistance}};}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{HF::ViewAnalysis::AGGREGATE\_TYPE}};}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01345}{HF::RayTracer::EmbreeRayTracer}};}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01285}{HF::Geometry::MeshInfo}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Create Plane}}
 \DoxyCodeLine{\textcolor{keyword}{const} std::vector<float> plane\_vertices\{}
@@ -568,7 +759,7 @@ The analysis performed by this function is identical to that described in Spheri
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Create RayTracer}}
 \DoxyCodeLine{EmbreeRayTracer ert(std::vector<MeshInfo>\{}
-\DoxyCodeLine{    \mbox{\hyperlink{a02910_acea841c68a73d07ad9d772ec2e94a683}{MeshInfo}}(plane\_vertices, plane\_indices, 0, \textcolor{stringliteral}{" "})\}}
+\DoxyCodeLine{    \mbox{\hyperlink{a00362_acea841c68a73d07ad9d772ec2e94a683}{MeshInfo}}(plane\_vertices, plane\_indices, 0, \textcolor{stringliteral}{"{} "{}})\}}
 \DoxyCodeLine{);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Define observer points}}
@@ -579,22 +770,23 @@ The analysis performed by this function is identical to that described in Spheri
 \DoxyCodeLine{\textcolor{comment}{// Perform View Analysis and sum the distance to all intersections}}
 \DoxyCodeLine{\textcolor{comment}{// for every node}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} num\_rays = 2000;}
-\DoxyCodeLine{\textcolor{keyword}{auto} results = \mbox{\hyperlink{a00393_gad2ee55f78e191d1ff90e083ad49dc49e}{SphericalRayshootWithAnyRTForDistance}}(}
+\DoxyCodeLine{\textcolor{keyword}{auto} results = \mbox{\hyperlink{a00393_ga78f77d24531d0fa55c9b60d7ec1bf32a}{SphericalRayshootWithAnyRTForDistance}}(}
 \DoxyCodeLine{    ert, points, num\_rays, 90.0f, 90.0f, 1.7f, \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}{AGGREGATE\_TYPE::SUM}}}
 \DoxyCodeLine{);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Print Results}}
-\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"("};}
+\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"{}("{}};}
 \DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < results.size(); i++) \{}
 \DoxyCodeLine{    std::cerr << results[i];}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordflow}{if} (i != results.size() -\/ 1) std::cerr << \textcolor{stringliteral}{", "};}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (i != results.size() -\/ 1) std::cerr << \textcolor{stringliteral}{"{}, "{}};}
 \DoxyCodeLine{\}}
-\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{")"} << std::endl;}
+\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"{})"{}} << std::endl;}
+
 \end{DoxyCode}
 
 \end{DoxyParagraph}
-{\ttfamily $>$$>$$>$ (2746.\+72, 932.\+565, 170.\+858, 76.\+8413)}
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} (2746.\+72, 932.\+565, 170.\+858, 76.\+8413)}
 
 \begin{DoxyRefDesc}{Todo}
 \item[\mbox{\hyperlink{a00386__todo000005}{Todo}}]Should this have a height check like the one in the \mbox{\hyperlink{a00401}{Visibility\+Graph}}?\end{DoxyRefDesc}
@@ -608,22 +800,22 @@ The analysis performed by this function is identical to that described in Spheri
 \item[\mbox{\hyperlink{a00386__todo000007}{Todo}}]Potential speed up here by using a Raytracer function that doesn\textquotesingle{}t return the point of intersection. \end{DoxyRefDesc}
 
 
-Definition at line 484 of file view\+\_\+analysis.\+h.
+Definition at line \mbox{\hyperlink{a00023_source_l00484}{484}} of file \mbox{\hyperlink{a00023_source}{view\+\_\+analysis.\+h}}.
 
 
 
-References H\+F\+::\+View\+Analysis\+::\+Aggregate(), H\+F\+::\+View\+Analysis\+::\+Fibbonacci\+Distribute\+Points(), and H\+F\+::\+View\+Analysis\+::\+M\+IN.
+References \mbox{\hyperlink{a00023_source_l00194}{HF\+::\+View\+Analysis\+::\+Aggregate()}}, \mbox{\hyperlink{a00020_source_l00121}{HF\+::\+View\+Analysis\+::\+Fibbonacci\+Distribute\+Points()}}, and \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07bace31e2a082d17e038fcc6e3006166653}{HF\+::\+View\+Analysis\+::\+MIN}}.
 
 
 
-Referenced by Sphereical\+View\+Analysis\+Aggregate(), Sphereical\+View\+Analysis\+Aggregate\+Flat(), and T\+E\+S\+T().
+Referenced by \mbox{\hyperlink{a00374_source_l00017}{Sphereical\+View\+Analysis\+Aggregate()}}, and \mbox{\hyperlink{a00374_source_l00050}{Sphereical\+View\+Analysis\+Aggregate\+Flat()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a00393_gad2ee55f78e191d1ff90e083ad49dc49e_cgraph}
+\includegraphics[width=350pt]{a00393_ga78f77d24531d0fa55c9b60d7ec1bf32a_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:
@@ -631,15 +823,15 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a00393_gad2ee55f78e191d1ff90e083ad49dc49e_icgraph}
+\includegraphics[width=350pt]{a00393_ga78f77d24531d0fa55c9b60d7ec1bf32a_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{a00393_gab99d16350ec1a4cac1dec3cbd731d7d8}\label{a00393_gab99d16350ec1a4cac1dec3cbd731d7d8}} 
+\mbox{\Hypertarget{a00393_gaecaa04882696ac6d73173227bd28e91b}\label{a00393_gaecaa04882696ac6d73173227bd28e91b}} 
 \index{ViewAnalysis@{ViewAnalysis}!SphericalViewAnalysis@{SphericalViewAnalysis}}
 \index{SphericalViewAnalysis@{SphericalViewAnalysis}!ViewAnalysis@{ViewAnalysis}}
 \doxysubsubsection{\texorpdfstring{SphericalViewAnalysis()}{SphericalViewAnalysis()}}
-{\footnotesize\ttfamily template$<$typename R\+ES , typename RT , typename N $>$ \\
-std\+::vector$<$R\+ES$>$ H\+F\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis (\begin{DoxyParamCaption}\item[{RT \&}]{ray\+\_\+tracer,  }\item[{const std\+::vector$<$ N $>$ \&}]{Nodes,  }\item[{int}]{num\+\_\+rays,  }\item[{float}]{upward\+\_\+limit = {\ttfamily 50.0f},  }\item[{float}]{downward\+\_\+limit = {\ttfamily 70.0f},  }\item[{float}]{height = {\ttfamily 1.7f} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$typename RES , typename RT , typename N $>$ \\
+std\+::vector$<$ RES $>$ HF\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis (\begin{DoxyParamCaption}\item[{RT \&}]{ray\+\_\+tracer,  }\item[{const std\+::vector$<$ N $>$ \&}]{Nodes,  }\item[{int}]{num\+\_\+rays,  }\item[{float}]{upward\+\_\+limit = {\ttfamily 50.0f},  }\item[{float}]{downward\+\_\+limit = {\ttfamily 70.0f},  }\item[{float}]{height = {\ttfamily 1.7f} }\end{DoxyParamCaption})}
 
 
 
@@ -666,7 +858,7 @@ Conduct view analysis with any Raytracer in parallel.
 \end{DoxyParams}
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em R\+ES} & A class or struct that has a .Set\+Hit() function. This function will be called with the node, direction, distance to intersection, and Mesh\+ID intersected for every ray that intersects geometry.\\
+{\em RES} & A class or struct that has a .Set\+Hit() function. This function will be called with the node, direction, distance to intersection, and Mesh\+ID intersected for every ray that intersects geometry.\\
 \hline
 {\em RT} & A Raytracer with Intersect\+Output\+Arguments defined for the type of N. \\
 \hline
@@ -674,9 +866,9 @@ Conduct view analysis with any Raytracer in parallel.
 \hline
 \end{DoxyTemplParams}
 \begin{DoxyReturn}{Returns}
-An {\itshape approximately} num\+\_\+rays $\ast$ Nodes.\+size() long vector of R\+ES with one element for every ray cast. Results will be laid out in order with the first node\textquotesingle{}s results first, then the second, etc. Every ray that intersected something, and all elements that didn\textquotesingle{}t result in an intersection will left at their default values.
+An {\itshape approximately} num\+\_\+rays $\ast$ Nodes.\+size() long vector of RES with one element for every ray cast. Results will be laid out in order with the first node\textquotesingle{}s results first, then the second, etc. Every ray that intersected something, and all elements that didn\textquotesingle{}t result in an intersection will left at their default values.
 \end{DoxyReturn}
-\mbox{\hyperlink{a00400}{View\+Analysis}} is calculated by casting a series of rays equally distributed in a sphere from each point in Nodes. This function will run in parallel using all available cores. Depending on R\+ES, this function\textquotesingle{}s complexity and results can vary.
+\mbox{\hyperlink{a00400}{View\+Analysis}} is calculated by casting a series of rays equally distributed in a sphere from each point in Nodes. This function will run in parallel using all available cores. Depending on RES, this function\textquotesingle{}s complexity and results can vary.
 
 
 \begin{DoxyExceptions}{Exceptions}
@@ -686,17 +878,17 @@ An {\itshape approximately} num\+\_\+rays $\ast$ Nodes.\+size() long vector of R
 \begin{DoxySeeAlso}{See also}
 \mbox{\hyperlink{a00393_ga6ca336e3887ef82d17b0713c2bf862df}{Fibbonacci\+Distribute\+Points}} For details on how the directions are calculated from num\+\_\+rays. 
 
-\mbox{\hyperlink{a00393_gad2ee55f78e191d1ff90e083ad49dc49e}{Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance}} for a more efficent method of getting a summary of the results.
+\mbox{\hyperlink{a00393_ga78f77d24531d0fa55c9b60d7ec1bf32a}{Spherical\+Rayshoot\+With\+Any\+RTFor\+Distance}} for a more efficent method of getting a summary of the results.
 \end{DoxySeeAlso}
 \begin{DoxyParagraph}{Example}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// Requires \#include "view\_analysis.h"}}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}view\_analysis.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Use this so we can fit within 80 characters}}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00393_gab99d16350ec1a4cac1dec3cbd731d7d8}{HF::ViewAnalysis::SphericalViewAnalysis}};}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01357}{HF::RayTracer::EmbreeRayTracer}};}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00403_a4f0c57b862a0826821217d8c3ac849c4}{HF::Geometry::MeshInfo}};}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a00393_gaecaa04882696ac6d73173227bd28e91b}{HF::ViewAnalysis::SphericalViewAnalysis}};}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01345}{HF::RayTracer::EmbreeRayTracer}};}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01285}{HF::Geometry::MeshInfo}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Create Plane}}
 \DoxyCodeLine{\textcolor{keyword}{const} std::vector<float> plane\_vertices\{}
@@ -710,7 +902,7 @@ An {\itshape approximately} num\+\_\+rays $\ast$ Nodes.\+size() long vector of R
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Create RayTracer}}
 \DoxyCodeLine{EmbreeRayTracer ert(std::vector<MeshInfo>\{}
-\DoxyCodeLine{    \mbox{\hyperlink{a02910_acea841c68a73d07ad9d772ec2e94a683}{MeshInfo}}(plane\_vertices, plane\_indices, 0, \textcolor{stringliteral}{" "})\}}
+\DoxyCodeLine{    \mbox{\hyperlink{a00362_acea841c68a73d07ad9d772ec2e94a683}{MeshInfo}}(plane\_vertices, plane\_indices, 0, \textcolor{stringliteral}{"{} "{}})\}}
 \DoxyCodeLine{);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Define a struct that only stores the distance when sethit is called.}}
@@ -746,54 +938,43 @@ An {\itshape approximately} num\+\_\+rays $\ast$ Nodes.\+size() long vector of R
 \DoxyCodeLine{);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Print Results}}
-\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"("};}
+\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"{}("{}};}
 \DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < first\_results.size(); i++) \{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} \& result = first\_results[i];}
 \DoxyCodeLine{    std::cerr << result.dist;}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordflow}{if} (i != first\_results.size() -\/ 1) std::cerr << \textcolor{stringliteral}{", "};}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (i != first\_results.size() -\/ 1) std::cerr << \textcolor{stringliteral}{"{}, "{}};}
 \DoxyCodeLine{\}}
-\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{")"} << std::endl;}
+\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"{})"{}} << std::endl;}
+
 \end{DoxyCode}
 
 \end{DoxyParagraph}
-{\ttfamily $>$$>$$>$ (-\/1, 7.\+35812, -\/1, -\/1, 3.\+70356, -\/1, 5.\+56647, 12.\+1517, -\/1, 2.\+36725, -\/1, -\/1, 2.\+97477, 2.\+58713, -\/1,} {\ttfamily -\/1, 1.\+91404, 5.\+95885, 4.\+26368, 1.\+86167, -\/1, -\/1, 2.\+0406, 2.\+78304, -\/1, -\/1, -\/1, -\/1, 2.\+83909, 2.\+05302,} {\ttfamily -\/1, -\/1, 1.\+90724, 4.\+29017, 6.\+3381, 1.\+98544, -\/1, -\/1, 2.\+75554, 3.\+15929, -\/1, -\/1, 2.\+6345, -\/1, -\/1,} {\ttfamily 6.\+80486, -\/1, 5.\+12012, -\/1)}
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} (-\/1, 7.\+35812, -\/1, -\/1, 3.\+70356, -\/1, 5.\+56647, 12.\+1517, -\/1, 2.\+36725, -\/1, -\/1, 2.\+97477, 2.\+58713, -\/1,} {\ttfamily -\/1, 1.\+91404, 5.\+95885, 4.\+26368, 1.\+86167, -\/1, -\/1, 2.\+0406, 2.\+78304, -\/1, -\/1, -\/1, -\/1, 2.\+83909, 2.\+05302,} {\ttfamily -\/1, -\/1, 1.\+90724, 4.\+29017, 6.\+3381, 1.\+98544, -\/1, -\/1, 2.\+75554, 3.\+15929, -\/1, -\/1, 2.\+6345, -\/1, -\/1,} {\ttfamily 6.\+80486, -\/1, 5.\+12012, -\/1)}
 
 \begin{DoxyRefDesc}{Todo}
 \item[\mbox{\hyperlink{a00386__todo000004}{Todo}}]Should this have a height check like the one in the \mbox{\hyperlink{a00401}{Visibility\+Graph}}?\end{DoxyRefDesc}
 
 
-Definition at line 335 of file view\+\_\+analysis.\+h.
+Definition at line \mbox{\hyperlink{a00023_source_l00335}{335}} of file \mbox{\hyperlink{a00023_source}{view\+\_\+analysis.\+h}}.
 
 
 
-References H\+F\+::\+View\+Analysis\+::\+Fibbonacci\+Distribute\+Points().
-
-
-
-Referenced by T\+E\+S\+T().
+References \mbox{\hyperlink{a00020_source_l00121}{HF\+::\+View\+Analysis\+::\+Fibbonacci\+Distribute\+Points()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a00393_gab99d16350ec1a4cac1dec3cbd731d7d8_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=309pt]{a00393_gab99d16350ec1a4cac1dec3cbd731d7d8_icgraph}
+\includegraphics[width=350pt]{a00393_gaecaa04882696ac6d73173227bd28e91b_cgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{a00393_ga94d3ddc3981020e2852fc77e51266185}\label{a00393_ga94d3ddc3981020e2852fc77e51266185}} 
 \index{ViewAnalysis@{ViewAnalysis}!SphericalViewAnalysisNoAggregate@{SphericalViewAnalysisNoAggregate}}
 \index{SphericalViewAnalysisNoAggregate@{SphericalViewAnalysisNoAggregate}!ViewAnalysis@{ViewAnalysis}}
 \doxysubsubsection{\texorpdfstring{SphericalViewAnalysisNoAggregate()}{SphericalViewAnalysisNoAggregate()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Spherical\+View\+Analysis\+No\+Aggregate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{E\+RT,  }\item[{const \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $\ast$}]{node\+\_\+ptr,  }\item[{int}]{node\+\_\+size,  }\item[{int $\ast$}]{max\+\_\+rays,  }\item[{float}]{upward\+\_\+fov,  }\item[{float}]{downward\+\_\+fov,  }\item[{float}]{height,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a02045}{Ray\+Result}} $>$ $\ast$$\ast$}]{out\+\_\+results,  }\item[{\mbox{\hyperlink{a02045}{Ray\+Result}} $\ast$$\ast$}]{out\+\_\+results\+\_\+ptr }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Spherical\+View\+Analysis\+No\+Aggregate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01345}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ERT,  }\item[{const \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} $\ast$}]{node\+\_\+ptr,  }\item[{int}]{node\+\_\+size,  }\item[{int $\ast$}]{max\+\_\+rays,  }\item[{float}]{upward\+\_\+fov,  }\item[{float}]{downward\+\_\+fov,  }\item[{float}]{height,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a02021}{Ray\+Result}} $>$ $\ast$$\ast$}]{out\+\_\+results,  }\item[{\mbox{\hyperlink{a02021}{Ray\+Result}} $\ast$$\ast$}]{out\+\_\+results\+\_\+ptr }\end{DoxyParamCaption})}
 
 
 
@@ -805,7 +986,7 @@ Perform view analysis, then get the distance and meshid for each individual ray 
 
 
 \begin{DoxyParams}{Parameters}
-{\em E\+RT} & Raytracer containing the geometry to use for ray intersections. \\
+{\em ERT} & Raytracer containing the geometry to use for ray intersections. \\
 \hline
 {\em node\+\_\+ptr} & Observer points for the view analysis. \\
 \hline
@@ -825,7 +1006,7 @@ Perform view analysis, then get the distance and meshid for each individual ray 
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-H\+F\+::\+OK on completion.
+HF\+::\+OK on completion.
 \end{DoxyReturn}
 Rays that do not intersect with any geometry will have a meshid of -\/1.
 
@@ -833,11 +1014,11 @@ Rays that do not intersect with any geometry will have a meshid of -\/1.
 The caller must call \mbox{\hyperlink{a00391_ga5a68e1d668554f73ee06de8aeeaaffad}{Destroy\+Ray\+Result\+Vector}} with out\+\_\+results to free the memory allocated by this function.
 \end{DoxyParagraph}
 \begin{DoxyPrecond}{Precondition}
-1) E\+RT points to a valid raytracer created by \mbox{\hyperlink{a00391_ga3ac702d080e493d1fa8be6cf4243e38b}{Create\+Raytracer}}. 
+1) ERT points to a valid raytracer created by \mbox{\hyperlink{a00391_ga3ac702d080e493d1fa8be6cf4243e38b}{Create\+Raytracer}}. 
 
 2) node\+\_\+ptr contains a valid array of nodes with length equal to node\+\_\+size. 
 
-3) node\+\_\+ptr, max\+\_\+rays, and E\+RT are not null.
+3) node\+\_\+ptr, max\+\_\+rays, and ERT are not null.
 \end{DoxyPrecond}
 \begin{DoxyPostcond}{Postcondition}
 1) out\+\_\+results contains a pointer to score for every node in nodes in order. 
@@ -849,7 +1030,7 @@ The caller must call \mbox{\hyperlink{a00391_ga5a68e1d668554f73ee06de8aeeaaffad}
 \begin{DoxySeeAlso}{See also}
 \mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
 
-\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
+\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a BVH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a BVH)
 
 \mbox{\hyperlink{a00393_gaf572b7bec28d55bf2c72719742703dff}{Spherical\+Distribute}} to get the direction of every ray casted by this function. Can be useful to determine the point of intersection for every ray casted.
 \end{DoxySeeAlso}
@@ -857,57 +1038,128 @@ The caller must call \mbox{\hyperlink{a00391_ga5a68e1d668554f73ee06de8aeeaaffad}
 
 \end{DoxyParagraph}
 Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}}).~\newline
- Then, {\bfseries{create a B\+VH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
+ Then, {\bfseries{create a BVH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
 
 
 Set up the parameters for the view analysis. 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Preparing the parameters for SphericalViewAnalysisNoAggregate}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Define point to start ray}}
+\DoxyCodeLine{        \textcolor{comment}{// These are Cartesian coordinates.}}
+\DoxyCodeLine{        std::array<Node, 1> p1\{ Node(0.0f, 0.0f, 2.0f) \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Define direction to cast ray}}
+\DoxyCodeLine{        \textcolor{comment}{// These are vector components, not Cartesian coordinates.}}
+\DoxyCodeLine{        std::array<float, 3> dir \{ 0.0f, 0.0f, -\/1.0f \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// This is a container of nodes to be analyzed.}}
+\DoxyCodeLine{        \textcolor{comment}{// SphericalViewAnalysisNoAggregate accepts a (Node *) parameter,}}
+\DoxyCodeLine{        \textcolor{comment}{// so a raw stack-\/allocated array will suffice.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// This may also be a pointer to a heap-\/allocated buffer}}
+\DoxyCodeLine{        \textcolor{comment}{// (which is owned by a vector<Node>, accessed via the vector<Node>::data() method).}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// ...or, it can be a pointer to memory allocated by the caller via operator new[node\_count]}}
+\DoxyCodeLine{        \textcolor{comment}{// (if this route is taken, be sure to release the memory with operator delete[] after use)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{int} node\_count = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(p1.size()); \textcolor{comment}{// should be the element count in nodes}}
+\DoxyCodeLine{        \textcolor{keywordtype}{int} ray\_count = 1000;               \textcolor{comment}{// will be mutated by SphericalViewAnalysisNoAggregate}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{float} height = 1.7f;          \textcolor{comment}{// height to offset nodes from the ground, in meters}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{float} upward\_fov = 50.0f;     \textcolor{comment}{// default parameter is 50.0f in Python code}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{float} downward\_fov = 70.0f;   \textcolor{comment}{// default parameter is 70.0f in Python code}}
+
 \end{DoxyCodeInclude}
- Now you must prepare a pointer to a std\+::vector$<$\mbox{\hyperlink{a02045}{Ray\+Result}}$>$.~\newline
+
+
+Now you must prepare a pointer to a std\+::vector\texorpdfstring{$<$}{<}\mbox{\hyperlink{a02021}{Ray\+Result}}\texorpdfstring{$>$}{>}.~\newline
  View analysis results will be stored at the memory addressed by this pointer. 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Declare a pointer to vector<RayResult>, named results.}}
+\DoxyCodeLine{        \textcolor{comment}{// This pointer will point to memory on the free store,}}
+\DoxyCodeLine{        \textcolor{comment}{// allocated within SphericalViewAnalysisNoAggregate.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// results\_data will point to the underlying buffer within *results,}}
+\DoxyCodeLine{        \textcolor{comment}{// which will be assigned inside SphericalViewAnalysisNoAggregate.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Note that we must call operator delete on results when we are finished with it.}}
+\DoxyCodeLine{        std::vector<RayResult>* results = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{        \mbox{\hyperlink{a02021}{RayResult}}* results\_data = \textcolor{keyword}{nullptr};}
+
 \end{DoxyCodeInclude}
- Now we are ready to call \mbox{\hyperlink{a00393_ga94d3ddc3981020e2852fc77e51266185}{Spherical\+View\+Analysis\+No\+Aggregate}} . 
+
+
+Now we are ready to call \mbox{\hyperlink{a00393_ga94d3ddc3981020e2852fc77e51266185}{Spherical\+View\+Analysis\+No\+Aggregate}} . 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Conducting a view analysis on the node at position p1.}}
+\DoxyCodeLine{        status = \mbox{\hyperlink{a00393_ga94d3ddc3981020e2852fc77e51266185}{SphericalViewAnalysisNoAggregate}}(bvh,}
+\DoxyCodeLine{            p1.data(), node\_count, \&ray\_count,}
+\DoxyCodeLine{            upward\_fov, downward\_fov, height,}
+\DoxyCodeLine{            \&results, \&results\_data);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (status != 1) \{}
+\DoxyCodeLine{            \textcolor{comment}{// Error!}}
+\DoxyCodeLine{            std::cerr << \textcolor{stringliteral}{"{}Error at SphericalViewAnalysisNoAggregate, code: "{}} << status << std::endl;}
+\DoxyCodeLine{        \}}
+
 \end{DoxyCodeInclude}
- We can output the contents of the {\bfseries{aggregate results vector}} to {\bfseries{stdout}}. 
+
+
+We can output the contents of the {\bfseries{aggregate results vector}} to {\bfseries{stdout}}. 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Print results vector (vector<RayResult>)}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{int} start\_range = 15;}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{int} end\_range = 20;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"{}["{}};}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = start\_range; i < end\_range; i++) \{}
+\DoxyCodeLine{            \textcolor{keyword}{auto} result = (*results)[i];}
+\DoxyCodeLine{}
+\DoxyCodeLine{            std::cout << \textcolor{stringliteral}{"{}("{}} << result.distance << \textcolor{stringliteral}{"{}, "{}} << result.meshid << \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (i < end\_range -\/ 1) \{}
+\DoxyCodeLine{                std::cout << \textcolor{stringliteral}{"{}, "{}};}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"{}]"{}} << std::endl;}
+
 \end{DoxyCodeInclude}
- After using the view analysis results, its resources must be {\bfseries{relinquished}}. 
+
+
+After using the view analysis results, its resources must be {\bfseries{relinquished}}. 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Memory resource cleanup.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// destroy vector<RayResult>}}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (results) \{}
+\DoxyCodeLine{            \textcolor{keyword}{delete} results;}
+\DoxyCodeLine{        \}}
+
 \end{DoxyCodeInclude}
- From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
+
+
+From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
  on how to free the remainder of the resources used for the view analysis --~\newline
- which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{}{H\+F\+::\+Raytracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
+ which are the (vector\texorpdfstring{$<$}{<}\mbox{\hyperlink{a01285}{HF\+::\+Geometry\+::\+Mesh\+Info}}\texorpdfstring{$>$}{>} $\ast$) and (\mbox{\hyperlink{}{HF\+::\+Raytracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
 
-{\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 00000293C\+C9\+C84\+D0, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 00000293C3012500, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ \mbox{[}(-\/1, -\/1), (-\/1, -\/1), (15.\+8334, 0), (-\/1, -\/1), (-\/1, -\/1)\mbox{]}}~\newline
-
-
-Definition at line 73 of file view\+\_\+analysis\+\_\+\+C.\+cpp.
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Load\+OBJ loaded mesh successfully into loaded\+\_\+obj at address 00000293CC9\+C84\+D0, code\+: 1}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 00000293C3012500, code\+: 1}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} \mbox{[}(-\/1, -\/1), (-\/1, -\/1), (15.\+8334, 0), (-\/1, -\/1), (-\/1, -\/1)\mbox{]}}~\newline
 
 
-
-References H\+F\+::\+Exceptions\+::\+OK.
+Definition at line \mbox{\hyperlink{a00374_source_l00073}{73}} of file \mbox{\hyperlink{a00374_source}{view\+\_\+analysis\+\_\+\+C.\+cpp}}.
 
 
 
-Referenced by C\+Interface\+Tests\+::\+T\+E\+S\+T(), and T\+E\+S\+T().
+References \mbox{\hyperlink{a00110_source_l00032}{HF\+::\+Exceptions\+::\+OK}}.
 
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00393_ga94d3ddc3981020e2852fc77e51266185_icgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{a00393_ga348af4492f3e4e7ffab6da3e86de3924}\label{a00393_ga348af4492f3e4e7ffab6da3e86de3924}} 
 \index{ViewAnalysis@{ViewAnalysis}!SphericalViewAnalysisNoAggregateFlat@{SphericalViewAnalysisNoAggregateFlat}}
 \index{SphericalViewAnalysisNoAggregateFlat@{SphericalViewAnalysisNoAggregateFlat}!ViewAnalysis@{ViewAnalysis}}
 \doxysubsubsection{\texorpdfstring{SphericalViewAnalysisNoAggregateFlat()}{SphericalViewAnalysisNoAggregateFlat()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Spherical\+View\+Analysis\+No\+Aggregate\+Flat (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{E\+RT,  }\item[{const float $\ast$}]{node\+\_\+ptr,  }\item[{int}]{node\+\_\+size,  }\item[{int $\ast$}]{max\+\_\+rays,  }\item[{float}]{upward\+\_\+fov,  }\item[{float}]{downward\+\_\+fov,  }\item[{float}]{height,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a02045}{Ray\+Result}} $>$ $\ast$$\ast$}]{out\+\_\+results,  }\item[{\mbox{\hyperlink{a02045}{Ray\+Result}} $\ast$$\ast$}]{out\+\_\+results\+\_\+ptr }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Spherical\+View\+Analysis\+No\+Aggregate\+Flat (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01345}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ERT,  }\item[{const float $\ast$}]{node\+\_\+ptr,  }\item[{int}]{node\+\_\+size,  }\item[{int $\ast$}]{max\+\_\+rays,  }\item[{float}]{upward\+\_\+fov,  }\item[{float}]{downward\+\_\+fov,  }\item[{float}]{height,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a02021}{Ray\+Result}} $>$ $\ast$$\ast$}]{out\+\_\+results,  }\item[{\mbox{\hyperlink{a02021}{Ray\+Result}} $\ast$$\ast$}]{out\+\_\+results\+\_\+ptr }\end{DoxyParamCaption})}
 
 
 
@@ -919,7 +1171,7 @@ Perform view analysis, and get the distance and meshid for each individual ray c
 
 
 \begin{DoxyParams}{Parameters}
-{\em E\+RT} & Raytracer containing the geometry to use for ray intersections.\\
+{\em ERT} & Raytracer containing the geometry to use for ray intersections.\\
 \hline
 {\em node\+\_\+ptr} & observer points for the view analysis. Every 3 elements represents the x,y,z coordinates of a new point.\\
 \hline
@@ -939,7 +1191,7 @@ Perform view analysis, and get the distance and meshid for each individual ray c
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-H\+F\+::\+OK on completion.
+HF\+::\+OK on completion.
 \end{DoxyReturn}
 Rays that do not intersect with any geometry will have a meshid of -\/1.
 
@@ -947,11 +1199,11 @@ Rays that do not intersect with any geometry will have a meshid of -\/1.
 The caller must call \mbox{\hyperlink{a00391_ga5a68e1d668554f73ee06de8aeeaaffad}{Destroy\+Ray\+Result\+Vector}} with out\+\_\+results to free the memory allocated by this function.
 \end{DoxyParagraph}
 \begin{DoxyPrecond}{Precondition}
-1) E\+RT points to a valid raytracer created by \mbox{\hyperlink{a00391_ga3ac702d080e493d1fa8be6cf4243e38b}{Create\+Raytracer}}. 
+1) ERT points to a valid raytracer created by \mbox{\hyperlink{a00391_ga3ac702d080e493d1fa8be6cf4243e38b}{Create\+Raytracer}}. 
 
 2) node\+\_\+ptr contains a valid array of floats with length equal to node\+\_\+size $\ast$3 . 
 
-3) node\+\_\+ptr, max\+\_\+rays, and E\+RT are not null.
+3) node\+\_\+ptr, max\+\_\+rays, and ERT are not null.
 \end{DoxyPrecond}
 \begin{DoxyPostcond}{Postcondition}
 1) out\+\_\+scores contains a pointer to score for every node in nodes in order. 
@@ -963,7 +1215,7 @@ The caller must call \mbox{\hyperlink{a00391_ga5a68e1d668554f73ee06de8aeeaaffad}
 \begin{DoxySeeAlso}{See also}
 \mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
 
-\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
+\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a BVH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a BVH)
 
 \mbox{\hyperlink{a00393_gaf572b7bec28d55bf2c72719742703dff}{Spherical\+Distribute}} to get the direction of every ray casted by this function. Can be useful to determine the point of intersection for every ray casted.
 \end{DoxySeeAlso}
@@ -971,43 +1223,122 @@ The caller must call \mbox{\hyperlink{a00391_ga5a68e1d668554f73ee06de8aeeaaffad}
 
 \end{DoxyParagraph}
 Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}}).~\newline
- Then, {\bfseries{create a B\+VH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
+ Then, {\bfseries{create a BVH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
 
 
 Set up the parameters for the view analysis. 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Preparing the parameters for SphericalViewAnalysisNoAggregateFlat}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Define point to start ray}}
+\DoxyCodeLine{        \textcolor{comment}{// These are Cartesian coordinates.}}
+\DoxyCodeLine{        std::array<float, 3> p1 \{ 0.0f, 0.0f, 2.0f \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Define direction to cast ray}}
+\DoxyCodeLine{        \textcolor{comment}{// These are vector components, not Cartesian coordinates.}}
+\DoxyCodeLine{        std::array<float, 3> dir \{ 0.0f, 0.0f, -\/1.0f \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// This is a container of nodes to be analyzed.}}
+\DoxyCodeLine{        \textcolor{comment}{// SphericalViewAnalysisNoAggregateFlat accepts a (Node *) parameter,}}
+\DoxyCodeLine{        \textcolor{comment}{// so a raw stack-\/allocated array will suffice.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// This may also be a pointer to a heap-\/allocated buffer}}
+\DoxyCodeLine{        \textcolor{comment}{// (which is owned by a vector<Node>, accessed via the vector<Node>::data() method).}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// ...or, it can be a pointer to memory allocated by the caller via operator new[node\_count]}}
+\DoxyCodeLine{        \textcolor{comment}{// (if this route is taken, be sure to release the memory with operator delete[] after use)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{int} node\_count = 1;           \textcolor{comment}{// should be the element count in nodes}}
+\DoxyCodeLine{        \textcolor{keywordtype}{int} ray\_count = 1000;               \textcolor{comment}{// will be mutated by SphericalViewAnalysisNoAggregateFlat}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{float} height = 1.7f;          \textcolor{comment}{// height to offset nodes from the ground, in meters}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{float} upward\_fov = 50.0f;     \textcolor{comment}{// default parameter is 50.0f in Python code}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{float} downward\_fov = 70.0f;   \textcolor{comment}{// default parameter is 70.0f in Python code}}
+
 \end{DoxyCodeInclude}
- Now you must prepare a pointer to a std\+::vector$<$\mbox{\hyperlink{a02045}{Ray\+Result}}$>$.~\newline
+
+
+Now you must prepare a pointer to a std\+::vector\texorpdfstring{$<$}{<}\mbox{\hyperlink{a02021}{Ray\+Result}}\texorpdfstring{$>$}{>}.~\newline
  View analysis results will be stored at the memory addressed by this pointer. 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Declare a pointer to vector<RayResult>, named results.}}
+\DoxyCodeLine{        \textcolor{comment}{// This pointer will point to memory on the free store,}}
+\DoxyCodeLine{        \textcolor{comment}{// allocated within SphericalViewAnalysisNoAggregateFlat.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// results\_data will point to the underlying buffer within *results,}}
+\DoxyCodeLine{        \textcolor{comment}{// which will be assigned inside SphericalViewAnalysisNoAggregateFlat.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Note that we must call operator delete on results when we are finished with it.}}
+\DoxyCodeLine{        std::vector<RayResult>* results = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{        \mbox{\hyperlink{a02021}{RayResult}}* results\_data = \textcolor{keyword}{nullptr};}
+
 \end{DoxyCodeInclude}
- We are now ready to call \mbox{\hyperlink{a00393_ga348af4492f3e4e7ffab6da3e86de3924}{Spherical\+View\+Analysis\+No\+Aggregate\+Flat}}. 
+
+
+We are now ready to call \mbox{\hyperlink{a00393_ga348af4492f3e4e7ffab6da3e86de3924}{Spherical\+View\+Analysis\+No\+Aggregate\+Flat}}. 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Conducting a view analysis on the node at position p1.}}
+\DoxyCodeLine{        status = \mbox{\hyperlink{a00393_ga348af4492f3e4e7ffab6da3e86de3924}{SphericalViewAnalysisNoAggregateFlat}}(bvh,}
+\DoxyCodeLine{            p1.data(), node\_count, \&ray\_count,}
+\DoxyCodeLine{            upward\_fov, downward\_fov, height,}
+\DoxyCodeLine{            \&results, \&results\_data);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (status != 1) \{}
+\DoxyCodeLine{            \textcolor{comment}{// Error!}}
+\DoxyCodeLine{            std::cerr << \textcolor{stringliteral}{"{}Error at SphericalViewAnalysisNoAggregateFlat, code: "{}} << status << std::endl;}
+\DoxyCodeLine{        \}}
+
 \end{DoxyCodeInclude}
- We can output the contents of the {\bfseries{results vector}} to {\bfseries{stdout}}. 
+
+
+We can output the contents of the {\bfseries{results vector}} to {\bfseries{stdout}}. 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Print results vector (vector<RayResult>)}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{int} start\_range = 15;}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{int} end\_range = 20;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"{}["{}};}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = start\_range; i < end\_range; i++) \{}
+\DoxyCodeLine{            \textcolor{keyword}{auto} result = (*results)[i];}
+\DoxyCodeLine{}
+\DoxyCodeLine{            std::cout << \textcolor{stringliteral}{"{}("{}} << result.distance << \textcolor{stringliteral}{"{}, "{}} << result.meshid << \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (i < end\_range -\/ 1) \{}
+\DoxyCodeLine{                std::cout << \textcolor{stringliteral}{"{}, "{}};}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"{}]"{}} << std::endl;}
+
 \end{DoxyCodeInclude}
- After using the view analysis results, its resources must be {\bfseries{relinquished}}. 
+
+
+After using the view analysis results, its resources must be {\bfseries{relinquished}}. 
 \begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Memory resource cleanup.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// destroy vector<RayResult>}}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (results) \{}
+\DoxyCodeLine{            \textcolor{keyword}{delete} results;}
+\DoxyCodeLine{        \}}
+
 \end{DoxyCodeInclude}
- From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
+
+
+From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
  on how to free the remainder of the resources used for the view analysis --~\newline
- which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{}{H\+F\+::\+Raytracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
+ which are the (vector\texorpdfstring{$<$}{<}\mbox{\hyperlink{a01285}{HF\+::\+Geometry\+::\+Mesh\+Info}}\texorpdfstring{$>$}{>} $\ast$) and (\mbox{\hyperlink{}{HF\+::\+Raytracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
 
-{\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 00000293C\+C9\+C8290, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 00000293C3012\+D20, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ \mbox{[}(-\/1, -\/1), (-\/1, -\/1), (15.\+8334, 0), (-\/1, -\/1), (-\/1, -\/1)\mbox{]}}~\newline
-
-
-Definition at line 106 of file view\+\_\+analysis\+\_\+\+C.\+cpp.
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Load\+OBJ loaded mesh successfully into loaded\+\_\+obj at address 00000293CC9\+C8290, code\+: 1}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 00000293C3012\+D20, code\+: 1}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} \mbox{[}(-\/1, -\/1), (-\/1, -\/1), (15.\+8334, 0), (-\/1, -\/1), (-\/1, -\/1)\mbox{]}}~\newline
 
 
-
-References Convert\+Raw\+Float\+Array\+To\+Points(), and H\+F\+::\+Exceptions\+::\+OK.
+Definition at line \mbox{\hyperlink{a00374_source_l00106}{106}} of file \mbox{\hyperlink{a00374_source}{view\+\_\+analysis\+\_\+\+C.\+cpp}}.
 
 
 
-Referenced by C\+Interface\+Tests\+::\+T\+E\+S\+T(), and T\+E\+S\+T().
+References \mbox{\hyperlink{a00179_source_l00024}{Convert\+Raw\+Float\+Array\+To\+Points()}}, and \mbox{\hyperlink{a00110_source_l00032}{HF\+::\+Exceptions\+::\+OK}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -1015,13 +1346,5 @@ Here is the call graph for this function\+:
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{a00393_ga348af4492f3e4e7ffab6da3e86de3924_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00393_ga348af4492f3e4e7ffab6da3e86de3924_icgraph}
 \end{center}
 \end{figure}

@@ -1,5 +1,5 @@
 var a01513 =
 [
-    [ "invalid_iterator", "a01513.html#adf4a6697420f3bddb4addfc0b98f6ee2", null ],
-    [ "create", "a01513.html#a4e849260a3caa1b288c7e619130c6c09", null ]
+    [ "other_error", "a01513.html#adf9227d6ca5161508f6a598a0dc6e7cd", null ],
+    [ "create", "a01513.html#a87e8ab894e8c85c0d97a0919782d3683", null ]
 ];

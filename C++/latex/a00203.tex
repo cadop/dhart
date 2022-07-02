@@ -2,7 +2,7 @@
 \label{a00203}\index{Cpp/spatialstructures/src/graph.h@{Cpp/spatialstructures/src/graph.h}}
 
 
-Contains definitions for the \mbox{\hyperlink{a01497}{Graph }} class.  
+Contains definitions for the \mbox{\hyperlink{a01485}{Graph }} class.  
 
 
 {\ttfamily \#include $<$robin\+\_\+hood.\+h$>$}\newline
@@ -30,63 +30,67 @@ This graph shows which files directly or indirectly include this file\+:
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{a01485}{H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs}}
-\begin{DoxyCompactList}\small\item\em A struct to hold all necessary information for a C\+SR. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{a00399_a01489}{H\+F\+::\+Spatial\+Structures\+::\+Subgraph}}
-\begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{a00399_a01489}{Subgraph}} consists of a parent \mbox{\hyperlink{a02017}{Node}} m\+\_\+parent and a container of \mbox{\hyperlink{a01473}{Edge}} m\+\_\+edges such that all \mbox{\hyperlink{a01473}{Edge}} in m\+\_\+edges extend from m\+\_\+parent.  \mbox{\hyperlink{a00399_a01489}{More...}}\end{DoxyCompactList}\item 
-class \mbox{\hyperlink{a01493}{H\+F\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set}}
+struct \mbox{\hyperlink{a01473}{HF\+::\+Spatial\+Structures\+::\+CSRPtrs}}
+\begin{DoxyCompactList}\small\item\em A struct to hold all necessary information for a CSR. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00399_a01477}{HF\+::\+Spatial\+Structures\+::\+Subgraph}}
+\begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{a00399_a01477}{Subgraph}} consists of a parent \mbox{\hyperlink{a02005}{Node}} m\+\_\+parent and a container of \mbox{\hyperlink{a01461}{Edge}} m\+\_\+edges such that all \mbox{\hyperlink{a01461}{Edge}} in m\+\_\+edges extend from m\+\_\+parent.  \mbox{\hyperlink{a00399_a01477}{More...}}\end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01481}{HF\+::\+Spatial\+Structures\+::\+Edge\+Cost\+Set}}
 \begin{DoxyCompactList}\small\item\em A set of edge costs for a graph. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}}
-\begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{a01497}{Graph}} of nodes connected by edges that supports both integers and \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+class \mbox{\hyperlink{a01485}{HF\+::\+Spatial\+Structures\+::\+Graph}}
+\begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{a01485}{Graph}} of nodes connected by edges that supports both integers and \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{a00405}{Eigen}}
+namespace \mbox{\hyperlink{a00405}{Eigen}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a00405}{Eigen}} a C++ template library for linear algebra\+: matrices, vectors, numerical solvers, and related algorithms. \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00396}{HF}}
+namespace \mbox{\hyperlink{a00396}{HF}}
 \begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00399}{H\+F\+::\+Spatial\+Structures}}
+namespace \mbox{\hyperlink{a00399}{HF\+::\+Spatial\+Structures}}
 \begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout Human\+Factors. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-using \mbox{\hyperlink{a00399_a40b235356dfcdd3f2e1adc0f3c342007}{H\+F\+::\+Spatial\+Structures\+::\+Edge\+Matrix}} = Eigen\+::\+Sparse\+Matrix$<$ float, 1 $>$
+using \mbox{\hyperlink{a00399_a40b235356dfcdd3f2e1adc0f3c342007}{HF\+::\+Spatial\+Structures\+::\+Edge\+Matrix}} = Eigen\+::\+Sparse\+Matrix$<$ float, 1 $>$
 \begin{DoxyCompactList}\small\item\em The type of matrix the graph uses internally. \end{DoxyCompactList}\item 
-using \mbox{\hyperlink{a00399_aaf74b9079d1b97124b8d1e4dae2cc13c}{H\+F\+::\+Spatial\+Structures\+::\+Temp\+Matrix}} = Eigen\+::\+Map$<$ const Edge\+Matrix $>$
+using \mbox{\hyperlink{a00399_aaf74b9079d1b97124b8d1e4dae2cc13c}{HF\+::\+Spatial\+Structures\+::\+Temp\+Matrix}} = Eigen\+::\+Map$<$ const Edge\+Matrix $>$
 \begin{DoxyCompactList}\small\item\em A mapped matrix of Edge\+Matrix. Only owns pointers to memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{a00399_a6b23c0b2531c78f6d5049873c184f4f9}{H\+F\+::\+Spatial\+Structures\+::\+C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+TE}} \+: int \{ \mbox{\hyperlink{a00399_a6b23c0b2531c78f6d5049873c184f4f9a6970bdc2201030b9c03fbdcf3973858a}{H\+F\+::\+Spatial\+Structures\+::\+C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+T\+E\+::\+S\+UM}} = 0, 
-\mbox{\hyperlink{a00399_a6b23c0b2531c78f6d5049873c184f4f9a16de38737a9f8366e9b2042b4e9b6290}{H\+F\+::\+Spatial\+Structures\+::\+C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+T\+E\+::\+A\+V\+E\+R\+A\+GE}} = 1, 
-\mbox{\hyperlink{a00399_a6b23c0b2531c78f6d5049873c184f4f9a4905ac9d6a22bdfc1ae096094ce6248d}{H\+F\+::\+Spatial\+Structures\+::\+C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+T\+E\+::\+C\+O\+U\+NT}} = 2
+enum class \mbox{\hyperlink{a00399_a6b23c0b2531c78f6d5049873c184f4f9}{HF\+::\+Spatial\+Structures\+::\+COST\+\_\+\+AGGREGATE}} \+: int \{ \mbox{\hyperlink{a00399_a6b23c0b2531c78f6d5049873c184f4f9a6970bdc2201030b9c03fbdcf3973858a}{HF\+::\+Spatial\+Structures\+::\+SUM}} = 0
+, \mbox{\hyperlink{a00399_a6b23c0b2531c78f6d5049873c184f4f9a16de38737a9f8366e9b2042b4e9b6290}{HF\+::\+Spatial\+Structures\+::\+AVERAGE}} = 1
+, \mbox{\hyperlink{a00399_a6b23c0b2531c78f6d5049873c184f4f9a4905ac9d6a22bdfc1ae096094ce6248d}{HF\+::\+Spatial\+Structures\+::\+COUNT}} = 2
  \}
 \begin{DoxyCompactList}\small\item\em Methods of aggregating the costs for edges for each node in the graph. \end{DoxyCompactList}\item 
-enum \mbox{\hyperlink{a00399_afac7c4ef1cb1104941f4d5a27973b47e}{H\+F\+::\+Spatial\+Structures\+::\+Direction}} \+: int \{ \mbox{\hyperlink{a00399_afac7c4ef1cb1104941f4d5a27973b47eafb4081bff9f77d65456ceb00b153e4d4}{H\+F\+::\+Spatial\+Structures\+::\+Direction\+::\+I\+N\+C\+O\+M\+I\+NG}} = 0, 
-\mbox{\hyperlink{a00399_afac7c4ef1cb1104941f4d5a27973b47ea1741b869c82993c62163223d8fefbba4}{H\+F\+::\+Spatial\+Structures\+::\+Direction\+::\+O\+U\+T\+G\+O\+I\+NG}} = 1, 
-\mbox{\hyperlink{a00399_afac7c4ef1cb1104941f4d5a27973b47ea6328e5e3186c227a021ef2ff77e40197}{H\+F\+::\+Spatial\+Structures\+::\+Direction\+::\+B\+O\+TH}} = 2
+enum class \mbox{\hyperlink{a00399_afac7c4ef1cb1104941f4d5a27973b47e}{HF\+::\+Spatial\+Structures\+::\+Direction}} \+: int \{ \mbox{\hyperlink{a00399_afac7c4ef1cb1104941f4d5a27973b47eafb4081bff9f77d65456ceb00b153e4d4}{HF\+::\+Spatial\+Structures\+::\+INCOMING}} = 0
+, \mbox{\hyperlink{a00399_afac7c4ef1cb1104941f4d5a27973b47ea1741b869c82993c62163223d8fefbba4}{HF\+::\+Spatial\+Structures\+::\+OUTGOING}} = 1
+, \mbox{\hyperlink{a00399_afac7c4ef1cb1104941f4d5a27973b47ea6328e5e3186c227a021ef2ff77e40197}{HF\+::\+Spatial\+Structures\+::\+BOTH}} = 2
  \}
 \begin{DoxyCompactList}\small\item\em Node to use for calculating the cost of an edge when converting node attributes to edge costs. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Contains definitions for the \mbox{\hyperlink{a01497}{Graph }} class. 
+Contains definitions for the \mbox{\hyperlink{a01485}{Graph }} class. 
 
 \begin{DoxyAuthor}{Author}
-T\+BA 
+TBA 
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
 06 Jun 2020 
 \end{DoxyDate}
 
 
-\doxysubsection{Class Documentation}
-\index{HF::SpatialStructures::Subgraph@{HF::SpatialStructures::Subgraph}}\label{a01489}
-\Hypertarget{a00399_a01489}
-\doxysubsubsection{struct HF\+::Spatial\+Structures\+::Subgraph}
-A \mbox{\hyperlink{a00399_a01489}{Subgraph}} consists of a parent \mbox{\hyperlink{a02017}{Node}} m\+\_\+parent and a container of \mbox{\hyperlink{a01473}{Edge}} m\+\_\+edges such that all \mbox{\hyperlink{a01473}{Edge}} in m\+\_\+edges extend from m\+\_\+parent. 
+Definition in file \mbox{\hyperlink{a00203_source}{graph.\+h}}.
 
-Definition at line 364 of file graph.\+h.
+
+
+\doxysubsection{Class Documentation}
+\index{HF::SpatialStructures::Subgraph@{HF::SpatialStructures::Subgraph}}\label{a01477}
+\Hypertarget{a00399_a01477}
+\doxysubsubsection{struct HF\+::Spatial\+Structures\+::Subgraph}
+A \mbox{\hyperlink{a00399_a01477}{Subgraph}} consists of a parent \mbox{\hyperlink{a02005}{Node}} m\+\_\+parent and a container of \mbox{\hyperlink{a01461}{Edge}} m\+\_\+edges such that all \mbox{\hyperlink{a01461}{Edge}} in m\+\_\+edges extend from m\+\_\+parent. 
+
+Definition at line \mbox{\hyperlink{a00203_source_l00364}{364}} of file \mbox{\hyperlink{a00203_source}{graph.\+h}}.
 
 
 
@@ -95,20 +99,20 @@ Collaboration diagram for HF\+::Spatial\+Structures\+::Subgraph\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=325pt]{a01487}
+\includegraphics[width=308pt]{a01475}
 \end{center}
 \end{figure}
 \begin{DoxyFields}{Class Members}
 \mbox{\Hypertarget{a00399_ac1403ade5ddeb5410a523871f96e1e64}\label{a00399_ac1403ade5ddeb5410a523871f96e1e64}} 
-vector$<$ \mbox{\hyperlink{a01473}{Edge}} $>$&
+vector$<$ \mbox{\hyperlink{a01461}{Edge}} $>$&
 m\_edges&
 The edges that extend from m\+\_\+parent. \\
 \hline
 
 \mbox{\Hypertarget{a00399_a2f8de99f10387d075d7d69336e4d5dd7}\label{a00399_a2f8de99f10387d075d7d69336e4d5dd7}} 
-\mbox{\hyperlink{a02017}{Node}}&
+\mbox{\hyperlink{a02005}{Node}}&
 m\_parent&
-The parent node from which all \mbox{\hyperlink{a01473}{Edge}} in m\+\_\+edges extend. \\
+The parent node from which all \mbox{\hyperlink{a01461}{Edge}} in m\+\_\+edges extend. \\
 \hline
 
 \end{DoxyFields}

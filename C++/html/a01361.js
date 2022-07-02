@@ -1,8 +1,8 @@
 var a01361 =
 [
-    [ "HitStruct", "a01361.html#a92e88a8bd11804536d214e6c4af49b2e", null ],
-    [ "HitStruct", "a01361.html#a95c75a6e6c497e4a67bba48a59c280e3", null ],
-    [ "DidHit", "a01361.html#a3d86c2c8d8e0ec6bf63a653ec89807a8", null ],
-    [ "distance", "a01361.html#a6fbe94ce3a7514a37415d28ff0500b64", null ],
-    [ "meshid", "a01361.html#a7c49a19e480ba9797c9da3d2acd2221d", null ]
+    [ "Source", "a01361.html#a38ed74046bc9ec6d9d8c6f28b2ed93ee", null ],
+    [ "stack_buffer", "a01361.html#a7b32e78fcb2d7476011e4222abbc1943", null ],
+    [ "stack_buffer", "a01361.html#a33fc79f562de8940c185880ec11384e4", null ],
+    [ "stack_buffer_", "a01361.html#a305996e6c091358dcf5526b65b1889b2", null ],
+    [ "used_stack_buffer_", "a01361.html#ae9ae5f1c043a2a5fcd6df58108e67182", null ]
 ];

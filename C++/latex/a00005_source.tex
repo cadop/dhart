@@ -1,0 +1,258 @@
+\hypertarget{a00005_source}{}\doxysection{graph\+\_\+generator.\+cpp}
+\label{a00005_source}\index{Cpp/analysismethods/src/graph\_generator.cpp@{Cpp/analysismethods/src/graph\_generator.cpp}}
+\mbox{\hyperlink{a00005}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00006}00006 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00007}\mbox{\hyperlink{a00005_a9f918755b601cf4bffca775992e6fb90}{00007}} \textcolor{preprocessor}{\#define NOMINMAX}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00008}00008 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00008}{graph\_generator.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00009}00009 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00185}{Constants.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00010}00010 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00209}{node.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00011}00011 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00197}{Edge.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00012}00012 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00203}{graph.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00013}00013 \textcolor{preprocessor}{\#include <robin\_hood.h>}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00014}00014 \textcolor{preprocessor}{\#include <omp.h>}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00015}00015 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00016}00016 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00017}{unique\_queue.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00017}00017 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00018}00018 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00019}00019 \textcolor{preprocessor}{\#include <thread>}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00020}00020 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00021}00021 \textcolor{keyword}{using }\mbox{\hyperlink{a01485}{HF::SpatialStructures::Graph}};}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00022}00022 \textcolor{keyword}{using }\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}};}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00023}00023 \textcolor{keyword}{using }\mbox{\hyperlink{a01461}{HF::SpatialStructures::Edge}};}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00024}00024 \textcolor{keyword}{using }\mbox{\hyperlink{a00399_a5db5f0307882796fcf7cdad83cb20c65}{HF::SpatialStructures::roundhf\_tmp}};}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00025}00025 \textcolor{keyword}{using }\mbox{\hyperlink{a00399_ab374c207312422f0543df4ea73f8bc85}{HF::SpatialStructures::trunchf\_tmp}};}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00026}00026 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00027}00027 \textcolor{keyword}{using }std::vector;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00028}00028 \textcolor{keyword}{using }\mbox{\hyperlink{a01233}{HF::GraphGenerator::GeometryFlagMap}};}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00029}00029 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00030}\mbox{\hyperlink{a00396}{00030}} \textcolor{keyword}{namespace }\mbox{\hyperlink{a00397}{HF::GraphGenerator}}\{ }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00035}\mbox{\hyperlink{a00397_af8cc1a7a794699308cf5c46d3ae59491}{00035}}     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a00397_af8cc1a7a794699308cf5c46d3ae59491}{SetupCoreCount}}(\textcolor{keywordtype}{int} cores = -\/1) \{}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00036}00036         \textcolor{keywordflow}{if} (cores > 1)  omp\_set\_num\_threads(cores);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00037}00037         \textcolor{keywordflow}{else} omp\_set\_num\_threads(std::thread::hardware\_concurrency());}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00038}00038     \}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00039}00039 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00049}00049     \textcolor{keyword}{template} <\textcolor{keyword}{typename} raytracer\_type>}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00050}\mbox{\hyperlink{a00397_a124a96c53ed2021db9d819369fe6b7ad}{00050}}     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a00397_a124a96c53ed2021db9d819369fe6b7ad}{setupRT}}(\mbox{\hyperlink{a01245}{GraphGenerator}}* gg, raytracer\_type \& rt, \textcolor{keyword}{const} std::vector<int> \& obs\_ids, \textcolor{keyword}{const} std::vector<int> \& walk\_ids ) \{}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00051}00051         gg-\/>\mbox{\hyperlink{a01245_a5801e0e8dbaaa13ccab14ff0cae69de0}{ray\_tracer}} = \mbox{\hyperlink{a01353}{HF::RayTracer::MultiRT}}(\&rt);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00052}00052         gg-\/>\mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{params}}.\mbox{\hyperlink{a00397_a5dc55aa5861e9bb2f2675146b11812af}{geom\_ids}}.\mbox{\hyperlink{a01233_a5f5b32d65d3d43143915633c8411acaf}{SetGeometryIds}}(obs\_ids, walk\_ids);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00053}00053     \}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00054}00054 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00055}\mbox{\hyperlink{a01245_afd9c31d0470d6e401949b91669029341}{00055}}     \mbox{\hyperlink{a01245}{GraphGenerator::GraphGenerator}}(\mbox{\hyperlink{a01345}{HF::RayTracer::EmbreeRayTracer}} \& rt, \textcolor{keyword}{const} vector<int> \& obstacle\_ids, \textcolor{keyword}{const} vector<int> \& walkable\_ids)\{}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00056}00056         setupRT<HF::RayTracer::EmbreeRayTracer> (\textcolor{keyword}{this}, rt, obstacle\_ids, walkable\_ids);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00057}00057     \}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00058}00058 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00059}\mbox{\hyperlink{a01245_a6f5497f50588ed5937fc8c496657b71b}{00059}}     \mbox{\hyperlink{a01245}{GraphGenerator::GraphGenerator}}(\mbox{\hyperlink{a01453}{HF::RayTracer::NanoRTRayTracer}} \& rt, \textcolor{keyword}{const} vector<int> \& obstacle\_ids, \textcolor{keyword}{const} vector<int> \& walkable\_ids) \{}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00060}00060         setupRT<HF::RayTracer::NanoRTRayTracer> (\textcolor{keyword}{this}, rt, obstacle\_ids, walkable\_ids);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00061}00061     \}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00062}00062 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00063}\mbox{\hyperlink{a01245_a804c4c9a8169aa9901cb32ee0f64c555}{00063}}     \mbox{\hyperlink{a01245}{GraphGenerator::GraphGenerator}}(\mbox{\hyperlink{a01353}{HF::RayTracer::MultiRT}} \& ray\_tracer, \textcolor{keyword}{const} vector<int> \& obstacle\_ids, \textcolor{keyword}{const} vector<int> \& walkable\_ids)}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00064}00064     \{}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00065}00065         this-\/>ray\_tracer = \mbox{\hyperlink{a01245_a5801e0e8dbaaa13ccab14ff0cae69de0}{ray\_tracer}};}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00066}00066         this-\/>\mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{params}}.\mbox{\hyperlink{a00397_a5dc55aa5861e9bb2f2675146b11812af}{geom\_ids}}.\mbox{\hyperlink{a01233_a5f5b32d65d3d43143915633c8411acaf}{SetGeometryIds}}(obstacle\_ids, walkable\_ids);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00067}00067     \}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00068}00068 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00069}\mbox{\hyperlink{a01245_a2616d5577f2b87dae8bdb9caab75e52f}{00069}}     \mbox{\hyperlink{a01485}{SpatialStructures::Graph}} GraphGenerator::IMPL\_BuildNetwork(}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00070}00070         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& start\_point,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00071}00071         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& Spacing,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00072}00072         \textcolor{keywordtype}{int} MaxNodes,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00073}00073         \mbox{\hyperlink{a00001_a02073}{real\_t}} UpStep,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00074}00074         \mbox{\hyperlink{a00001_a02073}{real\_t}} UpSlope,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00075}00075         \mbox{\hyperlink{a00001_a02073}{real\_t}} DownStep,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00076}00076         \mbox{\hyperlink{a00001_a02073}{real\_t}} DownSlope,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00077}00077         \textcolor{keywordtype}{int} max\_step\_connections,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00078}00078         \textcolor{keywordtype}{int} cores,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00079}00079         \mbox{\hyperlink{a00001_a02073}{real\_t}} node\_z\_precision,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00080}00080         \mbox{\hyperlink{a00001_a02073}{real\_t}} node\_spacing\_precision,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00081}00081         \mbox{\hyperlink{a00001_a02073}{real\_t}} ground\_offset)}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00082}00082     \{}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00083}00083         \textcolor{keywordflow}{if} (ground\_offset < node\_z\_precision)}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00084}00084         \{}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00085}00085             std::cerr << \textcolor{stringliteral}{"{}Ground offset is less than z-\/precision. Setting node offset to Z-\/Precision."{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00086}00086             ground\_offset = node\_z\_precision;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00087}00087             \textcolor{comment}{//std::logic\_error("{}Ground offset is less than Z-\/Precision"{});}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00088}00088         \}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00089}00089 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00090}00090         \textcolor{comment}{// Store parameters in params}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00091}00091         \mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{params}}.\mbox{\hyperlink{a00397_add2b6fa6bf77a8c4626a1e6d0559970f}{down\_step}} = DownStep; \mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{params}}.\mbox{\hyperlink{a00397_a0b8afc5f531e3286ce2434b1bc2b1f50}{up\_step}} = UpStep;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00092}00092         \mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{params}}.\mbox{\hyperlink{a00397_add7f080950668f5dfa8d857e9c66b89d}{up\_slope}} = UpSlope;    \mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{params}}.\mbox{\hyperlink{a00397_a7c141d33285a77c81fc1b9ce0b210d72}{down\_slope}} = DownSlope;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00093}00093 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00094}00094         \mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{params}}.\mbox{\hyperlink{a00397_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00397_a6ec86cb69c1cc0e0dc8ea229310939b6}{node\_z}} = node\_z\_precision;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00095}00095         \mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{params}}.\mbox{\hyperlink{a00397_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00397_ac982230f7d151df6018c19d712cd3436}{node\_spacing}} = node\_spacing\_precision;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00096}00096         \mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{params}}.\mbox{\hyperlink{a00397_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00397_a4fa4f096863296469711e52da4b36b9c}{ground\_offset}} = ground\_offset;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00097}00097 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00098}00098         \textcolor{comment}{// Store class members}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00099}00099         this-\/>\mbox{\hyperlink{a01245_a6afac9c527d8483943ef61e9e9a1ca15}{max\_nodes}} = MaxNodes;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00100}00100         this-\/>\mbox{\hyperlink{a01245_a9aba1df499733b653dff3ec59bf3871f}{spacing}} = Spacing; }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00101}00101         this-\/>\mbox{\hyperlink{a01245_a16da7abe348f7af1d232867f2d719db1}{core\_count}} = cores;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00102}00102         this-\/>\mbox{\hyperlink{a01245_a73847391cae1bc6c5a0ed5416844ab68}{max\_step\_connection}} = max\_step\_connections;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00103}00103         }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00104}00104         \textcolor{comment}{// Take the user defined start point and round it to the precision}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00105}00105         \textcolor{comment}{// that the Analysis package can handle. }}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00106}00106         \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} start = \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\{}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00107}00107           roundhf\_tmp<real\_t>(start\_point[0], \mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{params}}.\mbox{\hyperlink{a00397_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00397_ac982230f7d151df6018c19d712cd3436}{node\_spacing}}),}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00108}00108           roundhf\_tmp<real\_t>(start\_point[1], \mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{params}}.\mbox{\hyperlink{a00397_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00397_ac982230f7d151df6018c19d712cd3436}{node\_spacing}}),}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00109}00109           roundhf\_tmp<real\_t>(start\_point[2], \mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{params}}.\mbox{\hyperlink{a00397_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00397_a6ec86cb69c1cc0e0dc8ea229310939b6}{node\_z}}) }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00110}00110         \};}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00111}00111 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00112}00112         \textcolor{comment}{// Define a queue to use for determining what nodes need to be checked}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00113}00113         \mbox{\hyperlink{a01249}{UniqueQueue}} to\_do\_list;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00114}00114         \mbox{\hyperlink{a01241}{optional\_real3}} checked\_start = \mbox{\hyperlink{a00397_a9ddffecb75b34434d7157b49d3c67b60}{ValidateStartPoint}}(\mbox{\hyperlink{a01245_a5801e0e8dbaaa13ccab14ff0cae69de0}{ray\_tracer}}, start, this-\/>\mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{params}});}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00115}00115 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00116}00116         \textcolor{comment}{// Check if the start raycast connected.}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00117}00117         \textcolor{keywordflow}{if} (checked\_start)}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00118}00118         \{}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00119}00119             \textcolor{comment}{// Overwrite start with the checked start point}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00120}00120             start = *checked\_start;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00121}00121 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00122}00122             \textcolor{comment}{// add it to the to-\/do list}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00123}00123             to\_do\_list.\mbox{\hyperlink{a01249_a35a8d70ffef5833ae214feaa89aaf220}{PushAny}}(start);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00124}00124 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00125}00125             \textcolor{comment}{// If no connection was found, return an empty graph}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00126}00126             \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{a01245_a16da7abe348f7af1d232867f2d719db1}{core\_count}} != 0 \&\& this-\/>\mbox{\hyperlink{a01245_a16da7abe348f7af1d232867f2d719db1}{core\_count}} != 1)}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00127}00127             \{}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00128}00128                 \mbox{\hyperlink{a00397_af8cc1a7a794699308cf5c46d3ae59491}{SetupCoreCount}}(this-\/>\mbox{\hyperlink{a01245_a16da7abe348f7af1d232867f2d719db1}{core\_count}});}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00129}00129                 \textcolor{keywordflow}{return} \mbox{\hyperlink{a01245_a843cc6b5b69b5d013930b3685789fa15}{CrawlGeomParallel}}(to\_do\_list);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00130}00130             \}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00131}00131             \textcolor{comment}{// Run the single core version of the graph generator}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00132}00132             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00133}00133                 \textcolor{keywordflow}{return} \mbox{\hyperlink{a01245_ac7052d4b625fb96f29c5bfc091a86f7e}{CrawlGeom}}(to\_do\_list);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00134}00134         \}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00135}00135         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00136}00136             \textcolor{keywordflow}{return} \mbox{\hyperlink{a01485}{Graph}}();}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00137}00137     \}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00138}00138 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00139}\mbox{\hyperlink{a01245_a843cc6b5b69b5d013930b3685789fa15}{00139}}     \mbox{\hyperlink{a01485}{Graph}} GraphGenerator::CrawlGeomParallel(\mbox{\hyperlink{a01249}{UniqueQueue}}\& todo)}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00140}00140     \{}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00141}00141         \textcolor{comment}{// Generate the set of directions to use for each set of possible children}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00142}00142         \textcolor{comment}{// Uses the maximum connection defined by the user}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00143}00143         \textcolor{keyword}{const} \textcolor{keyword}{auto} directions = \mbox{\hyperlink{a00397_aefd344ebb2faadc64a56a16dc8582026}{CreateDirecs}}(\mbox{\hyperlink{a01245_a73847391cae1bc6c5a0ed5416844ab68}{max\_step\_connection}});}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00144}00144 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00145}00145         \textcolor{comment}{// Initialize a tracker for the number of nodes that can be compared to the max nodes limit}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00146}00146         \textcolor{keywordtype}{int} num\_nodes = 0;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00147}00147 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00148}00148         \mbox{\hyperlink{a01353}{RayTracer}} \& rt\_ref = this-\/>\mbox{\hyperlink{a01245_a5801e0e8dbaaa13ccab14ff0cae69de0}{ray\_tracer}};}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00149}00149 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00150}00150         \mbox{\hyperlink{a01485}{Graph}} G;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00151}00151         \textcolor{comment}{// Iterate through every node int the todo-\/list while it does not reach the maximum number of nodes limit}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00152}00152         \textcolor{keywordflow}{while} (!todo.\mbox{\hyperlink{a01249_ab659349de3391b0e2327f3736135752f}{empty}}() \&\& (num\_nodes < \mbox{\hyperlink{a01245_a6afac9c527d8483943ef61e9e9a1ca15}{max\_nodes}} || \mbox{\hyperlink{a01245_a6afac9c527d8483943ef61e9e9a1ca15}{max\_nodes}} < 0))}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00153}00153         \{}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00154}00154             \textcolor{comment}{// Pop nodes from the todo list (If max\_nodes will be exceeded, then}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00155}00155             \textcolor{comment}{// only pop as many as are left in max\_nodes.)}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00156}00156             \textcolor{keywordtype}{int} to\_do\_count = todo.\mbox{\hyperlink{a01249_a6d38edb96130bda3eb8126cc7501065f}{size}}();}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00157}00157             \textcolor{keywordflow}{if} (\mbox{\hyperlink{a01245_a6afac9c527d8483943ef61e9e9a1ca15}{max\_nodes}} > 0)}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00158}00158                 to\_do\_count = std::min(todo.\mbox{\hyperlink{a01249_a6d38edb96130bda3eb8126cc7501065f}{size}}(), \mbox{\hyperlink{a01245_a6afac9c527d8483943ef61e9e9a1ca15}{max\_nodes}} -\/ num\_nodes);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00159}00159 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00160}00160             \textcolor{comment}{// Get as many nodes as possible out of the queue}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00161}00161             \textcolor{keyword}{auto} to\_be\_done = todo.\mbox{\hyperlink{a01249_ae941f357ddbefc3b670c43ce2d90b589}{popMany}}(to\_do\_count);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00162}00162 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00163}00163             \textcolor{comment}{// If this happens, that means something is wrong with the algorithm}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00164}00164             \textcolor{comment}{// since to\_be\_done with a size of zero would just cause the outer}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00165}00165             \textcolor{comment}{// while loop to not run anymore.}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00166}00166             assert(to\_be\_done.size() > 0);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00167}00167 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00168}00168             \textcolor{comment}{// Create array arrays of edges that will be used to store results}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00169}00169             vector<vector<Edge>> OutEdges(to\_do\_count);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00170}00170 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00171}00171             \textcolor{comment}{// Compute valid children for every node in parallel.}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00172}00172 \textcolor{preprocessor}{            \#pragma omp parallel for schedule(dynamic) if (to\_be\_done.size() > 100)}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00173}00173             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < to\_do\_count; i++)}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00174}00174             \{}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00175}00175                 \textcolor{comment}{// Get the parent node from the todo list at index i}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00176}00176                 \textcolor{comment}{// and cast it to a real3}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00177}00177                 \textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& n = to\_be\_done[i];}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00178}00178                 \textcolor{keyword}{const} \textcolor{keyword}{auto} real\_parent = \mbox{\hyperlink{a00397_a58892abe1152c28d26d3ca749c99ea4d}{CastToReal3}}(n);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00179}00179 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00180}00180                 \textcolor{comment}{// Generate children around this parent}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00181}00181                 \textcolor{keyword}{const} std::vector<real3> children = \mbox{\hyperlink{a00397_a41e03f9bab54e4e0d1314c6a4bdf2ec1}{GeneratePotentialChildren}}(}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00182}00182                     real\_parent,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00183}00183                     directions,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00184}00184                     \mbox{\hyperlink{a01245_a9aba1df499733b653dff3ec59bf3871f}{spacing}},}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00185}00185                     \mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{params}}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00186}00186                 );}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00187}00187 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00188}00188                 \textcolor{comment}{// Calculate valid edges for this parent and store them in}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00189}00189                 \textcolor{comment}{// the edges array at it's index}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00190}00190                 OutEdges[i] = \mbox{\hyperlink{a00397_ab7ffcc7d6657ce276c06deed24c546a4}{GetChildren}}(}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00191}00191                     real\_parent,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00192}00192                     children,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00193}00193                     rt\_ref,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00194}00194                     \mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{params}}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00195}00195                 );}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00196}00196             \}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00197}00197 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00198}00198             \textcolor{comment}{// Go through each edge array we just calculated, then }}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00199}00199             \textcolor{comment}{// add the edges to the graph and todo list in sequence}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00200}00200             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < to\_do\_count; i++) \{}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00201}00201 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00202}00202                 \textcolor{comment}{// Only continue if there are edges for this node}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00203}00203                 \textcolor{keywordflow}{if} (!OutEdges[i].empty()) \{}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00204}00204 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00205}00205                     \textcolor{comment}{// Iterate through each edge and add it to the graph / todolist}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00206}00206                     \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& e : OutEdges[i]) \{}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00207}00207                         todo.\mbox{\hyperlink{a01249_ae0dc637a2d7c3aae32d8f035ac6b8016}{push}}(e.child);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00208}00208                         G.\mbox{\hyperlink{a01485_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(to\_be\_done[i], e.child, e.score);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00209}00209                     \}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00210}00210                     }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00211}00211                     \textcolor{comment}{// Increment max nodes}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00212}00212                     num\_nodes++;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00213}00213                 \}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00214}00214             \}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00215}00215         \}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00216}00216 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00217}00217         \textcolor{keywordflow}{return} G;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00218}00218     \}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00219}00219 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00220}\mbox{\hyperlink{a01245_ac7052d4b625fb96f29c5bfc091a86f7e}{00220}}     \mbox{\hyperlink{a01485}{Graph}} GraphGenerator::CrawlGeom(\mbox{\hyperlink{a01249}{UniqueQueue}}\& todo)}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00221}00221     \{}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00222}00222         \textcolor{comment}{// Create directions}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00223}00223         \textcolor{keyword}{const} \textcolor{keyword}{auto} directions = \mbox{\hyperlink{a00397_aefd344ebb2faadc64a56a16dc8582026}{CreateDirecs}}(this-\/>\mbox{\hyperlink{a01245_a73847391cae1bc6c5a0ed5416844ab68}{max\_step\_connection}});}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00224}00224 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00225}00225         \textcolor{comment}{// Cast this to a reference to avoid dereferencing every time}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00226}00226         \mbox{\hyperlink{a01353}{RayTracer}}\& rt\_ref = this-\/>\mbox{\hyperlink{a01245_a5801e0e8dbaaa13ccab14ff0cae69de0}{ray\_tracer}};}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00227}00227 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00228}00228         \textcolor{keywordtype}{int} num\_nodes = 0;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00229}00229         \mbox{\hyperlink{a01485}{Graph}} G;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00230}00230         \textcolor{keywordflow}{while} (!todo.\mbox{\hyperlink{a01249_ab659349de3391b0e2327f3736135752f}{empty}}() \&\& (num\_nodes < this-\/>\mbox{\hyperlink{a01245_a6afac9c527d8483943ef61e9e9a1ca15}{max\_nodes}} || this-\/>max\_nodes < 0)) \{}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00231}00231 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00232}00232             \textcolor{comment}{// Get the parent node from the todo list}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00233}00233             \textcolor{keyword}{const} \textcolor{keyword}{auto} parent = todo.\mbox{\hyperlink{a01249_a4aab642bf2c86a04f6890711ab7f2437}{pop}}();}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00234}00234 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00235}00235             \textcolor{comment}{// To maintain our precision standards, we'll convert this node to a real3.}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00236}00236             \textcolor{keyword}{const} \textcolor{keyword}{auto} real\_parent = \mbox{\hyperlink{a00397_a58892abe1152c28d26d3ca749c99ea4d}{CastToReal3}}(parent);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00237}00237 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00238}00238             \textcolor{comment}{// Generate children from parent}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00239}00239             \textcolor{keyword}{const} std::vector<real3> children = \mbox{\hyperlink{a00397_a41e03f9bab54e4e0d1314c6a4bdf2ec1}{GeneratePotentialChildren}}(}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00240}00240                 real\_parent,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00241}00241                 directions, }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00242}00242                 \mbox{\hyperlink{a01245_a9aba1df499733b653dff3ec59bf3871f}{spacing}},}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00243}00243                 \mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{params}}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00244}00244             );}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00245}00245 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00246}00246             \textcolor{comment}{// Create edges}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00247}00247             std::vector<graph\_edge> edges = \mbox{\hyperlink{a00397_ab7ffcc7d6657ce276c06deed24c546a4}{GetChildren}}(}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00248}00248                 real\_parent,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00249}00249                 children,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00250}00250                 rt\_ref,}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00251}00251                 \mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{params}}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00252}00252             );}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00253}00253 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00254}00254             \textcolor{comment}{// Add new nodes to the queue. It'll drop them if they}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00255}00255             \textcolor{comment}{// already were evaluated, or already existed on the queue}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00256}00256             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} edge : edges)}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00257}00257                 todo.\mbox{\hyperlink{a01249_a35a8d70ffef5833ae214feaa89aaf220}{PushAny}}(edge.child);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00258}00258 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00259}00259             \textcolor{comment}{// Add new edges to the graph}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00260}00260             \textcolor{keywordflow}{if} (!edges.empty())}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00261}00261                 \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& edge : edges)}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00262}00262                     G.\mbox{\hyperlink{a01485_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(parent, edge.child, edge.score);}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00263}00263 }
+\DoxyCodeLine{\Hypertarget{a00005_source_l00264}00264             \textcolor{comment}{// Increment node count}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00265}00265             ++num\_nodes;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00266}00266         \}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00267}00267         \textcolor{keywordflow}{return} G;}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00268}00268     \}}
+\DoxyCodeLine{\Hypertarget{a00005_source_l00269}00269 \}}
+
+\end{DoxyCode}

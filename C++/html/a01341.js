@@ -1,9 +1,9 @@
 var a01341 =
 [
-    [ "DistanceAndPredecessor", "a01341.html#a9d9e98ea5eedd5b876cb0da9c17eedf4", null ],
-    [ "GetRowOfDist", "a01341.html#a75b5c1c61a7afbe2ace4ba7a9cd41026", null ],
-    [ "GetRowOfPred", "a01341.html#a686718154f87c6914399998637b5bd4e", null ],
-    [ "dist", "a01341.html#ad9494246039332f91b21d77a70cb7318", null ],
-    [ "pred", "a01341.html#a2c8df39d6c2778163d32e53d803baf56", null ],
-    [ "size", "a01341.html#afae801900e74d0d1389988e8163f293a", null ]
+    [ "operator*", "a01341.html#a2d86f8a3010d26e57a71b17baeb2e69e", null ],
+    [ "operator-", "a01341.html#aa0c935fabbdc069a24f2c1f780b451f1", null ],
+    [ "Vector3D::Vector3D", "a01341.html#ac8801606dc5a1433fb7578c54d431a8c", null ],
+    [ "x", "a01341.html#a8dc6f75dc73e95942cca436c146cb83c", null ],
+    [ "y", "a01341.html#af7128e46fb0f8d5ef3e4a7355e9f959f", null ],
+    [ "z", "a01341.html#af6ea0d409b5b9d4833f6a745d4624477", null ]
 ];

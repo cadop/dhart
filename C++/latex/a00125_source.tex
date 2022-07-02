@@ -1,0 +1,115 @@
+\hypertarget{a00125_source}{}\doxysection{objloader.\+h}
+\label{a00125_source}\index{Cpp/objloader/src/objloader.h@{Cpp/objloader/src/objloader.h}}
+\mbox{\hyperlink{a00125}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00001}00001 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00008}00008 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00009}00009 \textcolor{preprocessor}{\#ifndef OBJLOADER\_H}}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00010}\mbox{\hyperlink{a00125_a4104f7562d27efe7c2f57dc557d2ce16}{00010}} \textcolor{preprocessor}{\#define OBJLOADER\_H}}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00011}00011 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00012}00012 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00013}00013 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00014}00014 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00119}{meshinfo.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00015}00015 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00030}\mbox{\hyperlink{a00405}{00030}} \textcolor{keyword}{namespace }\mbox{\hyperlink{a00405}{Eigen}} \{\}}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00031}00031 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00032}00032 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00033}00033 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00034}00034 \textcolor{comment}{// [nanoRT]}}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00035}00035 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00404}{HF::nanoGeom}} \{}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00036}00036     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00404_ad8e91aefa202de3abee6fd9914299e46}{LoadObj}}(Mesh\& mesh, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* filename);}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00037}00037 \}}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00038}00038 \textcolor{comment}{// end [nanoRT]}}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00039}00039 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00040}00040 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00041}00041 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00058}00058 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00403}{HF::Geometry}}\{}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00064}\mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5}{00064}}     \textcolor{keyword}{enum} \mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5}{GROUP\_METHOD}} \{}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00065}\mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e}{00065}}         \mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e}{ONLY\_FILE}} = 0, }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00066}\mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5afeacc3d8dc97902c6bf9332bdcda9912}{00066}}         \mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5afeacc3d8dc97902c6bf9332bdcda9912}{BY\_GROUP}} = 1, }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00067}\mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5ac47c481b667efc6c2689d46cd456237c}{00067}}         \mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5ac47c481b667efc6c2689d46cd456237c}{BY\_MATERIAL}} = 2, }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00068}00068         \mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5a42c850fb543d857db34aea03c8671f2b}{MATERIAL\_AND\_FILE}} = 3 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00069}\mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5a42c850fb543d857db34aea03c8671f2b}{00069}}     \};}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00070}00070 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00071}00071     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00072}\mbox{\hyperlink{a00403}{00072}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a00403_a01289}{tinyobj\_attr}} \{}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00073}\mbox{\hyperlink{a00403_a9de3755934a7e392e9b392e23a541d8e}{00073}}         std::vector<T> \mbox{\hyperlink{a00403_a9de3755934a7e392e9b392e23a541d8e}{vertices}};}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00074}00074     \};}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00075}00075 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00076}00076 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00077}00077     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00078}\mbox{\hyperlink{a00403}{00078}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a00403_a01293}{tinyobj\_shape}} \{}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00079}\mbox{\hyperlink{a00403_a05d64e665db54cf98c8b159326c636f9}{00079}}         std::string \mbox{\hyperlink{a00403_a05d64e665db54cf98c8b159326c636f9}{name}};}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00080}\mbox{\hyperlink{a00403_ac9a66a69cf7f1688351a54806afe25ce}{00080}}         std::vector<int> \mbox{\hyperlink{a00403_ac9a66a69cf7f1688351a54806afe25ce}{indices}};}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00081}\mbox{\hyperlink{a00403_a1326b7839d7fe477f6bc7d0d699eadfb}{00081}}         std::vector<int> \mbox{\hyperlink{a00403_a1326b7839d7fe477f6bc7d0d699eadfb}{mat\_ids}};}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00082}00082     \};}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00083}00083 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00084}\mbox{\hyperlink{a00403}{00084}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a00403_a01297}{tinyobj\_material}} \{}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00085}\mbox{\hyperlink{a00403_ae4cf96eab579f41afb748b1714b21ecb}{00085}}         std::string \mbox{\hyperlink{a00403_ae4cf96eab579f41afb748b1714b21ecb}{name}};}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00086}00086     \};}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00087}00087 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00088}00088     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00089}\mbox{\hyperlink{a00403}{00089}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a00403_a01301}{tinyobj\_geometry}}\{}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00090}\mbox{\hyperlink{a00403_a93f2dc0a104bbd96931921e366b7ddb2}{00090}}         std::vector<tinyobj\_shape<T>> \mbox{\hyperlink{a00403_a93f2dc0a104bbd96931921e366b7ddb2}{shapes}};}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00091}\mbox{\hyperlink{a00403_a54c1f870295e1d35ec13f5aab4d4c3b9}{00091}}         \mbox{\hyperlink{a00403_a01289}{tinyobj\_attr<T>}} \mbox{\hyperlink{a00403_a54c1f870295e1d35ec13f5aab4d4c3b9}{attributes}};}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00092}\mbox{\hyperlink{a00403_a4a3ee4a16a711ab365e1f073633fda57}{00092}}         std::vector<tinyobj\_material> \mbox{\hyperlink{a00403_a4a3ee4a16a711ab365e1f073633fda57}{materials}};}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00093}00093     \};}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00094}00094 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00095}00095     \mbox{\hyperlink{a00403_a01301}{tinyobj\_geometry<double>}} \mbox{\hyperlink{a00403_a9bbdc23c626ed431d5a084722c22f99f}{LoadMeshesFromTinyOBJ}}(std::string path);}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00096}00096 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00097}00097     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00098}\mbox{\hyperlink{a00403_a945c4699b13a7c924fd6532ae66963ca}{00098}}     \mbox{\hyperlink{a01285}{HF::Geometry::MeshInfo<T>}} \mbox{\hyperlink{a00403_a945c4699b13a7c924fd6532ae66963ca}{LoadTMPMeshObjects}}(\textcolor{keyword}{const} std::string \& path) \{}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00099}00099 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00100}00100         \textcolor{comment}{// Load the mesh from tinyobj}}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00101}00101         \mbox{\hyperlink{a00403_a01301}{tinyobj\_geometry<double>}} geom = \mbox{\hyperlink{a00403_a9bbdc23c626ed431d5a084722c22f99f}{LoadMeshesFromTinyOBJ}}(path);}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00102}00102 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00103}00103         \textcolor{comment}{// Count total indexes}}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00104}00104         \textcolor{keywordtype}{int} index\_count = 0;}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00105}00105         \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto} \& shape : geom.\mbox{\hyperlink{a00403_a93f2dc0a104bbd96931921e366b7ddb2}{shapes}})}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00106}00106             index\_count +=shape.indices.size();}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00107}00107 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00108}00108 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00109}00109         \textcolor{comment}{// Copy all indices into one big array}}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00110}00110         \textcolor{keywordtype}{int} last\_index = 0;}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00111}00111         std::vector<int> complete\_indices(index\_count);}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00112}00112         \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& shape : geom.\mbox{\hyperlink{a00403_a93f2dc0a104bbd96931921e366b7ddb2}{shapes}}) \{}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00113}00113             std::copy(shape.indices.begin(), shape.indices.end(), complete\_indices.begin() + last\_index);}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00114}00114             last\_index += shape.indices.size();}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00115}00115         \}}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00116}00116 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00117}00117         \textcolor{comment}{//std::vector<T> converted\_vertices = ConvertVertices<T, double>(geom.attributes.vertices);}}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00118}00118 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00119}00119         \textcolor{comment}{//Convert vertices to T}}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00120}00120         std::vector<T> out\_vertices(geom.\mbox{\hyperlink{a00403_a54c1f870295e1d35ec13f5aab4d4c3b9}{attributes}}.vertices.size());}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00121}00121         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < geom.\mbox{\hyperlink{a00403_a54c1f870295e1d35ec13f5aab4d4c3b9}{attributes}}.vertices.size(); i++)}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00122}00122             out\_vertices[i] = \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(geom.\mbox{\hyperlink{a00403_a54c1f870295e1d35ec13f5aab4d4c3b9}{attributes}}.vertices[i]);}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00123}00123 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00124}00124         \textcolor{keywordflow}{return} \mbox{\hyperlink{a01285}{HF::Geometry::MeshInfo<T>}}(out\_vertices, complete\_indices, 1, std::string(\textcolor{stringliteral}{"{}DoubleMesh"{}}));}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00125}00125     \}}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00126}00126 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00127}00127 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00134}00134 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00163}00163     std::vector<MeshInfo<float>> \mbox{\hyperlink{a00403_a06c0c11adb62f8b204e42f75ac1990ac}{LoadMeshObjects}}(}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00164}00164         std::string path,}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00165}00165         \mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5}{GROUP\_METHOD}} gm = \mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e}{ONLY\_FILE}},}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00166}00166         \textcolor{keywordtype}{bool} change\_coords = \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00167}00167         \textcolor{keywordtype}{int} scale = 1}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00168}00168     );}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00169}00169 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00176}00176 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00208}00208     std::vector<MeshInfo<float>> \mbox{\hyperlink{a00403_a06c0c11adb62f8b204e42f75ac1990ac}{LoadMeshObjects}}(}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00209}00209         std::vector<std::string>\& path,}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00210}00210         \mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5}{GROUP\_METHOD}} gm = \mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e}{ONLY\_FILE}},}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00211}00211         \textcolor{keywordtype}{bool} change\_coords = \textcolor{keyword}{false},}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00212}00212         \textcolor{keywordtype}{int} scale = 1}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00213}00213     );}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00214}00214 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00248}00248     std::vector<std::array<float, 3>> \mbox{\hyperlink{a00403_aec1df746155d224838048d3a43c2fe96}{LoadRawVertices}}(std::string path);}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00249}00249     }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00250}00250 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00261}00261     std::string \mbox{\hyperlink{a00403_adec2459f5c4ee10fd9d2154114d751de}{GetTestOBJPath}}(std::string key);}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00262}00262 \}}
+\DoxyCodeLine{\Hypertarget{a00125_source_l00263}00263 }
+\DoxyCodeLine{\Hypertarget{a00125_source_l00264}00264 \textcolor{preprocessor}{\#endif }}
+
+\end{DoxyCode}

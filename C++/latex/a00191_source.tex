@@ -1,0 +1,143 @@
+\hypertarget{a00191_source}{}\doxysection{cost\+\_\+algorithms.\+h}
+\label{a00191_source}\index{Cpp/spatialstructures/src/cost\_algorithms.h@{Cpp/spatialstructures/src/cost\_algorithms.h}}
+\mbox{\hyperlink{a00191}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00008}00008 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00009}00009 \textcolor{preprocessor}{\#ifndef COST\_ALGORITHMS\_H}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00010}00010 \textcolor{preprocessor}{\#define COST\_ALGORITHMS\_H}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00011}00011 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00012}00012 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00013}00013 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00014}00014 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00015}00015 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00185}{Constants.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00016}00016 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00017}00017 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00399}{HF::SpatialStructures}} \{}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00018}00018     \textcolor{keyword}{struct }Node;}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00019}00019     \textcolor{keyword}{struct }Edge;}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00020}00020     \textcolor{keyword}{struct }EdgeSet;}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00021}00021     \textcolor{keyword}{struct }IntEdge;}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00022}00022     \textcolor{keyword}{class }Graph;}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00023}00023     \textcolor{keyword}{struct }Subgraph;}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00024}00024 \}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00025}00025 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00026}00026 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00409}{HF::SpatialStructures::CostAlgorithms}} \{}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00042}00042     \textcolor{keywordtype}{double} \mbox{\hyperlink{a00409_ae7b446fefe0b9994859f47b85de79039}{to\_radians}}(\textcolor{keywordtype}{double} degrees);}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00043}00043     }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00067}00067     \textcolor{keywordtype}{double} \mbox{\hyperlink{a00409_adee2fb2573f4dbc2e5c7db153dff2694}{to\_degrees}}(\textcolor{keywordtype}{double} radians);}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00068}00068 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00093}00093     \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} dimension, \textcolor{keyword}{typename} \textcolor{keywordtype}{float}\_precision = \textcolor{keywordtype}{float}>}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00094}\mbox{\hyperlink{a00409_a355d486f17db42f6c56411cc53f76aec}{00094}}     float\_precision \mbox{\hyperlink{a00409_a355d486f17db42f6c56411cc53f76aec}{euclidean\_distance}}(float\_precision point\_a[], float\_precision point\_b[]) \{}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00095}00095         float\_precision sum = 0;}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00096}00096         }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00097}00097         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < dimension; i++) \{}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00098}00098             float\_precision difference = point\_b[i] -\/ point\_a[i];}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00099}00099             sum += std::pow(difference, 2.0);}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00100}00100         \}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00101}00101 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00102}00102         \textcolor{keywordflow}{return} std::sqrt(sum);}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00103}00103     \}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00104}00104 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00131}00131     \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} dimension, \textcolor{keyword}{typename} \textcolor{keywordtype}{float}\_precision = \textcolor{keywordtype}{float}>}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00132}\mbox{\hyperlink{a00409_afa250ed24ee2219f6632aaebfd7bd150}{00132}}     float\_precision \mbox{\hyperlink{a00409_afa250ed24ee2219f6632aaebfd7bd150}{dot\_product}}(float\_precision vec\_U[], float\_precision vec\_V[]) \{}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00133}00133         float\_precision sum = 0;}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00134}00134 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00135}00135         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < dimension; i++) \{}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00136}00136             sum += vec\_U[i] * vec\_V[i];}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00137}00137         \}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00138}00138 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00139}00139         \textcolor{keywordflow}{return} sum;}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00140}00140     \}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00141}00141 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00168}00168     \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} dimension, \textcolor{keyword}{typename} \textcolor{keywordtype}{float}\_precision = \textcolor{keywordtype}{float}>}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00169}\mbox{\hyperlink{a00409_a3de857e1e14eb6872146c36bef3b3fad}{00169}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00409_a3de857e1e14eb6872146c36bef3b3fad}{is\_perpendicular}}(float\_precision vec\_U[], float\_precision vec\_V[]) \{}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00170}00170         \textcolor{comment}{// Mathematically,}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00171}00171         \textcolor{comment}{// two vectors are perpendicular if their dot product is}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00172}00172         \textcolor{comment}{// equal to zero. But since it is a mortal sin to test}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00173}00173         \textcolor{comment}{// floating point numbers for equality (using operator==) -\/-\/}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00174}00174         \textcolor{comment}{// we can test if the dot product of}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00175}00175         \textcolor{comment}{// vector\_a and vector\_b is 'close enough' to zero,}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00176}00176         \textcolor{comment}{// by determining if our dot\_product calculation}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00177}00177         \textcolor{comment}{// is less than our ROUNDING\_PRECISION constant.}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00178}00178         \textcolor{comment}{// (which is 0.0001)    }}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00179}00179         \textcolor{keywordflow}{return} std::abs(dot\_product<dimension, float\_precision>(vec\_U, vec\_V)) }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00180}00180             < \mbox{\hyperlink{a00399_a0140105869479399be75147c8f77e724}{HF::SpatialStructures::ROUNDING\_PRECISION}};}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00181}00181     \}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00182}00182 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00230}00230     \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} dimension, \textcolor{keyword}{typename} \textcolor{keywordtype}{float}\_precision = \textcolor{keywordtype}{float}>}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00231}\mbox{\hyperlink{a00409_aeec6f9a28592565ad59609852e482663}{00231}}     std::vector<Edge> \mbox{\hyperlink{a00409_aeec6f9a28592565ad59609852e482663}{GetPerpendicularEdges}}(\textcolor{keyword}{const} \mbox{\hyperlink{a00399_a01477}{Subgraph}}\& sg, \textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& child\_node\_a) \{}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00232}00232         std::vector<Edge> perpendicular\_edges;}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00233}00233 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00234}00234         \textcolor{keyword}{auto}\& parent\_node = sg.\mbox{\hyperlink{a00399_a2f8de99f10387d075d7d69336e4d5dd7}{m\_parent}};}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00235}00235         \textcolor{keyword}{auto}\& edges = sg.\mbox{\hyperlink{a00399_ac1403ade5ddeb5410a523871f96e1e64}{m\_edges}};}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00236}00236 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00237}00237         \textcolor{keywordflow}{for} (\mbox{\hyperlink{a01461}{Edge}} edge\_b : edges) \{}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00238}00238             \mbox{\hyperlink{a02005}{Node}} child\_node\_b = edge\_b.child;}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00239}00239             \textcolor{comment}{// We iterate over all children by parent\_node.}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00240}00240             \textcolor{comment}{// The goal is to compare the vector formed by parent\_node and child\_a,}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00241}00241             \textcolor{comment}{// with the vectors formed by parent\_node and all other child node by this parent, all other child\_b's.}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00242}00242 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00243}00243             \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00244}00244 \textcolor{comment}{            std::cout << "{}parent "{} << parent\_node.id << "{} has child "{} << edge\_b.child.id}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00245}00245 \textcolor{comment}{                << "{} with data "{} << edge\_b.score << std::endl;}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00246}00246 \textcolor{comment}{            */}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00247}00247 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00248}00248             \textcolor{keywordflow}{if} (child\_node\_a != child\_node\_b) \{}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00249}00249                 \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00250}00250                 \textcolor{comment}{//  Here -\/-\/ we should assess the step\_type field for edge\_b.}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00251}00251                 \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00252}00252                 \textcolor{comment}{//  /// <summary> Describes the type of step an edge connects to. </summary>}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00253}00253                 \textcolor{comment}{//  enum STEP \{}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00254}00254                 \textcolor{comment}{//      NOT\_CONNECTED = 0, ///< No connection between parent and child.}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00255}00255                 \textcolor{comment}{//      NONE = 1,        ///< Parent and child are on the same plane and no step is required.}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00256}00256                 \textcolor{comment}{//      UP = 2,         ///< A step up is required to get from parent to child.}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00257}00257                 \textcolor{comment}{//      DOWN = 3,       ///< A step down is required to get from parent to child.}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00258}00258                 \textcolor{comment}{//      OVER = 4        ///< A step over something is required to get from parent to child.}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00259}00259                 \textcolor{comment}{//  \};}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00260}00260                 \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00261}00261 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00262}00262                 \textcolor{comment}{// Retrieve the \{ x, y, z \} components of the vectors formed by}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00263}00263                 \textcolor{comment}{//  parent\_node and child\_node\_a}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00264}00264                 \textcolor{comment}{//  parent\_node and child\_node\_b}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00265}00265                 \textcolor{keyword}{auto} vector\_a = parent\_node.\mbox{\hyperlink{a02005_ad3f7898ef3178eef0c3579869a7f5c67}{directionTo}}(child\_node\_a);}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00266}00266                 \textcolor{keyword}{auto} vector\_b = parent\_node.directionTo(child\_node\_b);}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00267}00267 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00268}00268                 \textcolor{keywordflow}{if} (is\_perpendicular<dimension, float\_precision>(vector\_a.data(), vector\_b.data())) \{}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00269}00269                     \textcolor{comment}{// If this evaluates true,}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00270}00270                     \textcolor{comment}{// we add edge\_b to perpendicular\_edges.}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00271}00271                     perpendicular\_edges.push\_back(edge\_b);}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00272}00272                 \}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00273}00273             \}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00274}00274             \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00275}00275                 \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00276}00276 \textcolor{comment}{                // If child\_node\_b is the same as the child\_node we passed in, skip it.}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00277}00277 \textcolor{comment}{                std::cout << "{} *** SKIPPED ***"{} << std::endl;}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00278}00278 \textcolor{comment}{                */}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00279}00279             \}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00280}00280         \}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00281}00281 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00282}00282         \textcolor{keywordflow}{return} perpendicular\_edges;}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00283}00283     \}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00284}00284 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00326}00326     std::vector<IntEdge> \mbox{\hyperlink{a00409_a51b88e596c3b5f68b7abbcbc91e30bdf}{CalculateCrossSlope}}(\textcolor{keyword}{const} \mbox{\hyperlink{a00399_a01477}{Subgraph}}\& sg);}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00327}00327 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00366}00366     std::vector<std::vector<IntEdge>> \mbox{\hyperlink{a00409_a51b88e596c3b5f68b7abbcbc91e30bdf}{CalculateCrossSlope}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01485}{Graph}}\& g);}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00367}00367 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00368}00368 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00369}00369     }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00411}00411     \mbox{\hyperlink{a01469}{EdgeSet}} \mbox{\hyperlink{a00409_ac51f2e76c00356f8a6145bee865cd922}{CalculateEnergyExpenditure}}(\textcolor{keyword}{const} \mbox{\hyperlink{a00399_a01477}{Subgraph}}\& sg);}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00412}00412 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00451}00451     std::vector<EdgeSet> \mbox{\hyperlink{a00409_ac51f2e76c00356f8a6145bee865cd922}{CalculateEnergyExpenditure}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01485}{Graph}}\& g);}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00452}00452 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00453}00453     \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00454}00454 \textcolor{comment}{        \(\backslash\)summary Calculates the slope between two nodes }}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00455}00455 \textcolor{comment}{        \(\backslash\)param parent A Node}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00456}00456 \textcolor{comment}{        \(\backslash\)param child A Node}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00457}00457 \textcolor{comment}{        \(\backslash\)returns A double of the Angle}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00458}00458 \textcolor{comment}{    */}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00459}00459     \textcolor{keywordtype}{double} \mbox{\hyperlink{a00409_ae06eb693d0d7858d7a863fae3a6eee2c}{CalculateSlope}}(\mbox{\hyperlink{a02005}{Node}}\& parent, \mbox{\hyperlink{a02005}{Node}}\& child);}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00460}00460 \}}
+\DoxyCodeLine{\Hypertarget{a00191_source_l00461}00461 }
+\DoxyCodeLine{\Hypertarget{a00191_source_l00462}00462 \textcolor{preprocessor}{\#endif }}
+
+\end{DoxyCode}

@@ -1,0 +1,49 @@
+\hypertarget{a00029_source}{}\doxysection{visibility\+\_\+graph.\+h}
+\label{a00029_source}\index{Cpp/analysismethods/src/visibility\_graph.h@{Cpp/analysismethods/src/visibility\_graph.h}}
+\mbox{\hyperlink{a00029}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{a00029_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{a00029_source_l00008}00008 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00009}00009 }
+\DoxyCodeLine{\Hypertarget{a00029_source_l00010}00010 \textcolor{comment}{// Forward Declares}}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00011}00011 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00396}{HF}} \{}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00012}00012     \textcolor{keyword}{namespace }SpatialStructures \{}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00013}00013         \textcolor{keyword}{class }Graph;            }
+\DoxyCodeLine{\Hypertarget{a00029_source_l00014}00014         \textcolor{keyword}{struct }Node;            }
+\DoxyCodeLine{\Hypertarget{a00029_source_l00015}00015         \textcolor{keyword}{struct }Edge;            }
+\DoxyCodeLine{\Hypertarget{a00029_source_l00016}00016     \}}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00017}00017 }
+\DoxyCodeLine{\Hypertarget{a00029_source_l00018}00018     \textcolor{keyword}{namespace }\mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{RayTracer}} \{}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00019}00019         \textcolor{keyword}{class }EmbreeRayTracer;  }
+\DoxyCodeLine{\Hypertarget{a00029_source_l00020}00020     \}}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00021}00021 \}}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00022}00022 }
+\DoxyCodeLine{\Hypertarget{a00029_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{a00029_source_l00041}00041 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00401}{HF::VisibilityGraph}} \{}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00043}00043 }
+\DoxyCodeLine{\Hypertarget{a00029_source_l00047}00047 }
+\DoxyCodeLine{\Hypertarget{a00029_source_l00113}00113     \mbox{\hyperlink{a01485}{HF::SpatialStructures::Graph}} \mbox{\hyperlink{a00401_a12eb1e4c06400c4625cd22d925927b03}{AllToAll}}(}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00114}00114         \mbox{\hyperlink{a01345}{HF::RayTracer::EmbreeRayTracer}}\& ert,}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00115}00115         \textcolor{keyword}{const} std::vector<HF::SpatialStructures::Node>\& input\_nodes,}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00116}00116         \textcolor{keywordtype}{float} height = 1.7f}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00117}00117     );}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00118}00118 }
+\DoxyCodeLine{\Hypertarget{a00029_source_l00122}00122 }
+\DoxyCodeLine{\Hypertarget{a00029_source_l00200}00200     \mbox{\hyperlink{a01485}{HF::SpatialStructures::Graph}} \mbox{\hyperlink{a00401_ae42a5aafdfcc29b6a668355c07602efb}{GroupToGroup}}(}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00201}00201         \mbox{\hyperlink{a01345}{HF::RayTracer::EmbreeRayTracer}}\& ert,}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00202}00202         \textcolor{keyword}{const} std::vector<HF::SpatialStructures::Node>\& from,}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00203}00203         \textcolor{keyword}{const} std::vector<HF::SpatialStructures::Node>\& to,}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00204}00204         \textcolor{keywordtype}{float} height = 1.7f}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00205}00205     );}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00206}00206 }
+\DoxyCodeLine{\Hypertarget{a00029_source_l00208}00208 }
+\DoxyCodeLine{\Hypertarget{a00029_source_l00271}00271     \mbox{\hyperlink{a01485}{HF::SpatialStructures::Graph}} \mbox{\hyperlink{a00401_ab1db87927118f70786a664c3b3cc7905}{AllToAllUndirected}}(}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00272}00272         \mbox{\hyperlink{a01345}{HF::RayTracer::EmbreeRayTracer}}\& ert,}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00273}00273         \textcolor{keyword}{const} std::vector<HF::SpatialStructures::Node>\& nodes,}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00274}00274         \textcolor{keywordtype}{float} height,}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00275}00275         \textcolor{keywordtype}{int} cores = -\/1}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00276}00276     );}
+\DoxyCodeLine{\Hypertarget{a00029_source_l00277}00277 \}}
+
+\end{DoxyCode}

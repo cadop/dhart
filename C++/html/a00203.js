@@ -1,12 +1,12 @@
 var a00203 =
 [
-    [ "CSRPtrs", "a01485.html", "a01485" ],
-    [ "Subgraph", "a00399.html#a01489", [
+    [ "HF::SpatialStructures::CSRPtrs", "a01473.html", "a01473" ],
+    [ "HF::SpatialStructures::Subgraph", "a00399.html#a01477", [
       [ "m_edges", "a00399.html#ac1403ade5ddeb5410a523871f96e1e64", null ],
       [ "m_parent", "a00399.html#a2f8de99f10387d075d7d69336e4d5dd7", null ]
     ] ],
-    [ "EdgeCostSet", "a01493.html", "a01493" ],
-    [ "Graph", "a01497.html", "a01497" ],
+    [ "HF::SpatialStructures::EdgeCostSet", "a01481.html", "a01481" ],
+    [ "HF::SpatialStructures::Graph", "a01485.html", "a01485" ],
     [ "EdgeMatrix", "a00203.html#a40b235356dfcdd3f2e1adc0f3c342007", null ],
     [ "TempMatrix", "a00203.html#aaf74b9079d1b97124b8d1e4dae2cc13c", null ],
     [ "COST_AGGREGATE", "a00203.html#a6b23c0b2531c78f6d5049873c184f4f9", [

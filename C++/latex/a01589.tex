@@ -1,73 +1,109 @@
-\hypertarget{a01589}{}\doxysection{nlohmann\+::detail\+::nonesuch Struct Reference}
-\label{a01589}\index{nlohmann::detail::nonesuch@{nlohmann::detail::nonesuch}}
+\hypertarget{a01589}{}\doxysection{nlohmann\+::adl\+\_\+serializer\texorpdfstring{$<$}{<} typename, typename \texorpdfstring{$>$}{>} Struct Template Reference}
+\label{a01589}\index{nlohmann::adl\_serializer$<$ typename, typename $>$@{nlohmann::adl\_serializer$<$ typename, typename $>$}}
+
+
+default JSONSerializer template argument  
+
+
 
 
 {\ttfamily \#include $<$json.\+hpp$>$}
 
-\doxysubsection*{Public Member Functions}
+\doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a01589_a6fe87da966856c6cb06617940d90f010}{nonesuch}} ()=delete
-\item 
-\mbox{\hyperlink{a01589_a7b1119845860e548b67f1644a2084373}{$\sim$nonesuch}} ()=delete
-\item 
-\mbox{\hyperlink{a01589_a563462ef2d05fe60cdf1dc7f567dc276}{nonesuch}} (\mbox{\hyperlink{a01589}{nonesuch}} const \&)=delete
-\item 
-\mbox{\hyperlink{a01589_ad7719f7d2a00263be8b8d123870217d8}{nonesuch}} (\mbox{\hyperlink{a01589}{nonesuch}} const \&\&)=delete
-\item 
-\mbox{\hyperlink{a00411_a59fca69799f6b9e366710cb9043aa77d}{void}} \mbox{\hyperlink{a01589_add6ef84c52a851e391cef514c85f2ffe}{operator=}} (\mbox{\hyperlink{a01589}{nonesuch}} const \&)=delete
-\item 
-\mbox{\hyperlink{a00411_a59fca69799f6b9e366710cb9043aa77d}{void}} \mbox{\hyperlink{a01589_a78ca022a1b4defe4f7ba662843602231}{operator=}} (\mbox{\hyperlink{a01589}{nonesuch}} \&\&)=delete
-\end{DoxyCompactItemize}
+{\footnotesize template$<$typename Basic\+Json\+Type , typename Value\+Type $>$ }\\static auto \mbox{\hyperlink{a01589_a2c544585b8b1828a0f1eecd831d0496e}{from\+\_\+json}} (Basic\+Json\+Type \&\&j, Value\+Type \&val) noexcept(noexcept(\+::nlohmann\+::from\+\_\+json(std\+::forward$<$ Basic\+Json\+Type $>$(j), val))) -\/$>$ decltype(\+::nlohmann\+::from\+\_\+json(std\+::forward$<$ Basic\+Json\+Type $>$(j), val), void())
+\begin{DoxyCompactList}\small\item\em convert a JSON value to any value type \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Basic\+Json\+Type , typename Value\+Type $>$ }\\static auto \mbox{\hyperlink{a01589_a01b867bd5dce5249d4f7433b8f27def6}{to\+\_\+json}} (Basic\+Json\+Type \&j, Value\+Type \&\&val) noexcept(noexcept(\+::nlohmann\+::to\+\_\+json(j, std\+::forward$<$ Value\+Type $>$(val)))) -\/$>$ decltype(\+::nlohmann\+::to\+\_\+json(j, std\+::forward$<$ Value\+Type $>$(val)), void())
+\begin{DoxyCompactList}\small\item\em convert any value type to a JSON value \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename, typename$>$\newline
+struct nlohmann\+::adl\+\_\+serializer$<$ typename, typename $>$}
+default JSONSerializer template argument 
 
+This serializer ignores the template arguments and uses ADL (\href{https://en.cppreference.com/w/cpp/language/adl}{\texttt{ argument-\/dependent lookup}}) for serialization. 
 
-Definition at line 2823 of file json.\+hpp.
-
-
-
-\doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{a01589_a6fe87da966856c6cb06617940d90f010}\label{a01589_a6fe87da966856c6cb06617940d90f010}} 
-\index{nlohmann::detail::nonesuch@{nlohmann::detail::nonesuch}!nonesuch@{nonesuch}}
-\index{nonesuch@{nonesuch}!nlohmann::detail::nonesuch@{nlohmann::detail::nonesuch}}
-\doxysubsubsection{\texorpdfstring{nonesuch()}{nonesuch()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily nlohmann\+::detail\+::nonesuch\+::nonesuch (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
-
-\mbox{\Hypertarget{a01589_a7b1119845860e548b67f1644a2084373}\label{a01589_a7b1119845860e548b67f1644a2084373}} 
-\index{nlohmann::detail::nonesuch@{nlohmann::detail::nonesuch}!````~nonesuch@{$\sim$nonesuch}}
-\index{````~nonesuch@{$\sim$nonesuch}!nlohmann::detail::nonesuch@{nlohmann::detail::nonesuch}}
-\doxysubsubsection{\texorpdfstring{$\sim$nonesuch()}{~nonesuch()}}
-{\footnotesize\ttfamily nlohmann\+::detail\+::nonesuch\+::$\sim$nonesuch (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
-
-\mbox{\Hypertarget{a01589_a563462ef2d05fe60cdf1dc7f567dc276}\label{a01589_a563462ef2d05fe60cdf1dc7f567dc276}} 
-\index{nlohmann::detail::nonesuch@{nlohmann::detail::nonesuch}!nonesuch@{nonesuch}}
-\index{nonesuch@{nonesuch}!nlohmann::detail::nonesuch@{nlohmann::detail::nonesuch}}
-\doxysubsubsection{\texorpdfstring{nonesuch()}{nonesuch()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily nlohmann\+::detail\+::nonesuch\+::nonesuch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01589}{nonesuch}} const \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
-
-\mbox{\Hypertarget{a01589_ad7719f7d2a00263be8b8d123870217d8}\label{a01589_ad7719f7d2a00263be8b8d123870217d8}} 
-\index{nlohmann::detail::nonesuch@{nlohmann::detail::nonesuch}!nonesuch@{nonesuch}}
-\index{nonesuch@{nonesuch}!nlohmann::detail::nonesuch@{nlohmann::detail::nonesuch}}
-\doxysubsubsection{\texorpdfstring{nonesuch()}{nonesuch()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily nlohmann\+::detail\+::nonesuch\+::nonesuch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01589}{nonesuch}} const \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+Definition at line \mbox{\hyperlink{a00206_source_l04370}{4370}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a01589_a78ca022a1b4defe4f7ba662843602231}\label{a01589_a78ca022a1b4defe4f7ba662843602231}} 
-\index{nlohmann::detail::nonesuch@{nlohmann::detail::nonesuch}!operator=@{operator=}}
-\index{operator=@{operator=}!nlohmann::detail::nonesuch@{nlohmann::detail::nonesuch}}
-\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00411_a59fca69799f6b9e366710cb9043aa77d}{void}} nlohmann\+::detail\+::nonesuch\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01589}{nonesuch}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+\mbox{\Hypertarget{a01589_a2c544585b8b1828a0f1eecd831d0496e}\label{a01589_a2c544585b8b1828a0f1eecd831d0496e}} 
+\index{nlohmann::adl\_serializer$<$ typename, typename $>$@{nlohmann::adl\_serializer$<$ typename, typename $>$}!from\_json@{from\_json}}
+\index{from\_json@{from\_json}!nlohmann::adl\_serializer$<$ typename, typename $>$@{nlohmann::adl\_serializer$<$ typename, typename $>$}}
+\doxysubsubsection{\texorpdfstring{from\_json()}{from\_json()}}
+{\footnotesize\ttfamily template$<$typename , typename $>$ \\
+template$<$typename Basic\+Json\+Type , typename Value\+Type $>$ \\
+static auto \mbox{\hyperlink{a01589}{nlohmann\+::adl\+\_\+serializer}}$<$ typename, typename $>$\+::from\+\_\+json (\begin{DoxyParamCaption}\item[{Basic\+Json\+Type \&\&}]{j,  }\item[{Value\+Type \&}]{val }\end{DoxyParamCaption}) -\/$>$ decltype(\+::nlohmann\+::from\+\_\+json(std\+::forward$<$Basic\+Json\+Type$>$(j), val), void())     \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [noexcept]}}
 
-\mbox{\Hypertarget{a01589_add6ef84c52a851e391cef514c85f2ffe}\label{a01589_add6ef84c52a851e391cef514c85f2ffe}} 
-\index{nlohmann::detail::nonesuch@{nlohmann::detail::nonesuch}!operator=@{operator=}}
-\index{operator=@{operator=}!nlohmann::detail::nonesuch@{nlohmann::detail::nonesuch}}
-\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00411_a59fca69799f6b9e366710cb9043aa77d}{void}} nlohmann\+::detail\+::nonesuch\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01589}{nonesuch}} const \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
+
+convert a JSON value to any value type 
+
+This function is usually called by the {\ttfamily \mbox{\hyperlink{a00411_acc422c11342b31368f610b6f96fcedc6}{get()}}} function of the \mbox{\hyperlink{a01593}{basic\+\_\+json}} class (either explicit or via conversion operators).
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em j} & JSON value to read from \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em val} & value to write to \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l04382}{4382}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00206_source_l03767}{nlohmann\+::detail\+::from\+\_\+json()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01589_a2c544585b8b1828a0f1eecd831d0496e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01589_a01b867bd5dce5249d4f7433b8f27def6}\label{a01589_a01b867bd5dce5249d4f7433b8f27def6}} 
+\index{nlohmann::adl\_serializer$<$ typename, typename $>$@{nlohmann::adl\_serializer$<$ typename, typename $>$}!to\_json@{to\_json}}
+\index{to\_json@{to\_json}!nlohmann::adl\_serializer$<$ typename, typename $>$@{nlohmann::adl\_serializer$<$ typename, typename $>$}}
+\doxysubsubsection{\texorpdfstring{to\_json()}{to\_json()}}
+{\footnotesize\ttfamily template$<$typename , typename $>$ \\
+template$<$typename Basic\+Json\+Type , typename Value\+Type $>$ \\
+static auto \mbox{\hyperlink{a01589}{nlohmann\+::adl\+\_\+serializer}}$<$ typename, typename $>$\+::to\+\_\+json (\begin{DoxyParamCaption}\item[{Basic\+Json\+Type \&}]{j,  }\item[{Value\+Type \&\&}]{val }\end{DoxyParamCaption}) -\/$>$ decltype(\+::nlohmann\+::to\+\_\+json(j, std\+::forward$<$Value\+Type$>$(val)), void())     \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+
+
+convert any value type to a JSON value 
+
+This function is usually called by the constructors of the \mbox{\hyperlink{a01593}{basic\+\_\+json}} class.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em j} & JSON value to write to \\
+\hline
+\mbox{\texttt{ in}}  & {\em val} & value to read from \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l04399}{4399}} of file \mbox{\hyperlink{a00206_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00206_source_l04330}{nlohmann\+::detail\+::to\+\_\+json()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01589_a01b867bd5dce5249d4f7433b8f27def6_cgraph}
+\end{center}
+\end{figure}
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}

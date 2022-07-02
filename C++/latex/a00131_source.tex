@@ -1,0 +1,71 @@
+\hypertarget{a00131_source}{}\doxysection{boost\+\_\+graph.\+cpp}
+\label{a00131_source}\index{Cpp/pathfinding/src/boost\_graph.cpp@{Cpp/pathfinding/src/boost\_graph.cpp}}
+\mbox{\hyperlink{a00131}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{a00131_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{a00131_source_l00008}00008 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00134}{boost\_graph.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00009}00009 }
+\DoxyCodeLine{\Hypertarget{a00131_source_l00010}00010 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00203}{graph.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00011}00011 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00209}{node.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00012}00012 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00197}{Edge.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00013}00013 \textcolor{preprocessor}{\#include <assert.h>}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00014}00014 }
+\DoxyCodeLine{\Hypertarget{a00131_source_l00015}00015 \textcolor{keyword}{using }\mbox{\hyperlink{a01485}{HF::SpatialStructures::Graph}};}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00016}00016 \textcolor{keyword}{using }\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}};}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00017}00017 \textcolor{keyword}{using }std::vector;}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00018}00018 \textcolor{keyword}{using }std::string;}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00019}00019 }
+\DoxyCodeLine{\Hypertarget{a00131_source_l00020}\mbox{\hyperlink{a00406}{00020}} \textcolor{keyword}{namespace }\mbox{\hyperlink{a00406}{HF::Pathfinding}} \{}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00021}00021 }
+\DoxyCodeLine{\Hypertarget{a00131_source_l00022}00022 }
+\DoxyCodeLine{\Hypertarget{a00131_source_l00023}\mbox{\hyperlink{a01317_ac7878a25105aec59a116942a717d71b4}{00023}}     \mbox{\hyperlink{a01317_ac7878a25105aec59a116942a717d71b4}{BoostGraph::BoostGraph}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01485}{Graph}}\& graph, \textcolor{keyword}{const} \textcolor{keywordtype}{string} \& cost\_type)}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00024}00024     \{}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00025}00025 }
+\DoxyCodeLine{\Hypertarget{a00131_source_l00026}00026         \textcolor{comment}{// Allocate a vector of integers with an element for every node in}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00027}00027         \textcolor{comment}{// nodes.}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00028}00028         \textcolor{keywordtype}{int} num\_nodes = graph.\mbox{\hyperlink{a01485_a2710af2a75976862d7a235793567d2f3}{size}}();}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00029}00029         vector<int> nodes(num\_nodes);}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00030}00030 }
+\DoxyCodeLine{\Hypertarget{a00131_source_l00031}00031         std::vector<pair> edges;}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00032}00032         std::vector<Edge\_Cost> weights;}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00033}00033 }
+\DoxyCodeLine{\Hypertarget{a00131_source_l00034}00034         \textcolor{comment}{// Get a set of all edges from the graph with the passed cost type.}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00035}00035         \textcolor{comment}{// This will return the set of costs that the graph was constructed}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00036}00036         \textcolor{comment}{// with in the case that no cost\_type was specified.}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00037}00037         \textcolor{keyword}{auto} edge\_sets = graph.\mbox{\hyperlink{a01485_a1a26ebb794b444e2214cf0b0fed5a529}{GetEdges}}(cost\_type);}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00038}00038 }
+\DoxyCodeLine{\Hypertarget{a00131_source_l00039}00039         \textcolor{comment}{// Iterate through every set of edges to convert them }}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00040}00040         \textcolor{comment}{// to a format usable with Boost}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00041}00041         \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& edgeset : edge\_sets) \{}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00042}00042             \textcolor{keyword}{const} \textcolor{keywordtype}{int} parent\_id = edgeset.parent;}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00043}00043 }
+\DoxyCodeLine{\Hypertarget{a00131_source_l00044}00044             \textcolor{comment}{// Iterate through all children of this parent}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00045}00045             \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& edge : edgeset.children) \{}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00046}00046                 }
+\DoxyCodeLine{\Hypertarget{a00131_source_l00047}00047                 \textcolor{comment}{// Add the edge to the boost graph's edge array and the weight}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00048}00048                 \textcolor{comment}{// to the boost graph's weights array}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00049}00049                 \textcolor{keywordtype}{int} child\_id = edge.child;}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00050}00050                 \textcolor{keywordtype}{float} cost = edge.weight;}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00051}00051                 weights.emplace\_back(\mbox{\hyperlink{a00406_a01309}{Edge\_Cost}}\{ edge.\mbox{\hyperlink{a00406_aefea62ffa2c7078ac7d9f2eefaa96e07}{weight}} \});}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00052}00052                 edges.emplace\_back(\mbox{\hyperlink{a00406_acc378c1e475802d96758aaef12d33dbc}{pair}}\{ parent\_id,child\_id \});}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00053}00053             \}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00054}00054         \}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00055}00055 }
+\DoxyCodeLine{\Hypertarget{a00131_source_l00056}00056         \textcolor{comment}{// Calculate the maximum id held by the graph.}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00057}00057         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} max\_node = graph.\mbox{\hyperlink{a01485_a5d1505ad796c9f222c923a1a22980bb2}{MaxID}}() + 1;}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00058}00058 }
+\DoxyCodeLine{\Hypertarget{a00131_source_l00059}00059         \textcolor{comment}{// Create the boost graph from the two input arrays}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00060}00060         \mbox{\hyperlink{a01317_a8af65de831cc2255b7ad2069791124ef}{g}} = \mbox{\hyperlink{a00406_a9314d552e0a8092644fa080c9945bd25}{graph\_t}}(boost::edges\_are\_unsorted, edges.begin(), edges.end(), weights.begin(), max\_node);}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00061}00061 }
+\DoxyCodeLine{\Hypertarget{a00131_source_l00062}00062         \textcolor{keywordtype}{int} n = num\_vertices(\mbox{\hyperlink{a01317_a8af65de831cc2255b7ad2069791124ef}{g}});}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00063}00063 }
+\DoxyCodeLine{\Hypertarget{a00131_source_l00064}00064         \textcolor{comment}{// Resize predecessor and distance arrays to maximum size.}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00065}00065         \mbox{\hyperlink{a01317_ac7b026041a385cf55c089944a02e0c1d}{p}}.resize(n);}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00066}00066         \mbox{\hyperlink{a01317_a45e623a31de17dd7eba2e849822fc692}{d}}.resize(n);}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00067}00067     \}}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00068}00068 }
+\DoxyCodeLine{\Hypertarget{a00131_source_l00069}00069     \mbox{\hyperlink{a01317_a9626c462cdaa2b8d869e7a4311c51b7d}{BoostGraph::\string~BoostGraph}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{a00131_source_l00070}00070 \}}
+
+\end{DoxyCode}

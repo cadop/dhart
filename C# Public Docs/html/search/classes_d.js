@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['unmanagedfloatarray2d_197',['UnmanagedFloatArray2D',['../class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_float_array2_d.html',1,'HumanFactors::NativeUtils::CommonNativeArrays']]],
-  ['unmanagedintarray2d_198',['UnmanagedIntArray2D',['../class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_int_array2_d.html',1,'HumanFactors::NativeUtils::CommonNativeArrays']]]
+  ['unmanagedfloatarray2d_0',['UnmanagedFloatArray2D',['../class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_float_array2_d.html',1,'HumanFactors::NativeUtils::CommonNativeArrays']]],
+  ['unmanagedintarray2d_1',['UnmanagedIntArray2D',['../class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_int_array2_d.html',1,'HumanFactors::NativeUtils::CommonNativeArrays']]]
 ];

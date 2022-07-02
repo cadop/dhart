@@ -1,5 +1,6 @@
 var a01517 =
 [
-    [ "type_error", "a01517.html#aa01edaa0bf18b853368f0b900e485cd7", null ],
-    [ "create", "a01517.html#aecc083aea4b698c33d042670ba50c10f", null ]
+    [ "type", "a01517.html#a3c14c4ab277de72b166806193ff4fa10", null ],
+    [ "value_type", "a01517.html#a2eca43d08fc1eb68bd5fa75b6714d21d", null ],
+    [ "size", "a01517.html#a7ac529419787d775f52408135304b337", null ]
 ];

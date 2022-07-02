@@ -1,213 +1,156 @@
-\hypertarget{a01341}{}\doxysection{HF\+::Pathfinding\+::Distance\+And\+Predecessor Struct Reference}
-\label{a01341}\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
+\hypertarget{a01341}{}\doxysection{HF\+::Ray\+Tracer\+::Vector3D Struct Reference}
+\label{a01341}\index{HF::RayTracer::Vector3D@{HF::RayTracer::Vector3D}}
 
 
-Holds and maintains a distance and predecessor matrix.  
-
-
-
-
-{\ttfamily \#include $<$path\+\_\+finder.\+h$>$}
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}
 
 
 
-Collaboration diagram for HF\+::Pathfinding\+::Distance\+And\+Predecessor\+:
+Collaboration diagram for HF\+::Ray\+Tracer\+::Vector3D\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a01339}
+\includegraphics[width=206pt]{a01339}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a01341_a9d9e98ea5eedd5b876cb0da9c17eedf4}{Distance\+And\+Predecessor}} (int \mbox{\hyperlink{a01341_afae801900e74d0d1389988e8163f293a}{size}})
-\begin{DoxyCompactList}\small\item\em Create and allocate a pair of distance and predecessor arrays. \end{DoxyCompactList}\item 
-float $\ast$ \mbox{\hyperlink{a01341_a75b5c1c61a7afbe2ace4ba7a9cd41026}{Get\+Row\+Of\+Dist}} (int i)
-\begin{DoxyCompactList}\small\item\em Get a pointer to the beginning of the ith row of the distance array. \end{DoxyCompactList}\item 
-int $\ast$ \mbox{\hyperlink{a01341_a686718154f87c6914399998637b5bd4e}{Get\+Row\+Of\+Pred}} (int i)
-\begin{DoxyCompactList}\small\item\em Get a pointer to the beginning of the ith row of the predecessor array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{a01341_ac8801606dc5a1433fb7578c54d431a8c}{Vector3\+D\+::\+Vector3D}} (\mbox{\hyperlink{a00001_a02073}{double}} \mbox{\hyperlink{a01341_a8dc6f75dc73e95942cca436c146cb83c}{x}}, \mbox{\hyperlink{a00001_a02073}{double}} \mbox{\hyperlink{a01341_af7128e46fb0f8d5ef3e4a7355e9f959f}{y}}, \mbox{\hyperlink{a00001_a02073}{double}} \mbox{\hyperlink{a01341_af6ea0d409b5b9d4833f6a745d4624477}{z}})
+\item 
+\mbox{\hyperlink{a01341}{Vector3D}} \mbox{\hyperlink{a01341_aa0c935fabbdc069a24f2c1f780b451f1}{operator-\/}} (const \mbox{\hyperlink{a01341}{Vector3D}} \&v2) const
+\item 
+\mbox{\hyperlink{a01341}{Vector3D}} \mbox{\hyperlink{a01341_a2d86f8a3010d26e57a71b17baeb2e69e}{operator$\ast$}} (const \mbox{\hyperlink{a00001_a02073}{double}} \&a) const
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::vector$<$ float $>$ $\ast$ \mbox{\hyperlink{a01341_ad9494246039332f91b21d77a70cb7318}{dist}}
+\mbox{\hyperlink{a00001_a02073}{double}} \mbox{\hyperlink{a01341_a8dc6f75dc73e95942cca436c146cb83c}{x}}
 \item 
-std\+::vector$<$ int $>$ $\ast$ \mbox{\hyperlink{a01341_a2c8df39d6c2778163d32e53d803baf56}{pred}}
+\mbox{\hyperlink{a00001_a02073}{double}} \mbox{\hyperlink{a01341_af7128e46fb0f8d5ef3e4a7355e9f959f}{y}}
 \item 
-int \mbox{\hyperlink{a01341_afae801900e74d0d1389988e8163f293a}{size}} = 0
-\begin{DoxyCompactList}\small\item\em Number of rows and colums. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{a00001_a02073}{double}} \mbox{\hyperlink{a01341_af6ea0d409b5b9d4833f6a745d4624477}{z}}
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Holds and maintains a distance and predecessor matrix. 
-
-\begin{DoxyRemark}{Remarks}
-This is mostly used for the implementation of Generate\+Distance\+And\+Predecessor.
-\end{DoxyRemark}
-\begin{DoxyWarning}{Warning}
-This object does N\+OT delete it\textquotesingle{}s internal arrays upon destruction. It\textquotesingle{}s the owner\textquotesingle{}s responsibility to do this! 
-\end{DoxyWarning}
 
 
-Definition at line 409 of file path\+\_\+finder.\+h.
-
-
-
-\doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{a01341_a9d9e98ea5eedd5b876cb0da9c17eedf4}\label{a01341_a9d9e98ea5eedd5b876cb0da9c17eedf4}} 
-\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}!DistanceAndPredecessor@{DistanceAndPredecessor}}
-\index{DistanceAndPredecessor@{DistanceAndPredecessor}!HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
-\doxysubsubsection{\texorpdfstring{DistanceAndPredecessor()}{DistanceAndPredecessor()}}
-{\footnotesize\ttfamily H\+F\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::\+Distance\+And\+Predecessor (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Create and allocate a pair of distance and predecessor arrays. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em size} & Number of rows and columns. Size of each array will be this to the power of 2\\
-\hline
-\end{DoxyParams}
-All arrays will be initialized with N\+AN as their default values 
-
-Definition at line 423 of file path\+\_\+finder.\+h.
-
-
-
-References dist, pred, and size.
+Definition at line \mbox{\hyperlink{a00146_source_l00039}{39}} of file \mbox{\hyperlink{a00146_source}{embree\+\_\+raytracer.\+h}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a01341_a75b5c1c61a7afbe2ace4ba7a9cd41026}\label{a01341_a75b5c1c61a7afbe2ace4ba7a9cd41026}} 
-\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}!GetRowOfDist@{GetRowOfDist}}
-\index{GetRowOfDist@{GetRowOfDist}!HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
-\doxysubsubsection{\texorpdfstring{GetRowOfDist()}{GetRowOfDist()}}
-{\footnotesize\ttfamily float$\ast$ H\+F\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::\+Get\+Row\+Of\+Dist (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\Hypertarget{a01341_a2d86f8a3010d26e57a71b17baeb2e69e}\label{a01341_a2d86f8a3010d26e57a71b17baeb2e69e}} 
+\index{HF::RayTracer::Vector3D@{HF::RayTracer::Vector3D}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!HF::RayTracer::Vector3D@{HF::RayTracer::Vector3D}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01341}{Vector3D}} HF\+::\+Ray\+Tracer\+::\+Vector3\+D\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a00001_a02073}{double}} \&}]{a }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Get a pointer to the beginning of the ith row of the distance array. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em i} & Index of the row to get.\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-a pointer to the beginning of row i. 
-\end{DoxyReturn}
-
-
-Definition at line 439 of file path\+\_\+finder.\+h.
+Definition at line \mbox{\hyperlink{a00146_source_l00056}{56}} of file \mbox{\hyperlink{a00146_source}{embree\+\_\+raytracer.\+h}}.
 
 
 
-References dist, and size.
+References \mbox{\hyperlink{a00146_source_l00040}{x}}, \mbox{\hyperlink{a00146_source_l00040}{y}}, and \mbox{\hyperlink{a00146_source_l00040}{z}}.
+
+\mbox{\Hypertarget{a01341_aa0c935fabbdc069a24f2c1f780b451f1}\label{a01341_aa0c935fabbdc069a24f2c1f780b451f1}} 
+\index{HF::RayTracer::Vector3D@{HF::RayTracer::Vector3D}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!HF::RayTracer::Vector3D@{HF::RayTracer::Vector3D}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01341}{Vector3D}} HF\+::\+Ray\+Tracer\+::\+Vector3\+D\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01341}{Vector3D}} \&}]{v2 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Referenced by H\+F\+::\+Pathfinding\+::\+Generate\+Distance\+And\+Pred(), and operator$<$$<$().
+Definition at line \mbox{\hyperlink{a00146_source_l00048}{48}} of file \mbox{\hyperlink{a00146_source}{embree\+\_\+raytracer.\+h}}.
 
-Here is the caller graph for this function\+:
+
+
+References \mbox{\hyperlink{a00146_source_l00040}{x}}, \mbox{\hyperlink{a00146_source_l00040}{y}}, and \mbox{\hyperlink{a00146_source_l00040}{z}}.
+
+\mbox{\Hypertarget{a01341_ac8801606dc5a1433fb7578c54d431a8c}\label{a01341_ac8801606dc5a1433fb7578c54d431a8c}} 
+\index{HF::RayTracer::Vector3D@{HF::RayTracer::Vector3D}!Vector3D::Vector3D@{Vector3D::Vector3D}}
+\index{Vector3D::Vector3D@{Vector3D::Vector3D}!HF::RayTracer::Vector3D@{HF::RayTracer::Vector3D}}
+\doxysubsubsection{\texorpdfstring{Vector3D::Vector3D()}{Vector3D::Vector3D()}}
+{\footnotesize\ttfamily HF\+::\+Ray\+Tracer\+::\+Vector3\+D\+::\+Vector3\+D\+::\+Vector3D (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00001_a02073}{double}}}]{x,  }\item[{\mbox{\hyperlink{a00001_a02073}{double}}}]{y,  }\item[{\mbox{\hyperlink{a00001_a02073}{double}}}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00146_source_l00042}{42}} of file \mbox{\hyperlink{a00146_source}{embree\+\_\+raytracer.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00146_source_l00042}{Vector3\+D\+::\+Vector3\+D()}}, \mbox{\hyperlink{a00146_source_l00040}{x}}, \mbox{\hyperlink{a00146_source_l00040}{y}}, and \mbox{\hyperlink{a00146_source_l00040}{z}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00146_source_l00042}{Vector3\+D\+::\+Vector3\+D()}}.
+
+Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a01341_a75b5c1c61a7afbe2ace4ba7a9cd41026_icgraph}
+\includegraphics[width=206pt]{a01341_ac8801606dc5a1433fb7578c54d431a8c_cgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{a01341_a686718154f87c6914399998637b5bd4e}\label{a01341_a686718154f87c6914399998637b5bd4e}} 
-\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}!GetRowOfPred@{GetRowOfPred}}
-\index{GetRowOfPred@{GetRowOfPred}!HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
-\doxysubsubsection{\texorpdfstring{GetRowOfPred()}{GetRowOfPred()}}
-{\footnotesize\ttfamily int$\ast$ H\+F\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::\+Get\+Row\+Of\+Pred (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Get a pointer to the beginning of the ith row of the predecessor array. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em i} & Index of the row to get.\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-a pointer to the beginning of row i. 
-\end{DoxyReturn}
-
-
-Definition at line 453 of file path\+\_\+finder.\+h.
-
-
-
-References pred, and size.
-
-
-
-Referenced by H\+F\+::\+Pathfinding\+::\+Generate\+Distance\+And\+Pred(), and operator$<$$<$().
-
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a01341_a686718154f87c6914399998637b5bd4e_icgraph}
+\includegraphics[width=206pt]{a01341_ac8801606dc5a1433fb7578c54d431a8c_icgraph}
 \end{center}
 \end{figure}
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{a01341_ad9494246039332f91b21d77a70cb7318}\label{a01341_ad9494246039332f91b21d77a70cb7318}} 
-\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}!dist@{dist}}
-\index{dist@{dist}!HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
-\doxysubsubsection{\texorpdfstring{dist}{dist}}
-{\footnotesize\ttfamily std\+::vector$<$float$>$$\ast$ H\+F\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::dist}
+\mbox{\Hypertarget{a01341_a8dc6f75dc73e95942cca436c146cb83c}\label{a01341_a8dc6f75dc73e95942cca436c146cb83c}} 
+\index{HF::RayTracer::Vector3D@{HF::RayTracer::Vector3D}!x@{x}}
+\index{x@{x}!HF::RayTracer::Vector3D@{HF::RayTracer::Vector3D}}
+\doxysubsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00001_a02073}{double}} HF\+::\+Ray\+Tracer\+::\+Vector3\+D\+::x}
 
 
 
-Definition at line 410 of file path\+\_\+finder.\+h.
+Definition at line \mbox{\hyperlink{a00146_source_l00040}{40}} of file \mbox{\hyperlink{a00146_source}{embree\+\_\+raytracer.\+h}}.
 
 
 
-Referenced by Calculate\+Distance\+And\+Predecessor(), Distance\+And\+Predecessor(), and Get\+Row\+Of\+Dist().
+Referenced by \mbox{\hyperlink{a00143_source_l00230}{HF\+::\+Ray\+Tracer\+::cross()}}, \mbox{\hyperlink{a00143_source_l00238}{HF\+::\+Ray\+Tracer\+::dot()}}, \mbox{\hyperlink{a00143_source_l00242}{HF\+::\+Ray\+Tracer\+::\+Invert\+Vector()}}, \mbox{\hyperlink{a00146_source_l00056}{operator$\ast$()}}, \mbox{\hyperlink{a00146_source_l00048}{operator-\/()}}, and \mbox{\hyperlink{a00146_source_l00042}{Vector3\+D\+::\+Vector3\+D()}}.
 
-\mbox{\Hypertarget{a01341_a2c8df39d6c2778163d32e53d803baf56}\label{a01341_a2c8df39d6c2778163d32e53d803baf56}} 
-\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}!pred@{pred}}
-\index{pred@{pred}!HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
-\doxysubsubsection{\texorpdfstring{pred}{pred}}
-{\footnotesize\ttfamily std\+::vector$<$int$>$$\ast$ H\+F\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::pred}
-
-
-
-Definition at line 411 of file path\+\_\+finder.\+h.
+\mbox{\Hypertarget{a01341_af7128e46fb0f8d5ef3e4a7355e9f959f}\label{a01341_af7128e46fb0f8d5ef3e4a7355e9f959f}} 
+\index{HF::RayTracer::Vector3D@{HF::RayTracer::Vector3D}!y@{y}}
+\index{y@{y}!HF::RayTracer::Vector3D@{HF::RayTracer::Vector3D}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00001_a02073}{double}} HF\+::\+Ray\+Tracer\+::\+Vector3\+D\+::y}
 
 
 
-Referenced by Calculate\+Distance\+And\+Predecessor(), Distance\+And\+Predecessor(), and Get\+Row\+Of\+Pred().
-
-\mbox{\Hypertarget{a01341_afae801900e74d0d1389988e8163f293a}\label{a01341_afae801900e74d0d1389988e8163f293a}} 
-\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}!size@{size}}
-\index{size@{size}!HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
-\doxysubsubsection{\texorpdfstring{size}{size}}
-{\footnotesize\ttfamily int H\+F\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::size = 0}
+Definition at line \mbox{\hyperlink{a00146_source_l00040}{40}} of file \mbox{\hyperlink{a00146_source}{embree\+\_\+raytracer.\+h}}.
 
 
 
-Number of rows and colums. 
+Referenced by \mbox{\hyperlink{a00143_source_l00230}{HF\+::\+Ray\+Tracer\+::cross()}}, \mbox{\hyperlink{a00143_source_l00238}{HF\+::\+Ray\+Tracer\+::dot()}}, \mbox{\hyperlink{a00143_source_l00242}{HF\+::\+Ray\+Tracer\+::\+Invert\+Vector()}}, \mbox{\hyperlink{a00146_source_l00056}{operator$\ast$()}}, \mbox{\hyperlink{a00146_source_l00048}{operator-\/()}}, and \mbox{\hyperlink{a00146_source_l00042}{Vector3\+D\+::\+Vector3\+D()}}.
+
+\mbox{\Hypertarget{a01341_af6ea0d409b5b9d4833f6a745d4624477}\label{a01341_af6ea0d409b5b9d4833f6a745d4624477}} 
+\index{HF::RayTracer::Vector3D@{HF::RayTracer::Vector3D}!z@{z}}
+\index{z@{z}!HF::RayTracer::Vector3D@{HF::RayTracer::Vector3D}}
+\doxysubsubsection{\texorpdfstring{z}{z}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00001_a02073}{double}} HF\+::\+Ray\+Tracer\+::\+Vector3\+D\+::z}
 
 
 
-Definition at line 413 of file path\+\_\+finder.\+h.
+Definition at line \mbox{\hyperlink{a00146_source_l00040}{40}} of file \mbox{\hyperlink{a00146_source}{embree\+\_\+raytracer.\+h}}.
 
 
 
-Referenced by Distance\+And\+Predecessor(), Get\+Row\+Of\+Dist(), Get\+Row\+Of\+Pred(), and operator$<$$<$().
+Referenced by \mbox{\hyperlink{a00143_source_l00230}{HF\+::\+Ray\+Tracer\+::cross()}}, \mbox{\hyperlink{a00143_source_l00238}{HF\+::\+Ray\+Tracer\+::dot()}}, \mbox{\hyperlink{a00143_source_l00242}{HF\+::\+Ray\+Tracer\+::\+Invert\+Vector()}}, \mbox{\hyperlink{a00146_source_l00056}{operator$\ast$()}}, \mbox{\hyperlink{a00146_source_l00048}{operator-\/()}}, and \mbox{\hyperlink{a00146_source_l00042}{Vector3\+D\+::\+Vector3\+D()}}.
 
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Cpp/pathfinding/src/\mbox{\hyperlink{a00140}{path\+\_\+finder.\+h}}\end{DoxyCompactItemize}
+Cpp/raytracer/src/\mbox{\hyperlink{a00146}{embree\+\_\+raytracer.\+h}}\end{DoxyCompactItemize}

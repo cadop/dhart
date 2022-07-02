@@ -1,0 +1,40 @@
+\hypertarget{a00158_source}{}\doxysection{Multi\+RT.\+h}
+\label{a00158_source}\index{Cpp/raytracer/src/MultiRT.h@{Cpp/raytracer/src/MultiRT.h}}
+\mbox{\hyperlink{a00158}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00001}00001 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00002}00002 }
+\DoxyCodeLine{\Hypertarget{a00158_source_l00003}00003 \textcolor{preprocessor}{\#include <array>}}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00004}00004 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00152}{HitStruct.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00005}00005 }
+\DoxyCodeLine{\Hypertarget{a00158_source_l00006}00006 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00398}{HF::RayTracer}} \{}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00007}00007     \textcolor{keyword}{class }EmbreeRayTracer;}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00008}00008     \textcolor{keyword}{class }NanoRTRayTracer;}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00009}00009 }
+\DoxyCodeLine{\Hypertarget{a00158_source_l00010}\mbox{\hyperlink{a01353}{00010}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a01353}{MultiRT}} \{}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00011}\mbox{\hyperlink{a01353_a07a089a34007343268b4254589324038}{00011}}         \textcolor{keyword}{using }\mbox{\hyperlink{a00001_a02073}{real\_t}} = \mbox{\hyperlink{a00001_a02073}{double}};}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00012}\mbox{\hyperlink{a01353_aee0e06ba774d2d3f873f9bb0d5786005}{00012}}         \textcolor{keyword}{using }\mbox{\hyperlink{a01353_aee0e06ba774d2d3f873f9bb0d5786005}{real3}} = std::array<real\_t, 3>;}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00013}00013 }
+\DoxyCodeLine{\Hypertarget{a00158_source_l00014}\mbox{\hyperlink{a01353_ab55089d50434891b9fc5dcc523eb1425}{00014}}         \textcolor{keyword}{enum} \mbox{\hyperlink{a01353_ab55089d50434891b9fc5dcc523eb1425}{RT\_Type}}\{}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00015}\mbox{\hyperlink{a01353_ab55089d50434891b9fc5dcc523eb1425a18f598cc5a38f3e5052c84e5192ce952}{00015}}             \mbox{\hyperlink{a01353_ab55089d50434891b9fc5dcc523eb1425a18f598cc5a38f3e5052c84e5192ce952}{NONE}},}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00016}\mbox{\hyperlink{a01353_ab55089d50434891b9fc5dcc523eb1425a0145c318ca132587feb44b0a8805a73a}{00016}}             \mbox{\hyperlink{a01353_ab55089d50434891b9fc5dcc523eb1425a0145c318ca132587feb44b0a8805a73a}{EMBREE}},}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00017}00017             \mbox{\hyperlink{a01353_ab55089d50434891b9fc5dcc523eb1425a15aa1720fdd46c882b9537585c915c09}{NANO\_RT}}}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00018}\mbox{\hyperlink{a01353_ab55089d50434891b9fc5dcc523eb1425a15aa1720fdd46c882b9537585c915c09}{00018}}         \};}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00019}00019 }
+\DoxyCodeLine{\Hypertarget{a00158_source_l00020}\mbox{\hyperlink{a01353_a1c2eb4f79eceffdc4e3d93f17c34e7c9}{00020}}         \textcolor{keywordtype}{void}* \mbox{\hyperlink{a01353_a1c2eb4f79eceffdc4e3d93f17c34e7c9}{RayTracer}};}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00021}\mbox{\hyperlink{a01353_acec8c7c5be5c43af1dcae2f271433ac9}{00021}}         \mbox{\hyperlink{a01353_ab55089d50434891b9fc5dcc523eb1425}{RT\_Type}} \mbox{\hyperlink{a01353_acec8c7c5be5c43af1dcae2f271433ac9}{type}} = \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a}{RT\_Type::NONE}};}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00022}00022 }
+\DoxyCodeLine{\Hypertarget{a00158_source_l00023}\mbox{\hyperlink{a01353_a5d72ecc4fff7d596a1f40aad769088d7}{00023}}         \textcolor{keyword}{inline} \mbox{\hyperlink{a01353_a5d72ecc4fff7d596a1f40aad769088d7}{MultiRT}}() \{\};}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00024}00024         \mbox{\hyperlink{a01353_a5d72ecc4fff7d596a1f40aad769088d7}{MultiRT}}(\mbox{\hyperlink{a01345}{HF::RayTracer::EmbreeRayTracer}}* ert);}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00025}00025 }
+\DoxyCodeLine{\Hypertarget{a00158_source_l00026}00026         \mbox{\hyperlink{a01353_a5d72ecc4fff7d596a1f40aad769088d7}{MultiRT}}(\mbox{\hyperlink{a01453}{HF::RayTracer::NanoRTRayTracer}}* nrt);}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00027}00027 }
+\DoxyCodeLine{\Hypertarget{a00158_source_l00028}00028         \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01353_a22ebf97e859ef651e81deb40b74f668f}{Occluded}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01353_aee0e06ba774d2d3f873f9bb0d5786005}{real3}} \& origin, \textcolor{keyword}{const} \mbox{\hyperlink{a01353_aee0e06ba774d2d3f873f9bb0d5786005}{real3}}\& direction, \mbox{\hyperlink{a01353_a07a089a34007343268b4254589324038}{real\_t}} distance);}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00029}00029 }
+\DoxyCodeLine{\Hypertarget{a00158_source_l00030}00030         \mbox{\hyperlink{a01349}{HitStruct<real\_t>}} \mbox{\hyperlink{a01353_a7ee672618f7fe9ce6938978d93d18514}{Intersect}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01353_aee0e06ba774d2d3f873f9bb0d5786005}{real3}}\& origin, \textcolor{keyword}{const} \mbox{\hyperlink{a01353_aee0e06ba774d2d3f873f9bb0d5786005}{real3}}\& direction);}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00031}00031     \};}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00032}00032 \}}
+\DoxyCodeLine{\Hypertarget{a00158_source_l00033}00033 }
+\DoxyCodeLine{\Hypertarget{a00158_source_l00034}00034 }
+
+\end{DoxyCode}
