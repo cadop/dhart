@@ -163,7 +163,7 @@ def Intersect(
     
     # If both are points, cast a single ray
     if origin_is_point and direction_is_point: 
-        return raytracer_native_functions.FireRaySingleDistance(
+        return raytracer_native_functions.CastRaySingleDistance(
             bvh.pointer, origin, direction, max_distance
         )
 
@@ -178,7 +178,7 @@ def Intersect(
         assert result_size != 0
 
         # Call native function
-        vector_ptr, array_ptr = raytracer_native_functions.FireMultipleRaysDistance(
+        vector_ptr, array_ptr = raytracer_native_functions.CastMultipleRaysDistance(
             bvh.pointer, origin, direction, max_distance
         )
 
@@ -198,7 +198,7 @@ def IntersectForPoint(
     To shoot multiple rays from one origin, or cast rays from multiple origins
     in a single direction, set origins OR directions to a single value. If
     they are both set to a single value then the ray will be fired as a single 
-    ray via FireRay.
+    ray via CastRay.
 
     Note:
         Accepts the following configurations:
@@ -265,19 +265,19 @@ def IntersectForPoint(
         if len(directions) != len(origins):
             print("Length of directions and origins do not match!")
             raise RuntimeError()
-        return raytracer_native_functions.FireMultipleRays(
+        return raytracer_native_functions.CastMultipleRays(
             bvh.pointer, origins, directions, max_distance
         )
     elif directions_is_list and not origins_is_list:
-        return raytracer_native_functions.FireOneOriginMultipleDirections(
+        return raytracer_native_functions.CastOneOriginMultipleDirections(
             bvh.pointer, origin, directions, max_distance
         )
     elif not directions_is_list and origins_is_list:
-        return raytracer_native_functions.FireMultipleOriginsOneDirection(
+        return raytracer_native_functions.CastMultipleOriginsOneDirection(
             bvh.pointer, origins, direction, max_distance
         )
     elif not directions_is_list and not origins_is_list:
-        return raytracer_native_functions.FireRay(
+        return raytracer_native_functions.CastRay(
             bvh.pointer, origin, direction, max_distance
         )
 
@@ -327,7 +327,7 @@ def IntersectOccluded(
     if len(origins) == 1 or not isinstance(origins, List):
         origins = (origins[0], origins[1], origins[2])
 
-    res = raytracer_native_functions.FireOcclusionRays(
+    res = raytracer_native_functions.CastOcclusionRays(
         bvh.pointer, origins, directions, max_distance
     )
 

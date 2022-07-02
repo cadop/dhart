@@ -127,7 +127,7 @@ namespace HumanFactors.RayTracing
 			bool did_hit = false;
 
 			// Call the C++ function to cast a ray
-			_ = FireRay(rt_ptr, ref x, ref y, ref z, dx, dy, dz, max_distance, ref did_hit);
+			_ = CastRay(rt_ptr, ref x, ref y, ref z, dx, dy, dz, max_distance, ref did_hit);
 
 			// If it hit, return a new vector3d with it's coordinates
 			if (did_hit) return new Vector3D(x, y, z);
@@ -189,19 +189,19 @@ namespace HumanFactors.RayTracing
 			if (num_origins == num_directions)
 			{
 				bool[] result_array = new bool[num_origins];
-				res = FireMultipleRays(ert, flat_origins, flat_dirs, num_origins, max_distance, result_array);
+				res = CastMultipleRays(ert, flat_origins, flat_dirs, num_origins, max_distance, result_array);
 				out_points = HelperFunctions.FloatArrayToVectorArray(flat_origins, result_array);
 			}
 			else if (num_origins > num_directions && num_directions == 1)
 			{
 				bool[] result_array = new bool[num_origins];
-				res = FireMultipleOriginsOneDirection(ert, flat_origins, flat_dirs, num_origins, max_distance, result_array);
+				res = CastMultipleOriginsOneDirection(ert, flat_origins, flat_dirs, num_origins, max_distance, result_array);
 				out_points = HelperFunctions.FloatArrayToVectorArray(flat_origins, result_array);
 			}
 			else if (num_directions > num_origins && num_origins == 1)
 			{
 				bool[] result_array = new bool[num_directions];
-				res = FireMultipleDirectionsOneOrigin(ert, flat_origins, flat_dirs, num_directions, max_distance, result_array);
+				res = CastMultipleDirectionsOneOrigin(ert, flat_origins, flat_dirs, num_directions, max_distance, result_array);
 				out_points = HelperFunctions.FloatArrayToVectorArray(flat_dirs, result_array);
 			}
 			else // If it doesn't match any configuration, throw
@@ -261,7 +261,7 @@ namespace HumanFactors.RayTracing
 			IntPtr vector_ptr = new IntPtr();
 			IntPtr data_ptr = new IntPtr();
 
-			HF_STATUS res = FireRaysDistance(
+			HF_STATUS res = CastRaysDistance(
 				ray_tracer,
 				flat_origins,
 				num_origins,
@@ -306,7 +306,7 @@ namespace HumanFactors.RayTracing
             </list>
         
         */
-		internal static bool[] C_FireOcclusionRays(
+		internal static bool[] C_CastOcclusionRays(
 			IntPtr rt_ptr,
 			IEnumerable<Vector3D> origins,
 			IEnumerable<Vector3D> directions,
@@ -328,7 +328,7 @@ namespace HumanFactors.RayTracing
 			float[] direction_array = HelperFunctions.FlattenVectorArray(directions);
 
 			// Call to C++ and get results. This will update the result array. 
-			HF_STATUS res = FireOcclusionRays(
+			HF_STATUS res = CastOcclusionRays(
 				rt_ptr,
 				origin_array,
 				direction_array,
@@ -371,7 +371,7 @@ namespace HumanFactors.RayTracing
 			float out_distance = 0.0f;
 
 			// Cast the ray in C++. This will update out_distance, and out_meshid
-			FireSingleRayDistance(rt_ptr, origin_arr, direction_arr, max_distance, ref out_distance, ref out_meshid);
+			CastSingleRayDistance(rt_ptr, origin_arr, direction_arr, max_distance, ref out_distance, ref out_meshid);
 
 			// Return the results
 			return new RayResult(out_distance, out_meshid);
@@ -409,7 +409,7 @@ namespace HumanFactors.RayTracing
 		);	
 		
 		[DllImport(dllpath)]
-		private static extern HF_STATUS FireRay(
+		private static extern HF_STATUS CastRay(
 			IntPtr ert,
 			ref float x,
 			ref float y,
@@ -422,7 +422,7 @@ namespace HumanFactors.RayTracing
 		);
 
 		[DllImport(dllpath)]
-		private static extern HF_STATUS FireSingleRayDistance(
+		private static extern HF_STATUS CastSingleRayDistance(
 			IntPtr ert,
 			[In] float[] origin,
 			[In] float[] direction,
@@ -432,7 +432,7 @@ namespace HumanFactors.RayTracing
 		);
 
 		[DllImport(dllpath, CharSet = CharSet.Ansi)]
-		private static extern HF_STATUS FireMultipleRays(
+		private static extern HF_STATUS CastMultipleRays(
 			IntPtr ert,
 			[In, Out] float[] origins,
 			float[] directions,
@@ -443,7 +443,7 @@ namespace HumanFactors.RayTracing
 		);                                                                    // of the values will be garbage
 
 		[DllImport(dllpath)]
-		private static extern HF_STATUS FireMultipleDirectionsOneOrigin(
+		private static extern HF_STATUS CastMultipleDirectionsOneOrigin(
 			IntPtr bvh,
 			[In] float[] origin,
 			[In] float[] directions,
@@ -454,7 +454,7 @@ namespace HumanFactors.RayTracing
 		);
 
 		[DllImport(dllpath)]
-		private static extern HF_STATUS FireMultipleOriginsOneDirection(
+		private static extern HF_STATUS CastMultipleOriginsOneDirection(
 			IntPtr bvh,
 			[In] float[] origin,
 			[In] float[] directions,
@@ -465,7 +465,7 @@ namespace HumanFactors.RayTracing
 		);
 
 		[DllImport(dllpath)]
-		private static extern HF_STATUS FireOcclusionRays(
+		private static extern HF_STATUS CastOcclusionRays(
 			IntPtr bvh,
 			[In] float[] origins,
 			[In] float[] directions,
@@ -483,7 +483,7 @@ namespace HumanFactors.RayTracing
 		private static extern HF_STATUS DestroyRayResultVector(IntPtr analysis);
 
 		[DllImport(dllpath)]
-		private static extern HF_STATUS FireRaysDistance(
+		private static extern HF_STATUS CastRaysDistance(
 			IntPtr ert,
 			[In] float[] origins,
 			int num_origins,

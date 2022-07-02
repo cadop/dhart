@@ -145,7 +145,7 @@ namespace HumanFactors.RayTracing
 
             \par Example
             \snippet raytracer\test_raytracer.cs EX_BVH_CSTOR
-            \snippet raytracer\test_raytracer.cs EX_FireRayMultiplePoints
+            \snippet raytracer\test_raytracer.cs EX_CastRayMultiplePoints
             ```
             Origin: (0, 0, 1), Intersection: (0, 0, 0)
 			Origin: (0, 1, 1), Intersection: (0, 1, 0)
@@ -286,6 +286,6 @@ namespace HumanFactors.RayTracing
 			IEnumerable<Vector3D> origin,
 			IEnumerable<Vector3D> direction,
 			float max_distance = -1
-		) => NativeMethods.C_FireOcclusionRays(bvh.Pointer, origin, direction, max_distance);
+		) => NativeMethods.C_CastOcclusionRays(bvh.Pointer, origin, direction, max_distance);
 	}
 }

@@ -189,7 +189,7 @@ namespace HumanFactors.Tests.RayTracing
             EmbreeBVH BVH = LoadPlane();
 
 
-            //! [EX_FireRayMultiplePoints]
+            //! [EX_CastRayMultiplePoints]
 
             int num_points = 5;
 
@@ -209,7 +209,7 @@ namespace HumanFactors.Tests.RayTracing
             for (int i = 0; i < num_points; i++)
                 Debug.WriteLine(String.Format("Origin: {0}, Intersection: {1}", origin_vector[i], results[i]));
 
-            //! [EX_FireRayMultiplePoints]
+            //! [EX_CastRayMultiplePoints]
 
             var result_1 = results[0];
             for (int i = 0; i < num_points; i++)

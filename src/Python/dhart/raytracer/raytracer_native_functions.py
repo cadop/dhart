@@ -50,7 +50,7 @@ def CreateRayTracer(mesh_info_ptr: Union[c_void_p, List[c_void_p]], use_precise:
     # Return raytracer
     return rt_ptr
 
-def FireRay(
+def CastRay(
     rt_ptr: c_void_p,
     origin: Tuple[float, float, float],
     direction: Tuple[float, float, float],
@@ -65,7 +65,7 @@ def FireRay(
     result = c_bool(False)
 
     # Cast the ray. if it hits, x,y, and z are overwritten
-    HFPython.FireRay(
+    HFPython.CastRay(
         rt_ptr,
         byref(c_x),
         byref(c_y),
@@ -84,7 +84,7 @@ def FireRay(
     return (c_x.value, c_y.value, c_z.value)
 
 
-def FireMultipleRays(
+def CastMultipleRays(
     rt_ptr: c_void_p,
     origin: List[Tuple[float, float, float]],
     direction: List[Tuple[float, float, float]],
@@ -104,7 +104,7 @@ def FireMultipleRays(
     result_array_type = c_bool * len(origin)
     result_array = result_array_type()
 
-    HFPython.FireMultipleRays(
+    HFPython.CastMultipleRays(
         rt_ptr,
         byref(origin_array),
         direction_array,
@@ -129,7 +129,7 @@ def FireMultipleRays(
     return return_array
 
 
-def FireOneOriginMultipleDirections(
+def CastOneOriginMultipleDirections(
     rt_ptr: c_void_p,
     origin: Tuple[float, float, float],
     direction: List[Tuple[float, float, float]],
@@ -148,7 +148,7 @@ def FireOneOriginMultipleDirections(
     result_array_type = c_bool * num_rays
     result_array = result_array_type()
 
-    HFPython.FireMultipleDirectionsOneOrigin(
+    HFPython.CastMultipleDirectionsOneOrigin(
         rt_ptr,
         origin_array,
         byref(direction_array),
@@ -172,7 +172,7 @@ def FireOneOriginMultipleDirections(
     return return_array
 
 
-def FireMultipleOriginsOneDirection(
+def CastMultipleOriginsOneDirection(
     rt_ptr: c_void_p,
     origin: List[Tuple[float, float, float]],
     direction: Tuple[float, float, float],
@@ -187,7 +187,7 @@ def FireMultipleOriginsOneDirection(
     result_array_type = c_bool * num_rays
     result_array = result_array_type()
 
-    HFPython.FireMultipleOriginsOneDirection(
+    HFPython.CastMultipleOriginsOneDirection(
         rt_ptr,
         byref(origin_array),
         direction_array,
@@ -211,7 +211,7 @@ def FireMultipleOriginsOneDirection(
     return return_array
 
 
-def FireOcclusionRays(
+def CastOcclusionRays(
     rt_ptr: c_void_p,
     origin: Union[Tuple[float, float, float], List[Tuple[float, float, float]]],
     direction: Union[Tuple[float, float, float], List[Tuple[float, float, float]]],
@@ -235,7 +235,7 @@ def FireOcclusionRays(
     result_array_type = c_bool * result_size
     result_array = result_array_type()
 
-    HFPython.FireOcclusionRays(
+    HFPython.CastOcclusionRays(
         rt_ptr,
         origin_array,
         direction_array,
@@ -252,7 +252,7 @@ def FireOcclusionRays(
     return return_array
 
 
-def FireRaySingleDistance(
+def CastRaySingleDistance(
     bvh_ptr: c_void_p, origin, direction, max_distance
 ) -> Tuple[float, int]:
     out_distance = c_float(-1)
@@ -260,7 +260,7 @@ def FireRaySingleDistance(
 
     origin_array = ConvertPointsToArray(origin)
     direction_array = ConvertPointsToArray(direction)
-    HFPython.FireSingleRayDistance(
+    HFPython.CastSingleRayDistance(
         bvh_ptr,
         origin_array,
         direction_array,
@@ -272,7 +272,7 @@ def FireRaySingleDistance(
     return (out_distance.value, out_meshid.value)
 
 
-def FireMultipleRaysDistance(
+def CastMultipleRaysDistance(
     bvh_ptr: c_void_p,
     origins: Union[Tuple[float, float, float], List[Tuple[float, float, float]]],
     directions: Union[Tuple[float, float, float], List[Tuple[float, float, float]]],
@@ -292,7 +292,7 @@ def FireMultipleRaysDistance(
     vector_ptr = pointer(c_void_p(0))
     array_ptr = pointer(c_void_p(0))
 
-    res = HFPython.FireRaysDistance(
+    res = HFPython.CastRaysDistance(
         bvh_ptr,
         origin_array,
         c_int(num_origins),
