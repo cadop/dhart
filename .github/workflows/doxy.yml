@@ -9,7 +9,7 @@ jobs:
   build:
 
 
-    runs-on: ubuntu-latest
+    runs-on: windows-2019
     strategy:
       matrix:
         python-version: [3.8]
@@ -27,8 +27,15 @@ jobs:
 
     - name: Install windows documentation requirements
       run: |
-        sudo apt-get install -y doxygen
-        sudo apt-get install -y graphviz
+        $url = "https://www.doxygen.nl/files/doxygen-1.9.4.windows.x64.bin.zip"
+        Start-DownloadWit`hRetry -Url $url -Name "doxygen.zip" -DownloadPath "C:\"
+        Extract-7Zip -Path  "C:\doxygen.zip" -DestinationPath "C:\windows\system32"
+        doxygen --version`
+
+        choco install graphviz -y
+
+        #sudo apt-get install -y doxygen
+        #sudo apt-get install -y graphviz
     
     - name: Build c++ documentation with doxygen
       run: |
@@ -50,7 +57,8 @@ jobs:
         mkdir html_build
 
         git worktree add -B docs html_build origin/docs
-        cp -a docs/. html_build/ 
+        # cp -a docs/. html_build/ 
+        robocopy .\docs\ .\html_build\ /e
 
         cd html_build
 
