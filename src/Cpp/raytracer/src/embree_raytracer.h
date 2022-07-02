@@ -801,12 +801,12 @@ namespace HF::RayTracer {
 		/// </param>
 		/// <param name="mesh_id"> (UNUSED) Only intersect with the mesh of this ID </param>
 		/// <returns>
-		/// A vector of <see cref="Vector3D" /> for the hitpoint of each ray fired. If a ray
+		/// A vector of <see cref="Vector3D" /> for the hitpoint of each ray cast. If a ray
 		/// didn't hit, its point will be invalid, checkable using <see
 		/// cref="Vector3D.IsValid()" />.
 		/// </returns>
 		/// <remarks>
-		/// <para> Can be fired in 3 configurations: </para>
+		/// <para> Can be cast in 3 configurations: </para>
 		/// <list type="bullet">
 		/// <item>
 		/// Equal amount of directions/origins: Cast a ray for every pair of origin/direction in
@@ -885,11 +885,11 @@ namespace HF::RayTracer {
 
 		/// <summary> Cast multiple occlusion rays in parallel. </summary>
 		/// <param name="origins">
-		/// A list of origins. If only one is supplied then it will be fired for every direction
+		/// A list of origins. If only one is supplied then it will be cast for every direction
 		/// in directions.
 		/// </param>
 		/// <param name="directions">
-		/// A list of directions. If only one is supplied then it will be fired for every origin
+		/// A list of directions. If only one is supplied then it will be cast for every origin
 		/// in origins
 		/// </param>
 		/// <param name="max_distance"> Maximum distance the ray can travel </param>
@@ -899,7 +899,7 @@ namespace HF::RayTracer {
 		/// a miss.
 		/// </returns>
 		/// <remarks>
-		/// <para> Can be fired in 3 configurations: </para>
+		/// <para> Can be cast in 3 configurations: </para>
 		/// <list type="bullet">
 		/// <item>
 		/// Equal amount of directions/origins: Cast a ray for every pair of origin/direction in

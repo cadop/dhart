@@ -240,7 +240,7 @@ namespace HF::ViewAnalysis {
 		\tparam N A point that overloads [] for 0, 1 and 2.
 
 		\return
-		An \a approximately num_rays * Nodes.size() long vector of RES with one element for every ray fired.
+		An \a approximately num_rays * Nodes.size() long vector of RES with one element for every ray cast.
 		Results will be laid out in order with the first node's results first, then the second, etc. Every ray that
 		intersected something, and all elements that didn't result in an intersection will left at their default values.
 
@@ -421,7 +421,7 @@ namespace HF::ViewAnalysis {
 		in a std::vector.
 
 		\see FibbonacciDistributePoints For details on how the directions are calculated from num_rays.
-		\see SphericalViewAnalysis to get the result of every ray fired instead of summarizing the results.
+		\see SphericalViewAnalysis to get the result of every ray cast instead of summarizing the results.
 		\see AGGREGATE_TYPE for a list of aggregation methods.
 		\see Aggregate for the implementation of all aggregation methods.
 

@@ -42,7 +42,7 @@ class RayResultList(NativeNumpyLike):
             vector_ptr: a pointer to a vector of floats
             data_ptr: a pointer to the underlying data of the node vector
             node_count : The number of nodes for this result set
-            ray_count : the number of rays fired per node in this result set
+            ray_count : the number of rays cast per node in this result set
         """
 
         # Make this one dimensional if either node_count or ray_count is 1
@@ -84,7 +84,7 @@ def Intersect(
     """ Cast one or more rays to get the distance to their point of intersection
     and the ID of the mesh they intersected.
     
-    In situations where multiple rays are shot, rays will be fired in parallel. 
+    In situations where multiple rays are shot, rays will be cast in parallel. 
 
     Note:
         Accepts the following configurations:
@@ -197,7 +197,7 @@ def IntersectForPoint(
     
     To shoot multiple rays from one origin, or cast rays from multiple origins
     in a single direction, set origins OR directions to a single value. If
-    they are both set to a single value then the ray will be fired as a single 
+    they are both set to a single value then the ray will be cast as a single 
     ray via CastRay.
 
     Note:

@@ -36,9 +36,9 @@ def SphericalViewAnalysisAggregate(
 ) -> ViewAnalysisAggregates:
     """ Conduct view analysis on every node in nodes and aggregate the results
 
-    ray_count rays are evenly distributed around each node in nodes and fired at the
+    ray_count rays are evenly distributed around each node in nodes and cast at the
     geometry in bvh. Hits are collected then summarized using the provided aggregation
-    method. The actual number of rays fired may be slightly more or less than the amount specified,
+    method. The actual number of rays cast may be slightly more or less than the amount specified,
     based on the fov limitations specified. 
 
     Args:
@@ -118,10 +118,10 @@ def SphericalViewAnalysis(
     upward_fov=50,
     downward_fov=70,
 ) -> RayResultList:
-    """ Conduct view analysis on every node in nodes and return the result of every ray fired
+    """ Conduct view analysis on every node in nodes and return the result of every ray cast
 
-    The actual number of rays fired may be slightly more or less than the amount specified,
-    based on the fov limitations specified. The direction each ray was fired in can be 
+    The actual number of rays cast may be slightly more or less than the amount specified,
+    based on the fov limitations specified. The direction each ray was cast in can be 
     retrieved from the function SphericallyDistributeRays.
 
     Args:

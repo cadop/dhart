@@ -88,7 +88,7 @@ def check_ray(
     origin: Tuple[float, float, float],
     direction: Tuple[float, float, float]
 ) -> Union[Tuple[float, float, float], None]:
-    """ Check if a ray fired from origin to direction hits
+    """ Check if a ray cast from origin to direction hits
 
     Args:
         bvh : The BVH to cast the ray at

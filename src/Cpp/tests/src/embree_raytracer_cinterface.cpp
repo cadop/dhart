@@ -358,7 +358,7 @@ namespace CInterfaceTests {
 		// *ray_result should not be an empty container.
 		ASSERT_FALSE(ray_result->empty());
 
-		// ray_result->size() should be equal to the amount of rays that will be fired.
+		// ray_result->size() should be equal to the amount of rays that will be cast.
 		ASSERT_EQ(ray_result->size(), count_dir);
 
 		//! [snippet_CastRaysDistance_results]
@@ -965,8 +965,8 @@ namespace CInterfaceTests {
 		// If a given ray i hits a target (dir[i] is a vector extending from p1[i]),
 		// results[i] will be set true. Otherwise, results[i] will be set false.
 
-		// count_points rays will be fired, from the coordinates described at the array p1.
-		// results[i] is true if a ray fired from p1[i], p1[i + 1], p1[i + 2] via direction dir
+		// count_points rays will be cast, from the coordinates described at the array p1.
+		// results[i] is true if a ray cast from p1[i], p1[i + 1], p1[i + 2] via direction dir
 		// makes a hit.
 		std::array<bool, count_p1> results;
 
@@ -1276,7 +1276,7 @@ namespace CInterfaceTests {
 		//! [snippet_CastOcclusionRays_components]
 
 		// dir_occl represents direction components in R3, size_dir_occl should be a multiple of 3 --
-		// or, if dir_occl has three members, count_dir_occl should be 1 (only one ray fired)
+		// or, if dir_occl has three members, count_dir_occl should be 1 (only one ray cast)
 		ASSERT_TRUE(size_dir_occl % 3 == 0 || (size_dir_occl == 3 && count_dir_occl == 1));
 
 		//! [snippet_CastOcclusionRays]
