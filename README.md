@@ -33,7 +33,7 @@ Order W15QKN19F0002 - Advanced Development of Asset Protection
 Technologies (ADAPT).
 
 If you find this repo useful, please cite using the following bibtex
-```
+```bibtex
 @article{schwartz2021human,
   title={Human centric accessibility graph for environment analysis},
   author={Schwartz, Mathew},
@@ -57,7 +57,7 @@ Example Usage
 
 Once the python package is installed, the basic setup for loading a model (e.g. obj), setting its rotation (if its not default z up), and creating a BVH (the accelerated structure of the mesh) is done by:
 
-```
+```python
 from dhart.geometry import LoadOBJ, CommonRotations
 from dhart.raytracer import (EmbreeBVH,Intersect,
                                         IntersectForPoint,
@@ -74,7 +74,7 @@ bvh = EmbreeBVH(loaded_obj)
 
 After this, different methods for casting a ray can be used:
 
-```
+```python
 # Define point to start ray
 p1 = (0, 0, 2)
 # Define direction to cast ray
@@ -95,7 +95,7 @@ print(f"Does the ray connect? {does_occlude}")
 
 which would output
 
-```
+```python
 Hit point: (0.0, 0.0, 0.0)
 distance is 2.0, meshid is 0
 Does the ray connect? True
