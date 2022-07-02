@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('a00391.html',''); initResizable(); });
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02021.html">RayResult</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The result of firing a ray at an object. Contains distance to the hitpoint and the ID of the mesh.  <a href="a02021.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The result of casting a ray at an object. Contains distance to the hitpoint and the ID of the mesh.  <a href="a02021.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -817,7 +817,7 @@ Raytracer teardown</h1>
 <div class="line">        <span class="comment">// count_dir_occl represents how many sets of directions we are dealing with.</span></div>
 <div class="line">        <span class="keyword">const</span> <span class="keywordtype">int</span> count_dir_occl = size_dir_occl / 3;</div>
 </div><!-- fragment --><p >Define a <b>maximum distance value</b>, and a <b>container</b> to store the <b>ray occlusion results</b>.<br  />
- </p><div class="fragment"><div class="line">        <span class="comment">// The array results should be the amount of rays we are firing, i.e. the value of count_dir_occl.</span></div>
+ </p><div class="fragment"><div class="line">        <span class="comment">// The array results should be the amount of rays we are casting, i.e. the value of count_dir_occl.</span></div>
 <div class="line">        std::array&lt;bool, count_dir_occl&gt; results;</div>
 <div class="line">        <span class="keywordtype">float</span> max_distance_occl = 9999.0f;</div>
 <div class="line"> </div>
@@ -1065,7 +1065,7 @@ Raytracer teardown</h1>
 <p>Cast rays for each node in origins/directions as ordered pairs and get distance back as a result. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ert</td><td>The raytracer to use for firing every ray.</td></tr>
+    <tr><td class="paramname">ert</td><td>The raytracer to use for casting every ray.</td></tr>
     <tr><td class="paramname">origins</td><td>An array of origin points to cast rays from. Should be an array of floats with every 3 floats representing a new origin point.</td></tr>
     <tr><td class="paramname">num_origins</td><td>The number of points in origins. NOTE: This should be equal to the length of origins / 3, since every 3 floats in origins equals a single point.</td></tr>
     <tr><td class="paramname">directions</td><td>An array of directions points to cast rays from. Should be an array of floats with every 3 floats representing a new direction.</td></tr>
@@ -1118,7 +1118,7 @@ Raytracer teardown</h1>
 <div class="line">            std::cerr &lt;&lt; <span class="stringliteral">&quot;Error at CastRaysDistance, code: &quot;</span> &lt;&lt; status &lt;&lt; std::endl;</div>
 <div class="line">        }</div>
 <div class="ttc" id="aa00391_html_ga81a505c14bba3bed1515384b209b3422"><div class="ttname"><a href="a00391.html#ga81a505c14bba3bed1515384b209b3422">CastRaysDistance</a></div><div class="ttdeci">C_INTERFACE CastRaysDistance(HF::RayTracer::EmbreeRayTracer *ert, float *origins, int num_origins, float *directions, int num_directions, std::vector&lt; RayResult &gt; **out_results, RayResult **results_data)</div><div class="ttdoc">Cast rays for each node in origins/directions as ordered pairs and get distance back as a result.</div><div class="ttdef"><b>Definition:</b> <a href="a00362_source.html#l00111">raytracer_C.cpp:111</a></div></div>
-<div class="ttc" id="aa02021_html"><div class="ttname"><a href="a02021.html">RayResult</a></div><div class="ttdoc">The result of firing a ray at an object. Contains distance to the hitpoint and the ID of the mesh.</div><div class="ttdef"><b>Definition:</b> <a href="a00365_source.html#l00089">raytracer_C.h:89</a></div></div>
+<div class="ttc" id="aa02021_html"><div class="ttname"><a href="a02021.html">RayResult</a></div><div class="ttdoc">The result of casting a ray at an object. Contains distance to the hitpoint and the ID of the mesh.</div><div class="ttdef"><b>Definition:</b> <a href="a00365_source.html#l00089">raytracer_C.h:89</a></div></div>
 </div><!-- fragment --><p >We can <b>review the results</b> by outputting the contents of the <b>results container</b>:<br  />
  </p><div class="fragment"><div class="line">        <span class="comment">//</span></div>
 <div class="line">        <span class="comment">// Iterate over *(ray_result) and output its contents</span></div>

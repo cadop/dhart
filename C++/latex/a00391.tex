@@ -4,7 +4,7 @@
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{a02021}{Ray\+Result}}
-\begin{DoxyCompactList}\small\item\em The result of firing a ray at an object. Contains distance to the hitpoint and the ID of the mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The result of casting a ray at an object. Contains distance to the hitpoint and the ID of the mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -645,7 +645,7 @@ Define the {\bfseries{vector components}} of the {\bfseries{ray(s)}} that will b
 Define a {\bfseries{maximum distance value}}, and a {\bfseries{container}} to store the {\bfseries{ray occlusion results}}.~\newline
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{        \textcolor{comment}{// The array results should be the amount of rays we are firing, i.e. the value of count\_dir\_occl.}}
+\DoxyCodeLine{        \textcolor{comment}{// The array results should be the amount of rays we are casting, i.e. the value of count\_dir\_occl.}}
 \DoxyCodeLine{        std::array<bool, count\_dir\_occl> results;}
 \DoxyCodeLine{        \textcolor{keywordtype}{float} max\_distance\_occl = 9999.0f;}
 \DoxyCodeLine{}
@@ -830,7 +830,7 @@ Cast rays for each node in origins/directions as ordered pairs and get distance 
 
 
 \begin{DoxyParams}{Parameters}
-{\em ert} & The raytracer to use for firing every ray.\\
+{\em ert} & The raytracer to use for casting every ray.\\
 \hline
 {\em origins} & An array of origin points to cast rays from. Should be an array of floats with every 3 floats representing a new origin point.\\
 \hline
