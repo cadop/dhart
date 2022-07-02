@@ -7,6 +7,8 @@ There are a few components to the package, but the main focus is in providing fa
 
 We have extensive documentation on the API, and welcome new contributions and bug fixes. Please make sure to take a look at the contributing guide.  
 
+Currently it is only available on Windows OS. We happily would accept contributors to help expand to Linux. 
+
 Features
 --------
 
