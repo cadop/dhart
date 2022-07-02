@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -46,6 +50,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('class_human_factors_1_1_spatial_structures_1_1_graph.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -60,11 +81,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_human_factors.html">HumanFactors</a></li><li class="navelem"><a class="el" href="namespace_human_factors_1_1_spatial_structures.html">SpatialStructures</a></li><li class="navelem"><a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -917,12 +933,16 @@ If <code>attribute</code> didn't exist in the graph, then an empty array of stri
 <li>src/Csharp/packages/spatialstructures/src/Graph.cs</li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <div class="ttc" id="aclass_human_factors_1_1_spatial_structures_1_1_graph_html_a01855a86f49d22301651cf7098ee8967"><div class="ttname"><a href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">HumanFactors.SpatialStructures.Graph.Graph</a></div><div class="ttdeci">Graph()</div><div class="ttdoc">Construct a new empty graph in unmanaged memory.</div><div class="ttdef"><b>Definition:</b> Graph.cs:121</div></div>
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Sat Jul 2 2022 19:30:57 for Analysis by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespace_human_factors.html">HumanFactors</a></li><li class="navelem"><a class="el" href="namespace_human_factors_1_1_spatial_structures.html">SpatialStructures</a></li><li class="navelem"><a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a></li>
+    <li class="footer">Generated on Sat Jul 2 2022 20:11:52 for Analysis by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
 </body>
 </html>
