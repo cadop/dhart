@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "Analysis", "index.html", [
+  [ "DHART", "index.html", [
     [ "Human Factors C# Documentation", "index.html", [
       [ "Getting Started", "index.html#autotoc_md62", null ]
     ] ],
