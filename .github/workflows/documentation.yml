@@ -10,6 +10,7 @@ jobs:
 
     runs-on: windows-2019
     strategy:
+      max-parallel: 1
       matrix:
         python-version: [3.8]
 
@@ -68,6 +69,7 @@ jobs:
   sphinx:
     runs-on: windows-2019
     strategy:
+      max-parallel: 1
       matrix:
         python-version: [3.8]
 
