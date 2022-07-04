@@ -13,7 +13,7 @@
 /*!
 	\define		C_INTERFACE
 	\brief		Specifies C linkage for functions defined in the C Interface.
-				Used for exporting C Interface functions from the Human Factors DLL.
+				Used for exporting C Interface functions from the DHART DLL.
 */
 #define C_INTERFACE extern "C" __declspec(dllexport) int
 

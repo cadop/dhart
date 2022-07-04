@@ -7,7 +7,7 @@ The Visual Studio project contains a source file with logic that will load the D
 
 The DLLs are included with this directory (in x64-Release/bin), along with sample .obj files that will be used by the examples to be demonstrated.
 
-If the end user chooses to create their own Human Factors solution/project,<br>
+If the end user chooses to create their own DHART solution/project,<br>
 without the use of this project template, the steps have been outlined below<br> 
 as to how this project folder structure was created.
 
@@ -50,10 +50,10 @@ Create a folder named '<b>Analysis Project Template</b>' in your development dir
 Launch <b>Visual Studio 2019</b> and open the <b>Analysis</b> repository.
 (<code>Analysis/src</code>). This will use the <code>CMakeLists.txt</code> file to work with the codebase within Visual Studio. (as opposed to a <code>.sln</code>).
 
-At the top of Visual Studio, click <b>Build > Install Human Factors</b>.<br>
-This will install Human Factors in <code>Analysis\src\out\install</code>.
+At the top of Visual Studio, click <b>Build > Install DHART</b>.<br>
+This will install DHART in <code>dhart\src\out\install</code>.
 
-After installing Human Factors, navigate to <code>Analysis\src\out\install</code> using the <b>File Explorer</b>.
+After installing DHART, navigate to <code>dhart\src\out\install</code> using the <b>File Explorer</b>.
 
 Copy the <b>x64-Release</b> folder into the '<b>Analysis Project Template</b>' folder you made earlier.
 
@@ -67,7 +67,7 @@ bin\tbb.dll
 
 <b>Delete everything else.</b> They will not be used.
 
-In <code>Analysis\src\Cpp\tests\Example Models</code>, copy the following<br>
+In <code>dhart\src\Cpp\tests\Example Models</code>, copy the following<br>
 into <code>Analysis Sample Usage</code>:
 ```
 plane.obj
@@ -365,7 +365,7 @@ the functions required to do each example, but every use-case example will begin
 
 <h2> Loading functions from the DHARTAPI DLL </h2>
 
-Within <code>DHARTAPISamples.cpp</code>, the function <code>HF_routine</code> is where you will use the loaded Human Factors DLL. You will load the functions you require from the DLL.<br>
+Within <code>DHARTAPISamples.cpp</code>, the function <code>HF_routine</code> is where you will use the loaded DHART DLL. You will load the functions you require from the DLL.<br>
 
 In order to use the DHARTAPI DLL,<br>
 you must take stock of the following:
@@ -374,7 +374,7 @@ you must take stock of the following:
 - Required C Interface functions, and their prototypes
 
 If you want access to the members of an <code>enum</code> or <code>struct</code>,<br>
-you must define the required types before using the Human Factors DLL.<br>
+you must define the required types before using the DHART DLL.<br>
 Otherwise, a forward-declaration will work.
 
 To load functions from the DHARTAPI DLL,<br>

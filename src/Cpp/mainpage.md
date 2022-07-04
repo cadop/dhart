@@ -1,6 +1,4 @@
-# Analysis
-
-Analysis of the Environment for ADAPT
+# DHART
 
 # Table of contents
 - Pre-requisites
@@ -13,10 +11,10 @@ Analysis of the Environment for ADAPT
 
 
 This guide will describe how to retrieve the contents of this repository,
-and build Analysis from source.
+and build from source.
 
 <h2>Please note:
-Analysis is currently designed to run on a PC<br>
+Dhart is currently designed to run on a PC<br>
 running the Windows 10 operating system.</h2>
 Also note: This guide is a 'work-in-progress' and subject to change.
 
@@ -40,13 +38,13 @@ you may continue with the following:
 Open <b>Git Bash</b>.
 Git Bash (MINGW64) begins at <code>~</code>, your home directory.<br>
 You may remain here, or navigate to a directory of your choice.<br>
-In the next step, you will clone the <b>Analysis</b> repository.
+In the next step, you will clone the <b>dhart</b> repository.
 
 <h3>1. Cloning the repository</h3>
-Type <code><b>git clone git@git.njit.edu:ADAPT/Analysis.git</b></code> at the prompt<br>
-and hit ENTER. The Analysis repository will then be cloned to your local machine.
+Type <code><b>git clone git@github.com/cadop/dhart.git</b></code> at the prompt<br>
+and hit ENTER. The repository will then be cloned to your local machine.
 
-Now that a local copy of the <b>Analysis</b> repository is on your machine,<br>
+Now that a local copy of the <b>dhart</b> repository is on your machine,<br>
 you may build the project with either:
 - [Microsoft Visual Studio 2019](docs/BuildVS.md)
 - [cmake-gui (CMake's standalone client)](docs/BuildCMake.md)
@@ -55,20 +53,20 @@ you may build the project with either:
 For a guide on how to obtain the output DLLS from this project after it has been generated and built, look at the guide on [the Cmake Installation Step](@ref InstallGuide)
 
 # Documentation
-Documentation for <b>Analysis</b> can be found in ./Analysis/docs/
+Documentation for <b>dhart</b> can be found in ./dhart/docs/
 
 The codebase is comprised of sources from:
 <br>
-- C++ (see ./Analysis/docs/C++)
-- C#  (see ./Analysis/docs/C#)
-- Python (see ./Analysis/docs/Python Docs)
+- C++ (see ./dhart/docs/C++)
+- C#  (see ./dhart/docs/C#)
+- Python (see ./dhart/docs/Python Docs)
 
 # C++
 The C++ portion of the codebase uses a subset of the <b>Boost</b> libraries,<br>
 and the sources are included with this repository.
 
-Because the Boost sources are included with Analysis,<br>
-(in <code>Analysis/src/external/boost</code>),<br>
+Because the Boost sources are included with dhart,<br>
+(in <code>dhart/src/external/boost</code>),<br>
 you do <b>not</b> need to download or install Boost to build the repository.
 
 You may read more about Boost at their website: https://www.boost.org/

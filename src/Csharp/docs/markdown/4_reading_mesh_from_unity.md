@@ -119,7 +119,7 @@ Now we have the plane as a mesh and are ready to get the required info from it f
 
 As previously stated, a mesh is comprised of an index and vertex array. To use this mesh in DHARTAPI, we need to construct a MeshInfo object using these arrays. Fortunately, Unity provides a straightforward way to access the triangle indices of a mesh in a format that we can use for DHARTAPI, but unfortunately the vertices only come in an array of Vector3, instead of the array of floats that we need. We will need to write a method to convert this array of Vector3 into an array of floats before we can use it in DHARTAPI.
 
-To simplify the process of converting the vertices to a suitable format, we will add a separate method called *Vector3ArrayToFloatArray* that will transform the array of Vector3 into an array of float ready for Human Factors.
+To simplify the process of converting the vertices to a suitable format, we will add a separate method called *Vector3ArrayToFloatArray* that will transform the array of Vector3 into an array of float ready for DHART.
 
 On line 9, just above the Start() function, add the following method:
 

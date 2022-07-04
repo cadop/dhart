@@ -1,5 +1,5 @@
 
-# Setting Up a Unity Project for Human Factors {#UnityProjectSetup}
+# Setting Up a Unity Project for DHART {#UnityProjectSetup}
 
 Next Tutorial: [Using The Raytracer](@ref UsingTheRaytracer) OR [Generating A Graph](@ref GeneratingAGraph)
 
@@ -50,7 +50,7 @@ Select your desired project type, directory, and project name. For the sake of t
 
 Upon completion you should be greeted by an empty Unity scene.
 
-## Importing the Human Factors Library
+## Importing the DHART Library
 
 Now that we have created a blank project, we need to import the DHARTAPI binaries as assets so Unity can see and interface with them.
 
@@ -112,6 +112,6 @@ Below is a link to the unity project created in this tutorial.
 
 [Tutorial 1: Unity Project Setup](Tutorial%201-%20Unity%20Project.zip)
 
-In this tutorial, we went through the process of creating unity project and adding the Analysis toolkit to the project. In the following tutorials, we will use this basis for using the modules that come with the Analysis toolkit.
+In this tutorial, we went through the process of creating unity project and adding the dhart toolkit to the project. In the following tutorials, we will use this basis for using the modules that come with the dhart toolkit.
 
 In the next tutorial: [Using the Raytracer](@ref UsingTheRaytracer) we will use DHARTAPI to create a plane, cast a ray at it, then get the point where the ray intersected the plane.

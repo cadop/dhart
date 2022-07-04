@@ -102,7 +102,7 @@ namespace HF::GraphGenerator{
 		this->max_step_connection = max_step_connections;
 		
 		// Take the user defined start point and round it to the precision
-		// that the Analysis package can handle. 
+		// that the dhart package can handle. 
 		real3 start = real3{
 		  roundhf_tmp<real_t>(start_point[0], params.precision.node_spacing),
 		  roundhf_tmp<real_t>(start_point[1], params.precision.node_spacing),

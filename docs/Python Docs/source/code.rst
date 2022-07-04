@@ -6,7 +6,7 @@ Code Reference
 Modules
 =======
 
-Modules of the Human Factors package. 
+Modules of the DHART package. 
 
 
 .. currentmodule:: dhart
