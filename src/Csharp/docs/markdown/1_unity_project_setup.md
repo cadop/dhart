@@ -1,5 +1,5 @@
 
-# Setting Up a Unity Project for Human Factors {#UnityProjectSetup}
+# Setting Up a Unity Project for DHART {#UnityProjectSetup}
 
 Next Tutorial: [Using The Raytracer](@ref UsingTheRaytracer) OR [Generating A Graph](@ref GeneratingAGraph)
 
@@ -50,7 +50,7 @@ Select your desired project type, directory, and project name. For the sake of t
 
 Upon completion you should be greeted by an empty Unity scene.
 
-## Importing the Human Factors Library
+## Importing the DHART Library
 
 Now that we have created a blank project, we need to import the DHARTAPI binaries as assets so Unity can see and interface with them.
 

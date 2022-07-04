@@ -10,7 +10,7 @@ In this tutorial we will cover the process of creating a new Visual Studio proje
 
 Ensure that you have the following prerequisites before continuing.
 
-1. The latest copy of the C# Human Factors Release
+1. The latest copy of the C# DHART Release
 2. A copy of Visual Studio. Version should not matter, but for this tutorial I will be using VisualStudio 2019
 3. The necessary prerequisites for developing C# projects in Visual Studio.  
 
@@ -48,7 +48,7 @@ In the conFigure dialog, you're able to change the name, location and framework 
 
 After pressing create, Visual Studio display a window for your new blank project. Now we're ready to move on to adding the DLL.
 
-## Adding A Reference To Human Factors
+## Adding A Reference To DHART
 
 Before we move on to writing the example program, we must first add DHARTAPI C# DLL as a reference.
 
@@ -66,9 +66,9 @@ A new window should open similar to the one shown in Figure 2.2, however the con
 
 ![Navigate to DHARTAPI DLL](walkthroughs/VisualStudio/bin_of_DHART_API.png)
 
-*Figure* **2.3**: *Human Factors Bin Folder*
+*Figure* **2.3**: *DHART Bin Folder*
 
-In the file explorer, navigate to the bin directory in which you've installed Human Factors. Select all the files in the bin directory, then click the add button at the bottom right of the window to add them to the menu.
+In the file explorer, navigate to the bin directory in which you've installed DHART. Select all the files in the bin directory, then click the add button at the bottom right of the window to add them to the menu.
 
 ![References Added](walkthroughs/VisualStudio/references_added.png)
 
