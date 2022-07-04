@@ -12,7 +12,7 @@ var indexSectionsWithContent =
   9: ":bdosw",
   10: "_cehijknot",
   11: "gprsv",
-  12: "abcdirt"
+  12: "bcdirt"
 };
 
 var indexSectionNames =

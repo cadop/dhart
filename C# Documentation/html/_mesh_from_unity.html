@@ -203,7 +203,7 @@ In Practice</h3>
 <h2><a class="anchor" id="autotoc_md37"></a>
 Getting the Vertices and Triangles</h2>
 <p >As previously stated, a mesh is comprised of an index and vertex array. To use this mesh in <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a>, we need to construct a MeshInfo object using these arrays. Fortunately, Unity provides a straightforward way to access the triangle indices of a mesh in a format that we can use for <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a>, but unfortunately the vertices only come in an array of Vector3, instead of the array of floats that we need. We will need to write a method to convert this array of Vector3 into an array of floats before we can use it in <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a>.</p>
-<p >To simplify the process of converting the vertices to a suitable format, we will add a separate method called <em>Vector3ArrayToFloatArray</em> that will transform the array of Vector3 into an array of float ready for Human Factors.</p>
+<p >To simplify the process of converting the vertices to a suitable format, we will add a separate method called <em>Vector3ArrayToFloatArray</em> that will transform the array of Vector3 into an array of float ready for DHART.</p>
 <p >On line 9, just above the Start() function, add the following method:</p>
 <div class="fragment"><div class="line"><span class="keyword">private</span> <span class="keywordtype">float</span>[] Vector3ArrayToFloatArray(Vector3[] vertices)</div>
 <div class="line">{</div>

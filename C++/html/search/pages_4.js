@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['installguide_0',['InstallGuide',['../a03464.html',1,'']]]
+  ['repository_20walkthrough_20_28video_29_0',['Repository walkthrough (video)',['../a03465.html',1,'']]]
 ];

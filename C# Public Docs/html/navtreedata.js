@@ -25,15 +25,15 @@
 var NAVTREE =
 [
   [ "DHART", "index.html", [
-    [ "Human Factors C# Documentation", "index.html", [
+    [ "DHART C# Documentation", "index.html", [
       [ "Getting Started", "index.html#autotoc_md62", null ]
     ] ],
-    [ "Setting Up a Unity Project for Human Factors", "_unity_project_setup.html", [
+    [ "Setting Up a Unity Project for DHART", "_unity_project_setup.html", [
       [ "Before we begin", "_unity_project_setup.html#autotoc_md0", [
         [ "Prerequisites", "_unity_project_setup.html#autotoc_md1", null ]
       ] ],
       [ "Creating a new project", "_unity_project_setup.html#autotoc_md2", null ],
-      [ "Importing the Human Factors Library", "_unity_project_setup.html#autotoc_md3", null ],
+      [ "Importing the DHART Library", "_unity_project_setup.html#autotoc_md3", null ],
       [ "Verifying Unity can reference DHARTAPI", "_unity_project_setup.html#autotoc_md4", null ],
       [ "Conclusion", "_unity_project_setup.html#autotoc_md5", null ]
     ] ],
@@ -93,7 +93,7 @@ var NAVTREE =
       ] ],
       [ "Conclusion", "_mesh_from_unity.html#autotoc_md45", null ]
     ] ],
-    [ "Analysis", "md_src__csharp_docs_markdown_mainpage.html", [
+    [ "DHART", "md_src__csharp_docs_markdown_mainpage.html", [
       [ "C# Documentation", "md_src__csharp_docs_markdown_mainpage.html#autotoc_md47", [
         [ "Getting Started", "md_src__csharp_docs_markdown_mainpage.html#autotoc_md48", null ]
       ] ],
@@ -105,7 +105,7 @@ var NAVTREE =
         [ "Prerequisites", "_v_s_tutorial.html#autotoc_md51", null ]
       ] ],
       [ "Creating the project", "_v_s_tutorial.html#autotoc_md52", null ],
-      [ "Adding A Reference To Human Factors", "_v_s_tutorial.html#autotoc_md53", null ],
+      [ "Adding A Reference To DHART", "_v_s_tutorial.html#autotoc_md53", null ],
       [ "Adding Native Dependencies", "_v_s_tutorial.html#autotoc_md54", null ],
       [ "Ensuring Files are Properly Placed in the Output Directory", "_v_s_tutorial.html#autotoc_md55", null ],
       [ "Testing the Interface", "_v_s_tutorial.html#autotoc_md56", [

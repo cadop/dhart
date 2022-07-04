@@ -25,11 +25,9 @@
 var NAVTREE =
 [
   [ "DHART", "index.html", [
-    [ "Analysis", "index.html", [
-      [ "Table of contents", "index.html#autotoc_md13", null ],
-      [ "Documentation", "index.html#autotoc_md14", null ],
-      [ "C++", "index.html#autotoc_md15", null ]
-    ] ],
+    [ "Table of contents", "index.html#autotoc_md13", null ],
+    [ "Documentation", "index.html#autotoc_md14", null ],
+    [ "C++", "index.html#autotoc_md15", null ],
     [ "BuildCMake", "a03459.html", null ],
     [ "BuildVS", "a03460.html", null ],
     [ "Contributing", "a03461.html", null ],

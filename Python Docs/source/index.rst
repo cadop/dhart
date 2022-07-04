@@ -1,5 +1,5 @@
 ==========================================================
-Human Factors: Automated analysis of the built environment
+DHART: Automated analysis of the built environment
 ==========================================================
 
 Contents
