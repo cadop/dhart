@@ -1,9 +1,9 @@
 <h2> Introduction </h2>
 
-This folder contains a sample HumanFactors project template,
+This folder contains a sample DHARTAPI project template,
 with a preconfigured Visual Studio solution (.sln) file and a Visual Studio project (.vcxproj) file. This project template will be used by every video tutorial/use case example, so that folder/project setup need not be endured by the end user.
 
-The Visual Studio project contains a source file with logic that will load the HumanFactors DLL (and its required dependencies). This is required before any functions can be called from the HumanFactors DLL.<br>
+The Visual Studio project contains a source file with logic that will load the DHARTAPI DLL (and its required dependencies). This is required before any functions can be called from the DHARTAPI DLL.<br>
 
 The DLLs are included with this directory (in x64-Release/bin), along with sample .obj files that will be used by the examples to be demonstrated.
 
@@ -13,14 +13,14 @@ as to how this project folder structure was created.
 
 <h2> Adding the project template to Visual Studio </h2>
 
-Begin by opening <code>HumanFactorsSamples.sln</code> in<br> 
-<code>Analysis\Analysis Project Template\HumanFactorsSamples\ </code>
+Begin by opening <code>DHARTAPISamples.sln</code> in<br> 
+<code>Analysis\Analysis Project Template\DHARTAPISamples\ </code>
 
 After opening the solution -- at the <b>top</b> of Visual Studio, navigate to<br>
 <b>Project > Export Template</b>
 
 - Ensure that the '<b>Project Template</b>' radio button is selected.<br>
-- Ensure that '<b>HumanFactorsSamples</b>' is selected for<br>
+- Ensure that '<b>DHARTAPISamples</b>' is selected for<br>
 - '<b>From which project would you like to create a template?</b>'
 
 Provide a <b>description</b> for '<b>Template description</b>'.<br>
@@ -29,7 +29,7 @@ Then, click '<b>Finish</b>'.
 The template will be saved to:<br>
 <code>[user folder]\Documents\Visual Studio 2019\My Exported Templates</code>
 
-Whenever you want to create a <b>new Visual Studio project</b> with the HumanFactors DLL,<br> the code provided will <b>already be defined to load the required DLLs</b>.<br>
+Whenever you want to create a <b>new Visual Studio project</b> with the DHARTAPI DLL,<br> the code provided will <b>already be defined to load the required DLLs</b>.<br>
 Note that the project will assume that the DLLs are in<br>
 <code>Analysis Project Template\x64-Release\bin</code>.<br>
 
@@ -61,7 +61,7 @@ In <code>Analysis Project Template\x64-Release</code>, keep only the following f
 
 ```
 bin\embree3.dll
-bin\HumanFactors.dll
+bin\DHARTAPI.dll
 bin\tbb.dll
 ```
 
@@ -83,12 +83,12 @@ On the left side, click '<b>Console App</b>'.<br>
 On the right side, scroll until you find '<b>Empty Project</b>'.
 Double click '<b>Empty Project</b>'
 
-For project name, type '<b>HumanFactorsSamples</b>'.<br>
+For project name, type '<b>DHARTAPISamples</b>'.<br>
 For location, navigate to <code>Analysis Sample Usage</code>.<br>
 Make sure that '<b>Place solution and project in the same directory</b>' is checked.
 Click '<b>Create</b>'.
 
-- Right click '<b>HumanFactorsSamples</b>'.
+- Right click '<b>DHARTAPISamples</b>'.
 - Select '<b>Properties</b>'.
 - Under '<b>General Properties</b>', select '<b>ISO C++17 Standard (std:c++17)</b>' for C++ Language Standard. 
 - Click '<b>Apply</b>', then '<b>OK</b>'.
@@ -99,9 +99,9 @@ Edit the <b>Active solution configuration</b> so we only have <b>Release</b> mod
 Edit the <b>Active solution platform</b> so we only have <b>x64</b>.
 
 Right click <b>'Source Files' > Add > New Item.</b><br>
-Click '<b>Select C++ File (.cpp)</b>'. For the name, type '<b>HumanFactorsSamples.cpp</b>'.
+Click '<b>Select C++ File (.cpp)</b>'. For the name, type '<b>DHARTAPISamples.cpp</b>'.
 
-In <code>HumanFactorsSamples.cpp</code>, enter the following:
+In <code>DHARTAPISamples.cpp</code>, enter the following:
 
 ```
 #include <iostream>
@@ -115,12 +115,12 @@ And hit <b>F5</b> to verify that the project builds.
 <h2> SOURCE FILE SETUP </h2>
 
 Now that the Visual Studio <code>.sln</code> and <code>.vcxproj</code><br>
-are set up, we can work on <code>HumanFactorsSamples.cpp</code>.<br>
+are set up, we can work on <code>DHARTAPISamples.cpp</code>.<br>
 
 The goal is to add the logic necessary<br>
-to load the HumanFactors DLL and its dependencies.<br>
+to load the DHARTAPI DLL and its dependencies.<br>
 
-At the top of <code>HumanFactorsSamples.cpp</code>,
+At the top of <code>DHARTAPISamples.cpp</code>,
 be sure the following headers are included:
 
 ```
@@ -137,13 +137,13 @@ In the <b>global namespace</b>, add the following:
 // Paths to DLLs
 const wchar_t path_tbb[27] = L"..\\x64-Release\\bin\\tbb.dll";
 const wchar_t path_embree3[31] = L"..\\x64-Release\\bin\\embree3.dll";
-const wchar_t path_humanfactors[36] = L"..\\x64-Release\\bin\\HumanFactors.dll";
+const wchar_t path_DHART_API[36] = L"..\\x64-Release\\bin\\DHARTAPI.dll";
 
 // Paths to .obj files
 const std::string plane_path_str = "..\\plane.obj";
 const std::string energy_blob_path_str = "..\\energy_blob_zup.obj";
 
-// Subroutine that will use the HumanFactors DLL.
+// Subroutine that will use the DHARTAPI DLL.
 void HF_routine(HINSTANCE dll_hf) { }
 
 You may rename HF_routine to a name that best suits your purpose/example.
@@ -156,10 +156,10 @@ In <code>main()</code>, we must <b>load the following DLLs in this order</b>:
 ```
 tbb.dll
 embree3.dll
-HumanFactors.dll
+DHARTAPI.dll
 ```
 
-<b>If the DLLs are not loaded in this order, HumanFactors.dll will not load.</b>
+<b>If the DLLs are not loaded in this order, DHARTAPI.dll will not load.</b>
 
 Load <code>tbb.dll</code> first.
 
@@ -190,13 +190,13 @@ else {
 }
 ```
 
-Then load <code>HumanFactors.dll</code>.
+Then load <code>DHARTAPI.dll</code>.
 
 ```
-HINSTANCE dll_humanfactors = LoadLibrary(CInterfaceTests::path_humanfactors);
+HINSTANCE dll_DHART_API = LoadLibrary(CInterfaceTests::path_DHART_API);
 
-if (dll_humanfactors == nullptr) {
-    std::cerr << "Unable to load " << "HumanFactors.dll" << std::endl;
+if (dll_DHART_API == nullptr) {
+    std::cerr << "Unable to load " << "DHARTAPI.dll" << std::endl;
 
     FreeLibrary(dll_embree3);
     FreeLibrary(dll_tbb);
@@ -204,7 +204,7 @@ if (dll_humanfactors == nullptr) {
     exit(EXIT_FAILURE);
 }
 else {
-    std::cout << "Loaded successfully: " << "HumanFactors.dll" << std::endl;
+    std::cout << "Loaded successfully: " << "DHARTAPI.dll" << std::endl;
 }
 ```
 
@@ -213,12 +213,12 @@ is now ready to be called.
 
 ```
 //
-// Ready to use dll_humanfactors here.
+// Ready to use dll_DHART_API here.
 //
-HF_routine(dll_humanfactors);
+HF_routine(dll_DHART_API);
 ```
 
-After using <code>dll_humanfactors</code>,<br>
+After using <code>dll_DHART_API</code>,<br>
 <b>we must free each library in reverse order of initialization.</b>
 
 Before we do that, we must sleep the current thread for 250ms.
@@ -229,8 +229,8 @@ std::this_thread::sleep_for(std::chrono::milliseconds(250));
 
 Now we can <b>free each library</b>:
 ```
-if (FreeLibrary(dll_humanfactors)) {
-    std::cout << "Freed successfully: " << "HumanFactors.dll" << std::endl;
+if (FreeLibrary(dll_DHART_API)) {
+    std::cout << "Freed successfully: " << "DHARTAPI.dll" << std::endl;
 }
 
 if (FreeLibrary(dll_embree3)) {
@@ -244,7 +244,7 @@ if (FreeLibrary(dll_tbb)) {
 return EXIT_SUCCESS;
 ```
 
-Here is what <b>HumanFactorsSamples.cpp</b> should look like:<br>
+Here is what <b>DHARTAPISamples.cpp</b> should look like:<br>
 (comments have been abridged for brevity)<br>
 
 ```
@@ -257,20 +257,20 @@ Here is what <b>HumanFactorsSamples.cpp</b> should look like:<br>
 // Paths to DLLs
 const wchar_t path_tbb[27] = L"..\\x64-Release\\bin\\tbb.dll";
 const wchar_t path_embree3[31] = L"..\\x64-Release\\bin\\embree3.dll";
-const wchar_t path_humanfactors[36] = L"..\\x64-Release\\bin\\HumanFactors.dll";
+const wchar_t path_DHART_API[36] = L"..\\x64-Release\\bin\\DHARTAPI.dll";
 
 // Paths to .obj files used by examples
 const std::string plane_path_str = "..\\plane.obj";
 const std::string energy_blob_path_str = "..\\energy_blob_zup.obj";
 
 /*!
-	\brief	Use case example code that uses HumanFactors DLL. All examples should begin here.
+	\brief	Use case example code that uses DHARTAPI DLL. All examples should begin here.
 
-	\param	dll_hf	Loaded HumanFactors DLL from which all function pointers will be loaded
+	\param	dll_hf	Loaded DHARTAPI DLL from which all function pointers will be loaded
 */
 void HF_routine(HINSTANCE dll_hf) {
 	//
-	// HumanFactors example code goes here.
+	// DHARTAPI example code goes here.
 	//
 }
 
@@ -287,10 +287,10 @@ int main(int argc, const char* argv[]) {
 		The following DLLs must be loaded in this order:
 			- tbb.dll
 			- embree3.dll
-			- HumanFactors.dll
+			- DHARTAPI.dll
 
 		If the DLLs are not loaded in this order,
-		HumanFactors.dll will fail to load!
+		DHARTAPI.dll will fail to load!
 	*/
 
 	// Load tbb.dll first.
@@ -317,11 +317,11 @@ int main(int argc, const char* argv[]) {
 		std::cout << "Loaded successfully: " << "embree3.dll" << std::endl;
 	}
     
-	// HumanFactors.dll depends on both tbb.dll and embree3.dll.
-	HINSTANCE dll_humanfactors = LoadLibrary(path_humanfactors);
+	// DHARTAPI.dll depends on both tbb.dll and embree3.dll.
+	HINSTANCE dll_DHART_API = LoadLibrary(path_DHART_API);
 
-	if (dll_humanfactors == nullptr) {
-		std::cerr << "Unable to load " << "HumanFactors.dll" << std::endl;
+	if (dll_DHART_API == nullptr) {
+		std::cerr << "Unable to load " << "DHARTAPI.dll" << std::endl;
 
 		FreeLibrary(dll_embree3);
 		FreeLibrary(dll_tbb);
@@ -329,21 +329,21 @@ int main(int argc, const char* argv[]) {
 		exit(EXIT_FAILURE);
 	}
 	else {
-		std::cout << "Loaded successfully: " << "HumanFactors.dll" << std::endl;
+		std::cout << "Loaded successfully: " << "DHARTAPI.dll" << std::endl;
 	}
 
 	//
-	// Ready to use dll_humanfactors here.
+	// Ready to use dll_DHART_API here.
 	//
-	HF_routine(dll_humanfactors);
+	HF_routine(dll_DHART_API);
 
 	//
 	// Free libraries in reverse order of creation.
 	//
 	std::this_thread::sleep_for(std::chrono::milliseconds(250));
 
-	if (FreeLibrary(dll_humanfactors)) {
-		std::cout << "Freed successfully: " << "HumanFactors.dll" << std::endl;
+	if (FreeLibrary(dll_DHART_API)) {
+		std::cout << "Freed successfully: " << "DHARTAPI.dll" << std::endl;
 	}
 
 	if (FreeLibrary(dll_embree3)) {
@@ -358,16 +358,16 @@ int main(int argc, const char* argv[]) {
 }
 ```
 
-<b>You now have a Visual Studio solution/project that is set up to use the HumanFactors DLL.</b><br>
+<b>You now have a Visual Studio solution/project that is set up to use the DHARTAPI DLL.</b><br>
 
-Each use-case example will demonstrate how to use <code>dll_humanfactors</code> to load
+Each use-case example will demonstrate how to use <code>dll_DHART_API</code> to load
 the functions required to do each example, but every use-case example will begin with the sample project template created here.
 
-<h2> Loading functions from the HumanFactors DLL </h2>
+<h2> Loading functions from the DHARTAPI DLL </h2>
 
-Within <code>HumanFactorsSamples.cpp</code>, the function <code>HF_routine</code> is where you will use the loaded Human Factors DLL. You will load the functions you require from the DLL.<br>
+Within <code>DHARTAPISamples.cpp</code>, the function <code>HF_routine</code> is where you will use the loaded Human Factors DLL. You will load the functions you require from the DLL.<br>
 
-In order to use the HumanFactors DLL,<br>
+In order to use the DHARTAPI DLL,<br>
 you must take stock of the following:
 - All data types required for an example (<code>struct</code>/<code>enum</code>/<code>class</code>)
 - Must the types be fully defined, or will a forward-declaration suffice?
@@ -377,7 +377,7 @@ If you want access to the members of an <code>enum</code> or <code>struct</code>
 you must define the required types before using the Human Factors DLL.<br>
 Otherwise, a forward-declaration will work.
 
-To load functions from the HumanFactors DLL,<br>
+To load functions from the DHARTAPI DLL,<br>
 you will use the function <code>GetProcAddress</code>, defined in <code>Windows.h</code>.
 
 Follow these steps for every example:<br>
@@ -416,7 +416,7 @@ void HF_routine(HINSTANCE dll_hf) {
 int main(int argc, const char *argv[]) {
     // Load DLLs
 
-    HF_routine(dll_humanfactors);
+    HF_routine(dll_DHART_API);
 
     // Free DLL
 }

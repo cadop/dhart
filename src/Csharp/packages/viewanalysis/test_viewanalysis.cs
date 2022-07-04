@@ -1,14 +1,14 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using HumanFactors.Geometry;
-using HumanFactors.RayTracing;
+using DHARTAPI.Geometry;
+using DHARTAPI.RayTracing;
 using System.Runtime.InteropServices;
 using System;
 using System.IO;
-using HumanFactors.ViewAnalysis;
+using DHARTAPI.ViewAnalysis;
 using System.Diagnostics;
-using HumanFactors.NativeUtils.CommonNativeArrays;
+using DHARTAPI.NativeUtils.CommonNativeArrays;
 
-namespace HumanFactors.Tests.ViewAnalysis
+namespace DHARTAPI.Tests.ViewAnalysis
 {
 
     [TestClass]
@@ -48,7 +48,7 @@ namespace HumanFactors.Tests.ViewAnalysis
 
             // Set maximum number of rays, then conduct analysis
 	        int num_rays = 1000;
-			ManagedFloatArray results = HumanFactors.ViewAnalysis.ViewAnalysis.ViewAnalysisAggregate(
+			ManagedFloatArray results = DHARTAPI.ViewAnalysis.ViewAnalysis.ViewAnalysisAggregate(
 				bvh,
 				nodes,
 				num_rays,
@@ -82,7 +82,7 @@ namespace HumanFactors.Tests.ViewAnalysis
             int num_rays = 10;
 
             // Conduct view analysis and get all the results
-            var results = HumanFactors.ViewAnalysis.ViewAnalysis.ViewAnalysisStandard(bvh, nodes, num_rays);
+            var results = DHARTAPI.ViewAnalysis.ViewAnalysis.ViewAnalysisStandard(bvh, nodes, num_rays);
 
             // Iterate through every node and print the results
             for (int node_index = 0; node_index < nodes.Length; node_index++)
@@ -120,7 +120,7 @@ namespace HumanFactors.Tests.ViewAnalysis
             //! [EX_SphericallyDistributeRays]
 
             // Equally distribute 10 rays
-            var results = HumanFactors.ViewAnalysis.ViewAnalysis.SphericallyDistributeRays(10);
+            var results = DHARTAPI.ViewAnalysis.ViewAnalysis.SphericallyDistributeRays(10);
 
             // Print results
             Debug.WriteLine(results);

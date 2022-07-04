@@ -1,10 +1,10 @@
-using HumanFactors.NativeUtils;
+using DHARTAPI.NativeUtils;
 
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace HumanFactors.RayTracing
+namespace DHARTAPI.RayTracing
 {
 	/*!
         \brief MeshID and Distance for a casted ray. 

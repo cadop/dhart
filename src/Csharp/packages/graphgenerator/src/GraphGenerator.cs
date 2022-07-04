@@ -1,6 +1,6 @@
-﻿using HumanFactors.Geometry;
-using HumanFactors.RayTracing;
-using HumanFactors.SpatialStructures;
+﻿using DHARTAPI.Geometry;
+using DHARTAPI.RayTracing;
+using DHARTAPI.SpatialStructures;
 using System;
 using System.Linq;
 
@@ -13,8 +13,8 @@ using System.Linq;
     by this algorithm, node represents a point in space that a human can occupy, and each edge between nodes 
     indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool 
     for analyzing space, since the graph or nodes it outputs can be used as input to all the analysis methods 
-    offered by HumanFactors, allowing for it to be the starting point of other analysis methods within
-    HumanFactors.
+    offered by DHARTAPI, allowing for it to be the starting point of other analysis methods within
+    DHARTAPI.
     
 	\par Obstacle Support
 	The Graph Generator supports marking specific geometry as walkable or obstacles. Obstacle surfaces  are surfaces
@@ -32,7 +32,7 @@ using System.Linq;
     geometry is Z-Up i.e. upstep is how high the step is in the z-direction, ground
     checks are performed in the -z direction etc. 
 */
-namespace HumanFactors.GraphGenerator
+namespace DHARTAPI.GraphGenerator
 {
     /*!
     \brief Generate a graph of accessible space on a mesh.
@@ -83,14 +83,14 @@ namespace HumanFactors.GraphGenerator
             Vector3D spacing = new Vector3D(1, 1, 1);
 
              // A standard graph with a spacing of 1 meter on each side with a maximum of 100 nodes
-            Graph G = HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph(BVH, start_point, spacing, 100);
+            Graph G = DHARTAPI.GraphGenerator.GraphGenerator.GenerateGraph(BVH, start_point, spacing, 100);
 
              // A graph that cannot traverse stairs
-            Graph G = HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph(BVH, start_point, spacing, 100, up_step:0, downstep:0);
+            Graph G = DHARTAPI.GraphGenerator.GraphGenerator.GenerateGraph(BVH, start_point, spacing, 100, up_step:0, downstep:0);
 
             // A graph that is able to traverse up 30 degree slopes, but can only traverse down 10
             // degree slopes
-                Graph G = HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph(BVH, start_point, spacing, 100, up_slope:30, down_slope:10);
+                Graph G = DHARTAPI.GraphGenerator.GraphGenerator.GenerateGraph(BVH, start_point, spacing, 100, up_slope:30, down_slope:10);
          \endcode
         */
 

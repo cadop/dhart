@@ -9,7 +9,7 @@ this package.
 
 Raytracing involves determining where a line would intersect a mesh
 if it were to continue infinitely form a specific point in the space.
-Many of the other modules in HumanFactors make use of ray intersections
+Many of the other modules in DHARTAPI make use of ray intersections
 in their analysis. 
 
 """

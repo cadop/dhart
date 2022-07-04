@@ -1,5 +1,5 @@
-using HumanFactors.Pathfinding;
-using HumanFactors.SpatialStructures;
+using DHARTAPI.Pathfinding;
+using DHARTAPI.SpatialStructures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using HumanFactors.NativeUtils.CommonNativeArrays;
+using DHARTAPI.NativeUtils.CommonNativeArrays;
 
-namespace HumanFactors.Tests.Pathfinding
+namespace DHARTAPI.Tests.Pathfinding
 {
     [TestClass]
     public class TestPathFinding
@@ -25,7 +25,7 @@ namespace HumanFactors.Tests.Pathfinding
             g.AddEdge(2, 3, 10);
             g.CompressToCSR();
 
-            var sp = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(g, 0, 3);
+            var sp = DHARTAPI.Pathfinding.ShortestPath.DijkstraShortestPath(g, 0, 3);
             Assert.IsTrue(sp != null);
             Span<PathMember> arr = sp.array;
 
@@ -49,7 +49,7 @@ namespace HumanFactors.Tests.Pathfinding
             int[] start_array = { 0, 0, 0, 0, 0, 0 };
             int[] end_array = { 3, 3, 3, 3, 3, 3 };
 
-            var short_paths = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(g, start_array, end_array);
+            var short_paths = DHARTAPI.Pathfinding.ShortestPath.DijkstraShortestPathMulti(g, start_array, end_array);
             foreach (var sp in short_paths)
             {
                 Span<PathMember> arr = sp.array;
@@ -84,7 +84,7 @@ namespace HumanFactors.Tests.Pathfinding
                 g.GetNodeID(node3)
             };
 
-            var sp = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(g, node0, node3);
+            var sp = DHARTAPI.Pathfinding.ShortestPath.DijkstraShortestPath(g, node0, node3);
             Assert.IsTrue(sp != null);
             Span<PathMember> arr = sp.array;
 
@@ -114,7 +114,7 @@ namespace HumanFactors.Tests.Pathfinding
             // A path with a cost type that doesn't exist
             try
             {
-                HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(
+                DHARTAPI.Pathfinding.ShortestPath.DijkstraShortestPath(
                     g, node0, node3, "CostThatDoesn'tExist"
                 );
             }
@@ -127,13 +127,13 @@ namespace HumanFactors.Tests.Pathfinding
             g.AddEdge(node1, node3, 10, test_cost);
             g.AddEdge(node2, node3, 10, test_cost);
 
-            HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(
+            DHARTAPI.Pathfinding.ShortestPath.DijkstraShortestPath(
                 g, node0, node3, test_cost
             );
 
             // create a path using the default cost, and a custom cost
-            var sp = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(g, node0, node3);
-            var sp_cost = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(g, node0, node3, test_cost);
+            var sp = DHARTAPI.Pathfinding.ShortestPath.DijkstraShortestPath(g, node0, node3);
+            var sp_cost = DHARTAPI.Pathfinding.ShortestPath.DijkstraShortestPath(g, node0, node3, test_cost);
 
             // Assert that the path was created successfully, and that it is equal to the default cost
             Assert.IsTrue(sp_cost != null, "Path with a custom cost type couldn't be created.");
@@ -166,7 +166,7 @@ namespace HumanFactors.Tests.Pathfinding
             Vector3D[] start_array = { node0, node0, node0, node0, node0, node0 };
             Vector3D[] end_array = { node3, node3, node3, node3, node3, node3 };
 
-            var short_paths = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(g, start_array, end_array);
+            var short_paths = DHARTAPI.Pathfinding.ShortestPath.DijkstraShortestPathMulti(g, start_array, end_array);
             foreach (var sp in short_paths)
             {
                 Span<PathMember> arr = sp.array;
@@ -222,7 +222,7 @@ namespace HumanFactors.Tests.Pathfinding
             bool did_throw = false;
             try
             {
-                HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(
+                DHARTAPI.Pathfinding.ShortestPath.DijkstraShortestPathMulti(
                     g, start_array, end_array, "CostThatDoesn'tExist"
                 );
             }
@@ -231,14 +231,14 @@ namespace HumanFactors.Tests.Pathfinding
             Assert.IsTrue(did_throw, "Giving the pathfinder an invalid cost type didn't throw an exception.");
 
             // Position Overload
-            var short_paths = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(
+            var short_paths = DHARTAPI.Pathfinding.ShortestPath.DijkstraShortestPathMulti(
                 g,
                 start_array,
                 end_array,
                 test_cost
             );
             // ID Overload
-            var short_int_paths = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(
+            var short_int_paths = DHARTAPI.Pathfinding.ShortestPath.DijkstraShortestPathMulti(
                 g,
                 start_int_array,
                 end_int_array,
@@ -279,13 +279,13 @@ namespace HumanFactors.Tests.Pathfinding
             bool threw_except = false;
             try
             {
-                HumanFactors.Pathfinding.ShortestPath.DijkstraAllToAll(g, "nonexistantcost");
+                DHARTAPI.Pathfinding.ShortestPath.DijkstraAllToAll(g, "nonexistantcost");
             }
             catch (KeyNotFoundException) { threw_except = true; }
             Assert.IsTrue(threw_except, "Doesn't throw the proper exception when specified cost doesn't exist");
 
             // Calculate all to all paths on g.
-            var paths = HumanFactors.Pathfinding.ShortestPath.DijkstraAllToAll(g);
+            var paths = DHARTAPI.Pathfinding.ShortestPath.DijkstraAllToAll(g);
 
             // The number of paths created should be equal to the amount of nodes in the
             // graph squared (for now).
@@ -301,7 +301,7 @@ namespace HumanFactors.Tests.Pathfinding
             // Print the contents of every path
             for (int i = 0; i < paths.Count(); i++)
             {
-                HumanFactors.Pathfinding.Path path = paths[i];
+                DHARTAPI.Pathfinding.Path path = paths[i];
 
                 // Print the empty string if null.
                 string path_string = "-------";
@@ -334,7 +334,7 @@ namespace HumanFactors.Tests.Pathfinding
 			// back from native code
 			UnmanagedFloatArray2D dist_matrix = null;
 			UnmanagedIntArray2D pred_matrix = null;
-			HumanFactors.Pathfinding.ShortestPath.GeneratePredecessorAndDistanceMatricies(
+			DHARTAPI.Pathfinding.ShortestPath.GeneratePredecessorAndDistanceMatricies(
 				g,
 				out dist_matrix,
 				out pred_matrix

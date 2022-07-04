@@ -144,7 +144,7 @@ C_INTERFACE LoadOBJ(
 );
 
 /*!
-	\brief Store a mesh in a format usable with HumanFactors
+	\brief Store a mesh in a format usable with DHARTAPI
 	
 	\param out_info Output parameter to contain the new instance of meshinfo
 

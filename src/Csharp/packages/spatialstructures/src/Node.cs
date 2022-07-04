@@ -1,10 +1,10 @@
-using HumanFactors.NativeUtils;
+using DHARTAPI.NativeUtils;
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 
-namespace HumanFactors.SpatialStructures
+namespace DHARTAPI.SpatialStructures
 {
 	/*!
         \brief A point in space.

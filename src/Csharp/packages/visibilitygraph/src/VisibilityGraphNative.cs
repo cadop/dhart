@@ -1,16 +1,16 @@
 
-using HumanFactors.NativeUtils;
-using HumanFactors.Exceptions;
+using DHARTAPI.NativeUtils;
+using DHARTAPI.Exceptions;
 using System;
 using System.Runtime.InteropServices;
-using HumanFactors.SpatialStructures;
+using DHARTAPI.SpatialStructures;
 using System.Runtime.Serialization.Json;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace HumanFactors.VisibilityGraph
+namespace DHARTAPI.VisibilityGraph
 {
 
 	/*! \brief Native Functions for the VisibilityGraph */

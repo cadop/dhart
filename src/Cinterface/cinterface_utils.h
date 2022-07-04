@@ -8,7 +8,7 @@
 	\brief Perform human scale analysis on 3D environments.
 
 	\remarks
-	This is the base namespace for the HumanFactors package. All future modules should remain in this
+	This is the base namespace for the DHARTAPI package. All future modules should remain in this
 	namespace and this should act as a jump page for all major sections of documentation.
 
 */

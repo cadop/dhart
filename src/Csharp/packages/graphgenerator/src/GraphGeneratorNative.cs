@@ -1,10 +1,10 @@
 
-using HumanFactors.NativeUtils;
-using HumanFactors.Exceptions;
+using DHARTAPI.NativeUtils;
+using DHARTAPI.Exceptions;
 using System;
 using System.Runtime.InteropServices;
 
-namespace HumanFactors.GraphGenerator
+namespace DHARTAPI.GraphGenerator
 {
 
 	/*! \brief Native methods for the GraphGenerator */

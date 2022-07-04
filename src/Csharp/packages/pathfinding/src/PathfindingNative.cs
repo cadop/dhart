@@ -1,9 +1,9 @@
 
-using HumanFactors.NativeUtils;
-using HumanFactors.Exceptions;
+using DHARTAPI.NativeUtils;
+using DHARTAPI.Exceptions;
 using System;
 using System.Runtime.InteropServices;
-using HumanFactors.SpatialStructures;
+using DHARTAPI.SpatialStructures;
 using System.Runtime.Serialization.Json;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Collections;
@@ -14,7 +14,7 @@ using System.Threading;
 using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
 
-namespace HumanFactors.Pathfinding
+namespace DHARTAPI.Pathfinding
 {
 	/*! \brief NativeMethods for the Pathfinding Namespace. */
 	internal static class NativeMethods

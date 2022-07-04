@@ -1,6 +1,6 @@
 /*!
-	\file	HumanFactorsSamples.cpp
-	\brief	Template project file for HumanFactors
+	\file	DHARTAPISamples.cpp
+	\brief	Template project file for DHARTAPI
 */
 
 #include <iostream>
@@ -14,7 +14,7 @@
 */
 const wchar_t path_tbb[27] = L"..\\x64-Release\\bin\\tbb.dll";
 const wchar_t path_embree3[31] = L"..\\x64-Release\\bin\\embree3.dll";
-const wchar_t path_humanfactors[36] = L"..\\x64-Release\\bin\\HumanFactors.dll";
+const wchar_t path_DHART_API[36] = L"..\\x64-Release\\bin\\DHARTAPI.dll";
 
 /*!
 	Paths to .obj files used by examples
@@ -23,17 +23,17 @@ const std::string plane_path_str = "..\\plane.obj";
 const std::string energy_blob_path_str = "..\\energy_blob_zup.obj";
 
 /*!
-	\brief	Use case example code that uses HumanFactors DLL. All examples should begin here.
+	\brief	Use case example code that uses DHARTAPI DLL. All examples should begin here.
 
-	\param	dll_hf	Loaded HumanFactors DLL from which all function pointers will be loaded
+	\param	dll_hf	Loaded DHARTAPI DLL from which all function pointers will be loaded
 
 	\details
-		At this point, the HumanFactors DLL (and the DLLs it depends on)
+		At this point, the DHARTAPI DLL (and the DLLs it depends on)
 		will have been loaded. When this function receives dll_hf,
 		there must be logic in this function that will load the functions
 		that will be called by the client.
 
-		In order to use the HumanFactors DLL,
+		In order to use the DHARTAPI DLL,
 		you must take stock of all of the data types (structures/enums/classes)
 		and determine what must be forward-declared, and what must be a complete type.
 		(You do not have access to the header files for these types!)
@@ -67,7 +67,7 @@ const std::string energy_blob_path_str = "..\\energy_blob_zup.obj";
 */
 void HF_routine(HINSTANCE dll_hf) {
 	//
-	// HumanFactors example code goes here.
+	// DHARTAPI example code goes here.
 	//
 }
 
@@ -84,10 +84,10 @@ int main(int argc, const char* argv[]) {
 		The following DLLs must be loaded in this order:
 			- tbb.dll
 			- embree3.dll
-			- HumanFactors.dll
+			- DHARTAPI.dll
 
 		If the DLLs are not loaded in this order,
-		HumanFactors.dll will fail to load!
+		DHARTAPI.dll will fail to load!
 	*/
 
 	/*
@@ -119,12 +119,12 @@ int main(int argc, const char* argv[]) {
 	}
 
 	/*
-		HumanFactors.dll depends on both tbb.dll and embree3.dll.
+		DHARTAPI.dll depends on both tbb.dll and embree3.dll.
 	*/
-	HINSTANCE dll_humanfactors = LoadLibrary(path_humanfactors);
+	HINSTANCE dll_DHART_API = LoadLibrary(path_DHART_API);
 
-	if (dll_humanfactors == nullptr) {
-		std::cerr << "Unable to load " << "HumanFactors.dll" << std::endl;
+	if (dll_DHART_API == nullptr) {
+		std::cerr << "Unable to load " << "DHARTAPI.dll" << std::endl;
 
 		FreeLibrary(dll_embree3);
 		FreeLibrary(dll_tbb);
@@ -132,21 +132,21 @@ int main(int argc, const char* argv[]) {
 		exit(EXIT_FAILURE);
 	}
 	else {
-		std::cout << "Loaded successfully: " << "HumanFactors.dll" << std::endl;
+		std::cout << "Loaded successfully: " << "DHARTAPI.dll" << std::endl;
 	}
 
 	//
-	// Ready to use dll_humanfactors here.
+	// Ready to use dll_DHART_API here.
 	//
-	HF_routine(dll_humanfactors);
+	HF_routine(dll_DHART_API);
 
 	//
 	// Free libraries in reverse order of creation.
 	//
 	std::this_thread::sleep_for(std::chrono::milliseconds(250));
 
-	if (FreeLibrary(dll_humanfactors)) {
-		std::cout << "Freed successfully: " << "HumanFactors.dll" << std::endl;
+	if (FreeLibrary(dll_DHART_API)) {
+		std::cout << "Freed successfully: " << "DHARTAPI.dll" << std::endl;
 	}
 
 	if (FreeLibrary(dll_embree3)) {
