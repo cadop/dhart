@@ -323,7 +323,7 @@ void CInterfaceTests::raycasting(HINSTANCE dll_hf) {
 	// count_dir_occl represents how many sets of directions we are dealing with.
 	const int count_dir_occl = size_dir_occl / 3;
 
-	// The array results should be the amount of rays we are firing, i.e. the value of count_origin.
+	// The array results should be the amount of rays we are casting, i.e. the value of count_origin.
 	bool results[size_p1_occl] = { false };
 	float max_distance_occl = 9999.0f;
 	status = CastOcculsionRays(bvh, p1_occl, dir_occl, count_origin, count_dir_occl, max_distance_occl, results);

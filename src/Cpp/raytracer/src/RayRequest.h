@@ -14,7 +14,7 @@ namespace HF {
 			float x, y, z;			///< X, Y, and Z origin points
 			float dx, dy, dz;		///< X, Y and Z direction to cast the ray in
 			bool was_cast = false; ///< Whether this ray was cast or not
-			float distance = -1;	///< Before firing: the maximum distance of the ray. After firing: distance to the hitpoint or -9999 on miss
+			float distance = -1;	///< Before casting: the maximum distance of the ray. After casting: distance to the hitpoint or -9999 on miss
 			int mesh_id = -1;		///< The ID of the hit mesh
 
 			/// <summary>
