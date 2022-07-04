@@ -99,7 +99,7 @@ An example of a file head would look like this:
 /// \date       06 Jun 2020
 ///</code>
 
-Other notes:<b>
+Other notes:
 - Follow each <code>///</code> with a <b>single</b> space, before using a tag.
 - Follow each tag with <b>two</b> tabs, then provide the description.
 
@@ -185,7 +185,7 @@ Follow these steps to ensure consistency within the codebase:
 2. Hit <b>TAB</b> twice, then begin your code example. You may indent as necessary for your example.
  
 3. When your example is finished, hit <b>ENTER</b>, then <b>BACKSPACE</b> so that you are inline with the <code>\code</code> tag.
-4. Use the <code>\endcode</code> tag to end your example.<br>Then hit <b>ENTER, then hit <b>BACKSPACE</b> as many times as necessary so that you are inline with <code>/*!</code>.
+4. Use the <code>\endcode</code> tag to end your example.<br>Then hit <b>ENTER</b>, then hit <b>BACKSPACE</b> as many times as necessary so that you are inline with <code>/*!</code>.
 
 5. Finally, end the example block with <code>*/</code>.
 
@@ -315,7 +315,7 @@ An example use of the <code>\image</code> tag would be:<br>
 <code>/// \image html C++\images\spatialstructures\node\test-image_node-h.png</code>
 
 ![VSImageNode-h](docs/contributing-guides/images/vs_imagetag_node-h.png)
-<b>See line 42 - example use of the <code>\image</code> tag.
+<br>See line 42 - example use of the <code>\image</code> tag.
 
 We will now move on to the <b>Doxygen GUI frontend (Doxywizard)</b> application.
 
