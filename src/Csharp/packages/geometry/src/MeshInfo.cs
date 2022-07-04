@@ -1,4 +1,4 @@
-using HumanFactors.NativeUtils;
+using DHARTAPI.NativeUtils;
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -8,8 +8,8 @@ using System.Security.Cryptography;
 	\brief Manipulate and load geometry from disk.
 
 	\details
-	The Geometry namespace contains all functionality in HumanFactors for dealing with mesh Geometry. The fundamental
-	datatype of HumanFactors.Geometry is MeshInfo, which stores the vertices and indices of a mesh in unmanaged memory.
+	The Geometry namespace contains all functionality in DHARTAPI for dealing with mesh Geometry. The fundamental
+	datatype of DHARTAPI.Geometry is MeshInfo, which stores the vertices and indices of a mesh in unmanaged memory.
 
 	\remarks
 	Right now only OBJ files are supported for loading geometry from disk, however MeshInfo offers
@@ -17,11 +17,11 @@ using System.Security.Cryptography;
 	can be developed.
 
 	\see OBJLoader to load OBJ files from disk.
-	\see MeshInfo for details on how HumanFactors represents mesh geometry, and how to convert a mesh
-    into a format that humanfactors can use. 
+	\see MeshInfo for details on how DHARTAPI represents mesh geometry, and how to convert a mesh
+    into a format that DHART_API can use. 
 */
 
-namespace HumanFactors.Geometry
+namespace DHARTAPI.Geometry
 {
 	/*!
 		\brief A collection of vertices and indices representing geometry.
@@ -133,7 +133,7 @@ namespace HumanFactors.Geometry
             \param name The name of the mesh. Unused for now.
             \param id The unique identifier for this mesh. If -1, this will automatically be set
 
-            \throws HumanFactors.Exceptions.InvalidMeshException
+            \throws DHARTAPI.Exceptions.InvalidMeshException
             The input indices and vertices result in an invalid mesh.
 
             \par Example

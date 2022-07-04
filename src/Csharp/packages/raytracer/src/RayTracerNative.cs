@@ -1,5 +1,5 @@
-using HumanFactors.Exceptions;
-using HumanFactors.NativeUtils;
+using DHARTAPI.Exceptions;
+using DHARTAPI.NativeUtils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,13 +12,13 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography.X509Certificates;
 
-namespace HumanFactors.RayTracing
+namespace DHARTAPI.RayTracing
 {
 
 	/*! \param NativeMethods for the RayTracing namespace */
 	internal static class NativeMethods
 	{
-		// Path to the HumanFactors C++ DLL
+		// Path to the DHARTAPI C++ DLL
 		private const string dllpath = NativeConstants.DLLPath;
 
 		/*!

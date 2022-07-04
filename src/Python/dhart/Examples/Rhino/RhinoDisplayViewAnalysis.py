@@ -71,7 +71,7 @@ def colorbar(val):
     #return (tmp_color[0],tmp_color[1],tmp_color[2])
 
 
-json_path = "H:\HumanMetrics\Codebase\HumanFactors\dhart\dhart\Examples\out_vg_score.json"
+json_path = "H:\HumanMetrics\Codebase\DHARTAPI\dhart\dhart\Examples\out_vg_score.json"
 push_off = 120
 
 

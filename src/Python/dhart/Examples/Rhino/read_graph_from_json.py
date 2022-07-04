@@ -97,7 +97,7 @@ def DrawPoints(nodes, colors, point_style, radius):
         display.AddPoint(node_to_add, scored_color, point_style, radius)
 
 display = SetupDisplay()
-json_path = "H:\HumanMetrics\Codebase\HumanFactors\dhart\dhart\Examples\out_graph.json"
+json_path = "H:\HumanMetrics\Codebase\DHARTAPI\dhart\dhart\Examples\out_graph.json"
 push_off = 100
 
 in_json = decode_json(json_path)

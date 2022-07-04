@@ -62,7 +62,7 @@ Double click on HFExampleScript that we created in the first tutorial to open up
 Just like the previous tutorials, we're going to declare which namespaces this script will use in the using section. For now we only need one using declaration. Add this to the top of your script like in the previous tutorials.
 
 ```{.cs}
-using HumanFactors.Geometry;
+using DHARTAPI.Geometry;
 ```
 
 Later you will be using different sections depending on whether you're generating a graph or firing a ray.
@@ -113,11 +113,11 @@ Then we can access the actual mesh carried by `PlaneFilter` by calling its .mesh
         Mesh PlaneMesh = PlaneFilter.mesh;
 ```
 
-Now we have the plane as a mesh and are ready to get the required info from it for HumanFactors.
+Now we have the plane as a mesh and are ready to get the required info from it for DHARTAPI.
 
 ### Getting the Vertices and Triangles
 
-As previously stated, a mesh is comprised of an index and vertex array. To use this mesh in HumanFactors, we need to construct a MeshInfo object using these arrays. Fortunately, Unity provides a straightforward way to access the triangle indices of a mesh in a format that we can use for HumanFactors, but unfortunately the vertices only come in an array of Vector3, instead of the array of floats that we need. We will need to write a method to convert this array of Vector3 into an array of floats before we can use it in HumanFactors.
+As previously stated, a mesh is comprised of an index and vertex array. To use this mesh in DHARTAPI, we need to construct a MeshInfo object using these arrays. Fortunately, Unity provides a straightforward way to access the triangle indices of a mesh in a format that we can use for DHARTAPI, but unfortunately the vertices only come in an array of Vector3, instead of the array of floats that we need. We will need to write a method to convert this array of Vector3 into an array of floats before we can use it in DHARTAPI.
 
 To simplify the process of converting the vertices to a suitable format, we will add a separate method called *Vector3ArrayToFloatArray* that will transform the array of Vector3 into an array of float ready for Human Factors.
 
@@ -143,7 +143,7 @@ On line 9, just above the Start() function, add the following method:
 
 *Figure* **4.8**: *Location for Vector3ArrayToFloatArray*
 
-Now we can call this method with the mesh's vertices as input to get an array usable with HumanFactors. Retrieve the indices and vertices from the mesh by calling its `.triangles` and `.vertices` properties, making sure to convert the array of vertices array from an array of Vector3 to an array of floats.
+Now we can call this method with the mesh's vertices as input to get an array usable with DHARTAPI. Retrieve the indices and vertices from the mesh by calling its `.triangles` and `.vertices` properties, making sure to convert the array of vertices array from an array of Vector3 to an array of floats.
 
 ```{.cs}
         // Get Triangle Indexes and Vertices from the Mesh
@@ -154,7 +154,7 @@ Now we can call this method with the mesh's vertices as input to get an array us
 After that, the process of constructing an instance of MeshInfo is identical to the previous tutorials:
 
 ```{.cs}
-        // Send to HumanFactors
+        // Send to DHARTAPI
         MeshInfo PlaneMeshInfo = new MeshInfo(plane_indices, plane_vertices);
 ```
 
@@ -164,7 +164,7 @@ Before we can continue to using this mesh it's important to cover a significant 
 
 ![UnityCoords](walkthroughs/unity/4_mesh_reading/unity_coordinate_system.png) ![RhinoCoords](walkthroughs/unity/4_mesh_reading/rhino_coordinates.PNG)
 
-*Figure* **4.9**: *Left: Unity's coordinate system. Right: HumanFactors's Coordinate system*
+*Figure* **4.9**: *Left: Unity's coordinate system. Right: DHARTAPI's Coordinate system*
 
 The Graph Generator expects geometry to be stored as if the Z-Axis were up as shown in the picture on the right. In Unity however, the Y-Axis is up, as shown in the left picture, meaning that we'll get inaccurate results if we use the mesh as is. To solve this, *MeshInfo* has a method *RotateMesh* that allows it to rotate itself after  is has been constructed. Another class in the Geometry namespace titled *CommonRotations* contains the rotation necessary to perform this conversion.
 
@@ -185,7 +185,7 @@ Up until this point, your code should match the code below.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HumanFactors.Geometry;
+using DHARTAPI.Geometry;
 
 public class HFExampleScript : MonoBehaviour
 {
@@ -214,7 +214,7 @@ public class HFExampleScript : MonoBehaviour
         int[] plane_indices = PlaneMesh.triangles;
         float[] plane_vertices = Vector3ArrayToFloatArray(PlaneMesh.vertices);
 
-        // Send to HumanFactors
+        // Send to DHARTAPI
         MeshInfo PlaneMeshInfo = new MeshInfo(plane_indices, plane_vertices);
 
         //Rotate to Z-Up
@@ -242,9 +242,9 @@ The lines you should copy for each tutorial are:
 Add the following using statments:
 
 ```{.cs}
-using HumanFactors;
-using HumanFactors.RayTracing;
-using HumanFactors.Geometry;
+using DHARTAPI;
+using DHARTAPI.RayTracing;
+using DHARTAPI.Geometry;
 ```
 
 Copy and paste lines Lines 30 - 42 from the Graph Generator tutorial:
@@ -270,10 +270,10 @@ Copy and paste lines Lines 30 - 42 from the Graph Generator tutorial:
 Add the following using statments:
 
 ```{.cs}
-using HumanFactors;
-using HumanFactors.SpatialStructures;
-using HumanFactors.GraphGenerator;
-using HumanFactors.RayTracing;
+using DHARTAPI;
+using DHARTAPI.SpatialStructures;
+using DHARTAPI.GraphGenerator;
+using DHARTAPI.RayTracing;
 ```
 
 Copy and paste lines 28 - 43 from the raytracer tutorial:
@@ -341,6 +341,6 @@ If your output matches the above output for the code you've chosen, then you hav
 
 Here is a link the full project created in this guide: [Full Project](Tutorial%204%20-%20Reading%20Mesh%20From%20Unity.zip)
 
-With this you have successfully read geometry from the Unity Scene and passed it to HumanFactors. This concludes the tutorial series for this point.
+With this you have successfully read geometry from the Unity Scene and passed it to DHARTAPI. This concludes the tutorial series for this point.
 
 If you want a more indepth look at using the Inspector to assign properties to components, see the [Official Unity Documentation](https://docs.unity3d.com/Manual/EditingValueProperties.html).

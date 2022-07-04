@@ -19,7 +19,7 @@
 	and related algorithms.
 
 	\details
-	HumanFactors uses Eigen to manage matricies in multiple areas. HF::SpatialStructures::Graph
+	DHARTAPI uses Eigen to manage matricies in multiple areas. HF::SpatialStructures::Graph
 	uses Eigen to manage its CSR, and HF::Geometry::MeshInfo uses Eigen to store and
 	transform vertices for geometry.
 
@@ -43,7 +43,7 @@ namespace HF::nanoGeom {
 	\brief Manipulate and load geometry from disk. 
 
 	\details
-	HF::Geometry contains all functionality in HumanFactors for dealing with mesh Geometry. The fundamental
+	HF::Geometry contains all functionality in DHARTAPI for dealing with mesh Geometry. The fundamental
 	datatype of HF::Geometry is MeshInfo, which stores the vertices and indices of meshes as matricies
 	in Eigen.
 
@@ -53,7 +53,7 @@ namespace HF::nanoGeom {
 	can be developed. 
 
 	\see LoadMeshObjects to load OBJ files from disk.
-	\see MeshInfo for details on how HumanFactors represents Mesh geometry.
+	\see MeshInfo for details on how DHARTAPI represents Mesh geometry.
 */
 namespace HF::Geometry{
 	/*!

@@ -1,9 +1,9 @@
-using HumanFactors.Geometry;
+using DHARTAPI.Geometry;
 using System;
 using System.Numerics;
 using System.Runtime.Remoting.Messaging;
 
-namespace HumanFactors.RayTracing
+namespace DHARTAPI.RayTracing
 {
     /*!
         \brief A Bounding Volume Hierarchy for the \link EmbreeRaytracer \endlink.
@@ -27,7 +27,7 @@ namespace HumanFactors.RayTracing
 
         \see EmbreeRaytracer for functions to use this BVH for ray intersections. 
     */
-    public class EmbreeBVH : HumanFactors.NativeUtils.NativeObject
+    public class EmbreeBVH : DHARTAPI.NativeUtils.NativeObject
     {
         /*!
             \brief Generate a BVH for an instance of MeshInfo. 

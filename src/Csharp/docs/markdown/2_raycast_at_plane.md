@@ -9,9 +9,9 @@ Next Tutorial: [Graph Generator](@ref GeneratingAGraph)
 
 ## Intro
 
-Now that we know the HumanFactors library can be referenced by our new Unity Project, let's check to see that it's working by writing a simple script that utilizes the Raytracer. Ray intersections are used internally by many of the analysis methods in HumanFactors, and can be an extremely useful tool for analyzing space. In this tutorial we will write a script that performs the following when playmode is entered:
+Now that we know the DHARTAPI library can be referenced by our new Unity Project, let's check to see that it's working by writing a simple script that utilizes the Raytracer. Ray intersections are used internally by many of the analysis methods in DHARTAPI, and can be an extremely useful tool for analyzing space. In this tutorial we will write a script that performs the following when playmode is entered:
 
-1. Create a Plane in HumanFactors from vertices and triangle indices.
+1. Create a Plane in DHARTAPI from vertices and triangle indices.
 2. Cast a ray at the plane.
 3. Print the point where the ray intersected the plane.
 
@@ -31,14 +31,14 @@ In the Visual Studio window we opened in the last tutorial, look at the contents
 
 ### Using Declarations
 
-Before getting into the logic of the script itself, we will add using declarations for the namespaces in HumanFactors that we plan to reference.
+Before getting into the logic of the script itself, we will add using declarations for the namespaces in DHARTAPI that we plan to reference.
 
 Add the following lines to the top of the script starting at line 4.
 
 ```{.cs}
-using HumanFactors;
-using HumanFactors.RayTracing;
-using HumanFactors.Geometry;
+using DHARTAPI;
+using DHARTAPI.RayTracing;
+using DHARTAPI.Geometry;
 ```
 
 ![HFExampleScript Usings](walkthroughs/unity/2_raycast_at_plane/add_using_delcarations.png)
@@ -82,7 +82,7 @@ In the index and vertex array, every 3 elements represent a separate triangle or
 
 **TODO**: Replace the empty links with links to our documentation.
 
-We will use these arrays to construct a new *MeshInfo* object in HumanFactors. Call the MeshInfo constructor with the two arrays we defined above as arguments.
+We will use these arrays to construct a new *MeshInfo* object in DHARTAPI. Call the MeshInfo constructor with the two arrays we defined above as arguments.
 
 ```{.cs}
         // Construct a meshinfo instance for the plane
@@ -189,9 +189,9 @@ Here is the final script we've been building in this tutorial.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HumanFactors;
-using HumanFactors.RayTracing;
-using HumanFactors.Geometry;
+using DHARTAPI;
+using DHARTAPI.RayTracing;
+using DHARTAPI.Geometry;
 
 public class HFExampleScript : MonoBehaviour
 {
@@ -241,7 +241,7 @@ public class HFExampleScript : MonoBehaviour
 
 Once you've verified your code matches, ***make sure to save the script  by clicking File then Save in the top menu or pressing Ctrl + S on your keyboard.*** Unity will NOT be able to use the script unless you save it. If you're unsure, the bar on the left-hand side between your code and the line numbers should be solid green, and the title of your assembly should not have an asterisk next to it.
 
-![Add Using HumanFactors](walkthroughs/unity/2_raycast_at_plane/saved_vs_unsaved.png)
+![Add Using DHARTAPI](walkthroughs/unity/2_raycast_at_plane/saved_vs_unsaved.png)
 
 ## Testing
 
@@ -279,7 +279,7 @@ To enter playmode, press the play button located at the top center of your scree
 > **NOTE:** If when entering play mode, the game window becomes full screen like below, that means you have the *Maximize On Play* option enabled. You can disable it by pressing the  *Maximize On Play* button circled in red below. For this tutorial series, we will leave this option off since it hides the console.
 >![Circled Maximize On Play Button](walkthroughs/unity/2_raycast_at_plane/playmode_maximize_on_play.png)
 
-![Add Using HumanFactors](walkthroughs/unity/2_raycast_at_plane/console_show_meshinfo.png) 
+![Add Using DHARTAPI](walkthroughs/unity/2_raycast_at_plane/console_show_meshinfo.png) 
 
 *Figure* **2.7A** *Intersection Results in play mode.*
 
@@ -303,4 +303,4 @@ If your console's output matches, then you've successfully completed this tutori
 
 Full project Link: [Tutorial 2: Casting a Ray at A Plane](Tutorial%202%20-%20Unity%20Project.zip)
 
-In this tutorial we've successfully created a plane from an array of vertices and triangle indexes, then casted a ray at it, then found the point where the ray and the plane intersected. Through this we've gained some experience using Visual Studio with Unity and became more familiar with the Editor's UI. In the next tutorial we will build upon this experience to cover a core part of the HumanFactors Library: The [Graph Generator](@ref GeneratingAGraph).
+In this tutorial we've successfully created a plane from an array of vertices and triangle indexes, then casted a ray at it, then found the point where the ray and the plane intersected. Through this we've gained some experience using Visual Studio with Unity and became more familiar with the Editor's UI. In the next tutorial we will build upon this experience to cover a core part of the DHARTAPI Library: The [Graph Generator](@ref GeneratingAGraph).

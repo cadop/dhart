@@ -2,13 +2,13 @@ using System.IO;
 using System.Runtime.Hosting;
 
 /*! 
-    \brief Custom exceptions thrown by HumanFactors Internally
+    \brief Custom exceptions thrown by DHARTAPI Internally
     
     \remarks
     Exceptions are created here as needed, and generally existing C# excepions 
     are preferred.
 */
-namespace HumanFactors.Exceptions
+namespace DHARTAPI.Exceptions
 {
 	/*! 
      \brief Common error codes to convey the state of the program.

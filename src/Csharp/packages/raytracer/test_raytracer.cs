@@ -1,10 +1,10 @@
-using HumanFactors.Geometry;
-using HumanFactors.RayTracing;
+using DHARTAPI.Geometry;
+using DHARTAPI.RayTracing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics;
 
-namespace HumanFactors.Tests.RayTracing
+namespace DHARTAPI.Tests.RayTracing
 {
     [TestClass]
     public class TestBVH
@@ -122,7 +122,7 @@ namespace HumanFactors.Tests.RayTracing
             Vector3D direction = new Vector3D(0, 0, -1);
             
             // Cast a ray from origin an direction and get the point
-            Vector3D good_point = HumanFactors.RayTracing.EmbreeRaytracer.IntersectForPoint(BVH, origin, direction, -1);
+            Vector3D good_point = DHARTAPI.RayTracing.EmbreeRaytracer.IntersectForPoint(BVH, origin, direction, -1);
 
             // Print the point
             Debug.WriteLine(good_point);
@@ -133,7 +133,7 @@ namespace HumanFactors.Tests.RayTracing
            
             // Do the same in a direction we know will miss
             Vector3D bad_direction = new Vector3D(0, 0, 1);
-            Vector3D bad_point = HumanFactors.RayTracing.EmbreeRaytracer.IntersectForPoint(BVH, origin, bad_direction, -1);
+            Vector3D bad_point = DHARTAPI.RayTracing.EmbreeRaytracer.IntersectForPoint(BVH, origin, bad_direction, -1);
            
             // Print the result of the missed ray
             Debug.WriteLine(bad_point);
@@ -157,7 +157,7 @@ namespace HumanFactors.Tests.RayTracing
             float dx = 0; float dy = 0; float dz = -1;           
 
             // Cast a ray from origin an direction and get the point
-            Vector3D good_point = HumanFactors.RayTracing.EmbreeRaytracer.IntersectForPoint(
+            Vector3D good_point = DHARTAPI.RayTracing.EmbreeRaytracer.IntersectForPoint(
                 BVH, x, y, z, dx, dy, dz, -1
            );
 
@@ -170,7 +170,7 @@ namespace HumanFactors.Tests.RayTracing
 
             // Do the same in a direction we know will miss
             float bad_dir_x = 0; float bad_dir_y = 0; float bad_dir_z = 1;
-            Vector3D bad_point = HumanFactors.RayTracing.EmbreeRaytracer.IntersectForPoint(
+            Vector3D bad_point = DHARTAPI.RayTracing.EmbreeRaytracer.IntersectForPoint(
                 BVH, x, y, z, bad_dir_x, bad_dir_y, bad_dir_z, -1
            );
             // Print the result of the missed ray

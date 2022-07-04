@@ -24,7 +24,7 @@ namespace CInterfaceTests {
 	*/
 	const wchar_t path_tbb[27] = L"..\\x64-Release\\bin\\tbb.dll";
 	const wchar_t path_embree3[31] = L"..\\x64-Release\\bin\\embree3.dll";
-	const wchar_t path_humanfactors[36] = L"..\\x64-Release\\bin\\HumanFactors.dll";
+	const wchar_t path_DHART_API[36] = L"..\\x64-Release\\bin\\DHARTAPI.dll";
 
 	void visualize_graph(HINSTANCE dll_hf);
 }
@@ -98,10 +98,10 @@ int main(int argc, const char* argv[]) {
 		The following DLLs must be loaded in this order:
 			- tbb.dll
 			- embree3.dll
-			- HumanFactors.dll
+			- DHARTAPI.dll
 
 		If the DLLs are not loaded in this order,
-		HumanFactors.dll will fail to load!
+		DHARTAPI.dll will fail to load!
 	*/
 
 	/*
@@ -133,12 +133,12 @@ int main(int argc, const char* argv[]) {
 	}
 
 	/*
-		HumanFactors.dll depends on both tbb.dll and embree3.dll.
+		DHARTAPI.dll depends on both tbb.dll and embree3.dll.
 	*/
-	HINSTANCE dll_humanfactors = LoadLibrary(CInterfaceTests::path_humanfactors);
+	HINSTANCE dll_DHART_API = LoadLibrary(CInterfaceTests::path_DHART_API);
 
-	if (dll_humanfactors == nullptr) {
-		std::cerr << "Unable to load " << "HumanFactors.dll" << std::endl;
+	if (dll_DHART_API == nullptr) {
+		std::cerr << "Unable to load " << "DHARTAPI.dll" << std::endl;
 
 		FreeLibrary(dll_embree3);
 		FreeLibrary(dll_tbb);
@@ -146,18 +146,18 @@ int main(int argc, const char* argv[]) {
 		exit(EXIT_FAILURE);
 	}
 	else {
-		std::cout << "Loaded successfully: " << "HumanFactors.dll" << std::endl;
+		std::cout << "Loaded successfully: " << "DHARTAPI.dll" << std::endl;
 
 		///
 		///	Generate graph test.
 		///	End status of 1 means OK.
 		///
-		CInterfaceTests::visualize_graph(dll_humanfactors);
+		CInterfaceTests::visualize_graph(dll_DHART_API);
 
 		/*
 			When stepping through the debugger, the statement below is not required --
-			but when running the executable, FreeLibrary(dll_humanfactors) throws an exception.
-			By putting the current thread to sleep for 250 ms, dll_humanfactors can be freed.
+			but when running the executable, FreeLibrary(dll_DHART_API) throws an exception.
+			By putting the current thread to sleep for 250 ms, dll_DHART_API can be freed.
 
 			Solution was described here:
 			https://forums.ni.com/t5/Instrument-Control-GPIB-Serial/Why-does-FreeLibrary-sometimes-crash/m-p/128079/highlight/true?profile.language=en#M7393
@@ -167,8 +167,8 @@ int main(int argc, const char* argv[]) {
 		///
 		/// Free libraries in order of creation
 		///
-		if (FreeLibrary(dll_humanfactors)) {
-			std::cout << "Freed successfully: " << "HumanFactors.dll" << std::endl;
+		if (FreeLibrary(dll_DHART_API)) {
+			std::cout << "Freed successfully: " << "DHARTAPI.dll" << std::endl;
 		}
 
 		if (FreeLibrary(dll_embree3)) {

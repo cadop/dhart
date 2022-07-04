@@ -1,12 +1,12 @@
-using HumanFactors.Geometry;
-using HumanFactors.GraphGenerator;
-using HumanFactors.SpatialStructures;
-using HumanFactors;
+using DHARTAPI.Geometry;
+using DHARTAPI.GraphGenerator;
+using DHARTAPI.SpatialStructures;
+using DHARTAPI;
 using System;
 using System.Diagnostics;
-using HumanFactors.RayTracing;
-using HumanFactors.ViewAnalysis;
-using HumanFactors.Pathfinding;
+using DHARTAPI.RayTracing;
+using DHARTAPI.ViewAnalysis;
+using DHARTAPI.Pathfinding;
 using System.Linq;
 
 class StringToEdgeCost
@@ -28,7 +28,7 @@ class StringToEdgeCost
 		int max_step_connections = 1;
 
 		// Generate a graph
-		var graph = HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph(
+		var graph = DHARTAPI.GraphGenerator.GraphGenerator.GenerateGraph(
 			bvh,
 			start_point,
 			spacing,

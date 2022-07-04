@@ -1,7 +1,7 @@
-using HumanFactors.Geometry;
-using HumanFactors.RayTracing;
-using HumanFactors.SpatialStructures;
-using HumanFactors.VisibilityGraph;
+using DHARTAPI.Geometry;
+using DHARTAPI.RayTracing;
+using DHARTAPI.SpatialStructures;
+using DHARTAPI.VisibilityGraph;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics;
@@ -9,7 +9,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace HumanFactors.Tests.VisibilityGraph
+namespace DHARTAPI.Tests.VisibilityGraph
 {
     [TestClass]
     public class VisibilityGraphTest
@@ -75,7 +75,7 @@ namespace HumanFactors.Tests.VisibilityGraph
             //! [EX_DirectedVisibilityGraph]
             
             // Create a visibility from every node to every other node
-            Graph G = HumanFactors.VisibilityGraph.VisibilityGraph.GenerateAllToAll(bvh, nodes);
+            Graph G = DHARTAPI.VisibilityGraph.VisibilityGraph.GenerateAllToAll(bvh, nodes);
 
             // Aggregate the graph's edges to get the total distance from this node to all of its edges
             var results = G.AggregateEdgeCosts(GraphEdgeAggregation.SUM);
@@ -97,7 +97,7 @@ namespace HumanFactors.Tests.VisibilityGraph
         public void Undirected()
         {
             var bvh = GetBVH();
-            Graph G = HumanFactors.VisibilityGraph.VisibilityGraph.GenerateAllToAll(bvh, nodes, directed:false);
+            Graph G = DHARTAPI.VisibilityGraph.VisibilityGraph.GenerateAllToAll(bvh, nodes, directed:false);
             Assert.IsTrue(IsValidGraph(G));
         }
 
@@ -113,7 +113,7 @@ namespace HumanFactors.Tests.VisibilityGraph
 		    Vector3D[] group_b = { Point3, Point4 };
 
             // Generate a visibility graph from group A to group B
-            Graph G = HumanFactors.VisibilityGraph.VisibilityGraph.GenerateGroupToGroup(bvh, group_a, group_b);
+            Graph G = DHARTAPI.VisibilityGraph.VisibilityGraph.GenerateGroupToGroup(bvh, group_a, group_b);
 
             // Print the results
             var results = G.AggregateEdgeCosts(GraphEdgeAggregation.SUM);

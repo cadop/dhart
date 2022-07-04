@@ -1,7 +1,7 @@
-﻿using HumanFactors.Exceptions;
-using HumanFactors.NativeUtils;
-using HumanFactors.NativeUtils.CommonNativeArrays;
-using HumanFactors.SpatialStructures;
+﻿using DHARTAPI.Exceptions;
+using DHARTAPI.NativeUtils;
+using DHARTAPI.NativeUtils.CommonNativeArrays;
+using DHARTAPI.SpatialStructures;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ using System.Security.Cryptography.X509Certificates;
     \see GraphGenerator to automatically generate a graph of accessible space on a mesh.
 
 */
-namespace HumanFactors.Pathfinding
+namespace DHARTAPI.Pathfinding
 {
 
 	/*!

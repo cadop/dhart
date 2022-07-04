@@ -35,8 +35,8 @@ namespace HF::SpatialStructures {
 	by this algorithm, node represents a point in space that a human can occupy, and each edge between nodes
 	indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool
 	for analyzing space, since the graph or nodes it outputs can be used as input to all the analysis methods
-	offered by HumanFactors, allowing for it to be the starting point of other analysis methods within
-	HumanFactors.
+	offered by DHARTAPI, allowing for it to be the starting point of other analysis methods within
+	DHARTAPI.
 
 	\par Obstacle Support
 	The Graph Generator supports marking specific geometry as walkable or obstacles. Obstacle surfaces  are surfaces
@@ -332,8 +332,8 @@ namespace HF::GraphGenerator {
 		by this algorithm, node represents a point in space that a human can occupy, and each edge between nodes 
 		indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool 
 		for analyzing space, since the graph or nodes it outputs can be used as input to all the analysis methods 
-		offered by HumanFactors, allowing for it to be the starting point of other analysis methods within
-		HumanFactors.
+		offered by DHARTAPI, allowing for it to be the starting point of other analysis methods within
+		DHARTAPI.
 		
 		\note 
 		All arguments are in meters for distances and degrees for angles

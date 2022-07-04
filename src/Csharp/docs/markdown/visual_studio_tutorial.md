@@ -4,7 +4,7 @@
 
 ## Intro
 
-In this tutorial we will cover the process of creating a new Visual Studio project that references the HumanFactors C# interface. We will also walk through the steps of adding non-C# dependencies such as `HumanFactors.dll` to your project, as this is required for the produced program to run at all. After this tutorial is completed you should have a project that is able to reference HumanFactors' C# interface and automatically copy it and its dependencies to the output folder when the project is built.
+In this tutorial we will cover the process of creating a new Visual Studio project that references the DHARTAPI C# interface. We will also walk through the steps of adding non-C# dependencies such as `DHARTAPI.dll` to your project, as this is required for the produced program to run at all. After this tutorial is completed you should have a project that is able to reference DHARTAPI' C# interface and automatically copy it and its dependencies to the output folder when the project is built.
 
 ### Prerequisites
 
@@ -40,7 +40,7 @@ Once you've clicked C# the menu should be filtered to only contain C# project ty
 
 *Figure* **1.4**: *ConFigure Dialog*
 
-In the conFigure dialog, you're able to change the name, location and framework version of your assembly. For this demonstration we'll be using the version of the .net framework that HumanFactorsCSharp was built with, **Framework version 4.5**. Change the framework version to 4.5 by using the dropdown menu circled in cyan in Figure 1.4. We'll be leaving the rest of the options as their defaults for this example, but feel free to change the name and location of the project. Once you're ready, click the Create button circled in red at the bottom right corner of the dialog to create the project.
+In the conFigure dialog, you're able to change the name, location and framework version of your assembly. For this demonstration we'll be using the version of the .net framework that DHARTAPICSharp was built with, **Framework version 4.5**. Change the framework version to 4.5 by using the dropdown menu circled in cyan in Figure 1.4. We'll be leaving the rest of the options as their defaults for this example, but feel free to change the name and location of the project. Once you're ready, click the Create button circled in red at the bottom right corner of the dialog to create the project.
 
 ![Blank Project](walkthroughs/VisualStudio/visual_studio_blank_project.png)
 
@@ -50,7 +50,7 @@ After pressing create, Visual Studio display a window for your new blank project
 
 ## Adding A Reference To Human Factors
 
-Before we move on to writing the example program, we must first add HumanFactors C# DLL as a reference.
+Before we move on to writing the example program, we must first add DHARTAPI C# DLL as a reference.
 
 ![Add Reference Menu ](walkthroughs/VisualStudio/right_click_class_library.png)
 
@@ -64,7 +64,7 @@ In the *Solution Explorer* on the right hand side of the window, right click on 
 
 A new window should open similar to the one shown in Figure 2.2, however the contents of the window will differ depending on what other C# projects you have previously built with Visual Studio, or DLLs you've previously added references to in the past. Click the Browse button circled in red in Figure 2.2 at the bottom right corner of the dialog. This should open a file explorer window.
 
-![Navigate to HumanFactors DLL](walkthroughs/VisualStudio/bin_of_humanfactors.png)
+![Navigate to DHARTAPI DLL](walkthroughs/VisualStudio/bin_of_DHART_API.png)
 
 *Figure* **2.3**: *Human Factors Bin Folder*
 
@@ -76,7 +76,7 @@ In the file explorer, navigate to the bin directory in which you've installed Hu
 
 ![References Added](walkthroughs/VisualStudio/references_added.png)
 
-If you completed the last step successfully, then you should be able to see all of the added DLLS checked off in the Reference Manager like in Figure 2.4. From this list, only some of the items are C# DLLs, so only leave the deselect every one of the references except for `HumanFactorsCSharp.dll`, `System.Memory.dll`, `System.Runtime.CompilerServices.Unsafe.dll`, and `System.Buffers.dll`.
+If you completed the last step successfully, then you should be able to see all of the added DLLS checked off in the Reference Manager like in Figure 2.4. From this list, only some of the items are C# DLLs, so only leave the deselect every one of the references except for `DHARTAPICSharp.dll`, `System.Memory.dll`, `System.Runtime.CompilerServices.Unsafe.dll`, and `System.Buffers.dll`.
 
 ![Subset of References](walkthroughs/VisualStudio/csharp_references.png)
 
@@ -98,7 +98,7 @@ Upon clicking this drop down, all of the references to this project will be disp
 
 ## Adding Native Dependencies
 
-We added the C# components of human factors to the project as libraries, however we also need to ensure that those DLLs that we unchecked are part of our project as well. While these libraries can't be loaded as dependencies like C# libraries can, they can still be managed by our project, and most importantly copied to the correct directories when the project is built. If the native libraries are not placed alongside the C# library, then HumanFactors will not run once the project is built.
+We added the C# components of human factors to the project as libraries, however we also need to ensure that those DLLs that we unchecked are part of our project as well. While these libraries can't be loaded as dependencies like C# libraries can, they can still be managed by our project, and most importantly copied to the correct directories when the project is built. If the native libraries are not placed alongside the C# library, then DHARTAPI will not run once the project is built.
 
 ![Add Existing Item](walkthroughs/VisualStudio/add_existing_item.png)
 
@@ -106,7 +106,7 @@ We added the C# components of human factors to the project as libraries, however
 
 To add a file to your project, right click on the project in the solution explorer window, then hover over add and click *Existing Item* as shown in Figure 3.1.
 
-Upon clicking on the Add existing item option another file explorer window will open. Navigate back to the  bin directory of humanfactors.
+Upon clicking on the Add existing item option another file explorer window will open. Navigate back to the  bin directory of DHART_API.
 
 ![All Files](walkthroughs/VisualStudio/all_files.png)
 
@@ -151,7 +151,7 @@ With everything set up correctly, we should now be able to demonstrate that this
 under the line `using System.Threading.Tasks` enter the following using declarations.
 
 ``` C#
-using HumanFactors;
+using DHARTAPI;
 using Humanfactors.SpatialStructures;
 ```
 
@@ -193,7 +193,7 @@ Once there, you should be looking at the output of your program. Verify that all
 
 ## Testing the Interface
 
-To demonstrate this DLL is functional, we will attempt to load the mesh data of an obj file from disk. In this tutorial I will be using a simple plane titled `plane.obj` however, this should work with any OBJ file so pick one of your own that you'd like to use with HumanFactors.
+To demonstrate this DLL is functional, we will attempt to load the mesh data of an obj file from disk. In this tutorial I will be using a simple plane titled `plane.obj` however, this should work with any OBJ file so pick one of your own that you'd like to use with DHARTAPI.
 
 ### Create a Console Project
 
@@ -233,7 +233,7 @@ Now that we have a console project that we can execute, we'll go back to our lib
 
 Go back to the .cs file we made in the previous section and double click on it to open it. In this fill we will modify Class1 to be static, then give it a function titled `SampleLoadOBJ()`.
 
-Before moving further, add the lines `using HumanFactors.Geometry;` and `using System.Diagnostics;` to your block of using declarations.  After adding that line, add the word `static` after the word `public` on line 12. This will make it so we don't need to instantiate a new instance of the class in order to run the function we want. After doing this, the editor will show an error with the code we wrote previously. Delete the body of that function, leaving the space between the open and closing braces of Class1 empty.
+Before moving further, add the lines `using DHARTAPI.Geometry;` and `using System.Diagnostics;` to your block of using declarations.  After adding that line, add the word `static` after the word `public` on line 12. This will make it so we don't need to instantiate a new instance of the class in order to run the function we want. After doing this, the editor will show an error with the code we wrote previously. Delete the body of that function, leaving the space between the open and closing braces of Class1 empty.
 
 ``` C#
 using System;
@@ -242,9 +242,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using HumanFactors;
-using HumanFactors.SpatialStructures;
-using HumanFactors.Geometry;
+using DHARTAPI;
+using DHARTAPI.SpatialStructures;
+using DHARTAPI.Geometry;
 using System.Diagnostics;
 
 namespace ClassLibrary1
@@ -268,9 +268,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using HumanFactors;
-using HumanFactors.SpatialStructures;
-using HumanFactors.Geometry;
+using DHARTAPI;
+using DHARTAPI.SpatialStructures;
+using DHARTAPI.Geometry;
 using System.Diagnostics;
 
 namespace ClassLibrary1
@@ -318,7 +318,7 @@ Go to the solution explorer and click on Program.cs under the ConsoleApp1 Projec
 
 *Figure* **5.3.2** : *Program.cs Blank*
 
-Before we can reference the other project, we must first add a reference to it, similar to how we added a reference to the humanfactors.dll in the second section of this tutorial.
+Before we can reference the other project, we must first add a reference to it, similar to how we added a reference to the DHART_API.dll in the second section of this tutorial.
 
 ![Add reference ConsoleApp1](walkthroughs/VisualStudio/add_reference_console_app_1.png)
 
@@ -397,4 +397,4 @@ Now finally, click the start button circled in Figure 5.4.7 to test the program.
 
 *Figure* **5.4.8** : *Successful Output Highlighted*
 
-Upon clicking start, you should see a console window appear briefly, then close. Look in the output at the bottom of your Visual Studio window. You should see the line HumanFactors.Geometry.Meshinfo. IF this is the case then you have successfully created a project using Humanfactors to load an obj from disk. 
+Upon clicking start, you should see a console window appear briefly, then close. Look in the output at the bottom of your Visual Studio window. You should see the line DHARTAPI.Geometry.Meshinfo. IF this is the case then you have successfully created a project using Humanfactors to load an obj from disk. 

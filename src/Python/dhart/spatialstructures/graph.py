@@ -60,7 +60,7 @@ class Graph:
         attributes are each have a distinct key as their name, but instead of 
         conatining information about edges in the graph, node attributes contain 
         information about nodes. Unlike the cost algorithms in edgecosts, right 
-        now there is no functionality within HumanFactors that populates the
+        now there is no functionality within DHARTAPI that populates the
         node attributes of the graph with any kind of metric, however the 
         methods to add and clear node attributes are made available so you are 
         free to add your own node attributes.

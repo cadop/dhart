@@ -1,8 +1,8 @@
-﻿using HumanFactors.NativeUtils;
+﻿using DHARTAPI.NativeUtils;
 using System;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices;
-using HumanFactors.Exceptions;
+using DHARTAPI.Exceptions;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.CodeDom;
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace HumanFactors.Geometry
+namespace DHARTAPI.Geometry
 {
 
 	/*! \brief Native methods for the Geometry namespace */
@@ -26,7 +26,7 @@ namespace HumanFactors.Geometry
 
 
 		/// <summary>
-		/// Path to the HumanFactors dll copied from <see cref="NativeConstants"/>.
+		/// Path to the DHARTAPI dll copied from <see cref="NativeConstants"/>.
 		/// </summary>
 		const string dllpath = NativeConstants.DLLPath;
 
@@ -41,7 +41,7 @@ namespace HumanFactors.Geometry
             \returns A pointer to the a instance of MeshInfo in native memory containing the mesh at `path`.
 
             \throws System.IO.FileNotFoundException No file was found at `path`.
-			\throws HumanFactors.Exceptions.InvalidMeshException The file at `path` did not represent a valid OBJ.
+			\throws DHARTAPI.Exceptions.InvalidMeshException The file at `path` did not represent a valid OBJ.
        */
 		internal static IntPtr[] C_LoadOBJ(string obj_path, float xrot, float yrot, float zrot, GROUP_METHOD gm)
 		{
@@ -126,7 +126,7 @@ namespace HumanFactors.Geometry
             A pointer to a new MeshInfo object in unmanaged memory, constructed with `vertices
             and `indices`.
 
-            \throws HumanFactors.Exceptions.InvalidMeshException The input indices and vertices result in an invalid mesh.
+            \throws DHARTAPI.Exceptions.InvalidMeshException The input indices and vertices result in an invalid mesh.
         */
 		internal static IntPtr C_StoreMesh(IEnumerable<float> vertices, IEnumerable<int> indices, string name, int id)
 		{

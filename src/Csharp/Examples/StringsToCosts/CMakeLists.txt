@@ -3,7 +3,7 @@
 add_executable(StringsToCosts)
 
 target_sources(StringsToCosts PRIVATE "strtoc.cs")
-target_link_libraries(StringsToCosts PRIVATE HumanFactorsCSharp)
+target_link_libraries(StringsToCosts PRIVATE DHARTAPICSharp)
 set(binary_path "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>")
 
 message([STATUS] "BINARY PATH ${binary_path}")
@@ -45,14 +45,14 @@ add_custom_command(TARGET StringsToCosts POST_BUILD
 # The following commands copy resources necessary for C# to perform its unittests
 add_custom_command(TARGET StringsToCosts POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E copy_if_different
-		"${CMAKE_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll"
-		"${binary_path}/humanfactors.dll"
+		"${CMAKE_BINARY_DIR}/$<CONFIGURATION>/DHARTAPI.dll"
+		"${binary_path}/DHART_API.dll"
 )
 
 # Copy example models to the build directory for C#
 add_custom_command(TARGET StringsToCosts POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E copy_directory
-		"${CMAKE_SOURCE_DIR}/${PYTHON_PACKAGE_DIR}/humanfactorspy/Example Models"
+		"${CMAKE_SOURCE_DIR}/${PYTHON_PACKAGE_DIR}/DHART_APIpy/Example Models"
 		"${binary_path}/ExampleModels"
 )
 

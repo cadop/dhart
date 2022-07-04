@@ -1,4 +1,4 @@
-﻿using HumanFactors.NativeUtils.CommonNativeArrays;
+﻿using DHARTAPI.NativeUtils.CommonNativeArrays;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 [assembly: CLSCompliant(true)]
 
-namespace HumanFactors.NativeUtils
+namespace DHARTAPI.NativeUtils
 {
 	
 	/*! 
@@ -75,19 +75,19 @@ namespace HumanFactors.NativeUtils
     */
 	internal static class NativeConstants
 	{
-		/*! \brief Relative path to the humanfactors DLL. 
+		/*! \brief Relative path to the DHART_API DLL. 
             
             \remarks
             This is used in the DLL imports section of every function that calls into native code in this library.
         */
-		public const string DLLPath = "HumanFactors.dll";
+		public const string DLLPath = "DHARTAPI.dll";
 	}
 
 	/*!
         \brief Contains some functions useful for converting data for interop.
         
         \remarks
-        These functions are frequently called internally in multiple HumanFactors
+        These functions are frequently called internally in multiple DHARTAPI
         namespaces. 
     */
 	public static class HelperFunctions
