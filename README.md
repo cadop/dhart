@@ -3,7 +3,7 @@
 
 Welcome to DHART:a C++ package with interfaces to Python, C, and C# for  Design, Humans, Analysis, and RoboTics.
 
-There are a few components to the package, but the main focus is in providing fast ray-casting interfaces for python and C# for a variety of analysis and evaluation techniques.  Generally, you should be able to build a grid-like structure of the floors for a 3D model, calculate shortest paths by distance and custom metrics, and use these tools inside of a variety of programs such as Unity, Rhino, Revit, and more. 
+There are a few components to the package, but the main focus is in providing fast ray-casting interfaces for python and C# for a variety of analysis and evaluation techniques.  Generally, you should be able to build a grid-like structure of the floors for a 3D model, calculate shortest paths by distance/visibility/energy and custom metrics, and use these tools inside of a variety of programs such as Unity, Rhino, Revit, and more. 
 
 We have extensive documentation on the API, and welcome new contributions and bug fixes. Please make sure to take a look at the contributing guide.  
 
@@ -25,13 +25,6 @@ Features
 Credits
 -------
 
-
-This repository contains work that was supported in part by the U.S.
-Army Combat Capabilities Development Command (CCDC) Armaments
-Center and the U.S. Army ManTech Office under Contract Delivery
-Order W15QKN19F0002 - Advanced Development of Asset Protection
-Technologies (ADAPT).
-
 If you find this repo useful, please cite using the following bibtex
 ```bibtex
 @article{schwartz2021human,
@@ -44,6 +37,8 @@ If you find this repo useful, please cite using the following bibtex
   publisher={Elsevier}
 }
 ```
+
+This repository contains work that was supported in part by the U.S. Army Combat Capabilities Development Command (CCDC) Armaments Center and the U.S. Army ManTech Office under Contract Delivery Order W15QKN19F0002 - Advanced Development of Asset Protection Technologies (ADAPT).
 
 There were dozens of contributors to this project over the years.  It has been led by Mathew Schwartz (NJIT) with a large part of the development by Drew Balletto. 
 
