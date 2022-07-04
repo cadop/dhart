@@ -19,6 +19,7 @@ Features
 - Easily generate visibility graphs and analyze locations of environment
 - Calculate view scores, percentage of view, and points of interest
 - Uses Embree raytracer for fast raycasting
+- Has switchable backend to use nanoRT for raycasting with double precision
 - Demos and instructions for integrating with Rhino 3D and Unity
 
 
