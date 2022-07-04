@@ -52,7 +52,7 @@ add_custom_command(TARGET StringsToCosts POST_BUILD
 # Copy example models to the build directory for C#
 add_custom_command(TARGET StringsToCosts POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E copy_directory
-		"${CMAKE_SOURCE_DIR}/${PYTHON_PACKAGE_DIR}/DHART_APIpy/Example Models"
+		"${CMAKE_SOURCE_DIR}/${PYTHON_PACKAGE_DIR}/dhart/Example Models"
 		"${binary_path}/ExampleModels"
 )
 
