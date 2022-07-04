@@ -147,7 +147,7 @@ Notice that the code is not a comment.
 The following steps utilize the Doxygen GUI Frontend.
 
 Load the Doxyfile from this repo into Doxygen, using the File menu.
-The Doxyfile is in <code>Analysis\src\Doxyfile</code>
+The Doxyfile is in <code>dhart\src\Doxyfile</code>
 
 <b>Step 3:</b><br>
 - Navigate to the Expert tab on the left hand side.
@@ -213,24 +213,24 @@ For <b>markdown files (<code>.md</code>)</b>,<br>
 we will be using the markdown syntax for images.<br>
 https://www.doxygen.nl/manual/markdown.html#md_images
 
-In <b>Analysis</b>,<br>
+In <b>dhart</b>,<br>
 we have a subdirectory named <b>docs</b>.<br>
-(<code>Analysis\docs</code>)<br>
+(<code>dhart\docs</code>)<br>
 
-The Analysis Doxyfile will already be configured to have it's <code>IMAGE_PATH</code><br>
+The Doxyfile will already be configured to have it's <code>IMAGE_PATH</code><br>
 configured such that its working directory for images begins at<br>
-<code>Analysis\docs</code>.<br>
+<code>dhart\docs</code>.<br>
 When we proceed to later steps, and we are to insert the path of an image file,<br>
 assume that the working directory for images begins at<br>
-<code>Analysis\docs.</code>
+<code>dhart\docs.</code>
 
 For example, if a file is saved at:<br>
-<code>Analysis\docs\C++\images\spatialstructures\node\test-image_node-h.png</code>,<br>
+<code>dhart\docs\C++\images\spatialstructures\node\test-image_node-h.png</code>,<br>
 you will specify the path:<br>
 <code>C++\images\spatialstructures\node\test-image_node-h.png</code>.
 
-Notice that the <b>Analysis\docs</b> portion is omitted when specifying the image,<br>
-since our Doxyfile will already its <code>IMAGE_PATH</code> configured to begin at <b>Analysis\docs</b>.
+Notice that the <b>dhart\docs</b> portion is omitted when specifying the image,<br>
+since our Doxyfile will already its <code>IMAGE_PATH</code> configured to begin at <b>dhart\docs</b>.
 
 <b>Step 0:</b><br>
 Begin by saving copy of <b>image_file</b>,<br>
@@ -238,7 +238,7 @@ which is the filename of the desired image,<br>
 into the following directory:<br>
 
 ```
-Analysis\docs\language\img\enclosing_folder\module_name
+dhart\docs\language\img\enclosing_folder\module_name
 ```
 <code><b>language</b></code>,<br>
 <code><b>enclosing_folder</b></code>,<br>
@@ -247,7 +247,7 @@ and <code><b>module_name</b></code> are <b>placeholders</b>.<br>
 <code>images</code> will be a subdirectory within <code><b>language</b></code>.
 
 <b>Note:</b><br>
-In the <b>Analysis\docs</b> directory,<br>
+In the <b>dhart\docs</b> directory,<br>
 there are <b>three</b> subdirectories:<br>
 for which the <code><b>language</b></code> placeholder applies:
 - C# Documentation
@@ -266,7 +266,7 @@ into documentation for a C++ header file,<br>
 the same steps will apply for C# or Python sources.<br>
 
 For instance, the full filepath of <code>node.h</code> is<br>
-<code><b>Analysis\src\Cpp\spatialstructures\src\node.h</b></code>
+<code><b>dhart\src\Cpp\spatialstructures\src\node.h</b></code>
 
 <code><b>language</b></code> is <b>C++</b><br>
 <code><b>enclosing_folder</b></code> is <b>spatialstructures</b><br>
@@ -276,7 +276,7 @@ So, if we wanted to insert an image for any documentation<br>
 for <code>node.h</code> or <code>node.cpp</code>,<br>
 the image would be saved into the following directory:<br>
 
-<code><b>Analysis\docs\C++\images\spatialstructures\node</b></code>
+<code><b>dhart\docs\C++\images\spatialstructures\node</b></code>
 
 ![NodePictureSample](docs/contributing-guides/images/file_explorer_docs_img_node-h.png)
 
@@ -348,7 +348,7 @@ An example use of the syntax would be:<br>
 <code><b>image_file</b></code> is <b>test.png</b>
 
 ![VSImageMDMainpage](docs/contributing-guides/images/vs_imagemd_mainpage.png)
-<b>This particular example is of mainpage.md, in Analysis\src\Cpp</b>
+<b>This particular example is of mainpage.md, in dhart\src\Cpp</b>
 
 We will now move on to the <b>Doxygen GUI frontend (Doxywizard)</b> application.
 
@@ -363,16 +363,16 @@ Click <b>File > Open...</b><br>
 ![DoxygenFileOpen](docs/contributing-guides/images/doxygen_fileopen.png)
 
 The 'Open configuration file' file explorer will appear.<br>
-Navigate to your local copy of the Analysis repository,<br>
+Navigate to your local copy of the dhart repository,<br>
 then click the <b>Doxyfile</b> icon.<br>
 
 ![DoxygenOpenDoxyfile0](docs/contributing-guides/images/doxygen_open_doxyfile_0.png)
-<b>Your path to the Analysis repository will differ, depending where it resides locally on your machine.</b>
+<b>Your path to the dhart repository will differ, depending where it resides locally on your machine.</b>
 
 Upon loading the Doxyfile, it will be preconfigured for <b>C++</b>.
 
 Doxygen's <b>working directory</b> will be the location of the <b>Doxyfile</b>,
-which is the root directory of the Analysis repository.
+which is the root directory of the dhart repository.
 
 The <b>Source code directory</b> will be configured for <code>./src/Cpp</code><br>
 and the <b>Destination directory</b> will be configured for <code>./docs/C++</code>.<br>
@@ -389,21 +389,21 @@ and the <b>Destination directory</b> will be configured for <code>./docs/C++</co
 Suggestion:<br>
 Before exporting documentation and pushing it to the repository,<br>
 change the <b>Destination directory</b> to a test directory of your choice<br>
-(relative to your local copy of Analysis on your machine)
+(relative to your local copy of dhart on your machine)
 
 To do this,<br>
 create a directory on your Desktop, named <b>test_docs</b>.<br>
 Then, for <b>Destination directory</b>,<br>
 you will want to provide a <b>relative path</b> to <b>test_docs</b>,<br>
 from Doxywizard's working directory.<br>
-(this will differ, depending on where your copy of Analysis resides on your machine)
+(this will differ, depending on where your copy of dhart resides on your machine)
 
 ![DoxygenWizardDestTest](docs/contributing-guides/images/doxygen_wizard_dest_test.png)
 <b>For this example, the destination directory is set to move up two parent directories, so that it can reach Desktop/test_docs.</b>
 
 <b>Step 3:</b><br>
-The Analysis Doxyfile will be preconfigured to search for images from<br>
-<code>Analysis\docs</code>, via the <code>IMAGE_PATH</code> variable.<br>
+The dhart Doxyfile will be preconfigured to search for images from<br>
+<code>dhart\docs</code>, via the <code>IMAGE_PATH</code> variable.<br>
 
 The current <code>IMAGE_PATH</code> value, <code>./docs</code> <b>should not be removed</b>,<br>
 but you may <b>add to it</b> by doing the following:
@@ -437,7 +437,7 @@ Then, click <b>Select Folder</b>.<br>
 We have now configured another image path for Doxygen.<br>
 
 ![DoxygenExpertTabImagePath3](docs/contributing-guides/images/doxygen_expert_tab_image_path_3.png)
-<b>When Doxygen inserts images into documentation, it will begin its search in the Analysis\docs directory.</b><br>
+<b>When Doxygen inserts images into documentation, it will begin its search in the dhart\docs directory.</b><br>
 <b>If you have added another path to IMAGE_PATH (not shown here), it will also search this path.</b>
 
 <b>Step 4:</b><br>

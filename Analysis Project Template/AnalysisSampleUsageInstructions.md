@@ -51,9 +51,9 @@ Launch <b>Visual Studio 2019</b> and open the <b>Analysis</b> repository.
 (<code>Analysis/src</code>). This will use the <code>CMakeLists.txt</code> file to work with the codebase within Visual Studio. (as opposed to a <code>.sln</code>).
 
 At the top of Visual Studio, click <b>Build > Install Human Factors</b>.<br>
-This will install Human Factors in <code>Analysis\src\out\install</code>.
+This will install Human Factors in <code>dhart\src\out\install</code>.
 
-After installing Human Factors, navigate to <code>Analysis\src\out\install</code> using the <b>File Explorer</b>.
+After installing Human Factors, navigate to <code>dhart\src\out\install</code> using the <b>File Explorer</b>.
 
 Copy the <b>x64-Release</b> folder into the '<b>Analysis Project Template</b>' folder you made earlier.
 
@@ -67,7 +67,7 @@ bin\tbb.dll
 
 <b>Delete everything else.</b> They will not be used.
 
-In <code>Analysis\src\Cpp\tests\Example Models</code>, copy the following<br>
+In <code>dhart\src\Cpp\tests\Example Models</code>, copy the following<br>
 into <code>Analysis Sample Usage</code>:
 ```
 plane.obj

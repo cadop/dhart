@@ -110,6 +110,14 @@ Installing
 
 - Requires Windows 10
 
+For Python you can use
+
+`pip install dhart`
+
+- However, if you would like to use Python with Rhino Grasshopper, you will need to follow the install instructions in the Python Docs. 
+
+For C# you can download from the Releases page. 
+- Of course, you can always clone this repo and build the project yourself. 
 
 We supply dll's to try and make the installation and linking process as easy as possible. 
 
@@ -146,10 +154,10 @@ you may continue with the following:
 0. Open Git Bash.
 Git Bash (MINGW64) begins at ~, your home directory.
 You may remain here, or navigate to a directory of your choice.
-In the next step, you will clone the Analysis repository.
+In the next step, you will clone the repository.
 
 1. Type git clone git@github.com/cadop/dhart.git at the prompt
-and hit ENTER. The Analysis repository will then be cloned to your local machine.
+and hit ENTER. The repository will then be cloned to your local machine.
 
 
 ### Using CMAKE Commands
@@ -188,7 +196,7 @@ Then, navigate to `src/`. Click the Select folder button to confirm.
 1. If the Solution Explorer view is not already open, you may open by
 navigating to View > Solution Explorer, or alternatively, you can also use the Ctrl + Alt + L shortcut to reveal Solution Explorer. Here, you can examine the sources imported by Visual Studio.
 
-1. We are now ready to build Analysis.
+1. We are now ready to build.
 CMake is used to aid in the compilation process.
 There are a few provided configuration files. Specifically, debug and release, as well as C# and Python specific ones.  Select the one you are interested in and navigate to Build > Build All. 
 
