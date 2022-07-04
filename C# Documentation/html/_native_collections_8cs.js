@@ -1,8 +1,8 @@
 var _native_collections_8cs =
 [
-    [ "HumanFactors.NativeUtils.CommonNativeArrays.ManagedFloatArray", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_managed_float_array.html", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_managed_float_array" ],
-    [ "HumanFactors.NativeUtils.CommonNativeArrays.ManagedCharPtrArray", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_managed_char_ptr_array.html", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_managed_char_ptr_array" ],
-    [ "HumanFactors.NativeUtils.CommonNativeArrays.UnmanagedIntArray2D", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_int_array2_d.html", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_int_array2_d" ],
-    [ "HumanFactors.NativeUtils.CommonNativeArrays.UnmanagedFloatArray2D", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_float_array2_d.html", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_float_array2_d" ],
-    [ "HumanFactors.NativeUtils.CommonNativeArrays.NativeMethods", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_native_methods.html", "class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_native_methods" ]
+    [ "DHARTAPI.NativeUtils.CommonNativeArrays.ManagedFloatArray", "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_managed_float_array.html", "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_managed_float_array" ],
+    [ "DHARTAPI.NativeUtils.CommonNativeArrays.ManagedCharPtrArray", "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_managed_char_ptr_array.html", "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_managed_char_ptr_array" ],
+    [ "DHARTAPI.NativeUtils.CommonNativeArrays.UnmanagedIntArray2D", "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_int_array2_d.html", "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_int_array2_d" ],
+    [ "DHARTAPI.NativeUtils.CommonNativeArrays.UnmanagedFloatArray2D", "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_float_array2_d.html", "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_float_array2_d" ],
+    [ "DHARTAPI.NativeUtils.CommonNativeArrays.NativeMethods", "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_native_methods.html", "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_native_methods" ]
 ];

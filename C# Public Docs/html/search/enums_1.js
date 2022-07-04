@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['graphedgeaggregation_0',['GraphEdgeAggregation',['../namespace_human_factors_1_1_spatial_structures.html#abd405fa41da0f9a771d547aa47b6e1a0',1,'HumanFactors::SpatialStructures']]],
-  ['group_5fmethod_1',['GROUP_METHOD',['../namespace_human_factors_1_1_geometry.html#ae1dc76f9bc90183da6add631332cb1fd',1,'HumanFactors::Geometry']]]
+  ['graphedgeaggregation_0',['GraphEdgeAggregation',['../namespace_d_h_a_r_t_a_p_i_1_1_spatial_structures.html#a596d2162828cb1e978b4cd89504a28ed',1,'DHARTAPI::SpatialStructures']]],
+  ['group_5fmethod_1',['GROUP_METHOD',['../namespace_d_h_a_r_t_a_p_i_1_1_geometry.html#a1635093a9d88241ca7681f68e10fd161',1,'DHARTAPI::Geometry']]]
 ];

@@ -104,9 +104,9 @@ $(document).ready(function(){initNavTree('_using_the_raytracer.html',''); initRe
 <div class="textblock"><p ><a class="anchor" id="md_src_Csharp_docs_markdown_2_raycast_at_plane"></a> Previous Tutorial: <a class="el" href="_unity_project_setup.html">Project Setup</a> | Next Tutorial: <a class="el" href="_generating_a_graph.html">Graph Generator</a></p>
 <h1><a class="anchor" id="autotoc_md6"></a>
 Intro</h1>
-<p >Now that we know the <a class="el" href="namespace_human_factors.html" title="Automated analysis of the built environent">HumanFactors</a> library can be referenced by our new Unity Project, let's check to see that it's working by writing a simple script that utilizes the Raytracer. Ray intersections are used internally by many of the analysis methods in <a class="el" href="namespace_human_factors.html" title="Automated analysis of the built environent">HumanFactors</a>, and can be an extremely useful tool for analyzing space. In this tutorial we will write a script that performs the following when playmode is entered:</p>
+<p >Now that we know the <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a> library can be referenced by our new Unity Project, let's check to see that it's working by writing a simple script that utilizes the Raytracer. Ray intersections are used internally by many of the analysis methods in <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a>, and can be an extremely useful tool for analyzing space. In this tutorial we will write a script that performs the following when playmode is entered:</p>
 <ol type="1">
-<li>Create a Plane in <a class="el" href="namespace_human_factors.html" title="Automated analysis of the built environent">HumanFactors</a> from vertices and triangle indices.</li>
+<li>Create a Plane in <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a> from vertices and triangle indices.</li>
 <li>Cast a ray at the plane.</li>
 <li>Print the point where the ray intersected the plane.</li>
 </ol>
@@ -125,14 +125,14 @@ HFExampleScriptBlank</div></div>
 </blockquote>
 <h2><a class="anchor" id="autotoc_md8"></a>
 Using Declarations</h2>
-<p >Before getting into the logic of the script itself, we will add using declarations for the namespaces in <a class="el" href="namespace_human_factors.html" title="Automated analysis of the built environent">HumanFactors</a> that we plan to reference.</p>
+<p >Before getting into the logic of the script itself, we will add using declarations for the namespaces in <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a> that we plan to reference.</p>
 <p >Add the following lines to the top of the script starting at line 4.</p>
-<div class="fragment"><div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_human_factors.html">HumanFactors</a>;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_human_factors_1_1_ray_tracing.html">HumanFactors.RayTracing</a>;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_human_factors_1_1_geometry.html">HumanFactors.Geometry</a>;</div>
-<div class="ttc" id="anamespace_human_factors_1_1_geometry_html"><div class="ttname"><a href="namespace_human_factors_1_1_geometry.html">HumanFactors.Geometry</a></div><div class="ttdoc">Manipulate and load geometry from disk.</div><div class="ttdef"><b>Definition:</b> <a href="_common_rotations_8cs_source.html#l00003">CommonRotations.cs:4</a></div></div>
-<div class="ttc" id="anamespace_human_factors_1_1_ray_tracing_html"><div class="ttname"><a href="namespace_human_factors_1_1_ray_tracing.html">HumanFactors.RayTracing</a></div><div class="ttdoc">Cast rays to determine if and where they intersect geometry.</div><div class="ttdef"><b>Definition:</b> <a href="_embree_b_v_h_8cs_source.html#l00006">EmbreeBVH.cs:7</a></div></div>
-<div class="ttc" id="anamespace_human_factors_html"><div class="ttname"><a href="namespace_human_factors.html">HumanFactors</a></div><div class="ttdoc">Automated analysis of the built environent</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00008">CommonTypes.cs:9</a></div></div>
+<div class="fragment"><div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i.html">DHARTAPI</a>;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i_1_1_ray_tracing.html">DHARTAPI.RayTracing</a>;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i_1_1_geometry.html">DHARTAPI.Geometry</a>;</div>
+<div class="ttc" id="anamespace_d_h_a_r_t_a_p_i_1_1_geometry_html"><div class="ttname"><a href="namespace_d_h_a_r_t_a_p_i_1_1_geometry.html">DHARTAPI.Geometry</a></div><div class="ttdoc">Manipulate and load geometry from disk.</div><div class="ttdef"><b>Definition:</b> <a href="_common_rotations_8cs_source.html#l00003">CommonRotations.cs:4</a></div></div>
+<div class="ttc" id="anamespace_d_h_a_r_t_a_p_i_1_1_ray_tracing_html"><div class="ttname"><a href="namespace_d_h_a_r_t_a_p_i_1_1_ray_tracing.html">DHARTAPI.RayTracing</a></div><div class="ttdoc">Cast rays to determine if and where they intersect geometry.</div><div class="ttdef"><b>Definition:</b> <a href="_embree_b_v_h_8cs_source.html#l00006">EmbreeBVH.cs:7</a></div></div>
+<div class="ttc" id="anamespace_d_h_a_r_t_a_p_i_html"><div class="ttname"><a href="namespace_d_h_a_r_t_a_p_i.html">DHARTAPI</a></div><div class="ttdoc">Automated analysis of the built environent</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00008">CommonTypes.cs:9</a></div></div>
 </div><!-- fragment --><div class="image">
 <img src="add_using_delcarations.png" alt=""/>
 <div class="caption">
@@ -166,15 +166,15 @@ Creating a Plane</h2>
 <div class="line">};</div>
 </div><!-- fragment --><p >In the index and vertex array, every 3 elements represent a separate triangle or vertex respectively. So, the first vertex is at location (-10,10,0) and the first triangle is comprised of the fourth, second, and first vertices. For more information on what both arrays mean, see out the [MeshInfo Documentation]().</p>
 <p ><b>TODO</b>: Replace the empty links with links to our documentation.</p>
-<p >We will use these arrays to construct a new <em>MeshInfo</em> object in <a class="el" href="namespace_human_factors.html" title="Automated analysis of the built environent">HumanFactors</a>. Call the MeshInfo constructor with the two arrays we defined above as arguments.</p>
+<p >We will use these arrays to construct a new <em>MeshInfo</em> object in <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a>. Call the MeshInfo constructor with the two arrays we defined above as arguments.</p>
 <div class="fragment"><div class="line"><span class="comment">// Construct a meshinfo instance for the plane</span></div>
-<div class="line"><a class="code hl_class" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a> Plane = <span class="keyword">new</span> <a class="code hl_class" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a>(plane_indices, plane_vertices);</div>
-<div class="ttc" id="aclass_human_factors_1_1_geometry_1_1_mesh_info_html"><div class="ttname"><a href="class_human_factors_1_1_geometry_1_1_mesh_info.html">HumanFactors.Geometry.MeshInfo</a></div><div class="ttdoc">A collection of vertices and indices representing geometry.</div><div class="ttdef"><b>Definition:</b> <a href="_mesh_info_8cs_source.html#l00049">MeshInfo.cs:50</a></div></div>
+<div class="line"><a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info.html">MeshInfo</a> Plane = <span class="keyword">new</span> <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info.html">MeshInfo</a>(plane_indices, plane_vertices);</div>
+<div class="ttc" id="aclass_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info_html"><div class="ttname"><a href="class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info.html">DHARTAPI.Geometry.MeshInfo</a></div><div class="ttdoc">A collection of vertices and indices representing geometry.</div><div class="ttdef"><b>Definition:</b> <a href="_mesh_info_8cs_source.html#l00049">MeshInfo.cs:50</a></div></div>
 </div><!-- fragment --><p >Before we can use this geometry with the Raytracer, we must first generate a Bounding Volume Hierarchy, or BVH using the geometry as input. In short, a BVH is an accelerated data structure that drastically reduces the time required to perform ray intersections. You can read more about the BVH in its dedicated article [Bounding Volume Hierarchy]().</p>
 <p >To generate a BVH from an instance of MeshInfo, call the BVH constructor with the MeshInfo instance as an argument.</p>
 <div class="fragment"><div class="line"><span class="comment">// Generate a BVH from the MeshInfo instance</span></div>
-<div class="line"><a class="code hl_class" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a> bvh = <span class="keyword">new</span> <a class="code hl_class" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a>(Plane);</div>
-<div class="ttc" id="aclass_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_html"><div class="ttname"><a href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html">HumanFactors.RayTracing.EmbreeBVH</a></div><div class="ttdoc">A Bounding Volume Hierarchy for the EmbreeRaytracer.</div><div class="ttdef"><b>Definition:</b> <a href="_embree_b_v_h_8cs_source.html#l00030">EmbreeBVH.cs:31</a></div></div>
+<div class="line"><a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a> bvh = <span class="keyword">new</span> <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a>(Plane);</div>
+<div class="ttc" id="aclass_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h_html"><div class="ttname"><a href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h.html">DHARTAPI.RayTracing.EmbreeBVH</a></div><div class="ttdoc">A Bounding Volume Hierarchy for the EmbreeRaytracer.</div><div class="ttdef"><b>Definition:</b> <a href="_embree_b_v_h_8cs_source.html#l00030">EmbreeBVH.cs:31</a></div></div>
 </div><!-- fragment --><p >At this point, your start function should match the following code:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> Start()</div>
 <div class="line">{</div>
@@ -191,10 +191,10 @@ Creating a Plane</h2>
 <div class="line">    };</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Construct a meshinfo instance for the plane</span></div>
-<div class="line">    <a class="code hl_class" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a> Plane = <span class="keyword">new</span> <a class="code hl_class" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a>(plane_indices, plane_vertices);</div>
+<div class="line">    <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info.html">MeshInfo</a> Plane = <span class="keyword">new</span> <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info.html">MeshInfo</a>(plane_indices, plane_vertices);</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Generate a BVH from the MeshInfo instance</span></div>
-<div class="line">    <a class="code hl_class" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a> bvh = <span class="keyword">new</span> <a class="code hl_class" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a>(Plane);</div>
+<div class="line">    <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a> bvh = <span class="keyword">new</span> <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a>(Plane);</div>
 <div class="line">}</div>
 </div><!-- fragment --><div class="image">
 <img src="creating_a_plane.png" alt=""/>
@@ -205,9 +205,9 @@ Image in Visual Studio</div></div>
 Casting a Ray</h2>
 <p >We'll put the origin point of the ray at (1,0,1) and cast it in the direction (0,0,-1). This should intersect with the plane we defined earlier at the point (1,0,0). In the start method, just below the line we create the BVH, define an origin point and a direction for the ray.</p>
 <div class="fragment"><div class="line"><span class="comment">// Define origin and direction</span></div>
-<div class="line"><a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> origin = <span class="keyword">new</span> <a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a>(1, 0, 1);</div>
-<div class="line"><a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> direction = <span class="keyword">new</span> <a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a>(0, 0, -1);</div>
-<div class="ttc" id="astruct_human_factors_1_1_vector3_d_html"><div class="ttname"><a href="struct_human_factors_1_1_vector3_d.html">HumanFactors.Vector3D</a></div><div class="ttdoc">A three dimensional vector with built in utility functions.</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00040">CommonTypes.cs:40</a></div></div>
+<div class="line"><a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a> origin = <span class="keyword">new</span> <a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a>(1, 0, 1);</div>
+<div class="line"><a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a> direction = <span class="keyword">new</span> <a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a>(0, 0, -1);</div>
+<div class="ttc" id="astruct_d_h_a_r_t_a_p_i_1_1_vector3_d_html"><div class="ttname"><a href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">DHARTAPI.Vector3D</a></div><div class="ttdoc">A three dimensional vector with built in utility functions.</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00040">CommonTypes.cs:40</a></div></div>
 </div><!-- fragment --><p >Depending on which function you call, the EmbreeRaytracer can return 3 different types of information:</p>
 <ol type="1">
 <li>The coordinates where a ray intersected the mesh.</li>
@@ -216,32 +216,32 @@ Casting a Ray</h2>
 </ol>
 <p >For this guide we will use [IntersectForPoint]() to get the point where the ray intersects the mesh. Starting on line 35 call the EmbreeRayTracer's <b>IntersectForPoint</b> function with the bvh, origin and direction as arguments.</p>
 <div class="fragment"><div class="line"><span class="comment">// Cast the ray, store the hitpoint.</span></div>
-<div class="line"><a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> intersection_point = <a class="code hl_class" href="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html">EmbreeRaytracer</a>.<a class="code hl_function" href="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html#afc149e5c713d0fcce5d142c82fd7e292">IntersectForPoint</a>(bvh, origin, direction);</div>
-<div class="ttc" id="aclass_human_factors_1_1_ray_tracing_1_1_embree_raytracer_html"><div class="ttname"><a href="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html">HumanFactors.RayTracing.EmbreeRaytracer</a></div><div class="ttdoc">Cast rays with Intel's Embree raytracing library.</div><div class="ttdef"><b>Definition:</b> <a href="_embree_ray_tracer_8cs_source.html#l00040">EmbreeRayTracer.cs:41</a></div></div>
-<div class="ttc" id="aclass_human_factors_1_1_ray_tracing_1_1_embree_raytracer_html_afc149e5c713d0fcce5d142c82fd7e292"><div class="ttname"><a href="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html#afc149e5c713d0fcce5d142c82fd7e292">HumanFactors.RayTracing.EmbreeRaytracer.IntersectForPoint</a></div><div class="ttdeci">static Vector3D IntersectForPoint(EmbreeBVH bvh, float x, float y, float z, float dx, float dy, float dz, float max_distance=-1)</div><div class="ttdoc">Cast a single ray, and get a point in return if it intersects any geometry.</div></div>
+<div class="line"><a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a> intersection_point = <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_raytracer.html">EmbreeRaytracer</a>.<a class="code hl_function" href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_raytracer.html#a51936c4b5e5718f4fa2a7696bf7a9108">IntersectForPoint</a>(bvh, origin, direction);</div>
+<div class="ttc" id="aclass_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_raytracer_html"><div class="ttname"><a href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_raytracer.html">DHARTAPI.RayTracing.EmbreeRaytracer</a></div><div class="ttdoc">Cast rays with Intel's Embree raytracing library.</div><div class="ttdef"><b>Definition:</b> <a href="_embree_ray_tracer_8cs_source.html#l00040">EmbreeRayTracer.cs:41</a></div></div>
+<div class="ttc" id="aclass_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_raytracer_html_a51936c4b5e5718f4fa2a7696bf7a9108"><div class="ttname"><a href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_raytracer.html#a51936c4b5e5718f4fa2a7696bf7a9108">DHARTAPI.RayTracing.EmbreeRaytracer.IntersectForPoint</a></div><div class="ttdeci">static Vector3D IntersectForPoint(EmbreeBVH bvh, float x, float y, float z, float dx, float dy, float dz, float max_distance=-1)</div><div class="ttdoc">Cast a single ray, and get a point in return if it intersects any geometry.</div></div>
 </div><!-- fragment --><p >Finally, log the point of intersection to Unity's console using <code>Debug.Log()</code> so we can view the results.</p>
 <div class="fragment"><div class="line"><span class="comment">// Print the x, y, and z components of the intersection point</span></div>
 <div class="line">Debug.Log(</div>
-<div class="line">    <span class="stringliteral">&quot;(&quot;</span> + intersection_point.<a class="code hl_variable" href="struct_human_factors_1_1_vector3_d.html#a1113b06e4bc74c2ef7f4fb35446f2a11">x</a> +</div>
-<div class="line">    <span class="stringliteral">&quot;,&quot;</span> + intersection_point.<a class="code hl_variable" href="struct_human_factors_1_1_vector3_d.html#a99cfb2d4db44be124ade92faa825cdd1">y</a> +</div>
-<div class="line">    <span class="stringliteral">&quot;,&quot;</span> + intersection_point.<a class="code hl_variable" href="struct_human_factors_1_1_vector3_d.html#ac8fb1423e902a5b760b43769bfbf240c">z</a> +</div>
+<div class="line">    <span class="stringliteral">&quot;(&quot;</span> + intersection_point.<a class="code hl_variable" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#a46b34f99709c14b7d8be79cf1b0debbc">x</a> +</div>
+<div class="line">    <span class="stringliteral">&quot;,&quot;</span> + intersection_point.<a class="code hl_variable" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#a15acdf142c31ca74018da12d8516a85f">y</a> +</div>
+<div class="line">    <span class="stringliteral">&quot;,&quot;</span> + intersection_point.<a class="code hl_variable" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#abac3c90f7958d6d98ba3e7c81cfbd6ab">z</a> +</div>
 <div class="line"><span class="stringliteral">&quot;)&quot;</span>);</div>
-<div class="ttc" id="astruct_human_factors_1_1_vector3_d_html_a1113b06e4bc74c2ef7f4fb35446f2a11"><div class="ttname"><a href="struct_human_factors_1_1_vector3_d.html#a1113b06e4bc74c2ef7f4fb35446f2a11">HumanFactors.Vector3D.x</a></div><div class="ttdeci">readonly float x</div><div class="ttdoc">X component of this vector.</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00041">CommonTypes.cs:41</a></div></div>
-<div class="ttc" id="astruct_human_factors_1_1_vector3_d_html_a99cfb2d4db44be124ade92faa825cdd1"><div class="ttname"><a href="struct_human_factors_1_1_vector3_d.html#a99cfb2d4db44be124ade92faa825cdd1">HumanFactors.Vector3D.y</a></div><div class="ttdeci">readonly float y</div><div class="ttdoc">Y component of this vector.</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00042">CommonTypes.cs:42</a></div></div>
-<div class="ttc" id="astruct_human_factors_1_1_vector3_d_html_ac8fb1423e902a5b760b43769bfbf240c"><div class="ttname"><a href="struct_human_factors_1_1_vector3_d.html#ac8fb1423e902a5b760b43769bfbf240c">HumanFactors.Vector3D.z</a></div><div class="ttdeci">readonly float z</div><div class="ttdoc">Z component of this vector.</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00043">CommonTypes.cs:43</a></div></div>
+<div class="ttc" id="astruct_d_h_a_r_t_a_p_i_1_1_vector3_d_html_a15acdf142c31ca74018da12d8516a85f"><div class="ttname"><a href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#a15acdf142c31ca74018da12d8516a85f">DHARTAPI.Vector3D.y</a></div><div class="ttdeci">readonly float y</div><div class="ttdoc">Y component of this vector.</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00042">CommonTypes.cs:42</a></div></div>
+<div class="ttc" id="astruct_d_h_a_r_t_a_p_i_1_1_vector3_d_html_a46b34f99709c14b7d8be79cf1b0debbc"><div class="ttname"><a href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#a46b34f99709c14b7d8be79cf1b0debbc">DHARTAPI.Vector3D.x</a></div><div class="ttdeci">readonly float x</div><div class="ttdoc">X component of this vector.</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00041">CommonTypes.cs:41</a></div></div>
+<div class="ttc" id="astruct_d_h_a_r_t_a_p_i_1_1_vector3_d_html_abac3c90f7958d6d98ba3e7c81cfbd6ab"><div class="ttname"><a href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#abac3c90f7958d6d98ba3e7c81cfbd6ab">DHARTAPI.Vector3D.z</a></div><div class="ttdeci">readonly float z</div><div class="ttdoc">Z component of this vector.</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00043">CommonTypes.cs:43</a></div></div>
 </div><!-- fragment --><p >Here's all of that together:</p>
 <div class="fragment"><div class="line"><span class="comment">// Define origin and direction</span></div>
-<div class="line"><a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> origin = <span class="keyword">new</span> <a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a>(1, 0, 1);</div>
-<div class="line"><a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> direction = <span class="keyword">new</span> <a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a>(0, 0, -1);</div>
+<div class="line"><a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a> origin = <span class="keyword">new</span> <a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a>(1, 0, 1);</div>
+<div class="line"><a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a> direction = <span class="keyword">new</span> <a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a>(0, 0, -1);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Cast the ray, store the hitpoint</span></div>
-<div class="line"><a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> intersection_point = <a class="code hl_class" href="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html">EmbreeRaytracer</a>.<a class="code hl_function" href="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html#afc149e5c713d0fcce5d142c82fd7e292">IntersectForPoint</a>(bvh, origin, direction);</div>
+<div class="line"><a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a> intersection_point = <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_raytracer.html">EmbreeRaytracer</a>.<a class="code hl_function" href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_raytracer.html#a51936c4b5e5718f4fa2a7696bf7a9108">IntersectForPoint</a>(bvh, origin, direction);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Print the x, y, and z components of the intersection_point</span></div>
 <div class="line">Debug.Log(</div>
-<div class="line">    <span class="stringliteral">&quot;(&quot;</span> + intersection_point.<a class="code hl_variable" href="struct_human_factors_1_1_vector3_d.html#a1113b06e4bc74c2ef7f4fb35446f2a11">x</a> +</div>
-<div class="line">    <span class="stringliteral">&quot;,&quot;</span> + intersection_point.<a class="code hl_variable" href="struct_human_factors_1_1_vector3_d.html#a99cfb2d4db44be124ade92faa825cdd1">y</a> +</div>
-<div class="line">    <span class="stringliteral">&quot;,&quot;</span> + intersection_point.<a class="code hl_variable" href="struct_human_factors_1_1_vector3_d.html#ac8fb1423e902a5b760b43769bfbf240c">z</a> +</div>
+<div class="line">    <span class="stringliteral">&quot;(&quot;</span> + intersection_point.<a class="code hl_variable" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#a46b34f99709c14b7d8be79cf1b0debbc">x</a> +</div>
+<div class="line">    <span class="stringliteral">&quot;,&quot;</span> + intersection_point.<a class="code hl_variable" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#a15acdf142c31ca74018da12d8516a85f">y</a> +</div>
+<div class="line">    <span class="stringliteral">&quot;,&quot;</span> + intersection_point.<a class="code hl_variable" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#abac3c90f7958d6d98ba3e7c81cfbd6ab">z</a> +</div>
 <div class="line"><span class="stringliteral">&quot;)&quot;</span>);</div>
 </div><!-- fragment --><div class="image">
 <img src="casting_a_ray.png" alt=""/>
@@ -253,9 +253,9 @@ Wrapping Up</h2>
 <div class="fragment"><div class="line"><span class="keyword">using </span>System.Collections;</div>
 <div class="line"><span class="keyword">using </span>System.Collections.Generic;</div>
 <div class="line"><span class="keyword">using </span>UnityEngine;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_human_factors.html">HumanFactors</a>;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_human_factors_1_1_ray_tracing.html">HumanFactors.RayTracing</a>;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_human_factors_1_1_geometry.html">HumanFactors.Geometry</a>;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i.html">DHARTAPI</a>;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i_1_1_ray_tracing.html">DHARTAPI.RayTracing</a>;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i_1_1_geometry.html">DHARTAPI.Geometry</a>;</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">public</span> <span class="keyword">class </span>HFExampleScript : MonoBehaviour</div>
 <div class="line">{</div>
@@ -275,23 +275,23 @@ Wrapping Up</h2>
 <div class="line">        };</div>
 <div class="line"> </div>
 <div class="line">        <span class="comment">// Construct a meshinfo instance for the plane</span></div>
-<div class="line">        <a class="code hl_class" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a> Plane = <span class="keyword">new</span> <a class="code hl_class" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a>(plane_indices, plane_vertices);</div>
+<div class="line">        <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info.html">MeshInfo</a> Plane = <span class="keyword">new</span> <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info.html">MeshInfo</a>(plane_indices, plane_vertices);</div>
 <div class="line"> </div>
 <div class="line">        <span class="comment">// Generate a BVH from the MeshInfo instance</span></div>
-<div class="line">        <a class="code hl_class" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a> bvh = <span class="keyword">new</span> <a class="code hl_class" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a>(Plane);</div>
+<div class="line">        <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a> bvh = <span class="keyword">new</span> <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a>(Plane);</div>
 <div class="line"> </div>
 <div class="line">        <span class="comment">// Define origin and direction</span></div>
-<div class="line">        <a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> origin = <span class="keyword">new</span> <a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a>(1, 0, 1);</div>
-<div class="line">        <a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> direction = <span class="keyword">new</span> <a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a>(0, 0, -1);</div>
+<div class="line">        <a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a> origin = <span class="keyword">new</span> <a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a>(1, 0, 1);</div>
+<div class="line">        <a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a> direction = <span class="keyword">new</span> <a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a>(0, 0, -1);</div>
 <div class="line"> </div>
 <div class="line">        <span class="comment">// Cast the ray, store the hitpoint</span></div>
-<div class="line">        <a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> intersection_point = <a class="code hl_class" href="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html">EmbreeRaytracer</a>.<a class="code hl_function" href="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html#afc149e5c713d0fcce5d142c82fd7e292">IntersectForPoint</a>(bvh, origin, direction);</div>
+<div class="line">        <a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a> intersection_point = <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_raytracer.html">EmbreeRaytracer</a>.<a class="code hl_function" href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_raytracer.html#a51936c4b5e5718f4fa2a7696bf7a9108">IntersectForPoint</a>(bvh, origin, direction);</div>
 <div class="line"> </div>
 <div class="line">        <span class="comment">// Print the x, y, and z components of the intersection_point</span></div>
 <div class="line">        Debug.Log(</div>
-<div class="line">            <span class="stringliteral">&quot;(&quot;</span> + intersection_point.<a class="code hl_variable" href="struct_human_factors_1_1_vector3_d.html#a1113b06e4bc74c2ef7f4fb35446f2a11">x</a> +</div>
-<div class="line">            <span class="stringliteral">&quot;,&quot;</span> + intersection_point.<a class="code hl_variable" href="struct_human_factors_1_1_vector3_d.html#a99cfb2d4db44be124ade92faa825cdd1">y</a> +</div>
-<div class="line">            <span class="stringliteral">&quot;,&quot;</span> + intersection_point.<a class="code hl_variable" href="struct_human_factors_1_1_vector3_d.html#ac8fb1423e902a5b760b43769bfbf240c">z</a> +</div>
+<div class="line">            <span class="stringliteral">&quot;(&quot;</span> + intersection_point.<a class="code hl_variable" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#a46b34f99709c14b7d8be79cf1b0debbc">x</a> +</div>
+<div class="line">            <span class="stringliteral">&quot;,&quot;</span> + intersection_point.<a class="code hl_variable" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#a15acdf142c31ca74018da12d8516a85f">y</a> +</div>
+<div class="line">            <span class="stringliteral">&quot;,&quot;</span> + intersection_point.<a class="code hl_variable" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#abac3c90f7958d6d98ba3e7c81cfbd6ab">z</a> +</div>
 <div class="line">        <span class="stringliteral">&quot;)&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
@@ -305,7 +305,7 @@ Wrapping Up</h2>
 <div class="image">
 <img src="saved_vs_unsaved.png" alt=""/>
 <div class="caption">
-Add Using HumanFactors</div></div>
+Add Using DHARTAPI</div></div>
     <h1><a class="anchor" id="autotoc_md12"></a>
 Testing</h1>
 <p >Now that we have a usable script, we need to attach it to some game object in order to run it. Let's minimize the Visual Studio window and go back to the Unity Editor.</p>
@@ -346,7 +346,7 @@ Look At Camera In Sidebar</div></div>
 <div class="image">
 <img src="console_show_meshinfo.png" alt=""/>
 <div class="caption">
-Add Using HumanFactors</div></div>
+Add Using DHARTAPI</div></div>
     <p ><em>Figure</em> <b>2.7A</b> <em>Intersection Results in play mode.</em></p>
 <div class="image">
 <img src="ExpectedOutput.png" alt=""/>
@@ -361,7 +361,7 @@ Console Output</div></div>
 <h1><a class="anchor" id="autotoc_md15"></a>
 Conclusion</h1>
 <p >Full project Link: <a href="Tutorial%202%20-%20Unity%20Project.zip">Tutorial 2: Casting a Ray at A Plane</a></p>
-<p >In this tutorial we've successfully created a plane from an array of vertices and triangle indexes, then casted a ray at it, then found the point where the ray and the plane intersected. Through this we've gained some experience using Visual Studio with Unity and became more familiar with the Editor's UI. In the next tutorial we will build upon this experience to cover a core part of the <a class="el" href="namespace_human_factors.html" title="Automated analysis of the built environent">HumanFactors</a> Library: The <a class="el" href="_generating_a_graph.html">Graph Generator</a>. </p>
+<p >In this tutorial we've successfully created a plane from an array of vertices and triangle indexes, then casted a ray at it, then found the point where the ray and the plane intersected. Through this we've gained some experience using Visual Studio with Unity and became more familiar with the Editor's UI. In the next tutorial we will build upon this experience to cover a core part of the <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a> Library: The <a class="el" href="_generating_a_graph.html">Graph Generator</a>. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

@@ -1,4 +1,4 @@
 var _common_rotations_8cs =
 [
-    [ "HumanFactors.Geometry.CommonRotations", "class_human_factors_1_1_geometry_1_1_common_rotations.html", "class_human_factors_1_1_geometry_1_1_common_rotations" ]
+    [ "DHARTAPI.Geometry.CommonRotations", "class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_common_rotations.html", "class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_common_rotations" ]
 ];

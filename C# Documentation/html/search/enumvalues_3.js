@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['db_5fbusy_0',['DB_BUSY',['../namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987fa14c281877943a01a538580a4b7581e71',1,'HumanFactors::Exceptions']]]
+  ['db_5fbusy_0',['DB_BUSY',['../namespace_d_h_a_r_t_a_p_i_1_1_exceptions.html#aea96bf1815d661a7ba498819e43454e7a14c281877943a01a538580a4b7581e71',1,'DHARTAPI::Exceptions']]]
 ];

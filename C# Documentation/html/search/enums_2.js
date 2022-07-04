@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hf_5fstatus_0',['HF_STATUS',['../namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f',1,'HumanFactors::Exceptions']]]
+  ['hf_5fstatus_0',['HF_STATUS',['../namespace_d_h_a_r_t_a_p_i_1_1_exceptions.html#aea96bf1815d661a7ba498819e43454e7',1,'DHARTAPI::Exceptions']]]
 ];

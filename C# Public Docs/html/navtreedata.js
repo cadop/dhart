@@ -34,7 +34,7 @@ var NAVTREE =
       ] ],
       [ "Creating a new project", "_unity_project_setup.html#autotoc_md2", null ],
       [ "Importing the Human Factors Library", "_unity_project_setup.html#autotoc_md3", null ],
-      [ "Verifying Unity can reference HumanFactors", "_unity_project_setup.html#autotoc_md4", null ],
+      [ "Verifying Unity can reference DHARTAPI", "_unity_project_setup.html#autotoc_md4", null ],
       [ "Conclusion", "_unity_project_setup.html#autotoc_md5", null ]
     ] ],
     [ "Using the RayTracer", "_using_the_raytracer.html", [
@@ -140,7 +140,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_generating_a_graph.html",
-"class_human_factors_1_1_spatial_structures_1_1_graph.html#a6b2aeaa562da06bec0d23aaabb2ba74d"
+"class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_graph.html#a818bd069403a09f53dc1d21270bc19ff"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

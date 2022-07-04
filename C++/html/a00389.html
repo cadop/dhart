@@ -95,7 +95,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga0805e80d13b29aeddc35f0bcf3f16a1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load an obj from the given path then rotate it by x,y, and z.  <a href="a00389.html#ga0805e80d13b29aeddc35f0bcf3f16a1a">More...</a><br /></td></tr>
 <tr class="separator:ga0805e80d13b29aeddc35f0bcf3f16a1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6ac447e5805d3d7e65c9083ffa603cfe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00389.html#ga6ac447e5805d3d7e65c9083ffa603cfe">StoreMesh</a> (<a class="el" href="a01285.html">HF::Geometry::MeshInfo</a>&lt; float &gt; **out_info, const int *indices, int num_indices, const float *vertices, int num_vertices, const char *name, int id)</td></tr>
-<tr class="memdesc:ga6ac447e5805d3d7e65c9083ffa603cfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store a mesh in a format usable with HumanFactors.  <a href="a00389.html#ga6ac447e5805d3d7e65c9083ffa603cfe">More...</a><br /></td></tr>
+<tr class="memdesc:ga6ac447e5805d3d7e65c9083ffa603cfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store a mesh in a format usable with DHARTAPI.  <a href="a00389.html#ga6ac447e5805d3d7e65c9083ffa603cfe">More...</a><br /></td></tr>
 <tr class="separator:ga6ac447e5805d3d7e65c9083ffa603cfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga907c8e39b159c8bad22645448bc97f57"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00389.html#ga907c8e39b159c8bad22645448bc97f57">RotateMesh</a> (<a class="el" href="a01285.html">HF::Geometry::MeshInfo</a>&lt; float &gt; *mesh_to_rotate, float xrot, float yrot, float zrot)</td></tr>
 <tr class="memdesc:ga907c8e39b159c8bad22645448bc97f57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate an existing mesh (<a class="el" href="a01285.html">HF::Geometry::MeshInfo</a>)  <a href="a00389.html#ga907c8e39b159c8bad22645448bc97f57">More...</a><br /></td></tr>
@@ -577,7 +577,7 @@ Notes on MeshInfo::PerformRotation</h1>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on return</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="a00389.html#mesh_setup">Mesh setup</a> (how to create a mesh), <a class="el" href="a00389.html#ga6ac447e5805d3d7e65c9083ffa603cfe" title="Store a mesh in a format usable with HumanFactors.">StoreMesh</a> (creating a mesh from arrays), <a class="el" href="a00389.html#mesh_teardown">Mesh teardown</a> (how to destroy a mesh), <a class="el" href="a00389.html#notes_perform_rotation">Notes on MeshInfo::PerformRotation</a> (assertion statement)</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="a00389.html#mesh_setup">Mesh setup</a> (how to create a mesh), <a class="el" href="a00389.html#ga6ac447e5805d3d7e65c9083ffa603cfe" title="Store a mesh in a format usable with DHARTAPI.">StoreMesh</a> (creating a mesh from arrays), <a class="el" href="a00389.html#mesh_teardown">Mesh teardown</a> (how to destroy a mesh), <a class="el" href="a00389.html#notes_perform_rotation">Notes on MeshInfo::PerformRotation</a> (assertion statement)</dd></dl>
 <div class="fragment"><div class="line">        <span class="comment">// Prepare the desired rotation values.</span></div>
 <div class="line">        <span class="comment">// A value of 0.0f means no rotation about the given axis.</span></div>
 <div class="line">        <span class="keyword">const</span> <span class="keywordtype">float</span> x_rot = 90.0f;</div>
@@ -664,7 +664,7 @@ Notes on MeshInfo::PerformRotation</h1>
 
 <p><code>#include &lt;<a class="el" href="a00353.html">Cinterface/objloader_C.h</a>&gt;</code></p>
 
-<p>Store a mesh in a format usable with HumanFactors. </p>
+<p>Store a mesh in a format usable with DHARTAPI. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">out_info</td><td>Output parameter to contain the new instance of meshinfo</td></tr>
@@ -732,7 +732,7 @@ Notes on MeshInfo::PerformRotation</h1>
 <div class="line">        <span class="keywordflow">else</span> {</div>
 <div class="line">            std::cout &lt;&lt; <span class="stringliteral">&quot;The mesh was stored properly at address &quot;</span> &lt;&lt; info &lt;&lt; <span class="stringliteral">&quot;.&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">        }</div>
-<div class="ttc" id="aa00389_html_ga6ac447e5805d3d7e65c9083ffa603cfe"><div class="ttname"><a href="a00389.html#ga6ac447e5805d3d7e65c9083ffa603cfe">StoreMesh</a></div><div class="ttdeci">C_INTERFACE StoreMesh(MeshInfo&lt; float &gt; **out_info, const int *indices, int num_indices, const float *vertices, int num_vertices, const char *name, int id)</div><div class="ttdoc">Store a mesh in a format usable with HumanFactors.</div><div class="ttdef"><b>Definition:</b> <a href="a00350_source.html#l00059">objloader_C.cpp:59</a></div></div>
+<div class="ttc" id="aa00389_html_ga6ac447e5805d3d7e65c9083ffa603cfe"><div class="ttname"><a href="a00389.html#ga6ac447e5805d3d7e65c9083ffa603cfe">StoreMesh</a></div><div class="ttdeci">C_INTERFACE StoreMesh(MeshInfo&lt; float &gt; **out_info, const int *indices, int num_indices, const float *vertices, int num_vertices, const char *name, int id)</div><div class="ttdoc">Store a mesh in a format usable with DHARTAPI.</div><div class="ttdef"><b>Definition:</b> <a href="a00350_source.html#l00059">objloader_C.cpp:59</a></div></div>
 </div><!-- fragment --><p ><code>&gt;&gt;&gt; The mesh was stored properly at address 0000029C6317BEB0.</code><br  />
 </p>
 

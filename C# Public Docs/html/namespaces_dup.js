@@ -1,4 +1,4 @@
 var namespaces_dup =
 [
-    [ "HumanFactors", "namespace_human_factors.html", "namespace_human_factors" ]
+    [ "DHARTAPI", "namespace_d_h_a_r_t_a_p_i.html", "namespace_d_h_a_r_t_a_p_i" ]
 ];

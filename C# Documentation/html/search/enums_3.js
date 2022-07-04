@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['viewaggregatetype_0',['ViewAggregateType',['../namespace_human_factors_1_1_view_analysis.html#ae24b8f5d9783a270e51183ff2eca765c',1,'HumanFactors::ViewAnalysis']]]
+  ['viewaggregatetype_0',['ViewAggregateType',['../namespace_d_h_a_r_t_a_p_i_1_1_view_analysis.html#a0c377126f38d722e30efe3609ee8391e',1,'DHARTAPI::ViewAnalysis']]]
 ];

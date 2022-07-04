@@ -1,0 +1,7 @@
+var namespace_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays =
+[
+    [ "ManagedCharPtrArray", "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_managed_char_ptr_array.html", "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_managed_char_ptr_array" ],
+    [ "ManagedFloatArray", "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_managed_float_array.html", "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_managed_float_array" ],
+    [ "UnmanagedFloatArray2D", "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_float_array2_d.html", "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_float_array2_d" ],
+    [ "UnmanagedIntArray2D", "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_int_array2_d.html", "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_int_array2_d" ]
+];

@@ -104,7 +104,7 @@ $(document).ready(function(){initNavTree('_generating_a_graph.html',''); initRes
 <li class="level1"><a href="#autotoc_md27">Conclusion</a></li>
 </ul>
 </div>
-<div class="textblock"><p ><a class="anchor" id="md_src_Csharp_docs_markdown_3_graph_generator"></a> Previous Tutorial: <a class="el" href="_unity_project_setup.html">Project Setup</a> | Next Tutorial: <a class="el" href="_mesh_from_unity.html">Passing a Mesh From Unity to HumanFactors</a></p>
+<div class="textblock"><p ><a class="anchor" id="md_src_Csharp_docs_markdown_3_graph_generator"></a> Previous Tutorial: <a class="el" href="_unity_project_setup.html">Project Setup</a> | Next Tutorial: <a class="el" href="_mesh_from_unity.html">Passing a Mesh From Unity to DHARTAPI</a></p>
 <h1><a class="anchor" id="autotoc_md16"></a>
 Intro</h1>
 <p >This tutorial picks up from where <a class="el" href="_unity_project_setup.html">Tutorial 1: Unity Project Setup</a> ended. If you are just beginning here, then you can download the Unity project from the bottom of tutorial 1.</p>
@@ -116,7 +116,7 @@ Intro</h1>
 </ol>
 <h2><a class="anchor" id="autotoc_md17"></a>
 Conceptual Overview</h2>
-<p >To put it simply, the <b>Graph Generator</b> maps out "accessible" space on a model from a given starting point. As the name implies, this map of the space is stored as a series of nodes and edges in a <b>Graph</b>. Each node represents a point in space that a human can occupy, and each edge between nodes indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool for analyzing space, since the graph or nodes it outputs can be used as input to all the analysis methods offered by <a class="el" href="namespace_human_factors.html" title="Automated analysis of the built environent">HumanFactors</a>. This allows the user to go straight from modifying a model or scene, to analyzing it with minimal effort.</p>
+<p >To put it simply, the <b>Graph Generator</b> maps out "accessible" space on a model from a given starting point. As the name implies, this map of the space is stored as a series of nodes and edges in a <b>Graph</b>. Each node represents a point in space that a human can occupy, and each edge between nodes indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool for analyzing space, since the graph or nodes it outputs can be used as input to all the analysis methods offered by <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a>. This allows the user to go straight from modifying a model or scene, to analyzing it with minimal effort.</p>
 <h1><a class="anchor" id="autotoc_md18"></a>
 Simple Graph Generation</h1>
 <p >For now, we will begin with the minimum required settings to run the Graph Generator then work our way up to examples that make use of the optional settings. To generate a graph at minimum, the following arguments are required:</p>
@@ -139,16 +139,16 @@ Using Declarations</h2>
 Using Declarations</div></div>
     <p ><em>Figure</em> <b>3.2</b> <em>Using declarations for this tutorial</em></p>
 <p >To get started, we will once again set up our using declarations to import the functionality we need, starting on line 3 of our blank script.</p>
-<div class="fragment"><div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_human_factors.html">HumanFactors</a>;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_human_factors_1_1_geometry.html">HumanFactors.Geometry</a>;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_human_factors_1_1_spatial_structures.html">HumanFactors.SpatialStructures</a>;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_human_factors_1_1_graph_generator.html">HumanFactors.GraphGenerator</a>;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_human_factors_1_1_ray_tracing.html">HumanFactors.RayTracing</a>;</div>
-<div class="ttc" id="anamespace_human_factors_1_1_geometry_html"><div class="ttname"><a href="namespace_human_factors_1_1_geometry.html">HumanFactors.Geometry</a></div><div class="ttdoc">Manipulate and load geometry from disk.</div><div class="ttdef"><b>Definition:</b> <a href="_common_rotations_8cs_source.html#l00003">CommonRotations.cs:4</a></div></div>
-<div class="ttc" id="anamespace_human_factors_1_1_graph_generator_html"><div class="ttname"><a href="namespace_human_factors_1_1_graph_generator.html">HumanFactors.GraphGenerator</a></div><div class="ttdoc">Generate a graph of accessible space from a given start point.</div><div class="ttdef"><b>Definition:</b> <a href="_graph_generator_8cs_source.html#l00035">GraphGenerator.cs:36</a></div></div>
-<div class="ttc" id="anamespace_human_factors_1_1_ray_tracing_html"><div class="ttname"><a href="namespace_human_factors_1_1_ray_tracing.html">HumanFactors.RayTracing</a></div><div class="ttdoc">Cast rays to determine if and where they intersect geometry.</div><div class="ttdef"><b>Definition:</b> <a href="_embree_b_v_h_8cs_source.html#l00006">EmbreeBVH.cs:7</a></div></div>
-<div class="ttc" id="anamespace_human_factors_1_1_spatial_structures_html"><div class="ttname"><a href="namespace_human_factors_1_1_spatial_structures.html">HumanFactors.SpatialStructures</a></div><div class="ttdoc">Standard fundamental data structures for representing space used throughout HumanFactors.</div><div class="ttdef"><b>Definition:</b> <a href="_graph_8cs_source.html#l00019">Graph.cs:20</a></div></div>
-<div class="ttc" id="anamespace_human_factors_html"><div class="ttname"><a href="namespace_human_factors.html">HumanFactors</a></div><div class="ttdoc">Automated analysis of the built environent</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00008">CommonTypes.cs:9</a></div></div>
+<div class="fragment"><div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i.html">DHARTAPI</a>;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i_1_1_geometry.html">DHARTAPI.Geometry</a>;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i_1_1_spatial_structures.html">DHARTAPI.SpatialStructures</a>;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i_1_1_graph_generator.html">DHARTAPI.GraphGenerator</a>;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i_1_1_ray_tracing.html">DHARTAPI.RayTracing</a>;</div>
+<div class="ttc" id="anamespace_d_h_a_r_t_a_p_i_1_1_geometry_html"><div class="ttname"><a href="namespace_d_h_a_r_t_a_p_i_1_1_geometry.html">DHARTAPI.Geometry</a></div><div class="ttdoc">Manipulate and load geometry from disk.</div><div class="ttdef"><b>Definition:</b> <a href="_common_rotations_8cs_source.html#l00003">CommonRotations.cs:4</a></div></div>
+<div class="ttc" id="anamespace_d_h_a_r_t_a_p_i_1_1_graph_generator_html"><div class="ttname"><a href="namespace_d_h_a_r_t_a_p_i_1_1_graph_generator.html">DHARTAPI.GraphGenerator</a></div><div class="ttdoc">Generate a graph of accessible space from a given start point.</div><div class="ttdef"><b>Definition:</b> <a href="_graph_generator_8cs_source.html#l00035">GraphGenerator.cs:36</a></div></div>
+<div class="ttc" id="anamespace_d_h_a_r_t_a_p_i_1_1_ray_tracing_html"><div class="ttname"><a href="namespace_d_h_a_r_t_a_p_i_1_1_ray_tracing.html">DHARTAPI.RayTracing</a></div><div class="ttdoc">Cast rays to determine if and where they intersect geometry.</div><div class="ttdef"><b>Definition:</b> <a href="_embree_b_v_h_8cs_source.html#l00006">EmbreeBVH.cs:7</a></div></div>
+<div class="ttc" id="anamespace_d_h_a_r_t_a_p_i_1_1_spatial_structures_html"><div class="ttname"><a href="namespace_d_h_a_r_t_a_p_i_1_1_spatial_structures.html">DHARTAPI.SpatialStructures</a></div><div class="ttdoc">Standard fundamental data structures for representing space used throughout DHARTAPI.</div><div class="ttdef"><b>Definition:</b> <a href="_graph_8cs_source.html#l00019">Graph.cs:20</a></div></div>
+<div class="ttc" id="anamespace_d_h_a_r_t_a_p_i_html"><div class="ttname"><a href="namespace_d_h_a_r_t_a_p_i.html">DHARTAPI</a></div><div class="ttdoc">Automated analysis of the built environent</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00008">CommonTypes.cs:9</a></div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md20"></a>
 Creating the Plane</h2>
 <p >Internally, the graph uses the <em>EmbreeRayTracer</em> which requires a BVH, so we can follow the process as the Project 2A to create a plane, then generate a BVH from it. If you want a more in-depth explanation of this code, please look at the previous tutorial if you want more information about this code.</p>
@@ -165,13 +165,13 @@ Creating the Plane</h2>
 <div class="line">   2, 3, 0</div>
 <div class="line">};</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Send them to HumanFactors</span></div>
-<div class="line"><a class="code hl_class" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a> Plane = <span class="keyword">new</span> <a class="code hl_class" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a>(plane_indices, plane_vertices);</div>
+<div class="line"><span class="comment">// Send them to DHARTAPI</span></div>
+<div class="line"><a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info.html">MeshInfo</a> Plane = <span class="keyword">new</span> <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info.html">MeshInfo</a>(plane_indices, plane_vertices);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Generate a BVH for the RayTracer</span></div>
-<div class="line"><a class="code hl_class" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a> bvh = <span class="keyword">new</span> <a class="code hl_class" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a>(Plane);</div>
-<div class="ttc" id="aclass_human_factors_1_1_geometry_1_1_mesh_info_html"><div class="ttname"><a href="class_human_factors_1_1_geometry_1_1_mesh_info.html">HumanFactors.Geometry.MeshInfo</a></div><div class="ttdoc">A collection of vertices and indices representing geometry.</div><div class="ttdef"><b>Definition:</b> <a href="_mesh_info_8cs_source.html#l00049">MeshInfo.cs:50</a></div></div>
-<div class="ttc" id="aclass_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_html"><div class="ttname"><a href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html">HumanFactors.RayTracing.EmbreeBVH</a></div><div class="ttdoc">A Bounding Volume Hierarchy for the EmbreeRaytracer.</div><div class="ttdef"><b>Definition:</b> <a href="_embree_b_v_h_8cs_source.html#l00030">EmbreeBVH.cs:31</a></div></div>
+<div class="line"><a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a> bvh = <span class="keyword">new</span> <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a>(Plane);</div>
+<div class="ttc" id="aclass_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info_html"><div class="ttname"><a href="class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info.html">DHARTAPI.Geometry.MeshInfo</a></div><div class="ttdoc">A collection of vertices and indices representing geometry.</div><div class="ttdef"><b>Definition:</b> <a href="_mesh_info_8cs_source.html#l00049">MeshInfo.cs:50</a></div></div>
+<div class="ttc" id="aclass_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h_html"><div class="ttname"><a href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h.html">DHARTAPI.RayTracing.EmbreeBVH</a></div><div class="ttdoc">A Bounding Volume Hierarchy for the EmbreeRaytracer.</div><div class="ttdef"><b>Definition:</b> <a href="_embree_b_v_h_8cs_source.html#l00030">EmbreeBVH.cs:31</a></div></div>
 </div><!-- fragment --><div class="image">
 <img src="creating_the_plane.PNG" alt=""/>
 <div class="caption">
@@ -180,23 +180,23 @@ Picture of the start method at this point</div></div>
 Generating the Graph</h2>
 <p >Now that we have a BVH, let's generate a graph on it. In the code below, we will define a starting point for the graph, then the spacing between each node.</p>
 <p >We'll place our start point 1 meter above the origin of the scene (0,0,1). Starting directly at the origin, (0,0,0), would put the start point inside of the plane we're using for the ground causing the initial ground check to fail.</p>
-<div class="fragment"><div class="line"><a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> start_point = <span class="keyword">new</span> <a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a>(0, 0, 1);</div>
-<div class="ttc" id="astruct_human_factors_1_1_vector3_d_html"><div class="ttname"><a href="struct_human_factors_1_1_vector3_d.html">HumanFactors.Vector3D</a></div><div class="ttdoc">A three dimensional vector with built in utility functions.</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00040">CommonTypes.cs:40</a></div></div>
+<div class="fragment"><div class="line"><a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a> start_point = <span class="keyword">new</span> <a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a>(0, 0, 1);</div>
+<div class="ttc" id="astruct_d_h_a_r_t_a_p_i_1_1_vector3_d_html"><div class="ttname"><a href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">DHARTAPI.Vector3D</a></div><div class="ttdoc">A three dimensional vector with built in utility functions.</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00040">CommonTypes.cs:40</a></div></div>
 </div><!-- fragment --><p >We'll use a spacing of one meter in each direction, so each node in our graph will be at maximum one meter apart.</p>
-<div class="fragment"><div class="line"><a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> spacing = <span class="keyword">new</span> <a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a>(1, 1, 1);</div>
+<div class="fragment"><div class="line"><a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a> spacing = <span class="keyword">new</span> <a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a>(1, 1, 1);</div>
 </div><!-- fragment --><p >Finally, we will call the GraphGenerator with these arguments.</p>
 <div class="fragment"><div class="line"><span class="comment">// Generate the Graph</span></div>
-<div class="line"><a class="code hl_class" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a> G = <a class="code hl_class" href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html">GraphGenerator</a>.<a class="code hl_function" href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html#a58f72952b259ac4f00c210ae10b1fbbf">GenerateGraph</a>(bvh, start_point, spacing);</div>
-<div class="ttc" id="aclass_human_factors_1_1_graph_generator_1_1_graph_generator_html"><div class="ttname"><a href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html">HumanFactors.GraphGenerator.GraphGenerator</a></div><div class="ttdoc">Generate a graph of accessible space on a mesh.</div><div class="ttdef"><b>Definition:</b> <a href="_graph_generator_8cs_source.html#l00044">GraphGenerator.cs:45</a></div></div>
-<div class="ttc" id="aclass_human_factors_1_1_graph_generator_1_1_graph_generator_html_a58f72952b259ac4f00c210ae10b1fbbf"><div class="ttname"><a href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html#a58f72952b259ac4f00c210ae10b1fbbf">HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph</a></div><div class="ttdeci">static Graph GenerateGraph(EmbreeBVH bvh, Vector3D start_point, Vector3D spacing, int max_nodes=-1, float up_step=0.2f, float up_slope=20, float down_step=0.2f, float down_slope=20, int max_step_connections=1, int core_count=-1, int[] obstacle_ids=null, int[] walkable_ids=null)</div><div class="ttdoc">Generate a graph of accessible space with the given settings. If no graph can be generated,...</div><div class="ttdef"><b>Definition:</b> <a href="_graph_generator_8cs_source.html#l00097">GraphGenerator.cs:97</a></div></div>
-<div class="ttc" id="aclass_human_factors_1_1_spatial_structures_1_1_graph_html"><div class="ttname"><a href="class_human_factors_1_1_spatial_structures_1_1_graph.html">HumanFactors.SpatialStructures.Graph</a></div><div class="ttdoc">A graph representing connections between points in space.</div><div class="ttdef"><b>Definition:</b> <a href="_graph_8cs_source.html#l00111">Graph.cs:112</a></div></div>
+<div class="line"><a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_graph.html">Graph</a> G = <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_graph_generator_1_1_graph_generator.html">GraphGenerator</a>.<a class="code hl_function" href="class_d_h_a_r_t_a_p_i_1_1_graph_generator_1_1_graph_generator.html#a14e2129d14f732fc1da329f2d9a0faba">GenerateGraph</a>(bvh, start_point, spacing);</div>
+<div class="ttc" id="aclass_d_h_a_r_t_a_p_i_1_1_graph_generator_1_1_graph_generator_html"><div class="ttname"><a href="class_d_h_a_r_t_a_p_i_1_1_graph_generator_1_1_graph_generator.html">DHARTAPI.GraphGenerator.GraphGenerator</a></div><div class="ttdoc">Generate a graph of accessible space on a mesh.</div><div class="ttdef"><b>Definition:</b> <a href="_graph_generator_8cs_source.html#l00044">GraphGenerator.cs:45</a></div></div>
+<div class="ttc" id="aclass_d_h_a_r_t_a_p_i_1_1_graph_generator_1_1_graph_generator_html_a14e2129d14f732fc1da329f2d9a0faba"><div class="ttname"><a href="class_d_h_a_r_t_a_p_i_1_1_graph_generator_1_1_graph_generator.html#a14e2129d14f732fc1da329f2d9a0faba">DHARTAPI.GraphGenerator.GraphGenerator.GenerateGraph</a></div><div class="ttdeci">static Graph GenerateGraph(EmbreeBVH bvh, Vector3D start_point, Vector3D spacing, int max_nodes=-1, float up_step=0.2f, float up_slope=20, float down_step=0.2f, float down_slope=20, int max_step_connections=1, int core_count=-1, int[] obstacle_ids=null, int[] walkable_ids=null)</div><div class="ttdoc">Generate a graph of accessible space with the given settings. If no graph can be generated,...</div><div class="ttdef"><b>Definition:</b> <a href="_graph_generator_8cs_source.html#l00097">GraphGenerator.cs:97</a></div></div>
+<div class="ttc" id="aclass_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_graph_html"><div class="ttname"><a href="class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_graph.html">DHARTAPI.SpatialStructures.Graph</a></div><div class="ttdoc">A graph representing connections between points in space.</div><div class="ttdef"><b>Definition:</b> <a href="_graph_8cs_source.html#l00111">Graph.cs:112</a></div></div>
 </div><!-- fragment --><p >All of that together is:</p>
 <div class="fragment"><div class="line"><span class="comment">// Set Start Point and Spacing</span></div>
-<div class="line"><a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> start_point = <span class="keyword">new</span> <a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a>(0, 0, 1);</div>
-<div class="line"><a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> spacing = <span class="keyword">new</span> <a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a>(1, 1, 1);</div>
+<div class="line"><a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a> start_point = <span class="keyword">new</span> <a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a>(0, 0, 1);</div>
+<div class="line"><a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a> spacing = <span class="keyword">new</span> <a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a>(1, 1, 1);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Generate the graph</span></div>
-<div class="line"><a class="code hl_class" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a> G = <a class="code hl_class" href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html">GraphGenerator</a>.<a class="code hl_function" href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html#a58f72952b259ac4f00c210ae10b1fbbf">GenerateGraph</a>(bvh, start_point, spacing);</div>
+<div class="line"><a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_graph.html">Graph</a> G = <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_graph_generator_1_1_graph_generator.html">GraphGenerator</a>.<a class="code hl_function" href="class_d_h_a_r_t_a_p_i_1_1_graph_generator_1_1_graph_generator.html#a14e2129d14f732fc1da329f2d9a0faba">GenerateGraph</a>(bvh, start_point, spacing);</div>
 </div><!-- fragment --><div class="image">
 <img src="generating_the_graph.PNG" alt=""/>
 <div class="caption">
@@ -206,10 +206,10 @@ Retrieving a list of nodes</h2>
 <p >Our graph G now contains a graph of the accessible space on the plane generated using the settings we passed as arguments. To verify that our results are correct, we will get a list of nodes from the graph, then print them to the unity console.</p>
 <p >Enter the following code at the bottom of the start method:</p>
 <div class="fragment"><div class="line"><span class="comment">// Get a list of nodes from the graph and print them.</span></div>
-<div class="line"><a class="code hl_class" href="class_human_factors_1_1_spatial_structures_1_1_node_list.html">NodeList</a> nodes = G.<a class="code hl_function" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a6b2aeaa562da06bec0d23aaabb2ba74d">getNodes</a>();</div>
+<div class="line"><a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_node_list.html">NodeList</a> nodes = G.<a class="code hl_function" href="class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_graph.html#ae223d1a997bf7a74df671c91f3d86f3a">getNodes</a>();</div>
 <div class="line">Debug.Log(nodes);</div>
-<div class="ttc" id="aclass_human_factors_1_1_spatial_structures_1_1_graph_html_a6b2aeaa562da06bec0d23aaabb2ba74d"><div class="ttname"><a href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a6b2aeaa562da06bec0d23aaabb2ba74d">HumanFactors.SpatialStructures.Graph.getNodes</a></div><div class="ttdeci">NodeList getNodes()</div><div class="ttdoc">Get an array containing the graph's current nodes.</div></div>
-<div class="ttc" id="aclass_human_factors_1_1_spatial_structures_1_1_node_list_html"><div class="ttname"><a href="class_human_factors_1_1_spatial_structures_1_1_node_list.html">HumanFactors.SpatialStructures.NodeList</a></div><div class="ttdoc">An array of Nodes directly from a graph in unmanaged memory.</div><div class="ttdef"><b>Definition:</b> <a href="_node_8cs_source.html#l00055">Node.cs:56</a></div></div>
+<div class="ttc" id="aclass_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_graph_html_ae223d1a997bf7a74df671c91f3d86f3a"><div class="ttname"><a href="class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_graph.html#ae223d1a997bf7a74df671c91f3d86f3a">DHARTAPI.SpatialStructures.Graph.getNodes</a></div><div class="ttdeci">NodeList getNodes()</div><div class="ttdoc">Get an array containing the graph's current nodes.</div></div>
+<div class="ttc" id="aclass_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_node_list_html"><div class="ttname"><a href="class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_node_list.html">DHARTAPI.SpatialStructures.NodeList</a></div><div class="ttdoc">An array of Nodes directly from a graph in unmanaged memory.</div><div class="ttdef"><b>Definition:</b> <a href="_node_8cs_source.html#l00055">Node.cs:56</a></div></div>
 </div><!-- fragment --><div class="image">
 <img src="print_nodes.png" alt=""/>
 <div class="caption">
@@ -220,11 +220,11 @@ Save and Test</h2>
 <div class="fragment"><div class="line"><span class="keyword">using </span>System.Collections;</div>
 <div class="line"><span class="keyword">using </span>System.Collections.Generic;</div>
 <div class="line"><span class="keyword">using </span>UnityEngine;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_human_factors.html">HumanFactors</a>;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_human_factors_1_1_spatial_structures.html">HumanFactors.SpatialStructures</a>;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_human_factors_1_1_graph_generator.html">HumanFactors.GraphGenerator</a>;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_human_factors_1_1_ray_tracing.html">HumanFactors.RayTracing</a>;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_human_factors_1_1_geometry.html">HumanFactors.Geometry</a>;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i.html">DHARTAPI</a>;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i_1_1_spatial_structures.html">DHARTAPI.SpatialStructures</a>;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i_1_1_graph_generator.html">DHARTAPI.GraphGenerator</a>;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i_1_1_ray_tracing.html">DHARTAPI.RayTracing</a>;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i_1_1_geometry.html">DHARTAPI.Geometry</a>;</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">public</span> <span class="keyword">class </span>HFExampleScript : MonoBehaviour</div>
 <div class="line">{</div>
@@ -243,21 +243,21 @@ Save and Test</h2>
 <div class="line">                2, 3, 0 </div>
 <div class="line">        };</div>
 <div class="line"> </div>
-<div class="line">        <span class="comment">// Send them to HumanFactors</span></div>
-<div class="line">        <a class="code hl_class" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a> Plane = <span class="keyword">new</span> <a class="code hl_class" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a>(plane_indices, plane_vertices);</div>
+<div class="line">        <span class="comment">// Send them to DHARTAPI</span></div>
+<div class="line">        <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info.html">MeshInfo</a> Plane = <span class="keyword">new</span> <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info.html">MeshInfo</a>(plane_indices, plane_vertices);</div>
 <div class="line"> </div>
 <div class="line">        <span class="comment">// Generate a BVH for the RayTracer</span></div>
-<div class="line">        <a class="code hl_class" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a> bvh = <span class="keyword">new</span> <a class="code hl_class" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a>(Plane);</div>
+<div class="line">        <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a> bvh = <span class="keyword">new</span> <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h.html">EmbreeBVH</a>(Plane);</div>
 <div class="line"> </div>
 <div class="line">        <span class="comment">// Set Options for the Graph Generator</span></div>
-<div class="line">        <a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> start_point = <span class="keyword">new</span> <a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a>(0, 0, 1);</div>
-<div class="line">        <a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> spacing = <span class="keyword">new</span> <a class="code hl_struct" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a>(1, 1, 1);</div>
+<div class="line">        <a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a> start_point = <span class="keyword">new</span> <a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a>(0, 0, 1);</div>
+<div class="line">        <a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a> spacing = <span class="keyword">new</span> <a class="code hl_struct" href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">Vector3D</a>(1, 1, 1);</div>
 <div class="line"> </div>
 <div class="line">        <span class="comment">// Generate the Graph</span></div>
-<div class="line">        <a class="code hl_class" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a> G = <a class="code hl_class" href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html">GraphGenerator</a>.<a class="code hl_function" href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html#a58f72952b259ac4f00c210ae10b1fbbf">GenerateGraph</a>(bvh, start_point, spacing);</div>
+<div class="line">        <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_graph.html">Graph</a> G = <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_graph_generator_1_1_graph_generator.html">GraphGenerator</a>.<a class="code hl_function" href="class_d_h_a_r_t_a_p_i_1_1_graph_generator_1_1_graph_generator.html#a14e2129d14f732fc1da329f2d9a0faba">GenerateGraph</a>(bvh, start_point, spacing);</div>
 <div class="line"> </div>
 <div class="line">        <span class="comment">// Get a list of nodes from the graph and print them.</span></div>
-<div class="line">        <a class="code hl_class" href="class_human_factors_1_1_spatial_structures_1_1_node_list.html">NodeList</a> nodes = G.<a class="code hl_function" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a6b2aeaa562da06bec0d23aaabb2ba74d">getNodes</a>();</div>
+<div class="line">        <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_node_list.html">NodeList</a> nodes = G.<a class="code hl_function" href="class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_graph.html#ae223d1a997bf7a74df671c91f3d86f3a">getNodes</a>();</div>
 <div class="line">        Debug.Log(nodes);</div>
 <div class="line">    }</div>
 <div class="line"> </div>

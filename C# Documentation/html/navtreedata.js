@@ -34,7 +34,7 @@ var NAVTREE =
       ] ],
       [ "Creating a new project", "_unity_project_setup.html#autotoc_md2", null ],
       [ "Importing the Human Factors Library", "_unity_project_setup.html#autotoc_md3", null ],
-      [ "Verifying Unity can reference HumanFactors", "_unity_project_setup.html#autotoc_md4", null ],
+      [ "Verifying Unity can reference DHARTAPI", "_unity_project_setup.html#autotoc_md4", null ],
       [ "Conclusion", "_unity_project_setup.html#autotoc_md5", null ]
     ] ],
     [ "Using the RayTracer", "_using_the_raytracer.html", [
@@ -147,8 +147,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_common_rotations_8cs.html",
-"class_human_factors_1_1_graph_generator_1_1_native_methods.html#a49f8767832baf6a3e8c907cf7ebcc0fa",
-"class_human_factors_1_1_spatial_structures_1_1_graph.html#a24d42bc60412118b8eab54d137cabf36",
+"class_d_h_a_r_t_a_p_i_1_1_graph_generator_1_1_native_methods.html#a5b951e30233e6d0708dc81fc618a27c8",
+"class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_graph.html#a30e35d3250c2410f817d55009a70543b",
 "hierarchy.html"
 ];
 
