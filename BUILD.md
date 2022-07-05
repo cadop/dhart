@@ -1,0 +1,75 @@
+
+### Prelim
+
+This guide will describe how to retrieve the contents of this repository,
+and build from source.
+
+Please note: DHART is currently designed to run on a PC running the Windows 10
+operating system.
+Also note: This guide is a 'work-in-progress' and subject to change.
+
+Git for Windows:
+If you do not already have Git for Windows on your machine,
+please download and install Git for Windows at https://gitforwindows.org/
+Microsoft Visual Studio 2019:
+https://visualstudio.microsoft.com/downloads/
+You may use the Community edition.
+CMake (Windows win64-x64)
+https://cmake.org/download/
+
+
+Once the software above is installed on your machine,
+you may continue with the following:
+
+0. Open Git Bash.
+Git Bash (MINGW64) begins at ~, your home directory.
+You may remain here, or navigate to a directory of your choice.
+In the next step, you will clone the repository.
+
+1. Type git clone git@github.com/cadop/dhart.git at the prompt
+and hit ENTER. The repository will then be cloned to your local machine.
+
+
+### Using CMAKE Commands
+
+Currently we directly call the configuration arguments when using cmake. 
+
+Python Debug
+
+1. `cmake ./src/ -G"Visual Studio 16 2019" -DCMAKE_GENERATOR_PLATFORM="x64"  -DCMAKE_CONFIGURATION_TYPES="Debug" -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DDHARTAPI_Config="All" -DDHARTAPI_EnableTests="False" -DDHARTAPI_EnablePython="True" -DDHARTAPI_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1` 
+
+1. `cmake --build . --config Debug`
+
+Python Release
+
+1. `cmake ./src/  -G"Visual Studio 16 2019"  -DCMAKE_GENERATOR_PLATFORM="x64"   -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DDHARTAPI_Config="All" -DDHARTAPI_EnableTests="False" -DCMAKE_CONFIGURATION_TYPES="Release" -DDHARTAPI_EnablePython="True" -DDHARTAPI_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1`
+
+1. `cmake --build . --config Release`
+
+Then 
+1. `cmake --install .`
+
+1. cd to build/Python and run `pip install .`
+
+### Using Visual Studio
+
+1. Open Microsoft Visual Studio 2019. After seeing the splash/welcome screen, please click the button that reads Open a local folder.
+
+
+1. When the Browse window appears, navigate to the folder
+(the repository that you had cloned) on your local machine.
+Then, navigate to `src/`. Click the Select folder button to confirm.
+
+1. You may see a banner that asks to generate or configure the cmake project.  Click generate. 
+
+1. If the Solution Explorer view is not already open, you may open by
+navigating to View > Solution Explorer, or alternatively, you can also use the Ctrl + Alt + L shortcut to reveal Solution Explorer. Here, you can examine the sources imported by Visual Studio.
+
+1. We are now ready to build.
+CMake is used to aid in the compilation process.
+There are a few provided configuration files. Specifically, debug and release, as well as C# and Python specific ones.  Select the one you are interested in and navigate to Build > Build All. 
+
+1. Once it has successfully built, you need to install.  Going back to the same build menu dropdown, click on install.  This will save the files to a build directory. 
+
+
+You can find the build files in .\dhart\src\out\build\x64-Debug
