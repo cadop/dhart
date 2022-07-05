@@ -10,10 +10,10 @@
 
 namespace HF {
 
-	/*! \brief Contains standard fundamental data structures for representing space used throughout HumanFactors. 
+	/*! \brief Contains standard fundamental data structures for representing space used throughout DHARTAPI. 
 	
 	\remarks
-	The datatypes in the SpatialStructures Namespace are used throughout the HumanFactors library. 
+	The datatypes in the SpatialStructures Namespace are used throughout the DHARTAPI library. 
 	For example, the HF::GraphGenerator and HF::VisibilityGraph both
 	produce a Graph	as output, allowing for the code to manage the Graph's internal CSR to be centralized
 	in a single location.
@@ -21,7 +21,7 @@ namespace HF {
 	namespace SpatialStructures {
 
 		/*!
-			\brief Minimum value that can be represented in humanfactors.
+			\brief Minimum value that can be represented in DHART_API.
 			
 			\details
 			All rounding operations in HF::SpatialStructures will use this constant

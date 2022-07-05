@@ -1,8 +1,8 @@
-using HumanFactors.NativeUtils;
+using DHARTAPI.NativeUtils;
 using System;
 using System.CodeDom;
 
-namespace HumanFactors.Pathfinding
+namespace DHARTAPI.Pathfinding
 {
 	/*! 
         \brief A ID of a Node in a Path and the cost to it's next element.

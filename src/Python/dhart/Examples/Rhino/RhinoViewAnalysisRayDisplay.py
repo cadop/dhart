@@ -31,7 +31,7 @@ def SetupDisplay():
     # display.Enabled = False
     return display
 
-json_path = "H:\\HumanMetrics\\Codebase\\HumanFactors\\dhart\\dhart\\Examples\\view_analysis_directions.json"
+json_path = ".\\dhart\\dhart\\Examples\\view_analysis_directions.json"
 push_off = 5
 display = SetupDisplay()
 

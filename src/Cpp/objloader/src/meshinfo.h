@@ -282,7 +282,7 @@ namespace HF::Geometry {
 			
 			\exception HF::Exceptions::InvalidOBJ in_vertices did not contain a valid set of triangles.
 
-			\todo Change std::exception to HumanFactors::InvalidOBJ. 
+			\todo Change std::exception to DHARTAPI::InvalidOBJ. 
 			\code
 				// be sure to #include "meshinfo.h", and #include <vector>
 

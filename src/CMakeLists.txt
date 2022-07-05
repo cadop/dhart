@@ -34,13 +34,13 @@ set(CSHARP_DEPENDENCY_BINARIES
 set(HF_SOURCES)
 
 
-project ("humanfactors" VERSION "0.0.1")
-set(project_name "HumanFactors")
+project ("dhart" VERSION "0.0.1")
+set(project_name "DHARTAPI")
 
 
 # Configuration options
 set_property(
-    CACHE HumanFactors_Config PROPERTY
+    CACHE DHARTAPI_Config PROPERTY
     STRINGS 
         All
         RayTracer
@@ -51,38 +51,38 @@ set_property(
 )
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "/EHsc /MP")
-option(HumanFactors_EnableTests "Install unit tests to the bin directory" ON)
-option(HumanFactors_EnableCSharp "Include C# Interface" ON)
-option(HumanFactors_EnablePython "Include Python Interface" ON)
-option(HumanFactors_BuildCSharpTests "Enable to build C# test projects" OFF)
-set(HumanFactors_InstallTitle "" CACHE STRING "Installed package will be written to release/<InstallTitle>/. An empty string will follow default behavior.")
-set(HumanFactors_Config "GraphGenerator" CACHE STRING "What projects to build")
+option(DHARTAPI_EnableTests "Install unit tests to the bin directory" ON)
+option(DHARTAPI_EnableCSharp "Include C# Interface" ON)
+option(DHARTAPI_EnablePython "Include Python Interface" ON)
+option(DHARTAPI_BuildCSharpTests "Enable to build C# test projects" OFF)
+set(DHARTAPI_InstallTitle "" CACHE STRING "Installed package will be written to release/<InstallTitle>/. An empty string will follow default behavior.")
+set(DHARTAPI_Config "GraphGenerator" CACHE STRING "What projects to build")
 set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}\\external")
 set (ENABLE_EXPORTS ON)
 
-if (NOT "${HumanFactors_InstallTitle}" STREQUAL "")
-    set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/release/${HumanFactors_InstallTitle})
+if (NOT "${DHARTAPI_InstallTitle}" STREQUAL "")
+    set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/release/${DHARTAPI_InstallTitle})
 endif()
 
 # Change install path if specified
 
-#if (NOT HumanFactors_UseDefaultInstallPath)
-#	if (HumanFactors_EnablePython) 
+#if (NOT DHARTAPI_UseDefaultInstallPath)
+#	if (DHARTAPI_EnablePython) 
 #		set(LANGUAGE_SUPPORT_STRING ${LANGUAGE_SUPPORT_STRING}Python_)
 #	endif()
-#	if (HumanFactors_EnableCSharp) 
+#	if (DHARTAPI_EnableCSharp) 
 #		set(LANGUAGE_SUPPORT_STRING ${LANGUAGE_SUPPORT_STRING}CSharp_) 
 #	endif()
 #
-#	set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/release/${LANGUAGE_SUPPORT_STRING}${HumanFactors_Config})
+#	set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/release/${LANGUAGE_SUPPORT_STRING}${DHARTAPI_Config})
 #	message(${CMAKE_INSTALL_PREFIX})
 #endif()
 
 # Setup
-add_library(HumanFactors SHARED)
+add_library(DHARTAPI SHARED)
 
 # These files are always needed
-target_include_directories(	HumanFactors PRIVATE ${C_INTERFACE_DIR}  ${CMAKE_CURRENT_LIST_DIR})
+target_include_directories(	DHARTAPI PRIVATE ${C_INTERFACE_DIR}  ${CMAKE_CURRENT_LIST_DIR})
 add_subdirectory(${C_PACKAGE_DIR}/exceptions)
 add_subdirectory(external)
 
@@ -126,9 +126,9 @@ set(ROOT_FILES # Files to be placed in the root of the project
         ${PYTHON_PACKAGE_DIR}/README.md
 )
 
-# Change linked targets based on HumanFactors_Config
-message([STATUS] ${HumanFactors_Config} " Selected as the current HumanFactors_Configuration")
-if(${HumanFactors_Config} STREQUAL "All")
+# Change linked targets based on DHARTAPI_Config
+message([STATUS] ${DHARTAPI_Config} " Selected as the current DHARTAPI_Configuration")
+if(${DHARTAPI_Config} STREQUAL "All")
     message([STATUS] "Generating all packages")
     add_subdirectory(${C_PACKAGE_DIR}/raytracer)
     add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
@@ -136,7 +136,7 @@ if(${HumanFactors_Config} STREQUAL "All")
     add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
     add_subdirectory(${C_PACKAGE_DIR}/pathfinding)
     target_link_libraries(
-        HumanFactors PRIVATE 
+        DHARTAPI PRIVATE 
             EmbreeRayTracer
             OBJLoader
             SpatialStructures	
@@ -173,13 +173,13 @@ if(${HumanFactors_Config} STREQUAL "All")
             ${PYTHON_PACKAGE_DIR}/dhart/graphgenerator
     )
 
-elseif(${HumanFactors_Config} STREQUAL "RayTracer")
+elseif(${DHARTAPI_Config} STREQUAL "RayTracer")
     message([STATUS] "Building  raytracer")
     add_subdirectory(${C_PACKAGE_DIR}/raytracer)
     add_subdirectory(${C_PACKAGE_DIR}/objloader)
 
     target_link_libraries(
-        HumanFactors 
+        DHARTAPI 
         PRIVATE 
             EmbreeRayTracer
             OBJLoader
@@ -197,7 +197,7 @@ elseif(${HumanFactors_Config} STREQUAL "RayTracer")
             ${PYTHON_PACKAGE_DIR}/dhart/raytracer
     )
 
-elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
+elseif(${DHARTAPI_Config} STREQUAL "GraphGenerator")
     message([STATUS] "Building  graph generator")
     add_subdirectory(${C_PACKAGE_DIR}/raytracer)
     add_subdirectory(${C_PACKAGE_DIR}/objloader)
@@ -205,7 +205,7 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
     add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
 
     target_link_libraries(
-        HumanFactors 
+        DHARTAPI 
         PRIVATE
             EmbreeRayTracer
             OBJLoader
@@ -232,7 +232,7 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
             ${PYTHON_PACKAGE_DIR}/dhart/graphgenerator
     )
 
-    elseif(${HumanFactors_Config} STREQUAL "ViewAnalysis")
+    elseif(${DHARTAPI_Config} STREQUAL "ViewAnalysis")
         message([STATUS] "Building  ViewAnalysis")
         add_subdirectory(${C_PACKAGE_DIR}/raytracer)
         add_subdirectory(${C_PACKAGE_DIR}/objloader)
@@ -240,7 +240,7 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
         add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
 
         target_link_libraries(
-            HumanFactors 
+            DHARTAPI 
             PRIVATE
                 EmbreeRayTracer
                 OBJLoader
@@ -266,7 +266,7 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
                 ${PYTHON_PACKAGE_DIR}/dhart/viewanalysis
         )
     
-    elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
+    elseif(${DHARTAPI_Config} STREQUAL "VisibilityGraph")
         message([STATUS] "Building Visibilitygraph")
         add_subdirectory(${C_PACKAGE_DIR}/raytracer)
         add_subdirectory(${C_PACKAGE_DIR}/objloader)
@@ -274,7 +274,7 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
         add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
 
         target_link_libraries(
-            HumanFactors 
+            DHARTAPI 
             PRIVATE
                 EmbreeRayTracer
                 OBJLoader
@@ -301,12 +301,12 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
                 ${PYTHON_PACKAGE_DIR}/dhart/VisibilityGraph
         )
         
-    elseif(${HumanFactors_Config} STREQUAL "Pathfinder")
+    elseif(${DHARTAPI_Config} STREQUAL "Pathfinder")
 
         add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
         add_subdirectory(${C_PACKAGE_DIR}/pathfinding)
         target_link_libraries(
-            HumanFactors 
+            DHARTAPI 
             PRIVATE
                 SpatialStructures
                 Pathfinder
@@ -325,11 +325,11 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
         )
     
 else()
-    message(FATAL_ERROR "That is not a valid configuration ${HumanFactors_Config}")
+    message(FATAL_ERROR "That is not a valid configuration ${DHARTAPI_Config}")
 endif()
 
-# Add sources to HumanFactors 
-target_sources(HumanFactors PRIVATE ${HF_SOURCES})
+# Add sources to DHARTAPI 
+target_sources(DHARTAPI PRIVATE ${HF_SOURCES})
 
 
 # /$$$$$$$$                   /$$             
@@ -341,10 +341,10 @@ target_sources(HumanFactors PRIVATE ${HF_SOURCES})
 #   | $$|  $$$$$$$ /$$$$$$$/ |  $$$$//$$$$$$$/
 #   |__/ \_______/|_______/   \___/ |_______/ 
                                             
-if(HumanFactors_EnableTests)
+if(DHARTAPI_EnableTests)
     enable_testing()
     include(GoogleTest)
-    # Download and unpack googletest at HumanFactors_Configure time
+    # Download and unpack googletest at DHARTAPI_Configure time
     configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
     execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
       RESULT_VARIABLE result
@@ -381,7 +381,7 @@ if(HumanFactors_EnableTests)
 
     target_include_directories(HFUnitTests PRIVATE ${C_INTERFACE_DIR})
 
-    if(${HumanFactors_Config} STREQUAL "All")
+    if(${DHARTAPI_Config} STREQUAL "All")
         message([STATUS] "Building all tests")
         target_link_libraries(
             HFUnitTests
@@ -421,7 +421,7 @@ if(HumanFactors_EnableTests)
                 #	${C_TEST_DRIVER_DIR}/visibility_graph_cinterface.cpp
                 #	${C_TEST_DRIVER_DIR}/spatialstructures_C_cinterface.cpp
         )
-    elseif(${HumanFactors_Config} STREQUAL "RayTracer")
+    elseif(${DHARTAPI_Config} STREQUAL "RayTracer")
         target_sources(
             HFUnitTests
             PRIVATE
@@ -443,7 +443,7 @@ if(HumanFactors_EnableTests)
                 HFExceptions 
                 EmbreeRayTracer
             )
-    elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
+    elseif(${DHARTAPI_Config} STREQUAL "GraphGenerator")
         target_link_libraries(
             HFUnitTests
             PRIVATE
@@ -464,7 +464,7 @@ if(HumanFactors_EnableTests)
                 ${C_TEST_DRIVER_DIR}/AnalysisMethods.cpp
                 ${C_TEST_DRIVER_DIR}/performance_testing.h
         )
-    elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
+    elseif(${DHARTAPI_Config} STREQUAL "VisibilityGraph")
         target_link_libraries(
             HFUnitTests
             PRIVATE
@@ -485,7 +485,7 @@ if(HumanFactors_EnableTests)
                 ${C_TEST_DRIVER_DIR}/VisibilityGraph.cpp
                 ${C_TEST_DRIVER_DIR}/performance_testing.h
         )
-    elseif(${HumanFactors_Config} STREQUAL "ViewAnalysis")
+    elseif(${DHARTAPI_Config} STREQUAL "ViewAnalysis")
         target_link_libraries(
             HFUnitTests
             PRIVATE
@@ -506,7 +506,7 @@ if(HumanFactors_EnableTests)
                 ${C_TEST_DRIVER_DIR}/ViewAnalysis.cpp
                 ${C_TEST_DRIVER_DIR}/performance_testing.h
         )
-    elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
+    elseif(${DHARTAPI_Config} STREQUAL "VisibilityGraph")
         target_link_libraries(
             HFUnitTests
             PRIVATE
@@ -527,7 +527,7 @@ if(HumanFactors_EnableTests)
                 ${C_TEST_DRIVER_DIR}/VisibilityGraph.cpp
                 ${C_TEST_DRIVER_DIR}/performance_testing.h
         )
-    elseif(${HumanFactors_Config} STREQUAL "Pathfinder")
+    elseif(${DHARTAPI_Config} STREQUAL "Pathfinder")
         target_link_libraries(
             HFUnitTests
             PRIVATE
@@ -590,12 +590,12 @@ install(TARGETS ${project_name}
 install(FILES ${DEPENDENCY_BINARIES} DESTINATION bin)
 
 # Install python if the option is set to true
-if(HumanFactors_EnablePython)
+if(DHARTAPI_EnablePython)
     message("Installing Python!")
     install(DIRECTORY ${PYTHON_MODULES} DESTINATION dhart)
     install(FILES ${PYTHON_FILES} DESTINATION dhart)
     install(FILES ${DEPENDENCY_BINARIES} DESTINATION dhart/bin)
-    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll" DESTINATION dhart/bin)
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/DHARTAPI.dll" DESTINATION dhart/bin)
 
     install (FILES ${RELEASE_DEPENDENCY_BINARIES} CONFIGURATIONS Release DESTINATION dhart/bin)
     install (FILES ${DEBUG_DEPENDENCY_BINARIES} CONFIGURATIONS Debug DESTINATION dhart/bin)
@@ -627,30 +627,30 @@ install(EXPORT ${project_name}Targets
         lib/cmake/${project_name}
 )
 
-if (HumanFactors_EnableCSharp)
+if (DHARTAPI_EnableCSharp)
     add_subdirectory(${CSHARP_DIR})
 
-    add_custom_command(TARGET HumanFactors POST_BUILD
+    add_custom_command(TARGET DHARTAPI POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
             "${CMAKE_SOURCE_DIR}/external/Embree/bin/tbb.dll" 
             "${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/tbb.dll"
     )
 
-    add_custom_command(TARGET HumanFactors POST_BUILD
+    add_custom_command(TARGET DHARTAPI POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
             "${CMAKE_SOURCE_DIR}/external/Embree/bin/embree3.dll" 
             "${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/embree3.dll"
     )
 
     # The following commands copy resources necessary for C# to perform its unittests
-    add_custom_command(TARGET HumanFactors POST_BUILD
+    add_custom_command(TARGET DHARTAPI POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll"
-            "${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/HumanFactors.dll"
+            "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/DHARTAPI.dll"
+            "${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/DHARTAPI.dll"
     )
 
     # Copy example models to the build directory for C#
-    add_custom_command(TARGET HumanFactors POST_BUILD
+    add_custom_command(TARGET DHARTAPI POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
             "${CMAKE_CURRENT_SOURCE_DIR}/${PYTHON_PACKAGE_DIR}/dhart/Example Models"
             "${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/ExampleModels"

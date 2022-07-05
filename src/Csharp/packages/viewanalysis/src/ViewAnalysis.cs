@@ -1,7 +1,7 @@
-﻿using HumanFactors.Exceptions;
-using HumanFactors.NativeUtils;
-using HumanFactors.NativeUtils.CommonNativeArrays;
-using HumanFactors.RayTracing;
+﻿using DHARTAPI.Exceptions;
+using DHARTAPI.NativeUtils;
+using DHARTAPI.NativeUtils.CommonNativeArrays;
+using DHARTAPI.RayTracing;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,9 +18,9 @@ using System.Runtime.InteropServices;
     within a certain angle above and below their eye level.
 
     \see ViewAnalysis for all ViewAnalysis functions.
-    \see HumanFactors.RayTracing for details on raycasting. 
+    \see DHARTAPI.RayTracing for details on raycasting. 
 */
-namespace HumanFactors.ViewAnalysis
+namespace DHARTAPI.ViewAnalysis
 {
 	/*! 
         \brief The type of aggregation method to use for ViewAnalysis.ViewAnalysisAggregate
@@ -46,7 +46,7 @@ namespace HumanFactors.ViewAnalysis
 	/*!
         \brief Functions for analyzing the view of an observer in an environment at human scale.
         
-        \note All of these functions internally use a raytracer, so a HumanFactors.RayTracing.EmbreeBVH is required.
+        \note All of these functions internally use a raytracer, so a DHARTAPI.RayTracing.EmbreeBVH is required.
     */
 	public static class ViewAnalysis
 	{

@@ -5,7 +5,7 @@ using System.Runtime;
 /// <summary>
 /// Automated analysis of the built environent
 /// </summary>
-namespace HumanFactors
+namespace DHARTAPI
 {
 
     /// <summary>
@@ -28,7 +28,7 @@ namespace HumanFactors
         \brief A three dimensional vector with built in utility functions. 
          
         \details 
-        The Vector3D is the fundamental type of HumanFactors for handling position 
+        The Vector3D is the fundamental type of DHARTAPI for handling position 
         and direction values. 
 
         \remarks

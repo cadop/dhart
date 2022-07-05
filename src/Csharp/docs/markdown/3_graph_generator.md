@@ -3,7 +3,7 @@
 
 Previous Tutorial: [Project Setup](@ref UnityProjectSetup)
 |
-Next Tutorial: [Passing a Mesh From Unity to HumanFactors](@ref MeshFromUnity)
+Next Tutorial: [Passing a Mesh From Unity to DHARTAPI](@ref MeshFromUnity)
 
 [TOC]
 
@@ -19,7 +19,7 @@ In this tutorial we will cover the following:
 
 ### Conceptual Overview
 
-To put it simply, the **Graph Generator** maps out "accessible" space on a model from a given starting point. As the name implies, this map of the space is stored as a series of nodes and edges in a **Graph**. Each node represents a point in space that a human can occupy, and each edge between nodes indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool for analyzing space, since the graph or nodes it outputs can be used as input to all the analysis methods offered by HumanFactors. This allows the user to go straight from modifying a model or scene, to analyzing it with minimal effort.
+To put it simply, the **Graph Generator** maps out "accessible" space on a model from a given starting point. As the name implies, this map of the space is stored as a series of nodes and edges in a **Graph**. Each node represents a point in space that a human can occupy, and each edge between nodes indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool for analyzing space, since the graph or nodes it outputs can be used as input to all the analysis methods offered by DHARTAPI. This allows the user to go straight from modifying a model or scene, to analyzing it with minimal effort.
 
 ## Simple Graph Generation
 
@@ -44,11 +44,11 @@ To begin: open the blank HFExample Script that we created in the project setup b
 To get started, we will once again set up our using declarations to import the functionality we need, starting on line 3 of our blank script. 
 
 ```{.cs}
-using HumanFactors;
-using HumanFactors.Geometry;
-using HumanFactors.SpatialStructures;
-using HumanFactors.GraphGenerator;
-using HumanFactors.RayTracing;
+using DHARTAPI;
+using DHARTAPI.Geometry;
+using DHARTAPI.SpatialStructures;
+using DHARTAPI.GraphGenerator;
+using DHARTAPI.RayTracing;
 ```
 
 ### Creating the Plane
@@ -70,7 +70,7 @@ Add the following code in the body of the Start method on line 13:
            2, 3, 0
         };
 
-        // Send them to HumanFactors
+        // Send them to DHARTAPI
         MeshInfo Plane = new MeshInfo(plane_indices, plane_vertices);
 
         // Generate a BVH for the RayTracer
@@ -137,11 +137,11 @@ Here is the full script we've created from this demo. Make sure yours matches it
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HumanFactors;
-using HumanFactors.SpatialStructures;
-using HumanFactors.GraphGenerator;
-using HumanFactors.RayTracing;
-using HumanFactors.Geometry;
+using DHARTAPI;
+using DHARTAPI.SpatialStructures;
+using DHARTAPI.GraphGenerator;
+using DHARTAPI.RayTracing;
+using DHARTAPI.Geometry;
 
 public class HFExampleScript : MonoBehaviour
 {
@@ -160,7 +160,7 @@ public class HFExampleScript : MonoBehaviour
                 2, 3, 0 
         };
 
-        // Send them to HumanFactors
+        // Send them to DHARTAPI
         MeshInfo Plane = new MeshInfo(plane_indices, plane_vertices);
 
         // Generate a BVH for the RayTracer
@@ -212,7 +212,7 @@ Once the console tab is open, click on the message containing the graph generato
 
 > **Note:**  this is not the full list of nodes. The list has been truncated due to the size of the output. To view every node, you must print them in a loop.
 
-Confirm your results match, then switch back to the previous view by clicking on the Project tab circled in red in Figure 3.5. After that, exit playmode by clicking on the blue play button at the top of the screen. If you've reached this point, then you have successfully generated a Graph using Human Factors and have completed this part of the tutorial. Next we will cover cases where the graph generator will be unable to generate a graph, and how to handle if a graph could not be generated.
+Confirm your results match, then switch back to the previous view by clicking on the Project tab circled in red in Figure 3.5. After that, exit playmode by clicking on the blue play button at the top of the screen. If you've reached this point, then you have successfully generated a Graph using DHART and have completed this part of the tutorial. Next we will cover cases where the graph generator will be unable to generate a graph, and how to handle if a graph could not be generated.
 
 ## Handling cases where a Graph could not be generated
 

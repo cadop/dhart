@@ -1,15 +1,15 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using HumanFactors.SpatialStructures;
+using DHARTAPI.SpatialStructures;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using HumanFactors.Exceptions;
+using DHARTAPI.Exceptions;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System;
 using System.Security.Cryptography;
 
-namespace HumanFactors.Tests.SpatialStructures
+namespace DHARTAPI.Tests.SpatialStructures
 {
     [TestClass]
     public class TestGraph
@@ -251,7 +251,7 @@ namespace HumanFactors.Tests.SpatialStructures
             // This must be throw a logicerror if uncompressed
             // And trying to read edges
             try { g.GetCost(0, 1); }
-            catch (HumanFactors.Exceptions.LogicError) { }
+            catch (DHARTAPI.Exceptions.LogicError) { }
 
             // Compress to the CSR 
             g.CompressToCSR();

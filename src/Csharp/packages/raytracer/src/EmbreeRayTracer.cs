@@ -1,5 +1,5 @@
-﻿using HumanFactors.Exceptions;
-using HumanFactors.NativeUtils;
+﻿using DHARTAPI.Exceptions;
+using DHARTAPI.NativeUtils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,7 +25,7 @@ using System.Runtime.Remoting.Messaging;
     \see EmbreeRaytracer for an implementation of a raytracer using Intel's Embree Library as a backend.
  */
 
-namespace HumanFactors.RayTracing
+namespace DHARTAPI.RayTracing
 {
 	/*!
         \brief Cast rays with Intel's Embree raytracing library.
@@ -33,7 +33,7 @@ namespace HumanFactors.RayTracing
         \remarks
         All functions in this class first require the creation of an EmbreeBVH with valid mesh geometry.
 
-        \see Geometry.MeshInfo for details on converting a mesh to a format that HumanFactors can interpret
+        \see Geometry.MeshInfo for details on converting a mesh to a format that DHARTAPI can interpret
         \see EmbreeBVH for details on generating a BVH from geometry.
     */
 

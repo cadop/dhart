@@ -3,14 +3,25 @@
 
 Welcome to DHART:a C++ package with interfaces to Python, C, and C# for  Design, Humans, Analysis, and RoboTics.
 
-There are a few components to the package, but the main focus is in providing fast ray-casting interfaces for python and C# for a variety of analysis and evaluation techniques.  Generally, you should be able to build a grid-like structure of the floors for a 3D model, calculate shortest paths by distance and custom metrics, and use these tools inside of a variety of programs such as Unity, Rhino, Revit, and more. 
+There are a few components to the package, but the main focus is in providing fast ray-casting interfaces for python and C# for a variety of analysis and evaluation techniques.  Generally, you should be able to build a grid-like structure of the floors for a 3D model, calculate shortest paths by distance/visibility/energy and custom metrics, and use these tools inside of a variety of programs such as Unity, Rhino, and more. 
 
 We have extensive documentation on the API, and welcome new contributions and bug fixes. Please make sure to take a look at the contributing guide.  
 
-Currently it is only available on Windows OS. We happily would accept contributors to help expand to Linux. 
+![Featured Image](https://github.com/cadop/dhart/blob/main/featured_ex.JPG?raw=true)
 
-Features
---------
+### Limitations
+
+- Currently it is only available on Windows OS. (We happily would accept contributors to help expand to Linux. )
+- Integration with Rhino is currently limited to viewing analysis results through `json` files. 
+
+### Coming Soon
+
+- Rhino and Grasshopper Plugin
+- Additional documentation for how to simulate LIDAR in python
+- Dedicated Releases for each language
+- Revit Plugin
+
+## Features
 
 - Python, C, C#, C++ interface
 - Extract connected grid-based graphs from 3d models
@@ -19,20 +30,17 @@ Features
 - Easily generate visibility graphs and analyze locations of environment
 - Calculate view scores, percentage of view, and points of interest
 - Uses Embree raytracer for fast raycasting
+- Has switchable backend to use nanoRT for raycasting with double precision
 - Demos and instructions for integrating with Rhino 3D and Unity
 
+## Credits
 
-Credits
--------
+This repository contains work that was supported in part by the U.S. Army Combat Capabilities Development Command (CCDC) Armaments Center and the U.S. Army ManTech Office under Contract Delivery Order W15QKN19F0002 - Advanced Development of Asset Protection Technologies (ADAPT).
 
-
-This repository contains work that was supported in part by the U.S.
-Army Combat Capabilities Development Command (CCDC) Armaments
-Center and the U.S. Army ManTech Office under Contract Delivery
-Order W15QKN19F0002 - Advanced Development of Asset Protection
-Technologies (ADAPT).
+Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the Army Contracting Command - New Jersey.
 
 If you find this repo useful, please cite using the following bibtex
+
 ```bibtex
 @article{schwartz2021human,
   title={Human centric accessibility graph for environment analysis},
@@ -44,8 +52,6 @@ If you find this repo useful, please cite using the following bibtex
   publisher={Elsevier}
 }
 ```
-
-There were dozens of contributors to this project over the years.  It has been led by Mathew Schwartz (NJIT) with a large part of the development by Drew Balletto. 
 
 
 Example Usage
@@ -95,7 +101,7 @@ print(f"Does the ray connect? {does_occlude}")
 
 which would output
 
-```python
+```
 Hit point: (0.0, 0.0, 0.0)
 distance is 2.0, meshid is 0
 Does the ray connect? True
@@ -109,90 +115,21 @@ Installing
 ----------
 
 - Requires Windows 10
+- Tested on Python 3.8 +
 
+For Python you can use
 
-We supply dll's to try and make the installation and linking process as easy as possible. 
+`pip install dhart`
 
-Depending on your goal, you may want to download the Python or the C# release. Each one has a different process. 
+- However, if you would like to use Python with Rhino Grasshopper, you will need to follow the install instructions in the Python Docs. 
 
-When visiting the documentation page, click on Python to follow installation guide for running in a python environment or as a Python Grasshopper node for Rhino.  Click on the C# documentation for a guide on how to use the project with Unity. 
+For C# you can download from the Releases page. 
+- Of course, you can always clone this repo and build the project yourself. 
+
+We supply `.dll`'s to try and make the installation and linking process as easy as possible. 
 
 
 Building from Source
 --------------------
 
-### Prelim
-
-This guide will describe how to retrieve the contents of this repository,
-and build from source.
-
-Please note: DHART is currently designed to run on a PC running the Windows 10
-operating system.
-Also note: This guide is a 'work-in-progress' and subject to change.
-
-Git for Windows:
-If you do not already have Git for Windows on your machine,
-please download and install Git for Windows at https://gitforwindows.org/
-Microsoft Visual Studio 2019:
-https://visualstudio.microsoft.com/downloads/
-You may use the Community edition.
-CMake (Windows win64-x64)
-https://cmake.org/download/
-
-
-Once the software above is installed on your machine,
-you may continue with the following:
-
-0. Open Git Bash.
-Git Bash (MINGW64) begins at ~, your home directory.
-You may remain here, or navigate to a directory of your choice.
-In the next step, you will clone the Analysis repository.
-
-1. Type git clone git@github.com/cadop/dhart.git at the prompt
-and hit ENTER. The Analysis repository will then be cloned to your local machine.
-
-
-### Using CMAKE Commands
-
-Currently we directly call the configuration arguments when using cmake. 
-
-Python Debug
-
-1. `cmake ./src/ -G"Visual Studio 16 2019" -DCMAKE_GENERATOR_PLATFORM="x64"  -DCMAKE_CONFIGURATION_TYPES="Debug" -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DHumanFactors_Config="All" -DHumanFactors_EnableTests="False" -DHumanFactors_EnablePython="True" -DHumanFactors_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1` 
-
-1. `cmake --build . --config Debug`
-
-Python Release
-
-1. `cmake ./src/  -G"Visual Studio 16 2019"  -DCMAKE_GENERATOR_PLATFORM="x64"   -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DHumanFactors_Config="All" -DHumanFactors_EnableTests="False" -DCMAKE_CONFIGURATION_TYPES="Release" -DHumanFactors_EnablePython="True" -DHumanFactors_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1`
-
-1. `cmake --build . --config Release`
-
-1. `cmake --install .`
-
-1. cd to build/Python and run `pip install .`
-
-### Using Visual Studio
-
-
-
-1. Open Microsoft Visual Studio 2019. After seeing the splash/welcome screen, please click the button that reads Open a local folder.
-
-
-1. When the Browse window appears, navigate to the folder
-(the repository that you had cloned) on your local machine.
-Then, navigate to `src/`. Click the Select folder button to confirm.
-
-1. You may see a banner that asks to generate or configure the cmake project.  Click generate. 
-
-1. If the Solution Explorer view is not already open, you may open by
-navigating to View > Solution Explorer, or alternatively, you can also use the Ctrl + Alt + L shortcut to reveal Solution Explorer. Here, you can examine the sources imported by Visual Studio.
-
-1. We are now ready to build Analysis.
-CMake is used to aid in the compilation process.
-There are a few provided configuration files. Specifically, debug and release, as well as C# and Python specific ones.  Select the one you are interested in and navigate to Build > Build All. 
-
-1. Once it has successfully built, you need to install.  Going back to the same build menu dropdown, click on install.  This will save the files to a build directory. 
-
-
-You can find the build files in .\dhart\src\out\build\x64-Debug
+You can use cmake on the commandline or Visual Studio, follow the instructions in `BUILD.md` to get started.

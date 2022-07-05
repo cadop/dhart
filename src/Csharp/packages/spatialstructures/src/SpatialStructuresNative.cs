@@ -1,5 +1,5 @@
-﻿using HumanFactors.Exceptions;
-using HumanFactors.NativeUtils;
+﻿using DHARTAPI.Exceptions;
+using DHARTAPI.NativeUtils;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -8,7 +8,7 @@ using System.Runtime.Serialization.Formatters;
 using System.Diagnostics;
 using System.Collections;
 
-namespace HumanFactors.SpatialStructures
+namespace DHARTAPI.SpatialStructures
 {
 	/*! 
         \brief Contains info necessary to reconstruct or access a CSR.

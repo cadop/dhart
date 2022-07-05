@@ -12,7 +12,7 @@
 #include <stdexcept>
 
 /*!
-	\brief Custom exceptions and error codes used interally by HumanFactors.
+	\brief Custom exceptions and error codes used interally by DHARTAPI.
 
 	\remarks
 	These were mostly created as needed for the CInterface. If a certain error code needs to be returned,
@@ -21,7 +21,7 @@
 */
 namespace HF::Exceptions{
 	/*! 
-		\brief A set of error codes standard throughout every HumanFactors codebase.
+		\brief A set of error codes standard throughout every DHARTAPI codebase.
 
 		\remarks 
 		Consider adding new error codes if the specific code you require can't be

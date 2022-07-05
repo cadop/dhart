@@ -1,10 +1,10 @@
-using HumanFactors.GraphGenerator;
-using HumanFactors.SpatialStructures;
-using HumanFactors.Geometry;
-using HumanFactors.RayTracing;
-using HumanFactors.Pathfinding;
+using DHARTAPI.GraphGenerator;
+using DHARTAPI.SpatialStructures;
+using DHARTAPI.Geometry;
+using DHARTAPI.RayTracing;
+using DHARTAPI.Pathfinding;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using HumanFactors;
+using DHARTAPI;
 using System.Diagnostics;
 using System;
 using System.Text.RegularExpressions;
@@ -45,7 +45,7 @@ namespace Humanfctors.Examples
 			int max_step_connections = 1;
 
 			// Generate a graph
-			var graph = HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph(
+			var graph = DHARTAPI.GraphGenerator.GraphGenerator.GenerateGraph(
 				bvh,
 				start_point,
 				spacing,
