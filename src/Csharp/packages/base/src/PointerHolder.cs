@@ -26,7 +26,7 @@ using System.Security.Policy;
 
     \endinternal
  */
-namespace HumanFactors.NativeUtils
+namespace DHARTAPI.NativeUtils
 {
 	/*! 
         \brief An object that holds a pointer to unmanaged memory or some other resource that must be freed.

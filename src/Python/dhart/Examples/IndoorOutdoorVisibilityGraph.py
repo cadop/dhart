@@ -66,7 +66,7 @@ def CreateGraph(bvh, ray_count, height, start_point, spacing, max_nodes):
 
 def GenerateVisibilityGraph(points, height=1.7):
     global json_dict
-    print(f"Firing {len(points) * len(points)} rays for Visibility Graph")
+    print(f"Casting {len(points) * len(points)} rays for Visibility Graph")
     VG = VisibilityGraphUndirectedAllToAll(bvh, points, height)
     
     print("Aggregating.")
@@ -85,7 +85,7 @@ def GenerateVisibilityGraph(points, height=1.7):
 
 def GenerateGroupedVisibilityGraph(group_a, group_b, height=1.7, directed =False):
     global json_dict
-    print(f"Firing {len(group_a) * len(group_b)} rays for Visibility Graph")
+    print(f"Casting {len(group_a) * len(group_b)} rays for Visibility Graph")
     VG = VisibilityGraphGroupToGroup(bvh, group_a, group_b, height)
     if (not VG):
         print("No visibility graph could be generated!")

@@ -640,7 +640,7 @@ TEST(_pathFinding, InsertAllToAllPathsIntoArray) {
 }
 
 /* This appears to always corrupt the heap when deallocating paths
-   due to differing compiler options between google test and humanfactors.
+   due to differing compiler options between google test and DHART_API.
 TEST(_pathFinding, InsertPathsIntoArray) {
 	// be sure to #include "path_finder.h", #include "boost_graph.h", and #include "graph.h"
 

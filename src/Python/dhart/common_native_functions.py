@@ -7,8 +7,8 @@ from dhart.utils import *
 
 # This is used to check if an object is a number
 
-# This is the name of the humanfactors DLL
-dllname = "HumanFactors.dll"
+# This is the name of the DHART_API DLL
+dllname = "DHARTAPI.dll"
 
 HFPython: Union[None, CDLL] = None  # The C++ DLL containing all functionality we need
 

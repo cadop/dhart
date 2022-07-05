@@ -1,5 +1,5 @@
 
-# Setting Up a Unity Project for Human Factors {#UnityProjectSetup}
+# Setting Up a Unity Project for DHART {#UnityProjectSetup}
 
 Next Tutorial: [Using The Raytracer](@ref UsingTheRaytracer) OR [Generating A Graph](@ref GeneratingAGraph)
 
@@ -10,17 +10,17 @@ Next Tutorial: [Using The Raytracer](@ref UsingTheRaytracer) OR [Generating A Gr
 In this guide we will cover the following:
 
 - Creating a new Unity project.
-- Importing HumanFactors to a Unity project.
-- Verifying that a Unity project code can reference HumanFactors.
+- Importing DHARTAPI to a Unity project.
+- Verifying that a Unity project code can reference DHARTAPI.
 
 ### Prerequisites
 
 - An installation of [Unity](https://unity3d.com/get-unity/download). This tutorial has been tested with Unity 2019.3f, but should work from 2018.3 on.
 - An installation of Visual Studio with Unity integration. Instructions for installing Unity with support for Visual Studio or adding VisualStudio support to an existing installation of Unity are available [here](https://docs.microsoft.com/en-us/visualstudio/cross-platform/getting-started-with-visual-studio-tools-for-unity?view=vs-2019).
-- A copy of the HumanFactors release built with support for C#. The `bin` folder of the release should contain the following files:
+- A copy of the DHARTAPI release built with support for C#. The `bin` folder of the release should contain the following files:
   1. embree3.dll
-  2. HumanFactors.dll
-  3. HumanFactorsCSharp.dll
+  2. DHARTAPI.dll
+  3. DHARTAPICSharp.dll
   4. msvcp140.dll
   5. System.Buffers.dll
   6. System.Memory.dll
@@ -42,7 +42,7 @@ To begin, open the Unity Hub then click the *NEW* button to create a new project
 
 *Figure* **1.2**: *The Create a Project Dialog*
 
-Select your desired project type, directory, and project name. For the sake of this tutorial, we will be using the *3D* project type and naming our project *HumanFactorsUnitySetup*, but you can name your project whatever you want. When done with this, press the *Create* button to create the project and wait while Unity imports all the necessary files.
+Select your desired project type, directory, and project name. For the sake of this tutorial, we will be using the *3D* project type and naming our project *DHARTAPIUnitySetup*, but you can name your project whatever you want. When done with this, press the *Create* button to create the project and wait while Unity imports all the necessary files.
 
 ![Empty Unity Scene](walkthroughs/unity/1_project_setup/blank_unity_scene.PNG)
 
@@ -50,23 +50,23 @@ Select your desired project type, directory, and project name. For the sake of t
 
 Upon completion you should be greeted by an empty Unity scene.
 
-## Importing the Human Factors Library
+## Importing the DHART Library
 
-Now that we have created a blank project, we need to import the HumanFactors binaries as assets so Unity can see and interface with them.
+Now that we have created a blank project, we need to import the DHARTAPI binaries as assets so Unity can see and interface with them.
 
 ![Moving the bin folder into the assets directory](walkthroughs/unity/1_project_setup/bin_to_assets.png)
 
-*Figure* **1.4**: *Dragging the HumanFactors bin folder into the Unity Project*
+*Figure* **1.4**: *Dragging the DHARTAPI bin folder into the Unity Project*
 
-If the HumanFactors release package is zipped, unzip the contents to another location before copying it or  you will get an error when trying to import it.  Once you have the files, as shown in Figure 1.4, drag the `bin` folder from the location you extracted the release to into the Unity Editor's assets window. Once you've done this, Unity should display the *bin* folder alongside the existing *Scenes* folder.
+If the DHARTAPI release package is zipped, unzip the contents to another location before copying it or  you will get an error when trying to import it.  Once you have the files, as shown in Figure 1.4, drag the `bin` folder from the location you extracted the release to into the Unity Editor's assets window. Once you've done this, Unity should display the *bin* folder alongside the existing *Scenes* folder.
 
-> **NOTE**: If you accidentally drag the bin folder into the *Scenes* folder or anywhere else that would cause two copies of the same dll to exist at the same time, delete any duplicates before proceding. Multiple copies of the same DLL will cause conflicts and may result in Unity being unable to load it in the future steps. You'll know this has happened if you see the following error `Multiple plugins with the same name 'humanfactors' (found at 'Assets/Scenes/bin/HumanFactors.dll' and 'Assets/bin/HumanFactors.dll')...` at the bottom of the screen.
+> **NOTE**: If you accidentally drag the bin folder into the *Scenes* folder or anywhere else that would cause two copies of the same dll to exist at the same time, delete any duplicates before proceding. Multiple copies of the same DLL will cause conflicts and may result in Unity being unable to load it in the future steps. You'll know this has happened if you see the following error `Multiple plugins with the same name 'DHART_API' (found at 'Assets/Scenes/bin/DHARTAPI.dll' and 'Assets/bin/DHARTAPI.dll')...` at the bottom of the screen.
 >![Duplicate DLL Error](walkthroughs/unity/1_project_setup/duplicate_dll_error.png)
 >![Delete Image](walkthroughs/unity/1_project_setup/delete.png)
 
-## Verifying Unity can reference HumanFactors
+## Verifying Unity can reference DHARTAPI
 
-The binaries have been added to our project as assets, but let's make sure Unity is able to reference them in code. To verify that Unity can reference the HumanFactors binaries, we're going to create a new script and look at its references. If we did everything correctly, Unity should automatically have added HumanFactorsCSharp as a reference.
+The binaries have been added to our project as assets, but let's make sure Unity is able to reference them in code. To verify that Unity can reference the DHARTAPI binaries, we're going to create a new script and look at its references. If we did everything correctly, Unity should automatically have added DHARTAPICSharp as a reference.
 
 ![Creating a new C# script](walkthroughs/unity/1_project_setup/create_new_script.png)
 
@@ -89,11 +89,11 @@ Looking in the assets window, you should notice a new script file next to Scenes
 
 Now that we have our new script, double click on it to open Visual studio.
 
-![HumanFactors referenced by your project](walkthroughs/unity/1_project_setup/visual_studio_human_factors_reference.png)
+![DHARTAPI referenced by your project](walkthroughs/unity/1_project_setup/visual_studio_human_factors_reference.png)
 
 *Figure* **1.8**: *Viewing the references of a project in Visual Studio*
 
-In Visual Studio, navigate to the *Solution Explorer* then expand the drop downs for your solution, Assembly-C-Sharp, and References. If everything was done correctly, you should see HumanFactors C# under the references for your project, as shown in Figure 1.8.
+In Visual Studio, navigate to the *Solution Explorer* then expand the drop downs for your solution, Assembly-C-Sharp, and References. If everything was done correctly, you should see DHARTAPI C# under the references for your project, as shown in Figure 1.8.
 
 > **NOTE**: If Mono-Develop appears instead of Visual Studio, then your installation of Unity is not set up to support Visual Studio. You can follow the above instructions from prerequisites to fix this.
 
@@ -104,7 +104,7 @@ In Visual Studio, navigate to the *Solution Explorer* then expand the drop downs
 > **NOTE:** Your version of Visual Studio may use the light theme by default like pictured below. This is purely visual and will not have any impact on this tutorial.
 > ![Light Theme](walkthroughs/unity/1_project_setup/light_visual_studio.png)
 
-If you see HumanFactors in your project's references, then you've successfully imported the HumanFactors library and are ready to start using the HumanFactors library.
+If you see DHARTAPI in your project's references, then you've successfully imported the DHARTAPI library and are ready to start using the DHARTAPI library.
 
 ## Conclusion
 
@@ -112,6 +112,6 @@ Below is a link to the unity project created in this tutorial.
 
 [Tutorial 1: Unity Project Setup](Tutorial%201-%20Unity%20Project.zip)
 
-In this tutorial, we went through the process of creating unity project and adding the Analysis toolkit to the project. In the following tutorials, we will use this basis for using the modules that come with the Analysis toolkit.
+In this tutorial, we went through the process of creating unity project and adding the dhart toolkit to the project. In the following tutorials, we will use this basis for using the modules that come with the dhart toolkit.
 
-In the next tutorial: [Using the Raytracer](@ref UsingTheRaytracer) we will use HumanFactors to create a plane, cast a ray at it, then get the point where the ray intersected the plane.
+In the next tutorial: [Using the Raytracer](@ref UsingTheRaytracer) we will use DHARTAPI to create a plane, cast a ray at it, then get the point where the ray intersected the plane.

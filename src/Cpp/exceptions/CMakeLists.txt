@@ -1,4 +1,4 @@
-﻿# CMakeList.txt : CMake project for humanfactors, include source and define
+﻿# CMakeList.txt : CMake project for DHART_API, include source and define
 # project specific logic here.
 #
 

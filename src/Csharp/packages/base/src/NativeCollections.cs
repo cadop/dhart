@@ -1,4 +1,4 @@
-﻿using HumanFactors.Exceptions;
+﻿using DHARTAPI.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,7 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 /*! \brief A set of native array implementations that are useful throughout the entire program. */
-namespace HumanFactors.NativeUtils.CommonNativeArrays
+namespace DHARTAPI.NativeUtils.CommonNativeArrays
 {
 	/*! \brief An array of floats in unmanaged memory. */
 	public class ManagedFloatArray : NativeUtils.NativeArray<float>

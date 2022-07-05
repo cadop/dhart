@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace HumanFactors.Geometry
+namespace DHARTAPI.Geometry
 {
 
 
@@ -35,7 +35,7 @@ namespace HumanFactors.Geometry
 			\returns An instance of MeshInfo containing the mesh loaded from the OBJ at path.
 
             \throws System.IO.FileNotFoundException No file was found at path.
-			\throws HumanFactors.Exceptions.InvalidMeshException
+			\throws DHARTAPI.Exceptions.InvalidMeshException
 			The file at the path was not a valid OBJ.
 			
             \remarks
@@ -65,7 +65,7 @@ namespace HumanFactors.Geometry
 			\returns All submeshes in the obj file at `path` grouped by `gm`
 
 			\throws System.IO.FileNotFoundException No file was found at  path.
-			\throws HumanFactors.Exceptions.InvalidMeshException
+			\throws DHARTAPI.Exceptions.InvalidMeshException
 			The file at the path was not a valid OBJ.
 			
 			\see GROUP_METHOD to see the different ways of grouping the different geometry in a .obj file
@@ -106,7 +106,7 @@ namespace HumanFactors.Geometry
 			\returns An instance of MeshInfo containing the mesh loaded from the OBJ at path.
 
             \throws System.IO.FileNotFoundException No file was found at  path.
-			\throws HumanFactors.Exceptions.InvalidMeshException
+			\throws DHARTAPI.Exceptions.InvalidMeshException
 			The file at the path did not represent a valid OBJ.
 			
             \remarks

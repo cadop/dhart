@@ -4,7 +4,7 @@
 Installation
 ============
 
-This guide will explain how to install the Analysis package. Most of the explanation in Setup is how to 
+This guide will explain how to install the dhart package. Most of the explanation in Setup is how to 
 create a virtual environment.  If you know how to do this, you can skip this and just use ``pip install .`` 
 as the regular python package installation method. 
 
@@ -14,7 +14,7 @@ Check Basic Requirements
 Currently tested on ``Python 3.8+``.
 
 
-If the Analysis package is in the general repository, it will be located in `Analysis/build/Python`. 
+If the dhart package is in the general repository, it will be located in `dhart/build/Python`. 
 Navigate to this folder and the directory should look like: 
 
 | Python
@@ -32,7 +32,7 @@ To install, open the windows `Command Prompt` by typing ``cmd`` into the windows
 
 It is recommended to use virtual environments, at least to start, to ensure the code is working. 
 For this, you will navigate to some folder that you can consistently find and is not part of the 
-Analysis package. For example, make a folder called ``py_envs`` in your ``Documents`` folder. 
+dhart package. For example, make a folder called ``py_envs`` in your ``Documents`` folder. 
 
 To setup a new virtual environment, go to the permanent folder location of your environments 
 in the command prompt. For example:
@@ -68,7 +68,7 @@ in the virtual environment.  Anytime you want to reload the installed environmen
 folder you made and type the above line for activating the environment.  If you want to end your virtual environment, 
 simply type ``deactivate`` in the command prompt. 
 
-Now that the virtual environment is activated, navigate to the Analysis folder e.g., ``build/Python``. Make sure
+Now that the virtual environment is activated, navigate to the dhart folder e.g., ``build/Python``. Make sure
 you are in the correct location by typing ``dir`` to see the ``setup.py`` file. To install, type:
 
 ``pip install .``

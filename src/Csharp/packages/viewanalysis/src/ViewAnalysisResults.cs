@@ -1,7 +1,7 @@
-﻿using HumanFactors.Exceptions;
-using HumanFactors.NativeUtils;
-using HumanFactors.NativeUtils.CommonNativeArrays;
-using HumanFactors.RayTracing;
+﻿using DHARTAPI.Exceptions;
+using DHARTAPI.NativeUtils;
+using DHARTAPI.NativeUtils.CommonNativeArrays;
+using DHARTAPI.RayTracing;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Diagnostics;
 using System.Dynamic;
 using System.Runtime.InteropServices;
 
-namespace HumanFactors.ViewAnalysis
+namespace DHARTAPI.ViewAnalysis
 {
     /*! \brief The results of a ray intersection. */
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -63,7 +63,7 @@ namespace HumanFactors.ViewAnalysis
         */
         protected override bool ReleaseHandle()
         {
-            HumanFactors.NativeUtils.CommonNativeArrays.NativeMethods.DestroyFloatVector(handle);
+            DHARTAPI.NativeUtils.CommonNativeArrays.NativeMethods.DestroyFloatVector(handle);
             return true;
         }
     }

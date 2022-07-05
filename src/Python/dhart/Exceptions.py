@@ -25,7 +25,7 @@ class HF_STATUS(Enum):
 
 
 class HFException(Exception):
-    """ Generic HumanFactorsException """
+    """ Generic DHARTAPIException """
     def __init__(self, message):
         super().__init__(message)
 

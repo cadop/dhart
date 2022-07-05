@@ -61,7 +61,7 @@ json_dict["edges"] = edges
 
 points = graph.getNodes()
 
-print(f"Firing {len(points) * len(points)} rays")
+print(f"Casting {len(points) * len(points)} rays")
 VG = VisibilityGraphUndirectedAllToAll(bvh, points, height)
 
 print("Aggregating.")

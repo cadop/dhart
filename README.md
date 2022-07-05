@@ -7,6 +7,8 @@ There are a few components to the package, but the main focus is in providing fa
 
 We have extensive documentation on the API, and welcome new contributions and bug fixes. Please make sure to take a look at the contributing guide.  
 
+Currently it is only available on Windows OS. We happily would accept contributors to help expand to Linux. 
+
 Features
 --------
 
@@ -31,7 +33,7 @@ Order W15QKN19F0002 - Advanced Development of Asset Protection
 Technologies (ADAPT).
 
 If you find this repo useful, please cite using the following bibtex
-```
+```bibtex
 @article{schwartz2021human,
   title={Human centric accessibility graph for environment analysis},
   author={Schwartz, Mathew},
@@ -55,7 +57,7 @@ Example Usage
 
 Once the python package is installed, the basic setup for loading a model (e.g. obj), setting its rotation (if its not default z up), and creating a BVH (the accelerated structure of the mesh) is done by:
 
-```
+```python
 from dhart.geometry import LoadOBJ, CommonRotations
 from dhart.raytracer import (EmbreeBVH,Intersect,
                                         IntersectForPoint,
@@ -72,7 +74,7 @@ bvh = EmbreeBVH(loaded_obj)
 
 After this, different methods for casting a ray can be used:
 
-```
+```python
 # Define point to start ray
 p1 = (0, 0, 2)
 # Define direction to cast ray
@@ -93,7 +95,7 @@ print(f"Does the ray connect? {does_occlude}")
 
 which would output
 
-```
+```python
 Hit point: (0.0, 0.0, 0.0)
 distance is 2.0, meshid is 0
 Does the ray connect? True
@@ -108,6 +110,14 @@ Installing
 
 - Requires Windows 10
 
+For Python you can use
+
+`pip install dhart`
+
+- However, if you would like to use Python with Rhino Grasshopper, you will need to follow the install instructions in the Python Docs. 
+
+For C# you can download from the Releases page. 
+- Of course, you can always clone this repo and build the project yourself. 
 
 We supply dll's to try and make the installation and linking process as easy as possible. 
 
@@ -144,10 +154,10 @@ you may continue with the following:
 0. Open Git Bash.
 Git Bash (MINGW64) begins at ~, your home directory.
 You may remain here, or navigate to a directory of your choice.
-In the next step, you will clone the Analysis repository.
+In the next step, you will clone the repository.
 
 1. Type git clone git@github.com/cadop/dhart.git at the prompt
-and hit ENTER. The Analysis repository will then be cloned to your local machine.
+and hit ENTER. The repository will then be cloned to your local machine.
 
 
 ### Using CMAKE Commands
@@ -156,13 +166,13 @@ Currently we directly call the configuration arguments when using cmake.
 
 Python Debug
 
-1. `cmake ./src/ -G"Visual Studio 16 2019" -DCMAKE_GENERATOR_PLATFORM="x64"  -DCMAKE_CONFIGURATION_TYPES="Debug" -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DHumanFactors_Config="All" -DHumanFactors_EnableTests="False" -DHumanFactors_EnablePython="True" -DHumanFactors_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1` 
+1. `cmake ./src/ -G"Visual Studio 16 2019" -DCMAKE_GENERATOR_PLATFORM="x64"  -DCMAKE_CONFIGURATION_TYPES="Debug" -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DDHARTAPI_Config="All" -DDHARTAPI_EnableTests="False" -DDHARTAPI_EnablePython="True" -DDHARTAPI_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1` 
 
 1. `cmake --build . --config Debug`
 
 Python Release
 
-1. `cmake ./src/  -G"Visual Studio 16 2019"  -DCMAKE_GENERATOR_PLATFORM="x64"   -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DHumanFactors_Config="All" -DHumanFactors_EnableTests="False" -DCMAKE_CONFIGURATION_TYPES="Release" -DHumanFactors_EnablePython="True" -DHumanFactors_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1`
+1. `cmake ./src/  -G"Visual Studio 16 2019"  -DCMAKE_GENERATOR_PLATFORM="x64"   -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DDHARTAPI_Config="All" -DDHARTAPI_EnableTests="False" -DCMAKE_CONFIGURATION_TYPES="Release" -DDHARTAPI_EnablePython="True" -DDHARTAPI_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1`
 
 1. `cmake --build . --config Release`
 
@@ -186,7 +196,7 @@ Then, navigate to `src/`. Click the Select folder button to confirm.
 1. If the Solution Explorer view is not already open, you may open by
 navigating to View > Solution Explorer, or alternatively, you can also use the Ctrl + Alt + L shortcut to reveal Solution Explorer. Here, you can examine the sources imported by Visual Studio.
 
-1. We are now ready to build Analysis.
+1. We are now ready to build.
 CMake is used to aid in the compilation process.
 There are a few provided configuration files. Specifically, debug and release, as well as C# and Python specific ones.  Select the one you are interested in and navigate to Build > Build All. 
 

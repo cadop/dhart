@@ -64,7 +64,7 @@ namespace std {
 	\brief The Boost C++ library. https://www.boost.org/
 
 	\details
-	HumanFactors uses a subset of the boost library containing only the essentials for 
+	DHARTAPI uses a subset of the boost library containing only the essentials for 
 	creating graphs and running shortest path algorithms. Use of boost is 
 	exclusive to the HF::Pathfinding namespace. 
 
@@ -145,7 +145,7 @@ namespace HF {
 			\brief A graph usable with the BoostGraphLibrary.
 			
 			\details
-			Contains a CSR in boost created from a graph in HumanFactors. This is necessary
+			Contains a CSR in boost created from a graph in DHARTAPI. This is necessary
 			for using any of the BoostGraphLibrary functions.
 
 			\invariant
@@ -160,7 +160,7 @@ namespace HF {
 			 their usage outside of the HF::Pathfinder, so there aren't any functions to interact with the boost graph
 			 after creation.
 
-			 \see HF::SpatialStructures::Graph for a graph that's better supported in HumanFactors.
+			 \see HF::SpatialStructures::Graph for a graph that's better supported in DHARTAPI.
 			 \see graph_t for info about the graph in boost this class holds. 
 		*/
 		class BoostGraph {

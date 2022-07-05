@@ -84,7 +84,7 @@ namespace HF {
 */
 
 /*!
-	\brief	The result of firing a ray at an object. Contains distance to the hitpoint and the ID of the mesh.
+	\brief	The result of casting a ray at an object. Contains distance to the hitpoint and the ID of the mesh.
 */
 struct RayResult {
 	float distance = -1;
@@ -190,7 +190,7 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 /*!
 	\brief		Cast rays for each node in origins/directions as ordered pairs and get distance back as a result.
 
-	\param	ert				The raytracer to use for firing every ray. 
+	\param	ert				The raytracer to use for casting every ray. 
 
 	\param	origins			An array of origin points to cast rays from. Should be an array of floats with every 3 floats
 							representing a new origin point.

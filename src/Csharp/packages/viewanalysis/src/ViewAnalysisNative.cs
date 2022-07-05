@@ -1,6 +1,6 @@
 
-using HumanFactors.NativeUtils;
-using HumanFactors.Exceptions;
+using DHARTAPI.NativeUtils;
+using DHARTAPI.Exceptions;
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Json;
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
 
-namespace HumanFactors.ViewAnalysis
+namespace DHARTAPI.ViewAnalysis
 {
 
 	/*! \brief Native functions for the ViewAnalysis namespace */

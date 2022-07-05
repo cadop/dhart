@@ -1,8 +1,8 @@
 using System.Numerics;
 
-namespace HumanFactors.Geometry
+namespace DHARTAPI.Geometry
 {
-    /*! \brief A collection of rotations that are frequently useful in HumanFactors. */
+    /*! \brief A collection of rotations that are frequently useful in DHARTAPI. */
     public static class CommonRotations
     {
         /*! \brief To rotate a mesh from Z-Up to Y-Up */

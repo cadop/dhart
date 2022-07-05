@@ -1,11 +1,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using HumanFactors.Geometry;
-using HumanFactors.SpatialStructures;
-using HumanFactors.RayTracing;
+using DHARTAPI.Geometry;
+using DHARTAPI.SpatialStructures;
+using DHARTAPI.RayTracing;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 
-namespace HumanFactors.Tests.GraphGenerator
+namespace DHARTAPI.Tests.GraphGenerator
 {
     [TestClass]
     public class GraphGenerator
@@ -21,7 +21,7 @@ namespace HumanFactors.Tests.GraphGenerator
             Vector3D start_point = new Vector3D(0, 0, 1);
             Vector3D spacing = new Vector3D(1, 1, 1);
 
-            Graph G = HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph(BVH, start_point, spacing, 999999);
+            Graph G = DHARTAPI.GraphGenerator.GraphGenerator.GenerateGraph(BVH, start_point, spacing, 999999);
             
             Assert.IsNotNull(G);
 
@@ -40,7 +40,7 @@ namespace HumanFactors.Tests.GraphGenerator
             Vector3D start_point = new Vector3D(0.001f, 0.001f, 1);
             Vector3D spacing = new Vector3D(0.0001f, 0.0001f, 1.7f);
 
-            Graph G = HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph(BVH, start_point, spacing, 1000000);
+            Graph G = DHARTAPI.GraphGenerator.GraphGenerator.GenerateGraph(BVH, start_point, spacing, 1000000);
 
             Assert.IsNotNull(G);
 
@@ -64,7 +64,7 @@ namespace HumanFactors.Tests.GraphGenerator
             Vector3D start_point = new Vector3D(0, 9000, 1);
             Vector3D spacing = new Vector3D(1, 1, 1);
 
-            Graph G = HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph(BVH, start_point, spacing, 999999);
+            Graph G = DHARTAPI.GraphGenerator.GraphGenerator.GenerateGraph(BVH, start_point, spacing, 999999);
 
             Assert.IsNull(G);
         }
@@ -85,12 +85,12 @@ namespace HumanFactors.Tests.GraphGenerator
             Vector3D start_point = new Vector3D(0, 0, 1);
             Vector3D spacing = new Vector3D(0.25f, 0.25f, 1);
 
-            Graph obstacle_graph = HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph(
+            Graph obstacle_graph = DHARTAPI.GraphGenerator.GraphGenerator.GenerateGraph(
                 BVH, start_point, spacing,
                 obstacle_ids: new int[] { Meshes[1].id }
             );
 
-            Graph non_obstacle_graph = HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph(
+            Graph non_obstacle_graph = DHARTAPI.GraphGenerator.GraphGenerator.GenerateGraph(
                 BVH, start_point, spacing
             );
 

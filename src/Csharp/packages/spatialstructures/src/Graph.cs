@@ -1,5 +1,5 @@
-using HumanFactors.NativeUtils;
-using HumanFactors.NativeUtils.CommonNativeArrays;
+using DHARTAPI.NativeUtils;
+using DHARTAPI.NativeUtils.CommonNativeArrays;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,15 +8,15 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 
 /*!
-    \brief Standard fundamental data structures for representing space used throughout HumanFactors. 
+    \brief Standard fundamental data structures for representing space used throughout DHARTAPI. 
 
     \remarks
-    The datatypes in the SpatialStructures namespace are used throughout the HumanFactors.
+    The datatypes in the SpatialStructures namespace are used throughout the DHARTAPI.
     For example, the GraphGenerator and VisibilityGraph both produce a Graph as output,
     allowing for the code to manage the Graph's internal CSR to be centralized in a single 
     location. 
 */
-namespace HumanFactors.SpatialStructures
+namespace DHARTAPI.SpatialStructures
 {
 	/// \brief  Methods for aggregating edge costs per node from the graph.
 	/// \see Graph.AggregateEdgeCosts for usage of this enum.
@@ -79,7 +79,7 @@ namespace HumanFactors.SpatialStructures
         each have a distinct key as their name, but instead of conatining information
         about edges in the graph, node attributes contain information about nodes.
         Unlike the cost algorithms in edgecosts,  right now there is no functionality 
-        within HumanFactors that populates the node attributes of the graph with any
+        within DHARTAPI that populates the node attributes of the graph with any
         kind of metric, however the methods to add and clear node attributes are
         made available so you are free to add your own node attributes. 
 

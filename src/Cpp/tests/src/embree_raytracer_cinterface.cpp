@@ -328,7 +328,7 @@ namespace CInterfaceTests {
 		//		count_points == count_dir (one direction per origin)
 		//		count_points == 1 && count_directions > 1 (one origin, multiple directions)
 		//		count_points > 1 && count_directions == 1 (multiple origins, one direction)
-		// In this particular example, since we are firing one direction per origin, 
+		// In this particular example, since we are casting one direction per origin, 
 		// we must ensure the following:
 		ASSERT_EQ(count_points, count_dir);
 
@@ -1280,7 +1280,7 @@ namespace CInterfaceTests {
 		ASSERT_TRUE(size_dir_occl % 3 == 0 || (size_dir_occl == 3 && count_dir_occl == 1));
 
 		//! [snippet_CastOcclusionRays]
-		// The array results should be the amount of rays we are firing, i.e. the value of count_dir_occl.
+		// The array results should be the amount of rays we are casting, i.e. the value of count_dir_occl.
 		std::array<bool, count_dir_occl> results;
 		float max_distance_occl = 9999.0f;
 
@@ -1441,7 +1441,7 @@ namespace CInterfaceTests {
 		//		count_points == 1 && count_directions > 1 (one origin, multiple directions)
 		//		count_points > 1 && count_directions == 1 (multiple origins, one direction)
 
-		// Since we are firing one direction per origin, we must ensure the following:
+		// Since we are casting one direction per origin, we must ensure the following:
 		ASSERT_EQ(count_points, count_dir);
 
 		status = CastRaysDistance(bvh, points.data(), count_points, dir.data(), count_dir, &ray_result, &ray_result_data);

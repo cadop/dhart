@@ -85,7 +85,7 @@ def colorbar(val):
     return ColorHSV(tmp_color[0],tmp_color[1],tmp_color[2])
     #return (tmp_color[0],tmp_color[1],tmp_color[2])
 
-json_path = "H:\HumanMetrics\Codebase\HumanFactors\dhart\dhart\Examples\out_graph.json"
+json_path = ".\\dhart\\dhart\\Examples\\out_graph.json"
 push_off = 110
 
 in_json = decode_json(json_path)

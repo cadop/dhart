@@ -8,7 +8,7 @@
 
 \endhtmlonly
 
-This is a brief video describing the folder structure<br> within the Analysis repository.
+This is a brief video describing the folder structure<br> within the repository.
 
 Length: <b>4m29s</b> (4:29)
 
@@ -16,7 +16,7 @@ Length: <b>4m29s</b> (4:29)
 Intro
 
 <b>(0:12) - (1:14)</b><br>
-Analysis Project Template
+Project Template
 
 <b>(1:14) - (1:24)</b><br>
 build
