@@ -8,7 +8,7 @@ Contents
 To get started from the very beginning with this package, please follow the installation guide below.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 5
    
    install.rst
    start.rst
