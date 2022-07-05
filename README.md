@@ -7,6 +7,8 @@ There are a few components to the package, but the main focus is in providing fa
 
 We have extensive documentation on the API, and welcome new contributions and bug fixes. Please make sure to take a look at the contributing guide.  
 
+![Featured Image](https://github.com/cadop/dhart/blob/main/featured_ex.JPG?raw=true)
+
 ### Limitations
 
 - Currently it is only available on Windows OS. (We happily would accept contributors to help expand to Linux. )
@@ -40,11 +42,10 @@ Center and the U.S. Army ManTech Office under Contract Delivery
 Order W15QKN19F0002 - Advanced Development of Asset Protection
 Technologies (ADAPT).
 
-Any opinions, findings and conclusions or recommendations
-expressed in this material are those of the author(s) and do not necessarily reflect the views of the Army Contracting Command - New
-Jersey.
+Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the Army Contracting Command - New Jersey.
 
 If you find this repo useful, please cite using the following bibtex
+
 ```bibtex
 @article{schwartz2021human,
   title={Human centric accessibility graph for environment analysis},
