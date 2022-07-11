@@ -16,7 +16,7 @@ please download and install Git for Windows at https://gitforwindows.org/
 
 - Microsoft Visual Studio 2019 (you can use 2022 but 2019 must be installed because of the build tools it comes with):
 https://visualstudio.microsoft.com/downloads/
-You may use the Community edition.
+You may use the Community edition. Make sure to also check Windows 10 SDK on the installer.
 
 - CMake (Windows win64-x64)
 https://cmake.org/download/
@@ -39,6 +39,7 @@ You must install the following tools for visual studio. This is found in the _in
 1. .NET Native
 1. MSVC v140
 1. MSVC v142
+1. Windows 10 SDK
 1. Testing tools core features - Build Tools
 
 At the time of writing, this list is a little long, and as we narrow down frequent issues we can hopefully reduce the exact features needed.
