@@ -1,5 +1,5 @@
 
-## Prelim
+# Prelim
 
 This guide will describe how to retrieve the contents of this repository,
 and build from source.
@@ -43,8 +43,11 @@ In the next step, you will clone the repository.
 1. For SSH Type `git clone git@github.com:cadop/dhart.git` at the prompt
 and hit ENTER. The repository will then be cloned to your local machine. For HTTPS use `git clone https://github.com/cadop/dhart.git`. 
 
+# Build Process
 
-### Using CMAKE Command Line
+You can build using either CMAKE from the command line, _or_ through Visual Studio.  Please note the instructions for Visual Studio as they still require the CMAKE installation within visual studio. 
+
+## Using CMAKE Command Line
 
 Currently we directly call the configuration arguments when using cmake. (If someone would like to contribute to improving this process feel free to open an issue. )
 
@@ -69,16 +72,15 @@ After building (assuming it went okay), run:
 
 1. cd to build/Python and run `pip install .`
 
-### Using Visual Studio
+## Using Visual Studio
 
 1. Open Microsoft Visual Studio 2019. After seeing the splash/welcome screen, please click the button that reads Open a local folder.
-
 
 1. When the Browse window appears, navigate to the folder
 (the repository that you had cloned) on your local machine.
 Then, navigate to `src/`. Click the Select folder button to confirm.
 
-1. You may see a banner that asks to generate or configure the cmake project.  Click generate. 
+1. You should see a banner that asks to generate or configure the cmake project.  Click generate. **NOTE**: If you do not see this banner, double click on the `CMakeLists.txt` text file. If you still do not see the banner, add a blank space in the file and save (ctrl+s), which should trigger it again, generating the cmake.  
 
 1. If the Solution Explorer view is not already open, you may open by
 navigating to View > Solution Explorer, or alternatively, you can also use the Ctrl + Alt + L shortcut to reveal Solution Explorer. Here, you can examine the sources imported by Visual Studio.
