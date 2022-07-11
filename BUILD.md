@@ -14,7 +14,7 @@ please download and install Git for Windows at https://gitforwindows.org/
 
 - Git lfs `https://git-lfs.github.com/`
 
-- Microsoft Visual Studio 2019 or 2022:
+- Microsoft Visual Studio 2019 (you can use 2022 but 2019 must be installed because of the build tools it comes with):
 https://visualstudio.microsoft.com/downloads/
 You may use the Community edition.
 
