@@ -23,7 +23,14 @@ You must install the following tools for visual studio. This is found in the _in
 
 1. Desktop Development with C++
 1. .NET desktop build tools
+1. .NET Core development tools
+1. .NET Core SDK
+1. .NET Framework 4.5 targeting pack
+1. .NET Framework 4.5.1 targeting pack
+1. .NET Framework 4.5.2 targeting pack
 1. .NET build tools
+1. .NET profiling tools
+1. .NET Native
 1. MSVC v140
 1. MSVC v142
 1. Testing tools core features - Build Tools
