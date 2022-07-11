@@ -8,13 +8,17 @@ Please note: DHART is currently designed to run on a PC running the Windows 10
 operating system.
 Also note: This guide is a 'work-in-progress' and subject to change.
 
-Git for Windows:
+- Git for Windows:
 If you do not already have Git for Windows on your machine,
 please download and install Git for Windows at https://gitforwindows.org/
-Microsoft Visual Studio 2019 or 2022:
+
+- Git lfs `https://git-lfs.github.com/`
+
+- Microsoft Visual Studio 2019 or 2022:
 https://visualstudio.microsoft.com/downloads/
 You may use the Community edition.
-CMake (Windows win64-x64)
+
+- CMake (Windows win64-x64)
 https://cmake.org/download/
 
 ### For Visual Studio
@@ -106,9 +110,15 @@ There are a few provided configuration files. Specifically, debug and release, a
 1. Once it has successfully built, you need to install.  Going back to the same build menu dropdown, click on install.  This will save the files to a build directory. 
 
 
-You can find the build files in .\dhart\src\out\build\x64-Debug
+You can find the build files in `.\dhart\src\out\build\x64-Debug` or `x63-Release` or (whatever config you selected.)
+
+### Testing
+
+After generating the build files, you should be able to open a visual studio solution file in the build directory.  If it doesn't display immediately, go to `Test -> Test Explorer` to open the test explorer. Then click `Run All`. 
 
 
 ### FAQ
 
-- `CMake Error: CMAKE_CSharp_COMPILER not set, after EnableLanguage`
+- `CMake Error: CMAKE_CSharp_COMPILER not set, after EnableLanguage` | This likely occurs because your `CMakeSettings.json` is not correct. If you did not use `git-lfs pull`, this file will just be a lfs object pointer. 
+- `CMake Error at X:\XXX\dhart\src\CMakeLists.txt:37: No CMAKE_C_COMPILER could be found.` | This is likely because you are missing the cmake installation or its not configured. Remember, you need _both_ to install cmake from cmake.org _and_ to include it in the visual studio installation settings.
+- Some error talking about tests or google-tests. | We use google-tests for the unit testing of the project.  If you are struggling to build because of this error, you can edit the `CMakeSettings.json` in visual studio and uncheck the `EnableTests` option and `Build_GMOCK` for the configuration you are interested in using.
