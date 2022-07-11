@@ -21,6 +21,8 @@ You may use the Community edition.
 - CMake (Windows win64-x64)
 https://cmake.org/download/
 
+Note for installing CMake, you must check `Add CMake to the system PATH`. The easiest is probably for all users, but you may know how to work with it for current user as well. 
+
 ### For Visual Studio
 
 You must install the following tools for visual studio. This is found in the _installer_ (not the extensions). 
