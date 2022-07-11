@@ -110,7 +110,7 @@ There are a few provided configuration files. Specifically, debug and release, a
 1. Once it has successfully built, you need to install.  Going back to the same build menu dropdown, click on install.  This will save the files to a build directory. 
 
 
-You can find the build files in `.\dhart\src\out\build\x64-Debug` or `x63-Release` or (whatever config you selected.)
+You can find the build files in `.\dhart\src\out\build\x64-Debug` or `x64-Release` or (whatever config you selected.)
 
 ### Testing
 
