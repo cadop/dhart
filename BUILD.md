@@ -1,5 +1,5 @@
 
-### Prelim
+## Prelim
 
 This guide will describe how to retrieve the contents of this repository,
 and build from source.
@@ -11,12 +11,26 @@ Also note: This guide is a 'work-in-progress' and subject to change.
 Git for Windows:
 If you do not already have Git for Windows on your machine,
 please download and install Git for Windows at https://gitforwindows.org/
-Microsoft Visual Studio 2019:
+Microsoft Visual Studio 2019 or 2022:
 https://visualstudio.microsoft.com/downloads/
 You may use the Community edition.
 CMake (Windows win64-x64)
 https://cmake.org/download/
 
+### For Visual Studio
+
+You must install the following tools for visual studio. This is found in the _installer_ (not the extensions). 
+
+1. Desktop Development with C++
+1. .NET desktop build tools
+1. .NET build tools
+1. MSVC v140
+1. MSVC v142
+1. Testing tools core features - Build Tools
+
+At the time of writing, this list is a little long, and as we narrow down frequent issues we can hopefully reduce the exact features needed.
+
+### Get DHART
 
 Once the software above is installed on your machine,
 you may continue with the following:
