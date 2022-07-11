@@ -50,6 +50,11 @@ In the next step, you will clone the repository.
 1. For SSH Type `git clone git@github.com:cadop/dhart.git` at the prompt
 and hit ENTER. The repository will then be cloned to your local machine. For HTTPS use `git clone https://github.com/cadop/dhart.git`. 
 
+! IMPORTANT ! You _must_ install and use `git-lfs`. If you use `git clone` and don't do this next step, you won't have the `.json` files.
+
+1. `cd dhart`
+1. `git-lfs pull`
+
 # Build Process
 
 You can build using either CMAKE from the command line, _or_ through Visual Studio.  Please note the instructions for Visual Studio as they still require the CMAKE installation within visual studio. 
@@ -89,6 +94,8 @@ Then, navigate to `src/`. Click the Select folder button to confirm.
 
 1. You should see a banner that asks to generate or configure the cmake project.  Click generate. **NOTE**: If you do not see this banner, double click on the `CMakeLists.txt` text file. If you still do not see the banner, add a blank space in the file and save (ctrl+s), which should trigger it again, generating the cmake.  
 
+1. This project uses `CMakeSettings.json`, so you must open the CMake options and ensure that CMake configuration file option is set to `Use CMakePresets.json if available, otherwise use CMakeSettings.json`.  You need to also make sure there is no `CMakePresets.json` since this will overwrite the proper settings.
+
 1. If the Solution Explorer view is not already open, you may open by
 navigating to View > Solution Explorer, or alternatively, you can also use the Ctrl + Alt + L shortcut to reveal Solution Explorer. Here, you can examine the sources imported by Visual Studio.
 
@@ -100,3 +107,8 @@ There are a few provided configuration files. Specifically, debug and release, a
 
 
 You can find the build files in .\dhart\src\out\build\x64-Debug
+
+
+### FAQ
+
+- `CMake Error: CMAKE_CSharp_COMPILER not set, after EnableLanguage`
