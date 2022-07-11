@@ -40,13 +40,13 @@ Git Bash (MINGW64) begins at ~, your home directory.
 You may remain here, or navigate to a directory of your choice.
 In the next step, you will clone the repository.
 
-1. Type git clone git@github.com/cadop/dhart.git at the prompt
-and hit ENTER. The repository will then be cloned to your local machine.
+1. For SSH Type `git clone git@github.com:cadop/dhart.git` at the prompt
+and hit ENTER. The repository will then be cloned to your local machine. For HTTPS use `git clone https://github.com/cadop/dhart.git`. 
 
 
-### Using CMAKE Commands
+### Using CMAKE Command Line
 
-Currently we directly call the configuration arguments when using cmake. 
+Currently we directly call the configuration arguments when using cmake. (If someone would like to contribute to improving this process feel free to open an issue. )
 
 Python Debug
 
@@ -60,7 +60,11 @@ Python Release
 
 1. `cmake --build . --config Release`
 
-Then 
+If you are using C#, then following the same script as above for Python, you would change the variable `-DDHARTAPI_EnableCSharp="False"` to `"True"`. 
+
+
+After building (assuming it went okay), run:
+
 1. `cmake --install .`
 
 1. cd to build/Python and run `pip install .`
