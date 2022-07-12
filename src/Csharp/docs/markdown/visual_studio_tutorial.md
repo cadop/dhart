@@ -40,7 +40,7 @@ Once you've clicked C# the menu should be filtered to only contain C# project ty
 
 *Figure* **1.4**: *ConFigure Dialog*
 
-In the conFigure dialog, you're able to change the name, location and framework version of your assembly. For this demonstration we'll be using the version of the .net framework that DHARTAPICSharp was built with, **Framework version 4.5**. Change the framework version to 4.5 by using the dropdown menu circled in cyan in Figure 1.4. We'll be leaving the rest of the options as their defaults for this example, but feel free to change the name and location of the project. Once you're ready, click the Create button circled in red at the bottom right corner of the dialog to create the project.
+In the conFigure dialog, you're able to change the name, location and framework version of your assembly. For this demonstration we'll be using the version of the .net framework that DHARTAPICSharp was built with, **Framework version 4.5**. Change the framework version to 4.5 (or whatever version your project was built for, possibly in the release notes if you download from github) by using the dropdown menu circled in cyan in Figure 1.4. We'll be leaving the rest of the options as their defaults for this example, but feel free to change the name and location of the project. Once you're ready, click the Create button circled in red at the bottom right corner of the dialog to create the project.
 
 ![Blank Project](walkthroughs/VisualStudio/visual_studio_blank_project.png)
 
@@ -89,6 +89,8 @@ Once you've unchecked the unneeded references, you can finish the process of add
 *Figure* **2.6**: *References Tab Circled*
 
 For additional verification that this worked, click the dropdown arrow in the solution explorer next to References, circled in red in Figure 2.6.
+
+If you do not see the references under the ClassLibrary1 group, and they are instead directly under Solution, you should select the references and drag them into the ClassLibrary References.
 
 ![References Highlighted in dropdown](walkthroughs/VisualStudio/highlighted_references.png)
 
@@ -368,6 +370,10 @@ After doing this your code should look like this. Once again, build your solutio
 
 Look at the debug toolbar right of your Visual Studio window, circled in Figure 5.4.3. You press the `Start` button to debug your program, however the option may default to ClassLibrary1 instead of ConsoleApp1. To solve this, click on the dropdown that says ClassLibrary1 and change it to ConsoleApp1 like in Figure 5.4.3. There is one more step before we can run the program, and that is to ensure that both ConsoleApp1 and ClassLibrary1 are built as 64 bit applications.
 
+If you do not see the "ConsoleApp1" type dropdown at all, it is okay and could just be a layout issue. To continue with this anyway, make sure you:
+- Right click on the Solution in Solution Explorer and building the solution (not just a subproject). 
+- Select the solution and rightclick or view Properties.  Change `Startup project` item to `ConsoleApp1`.
+
 
 ![Console App1 Properties Menu](walkthroughs/VisualStudio/console_app_1_properties.png)
 
@@ -398,3 +404,5 @@ Now finally, click the start button circled in Figure 5.4.7 to test the program.
 *Figure* **5.4.8** : *Successful Output Highlighted*
 
 Upon clicking start, you should see a console window appear briefly, then close. Look in the output at the bottom of your Visual Studio window. You should see the line DHARTAPI.Geometry.Meshinfo. IF this is the case then you have successfully created a project using Humanfactors to load an obj from disk. 
+
+The exact output may vary (such as saying `EntireFile, ID:0, Verts: 4, Triangles: 2`), but as long as there is no error it is a good sign. 
