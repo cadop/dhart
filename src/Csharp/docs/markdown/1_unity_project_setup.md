@@ -13,6 +13,8 @@ In this guide we will cover the following:
 - Importing DHARTAPI to a Unity project.
 - Verifying that a Unity project code can reference DHARTAPI.
 
+**IMPORTANT**: The current version of the project does not automatically link the C DLL within Unity.  The following tutorials and steps will work. However, you must build and run the unity project for the DLL to link correctly, otherwise you will recieve a `DLLNotFoundError`.  
+
 ### Prerequisites
 
 - An installation of [Unity](https://unity3d.com/get-unity/download). This tutorial has been tested with Unity 2019.3f, but should work from 2018.3 on.
