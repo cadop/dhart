@@ -6,6 +6,8 @@
 
 In this tutorial we will cover the process of creating a new Visual Studio project that references the DHARTAPI C# interface. We will also walk through the steps of adding non-C# dependencies such as `DHARTAPI.dll` to your project, as this is required for the produced program to run at all. After this tutorial is completed you should have a project that is able to reference DHARTAPI' C# interface and automatically copy it and its dependencies to the output folder when the project is built.
 
+Please note that you will need to download a `plane.obj` file from the repositories example models in order to run the project.
+
 ### Prerequisites
 
 Ensure that you have the following prerequisites before continuing.
@@ -299,6 +301,8 @@ namespace ClassLibrary1
 *Figure* **5.2.3** : *Full code with obj sample loader.*
 
 Make sure your code matches before progressing.
+
+**Important**: You must change the path `obj_path` to be the path from the downloaded `plane.obj` file. 
 
 ![ObJ Loader Code](walkthroughs/VisualStudio/build_solution_console.png)
 
