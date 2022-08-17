@@ -10,9 +10,12 @@ In this tutorial we'll be using the project created in the first tutorial: [Proj
 
 In this guide we will cover:
 
-- Assigning  a game object to a script so it can be referenced by code.
-- Accessing the components of a Game Object
+- Assigning a game object to a script so it can be referenced by code.
+- Accessing the components of a Game Object made in Unity
 - Transforming MeshInfo instances to Z-Up
+
+*NOTE!* This tutorial will show how to read basic meshes generated in Unity. When importing an OBJ or FBX file there are some more settings that need to be modified, which is discussed in the _next_ tutorial. 
+
 
 ## Scene Setup
 
