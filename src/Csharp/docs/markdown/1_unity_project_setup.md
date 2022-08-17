@@ -13,7 +13,7 @@ In this guide we will cover the following:
 - Importing DHARTAPI to a Unity project.
 - Verifying that a Unity project code can reference DHARTAPI.
 
-**IMPORTANT**: The current version of the project does not automatically link the C DLL within Unity.  The following tutorials and steps will work. However, you must build and run the unity project for the DLL to link correctly, otherwise you will recieve a `DLLNotFoundError`.  
+**IMPORTANT**: The current version of the project does not automatically link the C DLL within Unity.  You must follow the steps in `Adding DHART to Editor Path` listed below. The following tutorials and steps will work. However, you must either add DLLs to the editor or build and run the unity project for the DLL to link correctly, otherwise you will recieve a `DLLNotFoundError`.  
 
 ### Prerequisites
 
