@@ -32,6 +32,26 @@ In this guide we will cover the following:
   10. vcruntime140.dll
   11. vcruntime140_1.dll
 
+## Adding DHART to Editor Path
+
+One quark of Unity is that the Editor in which much of your development happens handles DLL references differently than when you build a project. Currently, to use DHART within the Unity Editor, you must copy the DLLs listed above into the Editors installation directory. 
+
+![Image](walkthroughs/unity/1_project_setup/editor_path.PNG)
+
+*Figure* **0.0**: *Finding the Unity Editor Path*
+
+To find where your editor has been installed, open the Unity Hub and click on Installs.  The Path to your Unity Editor version will be displayed under that version number. 
+
+![Image](walkthroughs/unity/1_project_setup/editor_dlls.PNG)
+
+*Figure* **0.1**: *Copying the DLLs into the Editor Folder*
+
+Open this path in a file explorer, and copy/replace the DLLs in the folder. If you are replacing any DLLs that came with Unity, it would be a *very* good idea to backup the Unity DLLs first!  _Note_ in the image shown, just a few of the DLLs are highlighted as an illustration, but you should copy all of them. 
+
+If you do not want to copy the DLLs, DHART will still work when you build and run your Unity project, but it will not be able to find the DLL in the Editor. 
+
+p.s. If you know how to avoid this copying of DLLs into the Editor folder please make a PR!
+
 ## Creating a new project
 
 ![Image](walkthroughs/unity/1_project_setup/UnityNew.PNG)
