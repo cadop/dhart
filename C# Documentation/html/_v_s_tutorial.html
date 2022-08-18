@@ -87,26 +87,27 @@ $(document).ready(function(){initNavTree('_v_s_tutorial.html',''); initResizable
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md50">Intro</a><ul><li class="level2"><a href="#autotoc_md51">Prerequisites</a></li>
+<ul><li class="level1"><a href="#autotoc_md65">Intro</a><ul><li class="level2"><a href="#autotoc_md66">Prerequisites</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md52">Creating the project</a></li>
-<li class="level1"><a href="#autotoc_md53">Adding A Reference To DHART</a></li>
-<li class="level1"><a href="#autotoc_md54">Adding Native Dependencies</a></li>
-<li class="level1"><a href="#autotoc_md55">Ensuring Files are Properly Placed in the Output Directory</a></li>
-<li class="level1"><a href="#autotoc_md56">Testing the Interface</a><ul><li class="level2"><a href="#autotoc_md57">Create a Console Project</a></li>
-<li class="level2"><a href="#autotoc_md58">Writing Sample Code</a></li>
-<li class="level2"><a href="#autotoc_md59">Adding a reference to the library from the Console App</a></li>
-<li class="level2"><a href="#autotoc_md60">Writing And Executing the Command Line Application</a></li>
+<li class="level1"><a href="#autotoc_md67">Creating the project</a></li>
+<li class="level1"><a href="#autotoc_md68">Adding A Reference To DHART</a></li>
+<li class="level1"><a href="#autotoc_md69">Adding Native Dependencies</a></li>
+<li class="level1"><a href="#autotoc_md70">Ensuring Files are Properly Placed in the Output Directory</a></li>
+<li class="level1"><a href="#autotoc_md71">Testing the Interface</a><ul><li class="level2"><a href="#autotoc_md72">Create a Console Project</a></li>
+<li class="level2"><a href="#autotoc_md73">Writing Sample Code</a></li>
+<li class="level2"><a href="#autotoc_md74">Adding a reference to the library from the Console App</a></li>
+<li class="level2"><a href="#autotoc_md75">Writing And Executing the Command Line Application</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="textblock"><p ><a class="anchor" id="md_src_Csharp_docs_markdown_visual_studio_tutorial"></a></p>
-<h1><a class="anchor" id="autotoc_md50"></a>
+<h1><a class="anchor" id="autotoc_md65"></a>
 Intro</h1>
 <p >In this tutorial we will cover the process of creating a new Visual Studio project that references the <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a> C# interface. We will also walk through the steps of adding non-C# dependencies such as <code>DHARTAPI.dll</code> to your project, as this is required for the produced program to run at all. After this tutorial is completed you should have a project that is able to reference <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a>' C# interface and automatically copy it and its dependencies to the output folder when the project is built.</p>
-<h2><a class="anchor" id="autotoc_md51"></a>
+<p >Please note that you will need to download a <code>plane.obj</code> file from the repositories example models in order to run the project.</p>
+<h2><a class="anchor" id="autotoc_md66"></a>
 Prerequisites</h2>
 <p >Ensure that you have the following prerequisites before continuing.</p>
 <ol type="1">
@@ -115,7 +116,7 @@ Prerequisites</h2>
 <li>The necessary prerequisites for developing C# projects in Visual Studio. <br  />
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md52"></a>
+<h1><a class="anchor" id="autotoc_md67"></a>
 Creating the project</h1>
 <div class="image">
 <img src="splash_screen.png" alt=""/>
@@ -140,14 +141,14 @@ Visual Studio Create A New Project</div></div>
 </blockquote>
 <p><img src="framework4.5.png" alt="" class="inline" title="ConFigure Dialog"/>    </p>
 <p ><em>Figure</em> <b>1.4</b>: <em>ConFigure Dialog</em></p>
-<p >In the conFigure dialog, you're able to change the name, location and framework version of your assembly. For this demonstration we'll be using the version of the .net framework that DHARTAPICSharp was built with, <b>Framework version 4.5</b>. Change the framework version to 4.5 by using the dropdown menu circled in cyan in Figure 1.4. We'll be leaving the rest of the options as their defaults for this example, but feel free to change the name and location of the project. Once you're ready, click the Create button circled in red at the bottom right corner of the dialog to create the project.</p>
+<p >In the conFigure dialog, you're able to change the name, location and framework version of your assembly. For this demonstration we'll be using the version of the .net framework that DHARTAPICSharp was built with, <b>Framework version 4.5</b>. Change the framework version to 4.5 (or whatever version your project was built for, possibly in the release notes if you download from github) by using the dropdown menu circled in cyan in Figure 1.4. We'll be leaving the rest of the options as their defaults for this example, but feel free to change the name and location of the project. Once you're ready, click the Create button circled in red at the bottom right corner of the dialog to create the project.</p>
 <div class="image">
 <img src="visual_studio_blank_project.png" alt=""/>
 <div class="caption">
 Blank Project</div></div>
     <p ><em>Figure</em> <b>1.5</b>: <em>Blank Project</em></p>
 <p >After pressing create, Visual Studio display a window for your new blank project. Now we're ready to move on to adding the DLL.</p>
-<h1><a class="anchor" id="autotoc_md53"></a>
+<h1><a class="anchor" id="autotoc_md68"></a>
 Adding A Reference To DHART</h1>
 <p >Before we move on to writing the example program, we must first add <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a> C# DLL as a reference.</p>
 <div class="image">
@@ -187,13 +188,14 @@ Subset of References</div></div>
 References Dropdown Circled</div></div>
     <p ><em>Figure</em> <b>2.6</b>: <em>References Tab Circled</em></p>
 <p >For additional verification that this worked, click the dropdown arrow in the solution explorer next to References, circled in red in Figure 2.6.</p>
+<p >If you do not see the references under the ClassLibrary1 group, and they are instead directly under Solution, you should select the references and drag them into the ClassLibrary References.</p>
 <div class="image">
 <img src="highlighted_references.png" alt=""/>
 <div class="caption">
 References Highlighted in dropdown</div></div>
     <p ><em>Figure</em> <b>2.7</b>: <em>New References in dropdown.</em></p>
 <p >Upon clicking this drop down, all of the references to this project will be displayed. In this list you should be able to see the references we added earlier. These references are highlighted in Figure 2.7. If you can see these references in the list, then you have completed this step correctly, and are ready to move onto the next step of this tutorial.</p>
-<h1><a class="anchor" id="autotoc_md54"></a>
+<h1><a class="anchor" id="autotoc_md69"></a>
 Adding Native Dependencies</h1>
 <p >We added the C# components of human factors to the project as libraries, however we also need to ensure that those DLLs that we unchecked are part of our project as well. While these libraries can't be loaded as dependencies like C# libraries can, they can still be managed by our project, and most importantly copied to the correct directories when the project is built. If the native libraries are not placed alongside the C# library, then <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a> will not run once the project is built.</p>
 <div class="image">
@@ -239,7 +241,7 @@ Solution Explorer Files</div></div>
 Changing Do not copy to Copy If Newer</div></div>
     <p ><em>Figure</em> <b>3.7</b>: <em>Changing Do Not Copy to Copy If Newer</em></p>
 <p >Once you click on <code>Do Not Copy</code> you should see a drop down appear to the right. Click on the downward arrow to expand it then select <code>Copy If Newer</code> like in Figure 3.7. Upon clicking this the option should also change to <code>Copy if Newer</code>. Now upon building the program, these files should be copied to the output directory alongside your library and all of the C# references.</p>
-<h1><a class="anchor" id="autotoc_md55"></a>
+<h1><a class="anchor" id="autotoc_md70"></a>
 Ensuring Files are Properly Placed in the Output Directory</h1>
 <p >With everything set up correctly, we should now be able to demonstrate that this process works. The goal is to ensure Visual Studio can see the referenced C# code, and that it copies all of the dependencies to the output directory once the project is built.</p>
 <p >under the line <code>using System.Threading.Tasks</code> enter the following using declarations.</p>
@@ -277,10 +279,10 @@ Solution in FileExplorer</div></div>
 Contents of the debug folder</div></div>
     <p ><em>Figure</em> <b>4.5</b> : <em>Contents of the Debug Folder</em></p>
 <p >Once there, you should be looking at the output of your program. Verify that all of the C# and non-C# DLLs that we've added have been copied over successfully. Now that this is the case, we're ready to move onto testing that this DLL works.</p>
-<h1><a class="anchor" id="autotoc_md56"></a>
+<h1><a class="anchor" id="autotoc_md71"></a>
 Testing the Interface</h1>
 <p >To demonstrate this DLL is functional, we will attempt to load the mesh data of an obj file from disk. In this tutorial I will be using a simple plane titled <code>plane.obj</code> however, this should work with any OBJ file so pick one of your own that you'd like to use with <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a>.</p>
-<h2><a class="anchor" id="autotoc_md57"></a>
+<h2><a class="anchor" id="autotoc_md72"></a>
 Create a Console Project</h2>
 <p >Since we created a C# library, we cannot run it in order to produce output. In order to test our library, we will create a second project that links with our library to execute some of its code.</p>
 <div class="image">
@@ -307,7 +309,7 @@ ConFigure new project dialog console</div></div>
 Blank console project</div></div>
     <p ><em>Figure</em> <b>5.1.4</b> : <em>Blank console project</em></p>
 <p >After that is complete, you should be brought back to Visual Studio with the new console project in your solution explorer (highlighted in 5.1.4). IF this is the case then we're ready to move onto writing to code to load an obj file.</p>
-<h2><a class="anchor" id="autotoc_md58"></a>
+<h2><a class="anchor" id="autotoc_md73"></a>
 Writing Sample Code</h2>
 <p >Now that we have a console project that we can execute, we'll go back to our library and write the code necessary to load an obj file.</p>
 <div class="image">
@@ -374,13 +376,14 @@ Blank console project</div></div>
 ObJ Loader Code</div></div>
     <p ><em>Figure</em> <b>5.2.3</b> : <em>Full code with obj sample loader.</em></p>
 <p >Make sure your code matches before progressing.</p>
+<p ><b>Important</b>: You must change the path <code>obj_path</code> to be the path from the downloaded <code>plane.obj</code> file.</p>
 <div class="image">
 <img src="build_solution_console.png" alt=""/>
 <div class="caption">
 ObJ Loader Code</div></div>
     <p ><em>Figure</em> <b>5.2.4</b> : <em>Building Solution</em></p>
 <p >Once you're sure your code matches, build the project by going to build &gt; build solution. This should build without errors. If this is the case, you have added the sample code successfully and are ready to write the command line application to call it.</p>
-<h2><a class="anchor" id="autotoc_md59"></a>
+<h2><a class="anchor" id="autotoc_md74"></a>
 Adding a reference to the library from the Console App</h2>
 <p >In this section we will add the necessary code to the command line application to call the code we just wrote. Despite being in the same solution, we need to explicitly add a reference from ConsoleApp1 to ClassLibrary1 before we can use the code from it.</p>
 <div class="image">
@@ -419,7 +422,7 @@ Check off ClassLibrary1</div></div>
 Referenced ClassLibrary1</div></div>
     <p ><em>Figure</em> <b>5.3.6</b> : <em>Highlighted: Class Library 1 in in the references of ConsoleApp1</em></p>
 <p >After pressing OK, you should see ClassLibrary1 in the references of ConsoleApp1 like highlighted in Figure 5.3.6. If you see this, then you're ready to move on to writing the code for the command line application.</p>
-<h2><a class="anchor" id="autotoc_md60"></a>
+<h2><a class="anchor" id="autotoc_md75"></a>
 Writing And Executing the Command Line Application</h2>
 <p >Now that the console project can reference our library, we will write some code to call the example function we defined.</p>
 <div class="image">
@@ -441,6 +444,10 @@ Main of Program.cs</div></div>
 Debug section circled</div></div>
     <p ><em>Figure</em> <b>5.4.3</b> : <em>Debug Toolbar Circled</em></p>
 <p >Look at the debug toolbar right of your Visual Studio window, circled in Figure 5.4.3. You press the <code>Start</code> button to debug your program, however the option may default to ClassLibrary1 instead of ConsoleApp1. To solve this, click on the dropdown that says ClassLibrary1 and change it to ConsoleApp1 like in Figure 5.4.3. There is one more step before we can run the program, and that is to ensure that both ConsoleApp1 and ClassLibrary1 are built as 64 bit applications.</p>
+<p >If you do not see the "ConsoleApp1" type dropdown at all, it is okay and could just be a layout issue. To continue with this anyway, make sure you:</p><ul>
+<li>Right click on the Solution in Solution Explorer and building the solution (not just a subproject).</li>
+<li>Select the solution and rightclick or view Properties. Change <code>Startup project</code> item to <code>ConsoleApp1</code>.</li>
+</ul>
 <div class="image">
 <img src="console_app_1_properties.png" alt=""/>
 <div class="caption">
@@ -470,7 +477,8 @@ Click Start Button</div></div>
 <div class="caption">
 Successful Output</div></div>
     <p ><em>Figure</em> <b>5.4.8</b> : <em>Successful Output Highlighted</em></p>
-<p >Upon clicking start, you should see a console window appear briefly, then close. Look in the output at the bottom of your Visual Studio window. You should see the line DHARTAPI.Geometry.Meshinfo. IF this is the case then you have successfully created a project using Humanfactors to load an obj from disk. </p>
+<p >Upon clicking start, you should see a console window appear briefly, then close. Look in the output at the bottom of your Visual Studio window. You should see the line DHARTAPI.Geometry.Meshinfo. IF this is the case then you have successfully created a project using Humanfactors to load an obj from disk.</p>
+<p >The exact output may vary (such as saying <code>EntireFile, ID:0, Verts: 4, Triangles: 2</code>), but as long as there is no error it is a good sign. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

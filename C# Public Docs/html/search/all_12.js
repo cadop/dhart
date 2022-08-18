@@ -7,5 +7,6 @@ var searchData=
   ['viewanalysisaggregate_4',['ViewAnalysisAggregate',['../class_d_h_a_r_t_a_p_i_1_1_view_analysis_1_1_view_analysis.html#ad653d720d58cafab4a9adc1c72be186e',1,'DHARTAPI::ViewAnalysis::ViewAnalysis']]],
   ['viewanalysisresult_5',['ViewAnalysisResult',['../struct_d_h_a_r_t_a_p_i_1_1_view_analysis_1_1_view_analysis_result.html',1,'DHARTAPI::ViewAnalysis']]],
   ['viewanalysisstandard_6',['ViewAnalysisStandard',['../class_d_h_a_r_t_a_p_i_1_1_view_analysis_1_1_view_analysis.html#a97eba82450f4eb1475614f6ca6738f91',1,'DHARTAPI::ViewAnalysis::ViewAnalysis']]],
-  ['visibilitygraph_7',['VisibilityGraph',['../class_d_h_a_r_t_a_p_i_1_1_visibility_graph_1_1_visibility_graph.html',1,'DHARTAPI::VisibilityGraph']]]
+  ['visibilitygraph_7',['VisibilityGraph',['../class_d_h_a_r_t_a_p_i_1_1_visibility_graph_1_1_visibility_graph.html',1,'DHARTAPI::VisibilityGraph']]],
+  ['visualizing_20dhart_20data_20in_20unity_8',['Visualizing DHART Data in Unity',['../_unity_graph_visualization.html',1,'']]]
 ];

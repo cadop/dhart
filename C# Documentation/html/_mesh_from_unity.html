@@ -87,42 +87,43 @@ $(document).ready(function(){initNavTree('_mesh_from_unity.html',''); initResiza
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md28">Intro</a></li>
-<li class="level1"><a href="#autotoc_md29">Scene Setup</a><ul><li class="level2"><a href="#autotoc_md30">Creating the Plane</a></li>
-<li class="level2"><a href="#autotoc_md31">Resetting the Plane&#39;s Position</a></li>
+<ul><li class="level1"><a href="#autotoc_md29">Intro</a></li>
+<li class="level1"><a href="#autotoc_md30">Scene Setup</a><ul><li class="level2"><a href="#autotoc_md31">Creating the Plane</a></li>
+<li class="level2"><a href="#autotoc_md32">Resetting the Plane&#39;s Position</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md32">Writing the Script</a><ul><li class="level2"><a href="#autotoc_md33">Setup for Adding References Through The Unity Inspector</a></li>
-<li class="level2"><a href="#autotoc_md34">Getting a Reference to the Mesh Held by a Specific GameObject</a><ul><li class="level3"><a href="#autotoc_md35">Background on GameObjects and Components</a></li>
-<li class="level3"><a href="#autotoc_md36">In Practice</a></li>
+<li class="level1"><a href="#autotoc_md33">Writing the Script</a><ul><li class="level2"><a href="#autotoc_md34">Setup for Adding References Through The Unity Inspector</a></li>
+<li class="level2"><a href="#autotoc_md35">Getting a Reference to the Mesh Held by a Specific GameObject</a><ul><li class="level3"><a href="#autotoc_md36">Background on GameObjects and Components</a></li>
+<li class="level3"><a href="#autotoc_md37">In Practice</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md37">Getting the Vertices and Triangles</a></li>
-<li class="level2"><a href="#autotoc_md38">Transforming the Mesh From Y-Up to Z-Up</a></li>
-<li class="level2"><a href="#autotoc_md39">Choose code From Previous Tutorial to Verify Results</a><ul><li class="level3"><a href="#autotoc_md40">Graph Generator</a></li>
-<li class="level3"><a href="#autotoc_md41">Ray Tracer</a></li>
+<li class="level2"><a href="#autotoc_md38">Getting the Vertices and Triangles</a></li>
+<li class="level2"><a href="#autotoc_md39">Transforming the Mesh From Y-Up to Z-Up</a></li>
+<li class="level2"><a href="#autotoc_md40">Choose code From Previous Tutorial to Verify Results</a><ul><li class="level3"><a href="#autotoc_md41">Graph Generator</a></li>
+<li class="level3"><a href="#autotoc_md42">Ray Tracer</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md42">Testing the Script</a><ul><li class="level2"><a href="#autotoc_md43">Adding References to Properties Through the Unity Inspector</a></li>
-<li class="level2"><a href="#autotoc_md44">Comparing Output</a></li>
+<li class="level1"><a href="#autotoc_md43">Testing the Script</a><ul><li class="level2"><a href="#autotoc_md44">Adding References to Properties Through the Unity Inspector</a></li>
+<li class="level2"><a href="#autotoc_md45">Comparing Output</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md45">Conclusion</a></li>
+<li class="level1"><a href="#autotoc_md46">Conclusion</a></li>
 </ul>
 </div>
 <div class="textblock"><p ><a class="anchor" id="md_src_Csharp_docs_markdown_4_reading_mesh_from_unity"></a> Previous Tutorial: <a class="el" href="_generating_a_graph.html">The Graph Generator</a></p>
-<h1><a class="anchor" id="autotoc_md28"></a>
+<h1><a class="anchor" id="autotoc_md29"></a>
 Intro</h1>
 <p >In this tutorial we'll be using the project created in the first tutorial: <a class="el" href="_unity_project_setup.html">Project Setup</a>, and we'll be using concepts and code covered in the previous guides.</p>
 <p >In this guide we will cover:</p>
 <ul>
 <li>Assigning a game object to a script so it can be referenced by code.</li>
-<li>Accessing the components of a Game Object</li>
+<li>Accessing the components of a Game Object made in Unity</li>
 <li>Transforming MeshInfo instances to Z-Up</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md29"></a>
+<p ><em>NOTE!</em> This tutorial will show how to read basic meshes generated in Unity. When importing an OBJ or FBX file there are some more settings that need to be modified, which is discussed in the <em>next</em> tutorial.</p>
+<h1><a class="anchor" id="autotoc_md30"></a>
 Scene Setup</h1>
 <p >Up until this point, we haven't needed to interact with the Unity scene, aside from attaching a script to the Main Camera object that is placed by default. For us to demonstrate reading geometry from the scene, we will use the Unity editor to create a plane in the scene that's similar to the plane we previously created in code, but half the size.</p>
 <div class="image">
@@ -130,7 +131,7 @@ Scene Setup</h1>
 <div class="caption">
 Blank Scene</div></div>
     <p >To begin, open the Unity project from <a class="el" href="_unity_project_setup.html">Unity Project Setup</a>.</p>
-<h2><a class="anchor" id="autotoc_md30"></a>
+<h2><a class="anchor" id="autotoc_md31"></a>
 Creating the Plane</h2>
 <div class="image">
 <img src="create_plane.png" alt=""/>
@@ -139,7 +140,7 @@ Plane Created</div></div>
     <p ><em>Figure</em> <b>4.1</b>: <em>Creating a plane using the menu bar</em></p>
 <p >Using the menubar at the top of the screen select GameObject &gt; 3D Object &gt; Plane.</p>
 <p >Once clicked, a new 10x10 plane will be created at the center of the scene window's view. The plane we created in code was centered on the origin, but this plane isn't since it was created where the scene editor's camera was looking. We must reset this plane to the origin before moving any further.</p>
-<h2><a class="anchor" id="autotoc_md31"></a>
+<h2><a class="anchor" id="autotoc_md32"></a>
 Resetting the Plane's Position</h2>
 <div class="image">
 <img src="look_at_transforms.png" alt=""/>
@@ -159,7 +160,7 @@ Reset Position</div></div>
 Plane After Reset Position</div></div>
     <p ><em>Figure</em> <b>4.4</b>: <em>The plane centered at the scene origin</em></p>
 <p >After clicking that button, your plane should be moved to the origin like in Figure 4.4. Note that the X, Y, and Z of the plane's position in the Inspector are all set to 0. Ensure that the rest of the variables in the transform header match that of Figure 4.4. Now that we have the plane ready to go, we can begin working on the script to get its vertices and triangles.</p>
-<h1><a class="anchor" id="autotoc_md32"></a>
+<h1><a class="anchor" id="autotoc_md33"></a>
 Writing the Script</h1>
 <p ><img src="visual_studio_human_factors_reference.png" alt="" class="inline" title="Blank Visual Studio Page"/>     <em>Figure</em> <b>4.5</b> <em>An Empty Script</em></p>
 <p >Double click on HFExampleScript that we created in the first tutorial to open up Visual Studio if it isn't open already. You should see a blank page like the above. If you're coming from a previous tutorial, <em>please clear it so it matches this</em>.</p>
@@ -167,7 +168,7 @@ Writing the Script</h1>
 <div class="fragment"><div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i_1_1_geometry.html">DHARTAPI.Geometry</a>;</div>
 <div class="ttc" id="anamespace_d_h_a_r_t_a_p_i_1_1_geometry_html"><div class="ttname"><a href="namespace_d_h_a_r_t_a_p_i_1_1_geometry.html">DHARTAPI.Geometry</a></div><div class="ttdoc">Manipulate and load geometry from disk.</div><div class="ttdef"><b>Definition:</b> <a href="_common_rotations_8cs_source.html#l00003">CommonRotations.cs:4</a></div></div>
 </div><!-- fragment --><p >Later you will be using different sections depending on whether you're generating a graph or casting a ray.</p>
-<h2><a class="anchor" id="autotoc_md33"></a>
+<h2><a class="anchor" id="autotoc_md34"></a>
 Setup for Adding References Through The Unity Inspector</h2>
 <div class="image">
 <img src="plane_in_scene.PNG" alt=""/>
@@ -177,10 +178,10 @@ PlaneReference</div></div>
 <p >There are many ways to reference a GameObject in the scene from a script, but for this example we'll be setting up our script so we can select a mesh in the scene from the Unity Inspector. Add a GameObject property to the script like shown on line 7 of figure 4.6.</p>
 <div class="fragment"><div class="line"><span class="keyword">public</span> GameObject PlaneInScene;</div>
 </div><!-- fragment --><p >Later we'll use the Unity Inspector to assign the plane in the scene to this property.</p>
-<h2><a class="anchor" id="autotoc_md34"></a>
+<h2><a class="anchor" id="autotoc_md35"></a>
 Getting a Reference to the Mesh Held by a Specific GameObject</h2>
 <p >Before we can extract the triangles and vertices from one an instance of a Unity Mesh, we first need to get a reference to the Mesh itself. Doing this requires some understanding of Unity GameObjects and their components.</p>
-<h3><a class="anchor" id="autotoc_md35"></a>
+<h3><a class="anchor" id="autotoc_md36"></a>
 Background on GameObjects and Components</h3>
 <div class="image">
 <img src="plane_inspector.PNG" alt=""/>
@@ -193,14 +194,14 @@ PlaneReference</div></div>
 <p >&zwj;<em>GameObjects are the fundamental objects in Unity that represent characters, props and scenery. They do not accomplish much in themselves, but they act as containers for Components, which implement the real functionality.</em> </p>
 </blockquote>
 <p>What this means for us is that the plane we see in the scene is not a Mesh, but a GameObject that contains a <a href="https://docs.unity3d.com/ScriptReference/MeshFilter.html">MeshFilter</a> that contains a Mesh. You can think of it like GameObject &gt; Mesh Filter &gt; Mesh. To obtain the Mesh itself, we must get it from the MeshFilter component of the Plane GameObject.</p>
-<h3><a class="anchor" id="autotoc_md36"></a>
+<h3><a class="anchor" id="autotoc_md37"></a>
 In Practice</h3>
 <p >A game object's components can be retrieved using the <a href="https://docs.unity3d.com/ScriptReference/GameObject.GetComponent.html">GetComponent</a> method. Go back to the Visual Studio window. In our script we will store a reference to the plane's mesh filter in a variable named <code>PlaneFilter</code> at the beginning of the script's <code>Start()</code> function like so:</p>
 <div class="fragment"><div class="line">MeshFilter PlaneFilter = PlaneInScene.GetComponent&lt;MeshFilter&gt;();</div>
 </div><!-- fragment --><p >Then we can access the actual mesh carried by <code>PlaneFilter</code> by calling its .mesh property:</p>
 <div class="fragment"><div class="line">Mesh PlaneMesh = PlaneFilter.mesh;</div>
 </div><!-- fragment --><p >Now we have the plane as a mesh and are ready to get the required info from it for <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a>.</p>
-<h2><a class="anchor" id="autotoc_md37"></a>
+<h2><a class="anchor" id="autotoc_md38"></a>
 Getting the Vertices and Triangles</h2>
 <p >As previously stated, a mesh is comprised of an index and vertex array. To use this mesh in <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a>, we need to construct a MeshInfo object using these arrays. Fortunately, Unity provides a straightforward way to access the triangle indices of a mesh in a format that we can use for <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a>, but unfortunately the vertices only come in an array of Vector3, instead of the array of floats that we need. We will need to write a method to convert this array of Vector3 into an array of floats before we can use it in <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a>.</p>
 <p >To simplify the process of converting the vertices to a suitable format, we will add a separate method called <em>Vector3ArrayToFloatArray</em> that will transform the array of Vector3 into an array of float ready for DHART.</p>
@@ -232,7 +233,7 @@ Convert Vector3 Array</div></div>
 <div class="line"><a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info.html">MeshInfo</a> PlaneMeshInfo = <span class="keyword">new</span> <a class="code hl_class" href="class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info.html">MeshInfo</a>(plane_indices, plane_vertices);</div>
 <div class="ttc" id="aclass_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info_html"><div class="ttname"><a href="class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info.html">DHARTAPI.Geometry.MeshInfo</a></div><div class="ttdoc">A collection of vertices and indices representing geometry.</div><div class="ttdef"><b>Definition:</b> <a href="_mesh_info_8cs_source.html#l00049">MeshInfo.cs:50</a></div></div>
 </div><!-- fragment --><p >Before we can continue to using this mesh it's important to cover a significant difference between this mesh and the mesh we've been creating in our code.</p>
-<h2><a class="anchor" id="autotoc_md38"></a>
+<h2><a class="anchor" id="autotoc_md39"></a>
 Transforming the Mesh From Y-Up to Z-Up</h2>
 <p ><img src="unity_coordinate_system.png" alt="" class="inline" title="UnityCoords"/>     <img src="rhino_coordinates.PNG" alt="" class="inline" title="RhinoCoords"/>    </p>
 <p ><em>Figure</em> <b>4.9</b>: <em>Left: Unity's coordinate system. Right: <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a>'s Coordinate system</em></p>
@@ -244,7 +245,7 @@ Transforming the Mesh From Y-Up to Z-Up</h2>
 <div class="ttc" id="aclass_d_h_a_r_t_a_p_i_1_1_geometry_1_1_common_rotations_html_a2265fdbc4a849150f58a73f06d5be92a"><div class="ttname"><a href="class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_common_rotations.html#a2265fdbc4a849150f58a73f06d5be92a">DHARTAPI.Geometry.CommonRotations.Yup_To_Zup</a></div><div class="ttdeci">static Vector3D Yup_To_Zup</div><div class="ttdoc">Will rotate a mesh from Y-Up to Z-Up.</div><div class="ttdef"><b>Definition:</b> <a href="_common_rotations_8cs_source.html#l00016">CommonRotations.cs:16</a></div></div>
 <div class="ttc" id="aclass_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info_html_a4a7a2b8ad360f0aa81660b3e97863fa9"><div class="ttname"><a href="class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info.html#a4a7a2b8ad360f0aa81660b3e97863fa9">DHARTAPI.Geometry.MeshInfo.RotateMesh</a></div><div class="ttdeci">void RotateMesh(float xrot, float yrot, float zrot)</div><div class="ttdoc">Rotate this mesh by the desired magnitude.</div><div class="ttdef"><b>Definition:</b> <a href="_mesh_info_8cs_source.html#l00165">MeshInfo.cs:165</a></div></div>
 </div><!-- fragment --><p >Now that the plane is in the correct orientation, we are ready to move on to verifying that we loaded the mesh successfully.</p>
-<h2><a class="anchor" id="autotoc_md39"></a>
+<h2><a class="anchor" id="autotoc_md40"></a>
 Choose code From Previous Tutorial to Verify Results</h2>
 <p >Up until this point, your code should match the code below.</p>
 <div class="fragment"><div class="line"><span class="keyword">using </span>System.Collections;</div>
@@ -300,7 +301,7 @@ Choose code From Previous Tutorial to Verify Results</h2>
 Screenshot of the entire code until this point</div></div>
     <p >To see if we're successfully reading the mesh from the scene, <em>pick either the graph generator or the raytracer tutorial to use for testing</em>. Substitute <code>PlaneMeshInfo</code> everywhere the code from the previous tutorials use <code>Plane</code>. The code you take from the other sections should be added directly after the line containing <code>PlaneMeshInfo.RotateMesh()</code>.</p>
 <p >The lines you should copy for each tutorial are:</p>
-<h3><a class="anchor" id="autotoc_md40"></a>
+<h3><a class="anchor" id="autotoc_md41"></a>
 Graph Generator</h3>
 <p >Add the following using statments:</p>
 <div class="fragment"><div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i.html">DHARTAPI</a>;</div>
@@ -324,7 +325,7 @@ Graph Generator</h3>
 <div class="line">Debug.Log(nodes);</div>
 <div class="ttc" id="aclass_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h_html"><div class="ttname"><a href="class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h.html">DHARTAPI.RayTracing.EmbreeBVH</a></div><div class="ttdoc">A Bounding Volume Hierarchy for the EmbreeRaytracer.</div><div class="ttdef"><b>Definition:</b> <a href="_embree_b_v_h_8cs_source.html#l00030">EmbreeBVH.cs:31</a></div></div>
 <div class="ttc" id="astruct_d_h_a_r_t_a_p_i_1_1_vector3_d_html"><div class="ttname"><a href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html">DHARTAPI.Vector3D</a></div><div class="ttdoc">A three dimensional vector with built in utility functions.</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00040">CommonTypes.cs:40</a></div></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md41"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md42"></a>
 Ray Tracer</h3>
 <p >Add the following using statments:</p>
 <div class="fragment"><div class="line"><span class="keyword">using </span><a class="code hl_namespace" href="namespace_d_h_a_r_t_a_p_i.html">DHARTAPI</a>;</div>
@@ -356,10 +357,10 @@ Ray Tracer</h3>
 <div class="ttc" id="astruct_d_h_a_r_t_a_p_i_1_1_vector3_d_html_a46b34f99709c14b7d8be79cf1b0debbc"><div class="ttname"><a href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#a46b34f99709c14b7d8be79cf1b0debbc">DHARTAPI.Vector3D.x</a></div><div class="ttdeci">readonly float x</div><div class="ttdoc">X component of this vector.</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00041">CommonTypes.cs:41</a></div></div>
 <div class="ttc" id="astruct_d_h_a_r_t_a_p_i_1_1_vector3_d_html_abac3c90f7958d6d98ba3e7c81cfbd6ab"><div class="ttname"><a href="struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#abac3c90f7958d6d98ba3e7c81cfbd6ab">DHARTAPI.Vector3D.z</a></div><div class="ttdeci">readonly float z</div><div class="ttdoc">Z component of this vector.</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00043">CommonTypes.cs:43</a></div></div>
 </div><!-- fragment --><p ><b>Make sure to copy over any other using declarations that the selected tutorial uses</b>, since those are required for it to function. Once you've finished this, <em><b>SAVE</b></em> your script, minimize Visual Studio, and switch to the Unity Editor.</p>
-<h1><a class="anchor" id="autotoc_md42"></a>
+<h1><a class="anchor" id="autotoc_md43"></a>
 Testing the Script</h1>
 <p >Like in the previous tutorials, drag the HFExampleScript onto the Main Camera object in the scene hierarchy to set it as a component. In the previous scripts we were ready to go after this step, but here we need to assign the Plane GameObject to the script in the Unity Inspector.</p>
-<h2><a class="anchor" id="autotoc_md43"></a>
+<h2><a class="anchor" id="autotoc_md44"></a>
 Adding References to Properties Through the Unity Inspector</h2>
 <div class="image">
 <img src="inspect_new_attribute.png" alt=""/>
@@ -379,7 +380,7 @@ Gameobject Select Window</div></div>
 Gameobject Select Window</div></div>
     <p ><em>Figure</em> <b>4.12</b>: <em>Inspector With Plane</em></p>
 <p >You should now see the plane in the Unity Inspector next to PlaneInScene, like in Figure 4.12. If you see this, then you have successfully added the plane to the script as a reference.</p>
-<h2><a class="anchor" id="autotoc_md44"></a>
+<h2><a class="anchor" id="autotoc_md45"></a>
 Comparing Output</h2>
 <p >Now, enter play mode by clicking the play button. If you have performed the above steps correctly, then your output should match The output below for the code you've chosen:</p>
 <p ><em><b>Graph Generator</b></em> : <code>[(0.000,0.000,0.000), (-1.000,-1.000,0.000), (-1.000,0.000,0.000), (-1.000,1.000,0.000), (0.000,-1.000,0.000), . . . (2.000,5.000,0.000), (3.000,5.000,0.000), (4.000,-5.000,0.000), (4.000,5.000,0.000)]</code></p>
@@ -388,7 +389,7 @@ Comparing Output</h2>
 <p >&zwj;<b>NOTE</b>: For the raytracer you might get an extremely low number for the Z component such as 5.960464E-08 instead of 0. This is normal, since none of the plane's vertices are exactly at whole numbers like they were in our example script. In fact, if you try to print any Vector3s like the ones returned from Mesh.vertices, they will round their components before displaying them. The nodelist returned from the graph will also round the components for every node it contains when converted to a string. Keep this in mind when reviewing results in the future. </p>
 </blockquote>
 <p>If your output matches the above output for the code you've chosen, then you have successfully completed this tutorial.</p>
-<h1><a class="anchor" id="autotoc_md45"></a>
+<h1><a class="anchor" id="autotoc_md46"></a>
 Conclusion</h1>
 <p >Here is a link the full project created in this guide: <a href="Tutorial%204%20-%20Reading%20Mesh%20From%20Unity.zip">Full Project</a></p>
 <p >With this you have successfully read geometry from the Unity Scene and passed it to <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a>. This concludes the tutorial series for this point.</p>

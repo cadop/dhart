@@ -90,10 +90,11 @@ $(document).ready(function(){initNavTree('_unity_project_setup.html',''); initRe
 <ul><li class="level1"><a href="#autotoc_md0">Before we begin</a><ul><li class="level2"><a href="#autotoc_md1">Prerequisites</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md2">Creating a new project</a></li>
-<li class="level1"><a href="#autotoc_md3">Importing the DHART Library</a></li>
-<li class="level1"><a href="#autotoc_md4">Verifying Unity can reference DHARTAPI</a></li>
-<li class="level1"><a href="#autotoc_md5">Conclusion</a></li>
+<li class="level1"><a href="#autotoc_md2">Adding DHART to Editor Path</a></li>
+<li class="level1"><a href="#autotoc_md3">Creating a new project</a></li>
+<li class="level1"><a href="#autotoc_md4">Importing the DHART Library</a></li>
+<li class="level1"><a href="#autotoc_md5">Verifying Unity can reference DHARTAPI</a></li>
+<li class="level1"><a href="#autotoc_md6">Conclusion</a></li>
 </ul>
 </div>
 <div class="textblock"><p ><a class="anchor" id="md_src_Csharp_docs_markdown_1_unity_project_setup"></a> Next Tutorial: <a class="el" href="_using_the_raytracer.html">Using The Raytracer</a> OR <a class="el" href="_generating_a_graph.html">Generating A Graph</a></p>
@@ -105,6 +106,8 @@ Before we begin</h1>
 <li>Importing <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a> to a Unity project.</li>
 <li>Verifying that a Unity project code can reference <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a>.</li>
 </ul>
+<p ><b>IMPORTANT</b>: The current version of the project does not automatically link the C DLL within Unity. You must follow the steps in <code>Adding DHART to Editor Path</code> listed below. The following tutorials and steps will work. However, you must either add DLLs to the editor or build and run the unity project for the DLL to link correctly, otherwise you will recieve a <code>DLLNotFoundError</code>. <br  />
+</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Prerequisites</h2>
 <ul>
@@ -126,6 +129,23 @@ Prerequisites</h2>
 </li>
 </ul>
 <h1><a class="anchor" id="autotoc_md2"></a>
+Adding DHART to Editor Path</h1>
+<p >One quark of Unity is that the Editor in which much of your development happens handles DLL references differently than when you build a project. Currently, to use DHART within the Unity Editor, you must copy the DLLs listed above into the Editors installation directory.</p>
+<div class="image">
+<img src="editor_path.PNG" alt=""/>
+<div class="caption">
+Image</div></div>
+    <p ><em>Figure</em> <b>0.0</b>: <em>Finding the Unity Editor Path</em></p>
+<p >To find where your editor has been installed, open the Unity Hub and click on Installs. The Path to your Unity Editor version will be displayed under that version number.</p>
+<div class="image">
+<img src="editor_dlls.PNG" alt=""/>
+<div class="caption">
+Image</div></div>
+    <p ><em>Figure</em> <b>0.1</b>: <em>Copying the DLLs into the Editor Folder</em></p>
+<p >Open this path in a file explorer, and copy/replace the DLLs in the folder. If you are replacing any DLLs that came with Unity, it would be a <em>very</em> good idea to backup the Unity DLLs first! <em>Note</em> in the image shown, just a few of the DLLs are highlighted as an illustration, but you should copy all of them.</p>
+<p >If you do not want to copy the DLLs, DHART will still work when you build and run your Unity project, but it will not be able to find the DLL in the Editor.</p>
+<p >p.s. If you know how to avoid this copying of DLLs into the Editor folder please make a PR!</p>
+<h1><a class="anchor" id="autotoc_md3"></a>
 Creating a new project</h1>
 <div class="image">
 <img src="UnityNew.PNG" alt=""/>
@@ -145,7 +165,7 @@ Choose Project Type</div></div>
 Empty Unity Scene</div></div>
     <p ><em>Figure</em> <b>1.3</b>: <em>An empty Unity scene</em></p>
 <p >Upon completion you should be greeted by an empty Unity scene.</p>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<h1><a class="anchor" id="autotoc_md4"></a>
 Importing the DHART Library</h1>
 <p >Now that we have created a blank project, we need to import the <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a> binaries as assets so Unity can see and interface with them.</p>
 <div class="image">
@@ -158,7 +178,7 @@ Moving the bin folder into the assets directory</div></div>
 <p >&zwj;<b>NOTE</b>: If you accidentally drag the bin folder into the <em>Scenes</em> folder or anywhere else that would cause two copies of the same dll to exist at the same time, delete any duplicates before proceding. Multiple copies of the same DLL will cause conflicts and may result in Unity being unable to load it in the future steps. You'll know this has happened if you see the following error &lsquo;Multiple plugins with the same name 'DHART_API&rsquo; (found at 'Assets/Scenes/bin/DHARTAPI.dll' and 'Assets/bin/DHARTAPI.dll')...` at the bottom of the screen. </p>
 </blockquote>
 <p>&gt;<img src="duplicate_dll_error.png" alt="" class="inline" title="Duplicate DLL Error"/>     &gt;<img src="delete.png" alt="" class="inline" title="Delete Image"/>    </p>
-<h1><a class="anchor" id="autotoc_md4"></a>
+<h1><a class="anchor" id="autotoc_md5"></a>
 Verifying Unity can reference DHARTAPI</h1>
 <p >The binaries have been added to our project as assets, but let's make sure Unity is able to reference them in code. To verify that Unity can reference the <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a> binaries, we're going to create a new script and look at its references. If we did everything correctly, Unity should automatically have added DHARTAPICSharp as a reference.</p>
 <div class="image">
@@ -200,7 +220,7 @@ DHARTAPI referenced by your project</div></div>
 <p >&zwj;<b>NOTE:</b> Your version of Visual Studio may use the light theme by default like pictured below. This is purely visual and will not have any impact on this tutorial. <img src="light_visual_studio.png" alt="" class="inline" title="Light Theme"/>     </p>
 </blockquote>
 <p>If you see <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a> in your project's references, then you've successfully imported the <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a> library and are ready to start using the <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a> library.</p>
-<h1><a class="anchor" id="autotoc_md5"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Conclusion</h1>
 <p >Below is a link to the unity project created in this tutorial.</p>
 <p ><a href="Tutorial%201-%20Unity%20Project.zip">Tutorial 1: Unity Project Setup</a></p>

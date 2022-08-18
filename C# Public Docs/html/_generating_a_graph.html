@@ -87,25 +87,25 @@ $(document).ready(function(){initNavTree('_generating_a_graph.html',''); initRes
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md16">Intro</a><ul><li class="level2"><a href="#autotoc_md17">Conceptual Overview</a></li>
+<ul><li class="level1"><a href="#autotoc_md17">Intro</a><ul><li class="level2"><a href="#autotoc_md18">Conceptual Overview</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md18">Simple Graph Generation</a><ul><li class="level2"><a href="#autotoc_md19">Using Declarations</a></li>
-<li class="level2"><a href="#autotoc_md20">Creating the Plane</a></li>
-<li class="level2"><a href="#autotoc_md21">Generating the Graph</a></li>
-<li class="level2"><a href="#autotoc_md22">Retrieving a list of nodes</a></li>
-<li class="level2"><a href="#autotoc_md23">Save and Test</a></li>
+<li class="level1"><a href="#autotoc_md19">Simple Graph Generation</a><ul><li class="level2"><a href="#autotoc_md20">Using Declarations</a></li>
+<li class="level2"><a href="#autotoc_md21">Creating the Plane</a></li>
+<li class="level2"><a href="#autotoc_md22">Generating the Graph</a></li>
+<li class="level2"><a href="#autotoc_md23">Retrieving a list of nodes</a></li>
+<li class="level2"><a href="#autotoc_md24">Save and Test</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md24">Handling cases where a Graph could not be generated</a><ul><li class="level2"><a href="#autotoc_md25">Checking for success</a></li>
-<li class="level2"><a href="#autotoc_md26">Testing</a></li>
+<li class="level1"><a href="#autotoc_md25">Handling cases where a Graph could not be generated</a><ul><li class="level2"><a href="#autotoc_md26">Checking for success</a></li>
+<li class="level2"><a href="#autotoc_md27">Testing</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md27">Conclusion</a></li>
+<li class="level1"><a href="#autotoc_md28">Conclusion</a></li>
 </ul>
 </div>
 <div class="textblock"><p ><a class="anchor" id="md_src_Csharp_docs_markdown_3_graph_generator"></a> Previous Tutorial: <a class="el" href="_unity_project_setup.html">Project Setup</a> | Next Tutorial: <a class="el" href="_mesh_from_unity.html">Passing a Mesh From Unity to DHARTAPI</a></p>
-<h1><a class="anchor" id="autotoc_md16"></a>
+<h1><a class="anchor" id="autotoc_md17"></a>
 Intro</h1>
 <p >This tutorial picks up from where <a class="el" href="_unity_project_setup.html">Tutorial 1: Unity Project Setup</a> ended. If you are just beginning here, then you can download the Unity project from the bottom of tutorial 1.</p>
 <p >In this tutorial we will cover the following:</p>
@@ -114,10 +114,10 @@ Intro</h1>
 <li>Reading nodes from a graph after it has been generated.</li>
 <li>Handling cases where the GraphGenerator could not generate a graph.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md18"></a>
 Conceptual Overview</h2>
 <p >To put it simply, the <b>Graph Generator</b> maps out "accessible" space on a model from a given starting point. As the name implies, this map of the space is stored as a series of nodes and edges in a <b>Graph</b>. Each node represents a point in space that a human can occupy, and each edge between nodes indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool for analyzing space, since the graph or nodes it outputs can be used as input to all the analysis methods offered by <a class="el" href="namespace_d_h_a_r_t_a_p_i.html" title="Automated analysis of the built environent">DHARTAPI</a>. This allows the user to go straight from modifying a model or scene, to analyzing it with minimal effort.</p>
-<h1><a class="anchor" id="autotoc_md18"></a>
+<h1><a class="anchor" id="autotoc_md19"></a>
 Simple Graph Generation</h1>
 <p >For now, we will begin with the minimum required settings to run the Graph Generator then work our way up to examples that make use of the optional settings. To generate a graph at minimum, the following arguments are required:</p>
 <ol type="1">
@@ -131,7 +131,7 @@ Simple Graph Generation</h1>
 HFExampleScriptBlank</div></div>
     <p ><em>Figure</em> <b>3.1</b> <em>Blank HFExampleScript.cs</em></p>
 <p >To begin: open the blank HFExample Script that we created in the project setup by double clicking on it in the Unity editor if it isn't open already. You should see a blank page like the above. If you're coming from a previous script, please clear it so it matches this.</p>
-<h2><a class="anchor" id="autotoc_md19"></a>
+<h2><a class="anchor" id="autotoc_md20"></a>
 Using Declarations</h2>
 <div class="image">
 <img src="using_declarations.png" alt=""/>
@@ -149,7 +149,7 @@ Using Declarations</div></div>
 <div class="ttc" id="anamespace_d_h_a_r_t_a_p_i_1_1_ray_tracing_html"><div class="ttname"><a href="namespace_d_h_a_r_t_a_p_i_1_1_ray_tracing.html">DHARTAPI.RayTracing</a></div><div class="ttdoc">Cast rays to determine if and where they intersect geometry.</div><div class="ttdef"><b>Definition:</b> EmbreeBVH.cs:7</div></div>
 <div class="ttc" id="anamespace_d_h_a_r_t_a_p_i_1_1_spatial_structures_html"><div class="ttname"><a href="namespace_d_h_a_r_t_a_p_i_1_1_spatial_structures.html">DHARTAPI.SpatialStructures</a></div><div class="ttdoc">Standard fundamental data structures for representing space used throughout DHARTAPI.</div><div class="ttdef"><b>Definition:</b> Graph.cs:20</div></div>
 <div class="ttc" id="anamespace_d_h_a_r_t_a_p_i_html"><div class="ttname"><a href="namespace_d_h_a_r_t_a_p_i.html">DHARTAPI</a></div><div class="ttdoc">Automated analysis of the built environent</div><div class="ttdef"><b>Definition:</b> CommonTypes.cs:9</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md20"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md21"></a>
 Creating the Plane</h2>
 <p >Internally, the graph uses the <em>EmbreeRayTracer</em> which requires a BVH, so we can follow the process as the Project 2A to create a plane, then generate a BVH from it. If you want a more in-depth explanation of this code, please look at the previous tutorial if you want more information about this code.</p>
 <p >Add the following code in the body of the Start method on line 13:</p>
@@ -176,7 +176,7 @@ Creating the Plane</h2>
 <img src="creating_the_plane.PNG" alt=""/>
 <div class="caption">
 Picture of the start method at this point</div></div>
-    <h2><a class="anchor" id="autotoc_md21"></a>
+    <h2><a class="anchor" id="autotoc_md22"></a>
 Generating the Graph</h2>
 <p >Now that we have a BVH, let's generate a graph on it. In the code below, we will define a starting point for the graph, then the spacing between each node.</p>
 <p >We'll place our start point 1 meter above the origin of the scene (0,0,1). Starting directly at the origin, (0,0,0), would put the start point inside of the plane we're using for the ground causing the initial ground check to fail.</p>
@@ -201,7 +201,7 @@ Generating the Graph</h2>
 <img src="generating_the_graph.PNG" alt=""/>
 <div class="caption">
 Picture of entire Start method until this point.</div></div>
-    <h2><a class="anchor" id="autotoc_md22"></a>
+    <h2><a class="anchor" id="autotoc_md23"></a>
 Retrieving a list of nodes</h2>
 <p >Our graph G now contains a graph of the accessible space on the plane generated using the settings we passed as arguments. To verify that our results are correct, we will get a list of nodes from the graph, then print them to the unity console.</p>
 <p >Enter the following code at the bottom of the start method:</p>
@@ -214,7 +214,7 @@ Retrieving a list of nodes</h2>
 <img src="print_nodes.png" alt=""/>
 <div class="caption">
 Picture of entire Start method Until this Point</div></div>
-    <h2><a class="anchor" id="autotoc_md23"></a>
+    <h2><a class="anchor" id="autotoc_md24"></a>
 Save and Test</h2>
 <p >Here is the full script we've created from this demo. Make sure yours matches it before moving on to testing.</p>
 <div class="fragment"><div class="line"><span class="keyword">using </span>System.Collections;</div>
@@ -291,7 +291,7 @@ View Console</div></div>
 <p >&zwj;<b>Note:</b> this is not the full list of nodes. The list has been truncated due to the size of the output. To view every node, you must print them in a loop. </p>
 </blockquote>
 <p>Confirm your results match, then switch back to the previous view by clicking on the Project tab circled in red in Figure 3.5. After that, exit playmode by clicking on the blue play button at the top of the screen. If you've reached this point, then you have successfully generated a Graph using DHART and have completed this part of the tutorial. Next we will cover cases where the graph generator will be unable to generate a graph, and how to handle if a graph could not be generated.</p>
-<h1><a class="anchor" id="autotoc_md24"></a>
+<h1><a class="anchor" id="autotoc_md25"></a>
 Handling cases where a Graph could not be generated</h1>
 <p >We've covered situations where we know the GraphGenerator will generate a graph, however it's important to know what happens in situations where it is unknown if a graph can be generated because we're taking user input, operating on a new model, or making changes to the geometry we're generating the graph on.</p>
 <p >A Graph can fail to generate if at least one of the two cases is true:</p>
@@ -305,7 +305,7 @@ Handling cases where a Graph could not be generated</h1>
 </li>
 </ol>
 <p >This tutorial will cover safely handling cases where graphs could not be generated by checking the return value of the graph generator.</p>
-<h2><a class="anchor" id="autotoc_md25"></a>
+<h2><a class="anchor" id="autotoc_md26"></a>
 Checking for success</h2>
 <p >If the Graph Generator failed due to one of the two cases listed above, a null value will be returned instead of a graph. To catch when this happens, let's add a null check just after the graph is generated on <em>Line 41</em>.</p>
 <div class="fragment"><div class="line"><span class="comment">// Check if the graph generator succeeded</span></div>
@@ -315,7 +315,7 @@ Checking for success</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p >Now, if the graph fails to generate, our code will print a clear error message and immediately stop executing the script. If we did not have this check and our graph did fail to generate, then we would get a confusing Null Reference Exception later when interacting with the graph. <br  />
 </p>
-<h2><a class="anchor" id="autotoc_md26"></a>
+<h2><a class="anchor" id="autotoc_md27"></a>
 Testing</h2>
 <p >To test that our null check is successful, we'll go to <em>line 34</em> and change our start point to be at (200, 0, 1) instead of (0,0,1): <code>Vector3D start_point = new Vector3D(200, 0, 1);</code> This is far, far beyond where our plane is and should result in case 1: the initial ground check failing to find any valid ground.</p>
 <div class="image">
@@ -329,7 +329,7 @@ Picture of the full Start() method for this test.</div></div>
 Failure</div></div>
     <p ><em>Figure</em> <b>3.5</b> <em>Our error message printed after the graph failed to generate</em></p>
 <p >If you did this correctly, then the error message we wrote earlier should appear instead of the output from the previous section. If you received this result, then you now know how to handle cases where the graph generator could not generate a graph.</p>
-<h1><a class="anchor" id="autotoc_md27"></a>
+<h1><a class="anchor" id="autotoc_md28"></a>
 Conclusion</h1>
 <p >Here is a link the full project created in this guide: <a href="Tutorial%203%20-%20Graph%20Generator.zip">Full Project</a></p>
 <p >In this tutorial we successfully generated a graph from a bvh, start point, and spacing. We also handled a case where a graph was unable to be generated, and wrote a custom error message to be printed instead of throwing a null reference exception.</p>
@@ -340,7 +340,7 @@ Conclusion</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Jul 11 2022 19:30:33 for DHART by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
+    <li class="footer">Generated on Thu Aug 18 2022 00:00:09 for DHART by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4 </li>
   </ul>
 </div>
 </body>
