@@ -1,11 +1,16 @@
 import os
+import sys 
 from os.path import dirname as up
 
 __all__ = ['get_sample_model']
 
 # This should be in a function
 directory = os.path.join(os.path.dirname(os.path.realpath(__file__)) ,"bin" )
-os.add_dll_directory(directory)
+
+if sys.version_info >=(3,8):
+    os.add_dll_directory(directory)
+else:
+    os.environ['PATH'] = directory + os.pathsep + os.environ['PATH']
 
 def get_data_dir():
     """Returns the data directory of the package.
