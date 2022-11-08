@@ -28,6 +28,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/sphinx_highlight.js"></script>
     <script type="text/javascript" src="_static/js/copybutton.js"></script>
     <link rel="index" title="Index" href="genindex.html" >
     <link rel="search" title="Search" href="search.html" >
@@ -88,13 +89,13 @@
             
   <div class="section" id="installation">
 <span id="user-install"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h1>
-<p>This guide will explain how to install the Analysis package. Most of the explanation in Setup is how to
+<p>This guide will explain how to install the dhart package. Most of the explanation in Setup is how to
 create a virtual environment.  If you know how to do this, you can skip this and just use <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.</span></code>
 as the regular python package installation method.</p>
 <div class="section" id="check-basic-requirements">
 <h2>Check Basic Requirements<a class="headerlink" href="#check-basic-requirements" title="Permalink to this heading">¶</a></h2>
 <p>Currently tested on <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3.8+</span></code>.</p>
-<p>If the Analysis package is in the general repository, it will be located in <em class="xref py py-obj">Analysis/build/Python</em>.
+<p>If the dhart package is in the general repository, it will be located in <em class="xref py py-obj">dhart/build/Python</em>.
 Navigate to this folder and the directory should look like:</p>
 <div class="line-block">
 <div class="line">Python</div>
@@ -110,7 +111,7 @@ Navigate to this folder and the directory should look like:</p>
 <p>To install, open the windows <em class="xref py py-obj">Command Prompt</em> by typing <code class="docutils literal notranslate"><span class="pre">cmd</span></code> into the windows search bar.</p>
 <p>It is recommended to use virtual environments, at least to start, to ensure the code is working.
 For this, you will navigate to some folder that you can consistently find and is not part of the
-Analysis package. For example, make a folder called <code class="docutils literal notranslate"><span class="pre">py_envs</span></code> in your <code class="docutils literal notranslate"><span class="pre">Documents</span></code> folder.</p>
+dhart package. For example, make a folder called <code class="docutils literal notranslate"><span class="pre">py_envs</span></code> in your <code class="docutils literal notranslate"><span class="pre">Documents</span></code> folder.</p>
 <p>To setup a new virtual environment, go to the permanent folder location of your environments
 in the command prompt. For example:</p>
 <p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">C:\Documents\py_envs</span></code></p>
@@ -119,16 +120,16 @@ Otherwise, if python 3.8 is the only version installed, it should also be possib
 with <code class="docutils literal notranslate"><span class="pre">python</span></code>. Depending on your case, you will type:</p>
 <p><code class="docutils literal notranslate"><span class="pre">py</span> <span class="pre">-3.8</span> <span class="pre">-m</span> <span class="pre">venv</span> <span class="pre">[preferred</span> <span class="pre">name]</span></code></p>
 <p>In the above line <code class="docutils literal notranslate"><span class="pre">[preferred</span> <span class="pre">name]</span></code> is really what you would like it to say. For this explanation,
-we will call the environment <code class="docutils literal notranslate"><span class="pre">hf_analysis</span></code>, which means you type:</p>
-<p><code class="docutils literal notranslate"><span class="pre">py</span> <span class="pre">-3.8</span> <span class="pre">-m</span> <span class="pre">venv</span> <span class="pre">hf_analysis</span></code></p>
+we will call the environment <code class="docutils literal notranslate"><span class="pre">dhart_venv</span></code>, which means you type:</p>
+<p><code class="docutils literal notranslate"><span class="pre">py</span> <span class="pre">-3.8</span> <span class="pre">-m</span> <span class="pre">venv</span> <span class="pre">dhart_venv</span></code></p>
 <p>It should take a second or two to finish. You will not see anything happen.  If you now type <code class="docutils literal notranslate"><span class="pre">dir</span></code>, you should
-see a folder called <code class="docutils literal notranslate"><span class="pre">hf_analysis</span></code>.  Now you need to ‘activate’ the virtual environment by typing:</p>
-<p><code class="docutils literal notranslate"><span class="pre">hf_analysis\Scripts\activate</span></code></p>
-<p>Now you should see <code class="docutils literal notranslate"><span class="pre">(hf_analysis)</span></code> before the directory in the command prompt. This means you are successfully
+see a folder called <code class="docutils literal notranslate"><span class="pre">dhart_venv</span></code>.  Now you need to ‘activate’ the virtual environment by typing:</p>
+<p><code class="docutils literal notranslate"><span class="pre">dhart_venv\Scripts\activate</span></code></p>
+<p>Now you should see <code class="docutils literal notranslate"><span class="pre">(dhart_venv)</span></code> before the directory in the command prompt. This means you are successfully
 in the virtual environment.  Anytime you want to reload the installed environment, you will navigate to the
 folder you made and type the above line for activating the environment.  If you want to end your virtual environment,
 simply type <code class="docutils literal notranslate"><span class="pre">deactivate</span></code> in the command prompt.</p>
-<p>Now that the virtual environment is activated, navigate to the Analysis folder e.g., <code class="docutils literal notranslate"><span class="pre">build/Python</span></code>. Make sure
+<p>Now that the virtual environment is activated, navigate to the dhart folder e.g., <code class="docutils literal notranslate"><span class="pre">build/Python</span></code>. Make sure
 you are in the correct location by typing <code class="docutils literal notranslate"><span class="pre">dir</span></code> to see the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> file. To install, type:</p>
 <p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.</span></code></p>
 <p>To do a basic check that the package installed in the correct location, navigate to a different directory.
@@ -143,7 +144,7 @@ For example:</p>
 <p><code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span> <span class="pre">dhart.get_sample_model()</span></code></p>
 <p>You should see the output being a path to your virtual environment folder:</p>
 <p><code class="docutils literal notranslate"><span class="pre">[your</span> <span class="pre">directory]\\lib\\site-packages\\dhart\\Example</span> <span class="pre">Models\\</span></code></p>
-<p>Where [your directory] would be <code class="docutils literal notranslate"><span class="pre">C:\\Documents\\py_envs\\hf_analysis</span></code> if following the directions in this document.</p>
+<p>Where [your directory] would be <code class="docutils literal notranslate"><span class="pre">C:\\Documents\\py_envs\\dhart_venv</span></code> if following the directions in this document.</p>
 </div>
 </div>
 
@@ -194,7 +195,7 @@ For example:</p>
         &copy; Copyright 2020.
       </li>
       <li>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
       </li>
     </ul>
     </div>

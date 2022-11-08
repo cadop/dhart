@@ -28,6 +28,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
     <link rel="index" title="Index" href="../genindex.html" >
     <link rel="search" title="Search" href="../search.html" >
@@ -91,7 +92,7 @@
 <h1>dhart.raytracer.isValidBVH<a class="headerlink" href="#dhart-raytracer-isvalidbvh" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="dhart.raytracer.isValidBVH">
-<code class="sig-prename descclassname"><span class="pre">dhart.raytracer.</span></code><code class="sig-name descname"><span class="pre">isValidBVH</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">bvh</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><span class="pre">object</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#dhart.raytracer.isValidBVH" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">dhart.raytracer.</span></code><code class="sig-name descname"><span class="pre">isValidBVH</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">bvh</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><span class="pre">object</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#dhart.raytracer.isValidBVH" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the given object is actually a BVH before sending the pointer to C++</p>
 <p>If this check were not performed, the pointer from any object with the .pointer attribute
 could be sent to C++ with catastrophic results. This check must be performed to ensure that
@@ -100,7 +101,7 @@ every pointer sent to C++ will lead to a valid and fully initialized Raytracer</
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.10)"><strong>TypeError</strong></a> – The passed object was not a valid bvh</td>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.11)"><strong>TypeError</strong></a> – The passed object was not a valid bvh</td>
 </tr>
 </tbody>
 </table>
@@ -114,6 +115,16 @@ every pointer sent to C++ will lead to a valid and fully initialized Raytracer</
           </div>
       <div class="spc-rightsidebar span3">
         <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">dhart.raytracer.isValidBVH</a><ul>
+<li><a class="reference internal" href="#dhart.raytracer.isValidBVH"><code class="docutils literal notranslate"><span class="pre">isValidBVH()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
   <div>
     <h4>Previous topic</h4>
     <p class="topless"><a href="dhart.raytracer.IntersectOccluded.html"
@@ -144,7 +155,7 @@ every pointer sent to C++ will lead to a valid and fully initialized Raytracer</
         &copy; Copyright 2020.
       </li>
       <li>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
       </li>
     </ul>
     </div>

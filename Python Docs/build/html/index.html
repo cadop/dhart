@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     
-    <title>Human Factors: Automated analysis of the built environment &mdash; DHART 0.0.1 documentation</title>
+    <title>DHART: Automated analysis of the built environment &mdash; DHART 0.0.1 documentation</title>
     
     <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
     <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
@@ -28,6 +28,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/sphinx_highlight.js"></script>
     <script type="text/javascript" src="_static/js/copybutton.js"></script>
     <link rel="index" title="Index" href="genindex.html" >
     <link rel="search" title="Search" href="search.html" >
@@ -77,16 +78,25 @@
         <div class="bodywrapper">
           <div class="body" id="spc-section-body">
             
-  <div class="section" id="human-factors-automated-analysis-of-the-built-environment">
-<h1>Human Factors: Automated analysis of the built environment<a class="headerlink" href="#human-factors-automated-analysis-of-the-built-environment" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="dhart-automated-analysis-of-the-built-environment">
+<h1>DHART: Automated analysis of the built environment<a class="headerlink" href="#dhart-automated-analysis-of-the-built-environment" title="Permalink to this heading">¶</a></h1>
 <div class="section" id="contents">
 <h2>Contents<a class="headerlink" href="#contents" title="Permalink to this heading">¶</a></h2>
 <p>To get started from the very beginning with this package, please follow the installation guide below.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Setup</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="user_install.html">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributing.html">Contributing and Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_install.html">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="user_install.html#check-basic-requirements">Check Basic Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_install.html#setup">Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html">Contributing and Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#check-dependencies">Check dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#building-documentation">Building Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#testing">Testing</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a><ul>
@@ -95,19 +105,355 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="examples/raycast.html">Ray Casting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/graph_generator.html">Generating a Graph</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/path_planning.html">Path Planning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/view_analysis.html">Spatial View Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/visibility_graph.html">Visibility Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/graph_generator.html">Generating a Graph</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/graph/generating.html">Generate a Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/graph/get_csr.html">Get a CSR of the Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/graph/visualize.html">Visualize the Graph</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/path_planning.html">Path Planning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/path/search.html">Basic Search on A Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/path/visualize.html">Visualize a Path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/path/limit.html">Limit a Path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/path/multi_cost.html">Path Plan with Different Costs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/view_analysis.html">Spatial View Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/view/basic.html">Visualize Spatial View</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/visibility_graph.html">Visibility Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/visibility/basic.html">Visualize a Visbility Graph Connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/visibility/groups.html">Visibility Graph Grouping</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="code.html">Code Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="code.html#modules">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code.html#modules">Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/dhart.geometry.html">dhart.geometry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.geometry.html#provides-functions-for-manipulating-and-loading-geometry">Provides functions for manipulating and loading geometry.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.geometry.CommonRotations.html">dhart.geometry.CommonRotations</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.geometry.CommonRotations.html#dhart.geometry.CommonRotations"><code class="docutils literal notranslate"><span class="pre">CommonRotations</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.geometry.MeshInfo.html">dhart.geometry.MeshInfo</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.geometry.MeshInfo.html#dhart.geometry.MeshInfo"><code class="docutils literal notranslate"><span class="pre">MeshInfo</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.geometry.MeshInfo.Rotate.html">dhart.geometry.MeshInfo.Rotate</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.geometry.MeshInfo.SetupVertAndIndexArrays.html">dhart.geometry.MeshInfo.SetupVertAndIndexArrays</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.geometry.OBJGroupType.html">dhart.geometry.OBJGroupType</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.geometry.OBJGroupType.html#dhart.geometry.OBJGroupType"><code class="docutils literal notranslate"><span class="pre">OBJGroupType</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.geometry.ConstructPlane.html">dhart.geometry.ConstructPlane</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.geometry.ConstructPlane.html#dhart.geometry.ConstructPlane"><code class="docutils literal notranslate"><span class="pre">ConstructPlane()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.geometry.Flatten.html">dhart.geometry.Flatten</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.geometry.Flatten.html#dhart.geometry.Flatten"><code class="docutils literal notranslate"><span class="pre">Flatten()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.geometry.LoadOBJ.html">dhart.geometry.LoadOBJ</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.geometry.LoadOBJ.html#dhart.geometry.LoadOBJ"><code class="docutils literal notranslate"><span class="pre">LoadOBJ()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dhart.graphgenerator.html">dhart.graphgenerator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.graphgenerator.html#provides-a-function-to-generate-a-graph-on-accessible-terrain">Provides a function to generate a graph on accessible terrain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.graphgenerator.GenerateGraph.html">dhart.graphgenerator.GenerateGraph</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.graphgenerator.GenerateGraph.html#dhart.graphgenerator.GenerateGraph"><code class="docutils literal notranslate"><span class="pre">GenerateGraph()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dhart.pathfinding.html">dhart.pathfinding</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.pathfinding.html#find-paths-between-points-within-a-graph">Find paths between points within a graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.pathfinding.Path.html">dhart.pathfinding.Path</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.pathfinding.Path.html#dhart.pathfinding.Path"><code class="docutils literal notranslate"><span class="pre">Path</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.pathfinding.Path.GetPointers.html">dhart.pathfinding.Path.GetPointers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.pathfinding.Path.delete_fp.html">dhart.pathfinding.Path.delete_fp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.pathfinding.PathMemberStruct.html">dhart.pathfinding.PathMemberStruct</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.pathfinding.PathMemberStruct.html#dhart.pathfinding.PathMemberStruct"><code class="docutils literal notranslate"><span class="pre">PathMemberStruct</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.pathfinding.ConvertNodesToIds.html">dhart.pathfinding.ConvertNodesToIds</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.pathfinding.ConvertNodesToIds.html#dhart.pathfinding.ConvertNodesToIds"><code class="docutils literal notranslate"><span class="pre">ConvertNodesToIds()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.pathfinding.DijkstraFindAllShortestPaths.html">dhart.pathfinding.DijkstraFindAllShortestPaths</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.pathfinding.DijkstraFindAllShortestPaths.html#dhart.pathfinding.DijkstraFindAllShortestPaths"><code class="docutils literal notranslate"><span class="pre">DijkstraFindAllShortestPaths()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.pathfinding.DijkstraShortestPath.html">dhart.pathfinding.DijkstraShortestPath</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.pathfinding.DijkstraShortestPath.html#dhart.pathfinding.DijkstraShortestPath"><code class="docutils literal notranslate"><span class="pre">DijkstraShortestPath()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.pathfinding.calculate_distance_and_predecessor.html">dhart.pathfinding.calculate_distance_and_predecessor</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.pathfinding.calculate_distance_and_predecessor.html#dhart.pathfinding.calculate_distance_and_predecessor"><code class="docutils literal notranslate"><span class="pre">calculate_distance_and_predecessor()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dhart.raytracer.html">dhart.raytracer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.raytracer.html#perform-efficent-ray-intersections-with-geometry">Perform efficent ray intersections with geometry.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.raytracer.EmbreeBVH.html">dhart.raytracer.EmbreeBVH</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.raytracer.EmbreeBVH.html#dhart.raytracer.EmbreeBVH"><code class="docutils literal notranslate"><span class="pre">EmbreeBVH</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.raytracer.EmbreeBVH.AddMesh.html">dhart.raytracer.EmbreeBVH.AddMesh</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.raytracer.RayResultList.html">dhart.raytracer.RayResultList</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.raytracer.RayResultList.html#dhart.raytracer.RayResultList"><code class="docutils literal notranslate"><span class="pre">RayResultList</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.raytracer.RayResultList.GetPointers.html">dhart.raytracer.RayResultList.GetPointers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.raytracer.RayResultList.delete_fp.html">dhart.raytracer.RayResultList.delete_fp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.raytracer.ResultStruct.html">dhart.raytracer.ResultStruct</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.raytracer.ResultStruct.html#dhart.raytracer.ResultStruct"><code class="docutils literal notranslate"><span class="pre">ResultStruct</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.raytracer.Intersect.html">dhart.raytracer.Intersect</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.raytracer.Intersect.html#dhart.raytracer.Intersect"><code class="docutils literal notranslate"><span class="pre">Intersect()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.raytracer.IntersectDistanceDouble.html">dhart.raytracer.IntersectDistanceDouble</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.raytracer.IntersectDistanceDouble.html#dhart.raytracer.IntersectDistanceDouble"><code class="docutils literal notranslate"><span class="pre">IntersectDistanceDouble()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.raytracer.IntersectForPoint.html">dhart.raytracer.IntersectForPoint</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.raytracer.IntersectForPoint.html#dhart.raytracer.IntersectForPoint"><code class="docutils literal notranslate"><span class="pre">IntersectForPoint()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.raytracer.IntersectOccluded.html">dhart.raytracer.IntersectOccluded</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.raytracer.IntersectOccluded.html#dhart.raytracer.IntersectOccluded"><code class="docutils literal notranslate"><span class="pre">IntersectOccluded()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.raytracer.isValidBVH.html">dhart.raytracer.isValidBVH</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.raytracer.isValidBVH.html#dhart.raytracer.isValidBVH"><code class="docutils literal notranslate"><span class="pre">isValidBVH()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dhart.spatialstructures.html">dhart.spatialstructures</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.spatialstructures.html#store-relationhships-between-points-in-space">Store relationhships between points in space</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.spatialstructures.CostAggregationType.html">dhart.spatialstructures.CostAggregationType</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.CostAggregationType.html#dhart.spatialstructures.CostAggregationType"><code class="docutils literal notranslate"><span class="pre">CostAggregationType</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.spatialstructures.CostAlgorithmKeys.html">dhart.spatialstructures.CostAlgorithmKeys</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.CostAlgorithmKeys.html#dhart.spatialstructures.CostAlgorithmKeys"><code class="docutils literal notranslate"><span class="pre">CostAlgorithmKeys</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.spatialstructures.Direction.html">dhart.spatialstructures.Direction</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Direction.html#dhart.spatialstructures.Direction"><code class="docutils literal notranslate"><span class="pre">Direction</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.spatialstructures.Edge.html">dhart.spatialstructures.Edge</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Edge.html#dhart.spatialstructures.Edge"><code class="docutils literal notranslate"><span class="pre">Edge</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.spatialstructures.EdgeSumArray.html">dhart.spatialstructures.EdgeSumArray</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.EdgeSumArray.html#dhart.spatialstructures.EdgeSumArray"><code class="docutils literal notranslate"><span class="pre">EdgeSumArray</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.EdgeSumArray.GetPointers.html">dhart.spatialstructures.EdgeSumArray.GetPointers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.EdgeSumArray.delete_fp.html">dhart.spatialstructures.EdgeSumArray.delete_fp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.spatialstructures.Graph.html">dhart.spatialstructures.Graph</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Graph.html#dhart.spatialstructures.Graph"><code class="docutils literal notranslate"><span class="pre">Graph</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Graph.AddEdgeToGraph.html">dhart.spatialstructures.Graph.AddEdgeToGraph</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Graph.AggregateEdgeCosts.html">dhart.spatialstructures.Graph.AggregateEdgeCosts</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Graph.Clear.html">dhart.spatialstructures.Graph.Clear</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Graph.CompressToCSR.html">dhart.spatialstructures.Graph.CompressToCSR</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Graph.ConvertToLists.html">dhart.spatialstructures.Graph.ConvertToLists</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Graph.GetEdgeCost.html">dhart.spatialstructures.Graph.GetEdgeCost</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Graph.GetNodeID.html">dhart.spatialstructures.Graph.GetNodeID</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Graph.NumNodes.html">dhart.spatialstructures.Graph.NumNodes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Graph.add_node_attributes.html">dhart.spatialstructures.Graph.add_node_attributes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Graph.attrs_to_costs.html">dhart.spatialstructures.Graph.attrs_to_costs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Graph.clear_node_attribute.html">dhart.spatialstructures.Graph.clear_node_attribute</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Graph.getNodes.html">dhart.spatialstructures.Graph.getNodes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Graph.get_closest_nodes.html">dhart.spatialstructures.Graph.get_closest_nodes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Graph.get_closest_points.html">dhart.spatialstructures.Graph.get_closest_points</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Graph.get_node_attributes.html">dhart.spatialstructures.Graph.get_node_attributes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.Graph.get_node_points.html">dhart.spatialstructures.Graph.get_node_points</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.spatialstructures.NodeList.html">dhart.spatialstructures.NodeList</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.NodeList.html#dhart.spatialstructures.NodeList"><code class="docutils literal notranslate"><span class="pre">NodeList</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.NodeList.GetPointers.html">dhart.spatialstructures.NodeList.GetPointers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.NodeList.delete_fp.html">dhart.spatialstructures.NodeList.delete_fp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.spatialstructures.NodeStruct.html">dhart.spatialstructures.NodeStruct</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.NodeStruct.html#dhart.spatialstructures.NodeStruct"><code class="docutils literal notranslate"><span class="pre">NodeStruct</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.spatialstructures.CalculateCrossSlope.html">dhart.spatialstructures.CalculateCrossSlope</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.CalculateCrossSlope.html#dhart.spatialstructures.CalculateCrossSlope"><code class="docutils literal notranslate"><span class="pre">CalculateCrossSlope()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.spatialstructures.CalculateEnergyExpenditure.html">dhart.spatialstructures.CalculateEnergyExpenditure</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.CalculateEnergyExpenditure.html#dhart.spatialstructures.CalculateEnergyExpenditure"><code class="docutils literal notranslate"><span class="pre">CalculateEnergyExpenditure()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.spatialstructures.CreateListOfNodeStructs.html">dhart.spatialstructures.CreateListOfNodeStructs</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.spatialstructures.CreateListOfNodeStructs.html#dhart.spatialstructures.CreateListOfNodeStructs"><code class="docutils literal notranslate"><span class="pre">CreateListOfNodeStructs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dhart.viewanalysis.html">dhart.viewanalysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.viewanalysis.html#determine-visual-variety-from-points-within-the-environment">Determine visual variety from points within the environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.viewanalysis.AggregationType.html">dhart.viewanalysis.AggregationType</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.viewanalysis.AggregationType.html#dhart.viewanalysis.AggregationType"><code class="docutils literal notranslate"><span class="pre">AggregationType</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.viewanalysis.ViewAnalysisAggregates.html">dhart.viewanalysis.ViewAnalysisAggregates</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.viewanalysis.ViewAnalysisAggregates.html#dhart.viewanalysis.ViewAnalysisAggregates"><code class="docutils literal notranslate"><span class="pre">ViewAnalysisAggregates</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.viewanalysis.ViewAnalysisAggregates.GetPointers.html">dhart.viewanalysis.ViewAnalysisAggregates.GetPointers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.viewanalysis.ViewAnalysisAggregates.delete_fp.html">dhart.viewanalysis.ViewAnalysisAggregates.delete_fp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.viewanalysis.ViewAnalysisDirections.html">dhart.viewanalysis.ViewAnalysisDirections</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.viewanalysis.ViewAnalysisDirections.html#dhart.viewanalysis.ViewAnalysisDirections"><code class="docutils literal notranslate"><span class="pre">ViewAnalysisDirections</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.viewanalysis.ViewAnalysisDirections.GetPointers.html">dhart.viewanalysis.ViewAnalysisDirections.GetPointers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.viewanalysis.ViewAnalysisDirections.delete_fp.html">dhart.viewanalysis.ViewAnalysisDirections.delete_fp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.viewanalysis.SphericalViewAnalysis.html">dhart.viewanalysis.SphericalViewAnalysis</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.viewanalysis.SphericalViewAnalysis.html#dhart.viewanalysis.SphericalViewAnalysis"><code class="docutils literal notranslate"><span class="pre">SphericalViewAnalysis()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.viewanalysis.SphericalViewAnalysisAggregate.html">dhart.viewanalysis.SphericalViewAnalysisAggregate</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.viewanalysis.SphericalViewAnalysisAggregate.html#dhart.viewanalysis.SphericalViewAnalysisAggregate"><code class="docutils literal notranslate"><span class="pre">SphericalViewAnalysisAggregate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.viewanalysis.SphericallyDistributeRays.html">dhart.viewanalysis.SphericallyDistributeRays</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.viewanalysis.SphericallyDistributeRays.html#dhart.viewanalysis.SphericallyDistributeRays"><code class="docutils literal notranslate"><span class="pre">SphericallyDistributeRays()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dhart.visibilitygraph.html">dhart.visibilitygraph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.visibilitygraph.html#determine-which-locations-are-visible-from-other-locations">Determine which locations are visible from other locations.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.visibilitygraph.VisibilityGraphAllToAll.html">dhart.visibilitygraph.VisibilityGraphAllToAll</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.visibilitygraph.VisibilityGraphAllToAll.html#dhart.visibilitygraph.VisibilityGraphAllToAll"><code class="docutils literal notranslate"><span class="pre">VisibilityGraphAllToAll()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.visibilitygraph.VisibilityGraphGroupToGroup.html">dhart.visibilitygraph.VisibilityGraphGroupToGroup</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.visibilitygraph.VisibilityGraphGroupToGroup.html#dhart.visibilitygraph.VisibilityGraphGroupToGroup"><code class="docutils literal notranslate"><span class="pre">VisibilityGraphGroupToGroup()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dhart.visibilitygraph.VisibilityGraphUndirectedAllToAll.html">dhart.visibilitygraph.VisibilityGraphUndirectedAllToAll</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dhart.visibilitygraph.VisibilityGraphUndirectedAllToAll.html#dhart.visibilitygraph.VisibilityGraphUndirectedAllToAll"><code class="docutils literal notranslate"><span class="pre">VisibilityGraphUndirectedAllToAll()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="code.html#module-dhart">Main Module Methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="code.html#dhart.get_sample_model"><code class="docutils literal notranslate"><span class="pre">get_sample_model()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">Internal API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html#api-overview">API Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#native-functions-to-c-interface">Native Functions to C Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#native-functions-to-c-interface">Native Functions to C Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#module-dhart.common_native_functions">Main Module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.common_native_functions.ConvertPointsToArray"><code class="docutils literal notranslate"><span class="pre">ConvertPointsToArray()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.common_native_functions.GetStringPtr"><code class="docutils literal notranslate"><span class="pre">GetStringPtr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.common_native_functions.convert_strings_to_array"><code class="docutils literal notranslate"><span class="pre">convert_strings_to_array()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.common_native_functions.getDLLHandle"><code class="docutils literal notranslate"><span class="pre">getDLLHandle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.Exceptions.FileNotFoundException"><code class="docutils literal notranslate"><span class="pre">FileNotFoundException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.Exceptions.HFException"><code class="docutils literal notranslate"><span class="pre">HFException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.Exceptions.InvalidCostOperation"><code class="docutils literal notranslate"><span class="pre">InvalidCostOperation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.Exceptions.InvalidOBJException"><code class="docutils literal notranslate"><span class="pre">InvalidOBJException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.Exceptions.LogicError"><code class="docutils literal notranslate"><span class="pre">LogicError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.Exceptions.MissingDependencyException"><code class="docutils literal notranslate"><span class="pre">MissingDependencyException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.Exceptions.OutOfRangeException"><code class="docutils literal notranslate"><span class="pre">OutOfRangeException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.Exceptions.HF_STATUS"><code class="docutils literal notranslate"><span class="pre">HF_STATUS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.native_numpy_like.NativeNumpyLike"><code class="docutils literal notranslate"><span class="pre">NativeNumpyLike</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="api.html#dhart.native_numpy_like.NativeNumpyLike.array"><code class="docutils literal notranslate"><span class="pre">NativeNumpyLike.array</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="api.html#dhart.native_numpy_like.NativeNumpyLike.GetPointers"><code class="docutils literal notranslate"><span class="pre">NativeNumpyLike.GetPointers()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="api.html#dhart.native_numpy_like.NativeNumpyLike.__init__"><code class="docutils literal notranslate"><span class="pre">NativeNumpyLike.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#module-dhart.graphgenerator.graph_generator_native_functions">Graph Generator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.graphgenerator.graph_generator_native_functions.GenerateGraph"><code class="docutils literal notranslate"><span class="pre">GenerateGraph()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#module-dhart.geometry.meshinfo_native_functions">Geometry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.geometry.meshinfo_native_functions.C_GetMeshID"><code class="docutils literal notranslate"><span class="pre">C_GetMeshID()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.geometry.meshinfo_native_functions.C_GetMeshName"><code class="docutils literal notranslate"><span class="pre">C_GetMeshName()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.geometry.meshinfo_native_functions.C_GetMeshVertsAndTris"><code class="docutils literal notranslate"><span class="pre">C_GetMeshVertsAndTris()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.geometry.meshinfo_native_functions.CreateMesh"><code class="docutils literal notranslate"><span class="pre">CreateMesh()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.geometry.meshinfo_native_functions.CreateOBJ"><code class="docutils literal notranslate"><span class="pre">CreateOBJ()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.geometry.meshinfo_native_functions.DestroyMeshInfo"><code class="docutils literal notranslate"><span class="pre">DestroyMeshInfo()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#module-dhart.pathfinding.pathfinder_native_functions">Path Finding</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.pathfinding.pathfinder_native_functions.C_DestroyPath"><code class="docutils literal notranslate"><span class="pre">C_DestroyPath()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.pathfinding.pathfinder_native_functions.C_FindAllPaths"><code class="docutils literal notranslate"><span class="pre">C_FindAllPaths()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.pathfinding.pathfinder_native_functions.C_FindPath"><code class="docutils literal notranslate"><span class="pre">C_FindPath()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.pathfinding.pathfinder_native_functions.C_FindPaths"><code class="docutils literal notranslate"><span class="pre">C_FindPaths()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.pathfinding.pathfinder_native_functions.c_calculate_distance_and_predecessor"><code class="docutils literal notranslate"><span class="pre">c_calculate_distance_and_predecessor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#module-dhart.raytracer.raytracer_native_functions">Raytracer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.raytracer.raytracer_native_functions.C_AddMeshes"><code class="docutils literal notranslate"><span class="pre">C_AddMeshes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.raytracer.raytracer_native_functions.C_PreciseIntersection"><code class="docutils literal notranslate"><span class="pre">C_PreciseIntersection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.raytracer.raytracer_native_functions.CreateRayTracer"><code class="docutils literal notranslate"><span class="pre">CreateRayTracer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.raytracer.raytracer_native_functions.DestroyRayTracer"><code class="docutils literal notranslate"><span class="pre">DestroyRayTracer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.raytracer.raytracer_native_functions.FireMultipleOriginsOneDirection"><code class="docutils literal notranslate"><span class="pre">FireMultipleOriginsOneDirection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.raytracer.raytracer_native_functions.FireMultipleRays"><code class="docutils literal notranslate"><span class="pre">FireMultipleRays()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.raytracer.raytracer_native_functions.FireMultipleRaysDistance"><code class="docutils literal notranslate"><span class="pre">FireMultipleRaysDistance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.raytracer.raytracer_native_functions.FireOcclusionRays"><code class="docutils literal notranslate"><span class="pre">FireOcclusionRays()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.raytracer.raytracer_native_functions.FireOneOriginMultipleDirections"><code class="docutils literal notranslate"><span class="pre">FireOneOriginMultipleDirections()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.raytracer.raytracer_native_functions.FireRay"><code class="docutils literal notranslate"><span class="pre">FireRay()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#module-dhart.spatialstructures.spatial_structures_native_functions">Spatial Structures</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.spatialstructures.spatial_structures_native_functions.C_AddEdgeFromNodeIDs"><code class="docutils literal notranslate"><span class="pre">C_AddEdgeFromNodeIDs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.spatialstructures.spatial_structures_native_functions.C_AddEdgeFromNodes"><code class="docutils literal notranslate"><span class="pre">C_AddEdgeFromNodes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.spatialstructures.spatial_structures_native_functions.C_AggregateEdgeCosts"><code class="docutils literal notranslate"><span class="pre">C_AggregateEdgeCosts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.spatialstructures.spatial_structures_native_functions.C_AttrsToCosts"><code class="docutils literal notranslate"><span class="pre">C_AttrsToCosts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.spatialstructures.spatial_structures_native_functions.C_ClearGraph"><code class="docutils literal notranslate"><span class="pre">C_ClearGraph()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.spatialstructures.spatial_structures_native_functions.C_CreateGraph"><code class="docutils literal notranslate"><span class="pre">C_CreateGraph()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.spatialstructures.spatial_structures_native_functions.C_GetCSRPtrs"><code class="docutils literal notranslate"><span class="pre">C_GetCSRPtrs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.spatialstructures.spatial_structures_native_functions.C_GetEdgeCost"><code class="docutils literal notranslate"><span class="pre">C_GetEdgeCost()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.spatialstructures.spatial_structures_native_functions.C_GetNodeID"><code class="docutils literal notranslate"><span class="pre">C_GetNodeID()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.spatialstructures.spatial_structures_native_functions.C_NumNodes"><code class="docutils literal notranslate"><span class="pre">C_NumNodes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.spatialstructures.spatial_structures_native_functions.DestroyGraph"><code class="docutils literal notranslate"><span class="pre">DestroyGraph()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.spatialstructures.spatial_structures_native_functions.DestroyNodes"><code class="docutils literal notranslate"><span class="pre">DestroyNodes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.spatialstructures.spatial_structures_native_functions.GetEdgesForNode"><code class="docutils literal notranslate"><span class="pre">GetEdgesForNode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.spatialstructures.spatial_structures_native_functions.GetNodesFromGraph"><code class="docutils literal notranslate"><span class="pre">GetNodesFromGraph()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.spatialstructures.spatial_structures_native_functions.SizeOfNodeVector"><code class="docutils literal notranslate"><span class="pre">SizeOfNodeVector()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.spatialstructures.spatial_structures_native_functions.c_add_node_attributes"><code class="docutils literal notranslate"><span class="pre">c_add_node_attributes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.spatialstructures.spatial_structures_native_functions.c_clear_node_attribute"><code class="docutils literal notranslate"><span class="pre">c_clear_node_attribute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.spatialstructures.spatial_structures_native_functions.c_get_node_attributes"><code class="docutils literal notranslate"><span class="pre">c_get_node_attributes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#module-dhart.viewanalysis.viewanalysis_native_functions">View Analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.viewanalysis.viewanalysis_native_functions.C_SphericalViewAnalysis"><code class="docutils literal notranslate"><span class="pre">C_SphericalViewAnalysis()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.viewanalysis.viewanalysis_native_functions.C_SphericalViewAnalysisAggregate"><code class="docutils literal notranslate"><span class="pre">C_SphericalViewAnalysisAggregate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#module-dhart.visibilitygraph.visibility_graph_native_functions">Visibility Graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.visibilitygraph.visibility_graph_native_functions.C_VisibilityGraphAllToAll"><code class="docutils literal notranslate"><span class="pre">C_VisibilityGraphAllToAll()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.visibilitygraph.visibility_graph_native_functions.C_VisibilityGraphAlltoAllUndirected"><code class="docutils literal notranslate"><span class="pre">C_VisibilityGraphAlltoAllUndirected()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#dhart.visibilitygraph.visibility_graph_native_functions.C_VisibilityGraphGroupToGroup"><code class="docutils literal notranslate"><span class="pre">C_VisibilityGraphGroupToGroup()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -132,7 +478,7 @@
   <div>
     <h3><a href="#">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">Human Factors: Automated analysis of the built environment</a><ul>
+<li><a class="reference internal" href="#">DHART: Automated analysis of the built environment</a><ul>
 <li><a class="reference internal" href="#contents">Contents</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
@@ -165,7 +511,7 @@
         &copy; Copyright 2020.
       </li>
       <li>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
       </li>
     </ul>
     </div>

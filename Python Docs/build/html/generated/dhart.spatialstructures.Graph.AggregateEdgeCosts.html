@@ -28,6 +28,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
     <link rel="index" title="Index" href="../genindex.html" >
     <link rel="search" title="Search" href="../search.html" >
@@ -92,7 +93,7 @@
 <h1>dhart.spatialstructures.Graph.AggregateEdgeCosts<a class="headerlink" href="#dhart-spatialstructures-graph-aggregateedgecosts" title="Permalink to this heading">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="dhart.spatialstructures.Graph.AggregateEdgeCosts">
-<code class="sig-prename descclassname"><span class="pre">Graph.</span></code><code class="sig-name descname"><span class="pre">AggregateEdgeCosts</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">ct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dhart.spatialstructures.CostAggregationType.html#dhart.spatialstructures.CostAggregationType" title="dhart.spatialstructures.graph.CostAggregationType"><span class="pre">CostAggregationType</span></a></span></em>, <em><span class="n"><span class="pre">directed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em>, <em><span class="n"><span class="pre">cost_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="dhart.spatialstructures.EdgeSumArray.html#dhart.spatialstructures.EdgeSumArray" title="dhart.spatialstructures.graph.EdgeSumArray"><span class="pre">EdgeSumArray</span></a></span></span><a class="headerlink" href="#dhart.spatialstructures.Graph.AggregateEdgeCosts" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">Graph.</span></code><code class="sig-name descname"><span class="pre">AggregateEdgeCosts</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">ct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dhart.spatialstructures.CostAggregationType.html#dhart.spatialstructures.CostAggregationType" title="dhart.spatialstructures.graph.CostAggregationType"><span class="pre">CostAggregationType</span></a></span></em>, <em><span class="n"><span class="pre">directed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></em>, <em><span class="n"><span class="pre">cost_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="dhart.spatialstructures.EdgeSumArray.html#dhart.spatialstructures.EdgeSumArray" title="dhart.spatialstructures.graph.EdgeSumArray"><span class="pre">EdgeSumArray</span></a></span></span><a class="headerlink" href="#dhart.spatialstructures.Graph.AggregateEdgeCosts" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Get an aggregated score for every node in the graph based on</dt><dd>its edges.</dd>
 </dl>
@@ -117,7 +118,7 @@ will use the default cost of the graph.</li>
 in the graph ordered by node ID.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.10)"><strong>KeyError</strong></a> – cost_type wasn’t set to an empty string or the key of any
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.11)"><strong>KeyError</strong></a> – cost_type wasn’t set to an empty string or the key of any
     cost type in the graph.</p>
 </td>
 </tr>
@@ -133,6 +134,16 @@ in the graph ordered by node ID.</p>
           </div>
       <div class="spc-rightsidebar span3">
         <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">dhart.spatialstructures.Graph.AggregateEdgeCosts</a><ul>
+<li><a class="reference internal" href="#dhart.spatialstructures.Graph.AggregateEdgeCosts"><code class="docutils literal notranslate"><span class="pre">Graph.AggregateEdgeCosts()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
   <div>
     <h4>Previous topic</h4>
     <p class="topless"><a href="dhart.spatialstructures.Graph.AddEdgeToGraph.html"
@@ -163,7 +174,7 @@ in the graph ordered by node ID.</p>
         &copy; Copyright 2020.
       </li>
       <li>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
       </li>
     </ul>
     </div>

@@ -28,6 +28,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
     <link rel="index" title="Index" href="../genindex.html" >
     <link rel="search" title="Search" href="../search.html" >
@@ -91,7 +92,7 @@
 <h1>dhart.spatialstructures.Graph<a class="headerlink" href="#dhart-spatialstructures-graph" title="Permalink to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="dhart.spatialstructures.Graph">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><code class="sig-prename descclassname"><span class="pre">dhart.spatialstructures.</span></code><code class="sig-name descname"><span class="pre">Graph</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">graph_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.10)"><span class="pre">c_void_p</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.spatialstructures.Graph" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><code class="sig-prename descclassname"><span class="pre">dhart.spatialstructures.</span></code><code class="sig-name descname"><span class="pre">Graph</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">graph_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.11)"><span class="pre">c_void_p</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.spatialstructures.Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>A graph representing connections between points in space.</p>
 <p>Every Node in the graph contains a set of  X,Y,Z coordinates which can be
 used to represent a specific point in space. This graph internally is
@@ -125,7 +126,7 @@ free to add your own node attributes.</dd>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://scipy.github.io/devdocs/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.10.0.dev0+1382.fe66218)">scipy.sparse._csr.csr_matrix</a></td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://scipy.github.io/devdocs/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.10.0.dev0+2172.3fc65ee)">scipy.sparse._csr.csr_matrix</a></td>
 </tr>
 </tbody>
 </table>
@@ -133,7 +134,7 @@ free to add your own node attributes.</dd>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dhart.spatialstructures.Graph.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">graph_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.10)"><span class="pre">c_void_p</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.spatialstructures.Graph.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">graph_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.11)"><span class="pre">c_void_p</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.spatialstructures.Graph.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new graph wrapper object from a graph pointer</p>
 </dd></dl>
 
@@ -220,6 +221,20 @@ free to add your own node attributes.</dd>
       <div class="spc-rightsidebar span3">
         <div class="sphinxsidebarwrapper">
   <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">dhart.spatialstructures.Graph</a><ul>
+<li><a class="reference internal" href="#dhart.spatialstructures.Graph"><code class="docutils literal notranslate"><span class="pre">Graph</span></code></a><ul>
+<li><a class="reference internal" href="#dhart.spatialstructures.Graph.csr"><code class="docutils literal notranslate"><span class="pre">Graph.csr</span></code></a></li>
+<li><a class="reference internal" href="#dhart.spatialstructures.Graph.__init__"><code class="docutils literal notranslate"><span class="pre">Graph.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
     <h4>Previous topic</h4>
     <p class="topless"><a href="dhart.spatialstructures.EdgeSumArray.delete_fp.html"
                           title="previous chapter">dhart.spatialstructures.EdgeSumArray.delete_fp</a></p>
@@ -249,7 +264,7 @@ free to add your own node attributes.</dd>
         &copy; Copyright 2020.
       </li>
       <li>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
       </li>
     </ul>
     </div>

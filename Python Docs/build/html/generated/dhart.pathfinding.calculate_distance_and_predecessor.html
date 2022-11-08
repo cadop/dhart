@@ -28,6 +28,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
     <link rel="index" title="Index" href="../genindex.html" >
     <link rel="search" title="Search" href="../search.html" >
@@ -91,7 +92,7 @@
 <h1>dhart.pathfinding.calculate_distance_and_predecessor<a class="headerlink" href="#dhart-pathfinding-calculate-distance-and-predecessor" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="dhart.pathfinding.calculate_distance_and_predecessor">
-<code class="sig-prename descclassname"><span class="pre">dhart.pathfinding.</span></code><code class="sig-name descname"><span class="pre">calculate_distance_and_predecessor</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dhart.spatialstructures.Graph.html#dhart.spatialstructures.Graph" title="dhart.spatialstructures.graph.Graph"><span class="pre">Graph</span></a></span></em>, <em><span class="n"><span class="pre">cost_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.10)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><span class="pre">FloatArray2D</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">IntArray2D</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dhart.pathfinding.calculate_distance_and_predecessor" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">dhart.pathfinding.</span></code><code class="sig-name descname"><span class="pre">calculate_distance_and_predecessor</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dhart.spatialstructures.Graph.html#dhart.spatialstructures.Graph" title="dhart.spatialstructures.graph.Graph"><span class="pre">Graph</span></a></span></em>, <em><span class="n"><span class="pre">cost_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><span class="pre">FloatArray2D</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">IntArray2D</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dhart.pathfinding.calculate_distance_and_predecessor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate distance and predecessor matricies for a graph in C++</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -104,7 +105,7 @@ matricies. Uses graph’s default cost type if left blank</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.10)"><strong>KeyError</strong></a> – cost_type wasn’t left blank, and didn’t already exist in the
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.11)"><strong>KeyError</strong></a> – cost_type wasn’t left blank, and didn’t already exist in the
     graph.</p>
 </td>
 </tr>
@@ -149,6 +150,16 @@ matricies. Uses graph’s default cost type if left blank</li>
       <div class="spc-rightsidebar span3">
         <div class="sphinxsidebarwrapper">
   <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">dhart.pathfinding.calculate_distance_and_predecessor</a><ul>
+<li><a class="reference internal" href="#dhart.pathfinding.calculate_distance_and_predecessor"><code class="docutils literal notranslate"><span class="pre">calculate_distance_and_predecessor()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
     <h4>Previous topic</h4>
     <p class="topless"><a href="dhart.pathfinding.DijkstraShortestPath.html"
                           title="previous chapter">dhart.pathfinding.DijkstraShortestPath</a></p>
@@ -178,7 +189,7 @@ matricies. Uses graph’s default cost type if left blank</li>
         &copy; Copyright 2020.
       </li>
       <li>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
       </li>
     </ul>
     </div>
