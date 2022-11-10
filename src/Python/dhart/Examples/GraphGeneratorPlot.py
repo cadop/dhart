@@ -217,7 +217,7 @@ plt.show()
 up_slope, down_slope = 5, 5
 
 # Add a minimum out-degree for each node 
-min_connections = 8
+min_connections = 3
 
 # Generate the Graph
 graph = GenerateGraph(bvh, start_point, spacing, max_nodes,
