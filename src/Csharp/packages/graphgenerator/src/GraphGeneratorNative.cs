@@ -30,6 +30,9 @@ namespace DHARTAPI.GraphGenerator
 			\param max_step_connections Multiplier for number of children to generate for each node. Increasing this value will
 			increase the number of edges in the graph, and as a result the amount of memory the
 			algorithm requires.
+			\param min_connections The required out-degree for a node to be valid and stored.
+			 This must be greater than 0 and equal or less than the total connections created from max_step_connections.
+			 Default is 1. A value of 8 when max_step_connections=1 would be a grid.
 			\param core_count Number of cores to use. -1 will use all available cores, and 0 will run a serialized version of the algorithm.
 			\param walkable_id IDs of geometry to be considered as obstacles
 			\param obstacle_id IDs of geometry to be considered as walkable surfaces
@@ -48,6 +51,7 @@ namespace DHARTAPI.GraphGenerator
 			float down_step = 0.2f,
 			float down_slope = 20,
 			int max_step_connections = 1,
+			int min_connections =1,
 			int core_count = -1,
 			int[] obstacle_ids = null,
 			int[] walkable_ids = null)
@@ -75,6 +79,7 @@ namespace DHARTAPI.GraphGenerator
 					down_step,
 					down_slope,
 					max_step_connections,
+					min_connections,
 					core_count,
 					ref out_graph
 				);
@@ -91,6 +96,7 @@ namespace DHARTAPI.GraphGenerator
 					down_step,
 					down_slope,
 					max_step_connections,
+					min_connections,
 					core_count,
 					obstacle_ids,
 					walkable_ids,
@@ -118,6 +124,7 @@ namespace DHARTAPI.GraphGenerator
 			float DownStep,
 			float DownSlope,
 			int max_step_connection,
+			int min_connections,
 			int core_count,
 			ref IntPtr out_graph
 		);
@@ -133,6 +140,7 @@ namespace DHARTAPI.GraphGenerator
 			float DownStep,
 			float DownSlope,
 			int max_step_connection,
+			int min_connections,
 			int core_count,
 			int[] obstacle_ids,
 			int[] walkable_ids,

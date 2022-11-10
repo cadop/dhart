@@ -58,6 +58,10 @@ namespace HF {
 	\param		max_step_connection		Multiplier for number of children to generate for each node. 
 										Increasing this value will increase the number of edges in the graph, 
 										and as a result the amount of memory the algorithm requires.
+			
+	\param		min_connections			The required out-degree for a node to be valid and stored.
+										This must be greater than 0 and equal or less than the total connections created from max_step_connections.
+										Default is 1. A value of 8 when max_step_connections=1 would be a grid.
 
 	\param		core_count				Number of cores to use. -1 will use all available cores, 
 										and 0 or 1 will run a serialized version of the algorithm.
@@ -112,6 +116,7 @@ C_INTERFACE GenerateGraph(
 	float DownStep,
 	float DownSlope,
 	int max_step_connection,
+	int min_connections,
 	int core_count,
 	HF::SpatialStructures::Graph** out_graph
 );
@@ -146,6 +151,10 @@ C_INTERFACE GenerateGraph(
 	\param		max_step_connection		Multiplier for number of children to generate for each node.
 										Increasing this value will increase the number of edges in the graph,
 										and as a result the amount of memory the algorithm requires.
+	
+	\param		min_connections			The required out-degree for a node to be valid and stored.
+										 This must be greater than 0 and equal or less than the total connections created from max_step_connections.
+										 Default is 1. A value of 8 when max_step_connections=1 would be a grid.
 
 	\param		core_count				Number of cores to use. -1 will use all available cores,
 										and 0 or 1 will run a serialized version of the algorithm.
@@ -205,6 +214,7 @@ C_INTERFACE GenerateGraphObstacles(
 	float DownStep,
 	float DownSlope,
 	int max_step_connection,
+	int min_connections,
 	int core_count,
 	const int* obstacle_ids,
 	const int* walkable_ids,

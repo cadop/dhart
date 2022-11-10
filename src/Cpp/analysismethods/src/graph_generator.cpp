@@ -75,6 +75,7 @@ namespace HF::GraphGenerator{
 		real_t DownStep,
 		real_t DownSlope,
 		int max_step_connections,
+		int min_connections,
 		int cores,
 		real_t node_z_precision,
 		real_t node_spacing_precision,
@@ -100,6 +101,7 @@ namespace HF::GraphGenerator{
 		this->spacing = Spacing; 
 		this->core_count = cores;
 		this->max_step_connection = max_step_connections;
+		this->min_connections = min_connections;
 		
 		// Take the user defined start point and round it to the precision
 		// that the dhart package can handle. 
@@ -199,8 +201,8 @@ namespace HF::GraphGenerator{
 			// add the edges to the graph and todo list in sequence
 			for (int i = 0; i < to_do_count; i++) {
 
-				// Only continue if there are edges for this node
-				if (!OutEdges[i].empty()) {
+				// Only continue if there are edges for this node and the number of edges is the minimum desired
+				if (!OutEdges[i].empty() && OutEdges[i].size() >= this->min_connections) {
 
 					// Iterate through each edge and add it to the graph / todolist
 					for (const auto& e : OutEdges[i]) {
@@ -244,25 +246,30 @@ namespace HF::GraphGenerator{
 			);
 
 			// Create edges
-			std::vector<graph_edge> edges = GetChildren(
+			std::vector<graph_edge> OutEdges = GetChildren(
 				real_parent,
 				children,
 				rt_ref,
 				params
 			);
 
-			// Add new nodes to the queue. It'll drop them if they
-			// already were evaluated, or already existed on the queue
-			for (auto edge : edges)
-				todo.PushAny(edge.child);
+			// Make
+			if (!OutEdges.empty() && OutEdges.size() >= this->min_connections)
+			{
 
-			// Add new edges to the graph
-			if (!edges.empty())
-				for (const auto& edge : edges)
-					G.addEdge(parent, edge.child, edge.score);
+				// Add new nodes to the queue. It'll drop them if they
+				// already were evaluated, or already existed on the queue
+				for (auto edge : OutEdges)
+					todo.PushAny(edge.child);
 
-			// Increment node count
-			++num_nodes;
+				// Add new edges to the graph
+				if (!OutEdges.empty())
+					for (const auto& edge : OutEdges)
+						G.addEdge(parent, edge.child, edge.score);
+
+				// Increment node count
+				num_nodes++;
+			}
 		}
 		return G;
 	}
