@@ -108,7 +108,7 @@ of out directions (out-degree), which can avoid walls/edges and prevent
     # Set a smaller threshold for slope
     up_slope, down_slope = 5, 5
 
-    min_connections = 8
+    min_connections = 3
 
     # Generate the Graph
     graph = GenerateGraph(bvh, start_point, spacing, max_nodes,
