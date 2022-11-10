@@ -470,7 +470,7 @@ namespace HF::GraphGenerator {
 			down_step_type DownStep,
 			down_slope_type DownSlope,
 			int max_step_connections,
-			int min_connections =1,
+			int min_connections = 1,
 			int cores = -1,
 			z_precision_type node_z_precision = default_z_precision,
 			connect_offset_type  node_spacing_precision = default_spacing_precision,
