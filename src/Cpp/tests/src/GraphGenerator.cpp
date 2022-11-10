@@ -130,6 +130,53 @@ TEST(_GraphGenerator, BuildNetwork) {
 
 	ComparePoints(graph_nodes, expected_nodes);
 }
+
+
+TEST(_GraphGenerator, OutDegree) {
+	// Load an OBJ containing a simple plane
+	auto mesh = HF::Geometry::LoadMeshObjects("energy_blob_zup.obj", HF::Geometry::ONLY_FILE, false);
+
+	// Create a raytracer using this obj
+	EmbreeRayTracer ray_tracer = HF::RayTracer::EmbreeRayTracer(mesh);
+
+	//! [EX_OutDegree]
+
+	// Create a graphgenerator using the raytracer we just created
+	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+
+	// Setup Graph Parameters
+	std::array<float, 3> start_point{ 0,0,20 };
+	std::array<float, 3> spacing{ 1,1,1 };
+	int max_nodes = 5000;
+	int up_step = 0.5; int down_step = 0.5;
+	int up_slope = 20; int down_slope = 20;
+	int max_step_connections = 1;
+	int min_connections = 1;
+
+	// Generate the graph using our parameters
+	HF::SpatialStructures::Graph g = GG.BuildNetwork(
+		start_point,
+		spacing,
+		max_nodes,
+		up_step, down_step,
+		up_slope, down_slope,
+		max_step_connections,
+		min_connections
+	);
+
+	//! [EX_OutDegree]
+
+	auto out_str = PrintGraph(g);
+
+	const auto graph_nodes = g.Nodes();
+
+	auto node_count = graph_nodes.size();
+
+	//ASSERT_EQ(graph_nodes.size(), expected_nodes.size());
+
+	//ComparePoints(graph_nodes, expected_nodes);
+}
+
 TEST(_GraphGenerator, OBS_VisTestCase) {
 	EmbreeRayTracer ray_tracer = CreateObstacleExampleRT("obstacle_vistestcase.obj");
 
