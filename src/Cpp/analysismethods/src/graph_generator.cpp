@@ -202,7 +202,7 @@ namespace HF::GraphGenerator{
 			for (int i = 0; i < to_do_count; i++) {
 
 				// Only continue if there are edges for this node and the number of edges is the minimum desired
-				if (!OutEdges[i].empty() && OutEdges.size() >= this->min_connections) {
+				if (!OutEdges[i].empty() && OutEdges[i].size() >= this->min_connections) {
 
 					// Iterate through each edge and add it to the graph / todolist
 					for (const auto& e : OutEdges[i]) {
