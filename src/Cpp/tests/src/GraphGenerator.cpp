@@ -151,7 +151,7 @@ TEST(_GraphGenerator, OutDegree) {
 	float up_step = 0.5; float down_step = 0.5;
 	int up_slope = 20; int down_slope = 20;
 	int max_step_connections = 1;
-	int min_connections = 1;
+	int min_connections = 4;
 
 	// Generate the graph using our parameters
 	HF::SpatialStructures::Graph g = GG.BuildNetwork(
@@ -170,11 +170,8 @@ TEST(_GraphGenerator, OutDegree) {
 
 	const auto graph_nodes = g.Nodes();
 
-	auto node_count = graph_nodes.size();
+	ASSERT_EQ(graph_nodes.size(), 3412);
 
-	//ASSERT_EQ(graph_nodes.size(), expected_nodes.size());
-
-	//ComparePoints(graph_nodes, expected_nodes);
 }
 
 TEST(_GraphGenerator, OBS_VisTestCase) {
