@@ -2,7 +2,7 @@
 \label{a01249}\index{HF::GraphGenerator::UniqueQueue@{HF::GraphGenerator::UniqueQueue}}
 
 
-A queue that remembers every object inserted, and prevents the addition of nodes that have already been inserted even if they\textquotesingle{}ve been popped. 
+A queue that remembers every object inserted, and prevents the addition of nodes that have already been inserted even if they\textquotesingle{}ve been popped.  
 
 
 
@@ -23,23 +23,23 @@ Collaboration diagram for HF\+::Graph\+Generator\+::Unique\+Queue\+:
 \begin{DoxyCompactItemize}
 \item 
 bool \mbox{\hyperlink{a01249_ae0dc637a2d7c3aae32d8f035ac6b8016}{push}} (const \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} \&p)
-\begin{DoxyCompactList}\small\item\em Add a node to the queue if it has never previously been in the queue. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Add a node to the queue if it has never previously been in the queue.  \end{DoxyCompactList}\item 
 \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} \mbox{\hyperlink{a01249_a4aab642bf2c86a04f6890711ab7f2437}{pop}} ()
-\begin{DoxyCompactList}\small\item\em Remove the topmost node from the queue and return it. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Remove the topmost node from the queue and return it.  \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{a01249_a6d38edb96130bda3eb8126cc7501065f}{size}} () const
-\begin{DoxyCompactList}\small\item\em Determine how many nodes are currently in the queue. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Determine how many nodes are currently in the queue.  \end{DoxyCompactList}\item 
 \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} \mbox{\hyperlink{a01249_ad0b5106014e798684efc0d3bdc4939da}{pop\+From\+Dict}} ()
-\begin{DoxyCompactList}\small\item\em Retrieve the topmost node from the queue, but \char`\"{}forget\char`\"{} about it to allow it to enter again in the future. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Retrieve the topmost node from the queue, but \char`\"{}forget\char`\"{} about it to allow it to enter again in the future.  \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{a01249_ae990ff15bb41d6da5b477f0c91550116}{has\+Node}} (const \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} \&p) const
-\begin{DoxyCompactList}\small\item\em Check to see if the node has ever been in the queue. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Check to see if the node has ever been in the queue.  \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{a01249_a6708d5114e7fbc588ec4d17919d2ad8e}{force\+Push}} (const \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} \&p)
-\begin{DoxyCompactList}\small\item\em Forcibly push a node onto the queue without checking it. Saves a hash function, but risks breaking the invariant. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Forcibly push a node onto the queue without checking it. Saves a hash function, but risks breaking the invariant.  \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{a01249_ab659349de3391b0e2327f3736135752f}{empty}} () const
-\begin{DoxyCompactList}\small\item\em Tell if the queue is empty. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Tell if the queue is empty.  \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{a01249_a8b1e179e1aa3d8d585c5708ae08ef3cc}{clear\+Queue}} ()
-\begin{DoxyCompactList}\small\item\em Clear every node from the queue without forgetting them. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Clear every node from the queue without forgetting them.  \end{DoxyCompactList}\item 
 std\+::vector$<$ \mbox{\hyperlink{a02005}{Spatial\+Structures\+::\+Node}} $>$ \mbox{\hyperlink{a01249_ae941f357ddbefc3b670c43ce2d90b589}{pop\+Many}} (int max=-\/1)
-\begin{DoxyCompactList}\small\item\em Pop a set amount of nodes from the queue, and return them as a vector. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Pop a set amount of nodes from the queue, and return them as a vector.  \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename arr\+\_\+type $>$ }\\bool \mbox{\hyperlink{a01249_a35a8d70ffef5833ae214feaa89aaf220}{Push\+Any}} (const arr\+\_\+type \&node)
 \begin{DoxyCompactList}\small\item\em Call push with any type of object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
@@ -52,7 +52,7 @@ robin\+\_\+hood\+::unordered\+\_\+map$<$ \mbox{\hyperlink{a02005}{HF\+::\+Spatia
 
 
 \doxysubsection{Detailed Description}
-A queue that remembers every object inserted, and prevents the addition of nodes that have already been inserted even if they\textquotesingle{}ve been popped.
+A queue that remembers every object inserted, and prevents the addition of nodes that have already been inserted even if they\textquotesingle{}ve been popped. 
 
 \begin{DoxyInvariant}{Invariant}
 All unique nodes can only enter the queue once. After they\textquotesingle{}ve been popped, future attempts to push them will fail.
@@ -77,7 +77,7 @@ Definition at line \mbox{\hyperlink{a00017_source_l00029}{29}} of file \mbox{\hy
 
 
 
-Clear every node from the queue without forgetting them. 
+Clear every node from the queue without forgetting them.  
 
 
 
@@ -95,7 +95,7 @@ References \mbox{\hyperlink{a00017_source_l00031}{node\+\_\+queue}}.
 
 
 
-Tell if the queue is empty. 
+Tell if the queue is empty.  
 
 \begin{DoxyReturn}{Returns}
 False if there is atleast one node in the queue. True otherwise. 
@@ -110,7 +110,7 @@ References \mbox{\hyperlink{a00014_source_l00032}{size()}}.
 
 
 
-Referenced by \mbox{\hyperlink{a00005_source_l00220}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom()}}, and \mbox{\hyperlink{a00005_source_l00139}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom\+Parallel()}}.
+Referenced by \mbox{\hyperlink{a00005_source_l00222}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom()}}, and \mbox{\hyperlink{a00005_source_l00141}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom\+Parallel()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -136,7 +136,7 @@ Here is the caller graph for this function\+:
 
 
 
-Forcibly push a node onto the queue without checking it. Saves a hash function, but risks breaking the invariant. 
+Forcibly push a node onto the queue without checking it. Saves a hash function, but risks breaking the invariant.  
 
 
 \begin{DoxyParams}{Parameters}
@@ -162,7 +162,7 @@ References \mbox{\hyperlink{a00017_source_l00031}{node\+\_\+queue}}.
 
 
 
-Check to see if the node has ever been in the queue. 
+Check to see if the node has ever been in the queue.  
 
 
 \begin{DoxyParams}{Parameters}
@@ -184,7 +184,7 @@ Definition at line \mbox{\hyperlink{a00014_source_l00043}{43}} of file \mbox{\hy
 
 
 
-Remove the topmost node from the queue and return it. 
+Remove the topmost node from the queue and return it.  
 
 \begin{DoxyReturn}{Returns}
 The node at the top of the queue. 
@@ -204,7 +204,7 @@ References \mbox{\hyperlink{a00017_source_l00031}{node\+\_\+queue}}.
 
 
 
-Referenced by \mbox{\hyperlink{a00005_source_l00220}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom()}}, and \mbox{\hyperlink{a00014_source_l00064}{pop\+Many()}}.
+Referenced by \mbox{\hyperlink{a00005_source_l00222}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom()}}, and \mbox{\hyperlink{a00014_source_l00064}{pop\+Many()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -222,7 +222,7 @@ Here is the caller graph for this function\+:
 
 
 
-Retrieve the topmost node from the queue, but \char`\"{}forget\char`\"{} about it to allow it to enter again in the future. 
+Retrieve the topmost node from the queue, but \char`\"{}forget\char`\"{} about it to allow it to enter again in the future.  
 
 \begin{DoxyReturn}{Returns}
 Topmost node in the queue. 
@@ -245,7 +245,7 @@ References \mbox{\hyperlink{a00017_source_l00031}{node\+\_\+queue}}.
 
 
 
-Pop a set amount of nodes from the queue, and return them as a vector. 
+Pop a set amount of nodes from the queue, and return them as a vector.  
 
 
 \begin{DoxyParams}{Parameters}
@@ -266,7 +266,7 @@ References \mbox{\hyperlink{a00017_source_l00031}{node\+\_\+queue}}, \mbox{\hype
 
 
 
-Referenced by \mbox{\hyperlink{a00005_source_l00139}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom\+Parallel()}}.
+Referenced by \mbox{\hyperlink{a00005_source_l00141}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom\+Parallel()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -292,7 +292,7 @@ Here is the caller graph for this function\+:
 
 
 
-Add a node to the queue if it has never previously been in the queue. 
+Add a node to the queue if it has never previously been in the queue.  
 
 
 \begin{DoxyParams}{Parameters}
@@ -314,7 +314,7 @@ References \mbox{\hyperlink{a00017_source_l00031}{node\+\_\+queue}}.
 
 
 
-Referenced by \mbox{\hyperlink{a00005_source_l00139}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom\+Parallel()}}, and \mbox{\hyperlink{a00017_source_l00118}{Push\+Any()}}.
+Referenced by \mbox{\hyperlink{a00005_source_l00141}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom\+Parallel()}}, and \mbox{\hyperlink{a00017_source_l00118}{Push\+Any()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -354,7 +354,7 @@ References \mbox{\hyperlink{a00014_source_l00011}{push()}}.
 
 
 
-Referenced by \mbox{\hyperlink{a00005_source_l00220}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom()}}, and \mbox{\hyperlink{a00005_source_l00069}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+IMPL\+\_\+\+Build\+Network()}}.
+Referenced by \mbox{\hyperlink{a00005_source_l00222}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom()}}, and \mbox{\hyperlink{a00005_source_l00069}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+IMPL\+\_\+\+Build\+Network()}}.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -380,7 +380,7 @@ Here is the caller graph for this function\+:
 
 
 
-Determine how many nodes are currently in the queue. 
+Determine how many nodes are currently in the queue.  
 
 \begin{DoxyReturn}{Returns}
 The number of nodes in the queue 
@@ -395,7 +395,7 @@ References \mbox{\hyperlink{a00017_source_l00031}{node\+\_\+queue}}.
 
 
 
-Referenced by \mbox{\hyperlink{a00005_source_l00139}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom\+Parallel()}}, \mbox{\hyperlink{a00014_source_l00055}{empty()}}, and \mbox{\hyperlink{a00014_source_l00064}{pop\+Many()}}.
+Referenced by \mbox{\hyperlink{a00005_source_l00141}{HF\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom\+Parallel()}}, \mbox{\hyperlink{a00014_source_l00055}{empty()}}, and \mbox{\hyperlink{a00014_source_l00064}{pop\+Many()}}.
 
 Here is the caller graph for this function\+:
 \nopagebreak

@@ -17,9 +17,9 @@ struct \mbox{\hyperlink{a01329}{Distance\+And\+Predecessor}}
 struct \mbox{\hyperlink{a01321}{Dist\+Pred}}
 \begin{DoxyCompactList}\small\item\em A single row of a distance and predecessor matrix. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{a00406_a01309}{Edge\+\_\+\+Cost}}
-\begin{DoxyCompactList}\small\item\em Data stored for every edge in the \mbox{\hyperlink{a01317}{Boost\+Graph}}.  \mbox{\hyperlink{a00406_a01309}{More...}}\end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Data stored for every edge in the \mbox{\hyperlink{a01317}{Boost\+Graph}}.   \mbox{\hyperlink{a00406_a01309}{More...}}\end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{a00406_a01313}{vertex\+\_\+data}}
-\begin{DoxyCompactList}\small\item\em Data stored for every vertex in the \mbox{\hyperlink{a01317}{Boost\+Graph}}. \mbox{\hyperlink{a00406_a01313}{More...}}\end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Data stored for every vertex in the \mbox{\hyperlink{a01317}{Boost\+Graph}}.  \mbox{\hyperlink{a00406_a01313}{More...}}\end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -28,7 +28,7 @@ typedef boost\+::compressed\+\_\+sparse\+\_\+row\+\_\+graph$<$ boost\+::directed
 typedef boost\+::graph\+\_\+traits$<$ \mbox{\hyperlink{a00406_a9314d552e0a8092644fa080c9945bd25}{graph\+\_\+t}} $>$\+::vertex\+\_\+descriptor \mbox{\hyperlink{a00406_a4dc50f188646ed884b58b3e26c7932a5}{vertex\+\_\+descriptor}}
 \begin{DoxyCompactList}\small\item\em Quick alias to shorten the typename of vertex descriptors for our graph\+\_\+t type. /summary\texorpdfstring{$>$}{>} \end{DoxyCompactList}\item 
 typedef std\+::pair$<$ int, int $>$ \mbox{\hyperlink{a00406_acc378c1e475802d96758aaef12d33dbc}{pair}}
-\begin{DoxyCompactList}\small\item\em Shorten std\+::pair to simplify graph construction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Shorten std\+::pair to simplify graph construction.  \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -39,7 +39,7 @@ typedef std\+::pair$<$ int, int $>$ \mbox{\hyperlink{a00406_acc378c1e475802d9675
 \mbox{\hyperlink{a01321}{Dist\+Pred}} \mbox{\hyperlink{a00406_a9f6490539108da057db2486295458886}{Build\+Distance\+And\+Predecessor}} (const \mbox{\hyperlink{a00406_a9314d552e0a8092644fa080c9945bd25}{graph\+\_\+t}} \&g, int id)
 \begin{DoxyCompactList}\small\item\em Build a row of the distance and predecessor matrices for the node at id. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{a02017}{Path}} \mbox{\hyperlink{a00406_a47d06b1c4bd84f4d0a7519ea0e96ff02}{Find\+Path}} (\mbox{\hyperlink{a01317}{Boost\+Graph}} $\ast$bg, int start\+\_\+id, int end\+\_\+id)
-\begin{DoxyCompactList}\small\item\em Find a path between points A and B using Dijkstra\textquotesingle{}s Shortest Path algorithm. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Find a path between points A and B using Dijkstra\textquotesingle{}s Shortest Path algorithm.  \end{DoxyCompactList}\item 
 vector$<$ \mbox{\hyperlink{a02017}{Path}} $>$ \mbox{\hyperlink{a00406_a15badb9d0a17849de7b21105605c9c91}{Find\+Paths}} (\mbox{\hyperlink{a01317}{Boost\+Graph}} $\ast$bg, const std\+::vector$<$ int $>$ \&start\+\_\+points, const std\+::vector$<$ int $>$ \&end\+\_\+points)
 \begin{DoxyCompactList}\small\item\em Find a path from every id in start\+\_\+ids to the matching end node in end\+\_\+ids. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{a00406_a417084c97d0672af2da7739157a9d8c0}{Insert\+Paths\+Into\+Array}} (const \mbox{\hyperlink{a01317}{Boost\+Graph}} $\ast$bg, const std\+::vector$<$ int $>$ \&start\+\_\+points, const std\+::vector$<$ int $>$ \&end\+\_\+points, \mbox{\hyperlink{a02017}{HF\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$out\+\_\+paths, \mbox{\hyperlink{a02013}{HF\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+path\+\_\+members, int $\ast$out\+\_\+sizes)
@@ -51,7 +51,7 @@ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{a01317}{Boost\+Graph}}, \mbox{\hyperl
 void \mbox{\hyperlink{a00406_a69bd3efcc13788e7c4be43b67d6002e5}{Insert\+All\+To\+All\+Paths\+Into\+Array}} (\mbox{\hyperlink{a01317}{Boost\+Graph}} $\ast$bg, \mbox{\hyperlink{a02017}{HF\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$out\+\_\+paths, \mbox{\hyperlink{a02013}{HF\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+path\+\_\+members, int $\ast$out\+\_\+sizes)
 \begin{DoxyCompactList}\small\item\em A special version of Find\+Paths optimized for the C\+\_\+\+Interface, such that all paths possible from each node to every other node are generated. \end{DoxyCompactList}\item 
 std\+::vector$<$ \mbox{\hyperlink{a02017}{HF\+::\+Spatial\+Structures\+::\+Path}} $>$ \mbox{\hyperlink{a00406_abb65ba6c3ed7a1999d9f40ae14ba3269}{Find\+All\+Paths}} (\mbox{\hyperlink{a01317}{Boost\+Graph}} $\ast$bg)
-\begin{DoxyCompactList}\small\item\em Find a path from every node to every node (NOTE\+: Not implemented yet.) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Find a path from every node to every node (NOTE\+: Not implemented yet.)  \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -71,7 +71,7 @@ This namespace utilizes pathfinding algorithms from Boost internally.\+To make u
 \index{HF::Pathfinding::Edge\_Cost@{HF::Pathfinding::Edge\_Cost}}\label{a01309}
 \Hypertarget{a00406_a01309}
 \doxysubsubsection{struct HF\+::Pathfinding\+::Edge\+\_\+\+Cost}
-Data stored for every edge in the \mbox{\hyperlink{a01317}{Boost\+Graph}}. 
+Data stored for every edge in the \mbox{\hyperlink{a01317}{Boost\+Graph}}.  
 
 Each edge in the graph only stores its weight as a float. 
 
@@ -98,7 +98,7 @@ Cost of traversing this edge. \\
 \index{HF::Pathfinding::vertex\_data@{HF::Pathfinding::vertex\_data}}\label{a01313}
 \Hypertarget{a00406_a01313}
 \doxysubsubsection{struct HF\+::Pathfinding\+::vertex\+\_\+data}
-Data stored for every vertex in the \mbox{\hyperlink{a01317}{Boost\+Graph}}.
+Data stored for every vertex in the \mbox{\hyperlink{a01317}{Boost\+Graph}}. 
 
 Every vertex stores in the graph stores it\textquotesingle{}s index p and a unique double d.
 
@@ -167,7 +167,7 @@ Definition at line \mbox{\hyperlink{a00134_source_l00135}{135}} of file \mbox{\h
 
 
 
-Shorten std\+::pair to simplify graph construction. 
+Shorten std\+::pair to simplify graph construction.  
 
 
 
@@ -216,20 +216,12 @@ Definition at line \mbox{\hyperlink{a00137_source_l00146}{146}} of file \mbox{\h
 
 
 
-References \mbox{\hyperlink{a00137_source_l00049}{HF\+::\+Pathfinding\+::\+Dist\+Pred\+::distance}}, \mbox{\hyperlink{a00206_source_l03956}{nlohmann\+::detail\+::get()}}, \mbox{\hyperlink{a00137_source_l00050}{HF\+::\+Pathfinding\+::\+Dist\+Pred\+::predecessor}}, and \mbox{\hyperlink{a00134_source_l00100}{HF\+::\+Pathfinding\+::\+Edge\+\_\+\+Cost\+::weight}}.
+References \mbox{\hyperlink{a00137_source_l00049}{HF\+::\+Pathfinding\+::\+Dist\+Pred\+::distance}}, \mbox{\hyperlink{a00137_source_l00050}{HF\+::\+Pathfinding\+::\+Dist\+Pred\+::predecessor}}, and \mbox{\hyperlink{a00134_source_l00100}{HF\+::\+Pathfinding\+::\+Edge\+\_\+\+Cost\+::weight}}.
 
 
 
 Referenced by \mbox{\hyperlink{a00137_source_l00166}{Find\+Path()}}, \mbox{\hyperlink{a00137_source_l00178}{Find\+Paths()}}, and \mbox{\hyperlink{a00137_source_l00201}{Insert\+Paths\+Into\+Array()}}.
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00406_a9f6490539108da057db2486295458886_cgraph}
-\end{center}
-\end{figure}
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
@@ -414,7 +406,7 @@ Here is the caller graph for this function\+:
 
 
 
-Find a path from every node to every node (NOTE\+: Not implemented yet.) 
+Find a path from every node to every node (NOTE\+: Not implemented yet.)  
 
 
 \begin{DoxyParams}{Parameters}
@@ -473,7 +465,7 @@ This will allocate a large amount of memory. Ensure that this won\textquotesingl
 
 
 
-Find a path between points A and B using Dijkstra\textquotesingle{}s Shortest Path algorithm. 
+Find a path between points A and B using Dijkstra\textquotesingle{}s Shortest Path algorithm.  
 
 
 \begin{DoxyParams}{Parameters}
@@ -706,7 +698,7 @@ Definition at line \mbox{\hyperlink{a00137_source_l00267}{267}} of file \mbox{\h
 
 
 
-References \mbox{\hyperlink{a00134_source_l00168}{HF\+::\+Pathfinding\+::\+Boost\+Graph\+::g}}, \mbox{\hyperlink{a00206_source_l03956}{nlohmann\+::detail\+::get()}}, \mbox{\hyperlink{a00140_source_l00439}{HF\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::\+Get\+Row\+Of\+Dist()}}, \mbox{\hyperlink{a00140_source_l00453}{HF\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::\+Get\+Row\+Of\+Pred()}}, \mbox{\hyperlink{a00134_source_l00169}{HF\+::\+Pathfinding\+::\+Boost\+Graph\+::p}}, and \mbox{\hyperlink{a00134_source_l00100}{HF\+::\+Pathfinding\+::\+Edge\+\_\+\+Cost\+::weight}}.
+References \mbox{\hyperlink{a00134_source_l00168}{HF\+::\+Pathfinding\+::\+Boost\+Graph\+::g}}, \mbox{\hyperlink{a00140_source_l00439}{HF\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::\+Get\+Row\+Of\+Dist()}}, \mbox{\hyperlink{a00140_source_l00453}{HF\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::\+Get\+Row\+Of\+Pred()}}, \mbox{\hyperlink{a00134_source_l00169}{HF\+::\+Pathfinding\+::\+Boost\+Graph\+::p}}, and \mbox{\hyperlink{a00134_source_l00100}{HF\+::\+Pathfinding\+::\+Edge\+\_\+\+Cost\+::weight}}.
 
 
 

@@ -177,10 +177,10 @@
 \DoxyCodeLine{\Hypertarget{a00011_source_l00233}00233         \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00234}00234             \textcolor{comment}{// Determine the type of connection between the parent and child}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00235}00235             \textcolor{comment}{//  including if it is a step, slope, or not connected}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00236}00236             \textcolor{keyword}{const} \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935e}{STEP}} connection\_type = \mbox{\hyperlink{a00397_aeab1db37b5aa614235f109d5dd9711a9}{CheckConnection}}(parent, child, rt, GP);}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00236}00236             \textcolor{keyword}{const} STEP connection\_type = \mbox{\hyperlink{a00397_aeab1db37b5aa614235f109d5dd9711a9}{CheckConnection}}(parent, child, rt, GP);}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00237}00237 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00238}00238             \textcolor{comment}{// If the node is connected Add it to out list of valid children}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00239}00239             \textcolor{keywordflow}{if} (connection\_type != \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9}{STEP::NOT\_CONNECTED}})}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00239}00239             \textcolor{keywordflow}{if} (connection\_type != STEP::NOT\_CONNECTED)}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00240}00240             \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00241}00241                 \textcolor{comment}{// Add the edge to the array of children, storing the distance and connection type}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00242}00242                 valid\_edges.emplace\_back(\mbox{\hyperlink{a00397_a2472e370aa77f9486bb1c46a1ff704c5}{graph\_edge}}(\mbox{\hyperlink{a00397_abf1a3ae7dc89b3cf430e059a87fcd477}{ToNode}}(child), \mbox{\hyperlink{a00397_a7f96186b8f24f878404d1feccf2f64db}{DistanceTo}}(parent, child), connection\_type));}
@@ -251,31 +251,31 @@
 \DoxyCodeLine{\Hypertarget{a00011_source_l00307}00307         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a01237}{GraphParams}}\& params)}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00308}00308     \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00309}00309         \textcolor{comment}{// Get groundoffset from graph parameters}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00310}00310         \textcolor{keyword}{const} \textcolor{keyword}{auto} \mbox{\hyperlink{a00399_a78ab286d1837e1db2b8b4ce90bc9fffa}{GROUND\_OFFSET}} = params.\mbox{\hyperlink{a00397_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00397_a4fa4f096863296469711e52da4b36b9c}{ground\_offset}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00310}00310         \textcolor{keyword}{const} \textcolor{keyword}{auto} GROUND\_OFFSET = params.\mbox{\hyperlink{a00397_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00397_a4fa4f096863296469711e52da4b36b9c}{ground\_offset}};}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00311}00311 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00312}00312         \textcolor{comment}{// Create a copy of parent and child that can be modified}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00313}00313         \textcolor{keyword}{auto} node1 = parent;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00314}00314         \textcolor{keyword}{auto} node2 = child;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00315}00315 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00316}00316         \textcolor{comment}{// Offset them from the ground slightly}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00317}00317         node1[2] += \mbox{\hyperlink{a00399_a78ab286d1837e1db2b8b4ce90bc9fffa}{GROUND\_OFFSET}};}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00318}00318         node2[2] += \mbox{\hyperlink{a00399_a78ab286d1837e1db2b8b4ce90bc9fffa}{GROUND\_OFFSET}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00317}00317         node1[2] += GROUND\_OFFSET;}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00318}00318         node2[2] += GROUND\_OFFSET;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00319}00319 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00320}00320         \textcolor{comment}{// See if there's a direct line of sight between parent and child}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00321}00321         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{a00397_ace66c1b60785c32433402f012019ab81}{OcclusionCheck}}(node1, node2, rt)) \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00322}00322             \textcolor{comment}{// If there is a direct line of sight, and they're on the same plane}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00323}00323             \textcolor{comment}{// then there is no step.}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00324}00324             \textcolor{keywordflow}{if} (abs(node1[2] -\/ node2[2]) < \mbox{\hyperlink{a00399_a78ab286d1837e1db2b8b4ce90bc9fffa}{GROUND\_OFFSET}}) \textcolor{keywordflow}{return} \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a}{STEP::NONE}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00324}00324             \textcolor{keywordflow}{if} (abs(node1[2] -\/ node2[2]) < GROUND\_OFFSET) \textcolor{keywordflow}{return} STEP::NONE;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00325}00325 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00326}00326             \textcolor{comment}{// If they are not on the same plane, it means this is a slope. Check if the slope is within the threshold.         }}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00327}00327             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{a00397_a9daa85cb56a1b18d44f46aa9c420afde}{CheckSlope}}(parent, child, params)) \textcolor{keywordflow}{return} \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a}{STEP::NONE}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00327}00327             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{a00397_a9daa85cb56a1b18d44f46aa9c420afde}{CheckSlope}}(parent, child, params)) \textcolor{keywordflow}{return} STEP::NONE;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00328}00328 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00329}00329             \textcolor{keywordflow}{return} \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9}{STEP::NOT\_CONNECTED}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00329}00329             \textcolor{keywordflow}{return} STEP::NOT\_CONNECTED;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00330}00330         \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00331}00331 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00332}00332         \textcolor{comment}{// Otherwise check for a step based connectiom}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00333}00333         \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00334}00334             \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935e}{STEP}} s = \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a}{STEP::NONE}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00334}00334             STEP s = STEP::NONE;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00335}00335             \textcolor{comment}{// If parent is higher than child, the check is to go downstairs}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00336}00336             \textcolor{comment}{// Since the child is lower, raise the child height by the downstep limit}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00337}00337             \textcolor{comment}{// to be checked for a connection}}
@@ -284,8 +284,8 @@
 \DoxyCodeLine{\Hypertarget{a00011_source_l00340}00340                 node1 = child;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00341}00341                 node2 = parent;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00342}00342                 node1[2] = node1[2] + params.\mbox{\hyperlink{a00397_add2b6fa6bf77a8c4626a1e6d0559970f}{down\_step}};}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00343}00343                 node2[2] = node2[2] + \mbox{\hyperlink{a00399_a78ab286d1837e1db2b8b4ce90bc9fffa}{GROUND\_OFFSET}};}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00344}00344                 s = \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935ea023b84d27813ed1b354da97011695e98}{STEP::DOWN}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00343}00343                 node2[2] = node2[2] + GROUND\_OFFSET;}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00344}00344                 s = STEP::DOWN;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00345}00345             \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00346}00346 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00347}00347             \textcolor{comment}{// If parent is lower than child, the check is to go upstairs}}
@@ -296,8 +296,8 @@
 \DoxyCodeLine{\Hypertarget{a00011_source_l00352}00352                 node1 = parent;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00353}00353                 node2 = child;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00354}00354                 node1[2] = node1[2] + params.\mbox{\hyperlink{a00397_a0b8afc5f531e3286ce2434b1bc2b1f50}{up\_step}};}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00355}00355                 node2[2] = node2[2] + \mbox{\hyperlink{a00399_a78ab286d1837e1db2b8b4ce90bc9fffa}{GROUND\_OFFSET}};}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00356}00356                 s = \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935ea599bf51c4226a80ada6f743f6e9acd5c}{STEP::UP}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00355}00355                 node2[2] = node2[2] + GROUND\_OFFSET;}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00356}00356                 s = STEP::UP;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00357}00357             \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00358}00358 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00359}00359             \textcolor{comment}{// If they're on an equal plane then offset by upstep to see}}
@@ -307,8 +307,8 @@
 \DoxyCodeLine{\Hypertarget{a00011_source_l00363}00363                 node1 = parent;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00364}00364                 node2 = child;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00365}00365                 node1[2] = node1[2] + params.\mbox{\hyperlink{a00397_a0b8afc5f531e3286ce2434b1bc2b1f50}{up\_step}};}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00366}00366                 node2[2] = node2[2] + \mbox{\hyperlink{a00399_a78ab286d1837e1db2b8b4ce90bc9fffa}{GROUND\_OFFSET}};}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00367}00367                 s = \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935eaa734acd80348ed3c2f2df367e7ab1bac}{STEP::OVER}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00366}00366                 node2[2] = node2[2] + GROUND\_OFFSET;}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00367}00367                 s = STEP::OVER;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00368}00368             \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00369}00369 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00370}00370             \textcolor{comment}{// If there is a line of sight then the nodes are connected}}
@@ -319,7 +319,7 @@
 \DoxyCodeLine{\Hypertarget{a00011_source_l00375}00375 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00376}00376         \textcolor{comment}{// If not, then there is no connection between these}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00377}00377         \textcolor{comment}{// nodes.}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00378}00378         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9}{STEP::NOT\_CONNECTED}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00378}00378         \textcolor{keywordflow}{return} STEP::NOT\_CONNECTED;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00379}00379     \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00380}00380 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00381}\mbox{\hyperlink{a00397_a41e03f9bab54e4e0d1314c6a4bdf2ec1}{00381}}     std::vector<real3> \mbox{\hyperlink{a00397_a41e03f9bab54e4e0d1314c6a4bdf2ec1}{GeneratePotentialChildren}}(}

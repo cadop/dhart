@@ -2,7 +2,7 @@
 \label{a01345}\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
 
 
-A wrapper for Intel\textquotesingle{}s Embree Library.  
+A wrapper for Intel\textquotesingle{}s Embree Library.   
 
 
 
@@ -25,27 +25,27 @@ Collaboration diagram for HF\+::Ray\+Tracer\+::Embree\+Ray\+Tracer\+:
 \mbox{\hyperlink{a01345_aec975d50cd4a80c595e611db321713b8}{Embree\+Ray\+Tracer}} (bool \mbox{\hyperlink{a01345_a10fe757b08ab77289cfd945b29d14b89}{use\+\_\+precise}}=false)
 \begin{DoxyCompactList}\small\item\em Construct an empty \mbox{\hyperlink{a01345}{Embree\+Ray\+Tracer}};. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{a01345_a0a3fa22a253ce3a7738f01286c11f589}{Embree\+Ray\+Tracer}} (std\+::vector$<$ \mbox{\hyperlink{a01285}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $>$ \&MI, bool use\+\_\+precise\+\_\+intersection=false)
-\begin{DoxyCompactList}\small\item\em Create a new \mbox{\hyperlink{a01345}{Embree\+Ray\+Tracer}} and add a single mesh to the scene. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Create a new \mbox{\hyperlink{a01345}{Embree\+Ray\+Tracer}} and add a single mesh to the scene.  \end{DoxyCompactList}\item 
 \mbox{\hyperlink{a01345_a06d9f03f0a10fb1f185bfa8a3a4bc056}{Embree\+Ray\+Tracer}} (\mbox{\hyperlink{a01285}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ \&MI, bool \mbox{\hyperlink{a01345_a10fe757b08ab77289cfd945b29d14b89}{use\+\_\+precise}}=false)
 \begin{DoxyCompactList}\small\item\em Construct the raytracer using only a single mesh. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{a01345_abb8661ead02def167ed72228eccd4705}{Embree\+Ray\+Tracer}} (const \mbox{\hyperlink{a01345}{Embree\+Ray\+Tracer}} \&ERT2)
 \begin{DoxyCompactList}\small\item\em Construct a raytracer using another raytracer. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{a01345_a99f9cf2231668b40902c19d6b886865a}{Embree\+Ray\+Tracer}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&\mbox{\hyperlink{a01345_a3a243ef02c74fc6df958a4fd2506e7cc}{geometry}})
-\begin{DoxyCompactList}\small\item\em Create a new Raytracer and generate its BVH from a flat array of vertices. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Create a new Raytracer and generate its BVH from a flat array of vertices.  \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{a01345_a6425a0f8f4a3ef8073e734ceb745cd1e}{Add\+Mesh}} (std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&Mesh, int ID, bool Commit=false)
-\begin{DoxyCompactList}\small\item\em Add a new mesh to this raytracer\textquotesingle{}s BVH with the specified ID. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Add a new mesh to this raytracer\textquotesingle{}s BVH with the specified ID.  \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{a01345_ad5389e05e451a8d8820c4deea886db3f}{Add\+Mesh}} (\mbox{\hyperlink{a01285}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ \&Mesh, bool Commit)
-\begin{DoxyCompactList}\small\item\em Add a new mesh to the BVH with the specified ID. If False, then the addition failed, or the ID was already taken. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Add a new mesh to the BVH with the specified ID. If False, then the addition failed, or the ID was already taken.  \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{a01345_a3d478f577e30d1b437421224134b5a38}{Add\+Mesh}} (std\+::vector$<$ \mbox{\hyperlink{a01285}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $>$ \&Meshes, bool Commit=true)
-\begin{DoxyCompactList}\small\item\em Add several new meshes to the BVH. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Add several new meshes to the BVH.  \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{a01345_aa8424b274c7c5d0598ff13b49ac8c8d2}{Point\+Intersection}} (std\+::array$<$ float, 3 $>$ \&origin, const std\+::array$<$ float, 3 $>$ \&dir, float distance=-\/1, int mesh\+\_\+id=-\/1)
-\begin{DoxyCompactList}\small\item\em Cast a ray and overwrite the origin with the hitpoint if it intersects any geometry. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Cast a ray and overwrite the origin with the hitpoint if it intersects any geometry.  \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{a01345_a8de15e23054b0b579087acc48616149f}{Point\+Intersection}} (float \&x, float \&y, float \&z, float dx, float dy, float dz, float distance=-\/1, int mesh\+\_\+id=-\/1)
-\begin{DoxyCompactList}\small\item\em Cast a single ray and get the hitpoint. {\itshape x} , {\itshape y} ,and {\itshape z}  are overridden with the hitpoint on a successful hit. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Cast a single ray and get the hitpoint. {\itshape x} , {\itshape y} ,and {\itshape z}  are overridden with the hitpoint on a successful hit.  \end{DoxyCompactList}\item 
 std\+::vector$<$ char $>$ \mbox{\hyperlink{a01345_a0c4abe0d3160c1a59231e0ae492fe537}{Point\+Intersections}} (std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&origins, std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&directions, bool use\+\_\+parallel=true, float max\+\_\+distance=-\/1, int mesh\+\_\+id=-\/1)
-\begin{DoxyCompactList}\small\item\em Cast multiple rays and recieve hitpoints in return. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Cast multiple rays and recieve hitpoints in return.  \end{DoxyCompactList}\item 
 std\+::vector$<$ char $>$ \mbox{\hyperlink{a01345_af718d171387e217f3c2172f795abfb90}{Occlusions}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&origins, const std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&directions, float max\+\_\+distance=-\/1, bool use\+\_\+parallel=true)
-\begin{DoxyCompactList}\small\item\em Cast multiple occlusion rays in parallel. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Cast multiple occlusion rays in parallel.  \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename return\+\_\+type  = double, class N , class V $>$ }\\\mbox{\hyperlink{a01349}{Hit\+Struct}}$<$ return\+\_\+type $>$ \mbox{\hyperlink{a01345_aefb986188c0520e407fa3a39c89a0017}{Intersect}} (const N \&node, const V \&direction, float max\+\_\+distance=-\/1.\+0f, int mesh\+\_\+id=-\/0.\+1f)
 \begin{DoxyCompactList}\small\item\em Cast a ray from origin in direction. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename return\+\_\+type  = double, typename numeric1  = double, typename numeric2  = double$>$ }\\\mbox{\hyperlink{a01349}{Hit\+Struct}}$<$ return\+\_\+type $>$ \mbox{\hyperlink{a01345_af37604ed6d68c27bb9224afd795cab18}{Intersect}} (numeric1 x, numeric1 y, numeric1 z, numeric2 dx, numeric2 dy, numeric2 dz, float distance=-\/1.\+0f, int mesh\+\_\+id=-\/1)
@@ -61,7 +61,7 @@ std\+::vector$<$ char $>$ \mbox{\hyperlink{a01345_af718d171387e217f3c2172f795abf
 void \mbox{\hyperlink{a01345_a70b9c1baf8390d8114c541d6a2ccb4f4}{operator=}} (const \mbox{\hyperlink{a01345}{Embree\+Ray\+Tracer}} \&ERT2)
 \begin{DoxyCompactList}\small\item\em Increment reference counters to prevent destruction when a copy is made. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{a01345_a2948458e764f0294996c91b00356073e}{$\sim$\+Embree\+Ray\+Tracer}} ()
-\begin{DoxyCompactList}\small\item\em Custom destructor to ensure cleanup of embree resources. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Custom destructor to ensure cleanup of embree resources.  \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -74,11 +74,11 @@ int \mbox{\hyperlink{a01345_a6ee1e15bc515878b156bc6a3778f8033}{Insert\+Geom}} (R
 \mbox{\hyperlink{a00001_a02073}{double}} \mbox{\hyperlink{a01345_a28032c693ac330c5b11bc2a877b04c75}{Calculate\+Precise\+Distance}} (unsigned int geom\+\_\+id, unsigned int prim\+\_\+id, const \mbox{\hyperlink{a01341}{Vector3D}} \&origin, const \mbox{\hyperlink{a01341}{Vector3D}} \&direction) const
 \begin{DoxyCompactList}\small\item\em Calculate the distance from origin to the point of intersection using an algorithm with higher precision. \end{DoxyCompactList}\item 
 RTCRay\+Hit \mbox{\hyperlink{a01345_ae3341adf12ae91e33f1188a434d8e28d}{Intersect\+\_\+\+IMPL}} (float x, float y, float z, float dx, float dy, float dz, float max\+\_\+distance=-\/1, int mesh\+\_\+id=-\/1)
-\begin{DoxyCompactList}\small\item\em Implementation for fundamental ray intersection. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Implementation for fundamental ray intersection.  \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{a01345_ade19fda460dadd98769b347840bd305a}{Occluded\+\_\+\+IMPL}} (float x, float y, float z, float dx, float dy, float dz, float distance=-\/1, int mesh\+\_\+id=-\/1)
-\begin{DoxyCompactList}\small\item\em Implementation for fundamental occlusion ray intersection. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Implementation for fundamental occlusion ray intersection.  \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{a01345_a7b06460e537c22386fa5a9af2701591a}{Occluded\+\_\+\+IMPL}} (const std\+::array$<$ float, 3 $>$ \&origin, const std\+::array$<$ float, 3 $>$ \&direction, float max\+\_\+dist=-\/1)
-\begin{DoxyCompactList}\small\item\em Cast an occlusion ray using arrays as input. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Cast an occlusion ray using arrays as input.  \end{DoxyCompactList}\item 
 RTCGeometry \mbox{\hyperlink{a01345_aa602f6c44fa5230477642942ebc3216e}{Construct\+Geometry\+From\+Buffers}} (std\+::vector$<$ \mbox{\hyperlink{a00398_a01337}{Triangle}} $>$ \&tris, std\+::vector$<$ \mbox{\hyperlink{a00398_a01333}{Vertex}} $>$ \&verts)
 \begin{DoxyCompactList}\small\item\em Create a new instance of RTCGeometry from a triangle and vertex buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
@@ -101,7 +101,7 @@ std\+::vector$<$ RTCGeometry $>$ \mbox{\hyperlink{a01345_a3a243ef02c74fc6df958a4
 
 
 \doxysubsection{Detailed Description}
-A wrapper for Intel\textquotesingle{}s Embree Library. 
+A wrapper for Intel\textquotesingle{}s Embree Library.  
 
 Provides several functions to quickly and simply perform ray intersections using Embree. This class will automatically dispose of Embree buffers when destroyed, incrementing Embree\textquotesingle{}s reference counters on copy, and decrementing them on deletion. This class also provides methods for adding geometry to Embree\textquotesingle{}s geometry buffers. 
 
@@ -164,7 +164,7 @@ Here is the call graph for this function\+:
 
 
 
-Create a new \mbox{\hyperlink{a01345}{Embree\+Ray\+Tracer}} and add a single mesh to the scene. 
+Create a new \mbox{\hyperlink{a01345}{Embree\+Ray\+Tracer}} and add a single mesh to the scene.  
 
 
 \begin{DoxyParams}{Parameters}
@@ -273,7 +273,7 @@ References \mbox{\hyperlink{a00146_source_l00086}{context}}, \mbox{\hyperlink{a0
 
 
 
-Create a new Raytracer and generate its BVH from a flat array of vertices. 
+Create a new Raytracer and generate its BVH from a flat array of vertices.  
 
 
 \begin{DoxyParams}{Parameters}
@@ -333,7 +333,7 @@ Here is the call graph for this function\+:
 
 
 
-Custom destructor to ensure cleanup of embree resources. 
+Custom destructor to ensure cleanup of embree resources.  
 
 
 \begin{DoxyCode}{0}
@@ -376,7 +376,7 @@ References \mbox{\hyperlink{a00146_source_l00082}{device}}, and \mbox{\hyperlink
 
 
 
-Add a new mesh to the BVH with the specified ID. If False, then the addition failed, or the ID was already taken. 
+Add a new mesh to the BVH with the specified ID. If False, then the addition failed, or the ID was already taken.  
 
 
 \begin{DoxyParams}{Parameters}
@@ -460,7 +460,7 @@ Here is the call graph for this function\+:
 
 
 
-Add several new meshes to the BVH. 
+Add several new meshes to the BVH.  
 
 
 \begin{DoxyParams}{Parameters}
@@ -548,7 +548,7 @@ Here is the call graph for this function\+:
 
 
 
-Add a new mesh to this raytracer\textquotesingle{}s BVH with the specified ID. 
+Add a new mesh to this raytracer\textquotesingle{}s BVH with the specified ID.  
 
 
 \begin{DoxyParams}{Parameters}
@@ -991,7 +991,7 @@ Here is the call graph for this function\+:
 
 
 
-Implementation for fundamental ray intersection. 
+Implementation for fundamental ray intersection.  
 
 
 \begin{DoxyParams}{Parameters}
@@ -1401,7 +1401,7 @@ Here is the call graph for this function\+:
 
 
 
-Cast an occlusion ray using arrays as input. 
+Cast an occlusion ray using arrays as input.  
 
 
 \begin{DoxyParams}{Parameters}
@@ -1489,7 +1489,7 @@ Here is the call graph for this function\+:
 
 
 
-Implementation for fundamental occlusion ray intersection. 
+Implementation for fundamental occlusion ray intersection.  
 
 
 \begin{DoxyParams}{Parameters}
@@ -1591,7 +1591,7 @@ Here is the caller graph for this function\+:
 
 
 
-Cast multiple occlusion rays in parallel. 
+Cast multiple occlusion rays in parallel.  
 
 
 \begin{DoxyParams}{Parameters}
@@ -1753,7 +1753,7 @@ References \mbox{\hyperlink{a00146_source_l00086}{context}}, \mbox{\hyperlink{a0
 
 
 
-Cast a single ray and get the hitpoint. {\itshape x} , {\itshape y} ,and {\itshape z}  are overridden with the hitpoint on a successful hit. 
+Cast a single ray and get the hitpoint. {\itshape x} , {\itshape y} ,and {\itshape z}  are overridden with the hitpoint on a successful hit.  
 
 
 \begin{DoxyParams}{Parameters}
@@ -1848,7 +1848,7 @@ Here is the call graph for this function\+:
 
 
 
-Cast a ray and overwrite the origin with the hitpoint if it intersects any geometry. 
+Cast a ray and overwrite the origin with the hitpoint if it intersects any geometry.  
 
 
 \begin{DoxyParams}{Parameters}
@@ -1950,7 +1950,7 @@ Here is the caller graph for this function\+:
 
 
 
-Cast multiple rays and recieve hitpoints in return. 
+Cast multiple rays and recieve hitpoints in return.  
 
 
 \begin{DoxyParams}{Parameters}

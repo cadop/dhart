@@ -23,7 +23,7 @@ var searchData=
   ['c_5fdestroypath_20',['C_DestroyPath',['../class_d_h_a_r_t_a_p_i_1_1_pathfinding_1_1_native_methods.html#a40318e6971f73b9b20cb4936349fc497',1,'DHARTAPI::Pathfinding::NativeMethods']]],
   ['c_5fdestroyrayresults_21',['C_DestroyRayResults',['../class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_native_methods.html#a3bcff88c66bf9d7fab6e38d463c8fdb2',1,'DHARTAPI::RayTracing::NativeMethods']]],
   ['c_5fdestroyraytracer_22',['C_DestroyRayTracer',['../class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_native_methods.html#a7c66235456c3465427479f4d7d100b7b',1,'DHARTAPI::RayTracing::NativeMethods']]],
-  ['c_5fgenerategraph_23',['C_GenerateGraph',['../class_d_h_a_r_t_a_p_i_1_1_graph_generator_1_1_native_methods.html#a3853aa5e400bb564b7e06390ecc82559',1,'DHARTAPI::GraphGenerator::NativeMethods']]],
+  ['c_5fgenerategraph_23',['C_GenerateGraph',['../class_d_h_a_r_t_a_p_i_1_1_graph_generator_1_1_native_methods.html#a010f5a4f0dc009da56978d0faf3e7017',1,'DHARTAPI::GraphGenerator::NativeMethods']]],
   ['c_5fgeneratepredecessoranddistancematricies_24',['C_GeneratePredecessorAndDistanceMatricies',['../class_d_h_a_r_t_a_p_i_1_1_pathfinding_1_1_native_methods.html#a20f4321ea9e77203c4f2ddda60a792b7',1,'DHARTAPI::Pathfinding::NativeMethods']]],
   ['c_5fgetcsrpointers_25',['C_GetCSRPointers',['../class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_native_methods.html#a684d0fc1c1df272e72bc62fb32eaa516',1,'DHARTAPI::SpatialStructures::NativeMethods']]],
   ['c_5fgetedgecost_26',['C_GetEdgeCost',['../class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_native_methods.html#a2d09e504a0bfbff0f018878a64810612',1,'DHARTAPI::SpatialStructures::NativeMethods']]],

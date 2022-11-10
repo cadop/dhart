@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['safehandle_0',['SafeHandle',['../class_safe_handle.html',1,'']]],
-  ['setting_20up_20a_20unity_20project_20for_20dhart_1',['Setting Up a Unity Project for DHART',['../_unity_project_setup.html',1,'']]],
-  ['shortestpath_2',['ShortestPath',['../class_d_h_a_r_t_a_p_i_1_1_pathfinding_1_1_shortest_path.html',1,'DHARTAPI::Pathfinding']]],
-  ['size_3',['size',['../class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_native_array.html#a485abf3516c68afcec40f783fa14a5c6',1,'DHARTAPI::NativeUtils::NativeArray']]],
-  ['sphericallydistributerays_4',['SphericallyDistributeRays',['../class_d_h_a_r_t_a_p_i_1_1_view_analysis_1_1_view_analysis.html#aa7f9b2bba104cb1e3b085890f5d261dd',1,'DHARTAPI::ViewAnalysis::ViewAnalysis']]],
-  ['stringtoedgecost_5',['StringToEdgeCost',['../class_string_to_edge_cost.html',1,'']]],
-  ['sum_6',['SUM',['../namespace_d_h_a_r_t_a_p_i_1_1_spatial_structures.html#a596d2162828cb1e978b4cd89504a28eda6970bdc2201030b9c03fbdcf3973858a',1,'DHARTAPI.SpatialStructures.SUM()'],['../namespace_d_h_a_r_t_a_p_i_1_1_view_analysis.html#a0c377126f38d722e30efe3609ee8391ea6970bdc2201030b9c03fbdcf3973858a',1,'DHARTAPI.ViewAnalysis.SUM()']]]
+  ['this_5bint_20i_5d_0',['this[int i]',['../struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#affb03c85ff8c5947f825d27fe4c56630',1,'DHARTAPI.Vector3D.this[int i]()'],['../class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_native_array2_d.html#a35adc00ef5697b63f903b96d3f5a1e94',1,'DHARTAPI.NativeUtils.NativeArray2D.this[int i]()']]],
+  ['this_5bint_20key_5d_1',['this[int key]',['../class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_native_array.html#abfc174280246d5e2d2a4d30b8f3346ef',1,'DHARTAPI::NativeUtils::NativeArray']]],
+  ['toarray_2',['ToArray',['../struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#a9e68c43e195142d59789c892e43df8ab',1,'DHARTAPI::Vector3D']]],
+  ['todo_20list_3',['Todo List',['../todo.html',1,'']]],
+  ['tostring_4',['ToString',['../struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#a4e78aca40dbd70040b58f734372d5745',1,'DHARTAPI.Vector3D.ToString()'],['../class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_native_array.html#a9d420d7075a687544331d46a6df03b93',1,'DHARTAPI.NativeUtils.NativeArray.ToString()'],['../struct_d_h_a_r_t_a_p_i_1_1_pathfinding_1_1_path_member.html#a8346d0ff2c45b0b8735efb19e36af685',1,'DHARTAPI.Pathfinding.PathMember.ToString()'],['../struct_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_ray_result.html#aecea2d1a18f834e26ca386468c1a6be9',1,'DHARTAPI.RayTracing.RayResult.ToString()'],['../struct_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_node.html#a7cdce51d37c12f3ae6721fe5fa7ac708',1,'DHARTAPI.SpatialStructures.Node.ToString()'],['../struct_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_c_s_r_info.html#adced8c93dbba17702655ba164a38a055',1,'DHARTAPI.SpatialStructures.CSRInfo.ToString()']]],
+  ['tovector3d_5',['ToVector3D',['../struct_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_node.html#a6a05f04775f4e3357b5ddc9a4646d9b1',1,'DHARTAPI.SpatialStructures.Node.ToVector3D()'],['../class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_node_list.html#a9676710f173f6d697452794811003a23',1,'DHARTAPI.SpatialStructures.NodeList.ToVector3D()']]],
+  ['type_6',['type',['../struct_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_node.html#a7352474cfb0cc97f8bc690608e4f4eaa',1,'DHARTAPI::SpatialStructures::Node']]]
 ];

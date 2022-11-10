@@ -65,7 +65,7 @@ json.\+exception.\+invalid\+\_\+iterator.\+203   &iterators do not fit current v
 json.\+exception.\+invalid\+\_\+iterator.\+204   &iterators out of range   &When an iterator range for a primitive type (number, boolean, or string) is passed to a constructor or an erase function, this range has to be exactly (begin(), end()), because this is the only way the single stored value is expressed. All other ranges are invalid.    \\\cline{1-3}
 json.\+exception.\+invalid\+\_\+iterator.\+205   &iterator out of range   &When an iterator for a primitive type (number, boolean, or string) is passed to an erase function, the iterator has to be the begin() iterator, because it is the only way to address the stored value. All other iterators are invalid.    \\\cline{1-3}
 json.\+exception.\+invalid\+\_\+iterator.\+206   &cannot construct with iterators from null   &The iterators passed to constructor basic\+\_\+json(\+Input\+IT first, Input\+IT last) belong to a JSON null value and hence to not define a valid range.    \\\cline{1-3}
-json.\+exception.\+invalid\+\_\+iterator.\+207   &cannot use key() for non-\/object iterators   &The key() member function can only be used on iterators belonging to a JSON object, because other types do not have a concept of a key.    \\\cline{1-3}
+json.\+exception.\+invalid\+\_\+iterator.\+207   &cannot use \mbox{\hyperlink{a00411_a2fb6dae6578e06ae73ca0d7cc8512b1aa3c6e0b8a9c15224a8228b9a98ca1531d}{key()}} for non-\/object iterators   &The \mbox{\hyperlink{a00411_a2fb6dae6578e06ae73ca0d7cc8512b1aa3c6e0b8a9c15224a8228b9a98ca1531d}{key()}} member function can only be used on iterators belonging to a JSON object, because other types do not have a concept of a key.    \\\cline{1-3}
 json.\+exception.\+invalid\+\_\+iterator.\+208   &cannot use operator\mbox{[}\mbox{]} for object iterators   &The operator\mbox{[}\mbox{]} to specify a concrete offset cannot be used on iterators belonging to a JSON object, because JSON objects are unordered.    \\\cline{1-3}
 json.\+exception.\+invalid\+\_\+iterator.\+209   &cannot use offsets with object iterators   &The offset operators (+, -\/, +=, -\/=) cannot be used on iterators belonging to a JSON object, because JSON objects are unordered.    \\\cline{1-3}
 json.\+exception.\+invalid\+\_\+iterator.\+210   &iterators do not fit   &The iterator range passed to the insert function are not compatible, meaning they do not belong to the same container. Therefore, the range ({\itshape first}, {\itshape last}) is invalid.    \\\cline{1-3}
@@ -81,7 +81,7 @@ json.\+exception.\+invalid\+\_\+iterator.\+214   &cannot get value   &Cannot get
 \begin{DoxySeeAlso}{See also}
 -\/ \mbox{\hyperlink{a01493}{exception}} for the base class of the library exceptions 
 
--\/ \mbox{\hyperlink{a01497}{parse\+\_\+error}} for exceptions indicating a parse error 
+-\/ \mbox{\hyperlink{a01497}{parse\+\_\+error}} for exceptions indicating a parse \mbox{\hyperlink{a00411_a58bb1ef1a9ad287a9cfaf1855784d9acacb5e100e5a9a3e7f6d1fd97512215282}{error}} 
 
 -\/ \mbox{\hyperlink{a01505}{type\+\_\+error}} for exceptions indicating executing a member function with a wrong type 
 
@@ -111,18 +111,6 @@ Definition at line \mbox{\hyperlink{a00206_source_l02521}{2521}} of file \mbox{\
 
 
 
-Referenced by \mbox{\hyperlink{a00206_source_l02513}{create()}}.
-
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a01501_adf4a6697420f3bddb4addfc0b98f6ee2_icgraph}
-\end{center}
-\end{figure}
-
-
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{a01501_a4e849260a3caa1b288c7e619130c6c09}\label{a01501_a4e849260a3caa1b288c7e619130c6c09}} 
 \index{nlohmann::detail::invalid\_iterator@{nlohmann::detail::invalid\_iterator}!create@{create}}
@@ -136,7 +124,7 @@ Definition at line \mbox{\hyperlink{a00206_source_l02513}{2513}} of file \mbox{\
 
 
 
-References \mbox{\hyperlink{a00206_source_l02521}{invalid\+\_\+iterator()}}, and \mbox{\hyperlink{a00206_source_l02369}{nlohmann\+::detail\+::exception\+::name()}}.
+References \mbox{\hyperlink{a00206_source_l02369}{nlohmann\+::detail\+::exception\+::name()}}.
 
 
 

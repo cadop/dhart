@@ -1240,19 +1240,19 @@ Collaboration diagram for nlohmann\+::detail\+::internal\+\_\+iterator\texorpdfs
 \begin{DoxyFields}{Class Members}
 \mbox{\Hypertarget{a00411_a8294a6e6f01b58e1cce8fbae66a50b5d}\label{a00411_a8294a6e6f01b58e1cce8fbae66a50b5d}} 
 iterator&
-array\_iterator&
+array\_iterator \{\}&
 iterator for JSON arrays \\
 \hline
 
 \mbox{\Hypertarget{a00411_a8cb0af3498061426c1d0a65ad6220408}\label{a00411_a8cb0af3498061426c1d0a65ad6220408}} 
 iterator&
-object\_iterator&
+object\_iterator \{\}&
 iterator for JSON objects \\
 \hline
 
 \mbox{\Hypertarget{a00411_a2b3bb45f968210e42c282017eeeb63a8}\label{a00411_a2b3bb45f968210e42c282017eeeb63a8}} 
 \mbox{\hyperlink{a01937}{primitive\_iterator\_t}}&
-primitive\_iterator&
+primitive\_iterator \{\}&
 generic iterator for all other types \\
 \hline
 
@@ -2660,12 +2660,12 @@ Definition at line \mbox{\hyperlink{a00206_source_l02146}{2146}} of file \mbox{\
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{    \textcolor{keyword}{template}<\textcolor{keyword}{template}<\textcolor{keyword}{typename}, \textcolor{keyword}{typename}, \textcolor{keyword}{typename}...> \textcolor{keyword}{class }ObjectType,   \(\backslash\)}
-\DoxyCodeLine{             template<\textcolor{keyword}{typename}, \textcolor{keyword}{typename}...> \textcolor{keyword}{class }ArrayType,              \(\backslash\)}
-\DoxyCodeLine{             class StringType, \textcolor{keyword}{class }BooleanType, \textcolor{keyword}{class }NumberIntegerType, \(\backslash\)}
-\DoxyCodeLine{             class NumberUnsignedType, \textcolor{keyword}{class }NumberFloatType,              \(\backslash\)}
-\DoxyCodeLine{             template<typename> \textcolor{keyword}{class }AllocatorType,                       \(\backslash\)}
-\DoxyCodeLine{             template<typename, typename = void> \textcolor{keyword}{class }JSONSerializer,     \(\backslash\)}
-\DoxyCodeLine{             class \mbox{\hyperlink{a03437}{BinaryType}}>}
+\DoxyCodeLine{             \textcolor{keyword}{template}<\textcolor{keyword}{typename}, \textcolor{keyword}{typename}...> \textcolor{keyword}{class }ArrayType,              \(\backslash\)}
+\DoxyCodeLine{             \textcolor{keyword}{class }StringType, \textcolor{keyword}{class }BooleanType, \textcolor{keyword}{class }NumberIntegerType, \(\backslash\)}
+\DoxyCodeLine{             \textcolor{keyword}{class }NumberUnsignedType, \textcolor{keyword}{class }NumberFloatType,              \(\backslash\)}
+\DoxyCodeLine{             \textcolor{keyword}{template}<\textcolor{keyword}{typename}> \textcolor{keyword}{class }AllocatorType,                       \(\backslash\)}
+\DoxyCodeLine{             \textcolor{keyword}{template}<\textcolor{keyword}{typename}, \textcolor{keyword}{typename} = \textcolor{keywordtype}{void}> \textcolor{keyword}{class }JSONSerializer,     \(\backslash\)}
+\DoxyCodeLine{             \textcolor{keyword}{class }\mbox{\hyperlink{a03437}{BinaryType}}>}
 
 \end{DoxyCode}
 
@@ -2680,8 +2680,8 @@ Definition at line \mbox{\hyperlink{a00206_source_l02137}{2137}} of file \mbox{\
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    \textcolor{keyword}{friend} \textcolor{keywordtype}{void} \mbox{\hyperlink{a00411_aaa77b0c9745130b77733a92a1a2e82ec}{to\_json}}(\mbox{\hyperlink{a01593}{nlohmann::json}}\& nlohmann\_json\_j, \textcolor{keyword}{const} Type\& nlohmann\_json\_t) \{ \mbox{\hyperlink{a00206_af62f70922a57ffa728d579d3c7963bf5}{NLOHMANN\_JSON\_EXPAND}}(\mbox{\hyperlink{a00206_a9495fb0e6d683bfa654ed646495b408a}{NLOHMANN\_JSON\_PASTE}}(\mbox{\hyperlink{a00206_a32c518e9a43fb0389fccb41e5c6f63a9}{NLOHMANN\_JSON\_TO}}, \_\_VA\_ARGS\_\_)) \} \(\backslash\)}
-\DoxyCodeLine{    friend \textcolor{keywordtype}{void} \mbox{\hyperlink{a00411_aef5c8ea108f4d2b03fb4a635617510de}{from\_json}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01593}{nlohmann::json}}\& nlohmann\_json\_j, Type\& nlohmann\_json\_t) \{ \mbox{\hyperlink{a00206_af62f70922a57ffa728d579d3c7963bf5}{NLOHMANN\_JSON\_EXPAND}}(\mbox{\hyperlink{a00206_a9495fb0e6d683bfa654ed646495b408a}{NLOHMANN\_JSON\_PASTE}}(\mbox{\hyperlink{a00206_a8d18979cc7c33deda994e0caacf9e5e0}{NLOHMANN\_JSON\_FROM}}, \_\_VA\_ARGS\_\_)) \}}
+\DoxyCodeLine{    \textcolor{keyword}{friend} \textcolor{keywordtype}{void} to\_json(\mbox{\hyperlink{a01593}{nlohmann::json}}\& nlohmann\_json\_j, \textcolor{keyword}{const} Type\& nlohmann\_json\_t) \{ \mbox{\hyperlink{a00206_af62f70922a57ffa728d579d3c7963bf5}{NLOHMANN\_JSON\_EXPAND}}(\mbox{\hyperlink{a00206_a9495fb0e6d683bfa654ed646495b408a}{NLOHMANN\_JSON\_PASTE}}(\mbox{\hyperlink{a00206_a32c518e9a43fb0389fccb41e5c6f63a9}{NLOHMANN\_JSON\_TO}}, \_\_VA\_ARGS\_\_)) \} \(\backslash\)}
+\DoxyCodeLine{    \textcolor{keyword}{friend} \textcolor{keywordtype}{void} from\_json(\textcolor{keyword}{const} \mbox{\hyperlink{a01593}{nlohmann::json}}\& nlohmann\_json\_j, Type\& nlohmann\_json\_t) \{ \mbox{\hyperlink{a00206_af62f70922a57ffa728d579d3c7963bf5}{NLOHMANN\_JSON\_EXPAND}}(\mbox{\hyperlink{a00206_a9495fb0e6d683bfa654ed646495b408a}{NLOHMANN\_JSON\_PASTE}}(\mbox{\hyperlink{a00206_a8d18979cc7c33deda994e0caacf9e5e0}{NLOHMANN\_JSON\_FROM}}, \_\_VA\_ARGS\_\_)) \}}
 
 \end{DoxyCode}
 
@@ -2703,8 +2703,8 @@ Definition at line \mbox{\hyperlink{a00206_source_l02292}{2292}} of file \mbox{\
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a00411_aaa77b0c9745130b77733a92a1a2e82ec}{to\_json}}(\mbox{\hyperlink{a01593}{nlohmann::json}}\& nlohmann\_json\_j, \textcolor{keyword}{const} Type\& nlohmann\_json\_t) \{ \mbox{\hyperlink{a00206_af62f70922a57ffa728d579d3c7963bf5}{NLOHMANN\_JSON\_EXPAND}}(\mbox{\hyperlink{a00206_a9495fb0e6d683bfa654ed646495b408a}{NLOHMANN\_JSON\_PASTE}}(\mbox{\hyperlink{a00206_a32c518e9a43fb0389fccb41e5c6f63a9}{NLOHMANN\_JSON\_TO}}, \_\_VA\_ARGS\_\_)) \} \(\backslash\)}
-\DoxyCodeLine{    inline \textcolor{keywordtype}{void} \mbox{\hyperlink{a00411_aef5c8ea108f4d2b03fb4a635617510de}{from\_json}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01593}{nlohmann::json}}\& nlohmann\_json\_j, Type\& nlohmann\_json\_t) \{ \mbox{\hyperlink{a00206_af62f70922a57ffa728d579d3c7963bf5}{NLOHMANN\_JSON\_EXPAND}}(\mbox{\hyperlink{a00206_a9495fb0e6d683bfa654ed646495b408a}{NLOHMANN\_JSON\_PASTE}}(\mbox{\hyperlink{a00206_a8d18979cc7c33deda994e0caacf9e5e0}{NLOHMANN\_JSON\_FROM}}, \_\_VA\_ARGS\_\_)) \}}
+\DoxyCodeLine{    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} to\_json(\mbox{\hyperlink{a01593}{nlohmann::json}}\& nlohmann\_json\_j, \textcolor{keyword}{const} Type\& nlohmann\_json\_t) \{ \mbox{\hyperlink{a00206_af62f70922a57ffa728d579d3c7963bf5}{NLOHMANN\_JSON\_EXPAND}}(\mbox{\hyperlink{a00206_a9495fb0e6d683bfa654ed646495b408a}{NLOHMANN\_JSON\_PASTE}}(\mbox{\hyperlink{a00206_a32c518e9a43fb0389fccb41e5c6f63a9}{NLOHMANN\_JSON\_TO}}, \_\_VA\_ARGS\_\_)) \} \(\backslash\)}
+\DoxyCodeLine{    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} from\_json(\textcolor{keyword}{const} \mbox{\hyperlink{a01593}{nlohmann::json}}\& nlohmann\_json\_j, Type\& nlohmann\_json\_t) \{ \mbox{\hyperlink{a00206_af62f70922a57ffa728d579d3c7963bf5}{NLOHMANN\_JSON\_EXPAND}}(\mbox{\hyperlink{a00206_a9495fb0e6d683bfa654ed646495b408a}{NLOHMANN\_JSON\_PASTE}}(\mbox{\hyperlink{a00206_a8d18979cc7c33deda994e0caacf9e5e0}{NLOHMANN\_JSON\_FROM}}, \_\_VA\_ARGS\_\_)) \}}
 
 \end{DoxyCode}
 
@@ -3397,26 +3397,26 @@ Definition at line \mbox{\hyperlink{a00206_source_l02227}{2227}} of file \mbox{\
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{    \textcolor{keyword}{template}<\textcolor{keyword}{typename} BasicJsonType>                                                            \(\backslash\)}
-\DoxyCodeLine{    inline \textcolor{keywordtype}{void} \mbox{\hyperlink{a00411_aaa77b0c9745130b77733a92a1a2e82ec}{to\_json}}(BasicJsonType\& j, \textcolor{keyword}{const} ENUM\_TYPE\& e)                                   \(\backslash\)}
+\DoxyCodeLine{    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} to\_json(BasicJsonType\& j, \textcolor{keyword}{const} ENUM\_TYPE\& e)                                   \(\backslash\)}
 \DoxyCodeLine{    \{                                                                                           \(\backslash\)}
 \DoxyCodeLine{        static\_assert(std::is\_enum<ENUM\_TYPE>::value, \#ENUM\_TYPE \textcolor{stringliteral}{"{} must be an enum!"{}});          \(\backslash\)}
-\DoxyCodeLine{        static \textcolor{keyword}{const} std::pair<ENUM\_TYPE, BasicJsonType> m[] = \_\_VA\_ARGS\_\_;                     \(\backslash\)}
-\DoxyCodeLine{        auto it = std::find\_if(std::begin(m), std::end(m),                                      \(\backslash\)}
+\DoxyCodeLine{        \textcolor{keyword}{static} \textcolor{keyword}{const} std::pair<ENUM\_TYPE, BasicJsonType> m[] = \_\_VA\_ARGS\_\_;                     \(\backslash\)}
+\DoxyCodeLine{        \textcolor{keyword}{auto} it = std::find\_if(std::begin(m), std::end(m),                                      \(\backslash\)}
 \DoxyCodeLine{                               [e](\textcolor{keyword}{const} std::pair<ENUM\_TYPE, BasicJsonType>\& ej\_pair) -\/> \textcolor{keywordtype}{bool}  \(\backslash\)}
 \DoxyCodeLine{        \{                                                                                       \(\backslash\)}
-\DoxyCodeLine{            return ej\_pair.first == e;                                                          \(\backslash\)}
+\DoxyCodeLine{            \textcolor{keywordflow}{return} ej\_pair.first == e;                                                          \(\backslash\)}
 \DoxyCodeLine{        \});                                                                                     \(\backslash\)}
 \DoxyCodeLine{        j = ((it != std::end(m)) ? it : std::begin(m))-\/>second;                                 \(\backslash\)}
 \DoxyCodeLine{    \}                                                                                           \(\backslash\)}
-\DoxyCodeLine{    template<typename BasicJsonType>                                                            \(\backslash\)}
-\DoxyCodeLine{    inline \textcolor{keywordtype}{void} \mbox{\hyperlink{a00411_aef5c8ea108f4d2b03fb4a635617510de}{from\_json}}(\textcolor{keyword}{const} BasicJsonType\& j, ENUM\_TYPE\& e)                                 \(\backslash\)}
+\DoxyCodeLine{    \textcolor{keyword}{template}<\textcolor{keyword}{typename} BasicJsonType>                                                            \(\backslash\)}
+\DoxyCodeLine{    \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a00412_a69afe041fa2aeac2239b65ae88b64af8}{from\_json}}(\textcolor{keyword}{const} BasicJsonType\& j, ENUM\_TYPE\& e)                                 \(\backslash\)}
 \DoxyCodeLine{    \{                                                                                           \(\backslash\)}
 \DoxyCodeLine{        static\_assert(std::is\_enum<ENUM\_TYPE>::value, \#ENUM\_TYPE \textcolor{stringliteral}{"{} must be an enum!"{}});          \(\backslash\)}
-\DoxyCodeLine{        static \textcolor{keyword}{const} std::pair<ENUM\_TYPE, BasicJsonType> m[] = \_\_VA\_ARGS\_\_;                     \(\backslash\)}
-\DoxyCodeLine{        auto it = std::find\_if(std::begin(m), std::end(m),                                      \(\backslash\)}
+\DoxyCodeLine{        \textcolor{keyword}{static} \textcolor{keyword}{const} std::pair<ENUM\_TYPE, BasicJsonType> m[] = \_\_VA\_ARGS\_\_;                     \(\backslash\)}
+\DoxyCodeLine{        \textcolor{keyword}{auto} it = std::find\_if(std::begin(m), std::end(m),                                      \(\backslash\)}
 \DoxyCodeLine{                               [\&j](\textcolor{keyword}{const} std::pair<ENUM\_TYPE, BasicJsonType>\& ej\_pair) -\/> \textcolor{keywordtype}{bool} \(\backslash\)}
 \DoxyCodeLine{        \{                                                                                       \(\backslash\)}
-\DoxyCodeLine{            return ej\_pair.second == j;                                                         \(\backslash\)}
+\DoxyCodeLine{            \textcolor{keywordflow}{return} ej\_pair.second == j;                                                         \(\backslash\)}
 \DoxyCodeLine{        \});                                                                                     \(\backslash\)}
 \DoxyCodeLine{        e = ((it != std::end(m)) ? it : std::begin(m))-\/>first;                                  \(\backslash\)}
 \DoxyCodeLine{    \}}

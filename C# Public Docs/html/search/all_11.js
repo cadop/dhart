@@ -1,10 +1,12 @@
 var searchData=
 [
-  ['unity_20tutorial_20index_0',['Unity Tutorial Index',['../_unity_tutorials.html',1,'']]],
-  ['unmanagedfloatarray2d_1',['UnmanagedFloatArray2D',['../class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_float_array2_d.html',1,'DHARTAPI::NativeUtils::CommonNativeArrays']]],
-  ['unmanagedintarray2d_2',['UnmanagedIntArray2D',['../class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_int_array2_d.html',1,'DHARTAPI::NativeUtils::CommonNativeArrays']]],
-  ['updatepressure_3',['UpdatePressure',['../class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_native_object.html#ab63e715d5db528edc64b3aa5233f750c',1,'DHARTAPI::NativeUtils::NativeObject']]],
-  ['using_20the_20c_23_20dll_20in_20a_20visual_20studio_20project_4',['Using the C# DLL in a Visual Studio Project',['../_v_s_tutorial.html',1,'']]],
-  ['using_20the_20graph_20generator_5',['Using the Graph Generator',['../_generating_a_graph.html',1,'']]],
-  ['using_20the_20raytracer_6',['Using the RayTracer',['../_using_the_raytracer.html',1,'']]]
+  ['vector3d_0',['Vector3D',['../struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html',1,'DHARTAPI.Vector3D'],['../struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#ad670a8dd832c1651456458aea190483f',1,'DHARTAPI.Vector3D.Vector3D()']]],
+  ['vertices_1',['vertices',['../class_d_h_a_r_t_a_p_i_1_1_geometry_1_1_mesh_info.html#aa6a46abcde23d402def052b581373438',1,'DHARTAPI::Geometry::MeshInfo']]],
+  ['viewaggregatetype_2',['ViewAggregateType',['../namespace_d_h_a_r_t_a_p_i_1_1_view_analysis.html#a0c377126f38d722e30efe3609ee8391e',1,'DHARTAPI::ViewAnalysis']]],
+  ['viewanalysis_3',['ViewAnalysis',['../class_d_h_a_r_t_a_p_i_1_1_view_analysis_1_1_view_analysis.html',1,'DHARTAPI::ViewAnalysis']]],
+  ['viewanalysisaggregate_4',['ViewAnalysisAggregate',['../class_d_h_a_r_t_a_p_i_1_1_view_analysis_1_1_view_analysis.html#ad653d720d58cafab4a9adc1c72be186e',1,'DHARTAPI::ViewAnalysis::ViewAnalysis']]],
+  ['viewanalysisresult_5',['ViewAnalysisResult',['../struct_d_h_a_r_t_a_p_i_1_1_view_analysis_1_1_view_analysis_result.html',1,'DHARTAPI::ViewAnalysis']]],
+  ['viewanalysisstandard_6',['ViewAnalysisStandard',['../class_d_h_a_r_t_a_p_i_1_1_view_analysis_1_1_view_analysis.html#a97eba82450f4eb1475614f6ca6738f91',1,'DHARTAPI::ViewAnalysis::ViewAnalysis']]],
+  ['visibilitygraph_7',['VisibilityGraph',['../class_d_h_a_r_t_a_p_i_1_1_visibility_graph_1_1_visibility_graph.html',1,'DHARTAPI::VisibilityGraph']]],
+  ['visualizing_20dhart_20data_20in_20unity_8',['Visualizing DHART Data in Unity',['../_unity_graph_visualization.html',1,'']]]
 ];

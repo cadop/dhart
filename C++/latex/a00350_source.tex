@@ -44,20 +44,20 @@
 \DoxyCodeLine{\Hypertarget{a00350_source_l00040}00040         \}}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00041}00041         *out\_data\_array = data\_array;}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00042}00042 }
-\DoxyCodeLine{\Hypertarget{a00350_source_l00043}00043         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}{HF\_STATUS::OK}};}
+\DoxyCodeLine{\Hypertarget{a00350_source_l00043}00043         \textcolor{keywordflow}{return} HF\_STATUS::OK;}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00044}00044     \}}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00045}00045     \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \mbox{\hyperlink{a01257}{HF::Exceptions::InvalidOBJ}} \& e) \{}
-\DoxyCodeLine{\Hypertarget{a00350_source_l00046}00046         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a06ef98037b48ddc9685ab0d7519495b1}{HF\_STATUS::INVALID\_OBJ}};}
+\DoxyCodeLine{\Hypertarget{a00350_source_l00046}00046         \textcolor{keywordflow}{return} HF\_STATUS::INVALID\_OBJ;}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00047}00047     \}}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00048}00048     \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \mbox{\hyperlink{a01253}{HF::Exceptions::FileNotFound}} \& e) \{}
-\DoxyCodeLine{\Hypertarget{a00350_source_l00049}00049         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a42b2a897f1b46ae086e3965e22f0ed58}{HF\_STATUS::NOT\_FOUND}};}
+\DoxyCodeLine{\Hypertarget{a00350_source_l00049}00049         \textcolor{keywordflow}{return} HF\_STATUS::NOT\_FOUND;}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00050}00050     \}}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00051}00051     \textcolor{keywordflow}{catch} (...) \{}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00052}00052         std::cerr << \textcolor{stringliteral}{"{}Generic Error"{}} << std::endl;}
-\DoxyCodeLine{\Hypertarget{a00350_source_l00053}00053         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a5bfa31d727681298e6c4cea74c848ddf}{HF\_STATUS::GENERIC\_ERROR}};}
+\DoxyCodeLine{\Hypertarget{a00350_source_l00053}00053         \textcolor{keywordflow}{return} HF\_STATUS::GENERIC\_ERROR;}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00054}00054     \}}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00055}00055 }
-\DoxyCodeLine{\Hypertarget{a00350_source_l00056}00056     \textcolor{keywordflow}{return} \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}{HF\_STATUS::OK}};}
+\DoxyCodeLine{\Hypertarget{a00350_source_l00056}00056     \textcolor{keywordflow}{return} HF\_STATUS::OK;}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00057}00057 \}}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00058}00058 }
 \DoxyCodeLine{\Hypertarget{a00350_source_l00059}\mbox{\hyperlink{a00389_ga6ac447e5805d3d7e65c9083ffa603cfe}{00059}} \mbox{\hyperlink{a00341_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00389_ga6ac447e5805d3d7e65c9083ffa603cfe}{StoreMesh}}(}
@@ -88,11 +88,11 @@
 \DoxyCodeLine{\Hypertarget{a00350_source_l00084}\mbox{\hyperlink{a00389_ga907c8e39b159c8bad22645448bc97f57}{00084}} \mbox{\hyperlink{a00341_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00389_ga907c8e39b159c8bad22645448bc97f57}{RotateMesh}}(\mbox{\hyperlink{a01285}{MeshInfo<float>}} * mesh\_to\_rotate, \textcolor{keywordtype}{float} xrot, \textcolor{keywordtype}{float} yrot, \textcolor{keywordtype}{float} zrot)}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00085}00085 \{}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00086}00086     \textcolor{keywordflow}{if} (mesh\_to\_rotate-\/>\mbox{\hyperlink{a01285_a5259d58812a4a21b93703a27732f684e}{meshid}} < 0)}
-\DoxyCodeLine{\Hypertarget{a00350_source_l00087}00087         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a06ef98037b48ddc9685ab0d7519495b1}{HF\_STATUS::INVALID\_OBJ}};}
+\DoxyCodeLine{\Hypertarget{a00350_source_l00087}00087         \textcolor{keywordflow}{return} HF\_STATUS::INVALID\_OBJ;}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00088}00088 }
 \DoxyCodeLine{\Hypertarget{a00350_source_l00089}00089     mesh\_to\_rotate-\/>\mbox{\hyperlink{a01285_a235d49e5a5a4d20d78db7adb854fb9e1}{PerformRotation}}(xrot, yrot, zrot);}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00090}00090 }
-\DoxyCodeLine{\Hypertarget{a00350_source_l00091}00091     \textcolor{keywordflow}{return} \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}{HF\_STATUS::OK}};}
+\DoxyCodeLine{\Hypertarget{a00350_source_l00091}00091     \textcolor{keywordflow}{return} HF\_STATUS::OK;}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00092}00092 \}}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00093}00093 }
 \DoxyCodeLine{\Hypertarget{a00350_source_l00094}\mbox{\hyperlink{a00389_ga89fc0803b894e7fa218ae271c46fb434}{00094}} \mbox{\hyperlink{a00341_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00389_ga89fc0803b894e7fa218ae271c46fb434}{GetVertsAndTris}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01285}{MeshInfo<float>}} * MI, \textcolor{keywordtype}{int}** index\_out, \textcolor{keywordtype}{int}* num\_triangles, \textcolor{keywordtype}{float}** vertex\_out, \textcolor{keywordtype}{int}* num\_vertices)}
@@ -106,7 +106,7 @@
 \DoxyCodeLine{\Hypertarget{a00350_source_l00102}00102     *index\_out = mesh\_indices.data;}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00103}00103     *num\_triangles = mesh\_indices.size / 3;}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00104}00104 }
-\DoxyCodeLine{\Hypertarget{a00350_source_l00105}00105     \textcolor{keywordflow}{return} \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}{HF\_STATUS::OK}};}
+\DoxyCodeLine{\Hypertarget{a00350_source_l00105}00105     \textcolor{keywordflow}{return} HF\_STATUS::OK;}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00106}00106 \}}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00107}00107 }
 \DoxyCodeLine{\Hypertarget{a00350_source_l00108}\mbox{\hyperlink{a00389_ga2a86bca57b3efdafeeb001a8ba36a212}{00108}} \mbox{\hyperlink{a00341_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00389_ga2a86bca57b3efdafeeb001a8ba36a212}{GetMeshName}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01285}{HF::Geometry::MeshInfo<float>}}* MI, \textcolor{keywordtype}{char}** out\_name)}
@@ -117,12 +117,12 @@
 \DoxyCodeLine{\Hypertarget{a00350_source_l00113}00113     *out\_name = \textcolor{keyword}{new} \textcolor{keywordtype}{char}[num\_characters];}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00114}00114     std::copy(name.c\_str(), name.c\_str() + num\_characters, *out\_name);}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00115}00115 }
-\DoxyCodeLine{\Hypertarget{a00350_source_l00116}00116     \textcolor{keywordflow}{return} \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}{HF\_STATUS::OK}};}
+\DoxyCodeLine{\Hypertarget{a00350_source_l00116}00116     \textcolor{keywordflow}{return} HF\_STATUS::OK;}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00117}00117 \}}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00118}00118 }
 \DoxyCodeLine{\Hypertarget{a00350_source_l00119}\mbox{\hyperlink{a00389_gaa07792b399e76e6101388bb6bbb96047}{00119}} \mbox{\hyperlink{a00341_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00389_gaa07792b399e76e6101388bb6bbb96047}{GetMeshID}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01285}{HF::Geometry::MeshInfo<float>}}* MI, \textcolor{keywordtype}{int}* out\_id) \{}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00120}00120     *out\_id = MI-\/>\mbox{\hyperlink{a01285_a5259d58812a4a21b93703a27732f684e}{meshid}};}
-\DoxyCodeLine{\Hypertarget{a00350_source_l00121}00121     \textcolor{keywordflow}{return} \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}{HF\_STATUS::OK}};}
+\DoxyCodeLine{\Hypertarget{a00350_source_l00121}00121     \textcolor{keywordflow}{return} HF\_STATUS::OK;}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00122}00122 \}}
 \DoxyCodeLine{\Hypertarget{a00350_source_l00123}00123 }
 \DoxyCodeLine{\Hypertarget{a00350_source_l00124}00124 }

@@ -6,6 +6,5 @@ var searchData=
   ['addnodeattribute_3c_20t_20_3e_3',['AddNodeAttribute&lt; T &gt;',['../class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_graph.html#a425d4666d544a72bc7fc11fb35f233a2',1,'DHARTAPI::SpatialStructures::Graph']]],
   ['aggregateedgecosts_4',['AggregateEdgeCosts',['../class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_graph.html#ac31c69fa2fb19842bb3daeee06d230a1',1,'DHARTAPI::SpatialStructures::Graph']]],
   ['array_5',['array',['../class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_native_array.html#a60d571ddd8cf18903ba032bc17298451',1,'DHARTAPI.NativeUtils.NativeArray.array()'],['../class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_native_array2_d.html#ade3f1cfe65e5e9e837434ca0846bb523',1,'DHARTAPI.NativeUtils.NativeArray2D.array()']]],
-  ['attrstocosts_6',['AttrsToCosts',['../class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_graph.html#a7b281dadea26c2d963a5c2b80b42b1e6',1,'DHARTAPI::SpatialStructures::Graph']]],
-  ['average_7',['AVERAGE',['../namespace_d_h_a_r_t_a_p_i_1_1_spatial_structures.html#a596d2162828cb1e978b4cd89504a28eda16de38737a9f8366e9b2042b4e9b6290',1,'DHARTAPI.SpatialStructures.AVERAGE()'],['../namespace_d_h_a_r_t_a_p_i_1_1_view_analysis.html#a0c377126f38d722e30efe3609ee8391ea16de38737a9f8366e9b2042b4e9b6290',1,'DHARTAPI.ViewAnalysis.AVERAGE()']]]
+  ['attrstocosts_6',['AttrsToCosts',['../class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_graph.html#a7b281dadea26c2d963a5c2b80b42b1e6',1,'DHARTAPI::SpatialStructures::Graph']]]
 ];

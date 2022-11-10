@@ -16,19 +16,19 @@ namespace \mbox{\hyperlink{a00409}{Cost\+Algorithms}}
 struct \mbox{\hyperlink{a01473}{CSRPtrs}}
 \begin{DoxyCompactList}\small\item\em A struct to hold all necessary information for a CSR. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{a01461}{Edge}}
-\begin{DoxyCompactList}\small\item\em A connection to a child node. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em A connection to a child node.  \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{a01481}{Edge\+Cost\+Set}}
 \begin{DoxyCompactList}\small\item\em A set of edge costs for a graph. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{a01469}{Edge\+Set}}
-\begin{DoxyCompactList}\small\item\em A collection of edges and a parent. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em A collection of edges and a parent.  \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{a01485}{Graph}}
 \begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{a01485}{Graph}} of nodes connected by edges that supports both integers and \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}}. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{a01465}{Int\+Edge}}
-\begin{DoxyCompactList}\small\item\em A lighter version of \mbox{\hyperlink{a01461}{Edge}} that contains an ID instead of a full node object.. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em A lighter version of \mbox{\hyperlink{a01461}{Edge}} that contains an ID instead of a full node object..  \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{a02005}{Node}}
-\begin{DoxyCompactList}\small\item\em A point in space with an ID. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em A point in space with an ID.  \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{a02017}{Path}}
-\begin{DoxyCompactList}\small\item\em A collection of nodes that form a path. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em A collection of nodes that form a path.  \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{a02013}{Path\+Member}}
 \begin{DoxyCompactList}\small\item\em The ID of a node, and the cost cost to the node after it. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{a00399_a01477}{Subgraph}}
@@ -51,7 +51,7 @@ enum \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935e}{STEP}} \{ \newli
 , \newline
 \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935eaa734acd80348ed3c2f2df367e7ab1bac}{OVER}} = 4
  \}
-\begin{DoxyCompactList}\small\item\em Describes the type of step an edge connects to. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Describes the type of step an edge connects to.  \end{DoxyCompactList}\item 
 enum class \mbox{\hyperlink{a00399_a6b23c0b2531c78f6d5049873c184f4f9}{COST\+\_\+\+AGGREGATE}} \+: int \{ \mbox{\hyperlink{a00399_a6b23c0b2531c78f6d5049873c184f4f9a6970bdc2201030b9c03fbdcf3973858a}{SUM}} = 0
 , \mbox{\hyperlink{a00399_a6b23c0b2531c78f6d5049873c184f4f9a16de38737a9f8366e9b2042b4e9b6290}{AVERAGE}} = 1
 , \mbox{\hyperlink{a00399_a6b23c0b2531c78f6d5049873c184f4f9a4905ac9d6a22bdfc1ae096094ce6248d}{COUNT}} = 2
@@ -73,9 +73,9 @@ enum \mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cc}{NODE\+\_\+\+TYPE
 {\footnotesize template$<$typename desired\+\_\+type , typename numeric\+\_\+type $>$ }\\constexpr desired\+\_\+type \mbox{\hyperlink{a00399_a0e25afd4cd04c2b85f5283b27e8acdef}{Divide\+By1}} (numeric\+\_\+type n)
 \begin{DoxyCompactList}\small\item\em Cast a value to the specific type and divide 1 by it. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{a00399_a7055938c4b6cc98ac7d1e4409e1f63e9}{roundhf}} (float f, float p=\mbox{\hyperlink{a00399_a8e1deca302502a6ab0e0943c292f33b6}{FLOAT\+\_\+\+PRECISION}}, float r=\mbox{\hyperlink{a00399_a0140105869479399be75147c8f77e724}{ROUNDING\+\_\+\+PRECISION}})
-\begin{DoxyCompactList}\small\item\em Round a float to the nearest precision defined globally. The global values can be overridden with optional parameters p and r. If r is 0.\+01, p must be 100.\+0, meaning there should be one more 0 between the decimal. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Round a float to the nearest precision defined globally. The global values can be overridden with optional parameters p and r. If r is 0.\+01, p must be 100.\+0, meaning there should be one more 0 between the decimal.  \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{a00399_a7819d69862372eb198ca0e74d2ecf5f0}{trunchf}} (float f, float p=1000.\+0, float r=0.\+001)
-\begin{DoxyCompactList}\small\item\em Truncate a float to the nearest precision defined globally. The global values can be overridden with optional parameters p and r. If r is 0.\+01, p must be 100.\+0, meaning there should be one more 0 between the decimal. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Truncate a float to the nearest precision defined globally. The global values can be overridden with optional parameters p and r. If r is 0.\+01, p must be 100.\+0, meaning there should be one more 0 between the decimal.  \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename numeric\+\_\+type $>$ }\\numeric\+\_\+type \mbox{\hyperlink{a00399_a0e6690272fb70b92279b9ab082a24302}{roundhf\+\_\+tail}} (numeric\+\_\+type f, int precision)
 \begin{DoxyCompactList}\small\item\em round a number twice, once at the precision+1, and again at the precision This method is to fix cases in which the precision to round to is 4, and the following number is 9. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename numeric\+\_\+type $>$ }\\constexpr numeric\+\_\+type \mbox{\hyperlink{a00399_a5db5f0307882796fcf7cdad83cb20c65}{roundhf\+\_\+tmp}} (numeric\+\_\+type f, numeric\+\_\+type p, numeric\+\_\+type r)
@@ -275,7 +275,7 @@ Definition at line \mbox{\hyperlink{a00209_source_l00029}{29}} of file \mbox{\hy
 
 
 
-Describes the type of step an edge connects to. 
+Describes the type of step an edge connects to.  
 
 \begin{DoxyEnumFields}{Enumerator}
 \raisebox{\heightof{T}}[0pt][0pt]{\index{NOT\_CONNECTED@{NOT\_CONNECTED}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!NOT\_CONNECTED@{NOT\_CONNECTED}}}\mbox{\Hypertarget{a00399_af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9}\label{a00399_af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9}} 
@@ -366,7 +366,7 @@ Here is the caller graph for this function\+:
 
 
 
-Round a float to the nearest precision defined globally. The global values can be overridden with optional parameters p and r. If r is 0.\+01, p must be 100.\+0, meaning there should be one more 0 between the decimal. 
+Round a float to the nearest precision defined globally. The global values can be overridden with optional parameters p and r. If r is 0.\+01, p must be 100.\+0, meaning there should be one more 0 between the decimal.  
 
 
 \begin{DoxyParams}{Parameters}
@@ -542,14 +542,26 @@ Definition at line \mbox{\hyperlink{a00185_source_l00114}{114}} of file \mbox{\h
 
 
 
-Referenced by \mbox{\hyperlink{a00185_source_l00133}{roundhf\+\_\+tmp()}}.
+References \mbox{\hyperlink{a00185_source_l00114}{roundhf\+\_\+tmp()}}.
 
+
+
+Referenced by \mbox{\hyperlink{a00185_source_l00114}{roundhf\+\_\+tmp()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{a00399_a5db5f0307882796fcf7cdad83cb20c65_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=336pt]{a00399_a5db5f0307882796fcf7cdad83cb20c65_icgraph}
+\includegraphics[width=190pt]{a00399_a5db5f0307882796fcf7cdad83cb20c65_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{a00399_a7819d69862372eb198ca0e74d2ecf5f0}\label{a00399_a7819d69862372eb198ca0e74d2ecf5f0}} 
@@ -560,7 +572,7 @@ Here is the caller graph for this function\+:
 
 
 
-Truncate a float to the nearest precision defined globally. The global values can be overridden with optional parameters p and r. If r is 0.\+01, p must be 100.\+0, meaning there should be one more 0 between the decimal. 
+Truncate a float to the nearest precision defined globally. The global values can be overridden with optional parameters p and r. If r is 0.\+01, p must be 100.\+0, meaning there should be one more 0 between the decimal.  
 
 
 \begin{DoxyParams}{Parameters}
@@ -698,14 +710,26 @@ Definition at line \mbox{\hyperlink{a00185_source_l00170}{170}} of file \mbox{\h
 
 
 
-Referenced by \mbox{\hyperlink{a00185_source_l00189}{trunchf\+\_\+tmp()}}.
+References \mbox{\hyperlink{a00185_source_l00170}{trunchf\+\_\+tmp()}}.
 
+
+
+Referenced by \mbox{\hyperlink{a00185_source_l00170}{trunchf\+\_\+tmp()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{a00399_ab374c207312422f0543df4ea73f8bc85_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=336pt]{a00399_ab374c207312422f0543df4ea73f8bc85_icgraph}
+\includegraphics[width=190pt]{a00399_ab374c207312422f0543df4ea73f8bc85_icgraph}
 \end{center}
 \end{figure}
 
@@ -738,10 +762,6 @@ Offset to be used for offsetting from a polygon when performing checks.
 
 
 Definition at line \mbox{\hyperlink{a00185_source_l00032}{32}} of file \mbox{\hyperlink{a00185_source}{Constants.\+h}}.
-
-
-
-Referenced by \mbox{\hyperlink{a00011_source_l00303}{HF\+::\+Graph\+Generator\+::\+Check\+Connection()}}.
 
 \mbox{\Hypertarget{a00399_a0140105869479399be75147c8f77e724}\label{a00399_a0140105869479399be75147c8f77e724}} 
 \index{HF::SpatialStructures@{HF::SpatialStructures}!ROUNDING\_PRECISION@{ROUNDING\_PRECISION}}

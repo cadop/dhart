@@ -22,10 +22,11 @@ var searchData=
   ['mesh_19',['mesh',['../a01449.html#a949f0f10008ed14b2183510786efe24e',1,'nanoRT_Data']]],
   ['mesh_5fid_20',['mesh_id',['../a01457.html#a1216778f37ab07dcf08cec70d56885c5',1,'HF::RayTracer::RayRequest']]],
   ['meshid_21',['meshid',['../a01285.html#a5259d58812a4a21b93703a27732f684e',1,'HF::Geometry::MeshInfo::meshid()'],['../a01349.html#a7c49a19e480ba9797c9da3d2acd2221d',1,'HF::RayTracer::HitStruct::meshid()'],['../a02021.html#a8396dcd612c36b2d5c0deb61adc137f5',1,'RayResult::meshid()']]],
-  ['min_5fdist_22',['min_dist',['../a01453.html#a5cc200a19023aba64bcc859c4b06f02f',1,'HF::RayTracer::NanoRTRayTracer']]],
-  ['min_5fleaf_5fprimitives_23',['min_leaf_primitives',['../a01393.html#ab5b0ecefe07c7a6d29d6d35cec57c51c',1,'nanort::BVHBuildOptions']]],
-  ['min_5fprimitives_5ffor_5fparallel_5fbuild_24',['min_primitives_for_parallel_build',['../a01393.html#a75d2abe7b240f074fb6369468261d793',1,'nanort::BVHBuildOptions']]],
-  ['min_5ft_25',['min_t',['../a01381.html#a0e35bd37e6eb93f8233d903725d75de4',1,'nanort::Ray']]],
-  ['minus_26',['minus',['../a00413.html#aec4e5028333c01f3229062f31ce16763',1,'nlohmann::detail::dtoa_impl::boundaries']]],
-  ['mode_27',['Mode',['../a01233.html#a8284a2c40aa9b0a5db59916d32b75659',1,'HF::GraphGenerator::GeometryFlagMap']]]
+  ['min_5fconnections_22',['min_connections',['../a01245.html#aa04d1ae908956afc43e540b0cc6849f7',1,'HF::GraphGenerator::GraphGenerator']]],
+  ['min_5fdist_23',['min_dist',['../a01453.html#a5cc200a19023aba64bcc859c4b06f02f',1,'HF::RayTracer::NanoRTRayTracer']]],
+  ['min_5fleaf_5fprimitives_24',['min_leaf_primitives',['../a01393.html#ab5b0ecefe07c7a6d29d6d35cec57c51c',1,'nanort::BVHBuildOptions']]],
+  ['min_5fprimitives_5ffor_5fparallel_5fbuild_25',['min_primitives_for_parallel_build',['../a01393.html#a75d2abe7b240f074fb6369468261d793',1,'nanort::BVHBuildOptions']]],
+  ['min_5ft_26',['min_t',['../a01381.html#a0e35bd37e6eb93f8233d903725d75de4',1,'nanort::Ray']]],
+  ['minus_27',['minus',['../a00413.html#aec4e5028333c01f3229062f31ce16763',1,'nlohmann::detail::dtoa_impl::boundaries']]],
+  ['mode_28',['Mode',['../a01233.html#a8284a2c40aa9b0a5db59916d32b75659',1,'HF::GraphGenerator::GeometryFlagMap']]]
 ];

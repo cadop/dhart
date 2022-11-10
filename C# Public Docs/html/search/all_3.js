@@ -1,27 +1,8 @@
 var searchData=
 [
-  ['commonnativearrays_0',['CommonNativeArrays',['../namespace_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays.html',1,'DHARTAPI::NativeUtils']]],
-  ['data_1',['data',['../struct_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_c_s_r_info.html#a43c0ee3eff5fbbf251f3b16e5bcc1758',1,'DHARTAPI::SpatialStructures::CSRInfo']]],
-  ['dependentnativearray_2',['DependentNativeArray',['../class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_dependent_native_array.html',1,'DHARTAPI::NativeUtils']]],
-  ['dependentnativearray_3c_20float_20_3e_3',['DependentNativeArray&lt; float &gt;',['../class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_dependent_native_array.html',1,'DHARTAPI::NativeUtils']]],
-  ['dependentnativearray_3c_20int_20_3e_4',['DependentNativeArray&lt; int &gt;',['../class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_dependent_native_array.html',1,'DHARTAPI::NativeUtils']]],
-  ['dhart_5',['DHART',['../md_src__csharp_docs_markdown_mainpage.html',1,'']]],
-  ['dhart_20c_23_20documentation_6',['DHART C# Documentation',['../index.html',1,'']]],
-  ['dhartapi_7',['DHARTAPI',['../namespace_d_h_a_r_t_a_p_i.html',1,'']]],
-  ['dijkstraalltoall_8',['DijkstraAllToAll',['../class_d_h_a_r_t_a_p_i_1_1_pathfinding_1_1_shortest_path.html#a5d3e810b6cef979141bd4208700a6df2',1,'DHARTAPI::Pathfinding::ShortestPath']]],
-  ['dijkstrashortestpath_9',['DijkstraShortestPath',['../class_d_h_a_r_t_a_p_i_1_1_pathfinding_1_1_shortest_path.html#a5f2c0aa645a9c1c6f87a693a57c958cd',1,'DHARTAPI.Pathfinding.ShortestPath.DijkstraShortestPath(Graph graph, int start_id, int end_id, string cost_type=&quot;&quot;)'],['../class_d_h_a_r_t_a_p_i_1_1_pathfinding_1_1_shortest_path.html#a45ddabab96c5913d7c2e3e5cc25404bf',1,'DHARTAPI.Pathfinding.ShortestPath.DijkstraShortestPath(Graph graph, Vector3D start_node, Vector3D end_node, string cost_type=&quot;&quot;)']]],
-  ['dijkstrashortestpathmulti_10',['DijkstraShortestPathMulti',['../class_d_h_a_r_t_a_p_i_1_1_pathfinding_1_1_shortest_path.html#a0a686d8b0ab01cbdc2b8ea31a5a21e46',1,'DHARTAPI.Pathfinding.ShortestPath.DijkstraShortestPathMulti(Graph graph, int[] start_ids, int[] end_ids, string cost_type=&quot;&quot;)'],['../class_d_h_a_r_t_a_p_i_1_1_pathfinding_1_1_shortest_path.html#a9a7b6f8275e1f2567d56592093bb464a',1,'DHARTAPI.Pathfinding.ShortestPath.DijkstraShortestPathMulti(Graph graph, IEnumerable&lt; Vector3D &gt; start_nodes, IEnumerable&lt; Vector3D &gt; end_nodes, string cost_type=&quot;&quot;)']]],
-  ['direction_11',['Direction',['../namespace_d_h_a_r_t_a_p_i_1_1_spatial_structures.html#a9bfdcf5aa8b13e0e9f75cd5cf647d61c',1,'DHARTAPI::SpatialStructures']]],
-  ['directionarray_12',['DirectionArray',['../class_d_h_a_r_t_a_p_i_1_1_view_analysis_1_1_direction_array.html',1,'DHARTAPI::ViewAnalysis']]],
-  ['distance_13',['distance',['../struct_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_ray_result.html#a0ad159bc7495497608f795bbe5cd7613',1,'DHARTAPI.RayTracing.RayResult.distance()'],['../struct_d_h_a_r_t_a_p_i_1_1_view_analysis_1_1_view_analysis_result.html#ad931d471967ef8429e5ae6413feff63d',1,'DHARTAPI.ViewAnalysis.ViewAnalysisResult.distance()']]],
-  ['distanceto_14',['DistanceTo',['../struct_d_h_a_r_t_a_p_i_1_1_vector3_d.html#ab531aefc27b503b4a961ded238307f7d',1,'DHARTAPI::Vector3D']]],
-  ['exceptions_15',['Exceptions',['../namespace_d_h_a_r_t_a_p_i_1_1_exceptions.html',1,'DHARTAPI']]],
-  ['geometry_16',['Geometry',['../namespace_d_h_a_r_t_a_p_i_1_1_geometry.html',1,'DHARTAPI']]],
-  ['graphgenerator_17',['GraphGenerator',['../namespace_d_h_a_r_t_a_p_i_1_1_graph_generator.html',1,'DHARTAPI']]],
-  ['nativeutils_18',['NativeUtils',['../namespace_d_h_a_r_t_a_p_i_1_1_native_utils.html',1,'DHARTAPI']]],
-  ['pathfinding_19',['Pathfinding',['../namespace_d_h_a_r_t_a_p_i_1_1_pathfinding.html',1,'DHARTAPI']]],
-  ['raytracing_20',['RayTracing',['../namespace_d_h_a_r_t_a_p_i_1_1_ray_tracing.html',1,'DHARTAPI']]],
-  ['spatialstructures_21',['SpatialStructures',['../namespace_d_h_a_r_t_a_p_i_1_1_spatial_structures.html',1,'DHARTAPI']]],
-  ['viewanalysis_22',['ViewAnalysis',['../namespace_d_h_a_r_t_a_p_i_1_1_view_analysis.html',1,'DHARTAPI']]],
-  ['visibilitygraph_23',['VisibilityGraph',['../namespace_d_h_a_r_t_a_p_i_1_1_visibility_graph.html',1,'DHARTAPI']]]
+  ['embreebvh_0',['EmbreeBVH',['../class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h.html',1,'DHARTAPI.RayTracing.EmbreeBVH'],['../class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h.html#abeef1b2305869384c5b8fee7603f4be8',1,'DHARTAPI.RayTracing.EmbreeBVH.EmbreeBVH(MeshInfo MI, bool use_precise=false)'],['../class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_b_v_h.html#aab9bb7cded6aff8e5ebb7d1fc19c7e08',1,'DHARTAPI.RayTracing.EmbreeBVH.EmbreeBVH(MeshInfo[] MI)']]],
+  ['embreeraytracer_1',['EmbreeRaytracer',['../class_d_h_a_r_t_a_p_i_1_1_ray_tracing_1_1_embree_raytracer.html',1,'DHARTAPI::RayTracing']]],
+  ['energy_5fexpenditure_2',['ENERGY_EXPENDITURE',['../class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_cost_algorithm_names.html#a5d8ff62205d5982bb0b13d926d4cb861',1,'DHARTAPI::SpatialStructures::CostAlgorithmNames']]],
+  ['equals_3',['Equals',['../class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_native_array.html#a839c874d8cb46a2999aa607607e1200c',1,'DHARTAPI.NativeUtils.NativeArray.Equals()'],['../struct_d_h_a_r_t_a_p_i_1_1_pathfinding_1_1_path_member.html#ad730daae2b0febae5ba37a6180732a2e',1,'DHARTAPI.Pathfinding.PathMember.Equals()']]],
+  ['extensions_4',['Extensions',['../class_d_h_a_r_t_a_p_i_1_1_extensions.html',1,'DHARTAPI']]]
 ];

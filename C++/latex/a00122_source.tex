@@ -35,7 +35,7 @@
 \DoxyCodeLine{\Hypertarget{a00122_source_l00036}00036         std::string warn;}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00037}00037         std::string err;}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00038}00038 }
-\DoxyCodeLine{\Hypertarget{a00122_source_l00039}00039         \textcolor{keywordtype}{bool} ret = \mbox{\hyperlink{a00404_ad8e91aefa202de3abee6fd9914299e46}{tinyobj::LoadObj}}(\&attrib, \&shapes, \&materials, \&warn, \&err, filename);}
+\DoxyCodeLine{\Hypertarget{a00122_source_l00039}00039         \textcolor{keywordtype}{bool} ret = tinyobj::LoadObj(\&attrib, \&shapes, \&materials, \&warn, \&err, filename);}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00040}00040 }
 \DoxyCodeLine{\Hypertarget{a00122_source_l00041}00041         \textcolor{comment}{// Check for errors in the loading}}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00042}00042         \textcolor{keywordflow}{if} (!err.empty()) \{}
@@ -80,9 +80,9 @@
 \DoxyCodeLine{\Hypertarget{a00122_source_l00081}00081                     \textcolor{comment}{// extract the index of the start of the mesh indices}}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00082}00082                     tinyobj::index\_t idx = shapes[s].mesh.indices[index\_offset + v];}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00083}00083                     \textcolor{comment}{// Assign the xyz values from the flat array}}
-\DoxyCodeLine{\Hypertarget{a00122_source_l00084}00084                     \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{tinyobj::real\_t}} vx = attrib.vertices[3 * idx.vertex\_index + 0];}
-\DoxyCodeLine{\Hypertarget{a00122_source_l00085}00085                     \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{tinyobj::real\_t}} vy = attrib.vertices[3 * idx.vertex\_index + 1];}
-\DoxyCodeLine{\Hypertarget{a00122_source_l00086}00086                     \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{tinyobj::real\_t}} vz = attrib.vertices[3 * idx.vertex\_index + 2];}
+\DoxyCodeLine{\Hypertarget{a00122_source_l00084}00084                     tinyobj::real\_t vx = attrib.vertices[3 * idx.vertex\_index + 0];}
+\DoxyCodeLine{\Hypertarget{a00122_source_l00085}00085                     tinyobj::real\_t vy = attrib.vertices[3 * idx.vertex\_index + 1];}
+\DoxyCodeLine{\Hypertarget{a00122_source_l00086}00086                     tinyobj::real\_t vz = attrib.vertices[3 * idx.vertex\_index + 2];}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00087}00087 }
 \DoxyCodeLine{\Hypertarget{a00122_source_l00088}00088                     \textcolor{comment}{// set vertices to the mesh data object}}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00089}00089                     \textcolor{comment}{// This could probably all be done in one step with the above 3 lines}}
@@ -256,7 +256,7 @@
 \DoxyCodeLine{\Hypertarget{a00122_source_l00257}00257                     index\_array[last\_index++] = this\_shape\_index.vertex\_index;}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00258}00258 }
 \DoxyCodeLine{\Hypertarget{a00122_source_l00259}00259             \textcolor{comment}{// Add this mesh to the output\_array}}
-\DoxyCodeLine{\Hypertarget{a00122_source_l00260}00260             MI.emplace\_back(\mbox{\hyperlink{a00403_a4f0c57b862a0826821217d8c3ac849c4}{MeshInfo}}(vertexes, index\_array, 0, name));}
+\DoxyCodeLine{\Hypertarget{a00122_source_l00260}00260             MI.emplace\_back(\mbox{\hyperlink{a01285}{MeshInfo}}(vertexes, index\_array, 0, name));}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00261}00261 }
 \DoxyCodeLine{\Hypertarget{a00122_source_l00262}00262             \textcolor{comment}{// Change from Y-\/up to Z-\/up if specified.}}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00263}00263             \textcolor{keywordflow}{if} (change\_coords) MI[0].ConvertToRhinoCoordinates();}
@@ -292,7 +292,7 @@
 \DoxyCodeLine{\Hypertarget{a00122_source_l00293}00293                 \}}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00294}00294 }
 \DoxyCodeLine{\Hypertarget{a00122_source_l00295}00295                 \textcolor{comment}{// Finally add this mesh to the list of meshes, then rotate it to Z-\/up if specified.}}
-\DoxyCodeLine{\Hypertarget{a00122_source_l00296}00296                 MI[k] = \mbox{\hyperlink{a00403_a4f0c57b862a0826821217d8c3ac849c4}{MeshInfo}}(current\_vertices, \textcolor{keywordtype}{id}, name);}
+\DoxyCodeLine{\Hypertarget{a00122_source_l00296}00296                 MI[k] = \mbox{\hyperlink{a01285}{MeshInfo}}(current\_vertices, \textcolor{keywordtype}{id}, name);}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00297}00297                 \textcolor{keywordflow}{if} (change\_coords) MI[k].ConvertToRhinoCoordinates();}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00298}00298             \}}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00299}00299             \textcolor{keywordflow}{break};}
@@ -347,7 +347,7 @@
 \DoxyCodeLine{\Hypertarget{a00122_source_l00348}00348                 \textcolor{keywordflow}{if} (mesh.empty()) \textcolor{keywordflow}{continue}; \textcolor{comment}{// Ignore unused materials}}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00349}00349 }
 \DoxyCodeLine{\Hypertarget{a00122_source_l00350}00350                 \textcolor{comment}{// add to list;}}
-\DoxyCodeLine{\Hypertarget{a00122_source_l00351}00351                 MI.push\_back(\mbox{\hyperlink{a00403_a4f0c57b862a0826821217d8c3ac849c4}{MeshInfo}}(mesh, i, names[i]));}
+\DoxyCodeLine{\Hypertarget{a00122_source_l00351}00351                 MI.push\_back(\mbox{\hyperlink{a01285}{MeshInfo}}(mesh, i, names[i]));}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00352}00352                 \textcolor{keywordflow}{if} (change\_coords) MI[i].ConvertToRhinoCoordinates();}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00353}00353             \}}
 \DoxyCodeLine{\Hypertarget{a00122_source_l00354}00354             \textcolor{keywordflow}{break};}

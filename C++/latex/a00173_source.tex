@@ -89,7 +89,7 @@
 \DoxyCodeLine{\Hypertarget{a00173_source_l00085}00085     \textcolor{comment}{// Add a ray object to be used for intersections}}
 \DoxyCodeLine{\Hypertarget{a00173_source_l00086}\mbox{\hyperlink{a01449_ab057f30627ea451e58b9c6cd2d39134a}{00086}}     \mbox{\hyperlink{a01381}{nanort::Ray<double>}} \mbox{\hyperlink{a01449_ab057f30627ea451e58b9c6cd2d39134a}{ray}};}
 \DoxyCodeLine{\Hypertarget{a00173_source_l00087}00087     \textcolor{comment}{// Add a hit object to be referenced}}
-\DoxyCodeLine{\Hypertarget{a00173_source_l00088}\mbox{\hyperlink{a01449_af9f21fbf5a65e0b29495fff58e466c57}{00088}}     \mbox{\hyperlink{a00408_a00408}{nanort::TriangleIntersection<double>}} \mbox{\hyperlink{a01449_af9f21fbf5a65e0b29495fff58e466c57}{hit}};}
+\DoxyCodeLine{\Hypertarget{a00173_source_l00088}\mbox{\hyperlink{a01449_af9f21fbf5a65e0b29495fff58e466c57}{00088}}     \mbox{\hyperlink{a00408_a01429}{nanort::TriangleIntersection<double>}} \mbox{\hyperlink{a01449_af9f21fbf5a65e0b29495fff58e466c57}{hit}};}
 \DoxyCodeLine{\Hypertarget{a00173_source_l00089}00089     \textcolor{comment}{// Add a distance attribute to store intersection distance}}
 \DoxyCodeLine{\Hypertarget{a00173_source_l00090}\mbox{\hyperlink{a01449_a08d942806f986d3ceef1bf276e043cb3}{00090}}     \textcolor{keywordtype}{double} \mbox{\hyperlink{a01449_a08d942806f986d3ceef1bf276e043cb3}{dist}} = -\/1;}
 \DoxyCodeLine{\Hypertarget{a00173_source_l00091}\mbox{\hyperlink{a01449_aed0de5480c190a177f5adf4ee086719d}{00091}}     \textcolor{keywordtype}{double} \mbox{\hyperlink{a01449_aed0de5480c190a177f5adf4ee086719d}{point}}[3] = \{ -\/1,-\/1,-\/1 \};}
@@ -107,9 +107,9 @@
 \DoxyCodeLine{\Hypertarget{a00173_source_l00103}00103 }
 \DoxyCodeLine{\Hypertarget{a00173_source_l00104}00104     \textcolor{comment}{// Convenience method not used now but here for clarity}}
 \DoxyCodeLine{\Hypertarget{a00173_source_l00105}00105     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00404_ae4ab3809e1f437e93ae1ad78c2792025}{nanoRT\_RayCast}}(\mbox{\hyperlink{a01417}{nanort::BVHAccel<double>}}\& accel,}
-\DoxyCodeLine{\Hypertarget{a00173_source_l00106}00106         \mbox{\hyperlink{a01433}{nanort::TriangleIntersector}}<\textcolor{keywordtype}{double}, \mbox{\hyperlink{a00408_a00408}{nanort::TriangleIntersection<double>}} >\& triangle\_intersector,}
+\DoxyCodeLine{\Hypertarget{a00173_source_l00106}00106         \mbox{\hyperlink{a01433}{nanort::TriangleIntersector}}<\textcolor{keywordtype}{double}, \mbox{\hyperlink{a00408_a01429}{nanort::TriangleIntersection<double>}} >\& triangle\_intersector,}
 \DoxyCodeLine{\Hypertarget{a00173_source_l00107}00107         \mbox{\hyperlink{a01381}{nanort::Ray<double>}}\& ray,}
-\DoxyCodeLine{\Hypertarget{a00173_source_l00108}00108         \mbox{\hyperlink{a00408_a00408}{nanort::TriangleIntersection<double>}}\& isect);}
+\DoxyCodeLine{\Hypertarget{a00173_source_l00108}00108         \mbox{\hyperlink{a00408_a01429}{nanort::TriangleIntersection<double>}}\& isect);}
 \DoxyCodeLine{\Hypertarget{a00173_source_l00109}00109 }
 \DoxyCodeLine{\Hypertarget{a00173_source_l00110}00110 }
 \DoxyCodeLine{\Hypertarget{a00173_source_l00111}00111     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
@@ -179,8 +179,8 @@
 \DoxyCodeLine{\Hypertarget{a00173_source_l00175}00175 }
 \DoxyCodeLine{\Hypertarget{a00173_source_l00176}00176     \textcolor{keyword}{public}:}
 \DoxyCodeLine{\Hypertarget{a00173_source_l00177}00177 }
-\DoxyCodeLine{\Hypertarget{a00173_source_l00179}00179         \mbox{\hyperlink{a01453_a0229249855045b4fbf7097c31827f6e6}{NanoRTRayTracer}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01285}{HF::Geometry::MeshInfo<float>}}\& MI);}
-\DoxyCodeLine{\Hypertarget{a00173_source_l00180}00180         \mbox{\hyperlink{a01453_a0229249855045b4fbf7097c31827f6e6}{NanoRTRayTracer}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01285}{HF::Geometry::MeshInfo<double>}}\& MI);}
+\DoxyCodeLine{\Hypertarget{a00173_source_l00179}00179         \mbox{\hyperlink{a01453}{NanoRTRayTracer}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01285}{HF::Geometry::MeshInfo<float>}}\& MI);}
+\DoxyCodeLine{\Hypertarget{a00173_source_l00180}00180         \mbox{\hyperlink{a01453}{NanoRTRayTracer}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01285}{HF::Geometry::MeshInfo<double>}}\& MI);}
 \DoxyCodeLine{\Hypertarget{a00173_source_l00181}00181 }
 \DoxyCodeLine{\Hypertarget{a00173_source_l00182}00182 }
 \DoxyCodeLine{\Hypertarget{a00173_source_l00183}00183         \textcolor{keyword}{template}<\textcolor{keyword}{typename} po\textcolor{keywordtype}{int}\_type, \textcolor{keyword}{typename} dist\_type = real\_t>}

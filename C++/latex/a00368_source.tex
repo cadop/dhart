@@ -36,7 +36,7 @@
 \DoxyCodeLine{\Hypertarget{a00368_source_l00032}\mbox{\hyperlink{a00392_ga0cc5b82caab046c65a201e4e7be5e9d4}{00032}} \mbox{\hyperlink{a00341_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}}  \mbox{\hyperlink{a00392_ga0cc5b82caab046c65a201e4e7be5e9d4}{GetAllNodesFromGraph}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01485}{Graph}}* graph, vector<Node>** out\_vector\_ptr, \mbox{\hyperlink{a02005}{Node}}** out\_data\_ptr)}
 \DoxyCodeLine{\Hypertarget{a00368_source_l00033}00033 \{}
 \DoxyCodeLine{\Hypertarget{a00368_source_l00034}00034     \textcolor{keywordflow}{if} (!graph)}
-\DoxyCodeLine{\Hypertarget{a00368_source_l00035}00035         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051ab31440d86dbcfa007f7c8121dcbeea85}{HF\_STATUS::INVALID\_PTR}};}
+\DoxyCodeLine{\Hypertarget{a00368_source_l00035}00035         \textcolor{keywordflow}{return} HF\_STATUS::INVALID\_PTR;}
 \DoxyCodeLine{\Hypertarget{a00368_source_l00036}00036 }
 \DoxyCodeLine{\Hypertarget{a00368_source_l00037}00037     \textcolor{keywordflow}{try} \{}
 \DoxyCodeLine{\Hypertarget{a00368_source_l00038}00038 }
@@ -48,7 +48,7 @@
 \DoxyCodeLine{\Hypertarget{a00368_source_l00044}00044         *out\_vector\_ptr = nodes;}
 \DoxyCodeLine{\Hypertarget{a00368_source_l00045}00045         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}{OK}};}
 \DoxyCodeLine{\Hypertarget{a00368_source_l00046}00046     \}}
-\DoxyCodeLine{\Hypertarget{a00368_source_l00047}00047     \textcolor{keywordflow}{catch} (...) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a5bfa31d727681298e6c4cea74c848ddf}{HF\_STATUS::GENERIC\_ERROR}}; \}}
+\DoxyCodeLine{\Hypertarget{a00368_source_l00047}00047     \textcolor{keywordflow}{catch} (...) \{ \textcolor{keywordflow}{return} HF\_STATUS::GENERIC\_ERROR; \}}
 \DoxyCodeLine{\Hypertarget{a00368_source_l00048}00048     \textcolor{keywordflow}{return} \mbox{\hyperlink{a00402_aed53c233beb1d9ec1b0c5fc2bfbb1051a5bfa31d727681298e6c4cea74c848ddf}{GENERIC\_ERROR}};}
 \DoxyCodeLine{\Hypertarget{a00368_source_l00049}00049 \}}
 \DoxyCodeLine{\Hypertarget{a00368_source_l00050}\mbox{\hyperlink{a00392_gac17c1fc05e6bf6900bac8689b7619bfb}{00050}} \mbox{\hyperlink{a00341_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00392_gac17c1fc05e6bf6900bac8689b7619bfb}{GetSizeOfNodeVector}}(}
