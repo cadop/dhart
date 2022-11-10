@@ -106,8 +106,8 @@ TEST(_GraphGenerator, BuildNetwork) {
 		start_point,
 		spacing,
 		max_nodes,
-		up_step, down_step,
-		up_slope, down_slope,
+		up_step, up_slope,
+		down_step, down_slope,
 		max_step_connections,
 		min_connections
 	);
@@ -148,7 +148,7 @@ TEST(_GraphGenerator, OutDegree) {
 	std::array<float, 3> start_point{ 0,0,20 };
 	std::array<float, 3> spacing{ 1,1,1 };
 	int max_nodes = 5000;
-	int up_step = 0.5; int down_step = 0.5;
+	float up_step = 0.5; float down_step = 0.5;
 	int up_slope = 20; int down_slope = 20;
 	int max_step_connections = 1;
 	int min_connections = 1;
@@ -158,8 +158,8 @@ TEST(_GraphGenerator, OutDegree) {
 		start_point,
 		spacing,
 		max_nodes,
-		up_step, down_step,
-		up_slope, down_slope,
+		up_step, up_slope,
+		down_step, down_slope,
 		max_step_connections,
 		min_connections
 	);
