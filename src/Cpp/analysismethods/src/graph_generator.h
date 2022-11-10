@@ -347,6 +347,7 @@ namespace HF::GraphGenerator {
 		int max_nodes;			///< Maximum number of nodes to generate. If less than zero, generate nodes without a limit.
 		int core_count;			///< Number of cores to use for graph generation.
 
+		int min_connections;  ///< Minimum number of step connections for a node to be valid (minimum out degree of node)
 		int max_step_connection; ///< Multiplier for number of children to generate. The higher this is, the more directions there will be
 		real3 spacing;			///< Spacing between nodes. New nodes will be generated with atleast this much distance between them. 
 
@@ -414,9 +415,13 @@ namespace HF::GraphGenerator {
 			The maximum downward slope the graph can traverse. Any slopes steeper than this will be
 			considered inaccessible.
 
-			\param max_step_connections Multiplier for number of children to generate for each node. Increasing this value will
-			 increase the number of edges in the graph, and as a result the amount of memory the
-			 algorithm requires.
+			\param max_step_connections Multiplier for number of children to generate for each node. 
+			 Increasing this value will increase the number of edges in the graph, 
+			 and as a result the amount of memory the algorithm requires.
+
+			\param min_connections The required out-degree for a node to be valid and stored.
+			 This must be greater than 0 and equal or less than the total connections created from max_step_connections.
+			 Default is 1. A value of 8 when max_step_connections=1 would be a grid.
 
 			\param cores Number of cores to use. -1 will use all available cores, and 0 will run a serialized version of the algorithm.
 			 
@@ -465,6 +470,7 @@ namespace HF::GraphGenerator {
 			down_step_type DownStep,
 			down_slope_type DownSlope,
 			int max_step_connections,
+			int min_connections =1,
 			int cores = -1,
 			z_precision_type node_z_precision = default_z_precision,
 			connect_offset_type  node_spacing_precision = default_spacing_precision,
@@ -480,6 +486,7 @@ namespace HF::GraphGenerator {
 				CastToReal(DownStep),
 				CastToReal(DownSlope),
 				max_step_connections,
+				min_connections,
 				cores,
 				CastToReal(node_z_precision),
 				CastToReal(node_spacing_precision),
@@ -508,6 +515,10 @@ namespace HF::GraphGenerator {
 			 increase the number of edges in the graph, and as a result the amount of memory the
 			 algorithm requires.
 
+			\param min_connections The required out-degree for a node to be valid and stored.
+			 This must be greater than 0 and equal or less than the total connections created from max_step_connections.
+			 Default is 1. A value of 8 when max_step_connections=1 would be a grid.
+
 			\param cores Number of cores to use. -1 will use all available cores, and 0 will run a serialized version of the algorithm.
 			 
 
@@ -531,6 +542,7 @@ namespace HF::GraphGenerator {
 			real_t DownStep,
 			real_t DownSlope,
 			int max_step_connections,
+			int min_connections,
 			int cores = -1,
 			real_t node_z_precision = default_z_precision,
 			real_t node_spacing_precision = default_spacing_precision,

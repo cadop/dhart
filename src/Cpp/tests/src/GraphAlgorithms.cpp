@@ -127,6 +127,7 @@ namespace HF {
 		double down_step = 5;
 		double down_slope = 60;
 		int max_step_connections = 1;
+		int min_connections = 1;
 		int cores = -1;
 
 
@@ -139,6 +140,7 @@ namespace HF {
 			down_step,
 			down_slope,
 			max_step_connections,
+			min_connections,
 			cores
 		);
 
@@ -158,6 +160,7 @@ namespace HF {
 		double down_step = 5;
 		double down_slope = 60;
 		int max_step_connections = 1;
+		int min_connections = 1;
 		int cores = -1;
 
 
@@ -170,6 +173,7 @@ namespace HF {
 			down_step,
 			down_slope,
 			max_step_connections,
+			min_connections,
 			cores
 		);
 
@@ -193,6 +197,7 @@ namespace HF {
 		double up_step = 1;	double up_slope = 1;
 		double down_step = 1;	double down_slope = 1;
 		int max_step_connections = 1;
+		int min_connections = 1;
 		int cores = -1;
 		std::array<double, 3> start_point{ 1.0, 1.0, 20.0};
 		std::array<double, 3> spacing{ 1, 1, 15};
@@ -200,14 +205,14 @@ namespace HF {
 		auto EmbreeGraph = EmbreeGraphGen.BuildNetwork(
 			start_point, spacing,
 			max_nodes, up_step, up_slope,
-			down_step,	down_slope,	max_step_connections,
+			down_step, down_slope, max_step_connections, min_connections,
 			cores
 		);
 
 		auto NanoGraph = NanoRTGraphGen.BuildNetwork(
 			start_point, spacing,
 			max_nodes, up_step, up_slope,
-			down_step, down_slope, max_step_connections,
+			down_step, down_slope, max_step_connections, min_connections,
 			cores
 		);
 
@@ -241,19 +246,20 @@ namespace HF {
 		double up_step = 50;	double up_slope = 45;
 		double down_step = 50;	double down_slope = 45;
 		int max_step_connections = 2;
+		int min_connections = 1;
 		int cores = -1;
 		std::array<double, 3> start_point{ -22.42, -12.0, 5.0};
 		std::array<double, 3> spacing{ 1.0, 1.0, 10.0 };				
 		auto EmbreeGraph = EmbreeGraphGen.BuildNetwork(
 			start_point, spacing,
 			max_nodes, up_step, up_slope,
-			down_step, down_slope, max_step_connections,
+			down_step, down_slope, max_step_connections, min_connections,
 			cores
 		);
 		auto NanoGraph = NanoRTGraphGen.BuildNetwork(
 			start_point, spacing,
 			max_nodes, up_step, up_slope,
-			down_step, down_slope, max_step_connections,
+			down_step, down_slope, max_step_connections, min_connections,
 			cores
 		);
 

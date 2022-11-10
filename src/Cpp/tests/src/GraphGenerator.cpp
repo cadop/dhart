@@ -99,6 +99,7 @@ TEST(_GraphGenerator, BuildNetwork) {
 	int up_step = 1; int down_step = 1;
 	int up_slope = 45; int down_slope = 45;
 	int max_step_connections = 1;
+	int min_connections = 1;
 
 	// Generate the graph using our parameters
 	HF::SpatialStructures::Graph g = GG.BuildNetwork(
@@ -107,7 +108,8 @@ TEST(_GraphGenerator, BuildNetwork) {
 		max_nodes,
 		up_step, down_step,
 		up_slope, down_slope,
-		max_step_connections
+		max_step_connections,
+		min_connections
 	);
 
 	//! [EX_BuildNetwork]
@@ -141,6 +143,7 @@ TEST(_GraphGenerator, OBS_VisTestCase) {
 	int up_step = 20; int down_step = 20;
 	int up_slope = 45; int down_slope = 45;
 	int max_step_connections = 1;
+	int min_connections = 1;
 
 	// Generate a graph without specifying obstacles, this will result on the graph not going on the
 	// boxes due to the low upstep
@@ -150,7 +153,7 @@ TEST(_GraphGenerator, OBS_VisTestCase) {
 		max_nodes,
 		1, 1,
 		up_slope, down_slope,
-		max_step_connections
+		max_step_connections, min_connections
 	);
 
 	HF::GraphGenerator::GraphGenerator GG_Obstacle = GraphGenerator::GraphGenerator(ray_tracer, std::vector<int>{2});
@@ -163,7 +166,7 @@ TEST(_GraphGenerator, OBS_VisTestCase) {
 		max_nodes,
 		up_step, down_step,
 		up_slope, down_slope,
-		max_step_connections
+		max_step_connections, min_connections
 	);
 	
 	obstacle_graph.DumpToJson("Visgraph.json");
@@ -183,6 +186,7 @@ TEST(_GraphGenerator, OBS_BuildNetwork) {
 	int up_step = 1; int down_step = 1;
 	int up_slope = 45; int down_slope = 45;
 	int max_step_connections = 1;
+	int min_connections = 1;
 
 	// Generate the graph using our parameters
 	HF::SpatialStructures::Graph non_obstacle_graph = GG.BuildNetwork(
@@ -191,7 +195,7 @@ TEST(_GraphGenerator, OBS_BuildNetwork) {
 		max_nodes,
 		up_step, down_step,
 		up_slope, down_slope,
-		max_step_connections
+		max_step_connections, min_connections
 	);
 
 	HF::GraphGenerator::GraphGenerator GG_Obstacle = GraphGenerator::GraphGenerator(ray_tracer, std::vector<int>{2});
@@ -203,7 +207,7 @@ TEST(_GraphGenerator, OBS_BuildNetwork) {
 		max_nodes,
 		up_step, down_step,
 		up_slope, down_slope,
-		max_step_connections
+		max_step_connections, min_connections
 	);
 
 	ASSERT_LT(obstacle_graph.size(), non_obstacle_graph.size());
@@ -224,6 +228,7 @@ TEST(_GraphGenerator, CrawlGeom) {
 	int up_step = 1; int down_step = 1;
 	int up_slope = 45; int down_slope = 45;
 	int max_step_connections = 1;
+	int min_connections = 1;
 
 	// Since we're not calling BuildNetwork, we will need to set some parameters
 	// in the GraphGenerator in order to use this function standalone
@@ -232,6 +237,7 @@ TEST(_GraphGenerator, CrawlGeom) {
 	GG.core_count = -1;
 	GG.max_nodes = 5;
 	GG.max_step_connection = 1;
+	GG.min_connections = 1;
 	
 	// Setup its params struct
 	GG.params.up_step = up_step; GG.params.down_step = down_step;

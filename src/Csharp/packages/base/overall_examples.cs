@@ -43,6 +43,7 @@ namespace Humanfctors.Examples
 			float up_slope = 60.0f;
 			float down_slope = 60.0f;
 			int max_step_connections = 1;
+			int min_connections = 1;
 
 			// Generate a graph
 			var graph = DHARTAPI.GraphGenerator.GraphGenerator.GenerateGraph(
@@ -55,6 +56,7 @@ namespace Humanfctors.Examples
 				up_slope,
 				down_slope,
 				max_step_connections,
+				min_connections,
 				-1
 			);
 
@@ -351,6 +353,7 @@ namespace Humanfctors.Examples
 			float down_step = 5;
 			float down_slope = 60;
 			int max_step_connections = 1;
+			int min_connections = 1;
 			int cores = -1;
 
 
@@ -364,6 +367,7 @@ namespace Humanfctors.Examples
 				down_step,
 				down_slope,
 				max_step_connections,
+				min_connections,
 				cores
 			);
 

@@ -75,6 +75,7 @@ namespace HF::GraphGenerator{
 		real_t DownStep,
 		real_t DownSlope,
 		int max_step_connections,
+		int min_connections,
 		int cores,
 		real_t node_z_precision,
 		real_t node_spacing_precision,
@@ -100,6 +101,7 @@ namespace HF::GraphGenerator{
 		this->spacing = Spacing; 
 		this->core_count = cores;
 		this->max_step_connection = max_step_connections;
+		this->min_connections = min_connections;
 		
 		// Take the user defined start point and round it to the precision
 		// that the dhart package can handle. 

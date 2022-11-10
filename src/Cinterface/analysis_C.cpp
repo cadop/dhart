@@ -29,6 +29,7 @@ C_INTERFACE GenerateGraph(
 	float DownStep,
 	float DownSlope,
 	int max_step_connections,
+	int min_connections,
 	int core_count,
 	Graph** out_graph
 ){
@@ -46,6 +47,7 @@ C_INTERFACE GenerateGraph(
 		DownStep,
 		DownSlope,
 		max_step_connections,
+		min_connections,
 		core_count
 	);
 
@@ -67,6 +69,7 @@ C_INTERFACE GenerateGraphObstacles(
 	float DownStep,
 	float DownSlope,
 	int max_step_connections,
+	int min_connections,
 	int core_count,
 	const int* obstacle_ids,
 	const int* walkable_ids,
@@ -91,6 +94,7 @@ C_INTERFACE GenerateGraphObstacles(
 		DownStep,
 		DownSlope,
 		max_step_connections,
+		min_connections,
 		core_count
 	);
 

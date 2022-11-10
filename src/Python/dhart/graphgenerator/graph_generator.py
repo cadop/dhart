@@ -21,6 +21,7 @@ def GenerateGraph(
     down_step: float = 0.197,
     down_slope: float = 20,
     max_step_connections: int = 1,
+    min_connections: int = 1,
     cores : int = -1,
     obstacle_ids : List[int] = [],
     walkable_ids : List[int] = []
@@ -52,6 +53,9 @@ def GenerateGraph(
         max_step_connections (int, optional): Multiplier for number of children to
             generate for each node. Increasing this value will increase the number of 
             edges in the graph, and as a result the amount of memory the algorithm requires.
+        min_connections (int, optional) The required out-degree for a node to be valid and stored.
+            This must be greater than 0 and equal or less than the total connections created from max_step_connections.
+            Default is 1. A value of 8 when max_step_connections=1 would be a grid.
         cores (int, optional):  Number of cores to use. -1 will use all available cores, 
             and 0 will run a serialized version of the algorithm.
         obstacle_ids : Ids of geometry to consider as obstacles
@@ -130,6 +134,7 @@ def GenerateGraph(
         down_step,
         down_slope,
         max_step_connections,
+        min_connections,
         cores,
         obstacle_ids,
         walkable_ids
