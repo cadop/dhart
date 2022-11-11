@@ -1,6 +1,7 @@
 from ctypes import *
 from typing import *
 import os
+import sys
 import numbers
 from dhart.Exceptions import *
 from dhart.utils import *
@@ -21,10 +22,15 @@ def getDLLHandle() -> CDLL:
         return HFPython
     try:
         directory = os.path.join(os.path.dirname(os.path.realpath(__file__)),"bin")
-        os.add_dll_directory(directory)
+
+        if sys.version_info >=(3,8):
+            os.add_dll_directory(directory)
+        else:
+            os.environ['PATH'] = directory + os.pathsep + os.environ['PATH']
 
         cdll_dir = os.path.join(directory, dllname)
         HFPython = CDLL(cdll_dir, use_last_error=False)
+
     except FileNotFoundError as e:
         print("CDLL Failed to load!")
         print(e)
