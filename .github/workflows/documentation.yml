@@ -27,7 +27,7 @@ jobs:
 
     - name: Install windows documentation requirements
       run: |
-        $url = "https://www.doxygen.nl/files/doxygen-1.9.4.windows.x64.bin.zip"
+        $url = "https://www.doxygen.nl/files/doxygen-1.9.5.windows.x64.bin.zip"
         Start-DownloadWit`hRetry -Url $url -Name "doxygen.zip" -DownloadPath "C:\"
         Extract-7Zip -Path  "C:\doxygen.zip" -DestinationPath "C:\windows\system32"
         doxygen --version`

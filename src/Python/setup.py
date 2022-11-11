@@ -5,10 +5,11 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='dhart',
-      version='0.2.4',
+      version='0.2.6',
       description='Design Humans Analysis RoboTics',
       long_description=long_description,
       long_description_content_type="text/markdown",
+      url="https://github.com/cadop/dhart",
       author='',
       author_email='',
       packages=find_packages(),

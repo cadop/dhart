@@ -21,6 +21,7 @@ def GenerateGraph(
     down_step: float,
     down_slope: float,
     max_step_connections: int,
+    min_connections: int,
     cores : int = -1,
     obstacle_geometry: List[int] = [],
     walkable_geometry: List[int] = []
@@ -62,6 +63,7 @@ def GenerateGraph(
             c_float(down_step),
             c_float(down_slope),
             max_step_connections,
+            min_connections,
             c_int(cores),
             byref(graph_ptr)
         )
@@ -81,6 +83,7 @@ def GenerateGraph(
             c_float(down_step),
             c_float(down_slope),
             max_step_connections,
+            min_connections,
             c_int(cores),
             obstacle_array,
             walkable_array,

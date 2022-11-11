@@ -97,6 +97,10 @@ namespace HF {
 		const int max_step_connections = 1;		// Multiplier for number of children to generate for each node.
 												// Increasing this value increases the number of edges in the graph,
 												// therefore increasing the memory footprint of the algorithm overall.
+			
+		const int min_connections = 1;          // The required out-degree for a node to be valid and stored.
+												// This must be greater than 0 and equal or less than the total connections created from max_step_connections.
+												// Default is 1. A value of 8 when max_step_connections=1 would be a grid.
 
 		const int core_count = -1;				// CPU core count. A value of (-1) will use all available cores.
 
@@ -109,7 +113,7 @@ namespace HF {
 
 		status = GenerateGraph(bvh, start_point.data(), spacing.data(), max_nodes,
 			up_step, down_step, up_slope, down_slope,
-			max_step_connections, core_count, &graph);
+			max_step_connections, min_connections, core_count, &graph);
 
 		if (status != 1) {
 			std::cerr << "Error at GenerateGraph, code: " << status << std::endl;
