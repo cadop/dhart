@@ -255,6 +255,7 @@ namespace HF {
 			20,
 			1,
 			1,
+			1,
 			-1,
 			default_z_precision,
 			default_spacing_precision,
@@ -349,9 +350,10 @@ namespace CInterfaceTests {
 		const float down_step = 2.0;
 		const float down_slope = 0.5;
 		const int maximum_step_connections = 2;
+		const int min_connections = 1;
 		const int cores = 4;
 		
-		if (GenerateGraph(&ert, start, spacing, max_nodes, up_step, up_slope, down_step, down_slope, maximum_step_connections, cores, &g)) {
+		if (GenerateGraph(&ert, start, spacing, max_nodes, up_step, up_slope, down_step, down_slope, maximum_step_connections, min_connections, cores, &g)) {
 			std::cout << "GenerateGraph successful" << std::endl;
 		}
 		else {
@@ -445,6 +447,7 @@ TEST(Performance, GraphGenerator) {
 	float up_slope = 30;
 	float down_slope = 30;
 	int max_step_connections = 1;
+	int min_connections = 1;
 
 
 	// Run Trials and record results
@@ -462,7 +465,8 @@ TEST(Performance, GraphGenerator) {
 			up_slope,
 			down_step,
 			down_slope,
-			max_step_connections
+			max_step_connections,
+			min_connections
 		);
 		watch.StopClock();
 
@@ -487,6 +491,7 @@ TEST(Performance, attrs) {
 	float up_slope = 30;
 	float down_slope = 30;
 	int max_step_connections = 1;
+	int min_connections = 1;
 
 	auto GG = HF::GraphGenerator::GraphGenerator(ray_tracer);
 	auto graph = GG.BuildNetwork(
@@ -497,7 +502,8 @@ TEST(Performance, attrs) {
 		up_slope,
 		down_step,
 		down_slope,
-		max_step_connections
+		max_step_connections,
+		min_connections
 	);
 	graph.Compress();
 

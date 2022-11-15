@@ -99,15 +99,17 @@ TEST(_GraphGenerator, BuildNetwork) {
 	int up_step = 1; int down_step = 1;
 	int up_slope = 45; int down_slope = 45;
 	int max_step_connections = 1;
+	int min_connections = 1;
 
 	// Generate the graph using our parameters
 	HF::SpatialStructures::Graph g = GG.BuildNetwork(
 		start_point,
 		spacing,
 		max_nodes,
-		up_step, down_step,
-		up_slope, down_slope,
-		max_step_connections
+		up_step, up_slope,
+		down_step, down_slope,
+		max_step_connections,
+		min_connections
 	);
 
 	//! [EX_BuildNetwork]
@@ -128,6 +130,50 @@ TEST(_GraphGenerator, BuildNetwork) {
 
 	ComparePoints(graph_nodes, expected_nodes);
 }
+
+
+TEST(_GraphGenerator, OutDegree) {
+	// Load an OBJ containing a simple plane
+	auto mesh = HF::Geometry::LoadMeshObjects("energy_blob_zup.obj", HF::Geometry::ONLY_FILE, false);
+
+	// Create a raytracer using this obj
+	EmbreeRayTracer ray_tracer = HF::RayTracer::EmbreeRayTracer(mesh);
+
+	//! [EX_OutDegree]
+
+	// Create a graphgenerator using the raytracer we just created
+	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+
+	// Setup Graph Parameters
+	std::array<float, 3> start_point{ 0,0,20 };
+	std::array<float, 3> spacing{ 1,1,1 };
+	int max_nodes = 5000;
+	float up_step = 0.5; float down_step = 0.5;
+	int up_slope = 20; int down_slope = 20;
+	int max_step_connections = 1;
+	int min_connections = 4;
+
+	// Generate the graph using our parameters
+	HF::SpatialStructures::Graph g = GG.BuildNetwork(
+		start_point,
+		spacing,
+		max_nodes,
+		up_step, up_slope,
+		down_step, down_slope,
+		max_step_connections,
+		min_connections
+	);
+
+	//! [EX_OutDegree]
+
+	auto out_str = PrintGraph(g);
+
+	const auto graph_nodes = g.Nodes();
+
+	ASSERT_EQ(graph_nodes.size(), 3412);
+
+}
+
 TEST(_GraphGenerator, OBS_VisTestCase) {
 	EmbreeRayTracer ray_tracer = CreateObstacleExampleRT("obstacle_vistestcase.obj");
 
@@ -141,6 +187,7 @@ TEST(_GraphGenerator, OBS_VisTestCase) {
 	int up_step = 20; int down_step = 20;
 	int up_slope = 45; int down_slope = 45;
 	int max_step_connections = 1;
+	int min_connections = 1;
 
 	// Generate a graph without specifying obstacles, this will result on the graph not going on the
 	// boxes due to the low upstep
@@ -150,7 +197,7 @@ TEST(_GraphGenerator, OBS_VisTestCase) {
 		max_nodes,
 		1, 1,
 		up_slope, down_slope,
-		max_step_connections
+		max_step_connections, min_connections
 	);
 
 	HF::GraphGenerator::GraphGenerator GG_Obstacle = GraphGenerator::GraphGenerator(ray_tracer, std::vector<int>{2});
@@ -163,7 +210,7 @@ TEST(_GraphGenerator, OBS_VisTestCase) {
 		max_nodes,
 		up_step, down_step,
 		up_slope, down_slope,
-		max_step_connections
+		max_step_connections, min_connections
 	);
 	
 	obstacle_graph.DumpToJson("Visgraph.json");
@@ -183,6 +230,7 @@ TEST(_GraphGenerator, OBS_BuildNetwork) {
 	int up_step = 1; int down_step = 1;
 	int up_slope = 45; int down_slope = 45;
 	int max_step_connections = 1;
+	int min_connections = 1;
 
 	// Generate the graph using our parameters
 	HF::SpatialStructures::Graph non_obstacle_graph = GG.BuildNetwork(
@@ -191,7 +239,7 @@ TEST(_GraphGenerator, OBS_BuildNetwork) {
 		max_nodes,
 		up_step, down_step,
 		up_slope, down_slope,
-		max_step_connections
+		max_step_connections, min_connections
 	);
 
 	HF::GraphGenerator::GraphGenerator GG_Obstacle = GraphGenerator::GraphGenerator(ray_tracer, std::vector<int>{2});
@@ -203,7 +251,7 @@ TEST(_GraphGenerator, OBS_BuildNetwork) {
 		max_nodes,
 		up_step, down_step,
 		up_slope, down_slope,
-		max_step_connections
+		max_step_connections, min_connections
 	);
 
 	ASSERT_LT(obstacle_graph.size(), non_obstacle_graph.size());
@@ -224,6 +272,7 @@ TEST(_GraphGenerator, CrawlGeom) {
 	int up_step = 1; int down_step = 1;
 	int up_slope = 45; int down_slope = 45;
 	int max_step_connections = 1;
+	int min_connections = 1;
 
 	// Since we're not calling BuildNetwork, we will need to set some parameters
 	// in the GraphGenerator in order to use this function standalone
@@ -232,6 +281,7 @@ TEST(_GraphGenerator, CrawlGeom) {
 	GG.core_count = -1;
 	GG.max_nodes = 5;
 	GG.max_step_connection = 1;
+	GG.min_connections = 1;
 	
 	// Setup its params struct
 	GG.params.up_step = up_step; GG.params.down_step = down_step;
