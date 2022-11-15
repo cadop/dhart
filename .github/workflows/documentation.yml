@@ -99,6 +99,7 @@ jobs:
     - name: Install documentation dependencies
       run: |
         pip install sphinx numpydoc matplotlib         
+
     - name: Setup cmake
       run: |
         ls 
@@ -110,18 +111,23 @@ jobs:
         ls
         cd src
         cmake --build . --config Release
+
     - name: cmake Install
       run: |
         ls
         cd src
         cmake --install .
 
+    - name: check Existing dhart 
+      run: |
+        python -c "from dhart.spatialstructures import Graph"
+
     - name: Install package
       run: |
         ls
         cd build/Python
         ls
-        pip install -e . 
+        pip install . 
 
     # - name: test if package dll is installed
     #   run: | 
