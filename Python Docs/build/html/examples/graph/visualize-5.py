@@ -1,6 +1,32 @@
+import matplotlib.pyplot as plt
+
+from dhart.geometry import LoadOBJ
+from dhart.raytracer import EmbreeBVH
+from dhart.graphgenerator import GenerateGraph
+import dhart
+
+# Get a sample model path
+obj_path = dhart.get_sample_model("energy_blob_zup.obj")
+print(obj_path)
+
+# Load the obj file
+obj = LoadOBJ(obj_path)
+
+# Create a BVH
+bvh = EmbreeBVH(obj, True)
+
+# Set the graph parameters
+start_point = (0, 0, 20)
+spacing = (1, 1, 1)
+max_nodes = 5000
+up_step, down_step = 0.5, 0.5
+
+max_step_connections = 1
+
 # Set a smaller threshold for slope
 up_slope, down_slope = 5, 5
 
+# Add a minimum out-degree for each node
 min_connections = 3
 
 # Generate the Graph
