@@ -88,8 +88,10 @@
         <div class="bodywrapper">
           <div class="body" id="spc-section-body">
             
-  <div class="section" id="module-dhart.Examples.GraphGeneratorPlot">
-<span id="visualize-the-graph"></span><h1>Visualize the Graph<a class="headerlink" href="#module-dhart.Examples.GraphGeneratorPlot" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="visualize-the-graph">
+<h1>Visualize the Graph<a class="headerlink" href="#visualize-the-graph" title="Permalink to this heading">¶</a></h1>
+<div class="section" id="module-dhart.Examples.GraphGeneratorPlot">
+<span id="basic-graph-visualization"></span><h2>Basic Graph Visualization<a class="headerlink" href="#module-dhart.Examples.GraphGeneratorPlot" title="Permalink to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
 
@@ -188,6 +190,43 @@ tolerances and plot a new graph which shows certain areas are not reachable.</p>
 <div class="figure align-default">
 <img alt="../../_images/visualize-4.png" class="plot-directive" src="../../_images/visualize-4.png" />
 </div>
+<p>Using the min_connections parameter we can ensure nodes have a minimum number
+of out directions (out-degree), which can avoid walls/edges and prevent
+‘islands’ caused by single edge connections</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set a smaller threshold for slope</span>
+<span class="n">up_slope</span><span class="p">,</span> <span class="n">down_slope</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span>
+
+<span class="n">min_connections</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># Generate the Graph</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">GenerateGraph</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">start_point</span><span class="p">,</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">max_nodes</span><span class="p">,</span>
+                        <span class="n">up_step</span><span class="p">,</span><span class="n">up_slope</span><span class="p">,</span><span class="n">down_step</span><span class="p">,</span><span class="n">down_slope</span><span class="p">,</span>
+                        <span class="n">max_step_connections</span><span class="p">,</span> <span class="n">min_connections</span><span class="p">,</span> <span class="n">cores</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Convert the graph to a CSR</span>
+<span class="n">csr_graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">CompressToCSR</span><span class="p">()</span>
+
+<span class="c1"># Get the nodes of the graph as a list of x,y,z,type,id tuples</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
+
+<span class="c1"># get the x,y,z coordinates of the nodes and set the color to the z value</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nodes</span> <span class="p">]</span> <span class="c1"># x coordinate</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nodes</span> <span class="p">]</span> <span class="c1"># y coordinate</span>
+<span class="n">z</span> <span class="o">=</span> <span class="p">[</span> <span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nodes</span> <span class="p">]</span> <span class="c1"># z coordinate</span>
+
+<span class="c1"># Plot the graph</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../../examples/graph/visualize-5.py">Source code</a>)</p>
+</div>
+<div class="section" id="slope-settings">
+<h2>Slope Settings<a class="headerlink" href="#slope-settings" title="Permalink to this heading">¶</a></h2>
+</div>
+<div class="section" id="determining-minimum-connections">
+<h2>Determining Minimum Connections<a class="headerlink" href="#determining-minimum-connections" title="Permalink to this heading">¶</a></h2>
+</div>
 </div>
 
 
@@ -196,6 +235,18 @@ tolerances and plot a new graph which shows certain areas are not reachable.</p>
           </div>
       <div class="spc-rightsidebar span3">
         <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Visualize the Graph</a><ul>
+<li><a class="reference internal" href="#module-dhart.Examples.GraphGeneratorPlot">Basic Graph Visualization</a></li>
+<li><a class="reference internal" href="#slope-settings">Slope Settings</a></li>
+<li><a class="reference internal" href="#determining-minimum-connections">Determining Minimum Connections</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
   <div>
     <h4>Previous topic</h4>
     <p class="topless"><a href="get_csr.html"

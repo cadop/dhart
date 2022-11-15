@@ -112,11 +112,11 @@
 <span class="c1"># Define direction to cast ray</span>
 <span class="nb">dir</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="c1"># Fire a ray for the hitpoint</span>
+<span class="c1"># Cast a ray for the hitpoint</span>
 <span class="n">hit_point</span> <span class="o">=</span> <span class="n">IntersectForPoint</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="nb">dir</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hit point: </span><span class="si">{</span><span class="n">hit_point</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="c1"># Fire a ray for distance/meshid</span>
+<span class="c1"># Cast a ray for distance/meshid</span>
 <span class="n">distance</span><span class="p">,</span> <span class="n">mesh_id</span> <span class="o">=</span> <span class="n">Intersect</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="nb">dir</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;distance is </span><span class="si">{</span><span class="n">distance</span><span class="si">}</span><span class="s2">, meshid is </span><span class="si">{</span><span class="n">mesh_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
