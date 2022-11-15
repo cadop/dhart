@@ -88,13 +88,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
 
-    - name: Install from pypi
-      run: | 
-        pip install matplotlib 
-        pip install numpy 
-        pip install scipy
-        pip install dhart
-        python -c "from dhart.spatialstructures import Graph"
+    # - name: Install from pypi
+    #   run: | 
+    #     pip install matplotlib 
+    #     pip install numpy 
+    #     pip install scipy
+    #     pip install dhart
+    #     python -c "from dhart.spatialstructures import Graph"
 
     - name: Install documentation dependencies
       run: |
@@ -115,7 +115,7 @@ jobs:
         ls
         cd src
         cmake --install .
-        
+
     - name: Install package
       run: |
         ls
