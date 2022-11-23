@@ -458,7 +458,7 @@ TEST(_EmbreeRayTracer, OcclusionsNonStream) {
 
 	// Create an array of origins with the first 5 values being above the plane and the last
 	// five values being under it.
-	std::vector<std::array<float, 3>> origins(100000);
+	std::vector<std::array<float, 3>> origins(10000000);
 	for (int i = 0; i < 5; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, 1.0f};
 	for (int i = 5; i < 10; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, -1.0f};
 
@@ -500,7 +500,7 @@ TEST(_EmbreeRayTracer, OcclusionsStream) {
 
 	// Create an array of origins with the first 5 values being above the plane and the last
 	// five values being under it.
-	std::vector<std::array<float, 3>> origins(100000);
+	std::vector<std::array<float, 3>> origins(10000000);
 	for (int i = 0; i < 5; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, 1.0f};
 	for (int i = 5; i < 10; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, -1.0f};
 
