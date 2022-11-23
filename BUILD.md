@@ -161,12 +161,12 @@ Note that this is not "install on my computer" but rather it runs the CMAKE inst
 
 Instead of clicking install, you can continue from the `Rebuild All` step above by navigating to the output directory of the build.
 
-![Open](docs/build-instructions/12_build-location.png)
+![Open](docs/build-instructions/12_build-location.PNG)
 
 
 You can find the build files in `.\dhart\src\out\build\x64-Debug` or `x64-Release` or (whatever config you selected.)  There should be a visual studio solution that is generated for you.  
 
-![Open](docs/build-instructions/13_dhart-sln.png)
+![Open](docs/build-instructions/13_dhart-sln.PNG)
 
 
 After you open this solution file, the project structure should be more familiar. 
@@ -175,7 +175,7 @@ Please make sure to open the solution after closing the original Visual Studio p
 
 The easiest first step is to run the existing tests. You can find the test explorer under `Test`
 
-![Open](docs/build-instructions/14_tests.png)
+![Open](docs/build-instructions/14_tests.PNG)
 
 If you had selected a config for C#, you should see `hfcsharptest` dropdown, which are the unittests for C#. There should also be `HFUnitTests`, which provide the C++ and C interface tests.  
 
