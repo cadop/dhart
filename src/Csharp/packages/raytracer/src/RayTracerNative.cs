@@ -308,15 +308,16 @@ namespace DHARTAPI.RayTracing
         */
 		internal static bool[] C_CastOcclusionRays(
 			IntPtr rt_ptr,
-			IEnumerable<Vector3D> origins,
-			IEnumerable<Vector3D> directions,
+			float[] origins,
+			float[] directions,
 			float max_distance
 		)
 		{
 
 			// Get the size of both arrays
-			int num_origins = origins.Count();
-			int num_directions = directions.Count();
+			// Division by 3 corresponds to 3 XYZ coordinates of each vector
+			int num_origins = origins.Length / 3;
+			int num_directions = directions.Length / 3;
 
 			// The number of results will be equal to the length
 			// of the lonest input
@@ -324,14 +325,12 @@ namespace DHARTAPI.RayTracing
 
 			// Create output array and convert origin/directions to arrays
 			bool[] result_array = new bool[result_size];
-			float[] origin_array = HelperFunctions.FlattenVectorArray(origins);
-			float[] direction_array = HelperFunctions.FlattenVectorArray(directions);
 
 			// Call to C++ and get results. This will update the result array. 
 			HF_STATUS res = CastOcclusionRays(
 				rt_ptr,
-				origin_array,
-				direction_array,
+				origins,
+				directions,
 				num_origins,
 				num_directions,
 				max_distance,
