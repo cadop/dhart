@@ -10,6 +10,7 @@
 #include <functional>
 #include <iostream>
 #include <thread>
+#include<valarray>
 
 #include <robin_hood.h>
 
@@ -600,30 +601,43 @@ namespace HF::RayTracer {
 		}
 
 		// This is a special case where we can guarantee coherent rays
-		else if (directions.size() == 1 && origins.size() > 1 && max_distance == 99999)
+		else if (directions.size() == 1 && origins.size() > 1 && max_distance==99999)
 		{
 			out_array.resize(origins.size());
 			const auto& direction = directions[0];
-			std::vector<RTCRay> rays(origins.size());
+			
+			// use a valarray to avoid copying when slicing
+			std::valarray<RTCRay> rays(origins.size());
 
+			// pack rays
 			for (int i = 0; i < origins.size(); i++) {
 				const auto& origin = origins[i];
 				auto ray = ConstructRay(origin[0], origin[1], origin[2], direction[0], direction[1], direction[2], max_distance);
 				rays[i] = ray;
 			}
 
-			out_array = Occluded_Stream_IMPL(rays);
-			// Parallel version
-			/*
-#pragma omp parallel for if(use_parallel) schedule(dynamic)
-			for (int i = 0; i < origins.size(); i++) {
-				const auto& origin = origins[i];
-				out_array[i] = Occluded_IMPL(origin[0], origin[1], origin[2],
-											 direction[0], direction[1], direction[2],
-											 max_distance, -1
-				);
+			std::size_t chunks = origins.size() / omp_get_num_threads();
+
+			// Use a static schedule to maximize the chunk size
+#pragma omp parallel for if(use_parallel) schedule(static)
+			for (int start = 0; start < origins.size(); start+=chunks) {
+
+				std::size_t end = min(start + chunks, origins.size());
+
+				std::slice indexSlice (start, (std::size_t)end-start, 1);
+
+				std::valarray<RTCRay> sub = rays[indexSlice];
+
+				std::vector<RTCRay> subrays;
+				subrays.assign(std::begin(sub), std::end(sub));
+					
+				Occluded_Stream_IMPL(subrays);
+
+				for (int i = 0; i < subrays.size(); i++) {
+					out_array[(std::size_t)start+i] = bool(subrays[i].tfar == -INFINITY);
+				}
+
 			}
-			*/
 
 		} // Ends coherent rays
 
@@ -633,7 +647,7 @@ namespace HF::RayTracer {
 			out_array.resize(origins.size());
 			const auto& direction = directions[0];
 
-//#pragma omp parallel for if(use_parallel) schedule(dynamic)
+#pragma omp parallel for if(use_parallel) schedule(dynamic)
 			for (int i = 0; i < origins.size(); i++) {
 				const auto& origin = origins[i];
 				out_array[i] = Occluded_IMPL(origin[0], origin[1], origin[2],
@@ -641,9 +655,7 @@ namespace HF::RayTracer {
 											 max_distance, -1
 				);
 			}
-			
-
-		} // Ends coherent rays
+		} // Ends comparison rays
 
 		else if (directions.size() == 1 && origins.size() == 1) {
 			out_array = { Occluded_IMPL(origins[0], directions[0], max_distance) };
@@ -658,8 +670,22 @@ namespace HF::RayTracer {
 		return ray.tfar == -INFINITY;
 	}
 
-	std::vector<char> EmbreeRayTracer::Occluded_Stream_IMPL(std::vector<RTCRay>& rays )
-	//void EmbreeRayTracer::Occluded_Stream_IMPL(std::vector<RTCRay>& rays )
+	void EmbreeRayTracer::Occluded_Stream_IMPL(std::vector<RTCRay>& rays )
+	{
+		int M = rays.size();
+		context.flags = RTC_INTERSECT_CONTEXT_FLAG_COHERENT;
+		auto raystride = sizeof(RTCRay);
+		// rtcOccluded1M(scene, &context, (RTCRay*)&rays, M, raystride);
+		rtcOccluded1M(scene, &context, rays.data(), M, raystride);
+		//rtcOccluded1M(scene, &context, rays, M, raystride);
+
+		context.flags = RTC_INTERSECT_CONTEXT_FLAG_INCOHERENT; // reset context
+
+		//return out_results;
+	}
+
+	/*
+	std::vector<char> EmbreeRayTracer::Occluded_Stream_IMPL(std::vector<RTCRay>& rays)
 	{
 
 		int M = rays.size();
@@ -673,11 +699,12 @@ namespace HF::RayTracer {
 		for (int i = 0; i < rays.size(); i++) {
 			out_results[i] = bool(rays[i].tfar == -INFINITY);
 		}
-		
+
 		context.flags = RTC_INTERSECT_CONTEXT_FLAG_INCOHERENT; // reset context
 
 		return out_results;
 	}
+	*/
 
 	// Increment reference counters to prevent destruction when this thing goes out of scope
 	void EmbreeRayTracer::operator=(const EmbreeRayTracer& ERT2) {
