@@ -441,6 +441,50 @@ TEST(_EmbreeRayTracer, Occlusions) {
 }
 
 
+TEST(_EmbreeRayTracer, OcclusionMultiOrigin) {
+	// Create Plane
+
+	const std::vector<float> plane_vertices{
+		-10.0f, 10.0f, 0.0f,
+		-10.0f, -10.0f, 0.0f,
+		10.0f, 10.0f, 0.0f,
+		10.0f, -10.0f, 0.0f,
+	};
+	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+	
+	// Create RayTracer
+	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
+
+	// Create a single direction of {0,0,-1} wrapped in an array
+	std::vector<std::array<float, 3>> directions(1, std::array<float, 3>{0, 0, -1});
+
+	// Create an array of origins with the first 5 values being above the plane and the last
+	// five values being under it.
+	std::vector<std::array<float, 3>> origins(1000);
+	for (int i = 0; i < 5; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, 1.0f};
+	for (int i = 5; i < 10; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, -1.0f};
+
+	// Cast every ray.
+	std::vector<char> results = ert.Occlusions(origins, directions);
+	
+	// Iterate through all after_added_results to print them
+	std::cerr << "[";
+	for (int i = 0; i < 10; i++) {
+		// Print true if the ray intersected, false otherwise
+		if (results[i]) std::cout << "True";
+		else std::cerr << "False";
+
+		// Add a comma if it's not the last member
+		if (i != 9) std::cerr << ", ";
+
+		if (i < 5) ASSERT_TRUE(results[i]);
+		else ASSERT_FALSE(results[i]);
+	}
+	std::cerr << "]" << std::endl;
+	
+}
+
+
 TEST(_EmbreeRayTracer, OcclusionsNotStreamNotParallel) {
 	// Create Plane
 
