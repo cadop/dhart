@@ -601,6 +601,7 @@ namespace HF::RayTracer {
 		}
 
 		// This is a special case where we can guarantee coherent rays
+		// streaming and parallel
 		else if (directions.size() == 1 && origins.size() > 1 && max_distance==99999)
 		{
 			out_array.resize(origins.size());
@@ -617,7 +618,7 @@ namespace HF::RayTracer {
 			}
 
 			std::size_t chunks = origins.size() / omp_get_num_threads();
-
+			context.flags = RTC_INTERSECT_CONTEXT_FLAG_COHERENT;
 			// Use a static schedule to maximize the chunk size
 #pragma omp parallel for if(use_parallel) schedule(static)
 			for (int start = 0; start < origins.size(); start+=chunks) {
@@ -638,11 +639,43 @@ namespace HF::RayTracer {
 				}
 
 			}
+			context.flags = RTC_INTERSECT_CONTEXT_FLAG_NONE; // reset context
 
 		} // Ends coherent rays
 
+		// This is a special case where we can guarantee coherent rays
+		// streaming and not-parallel
+		else if (directions.size() == 1 && origins.size() > 1 && max_distance == 99998)
+		{
+			out_array.resize(origins.size());
+			const auto& direction = directions[0];
+
+			// use a valarray to avoid copying when slicing
+			std::vector<RTCRay> rays(origins.size());
+
+			// pack rays
+			for (int i = 0; i < origins.size(); i++) {
+				const auto& origin = origins[i];
+				auto ray = ConstructRay(origin[0], origin[1], origin[2], direction[0], direction[1], direction[2], max_distance);
+				rays[i] = ray;
+			}
+
+			context.flags = RTC_INTERSECT_CONTEXT_FLAG_COHERENT;
+
+			Occluded_Stream_IMPL(rays);
+
+			for (int i = 0; i < rays.size(); i++) {
+				out_array[i] = bool(rays[i].tfar == -INFINITY);
+			}
+
+			context.flags = RTC_INTERSECT_CONTEXT_FLAG_NONE; // reset context
+
+		} // Ends coherent rays
+
+
 		// This is a comparison test against the coherent streaming rays
-		else if (directions.size() == 1 && origins.size() > 1 && max_distance != 99999)
+		// not-streaming and parallel
+		else if (directions.size() == 1 && origins.size() > 1 && max_distance == 99997)
 		{
 			out_array.resize(origins.size());
 			const auto& direction = directions[0];
@@ -656,6 +689,24 @@ namespace HF::RayTracer {
 				);
 			}
 		} // Ends comparison rays
+
+		// This is a comparison test against the coherent streaming rays
+		// 99996 is: Not-streaming and not-parallel
+		else if (directions.size() == 1 && origins.size() > 1 && max_distance == 99996)
+		{
+			out_array.resize(origins.size());
+			const auto& direction = directions[0];
+
+			for (int i = 0; i < origins.size(); i++) {
+				const auto& origin = origins[i];
+				out_array[i] = Occluded_IMPL(origin[0], origin[1], origin[2],
+					direction[0], direction[1], direction[2],
+					max_distance, -1
+				);
+			}
+		} // Ends comparison rays
+
+
 
 		else if (directions.size() == 1 && origins.size() == 1) {
 			out_array = { Occluded_IMPL(origins[0], directions[0], max_distance) };
@@ -673,13 +724,13 @@ namespace HF::RayTracer {
 	void EmbreeRayTracer::Occluded_Stream_IMPL(std::vector<RTCRay>& rays )
 	{
 		int M = rays.size();
-		context.flags = RTC_INTERSECT_CONTEXT_FLAG_COHERENT;
+		
 		auto raystride = sizeof(RTCRay);
 		// rtcOccluded1M(scene, &context, (RTCRay*)&rays, M, raystride);
 		rtcOccluded1M(scene, &context, rays.data(), M, raystride);
 		//rtcOccluded1M(scene, &context, rays, M, raystride);
 
-		context.flags = RTC_INTERSECT_CONTEXT_FLAG_INCOHERENT; // reset context
+
 
 		//return out_results;
 	}
