@@ -680,7 +680,7 @@ namespace HF::RayTracer {
 			out_array.resize(origins.size());
 			const auto& direction = directions[0];
 
-#pragma omp parallel for if(use_parallel) schedule(dynamic, 128)
+#pragma omp parallel for if(use_parallel) schedule(dynamic, 256)
 			for (int i = 0; i < origins.size(); i++) {
 				const auto& origin = origins[i];
 				out_array[i] = Occluded_IMPL(origin[0], origin[1], origin[2],
