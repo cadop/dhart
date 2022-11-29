@@ -485,279 +485,6 @@ TEST(_EmbreeRayTracer, OcclusionMultiOrigin) {
 }
 
 
-TEST(_EmbreeRayTracer, OcclusionsNotStreamNotParallel) {
-	// Create Plane
-
-	/*
-	const std::vector<float> plane_vertices{
-		-10.0f, 10.0f, 0.0f,
-		-10.0f, -10.0f, 0.0f,
-		10.0f, 10.0f, 0.0f,
-		10.0f, -10.0f, 0.0f,
-	};
-	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
-	*/
-
-	// Create RayTracer
-	//EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
-
-	string model = "sponza.obj";
-	bool flip_z = false;
-
-	std::vector<MeshInfo<float>> MI = HF::Geometry::LoadMeshObjects(model, HF::Geometry::GROUP_METHOD::ONLY_FILE, flip_z);
-	EmbreeRayTracer ert = EmbreeRayTracer(MI, false);
-
-	// Create a single direction of {0,0,-1} wrapped in an array
-	std::vector<std::array<float, 3>> directions(1, std::array<float, 3>{0, 0, -1});
-
-	// Create an array of origins with the first 5 values being above the plane and the last
-	// five values being under it.
-	std::vector<std::array<float, 3>> origins(10000000);
-	//for (int i = 0; i < 5; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, 1.0f};
-	//for (int i = 5; i < 10; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, -1.0f};
-
-	for (int i = 0; i < origins.size(); i++)
-	{
-		origins[i][0] = rand() % 100;
-		origins[i][1] = rand() % 100;
-		origins[i][2] = rand() % 100;
-	}
-
-	StopWatch standard_watch;
-	standard_watch.StartClock();
-	// Cast every ray.
-	std::vector<char> results = ert.Occlusions(origins, directions, 99996);
-	standard_watch.StopClock();
-
-	std::cerr << "[";
-	std::cerr << std::to_string(static_cast<double>(standard_watch.GetDuration()) / 1000000.0);
-	std::cerr << "]" << std::endl;
-
-	/*
-	// Iterate through all after_added_results to print them
-	std::cerr << "[";
-	for (int i = 0; i < 10; i++) {
-		// Print true if the ray intersected, false otherwise
-		if (results[i]) std::cout << "True";
-		else std::cerr << "False";
-
-		// Add a comma if it's not the last member
-		if (i != 9) std::cerr << ", ";
-
-		if (i < 5) ASSERT_TRUE(results[i]);
-		else ASSERT_FALSE(results[i]);
-	}
-	std::cerr << "]" << std::endl;
-	*/
-}
-
-
-TEST(_EmbreeRayTracer, OcclusionsStreamParallel) {
-	// Create Plane
-
-	/*
-	const std::vector<float> plane_vertices{
-		-10.0f, 10.0f, 0.0f,
-		-10.0f, -10.0f, 0.0f,
-		10.0f, 10.0f, 0.0f,
-		10.0f, -10.0f, 0.0f,
-	};
-	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
-	*/
-
-	// Create RayTracer
-	//EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
-
-	string model = "sponza.obj";
-	bool flip_z = false;
-
-	std::vector<MeshInfo<float>> MI = HF::Geometry::LoadMeshObjects(model, HF::Geometry::GROUP_METHOD::ONLY_FILE, flip_z);
-	EmbreeRayTracer ert = EmbreeRayTracer(MI, false);
-
-	// Create a single direction of {0,0,-1} wrapped in an array
-	std::vector<std::array<float, 3>> directions(1, std::array<float, 3>{0, 0, -1});
-
-	// Create an array of origins with the first 5 values being above the plane and the last
-	// five values being under it.
-	std::vector<std::array<float, 3>> origins(10000000);
-	//for (int i = 0; i < 5; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, 1.0f};
-	//for (int i = 5; i < 10; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, -1.0f};
-
-	for (int i = 0; i < origins.size(); i++)
-	{
-		origins[i][0] = rand() % 100;
-		origins[i][1] = rand() % 100;
-		origins[i][2] = rand() % 100;
-	}
-	
-	StopWatch standard_watch;
-	standard_watch.StartClock();
-	// Cast every ray.
-	std::vector<char> results = ert.Occlusions(origins, directions, 99999);
-	standard_watch.StopClock();
-
-	std::cerr << "[";
-	std::cerr << std::to_string(static_cast<double>(standard_watch.GetDuration()) / 1000000.0);
-	std::cerr << "]" << std::endl;
-
-	/*
-	// Iterate through all after_added_results to print them
-	std::cerr << "[";
-	for (int i = 0; i < 10; i++) {
-		// Print true if the ray intersected, false otherwise
-		if (results[i]) std::cout << "True";
-		else std::cerr << "False";
-
-		// Add a comma if it's not the last member
-		if (i != 9) std::cerr << ", ";
-
-		if (i < 5) ASSERT_TRUE(results[i]);
-		else ASSERT_FALSE(results[i]);
-	}
-	std::cerr << "]" << std::endl;
-	*/
-}
-
-
-TEST(_EmbreeRayTracer, OcclusionsStreamNotParallel) {
-	// Create Plane
-
-	/*
-	const std::vector<float> plane_vertices{
-		-10.0f, 10.0f, 0.0f,
-		-10.0f, -10.0f, 0.0f,
-		10.0f, 10.0f, 0.0f,
-		10.0f, -10.0f, 0.0f,
-	};
-	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
-	*/
-
-	// Create RayTracer
-	//EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
-
-	string model = "sponza.obj";
-	bool flip_z = false;
-
-	std::vector<MeshInfo<float>> MI = HF::Geometry::LoadMeshObjects(model, HF::Geometry::GROUP_METHOD::ONLY_FILE, flip_z);
-	EmbreeRayTracer ert = EmbreeRayTracer(MI, false);
-
-	// Create a single direction of {0,0,-1} wrapped in an array
-	std::vector<std::array<float, 3>> directions(1, std::array<float, 3>{0, 0, -1});
-
-	// Create an array of origins with the first 5 values being above the plane and the last
-	// five values being under it.
-	std::vector<std::array<float, 3>> origins(10000000);
-	//for (int i = 0; i < 5; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, 1.0f};
-	//for (int i = 5; i < 10; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, -1.0f};
-
-	for (int i = 0; i < origins.size(); i++)
-	{
-		origins[i][0] = rand() % 100;
-		origins[i][1] = rand() % 100;
-		origins[i][2] = rand() % 100;
-	}
-
-	StopWatch standard_watch;
-	standard_watch.StartClock();
-
-	// Cast every ray.
-	std::vector<char> results = ert.Occlusions(origins, directions, 99998);
-	standard_watch.StopClock();
-
-	std::cerr << "[";
-	std::cerr << std::to_string(static_cast<double>(standard_watch.GetDuration()) / 1000000.0);
-	std::cerr << "]" << std::endl;
-
-	/*
-	// Iterate through all after_added_results to print them
-	std::cerr << "[";
-	for (int i = 0; i < 10; i++) {
-		// Print true if the ray intersected, false otherwise
-		if (results[i]) std::cout << "True";
-		else std::cerr << "False";
-
-		// Add a comma if it's not the last member
-		if (i != 9) std::cerr << ", ";
-
-		if (i < 5) ASSERT_TRUE(results[i]);
-		else ASSERT_FALSE(results[i]);
-	}
-	std::cerr << "]" << std::endl;
-
-	*/
-}
-
-
-TEST(_EmbreeRayTracer, OcclusionsNotStreamParallel) {
-	// Create Plane
-
-	/*
-	const std::vector<float> plane_vertices{
-		-10.0f, 10.0f, 0.0f,
-		-10.0f, -10.0f, 0.0f,
-		10.0f, 10.0f, 0.0f,
-		10.0f, -10.0f, 0.0f,
-	};
-	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
-	*/
-
-	// Create RayTracer
-	//EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
-
-	StopWatch standard_watch;
-
-	string model = "sponza.obj";
-	bool flip_z = false;
-
-	std::vector<MeshInfo<float>> MI = HF::Geometry::LoadMeshObjects(model, HF::Geometry::GROUP_METHOD::ONLY_FILE, flip_z);
-	EmbreeRayTracer ert = EmbreeRayTracer(MI, false);
-
-	// Create a single direction of {0,0,-1} wrapped in an array
-	std::vector<std::array<float, 3>> directions(1, std::array<float, 3>{0, 0, -1});
-
-	// Create an array of origins with the first 5 values being above the plane and the last
-	// five values being under it.
-	std::vector<std::array<float, 3>> origins(10000000);
-	//for (int i = 0; i < 5; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, 1.0f};
-	//for (int i = 5; i < 10; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, -1.0f};
-
-	for (int i = 0; i < origins.size(); i++)
-	{
-		origins[i][0] = rand() % 100;
-		origins[i][1] = rand() % 100;
-		origins[i][2] = rand() % 100;
-	}
-
-	standard_watch.StartClock();
-	// Cast every ray.
-	std::vector<char> results = ert.Occlusions(origins, directions, 99997);
-	standard_watch.StopClock();
-
-	std::cerr << "[";
-	std::cerr << std::to_string(static_cast<double>(standard_watch.GetDuration()) / 1000000.0);
-	std::cerr << "]" << std::endl;
-
-	/*
-
-	// Iterate through all after_added_results to print them
-	std::cerr << "[";
-	for (int i = 0; i < 10; i++) {
-		// Print true if the ray intersected, false otherwise
-		if (results[i]) std::cout << "True";
-		else std::cerr << "False";
-
-		// Add a comma if it's not the last member
-		if (i != 9) std::cerr << ", ";
-
-		if (i < 5) ASSERT_TRUE(results[i]);
-		else ASSERT_FALSE(results[i]);
-	}
-	std::cerr << "]" << std::endl;
-
-	*/
-}
-
-
 TEST(_EmbreeRayTracer, OcclusionPerformance) {
 
 	string model = "sponza.obj";
@@ -780,23 +507,11 @@ TEST(_EmbreeRayTracer, OcclusionPerformance) {
 		origins[i][2] = rand() % 100;
 	}
 
-	StopWatch not_stream_not_parallel;
-	not_stream_not_parallel.StartClock();
-	// Cast every ray.
-	std::vector<char> results_99996 = ert.Occlusions(origins, directions, 99996);
-	not_stream_not_parallel.StopClock();
-
 	StopWatch not_stream_parallel;
 	not_stream_parallel.StartClock();
 	// Cast every ray.
-	std::vector<char> results_99997 = ert.Occlusions(origins, directions, 99997);
+	std::vector<char> results_99997 = ert.Occlusions(origins, directions);
 	not_stream_parallel.StopClock();
-
-	StopWatch stream_not_parallel;
-	stream_not_parallel.StartClock();
-	// Cast every ray.
-	std::vector<char> results_99998 = ert.Occlusions(origins, directions, 99998);
-	stream_not_parallel.StopClock();
 
 	StopWatch stream_parallel;
 	stream_parallel.StartClock();
@@ -804,16 +519,8 @@ TEST(_EmbreeRayTracer, OcclusionPerformance) {
 	std::vector<char> results_99999 = ert.Occlusions(origins, directions, 99999);
 	stream_parallel.StopClock();
 
-	std::cerr << "[not_stream_not_parallel: ";
-	std::cerr << std::to_string(static_cast<double>(not_stream_not_parallel.GetDuration()) / 1000000.0);
-	std::cerr << "]" << std::endl;
-
 	std::cerr << "[not_stream_parallel: ";
 	std::cerr << std::to_string(static_cast<double>(not_stream_parallel.GetDuration()) / 1000000.0);
-	std::cerr << "]" << std::endl;
-
-	std::cerr << "[stream_not_parallel: ";
-	std::cerr << std::to_string(static_cast<double>(stream_not_parallel.GetDuration()) / 1000000.0);
 	std::cerr << "]" << std::endl;
 
 	std::cerr << "[stream_parallel: ";
@@ -822,7 +529,7 @@ TEST(_EmbreeRayTracer, OcclusionPerformance) {
 
 	for (int i = 0; i < origins.size(); i++)
 	{
-		ASSERT_TRUE(results_99996[i] == results_99997[i] == results_99998[i] == results_99999[i]);
+		ASSERT_TRUE(results_99997[i] == results_99999[i]);
 	}
 
 }
