@@ -576,7 +576,7 @@ namespace HF::RayTracer {
 
 		if (directions.size() > 1 && origins.size() > 1) {
 			out_array.resize(origins.size());
-#pragma omp parallel for if(use_parallel) schedule(dynamic)
+#pragma omp parallel for if(use_parallel) schedule(dynamic, 128)
 			for (int i = 0; i < origins.size(); i++) {
 				out_array[i] = Occluded_IMPL(
 					origins[i][0], origins[i][1], origins[i][2],
@@ -589,7 +589,7 @@ namespace HF::RayTracer {
 			out_array.resize(directions.size());
 			const auto& origin = origins[0];
 			printf("Using multidirection, single origin\n");
-#pragma omp parallel for if(use_parallel) schedule(dynamic)
+#pragma omp parallel for if(use_parallel) schedule(dynamic, 128)
 			for (int i = 0; i < directions.size(); i++) {
 				const auto& direction = directions[i];
 				out_array[i] = Occluded_IMPL(
@@ -608,7 +608,7 @@ namespace HF::RayTracer {
 			const auto& direction = directions[0];
 			
 			// use a valarray to avoid copying when slicing
-			std::valarray<RTCRay> rays(origins.size());
+			std::vector<RTCRay> rays(origins.size());
 
 			// pack rays
 			for (int i = 0; i < origins.size(); i++) {
@@ -617,21 +617,16 @@ namespace HF::RayTracer {
 				rays[i] = ray;
 			}
 
-			std::size_t chunks = origins.size() / omp_get_num_threads();
+			std::size_t chunks = (origins.size() / omp_get_num_threads());
 			context.flags = RTC_INTERSECT_CONTEXT_FLAG_COHERENT;
+
 			// Use a static schedule to maximize the chunk size
-#pragma omp parallel for if(use_parallel) schedule(static)
+#pragma omp parallel for if(use_parallel) schedule(dynamic)
 			for (int start = 0; start < origins.size(); start+=chunks) {
 
 				std::size_t end = min(start + chunks, origins.size());
+				vector<RTCRay> subrays = { rays.begin() + start, rays.begin()+end };
 
-				std::slice indexSlice (start, (std::size_t)end-start, 1);
-
-				std::valarray<RTCRay> sub = rays[indexSlice];
-
-				std::vector<RTCRay> subrays;
-				subrays.assign(std::begin(sub), std::end(sub));
-					
 				Occluded_Stream_IMPL(subrays);
 
 				for (int i = 0; i < subrays.size(); i++) {
@@ -643,67 +638,24 @@ namespace HF::RayTracer {
 
 		} // Ends coherent rays
 
-		// This is a special case where we can guarantee coherent rays
-		// streaming and not-parallel
-		else if (directions.size() == 1 && origins.size() > 1 && max_distance == 99998)
-		{
-			out_array.resize(origins.size());
-			const auto& direction = directions[0];
-
-			// use a valarray to avoid copying when slicing
-			std::vector<RTCRay> rays(origins.size());
-
-			// pack rays
-			for (int i = 0; i < origins.size(); i++) {
-				const auto& origin = origins[i];
-				auto ray = ConstructRay(origin[0], origin[1], origin[2], direction[0], direction[1], direction[2], max_distance);
-				rays[i] = ray;
-			}
-
-			context.flags = RTC_INTERSECT_CONTEXT_FLAG_COHERENT;
-
-			Occluded_Stream_IMPL(rays);
-
-			for (int i = 0; i < rays.size(); i++) {
-				out_array[i] = bool(rays[i].tfar == -INFINITY);
-			}
-
-			context.flags = RTC_INTERSECT_CONTEXT_FLAG_NONE; // reset context
-
-		} // Ends coherent rays
-
-
 		// This is a comparison test against the coherent streaming rays
 		// not-streaming and parallel
-		else if (directions.size() == 1 && origins.size() > 1 && max_distance == 99997)
+		else if (directions.size() == 1 && origins.size() > 1)
 		{
 			out_array.resize(origins.size());
 			const auto& direction = directions[0];
+			context.flags = RTC_INTERSECT_CONTEXT_FLAG_COHERENT;
 
+			// Use chunk size of 256 for reducing parallel overhead
 #pragma omp parallel for if(use_parallel) schedule(dynamic, 256)
 			for (int i = 0; i < origins.size(); i++) {
 				const auto& origin = origins[i];
 				out_array[i] = Occluded_IMPL(origin[0], origin[1], origin[2],
 											 direction[0], direction[1], direction[2],
-											 max_distance, -1
-				);
+											 max_distance, -1);
 			}
-		} // Ends comparison rays
+			context.flags = RTC_INTERSECT_CONTEXT_FLAG_NONE; // reset context
 
-		// This is a comparison test against the coherent streaming rays
-		// 99996 is: Not-streaming and not-parallel
-		else if (directions.size() == 1 && origins.size() > 1 && max_distance == 99996)
-		{
-			out_array.resize(origins.size());
-			const auto& direction = directions[0];
-
-			for (int i = 0; i < origins.size(); i++) {
-				const auto& origin = origins[i];
-				out_array[i] = Occluded_IMPL(origin[0], origin[1], origin[2],
-											direction[0], direction[1], direction[2],
-											max_distance, -1
-				);
-			}
 		} // Ends comparison rays
 
 		else if (directions.size() == 1 && origins.size() == 1) {
