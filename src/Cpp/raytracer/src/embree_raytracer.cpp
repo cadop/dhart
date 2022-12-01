@@ -10,7 +10,6 @@
 #include <functional>
 #include <iostream>
 #include <thread>
-#include<valarray>
 
 #include <robin_hood.h>
 
@@ -608,7 +607,7 @@ namespace HF::RayTracer {
 			const auto& direction = directions[0];
 
 			// Estimated chunk size that is balanced between stream and parallelization
-			std::size_t chunks = 128; 
+			std::size_t chunks = 256; 
 			// Set flag to coherent rays
 			context.flags = RTC_INTERSECT_CONTEXT_FLAG_COHERENT;
 
@@ -639,8 +638,7 @@ namespace HF::RayTracer {
 
 		} // Ends coherent rays
 
-		// This is a comparison test against the coherent streaming rays
-		// not-streaming and parallel
+		// This is a special case where we can guarantee coherent rays
 		else if (directions.size() == 1 && origins.size() > 1)
 		{
 			out_array.resize(origins.size());
@@ -678,28 +676,6 @@ namespace HF::RayTracer {
 		// rtcOccluded1M(scene, &context, (RTCRay*)&rays, M, raystride);
 		rtcOccluded1M(scene, &context, rays.data(), M, sizeof(RTCRay));
 	}
-
-	/*
-	std::vector<char> EmbreeRayTracer::Occluded_Stream_IMPL(std::vector<RTCRay>& rays)
-	{
-
-		int M = rays.size();
-		context.flags = RTC_INTERSECT_CONTEXT_FLAG_COHERENT;
-		auto raystride = sizeof(RTCRay);
-		// rtcOccluded1M(scene, &context, (RTCRay*)&rays, M, raystride);
-		rtcOccluded1M(scene, &context, rays.data(), M, raystride);
-
-		std::vector<char> out_results;
-		out_results.resize(rays.size());
-		for (int i = 0; i < rays.size(); i++) {
-			out_results[i] = bool(rays[i].tfar == -INFINITY);
-		}
-
-		context.flags = RTC_INTERSECT_CONTEXT_FLAG_INCOHERENT; // reset context
-
-		return out_results;
-	}
-	*/
 
 	// Increment reference counters to prevent destruction when this thing goes out of scope
 	void EmbreeRayTracer::operator=(const EmbreeRayTracer& ERT2) {
