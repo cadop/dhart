@@ -47,6 +47,8 @@ You must install the following tools for visual studio. This is found in the _in
 
 At the time of writing, this list is a little long, and as we narrow down frequent issues we can hopefully reduce the exact features needed.
 
+NOTE: If you do not have Visual Studio 2019, and are only installing 2022, you may not find `.NET Framework 4.5`. You can either download it from Microsoft separately, or look at the FAQ (at the bottom of this page) to change the `.NET` Framework. 
+
 </details>
 
 ### Get DHART
