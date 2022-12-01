@@ -607,16 +607,17 @@ namespace HF::RayTracer {
 			out_array.resize(origins.size());
 			const auto& direction = directions[0];
 
-			std::size_t chunks = 128;
+			// Estimated chunk size that is balanced between stream and parallelization
+			std::size_t chunks = 128; 
+			// Set flag to coherent rays
 			context.flags = RTC_INTERSECT_CONTEXT_FLAG_COHERENT;
 
-			// Use a static schedule to maximize the chunk size
 #pragma omp parallel for if(use_parallel) schedule(dynamic)
 			for (int start = 0; start < origins.size(); start+=chunks) {
 
+				// Define stride length
 				std::size_t end = min(start + chunks, origins.size());
 				
-				// use a valarray to avoid copying when slicing
 				std::vector<RTCRay> rays((int)(end-start));
 
 				// pack rays
@@ -626,6 +627,7 @@ namespace HF::RayTracer {
 					rays[i] = ray;
 				}
 
+				// Call the Stream method for coherent rays
 				Occluded_Stream_IMPL(rays);
 
 				for (int i = 0; i < rays.size(); i++) {
