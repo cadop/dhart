@@ -606,18 +606,8 @@ namespace HF::RayTracer {
 		{
 			out_array.resize(origins.size());
 			const auto& direction = directions[0];
-			
-			// use a valarray to avoid copying when slicing
-			std::vector<RTCRay> rays(origins.size());
 
-			// pack rays
-			for (int i = 0; i < origins.size(); i++) {
-				const auto& origin = origins[i];
-				auto ray = ConstructRay(origin[0], origin[1], origin[2], direction[0], direction[1], direction[2], max_distance);
-				rays[i] = ray;
-			}
-
-			std::size_t chunks = (origins.size() / omp_get_num_threads());
+			std::size_t chunks = 128;
 			context.flags = RTC_INTERSECT_CONTEXT_FLAG_COHERENT;
 
 			// Use a static schedule to maximize the chunk size
@@ -625,12 +615,21 @@ namespace HF::RayTracer {
 			for (int start = 0; start < origins.size(); start+=chunks) {
 
 				std::size_t end = min(start + chunks, origins.size());
-				vector<RTCRay> subrays = { rays.begin() + start, rays.begin()+end };
+				
+				// use a valarray to avoid copying when slicing
+				std::vector<RTCRay> rays((int)(end-start));
 
-				Occluded_Stream_IMPL(subrays);
+				// pack rays
+				for (int i = 0; i < end-start; i++) {
+					const auto& origin = origins[std::size_t(start)+std::size_t(i)];
+					auto ray = ConstructRay(origin[0], origin[1], origin[2], direction[0], direction[1], direction[2], max_distance);
+					rays[i] = ray;
+				}
 
-				for (int i = 0; i < subrays.size(); i++) {
-					out_array[(std::size_t)start+i] = bool(subrays[i].tfar == -INFINITY);
+				Occluded_Stream_IMPL(rays);
+
+				for (int i = 0; i < rays.size(); i++) {
+					out_array[(std::size_t)start+i] = bool(rays[i].tfar == -INFINITY);
 				}
 
 			}
