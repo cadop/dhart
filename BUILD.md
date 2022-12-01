@@ -197,5 +197,21 @@ After generating the build files, you should be able to open a visual studio sol
 - `CMake Error: CMAKE_CSharp_COMPILER not set, after EnableLanguage` | This likely occurs because your `CMakeSettings.json` is not correct. If you did not use `git-lfs pull`, this file will just be a lfs object pointer. 
 - `CMake Error at X:\XXX\dhart\src\CMakeLists.txt:37: No CMAKE_C_COMPILER could be found.` | This is likely because you are missing the cmake installation or its not configured. Remember, you need _both_ to install cmake from cmake.org _and_ to include it in the visual studio installation settings.
 - Some error talking about tests or google-tests. | We use google-tests for the unit testing of the project.  If you are struggling to build because of this error, you can edit the `CMakeSettings.json` in visual studio and uncheck the `EnableTests` option and `Build_GMOCK` for the configuration you are interested in using.
+- Cannot run the install because of the following error:
+```
+Severity	Code	Description	Project	File	Line	Suppression State
+Error	MSB3073	The command "setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DBUILD_TYPE=RelWithDebInfo -P cmake_install.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+:VCEnd" exited with code 1.	INSTALL	C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets	149	
+```
+It is usually caused when the visual studio solution is opened and a failed build was run on one of the projects inside (or something like this). In general its a write access issue. Close all VS instances, go to the src folder, delete `.vs` folder, and delete `out` folder. Reopen VS with the source folder and build/install again. 
+
 
 </details>
