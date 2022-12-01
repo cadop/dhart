@@ -234,6 +234,6 @@ if %errorlevel% neq 0 goto :VCEnd
 :VCEnd" exited with code 1.	INSTALL	C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets	149	
 ```
 It is usually caused when the visual studio solution is opened and a failed build was run on one of the projects inside (or something like this). In general its a write access issue. Close all VS instances, go to the src folder, delete `.vs` folder, and delete `out` folder. Reopen VS with the source folder and build/install again. 
-
+- Build is failing with Visual Studio because of .NET version. Go to `src/Csharp/CMakeLists.txt` and search for `VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.5"` (and `4.5.2`). Replace these with `VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.8"`, or whatever .NET version you are using. 
 
 </details>
