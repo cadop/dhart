@@ -37,7 +37,7 @@ namespace DHARTAPI.RayTracing
         \see EmbreeBVH for details on generating a BVH from geometry.
     */
 
-	public sealed class EmbreeRaytracer
+	public static class EmbreeRaytracer
 	{
 		/*!
             \brief Cast a single ray, and get a point in return if it intersects any geometry.

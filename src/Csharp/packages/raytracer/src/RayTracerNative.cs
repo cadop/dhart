@@ -16,7 +16,7 @@ namespace DHARTAPI.RayTracing
 {
 
 	/*! \param NativeMethods for the RayTracing namespace */
-	internal sealed class NativeMethods
+	internal static class NativeMethods
 	{
 		// Path to the DHARTAPI C++ DLL
 		private const string dllpath = NativeConstants.DLLPath;

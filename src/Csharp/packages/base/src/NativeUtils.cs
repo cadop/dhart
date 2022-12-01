@@ -91,7 +91,7 @@ namespace DHARTAPI.NativeUtils
         These functions are frequently called internally in multiple DHARTAPI
         namespaces. 
     */
-	public sealed class HelperFunctions
+	public static class HelperFunctions
 	{
 		/*! 
             \brief Copy an array of structs from unmanaged memory into managed memory </summary>
