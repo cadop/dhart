@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -90,7 +91,7 @@ namespace DHARTAPI.NativeUtils
         These functions are frequently called internally in multiple DHARTAPI
         namespaces. 
     */
-	public static class HelperFunctions
+	public sealed class HelperFunctions
 	{
 		/*! 
             \brief Copy an array of structs from unmanaged memory into managed memory </summary>
@@ -160,7 +161,7 @@ namespace DHARTAPI.NativeUtils
 			return out_array;
 		}
 
-		/*! 
+        /*! 
             \brief Convert a flat array of floats into a vector of points where result_array is true
             
             \param float_array
@@ -180,7 +181,25 @@ namespace DHARTAPI.NativeUtils
             The number of elements in result_array is not equal to the number of
             elements in float_array / 3
        */
-		public static Vector3D[] FloatArrayToVectorArray(float[] float_array, bool[] result_array)
+
+        public static float[] FlattenVectorArrayUnsafe(Vector3D[] vectors)
+        {
+            // Create a new output array of floats 3x the size of vectors.
+            float[] out_array = new float[vectors.Length * 3];
+
+            // Use Unsafe.Add to iterate over the array 
+            ref var s0 = ref vectors[0];
+            for (int i = 0, j = 0; i < vectors.Length; i++, j++)
+            {
+                out_array[j] = Unsafe.Add(ref s0, i).x;
+                out_array[j++] = Unsafe.Add(ref s0, i).y;
+                out_array[j++] = Unsafe.Add(ref s0, i).z;
+            }
+
+            return out_array;
+        }
+
+        public static Vector3D[] FloatArrayToVectorArray(float[] float_array, bool[] result_array)
 		{
 			// If our precondition isn't met, throw
 			int size = float_array.Length / 3;
