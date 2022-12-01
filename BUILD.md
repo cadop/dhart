@@ -25,6 +25,9 @@ Note for installing CMake, you must check `Add CMake to the system PATH`. The ea
 
 ### For Visual Studio
 
+<details>
+  <summary>Visual Studio Build Requirements</summary>
+
 You must install the following tools for visual studio. This is found in the _installer_ (not the extensions). 
 
 1. Desktop Development with C++
@@ -43,6 +46,8 @@ You must install the following tools for visual studio. This is found in the _in
 1. Testing tools core features - Build Tools
 
 At the time of writing, this list is a little long, and as we narrow down frequent issues we can hopefully reduce the exact features needed.
+
+</details>
 
 ### Get DHART
 
@@ -68,6 +73,9 @@ You can build using either CMAKE from the command line, _or_ through Visual Stud
 
 ## Using CMAKE Command Line
 
+<details>
+  <summary>CMAKE Build Details</summary>
+
 Currently we directly call the configuration arguments when using cmake. (If someone would like to contribute to improving this process feel free to open an issue. )
 
 Python Debug
@@ -91,7 +99,14 @@ After building (assuming it went okay), run:
 
 1. cd to build/Python and run `pip install .`
 
+</details>
+
+------------------
+
 ## Using Visual Studio
+
+<details>
+  <summary>Visual Studio Build Details</summary>
 
 1. Open Microsoft Visual Studio 2019. After seeing the splash/welcome screen, please click the button that reads Open a local folder.
 
@@ -185,14 +200,21 @@ Hint: The easiest way to try out the interface and changes is to copy an existin
 
 Once you are done with your changes, you can start this tutorial again to build/install (make a release) of the `dll`'s. 
 
+</details>
+
+------------------
 ### Testing
 
+<details>
+  <summary>Testing Details</summary>
 After generating the build files, you should be able to open a visual studio solution file in the build directory.  If it doesn't display immediately, go to `Test -> Test Explorer` to open the test explorer. Then click `Run All`. 
 
+</details>
 
-### FAQ
+-------------------
+## FAQ
 <details>
-  <summary>FAQ List</summary>
+  <summary>FAQ Details</summary>
 
 - `CMake Error: CMAKE_CSharp_COMPILER not set, after EnableLanguage` | This likely occurs because your `CMakeSettings.json` is not correct. If you did not use `git-lfs pull`, this file will just be a lfs object pointer. 
 - `CMake Error at X:\XXX\dhart\src\CMakeLists.txt:37: No CMAKE_C_COMPILER could be found.` | This is likely because you are missing the cmake installation or its not configured. Remember, you need _both_ to install cmake from cmake.org _and_ to include it in the visual studio installation settings.
