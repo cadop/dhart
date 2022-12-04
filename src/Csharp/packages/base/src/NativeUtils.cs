@@ -168,11 +168,11 @@ namespace DHARTAPI.NativeUtils
 
             // Use Unsafe.Add to iterate over the array 
             ref var s0 = ref vectors[0];
-            for (int i = 0, j = 0; i < vectors.Length; i++, j++)
+            for (int i = 0, j = 0; i < vectors.Length; i++, j += 3)
             {
                 out_array[j] = Unsafe.Add(ref s0, i).x;
-                out_array[j++] = Unsafe.Add(ref s0, i).y;
-                out_array[j++] = Unsafe.Add(ref s0, i).z;
+                out_array[j + 1] = Unsafe.Add(ref s0, i).y;
+                out_array[j + 2] = Unsafe.Add(ref s0, i).z;
             }
 
             return out_array;
