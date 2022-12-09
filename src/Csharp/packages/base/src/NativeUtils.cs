@@ -160,26 +160,6 @@ namespace DHARTAPI.NativeUtils
 			return out_array;
 		}
 
-		/*
-        public static float[] FlattenVectorArrayUnsafe(Vector3D[] vectors)
-        {
-            // Create a new output array of floats 3x the size of vectors.
-            float[] out_array = new float[vectors.Length * 3];
-
-            // Use Unsafe.Add to iterate over the array 
-            ref var s0 = ref vectors[0];
-            for (int i = 0, j = 0; i < vectors.Length; i++, j++)
-            {
-				var currentPoint = Unsafe.Add(ref s0, i);
-				out_array[j] = (float)currentPoint.x;
-				out_array[j + 1] = (float)currentPoint.y;
-				out_array[j + 2] = (float)currentPoint.z;
-            }
-
-            return out_array;
-        }
-		*/
-
         /*! 
             \brief Convert a flat array of floats into a vector of points where result_array is true
             
