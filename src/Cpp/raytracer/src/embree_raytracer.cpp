@@ -598,22 +598,22 @@ namespace HF::RayTracer {
 			}
 		}
 
-		// This is a special case where we can guarantee coherent rays
+		// This is might seem to be an application of coherent rays with streaming, 
+		// but coherent rays also require the origins to be very similar, so it doesn't help
 		else if (directions.size() == 1 && origins.size() > 1)
 		{
 			out_array.resize(origins.size());
 			const auto& direction = directions[0];
-			context.flags = RTC_INTERSECT_CONTEXT_FLAG_COHERENT;
 
 			// Use chunk size of 256 for reducing parallel overhead
 		#pragma omp parallel for if(use_parallel) schedule(dynamic, 256)
 			for (int i = 0; i < origins.size(); i++) {
 				const auto& origin = origins[i];
-				out_array[i] = Occluded_IMPL(origin[0], origin[1], origin[2], direction[0], direction[1], direction[2], max_distance, -1);
+				out_array[i] = Occluded_IMPL(origin[0], origin[1], origin[2], 
+											direction[0], direction[1], direction[2], 
+											max_distance, -1);
 			}
-			context.flags = RTC_INTERSECT_CONTEXT_FLAG_NONE; // reset context
-
-		} // Ends comparison rays
+		}
 
 		else if (directions.size() == 1 && origins.size() == 1) {
 			out_array = { Occluded_IMPL(origins[0], directions[0], max_distance) };
