@@ -160,7 +160,7 @@ namespace DHARTAPI.NativeUtils
 			return out_array;
 		}
 
-		/*! 
+        /*! 
             \brief Convert a flat array of floats into a vector of points where result_array is true
             
             \param float_array

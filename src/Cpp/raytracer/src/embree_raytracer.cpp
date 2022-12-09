@@ -10,7 +10,6 @@
 #include <functional>
 #include <iostream>
 #include <thread>
-
 #include <robin_hood.h>
 
 #include <meshinfo.h>
@@ -193,7 +192,7 @@ namespace HF::RayTracer {
 		scene = rtcNewScene(device);
 		rtcSetSceneBuildQuality(scene, RTC_BUILD_QUALITY_HIGH);
 		rtcSetSceneFlags(scene, RTC_SCENE_FLAG_ROBUST);
-
+		// Initialize the intersect context, which should later allow RTC_INTERSECT_CONTEXT_FLAG_COHERENT
 		rtcInitIntersectContext(&context);
 	}
 
@@ -575,7 +574,7 @@ namespace HF::RayTracer {
 
 		if (directions.size() > 1 && origins.size() > 1) {
 			out_array.resize(origins.size());
-#pragma omp parallel for if(use_parallel) schedule(dynamic)
+#pragma omp parallel for if(use_parallel) schedule(dynamic, 128)
 			for (int i = 0; i < origins.size(); i++) {
 				out_array[i] = Occluded_IMPL(
 					origins[i][0], origins[i][1], origins[i][2],
@@ -588,7 +587,7 @@ namespace HF::RayTracer {
 			out_array.resize(directions.size());
 			const auto& origin = origins[0];
 			printf("Using multidirection, single origin\n");
-#pragma omp parallel for if(use_parallel) schedule(dynamic)
+#pragma omp parallel for if(use_parallel) schedule(dynamic, 128)
 			for (int i = 0; i < directions.size(); i++) {
 				const auto& direction = directions[i];
 				out_array[i] = Occluded_IMPL(
@@ -598,20 +597,24 @@ namespace HF::RayTracer {
 				);
 			}
 		}
+
+		// This is might seem to be an application of coherent rays with streaming, 
+		// but coherent rays also require the origins to be very similar, so it doesn't help
 		else if (directions.size() == 1 && origins.size() > 1)
 		{
 			out_array.resize(origins.size());
 			const auto& direction = directions[0];
-#pragma omp parallel for if(use_parallel) schedule(dynamic)
+
+			// Use chunk size of 256 for reducing parallel overhead
+		#pragma omp parallel for if(use_parallel) schedule(dynamic, 256)
 			for (int i = 0; i < origins.size(); i++) {
 				const auto& origin = origins[i];
-				out_array[i] = Occluded_IMPL(
-					origin[0], origin[1], origin[2],
-					direction[0], direction[1], direction[2],
-					max_distance, -1
-				);
+				out_array[i] = Occluded_IMPL(origin[0], origin[1], origin[2], 
+											direction[0], direction[1], direction[2], 
+											max_distance, -1);
 			}
 		}
+
 		else if (directions.size() == 1 && origins.size() == 1) {
 			out_array = { Occluded_IMPL(origins[0], directions[0], max_distance) };
 		}

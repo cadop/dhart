@@ -300,6 +300,7 @@ namespace HF::RayTracer {
 			float distance = -1,
 			int mesh_id = -1
 		);
+		
 
 		/// <summary> Cast an occlusion ray using arrays as input. </summary>
 /// <param name="origin"> Start point of the ray. </param>
