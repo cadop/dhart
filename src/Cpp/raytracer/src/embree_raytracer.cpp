@@ -10,7 +10,6 @@
 #include <functional>
 #include <iostream>
 #include <thread>
-
 #include <robin_hood.h>
 
 #include <meshinfo.h>
@@ -611,7 +610,7 @@ namespace HF::RayTracer {
 			// Set flag to coherent rays
 			context.flags = RTC_INTERSECT_CONTEXT_FLAG_COHERENT;
 
-#pragma omp parallel for if(use_parallel) schedule(dynamic)
+		#pragma omp parallel for if(use_parallel) schedule(dynamic)
 			for (int start = 0; start < origins.size(); start+=chunks) {
 
 				// Define stride length
@@ -627,7 +626,7 @@ namespace HF::RayTracer {
 				}
 
 				// Call the Stream method for coherent rays
-				Occluded_Stream_IMPL(rays);
+				rtcOccluded1M(scene, &context, rays.data(), rays.size(), sizeof(RTCRay));
 
 				for (int i = 0; i < rays.size(); i++) {
 					out_array[(std::size_t)start+i] = bool(rays[i].tfar == -INFINITY);
@@ -635,6 +634,89 @@ namespace HF::RayTracer {
 
 			}
 			context.flags = RTC_INTERSECT_CONTEXT_FLAG_NONE; // reset context
+
+		} // Ends coherent rays
+
+		else if (directions.size() == 1 && origins.size() > 1 && max_distance == 99998)
+		{
+			out_array.resize(origins.size());
+			const auto& direction = directions[0];
+
+			//std::valarray<RTCRay> rays(origins.size());
+			std::vector<RTCRay> rays(origins.size());
+
+			// Estimated chunk size that is balanced between stream and parallelization
+			std::size_t chunks = 256;
+			// Set flag to coherent rays
+			context.flags = RTC_INTERSECT_CONTEXT_FLAG_COHERENT;
+
+			use_parallel = false;
+
+//#pragma omp parallel for if(use_parallel) schedule(dynamic)
+			for (int start = 0; start < origins.size(); start += chunks) {
+
+				// Define stride length
+				std::size_t end = min(start + chunks, origins.size());
+
+				// pack rays
+				for (int i = start; i < end; i++) {
+					const auto& origin = origins[i];
+					auto ray = ConstructRay(origin[0], origin[1], origin[2], direction[0], direction[1], direction[2], max_distance);
+					rays[i] = ray;
+				}
+
+				auto rtcsize = sizeof(rays[0]);
+				auto streamsize =  rtcsize * (end - start);
+				// Call the Stream method for coherent rays
+				rtcOccluded1M(scene, &context, &rays[start], streamsize, rtcsize);
+
+				for (int i = start; i < end; i++) 
+				{
+					out_array[i] = bool(rays[i].tfar == -INFINITY);
+				}
+
+			}
+			context.flags = RTC_INTERSECT_CONTEXT_FLAG_NONE; // reset context
+
+		} // Ends coherent rays
+
+
+		else if (directions.size() == 1 && origins.size() > 1 && max_distance == 99996)
+		{
+			out_array.resize(origins.size());
+			const auto& direction = directions[0];
+
+			//std::vector<RTCRay> rays(origins.size());
+
+			// Estimated chunk size that is balanced between stream and parallelization
+			std::size_t chunks = 256;
+			// Set flag to coherent rays
+			context.flags = RTC_INTERSECT_CONTEXT_FLAG_COHERENT;
+	
+		#pragma omp parallel for if(use_parallel) schedule(dynamic)
+
+			for (int start = 0; start < origins.size(); start += chunks) {
+
+				// Define stride length
+				std::size_t end = min(start + chunks, origins.size());
+
+				RTCRay rays[256];
+
+				// pack rays
+				for (int i = 0; i < end-start; i++) {
+					const auto& origin = origins[start+i];
+					auto ray = ConstructRay(origin[0], origin[1], origin[2], direction[0], direction[1], direction[2], max_distance);
+					rays[i] = ray;
+				}
+
+				rtcOccluded1M(scene, &context, &rays[0], end-start, sizeof(RTCRay));
+
+				for (int i = 0; i < end-start; i++){
+					out_array[start+i] = bool(rays[i].tfar == -INFINITY);
+				}
+
+			}
+			context.flags = RTC_INTERSECT_CONTEXT_FLAG_NONE;
 
 		} // Ends coherent rays
 
@@ -646,12 +728,12 @@ namespace HF::RayTracer {
 			context.flags = RTC_INTERSECT_CONTEXT_FLAG_COHERENT;
 
 			// Use chunk size of 256 for reducing parallel overhead
-#pragma omp parallel for if(use_parallel) schedule(dynamic, 256)
+		#pragma omp parallel for if(use_parallel) schedule(dynamic, 256)
 			for (int i = 0; i < origins.size(); i++) {
 				const auto& origin = origins[i];
-				out_array[i] = Occluded_IMPL(origin[0], origin[1], origin[2],
-											 direction[0], direction[1], direction[2],
-											 max_distance, -1);
+				auto ray = ConstructRay(origin[0], origin[1], origin[2], direction[0], direction[1], direction[2], max_distance);
+				rtcOccluded1(scene, &context, &ray);
+				out_array[i] = ray.tfar == -INFINITY;
 			}
 			context.flags = RTC_INTERSECT_CONTEXT_FLAG_NONE; // reset context
 
