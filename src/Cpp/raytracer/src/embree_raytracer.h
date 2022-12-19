@@ -300,9 +300,6 @@ namespace HF::RayTracer {
 			float distance = -1,
 			int mesh_id = -1
 		);
-
-		void Occluded_Stream_IMPL(std::vector<RTCRay>& rays);
-		//std::vector<char> Occluded_Stream_IMPL(std::vector<RTCRay>& rays);
 		
 
 		/// <summary> Cast an occlusion ray using arrays as input. </summary>

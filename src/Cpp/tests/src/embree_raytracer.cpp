@@ -484,56 +484,6 @@ TEST(_EmbreeRayTracer, OcclusionMultiOrigin) {
 	
 }
 
-
-TEST(_EmbreeRayTracer, OcclusionPerformance) {
-
-	string model = "sponza.obj";
-	bool flip_z = false;
-
-	std::vector<MeshInfo<float>> MI = HF::Geometry::LoadMeshObjects(model, HF::Geometry::GROUP_METHOD::ONLY_FILE, flip_z);
-	EmbreeRayTracer ert = EmbreeRayTracer(MI, false);
-
-	// Create a single direction of {0,0,-1} wrapped in an array
-	std::vector<std::array<float, 3>> directions(1, std::array<float, 3>{0, 0, -1});
-
-	// Create an array of origins
-	std::vector<std::array<float, 3>> origins(1000000);
-
-	// Generate random data
-	for (int i = 0; i < origins.size(); i++)
-	{
-		origins[i][0] = rand() % 100;
-		origins[i][1] = rand() % 100;
-		origins[i][2] = rand() % 100;
-	}
-
-	StopWatch not_stream_parallel;
-	not_stream_parallel.StartClock();
-	// Cast every ray.
-	std::vector<char> results_99997 = ert.Occlusions(origins, directions);
-	not_stream_parallel.StopClock();
-
-	StopWatch stream_parallel;
-	stream_parallel.StartClock();
-	// Cast every ray.
-	std::vector<char> results_99999 = ert.Occlusions(origins, directions, 99999);
-	stream_parallel.StopClock();
-
-	std::cerr << "[not_stream_parallel: ";
-	std::cerr << std::to_string(static_cast<double>(not_stream_parallel.GetDuration()) / 1000000.0);
-	std::cerr << "]" << std::endl;
-
-	std::cerr << "[stream_parallel: ";
-	std::cerr << std::to_string(static_cast<double>(stream_parallel.GetDuration()) / 1000000.0);
-	std::cerr << "]" << std::endl;
-
-	for (int i = 0; i < origins.size(); i++)
-	{
-		ASSERT_TRUE(results_99997[i] == results_99999[i]);
-	}
-
-}
-
 TEST(_EmbreeRayTracer, PointIntersection) {
 	// Create Plane
 	const vector<float> plane_vertices{

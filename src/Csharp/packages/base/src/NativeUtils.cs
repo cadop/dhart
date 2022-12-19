@@ -161,6 +161,7 @@ namespace DHARTAPI.NativeUtils
 			return out_array;
 		}
 
+
         public static float[] FlattenVectorArrayUnsafe(Vector3D[] vectors)
         {
             // Create a new output array of floats 3x the size of vectors.
@@ -177,6 +178,7 @@ namespace DHARTAPI.NativeUtils
 
             return out_array;
         }
+
 
         /*! 
             \brief Convert a flat array of floats into a vector of points where result_array is true
