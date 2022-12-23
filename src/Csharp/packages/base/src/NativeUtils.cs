@@ -160,6 +160,46 @@ namespace DHARTAPI.NativeUtils
 			return out_array;
 		}
 
+		/// <summary>
+		/// Flatten array by passing array directly
+		/// </summary>
+		/// <param name="vectors"></param>
+		/// <returns></returns>
+		public static float[] FlattenVectorArray(Vector3D[] vectors)
+		{
+			// Create a new output array of floats 3x the size of vectors.
+			float[] out_array = new float[vectors.Length * 3];
+
+			// Use Unsafe.Add to iterate over the array 
+			//ref var s0 = ref vectors[0];
+			for (int i = 0, j = 0; i < vectors.Length; i++, j += 3)
+			{
+				out_array[j] = vectors[i].x;
+				out_array[j + 1] = vectors[i].y;
+				out_array[j + 2] = vectors[i].z;
+			}
+
+			return out_array;
+		}
+
+		public static float[] FlattenVectorArrayUnsafe(Vector3D[] vectors)
+        {
+            // Create a new output array of floats 3x the size of vectors.
+            float[] out_array = new float[vectors.Length * 3];
+
+            // Use Unsafe.Add to iterate over the array 
+            ref var s0 = ref vectors[0];
+            for (int i = 0, j = 0; i < vectors.Length; i++, j += 3)
+            {
+                out_array[j] = Unsafe.Add(ref s0, i).x;
+                out_array[j + 1] = Unsafe.Add(ref s0, i).y;
+                out_array[j + 2] = Unsafe.Add(ref s0, i).z;
+            }
+
+            return out_array;
+        }
+
+
         /*! 
             \brief Convert a flat array of floats into a vector of points where result_array is true
             
