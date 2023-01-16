@@ -277,7 +277,7 @@ namespace DHARTAPI.RayTracing
 			return new CVectorAndData(data_ptr, vector_ptr, origins.Count());
 		}
 
-		/*!
+        /*!
             \brief Cast occlusion rays in C++ using embree
 
             \param rt_ptr A pointer to a valid raytracer in C++
@@ -306,7 +306,42 @@ namespace DHARTAPI.RayTracing
             </list>
         
         */
-		internal static bool[] C_CastOcclusionRays(
+
+        internal static bool[] C_CastOcclusionRays(
+			IntPtr rt_ptr,
+			float[] origins,
+			float[] directions,
+			float max_distance
+)
+        {
+
+            // Get the size of both arrays
+            int num_origins = origins.Length / 3;
+			int num_directions = directions.Length / 3;
+
+            // The number of results will be equal to the length
+            // of the lonest input
+            int result_size = Math.Max(num_origins, num_directions);
+
+            // Create output array and convert origin/directions to arrays
+            bool[] result_array = new bool[result_size];
+
+            // Call to C++ and get results. This will update the result array. 
+            HF_STATUS res = CastOcclusionRays(
+                rt_ptr,
+                origins,
+                directions,
+                num_origins,
+                num_directions,
+                max_distance,
+                result_array
+            );
+
+            // Return results
+            return result_array;
+        }
+
+        internal static bool[] C_CastOcclusionRays(
 			IntPtr rt_ptr,
 			IEnumerable<Vector3D> origins,
 			IEnumerable<Vector3D> directions,

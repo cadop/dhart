@@ -242,7 +242,7 @@ namespace DHARTAPI.RayTracing
 			float max_distance = -1
 		) => new RayResults(NativeMethods.C_IntersectRays(bvh.Pointer, origins, directions, max_distance));
 
-		/*!
+        /*!
             \brief Determine if any geometry occludes a point from a direction.
 
             \param bvh A valid Embree BVH.
@@ -281,7 +281,30 @@ namespace DHARTAPI.RayTracing
             `Ray 1: True, Ray 2 : False`
         */
 
-		public static bool[] IntersectOccluded(
+        public static bool[] IntersectOccluded(
+            EmbreeBVH bvh,
+            float[] origin,
+            float[] direction,
+            float max_distance = -1
+)
+        {
+            return NativeMethods.C_CastOcclusionRays(bvh.Pointer, origin, direction, max_distance);
+        }
+
+        public static bool[] IntersectOccluded(
+            EmbreeBVH bvh,
+            Vector3D[] origin,
+            Vector3D[] direction,
+            float max_distance = -1
+)
+        {
+            float[] origin_array = HelperFunctions.FlattenVectorArrayUnsafe(origin);
+            float[] direction_array = HelperFunctions.FlattenVectorArrayUnsafe(direction);
+
+            return NativeMethods.C_CastOcclusionRays(bvh.Pointer, origin_array, direction_array, max_distance);
+        }
+
+        public static bool[] IntersectOccluded(
 			EmbreeBVH bvh,
 			IEnumerable<Vector3D> origin,
 			IEnumerable<Vector3D> direction,
