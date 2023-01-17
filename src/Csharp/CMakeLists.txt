@@ -14,7 +14,6 @@ LIST (APPEND test_references "System")
 LIST (APPEND test_references "System.Numerics.Vectors")
 LIST (APPEND test_references "System.Memory")
 LIST (APPEND test_references "netstandard")
-LIST (APPEND test_references "System.Runtime.CompilerServices.Unsafe")
 
 LIST (APPEND normal_references "System")
 LIST (APPEND normal_references "System.Runtime.InteropServices")
@@ -23,7 +22,6 @@ LIST (APPEND normal_references "System.Numerics.Vectors")
 LIST (APPEND normal_references "System.Memory")
 LIST (APPEND normal_references "netstandard")
 LIST (APPEND normal_references "System.Runtime.Serialization")
-LIST (APPEND normal_references "System.Runtime.CompilerServices.Unsafe")
 
 # Set the C# language version
 set(CMAKE_CSharp_FLAGS "/langversion:7.3")
