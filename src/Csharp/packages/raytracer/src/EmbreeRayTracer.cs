@@ -253,6 +253,9 @@ namespace DHARTAPI.RayTracing
             \returns An array of true or false values indicating hits or misses respectively.
 
             \details
+            There are two overloads on this function, one for passing a Vector3D array (instead of enumerable)
+            and one for passing a pre-flattened list of floats.
+
             Can be casted in 3 configurations:
             </para>
             <list type = "bullet" >
@@ -286,11 +289,8 @@ namespace DHARTAPI.RayTracing
             float[] origin,
             float[] direction,
             float max_distance = -1
-)
-        {
-            return NativeMethods.C_CastOcclusionRays(bvh.Pointer, origin, direction, max_distance);
-        }
-
+        ) => NativeMethods.C_CastOcclusionRays(bvh.Pointer, origin, direction, max_distance);
+        
         public static bool[] IntersectOccluded(
 			EmbreeBVH bvh,
 			IEnumerable<Vector3D> origin,
