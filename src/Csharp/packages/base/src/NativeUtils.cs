@@ -176,8 +176,6 @@ namespace DHARTAPI.NativeUtils
             // Create a new output array of floats 3x the size of vectors.
             float[] out_array = new float[vectors.Length * 3];
 
-            // Use Unsafe.Add to iterate over the array 
-            //ref var s0 = ref vectors[0];
             for (int i = 0, j = 0; i < vectors.Length; i++, j += 3)
             {
                 out_array[j] = vectors[i].x;
