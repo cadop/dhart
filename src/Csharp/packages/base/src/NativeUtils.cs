@@ -125,7 +125,7 @@ namespace DHARTAPI.NativeUtils
 		}
 
 		/*! 
-            \brief Convert a  vector array into an array of floats. 
+            \brief Convert a  vector array into an array of floats. Slower than passing a Vector3D array.
             
             \param vectors The array of vectors to convert
             
@@ -161,24 +161,33 @@ namespace DHARTAPI.NativeUtils
 			return out_array;
 		}
 
+        /*! 
+            \brief Convert a vector3d array into an array of floats. A faster overload to the enumerable method.
+            
+            \param vectors The array of vectors to convert
+            
+            \returns An array of floats 3x as big as the array of vectors.
+            
+            \internal
+                \remarks Useful for preparing for Pinvoke
+            \endinternal
+        */
+        public static float[] FlattenVectorArray(Vector3D[] vectors)
+		{
+			// Create a new output array of floats 3x the size of vectors.
+			float[] out_array = new float[vectors.Length * 3];
 
-        public static float[] FlattenVectorArrayUnsafe(Vector3D[] vectors)
-        {
-            // Create a new output array of floats 3x the size of vectors.
-            float[] out_array = new float[vectors.Length * 3];
+			// Use Unsafe.Add to iterate over the array 
+			//ref var s0 = ref vectors[0];
+			for (int i = 0, j = 0; i < vectors.Length; i++, j += 3)
+			{
+				out_array[j] = vectors[i].x;
+				out_array[j + 1] = vectors[i].y;
+				out_array[j + 2] = vectors[i].z;
+			}
 
-            // Use Unsafe.Add to iterate over the array 
-            ref var s0 = ref vectors[0];
-            for (int i = 0, j = 0; i < vectors.Length; i++, j += 3)
-            {
-                out_array[j] = Unsafe.Add(ref s0, i).x;
-                out_array[j + 1] = Unsafe.Add(ref s0, i).y;
-                out_array[j + 2] = Unsafe.Add(ref s0, i).z;
-            }
-
-            return out_array;
-        }
-
+			return out_array;
+		}
 
         /*! 
             \brief Convert a flat array of floats into a vector of points where result_array is true
