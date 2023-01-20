@@ -111,7 +111,7 @@ namespace DHARTAPI.RayTracing
 		public static Vector3D IntersectForPoint(EmbreeBVH bvh, Vector3D origin, Vector3D direction, float max_distance = -1)
 			=> IntersectForPoint(bvh, origin.x, origin.y, origin.z, direction.x, direction.y, direction.z, max_distance);
 
-		/*!
+        /*!
             \brief Cast multiple rays and recieve hitpoints in return.
 
             \param bvh  A valid BVH containing geometry to intersect with.
@@ -154,15 +154,22 @@ namespace DHARTAPI.RayTracing
 			Origin: (0, 4, 1), Intersection: (0, 4, 0)
             ```
         */
+        public static Vector3D[] IntersectForPoints(
+            EmbreeBVH bvh,
+            float[] origins,
+            float[] directions,
+            float max_distance = -1
+        ) => NativeMethods.C_IntersectPoints(bvh.Pointer, origins, directions, max_distance);
 
-		public static Vector3D[] IntersectForPoints(
+
+        public static Vector3D[] IntersectForPoints(
 			EmbreeBVH bvh,
 			IEnumerable<Vector3D> origins,
 			IEnumerable<Vector3D> directions,
 			float max_distance = -1
 		) => NativeMethods.C_IntersectPoints(bvh.Pointer, origins, directions, max_distance);
 
-		/*!
+        /*!
             \brief Cast a single ray and get the distance to its hit and the meshID if it hit anything
 
             \param bvh A valid BVH containing the geometry to intersect with.
@@ -184,14 +191,21 @@ namespace DHARTAPI.RayTracing
             `[1,0]`
         */
 
-		public static RayResult IntersectForDistance(
+        public static RayResult IntersectForDistance(
+            EmbreeBVH bvh,
+            float[] origin,
+            float[] direction,
+            float max_distance = -1
+        ) => NativeMethods.C_IntersectRay(bvh.Pointer, origin, direction, max_distance);
+
+        public static RayResult IntersectForDistance(
 			EmbreeBVH bvh,
 			Vector3D origin,
 			Vector3D direction,
 			float max_distance = -1
 		) => NativeMethods.C_IntersectRay(bvh.Pointer, origin, direction, max_distance);
 
-		/*!
+        /*!
             \brief Cast multiple rays and recieve the distance and meshid of geometry intersected by each in return.
 
             \param bvh  A valid BVH containing geometry to intersect with.
@@ -235,7 +249,14 @@ namespace DHARTAPI.RayTracing
             ```
         */
 
-		public static RayResults IntersectForDistances(
+        public static RayResults IntersectForDistances(
+            EmbreeBVH bvh,
+            float[] origins,
+            float[] directions,
+            float max_distance = -1
+        ) => new RayResults(NativeMethods.C_IntersectRays(bvh.Pointer, origins, directions, max_distance));
+
+        public static RayResults IntersectForDistances(
 			EmbreeBVH bvh,
 			IEnumerable<Vector3D> origins,
 			IEnumerable<Vector3D> directions,
