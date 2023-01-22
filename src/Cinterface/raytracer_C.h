@@ -89,6 +89,7 @@ namespace HF {
 struct RayResult {
 	float distance = -1;
 	int meshid = -1;
+	int primid = -1;
 
 	/*!
 		\brief	Update this result based on the ray intersection. Similar structures can be created
@@ -98,11 +99,13 @@ struct RayResult {
 		\param	direction	Not used for this structure
 		\param	dist		Distance from node to the hit_point
 		\param	mid			ID of the hit mesh
+		\param	pid			ID of the hit primitive
 	*/
 	template <typename N, typename V>
-	void SetHit(const N& node, const V& direction, float dist, int mid) {
+	void SetHit(const N& node, const V& direction, float dist, int mid, int pid) {
 		distance = dist;
 		meshid = mid;
+		primid = pid;
 	}
 };
 
@@ -281,6 +284,7 @@ C_INTERFACE CastRaysDistance(
 	\param	max_distance	Maximum distance to record a hit within. Any hits beyond this distance will not be counted.
 	\param	out_distance	Out parameter for Distance to the hitpoint. Will be set to -1 if the ray didn't hit anything.
 	\param	out_meshid		Out parameter for the ID of the hit mesh. Will be set to -1 if the ray didn't hit anything.
+	\param	out_primid		Out parameter for the ID of the hit primitive. Will be set to -1 if the ray didn't hit anything.
 
 	\returns	HF_STATUS::OK on success
 
@@ -317,7 +321,8 @@ C_INTERFACE CastSingleRayDistance(
 	const float* direction,
 	const float max_distance,
 	float* out_distance,
-	int* out_meshid
+	int* out_meshid,
+	int* out_primid
 );
 
 /*!

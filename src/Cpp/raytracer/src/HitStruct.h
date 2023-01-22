@@ -7,10 +7,11 @@ namespace HF::RayTracer {
 	struct HitStruct {
 		numeric_type distance;  ///< Distance from the origin point to the hit point. Set to -1 if no hit was recorded.
 		int meshid; ///< The ID of the hit mesh. Set to -1 if no hit was recorded
+		int primid; ///< The ID of the hit primitive. Set to -1 if no hit was recorded
 
-		HitStruct() : distance(-1), meshid(-1) {}
+		HitStruct() : distance(-1), meshid(-1), primid(-1) {}
 
-		HitStruct(numeric_type in_distance, int in_meshid) : distance(in_distance), meshid(in_meshid) {}
+		HitStruct(numeric_type in_distance, int in_meshid, int in_primid) : distance(in_distance), meshid(in_meshid), primid(in_primid) {}
 
 		/// <summary> Determine whether or not this hitstruct contains a hit. </summary>
 		/// <returns> True if the point hit, false if it did not </returns>

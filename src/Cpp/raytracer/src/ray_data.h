@@ -198,7 +198,7 @@ namespace HF::RayTracer {
             bool did_intersect = bvh.Traverse<Intersector>(ray, temp_intersector, &hit);
             
             if (did_intersect)
-                return HitStruct{ hit.t, 0 };
+                return HitStruct{ hit.t, 0, 0};
             else
                 return HitStruct();
 

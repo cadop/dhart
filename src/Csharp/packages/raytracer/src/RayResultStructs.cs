@@ -20,22 +20,30 @@ namespace DHARTAPI.RayTracing
 	{
 		public float distance; ///< Distance from origin to the point of intersection. -1 if missed.
 		public Int32 mesh_id; ///< ID of the mesh intersected. -1 if missed.
+		public Int32 prim_id; ///< ID of the primitive intersected. -1 if missed
+
+		/// </summary>
+		/// <param name="in_distance"></param>
+		/// <param name="in_mesh_id"></param>
+		/// <param name="in_prim_id"></param>
 
 		/*! 
             \brief Construct a new RayResult to contain the distance to an intersection and the id of the mesh intersected
             
             \param in_distance Distance to ray intersection.
             \param in_mesh_id ID of the mesh intersected.
+			\param in_prim_id ID of the mesh intersected.
        */
-		internal RayResult(float in_distance, int in_mesh_id)
+		internal RayResult(float in_distance, int in_mesh_id, int in_prim_id)
 		{
 			this.distance = in_distance;
 			this.mesh_id = in_mesh_id;
+			this.prim_id = in_prim_id;
 		}
 		/*! \brief Get a string representation of this ray result
             \returns The ID and distance of this rayresult as a formatted string 
         */
-		public override string ToString() => String.Format("[{0:0.###},{1}]", distance, mesh_id);
+		public override string ToString() => String.Format("[{0:0.###},{1}, {2}]", distance, mesh_id, prim_id);
 
 	}
 

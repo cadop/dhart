@@ -120,13 +120,13 @@ namespace DHARTAPI.RayTracing
 			float dx,
 			float dy,
 			float dz,
-			float max_distance = -1
+            float max_distance = -1
 		)
 		{
 			// Create parameter to use as an output parameter
 			bool did_hit = false;
 
-			// Call the C++ function to cast a ray
+            // Call the C++ function to cast a ray
 			_ = CastRay(rt_ptr, ref x, ref y, ref z, dx, dy, dz, max_distance, ref did_hit);
 
 			// If it hit, return a new vector3d with it's coordinates
@@ -476,13 +476,14 @@ namespace DHARTAPI.RayTracing
         {
             // Setup output parameters
             int out_meshid = 0;
+			int out_primid = 0;
             float out_distance = 0.0f;
 
             // Cast the ray in C++. This will update out_distance, and out_meshid
-            CastSingleRayDistance(rt_ptr, origin, direction, max_distance, ref out_distance, ref out_meshid);
+            CastSingleRayDistance(rt_ptr, origin, direction, max_distance, ref out_distance, ref out_meshid, ref out_primid);
 
             // Return the results
-            return new RayResult(out_distance, out_meshid);
+            return new RayResult(out_distance, out_meshid, out_primid);
         }
 
         internal static RayResult C_IntersectRay(
@@ -498,13 +499,14 @@ namespace DHARTAPI.RayTracing
 
 			// Setup output parameters
 			int out_meshid = 0;
+			int out_primid = 0;
 			float out_distance = 0.0f;
 
-			// Cast the ray in C++. This will update out_distance, and out_meshid
-			CastSingleRayDistance(rt_ptr, origin_arr, direction_arr, max_distance, ref out_distance, ref out_meshid);
+			// Cast the ray in C++. This will update out_distance, out_meshid, and out_primid
+			CastSingleRayDistance(rt_ptr, origin_arr, direction_arr, max_distance, ref out_distance, ref out_meshid, ref out_primid);
 
 			// Return the results
-			return new RayResult(out_distance, out_meshid);
+			return new RayResult(out_distance, out_meshid, out_primid);
 		}
 
 		/*! \brief Free the memory allocated by a raytracer in C++.
@@ -549,7 +551,7 @@ namespace DHARTAPI.RayTracing
 			float dz,
 			float max_distance,
 			ref bool result
-		);
+        );
 
 		[DllImport(dllpath)]
 		private static extern HF_STATUS CastSingleRayDistance(
@@ -558,7 +560,8 @@ namespace DHARTAPI.RayTracing
 			[In] float[] direction,
 			float max_distance,
 			ref float out_distance,
-			ref int out_meshid
+			ref int out_meshid,
+			ref int out_primid
 		);
 
 		[DllImport(dllpath, CharSet = CharSet.Ansi)]
