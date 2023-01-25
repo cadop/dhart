@@ -101,11 +101,10 @@ C_INTERFACE CastSingleRayDistance(
 	const float* direction,
 	const float max_distance,
 	float* out_distance,
-	int* out_meshid,
-	int* out_primid
+	int* out_meshid
 )
 {
-	ert->IntersectOutputArguments(origin, direction, *out_distance, *out_meshid, *out_primid);
+	ert->IntersectOutputArguments(origin, direction, *out_distance, *out_meshid);
 	return HF::Exceptions::HF_STATUS::OK;
 }
 
@@ -149,9 +148,8 @@ C_INTERFACE CastRaysDistance(
 		for (int i = 0; i < num_origins; i++) {
 			float out_distance = -1;
 			int out_id = -1;
-			int out_primid = -1;
-			if (ert->IntersectOutputArguments(origin_pts[i], direction_pts[i], out_distance, out_id, out_primid))
-				(*output_results)[i].SetHit(origin_pts[i], direction_pts[i], out_distance, out_id, out_primid);
+			if (ert->IntersectOutputArguments(origin_pts[i], direction_pts[i], out_distance, out_id))
+				(*output_results)[i].SetHit(origin_pts[i], direction_pts[i], out_distance, out_id);
 		}
 		break;
 	}
@@ -164,9 +162,9 @@ C_INTERFACE CastRaysDistance(
 		output_results = new std::vector<RayResult>(num_origins);
 	#pragma omp parallel for schedule(dynamic)
 		for (int i = 0; i < num_directions; i++) {
-			float out_distance = -1; int out_id = -1; int out_primid = -1;
-			if (ert->IntersectOutputArguments(origin, direction_pts[i], out_distance, out_id, out_primid))
-				(*output_results)[i].SetHit(origin, direction_pts[i], out_distance, out_id, out_primid);
+			float out_distance = -1; int out_id = -1;
+			if (ert->IntersectOutputArguments(origin, direction_pts[i], out_distance, out_id))
+				(*output_results)[i].SetHit(origin, direction_pts[i], out_distance, out_id);
 		}
 		break;
 	}
@@ -178,9 +176,9 @@ C_INTERFACE CastRaysDistance(
 		output_results = new std::vector<RayResult>(num_origins);
 	#pragma omp parallel for schedule(dynamic)
 		for (int i = 0; i < num_origins; i++) {
-			float out_distance = -1; int out_id = -1; int out_primid = -1;
-			if (ert->IntersectOutputArguments(origin_pts[i], direction, out_distance, out_id, out_primid))
-				(*output_results)[i].SetHit(origin_pts[i], direction, out_distance, out_id, out_primid);
+			float out_distance = -1; int out_id = -1;
+			if (ert->IntersectOutputArguments(origin_pts[i], direction, out_distance, out_id))
+				(*output_results)[i].SetHit(origin_pts[i], direction, out_distance, out_id);
 
 		}
 		break;

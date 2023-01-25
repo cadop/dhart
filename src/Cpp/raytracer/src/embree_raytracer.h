@@ -1066,7 +1066,6 @@ namespace HF::RayTracer {
 						Vector3D(dx,dy,dz)
 					);
 				out_struct.meshid = result.hit.geomID;
-				out_struct.primid = result.hit.primID;
 			}
 
 			return out_struct;
@@ -1101,14 +1100,12 @@ namespace HF::RayTracer {
 			const V& direction,
 			return_type& out_distance,
 			int& out_meshid,
-			int& out_primid,
 			float max_distance = -1.0f)
 		{
 			HitStruct<return_type> result = Intersect<return_type>(node, direction, max_distance);
 			if (result.DidHit()) {
 				out_distance = result.distance;
 				out_meshid = result.meshid;
-				out_primid = result.primid;
 				return true;
 			}
 			else

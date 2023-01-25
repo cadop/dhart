@@ -365,7 +365,6 @@ namespace HF::ViewAnalysis {
 				// Reset out values to temporarily store results. Kept private by defining here
 				float out_distance = 0;
 				int out_mid = 0;
-				int out_pid = 0;
 
 				auto node = Nodes[i];
 				node[2] += height;
@@ -376,9 +375,9 @@ namespace HF::ViewAnalysis {
 				{
 					int idx = os + k;
 					// Call the result's SetHit if it intersected.
-					if (ray_tracer.IntersectOutputArguments(node, directions[k], out_distance, out_mid, out_pid))
+					if (ray_tracer.IntersectOutputArguments(node, directions[k], out_distance, out_mid))
 					{
-						out_results[idx].SetHit(node, directions[k], out_distance, out_mid, out_pid);
+						out_results[idx].SetHit(node, directions[k], out_distance, out_mid);
 					}
 				} // End direction loop
 			} // End node loop
