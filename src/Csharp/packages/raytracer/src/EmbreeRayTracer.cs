@@ -304,6 +304,21 @@ namespace DHARTAPI.RayTracing
             return NativeMethods.C_CastOcclusionRays(bvh.Pointer, origin_array, direction_array, max_distance);
         }
 
+
+        public static bool[] IntersectOccluded(
+            EmbreeBVH bvh,
+            Vector3D[] origin,
+            Vector3D[] direction,
+            float max_distance = -1
+)
+        {
+            float[] origin_array = HelperFunctions.FlattenVectorArray(origin);
+            float[] direction_array = HelperFunctions.FlattenVectorArray(direction);
+
+            return NativeMethods.C_CastOcclusionRays(bvh.Pointer, origin_array, direction_array, max_distance);
+        }
+
+
         public static bool[] IntersectOccluded(
 			EmbreeBVH bvh,
 			IEnumerable<Vector3D> origin,
