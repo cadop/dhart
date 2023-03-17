@@ -136,7 +136,7 @@ namespace DHARTAPI.RayTracing
 			else return new Vector3D(float.NaN, float.NaN, float.NaN);
 		}
 
-        /*! 
+		/*! 
             \brief Cast multiple rays at once in C++.
             
             \param ert Embree Raytracer to use for this call
@@ -165,7 +165,21 @@ namespace DHARTAPI.RayTracing
             \throws System.Exception Multiple rays failed to cast 
         */
 
-        internal static Vector3D[] C_IntersectPoints(
+		internal static Vector3D[] C_IntersectPoints(
+			IntPtr ert,
+			IEnumerable<Vector3D> origins,
+			IEnumerable<Vector3D> directions,
+			float max_distance
+		)
+		{
+			// Convert directions and origins to arrays. 
+			float[] flat_origins = NativeUtils.HelperFunctions.FlattenVectorArray(origins);
+			float[] flat_dirs = NativeUtils.HelperFunctions.FlattenVectorArray(directions);
+
+			return C_IntersectPoints(ert, flat_origins, flat_dirs, max_distance);
+		}
+
+		internal static Vector3D[] C_IntersectPoints(
 			IntPtr ert,
 			float[] origins,
             float[] directions,
@@ -210,54 +224,6 @@ namespace DHARTAPI.RayTracing
             return out_points;
         }
 
-        internal static Vector3D[] C_IntersectPoints(
-			IntPtr ert,
-			IEnumerable<Vector3D> origins,
-			IEnumerable<Vector3D> directions,
-			float max_distance
-		)
-		{
-			// Convert directions and origins to arrays. 
-			float[] flat_origins = NativeUtils.HelperFunctions.FlattenVectorArray(origins);
-			float[] flat_dirs = NativeUtils.HelperFunctions.FlattenVectorArray(directions);
-
-			// Select C function to use based on number of origins/directions
-			int num_origins = origins.Count();
-			int num_directions = directions.Count();
-
-			// Declare result here, since it needs to be written to later
-			HF_STATUS res = HF_STATUS.GENERIC_ERROR;
-			Vector3D[] out_points;
-
-			// Depending on the configuration, this will call different functions in the 
-			// C-Interface. All accomplish the same thing: Call a function, interpret the results,
-			// capture the return code.
-			if (num_origins == num_directions)
-			{
-				bool[] result_array = new bool[num_origins];
-				res = CastMultipleRays(ert, flat_origins, flat_dirs, num_origins, max_distance, result_array);
-				out_points = HelperFunctions.FloatArrayToVectorArray(flat_origins, result_array);
-			}
-			else if (num_origins > num_directions && num_directions == 1)
-			{
-				bool[] result_array = new bool[num_origins];
-				res = CastMultipleOriginsOneDirection(ert, flat_origins, flat_dirs, num_origins, max_distance, result_array);
-				out_points = HelperFunctions.FloatArrayToVectorArray(flat_origins, result_array);
-			}
-			else if (num_directions > num_origins && num_origins == 1)
-			{
-				bool[] result_array = new bool[num_directions];
-				res = CastMultipleDirectionsOneOrigin(ert, flat_origins, flat_dirs, num_directions, max_distance, result_array);
-				out_points = HelperFunctions.FloatArrayToVectorArray(flat_dirs, result_array);
-			}
-			else // If it doesn't match any configuration, throw
-				throw new ArgumentException("Arguments did not match one of the predefined cases!");
-
-			// If this is ever not HF_STATUS.OK, then something changed in the C-Interface that wasn't reflected here.
-			if (res != HF_STATUS.OK) Debug.Assert(false);
-
-			return out_points;
-		}
 
         /*!
             \brief Cast multiple rays in C++ then recieve the distance and meshid of geometry intersected
@@ -292,37 +258,6 @@ namespace DHARTAPI.RayTracing
             \throws System.ArgumentException
             Length of directions and origins did not match any of the valid cases.
         */
-
-        internal static CVectorAndData C_IntersectRays(
-            IntPtr ray_tracer,
-            float[] origins,
-            float[] directions,
-            float max_distance
-        )
-        {
-            // Get the size of both arrays
-            int num_origins = origins.Length / 3;
-            int num_directions = directions.Length / 3;
-
-            IntPtr vector_ptr = new IntPtr();
-            IntPtr data_ptr = new IntPtr();
-
-            HF_STATUS res = CastRaysDistance(
-                ray_tracer,
-                origins,
-                num_origins,
-                directions,
-                num_directions,
-                ref vector_ptr,
-                ref data_ptr
-            );
-
-            if (res != HF_STATUS.OK)
-                throw new Exception("RAYS FOR DISTANCE FAIL");
-
-            return new CVectorAndData(data_ptr, vector_ptr, num_origins);
-        }
-
         internal static CVectorAndData C_IntersectRays(
 			IntPtr ray_tracer,
 			IEnumerable<Vector3D> origins,
@@ -330,19 +265,32 @@ namespace DHARTAPI.RayTracing
 			float max_distance
 		)
 		{
+			// convert data and then use float method
 			var flat_origins = HelperFunctions.FlattenVectorArray(origins);
 			var flat_directions = HelperFunctions.FlattenVectorArray(directions);
-			int num_origins = origins.Count();
-			int num_directions = directions.Count();
+
+			return C_IntersectRays(ray_tracer, flat_origins, flat_directions, max_distance);
+		}
+
+		internal static CVectorAndData C_IntersectRays(
+			IntPtr ray_tracer,
+			float[] origins,
+			float[] directions,
+			float max_distance
+		)
+		{
+			// Get the size of both arrays
+			int num_origins = origins.Length / 3;
+			int num_directions = directions.Length / 3;
 
 			IntPtr vector_ptr = new IntPtr();
 			IntPtr data_ptr = new IntPtr();
 
 			HF_STATUS res = CastRaysDistance(
 				ray_tracer,
-				flat_origins,
+				origins,
 				num_origins,
-				flat_directions,
+				directions,
 				num_directions,
 				ref vector_ptr,
 				ref data_ptr
@@ -351,10 +299,10 @@ namespace DHARTAPI.RayTracing
 			if (res != HF_STATUS.OK)
 				throw new Exception("RAYS FOR DISTANCE FAIL");
 
-			return new CVectorAndData(data_ptr, vector_ptr, origins.Count());
+			return new CVectorAndData(data_ptr, vector_ptr, num_origins);
 		}
 
-        /*!
+		/*!
             \brief Cast occlusion rays in C++ using embree
 
             \param rt_ptr A pointer to a valid raytracer in C++
@@ -383,53 +331,32 @@ namespace DHARTAPI.RayTracing
             </list>
         
         */
-
-        internal static bool[] C_CastOcclusionRays(
-			IntPtr rt_ptr,
-			float[] origins,
-			float[] directions,
-			float max_distance
-)
-        {
-
-            // Get the size of both arrays
-            int num_origins = origins.Length / 3;
-			int num_directions = directions.Length / 3;
-
-            // The number of results will be equal to the length
-            // of the lonest input
-            int result_size = Math.Max(num_origins, num_directions);
-
-            // Create output array and convert origin/directions to arrays
-            bool[] result_array = new bool[result_size];
-
-            // Call to C++ and get results. This will update the result array. 
-            HF_STATUS res = CastOcclusionRays(
-                rt_ptr,
-                origins,
-                directions,
-                num_origins,
-                num_directions,
-                max_distance,
-                result_array
-            );
-
-            // Return results
-            return result_array;
-        }
-
-		
-        internal static bool[] C_CastOcclusionRays(
+		internal static bool[] C_CastOcclusionRays(
 			IntPtr rt_ptr,
 			IEnumerable<Vector3D> origins,
 			IEnumerable<Vector3D> directions,
 			float max_distance
 		)
 		{
+			// Convert data and use the float method
+			float[] origin_array = HelperFunctions.FlattenVectorArray(origins);
+			float[] direction_array = HelperFunctions.FlattenVectorArray(directions);
+
+			return C_CastOcclusionRays(rt_ptr, origin_array, direction_array, max_distance);
+			
+		}
+
+		internal static bool[] C_CastOcclusionRays(
+			IntPtr rt_ptr,
+			float[] origins,
+			float[] directions,
+			float max_distance
+		)
+		{
 
 			// Get the size of both arrays
-			int num_origins = origins.Count();
-			int num_directions = directions.Count();
+			int num_origins = origins.Length / 3;
+			int num_directions = directions.Length / 3;
 
 			// The number of results will be equal to the length
 			// of the lonest input
@@ -437,14 +364,12 @@ namespace DHARTAPI.RayTracing
 
 			// Create output array and convert origin/directions to arrays
 			bool[] result_array = new bool[result_size];
-			float[] origin_array = HelperFunctions.FlattenVectorArray(origins);
-			float[] direction_array = HelperFunctions.FlattenVectorArray(directions);
 
 			// Call to C++ and get results. This will update the result array. 
 			HF_STATUS res = CastOcclusionRays(
 				rt_ptr,
-				origin_array,
-				direction_array,
+				origins,
+				directions,
 				num_origins,
 				num_directions,
 				max_distance,
@@ -454,9 +379,8 @@ namespace DHARTAPI.RayTracing
 			// Return results
 			return result_array;
 		}
-		
 
-        /*!
+		/*!
             \brief Cast a single ray in C++ and get the distance/meshid of the intersection
                    if it intersects anything. 
 
@@ -469,7 +393,21 @@ namespace DHARTAPI.RayTracing
             it intersected. If the ray didn't intersect anything, then both values will be set to -1.
              
        */
-        internal static RayResult C_IntersectRay(
+		internal static RayResult C_IntersectRay(
+			IntPtr rt_ptr,
+			Vector3D origin,
+			Vector3D direction,
+			float max_distance
+		)
+		{
+			// Convert inputs to arrays
+			float[] origin_arr = new float[3] { origin.x, origin.y, origin.z };
+			float[] direction_arr = new float[3] { direction.x, direction.y, direction.z };
+
+			return C_IntersectRay(rt_ptr, origin_arr, direction_arr, max_distance);
+		}
+
+		internal static RayResult C_IntersectRay(
             IntPtr rt_ptr,
             float[] origin,
             float[] direction,
@@ -487,27 +425,7 @@ namespace DHARTAPI.RayTracing
             return new RayResult(out_distance, out_meshid);
         }
 
-        internal static RayResult C_IntersectRay(
-			IntPtr rt_ptr,
-			Vector3D origin,
-			Vector3D direction,
-			float max_distance
-		)
-		{
-			// Convert inputs to arrays
-			float[] origin_arr = new float[3] { origin.x, origin.y, origin.z };
-			float[] direction_arr = new float[3] { direction.x, direction.y, direction.z };
 
-			// Setup output parameters
-			int out_meshid = 0;
-			float out_distance = 0.0f;
-
-			// Cast the ray in C++. This will update out_distance, and out_meshid
-			CastSingleRayDistance(rt_ptr, origin_arr, direction_arr, max_distance, ref out_distance, ref out_meshid);
-
-			// Return the results
-			return new RayResult(out_distance, out_meshid);
-		}
 
 		/*! \brief Free the memory allocated by a raytracer in C++.
             \param rt_ptr A pointer to an EmbreeRayTracer in C++
