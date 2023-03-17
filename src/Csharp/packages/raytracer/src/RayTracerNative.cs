@@ -181,6 +181,20 @@ namespace DHARTAPI.RayTracing
 
 		internal static Vector3D[] C_IntersectPoints(
 			IntPtr ert,
+			Vector3D[] origins,
+			Vector3D[] directions,
+			float max_distance
+		)
+		{
+			// Convert directions and origins to arrays. 
+			float[] flat_origins = NativeUtils.HelperFunctions.FlattenVectorArray(origins);
+			float[] flat_dirs = NativeUtils.HelperFunctions.FlattenVectorArray(directions);
+
+			return C_IntersectPoints(ert, flat_origins, flat_dirs, max_distance);
+		}
+
+		internal static Vector3D[] C_IntersectPoints(
+			IntPtr ert,
 			float[] origins,
             float[] directions,
 			float max_distance
@@ -274,6 +288,20 @@ namespace DHARTAPI.RayTracing
 
 		internal static CVectorAndData C_IntersectRays(
 			IntPtr ray_tracer,
+			Vector3D[] origins,
+			Vector3D[] directions,
+			float max_distance
+		)
+		{
+			// convert data and then use float method
+			var flat_origins = HelperFunctions.FlattenVectorArray(origins);
+			var flat_directions = HelperFunctions.FlattenVectorArray(directions);
+
+			return C_IntersectRays(ray_tracer, flat_origins, flat_directions, max_distance);
+		}
+
+		internal static CVectorAndData C_IntersectRays(
+			IntPtr ray_tracer,
 			float[] origins,
 			float[] directions,
 			float max_distance
@@ -346,6 +374,20 @@ namespace DHARTAPI.RayTracing
 			
 		}
 
+		internal static bool[] C_CastOcclusionRays(
+			IntPtr rt_ptr,
+			Vector3D[] origins,
+			Vector3D[] directions,
+			float max_distance
+		)
+		{
+			// Convert data and use the float method
+			float[] origin_array = HelperFunctions.FlattenVectorArray(origins);
+			float[] direction_array = HelperFunctions.FlattenVectorArray(directions);
+
+			return C_CastOcclusionRays(rt_ptr, origin_array, direction_array, max_distance);
+
+		}
 		internal static bool[] C_CastOcclusionRays(
 			IntPtr rt_ptr,
 			float[] origins,
