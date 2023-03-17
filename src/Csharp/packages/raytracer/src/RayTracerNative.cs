@@ -418,6 +418,7 @@ namespace DHARTAPI.RayTracing
             return result_array;
         }
 
+		
         internal static bool[] C_CastOcclusionRays(
 			IntPtr rt_ptr,
 			IEnumerable<Vector3D> origins,
@@ -453,6 +454,7 @@ namespace DHARTAPI.RayTracing
 			// Return results
 			return result_array;
 		}
+		
 
         /*!
             \brief Cast a single ray in C++ and get the distance/meshid of the intersection
