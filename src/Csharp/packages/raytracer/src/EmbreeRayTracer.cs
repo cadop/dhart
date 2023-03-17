@@ -291,20 +291,6 @@ namespace DHARTAPI.RayTracing
             return NativeMethods.C_CastOcclusionRays(bvh.Pointer, origin, direction, max_distance);
         }
 
-        public static bool[] IntersectOccludedUnsafe(
-            EmbreeBVH bvh,
-            Vector3D[] origin,
-            Vector3D[] direction,
-            float max_distance = -1
-)
-        {
-            float[] origin_array = HelperFunctions.FlattenVectorArrayUnsafe(origin);
-            float[] direction_array = HelperFunctions.FlattenVectorArrayUnsafe(direction);
-
-            return NativeMethods.C_CastOcclusionRays(bvh.Pointer, origin_array, direction_array, max_distance);
-        }
-
-
         public static bool[] IntersectOccluded(
             EmbreeBVH bvh,
             Vector3D[] origin,
@@ -318,12 +304,12 @@ namespace DHARTAPI.RayTracing
             return NativeMethods.C_CastOcclusionRays(bvh.Pointer, origin_array, direction_array, max_distance);
         }
 
-
         public static bool[] IntersectOccluded(
 			EmbreeBVH bvh,
 			IEnumerable<Vector3D> origin,
 			IEnumerable<Vector3D> direction,
 			float max_distance = -1
 		) => NativeMethods.C_CastOcclusionRays(bvh.Pointer, origin, direction, max_distance);
-	}
+
+    }
 }

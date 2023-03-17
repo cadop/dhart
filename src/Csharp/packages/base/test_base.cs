@@ -25,6 +25,7 @@ namespace DHARTAPI.Tests.Base
     {
         private const string plane_path = "ExampleModels/plane.obj";
 
+        /*
         [TestMethod]
         public void FlattenUnsafe()
         {
@@ -59,6 +60,7 @@ namespace DHARTAPI.Tests.Base
 
             Console.WriteLine(" Passing Vector3D array took {0} milliseconds", stopwatch.Elapsed.TotalMilliseconds);
         }
+        */
 
         [TestMethod]
         public void Flatten()
@@ -181,6 +183,43 @@ namespace DHARTAPI.Tests.Base
             Console.WriteLine(" Passing Vector3D array took {0} milliseconds", stopwatch.Elapsed.TotalMilliseconds);
         }
 
+
+
+        [TestMethod]
+        public void EnumerableFlatten()
+        {
+            var stopwatch = new Stopwatch();
+
+            MeshInfo Mesh = OBJLoader.LoadOBJ(plane_path, CommonRotations.Yup_To_Zup);
+            DHARTAPI.RayTracing.EmbreeBVH BVH = new DHARTAPI.RayTracing.EmbreeBVH(Mesh);
+
+            // Size of test
+            const int arraysize = 1000000;
+
+            Vector3D[] origin_vector = new Vector3D[arraysize];
+            Vector3D[] direction_vector = new Vector3D[1];
+
+            direction_vector[0] = new Vector3D(0, 0, -1);
+
+            for (int i = 0; i < arraysize; i++)
+            {
+                origin_vector[i] = new Vector3D(0, 0, 1);
+            }
+
+            // Start the stopwatch test
+            stopwatch.Start();
+
+            bool[] results = DHARTAPI.RayTracing.EmbreeRaytracer.IntersectOccluded(BVH, origin_vector, direction_vector, -1);
+
+            // End the stopwatch
+            stopwatch.Stop();
+
+            foreach (bool result in results)
+                Assert.IsTrue(result);
+
+            Console.WriteLine(" Passing Enumerable Vector3D array took {0} milliseconds", stopwatch.Elapsed.TotalMilliseconds);
+        }
+
         [TestMethod]
         public void Flat()
         {
@@ -220,41 +259,5 @@ namespace DHARTAPI.Tests.Base
 
             Console.WriteLine(" Passing already Flat array took {0} milliseconds", stopwatch.Elapsed.TotalMilliseconds);
         }
-
-        [TestMethod]
-        public void EnumerableFlatten()
-        {
-            var stopwatch = new Stopwatch();
-
-            MeshInfo Mesh = OBJLoader.LoadOBJ(plane_path, CommonRotations.Yup_To_Zup);
-            DHARTAPI.RayTracing.EmbreeBVH BVH = new DHARTAPI.RayTracing.EmbreeBVH(Mesh);
-
-            // Size of test
-            const int arraysize = 1000000;
-
-            Vector3D[] origin_vector = new Vector3D[arraysize];
-            Vector3D[] direction_vector = new Vector3D[1];
-
-            direction_vector[0] = new Vector3D(0, 0, -1);
-
-            for (int i = 0; i < arraysize; i++)
-            {
-                origin_vector[i] = new Vector3D(0, 0, 1);
-            }
-
-            // Start the stopwatch test
-            stopwatch.Start();
-
-            bool[] results = DHARTAPI.RayTracing.EmbreeRaytracer.IntersectOccluded(BVH, origin_vector, direction_vector, -1);
-
-            // End the stopwatch
-            stopwatch.Stop();
-
-            foreach (bool result in results)
-                Assert.IsTrue(result);
-
-            Console.WriteLine(" Passing Enumerable Vector3D array took {0} milliseconds", stopwatch.Elapsed.TotalMilliseconds);
-        }
-
     }
 }
