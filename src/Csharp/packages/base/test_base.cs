@@ -67,7 +67,7 @@ namespace DHARTAPI.Tests.Base
 
 
         [TestMethod]
-        public void EnumerableFlatten()
+        public void ArrayFlatten()
         {
             var stopwatch = new Stopwatch();
 
