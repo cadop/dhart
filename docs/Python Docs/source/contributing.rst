@@ -5,6 +5,9 @@ Contributing and Testing
 ========================
 
 
+The process assumes the repo has been cloned and was built using visual studio (with cmake), then using the install. This generates a 
+build folder with the python package in it. The following instructions rely on this build folder (not the src folder).  
+
 Check dependencies
 ------------------
 
@@ -12,7 +15,9 @@ Currently tested on ``Python 3.8+``.
 
 For the package: ``numpy>=1.18``, ``scipy>=1.4.1``
 
-For building documentation: ``sphinx>=3.0.3``, ``scipy`` html_theme
+For building documentation: ``sphinx>=3.0.3`` (latest version uses ``sphinx>=7``), ``scipy`` html_theme, ``matplotlib``.
+
+All packages should be automatically installed if using ``pip install dhart[dev]`` (or ``pip install .[dev]`` if cloning the repo).
 
 
 Building Documentation
@@ -20,10 +25,12 @@ Building Documentation
 
 Documentation is built using sphinx with the scipy html_theme in the `docs` folder. 
 
+
 ``make clean``
 
 ``make html``
 
+For windows, you may have to use ``.\make.bat html``.
 
 Testing
 --------
