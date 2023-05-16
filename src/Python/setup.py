@@ -28,8 +28,8 @@ setup(name='dhart',
       install_requires=[
             'numpy',
             'scipy',
-            'matplotlib',
       ],
+      extras_require={'dev': ['sphinx', 'numpydoc','matplotlib','pytest']},
       zip_safe=True,
       include_package_data=True
 )
