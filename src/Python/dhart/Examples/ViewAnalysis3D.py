@@ -1,8 +1,10 @@
-'''
+"""
+
 
 .. plot::
     :context: reset
 
+    
     import matplotlib.pyplot as plt
     import numpy as np
 
@@ -29,12 +31,12 @@
     height = 5 
     query_point = [(25,25,0)]
 
-Get distances from the desired point to the model (bvh)
-
+    
+    # Get distances from the desired point to the model (bvh)
     hit_points = SphericalViewAnalysis(bvh, query_point, ray_count, height, upward_fov=upfov, downward_fov=downfov)
 
-Get the directions that were used for the view analysis function
-
+    
+    # Get the directions that were used for the view analysis function
     hit_dirs = SphericallyDistributeRays(ray_count, upward_fov=upfov, downward_fov=downfov)
 
     # Get index where hitpoints are not -1
@@ -46,9 +48,11 @@ Get the directions that were used for the view analysis function
     # reshape to get the correct axis 
     hit_pos = hit_dirs_valid * hit_points.reshape(-1,1)
 
+    
 .. plot::
     :context: close-figs
 
+    
     # Plot the graph in 3D
     fig = plt.figure()
     ax = fig.add_subplot(projection='3d')
@@ -65,10 +69,8 @@ Get the directions that were used for the view analysis function
 
     # Draw figure
     plt.show()
-    plt.clf()
 
-
-Repeat with a smaller fov
+    #Repeat with a smaller fov
 
     upfov, downfov = 15, 15
     hit_points = SphericalViewAnalysis(bvh, query_point, ray_count, height, upward_fov=upfov, downward_fov=downfov)
@@ -83,9 +85,11 @@ Repeat with a smaller fov
     # reshape to get the correct axis 
     hit_pos = hit_dirs_valid * hit_points.reshape(-1,1)
 
+    
 .. plot::
     :context: close-figs
 
+    
     # Plot the graph in 3D
     fig = plt.figure()
     ax = fig.add_subplot(projection='3d')
@@ -102,9 +106,8 @@ Repeat with a smaller fov
 
     # Draw figure
     plt.show()
-    plt.clf()
 
-'''
+"""
 
 
 
