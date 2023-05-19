@@ -96,8 +96,113 @@
 For context of what the points are showing in the example, the model itself looks like the image displayed below.</p>
 <img alt="../../_images/visibility_ex_rendered.png" src="../../_images/visibility_ex_rendered.png" />
 </section>
-<section id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">¶</a></h2>
+<section id="module-dhart.Examples.ViewAnalysis3D">
+<span id="example"></span><h2>Example<a class="headerlink" href="#module-dhart.Examples.ViewAnalysis3D" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">dhart.geometry</span> <span class="kn">import</span> <span class="n">LoadOBJ</span>
+<span class="kn">from</span> <span class="nn">dhart.raytracer</span> <span class="kn">import</span> <span class="n">EmbreeBVH</span>
+<span class="kn">from</span> <span class="nn">dhart.viewanalysis</span> <span class="kn">import</span> <span class="n">SphericalViewAnalysis</span><span class="p">,</span> <span class="n">SphericallyDistributeRays</span>
+<span class="kn">import</span> <span class="nn">dhart</span> <span class="k">as</span> <span class="nn">hfpy</span>
+
+<span class="c1"># Get a sample model path</span>
+<span class="n">obj_path</span> <span class="o">=</span> <span class="n">hfpy</span><span class="o">.</span><span class="n">get_sample_model</span><span class="p">(</span><span class="s2">&quot;VisibilityTestCase.obj&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load the obj file</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="n">LoadOBJ</span><span class="p">(</span><span class="n">obj_path</span><span class="p">)</span>
+
+<span class="c1"># Create a BVH</span>
+<span class="n">bvh</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
+<span class="n">ray_count</span> <span class="o">=</span> <span class="mi">10000</span> <span class="c1"># Set the number of rays to use per node</span>
+
+<span class="c1"># Set the up and down field of view limits</span>
+<span class="n">upfov</span><span class="p">,</span> <span class="n">downfov</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">40</span>
+
+<span class="c1"># Set a height offset to cast rays from the points</span>
+<span class="n">height</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">query_point</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">25</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>
+
+
+<span class="c1"># Get distances from the desired point to the model (bvh)</span>
+<span class="n">hit_points</span> <span class="o">=</span> <span class="n">SphericalViewAnalysis</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">query_point</span><span class="p">,</span> <span class="n">ray_count</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">upward_fov</span><span class="o">=</span><span class="n">upfov</span><span class="p">,</span> <span class="n">downward_fov</span><span class="o">=</span><span class="n">downfov</span><span class="p">)</span>
+
+
+<span class="c1"># Get the directions that were used for the view analysis function</span>
+<span class="n">hit_dirs</span> <span class="o">=</span> <span class="n">SphericallyDistributeRays</span><span class="p">(</span><span class="n">ray_count</span><span class="p">,</span> <span class="n">upward_fov</span><span class="o">=</span><span class="n">upfov</span><span class="p">,</span> <span class="n">downward_fov</span><span class="o">=</span><span class="n">downfov</span><span class="p">)</span>
+
+<span class="c1"># Get index where hitpoints are not -1</span>
+<span class="n">hit_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">hit_points</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1">#pull out just the distances and the directions</span>
+<span class="n">hit_dirs_valid</span> <span class="o">=</span> <span class="n">hit_dirs</span><span class="p">[</span><span class="n">hit_idx</span><span class="p">]</span>
+<span class="n">hit_points</span> <span class="o">=</span> <span class="n">hit_points</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">][</span><span class="n">hit_idx</span><span class="p">]</span>
+
+<span class="c1"># reshape to get the correct axis</span>
+<span class="n">hit_pos</span> <span class="o">=</span> <span class="n">hit_dirs_valid</span> <span class="o">*</span> <span class="n">hit_points</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(<a class="reference download internal" download="" href="../../_downloads/6d659f4bd47cb2d43d48d0c41c880087/spherical-1.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the graph in 3D</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">azim</span><span class="o">=-</span><span class="mi">140</span><span class="p">,</span> <span class="n">elev</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="c1"># Set limits</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">set_xlim3d</span><span class="p">(</span><span class="n">left</span><span class="o">=-</span><span class="mi">15</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">set_ylim3d</span><span class="p">(</span><span class="n">bottom</span><span class="o">=-</span><span class="mi">15</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">set_zlim3d</span><span class="p">(</span><span class="n">bottom</span><span class="o">=-</span><span class="mi">0</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+
+<span class="c1"># Pull out hitpoints</span>
+<span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span> <span class="o">=</span> <span class="n">hit_pos</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">hit_pos</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">hit_pos</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
+<span class="c1"># Assign points</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Draw figure</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference download internal" download="" href="../../_downloads/42d0e9c4912f5dc0d1a84391adf7498a/spherical-2.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>)</p>
+<figure class="align-default">
+<img alt="../../_images/spherical-2_00_00.png" class="plot-directive" src="../../_images/spherical-2_00_00.png" />
+</figure>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Repeat with a smaller fov</span>
+
+<span class="n">upfov</span><span class="p">,</span> <span class="n">downfov</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">15</span>
+<span class="n">hit_points</span> <span class="o">=</span> <span class="n">SphericalViewAnalysis</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">query_point</span><span class="p">,</span> <span class="n">ray_count</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">upward_fov</span><span class="o">=</span><span class="n">upfov</span><span class="p">,</span> <span class="n">downward_fov</span><span class="o">=</span><span class="n">downfov</span><span class="p">)</span>
+<span class="n">hit_dirs</span> <span class="o">=</span> <span class="n">SphericallyDistributeRays</span><span class="p">(</span><span class="n">ray_count</span><span class="p">,</span> <span class="n">upward_fov</span><span class="o">=</span><span class="n">upfov</span><span class="p">,</span> <span class="n">downward_fov</span><span class="o">=</span><span class="n">downfov</span><span class="p">)</span>
+
+<span class="c1"># Get index where hitpoints are not -1</span>
+<span class="n">hit_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">hit_points</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1">#pull out just the distances and the directions</span>
+<span class="n">hit_points</span> <span class="o">=</span> <span class="n">hit_points</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">][</span><span class="n">hit_idx</span><span class="p">]</span>
+<span class="n">hit_dirs_valid</span> <span class="o">=</span> <span class="n">hit_dirs</span><span class="p">[</span><span class="n">hit_idx</span><span class="p">]</span>
+
+<span class="c1"># reshape to get the correct axis</span>
+<span class="n">hit_pos</span> <span class="o">=</span> <span class="n">hit_dirs_valid</span> <span class="o">*</span> <span class="n">hit_points</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the graph in 3D</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">azim</span><span class="o">=-</span><span class="mi">140</span><span class="p">,</span> <span class="n">elev</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="c1"># Set limits</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">set_xlim3d</span><span class="p">(</span><span class="n">left</span><span class="o">=-</span><span class="mi">15</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">set_ylim3d</span><span class="p">(</span><span class="n">bottom</span><span class="o">=-</span><span class="mi">15</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">set_zlim3d</span><span class="p">(</span><span class="n">bottom</span><span class="o">=-</span><span class="mi">0</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+
+<span class="c1"># Pull out hitpoints</span>
+<span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span> <span class="o">=</span> <span class="n">hit_pos</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">hit_pos</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">hit_pos</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
+<span class="c1"># Assign points</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Draw figure</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference download internal" download="" href="../../_downloads/3bdf249c8dec27f221f1228ef67da6cb/spherical-3.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>)</p>
+<figure class="align-default">
+<img alt="../../_images/spherical-3.png" class="plot-directive" src="../../_images/spherical-3.png" />
+</figure>
 </section>
 </section>
 
@@ -112,7 +217,7 @@ For context of what the points are showing in the example, the model itself look
     <ul>
 <li><a class="reference internal" href="#">Visualize Spatial View Points</a><ul>
 <li><a class="reference internal" href="#overview">Overview</a></li>
-<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#module-dhart.Examples.ViewAnalysis3D">Example</a></li>
 </ul>
 </li>
 </ul>
