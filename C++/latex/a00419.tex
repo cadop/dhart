@@ -1,284 +1,83 @@
-\hypertarget{a00419}{}\doxysection{Node\+Example\+Tests Namespace Reference}
-\label{a00419}\index{NodeExampleTests@{NodeExampleTests}}
+\hypertarget{a00419}{}\doxysection{Cinterface/objloader\+\_\+C.h File Reference}
+\label{a00419}\index{Cinterface/objloader\_C.h@{Cinterface/objloader\_C.h}}
 
 
-The following are tests for the code samples for \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}}.  
+Header file for functions related to loading/storing an OBJ file (a mesh)  
 
 
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for objloader\+\_\+\+C.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{a00420}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{a00421}
+\end{center}
+\end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{a00462}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{a00469}{HF\+::\+Geometry}}
+\begin{DoxyCompactList}\small\item\em Manipulate and load geometry from disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a00419_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}}~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int
+\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a00419_ade2fe933be0f91e1932993f8682e6130}{T\+E\+ST}} (\+\_\+\+Node, Default\+Constructor)
-\item 
-\mbox{\hyperlink{a00419_aa8e074eedce557a43a403a6b545007e2}{T\+E\+ST}} (\+\_\+\+Node, Param\+Constructor\+No\+ID)
-\item 
-\mbox{\hyperlink{a00419_ab7f7e2da0794a3f79b35505a6f290960}{T\+E\+ST}} (\+\_\+\+Node, Param\+Constructor\+Array)
-\item 
-\mbox{\hyperlink{a00419_a96c3acb5eeeea4fd634c510f4ed16211}{T\+E\+ST}} (\+\_\+node, Param\+Constructor\+Array\+Type\+ID)
-\item 
-\mbox{\hyperlink{a00419_ae531762b8a1cc3bec235915b2f91161e}{T\+E\+ST}} (\+\_\+node, \mbox{\hyperlink{a00299_a68644d658b00e6ade10de66d9fc78952}{Distance\+To}})
-\item 
-\mbox{\hyperlink{a00419_ac00468cfab6fef2cafaab0b0e05c28e6}{T\+E\+ST}} (\+\_\+node, Angle\+To)
-\item 
-\mbox{\hyperlink{a00419_ac68b0176e9e9bf136dc8ab4e14c1949b}{T\+E\+ST}} (\+\_\+node, Direction\+To)
-\item 
-\mbox{\hyperlink{a00419_a22f65c9a54df6876a83d2691c5576880}{T\+E\+ST}} (\+\_\+node, Get\+Array)
-\item 
-\mbox{\hyperlink{a00419_a7b34b68f2e98d47b296c764dd7deb932}{T\+E\+ST}} (\+\_\+node, Operator\+Index\+By\+Ref)
-\item 
-\mbox{\hyperlink{a00419_af8dd9c7b6d74e0f976a669e2286a103e}{T\+E\+ST}} (\+\_\+node, Operator\+Index\+By\+Val)
-\item 
-\mbox{\hyperlink{a00419_adc75803d5726fdf6deeb7a71117cb743}{T\+E\+ST}} (\+\_\+node, Operator\+Equality)
-\item 
-\mbox{\hyperlink{a00419_a1bef2a948ae3142bd53aa230a0c606e6}{T\+E\+ST}} (\+\_\+node, Operator\+Assignment)
-\item 
-\mbox{\hyperlink{a00419_abd0cf2ca4f703c49ac4fa9277a2c827d}{T\+E\+ST}} (\+\_\+node, Operator\+N\+Equality)
-\item 
-\mbox{\hyperlink{a00419_aa4474ca27af9be07da68241755f0eb12}{T\+E\+ST}} (\+\_\+node, Operator\+Minus)
-\item 
-\mbox{\hyperlink{a00419_a27dcd5e2b569e7798a64c7c452b32f79}{T\+E\+ST}} (\+\_\+node, Operator\+Plus)
-\item 
-\mbox{\hyperlink{a00419_a308909e60da2ac3a46206ed60c280556}{T\+E\+ST}} (\+\_\+node, Operator\+Multiply)
-\item 
-\mbox{\hyperlink{a00419_afde0c04a229e09228aec524d87e3fe3b}{T\+E\+ST}} (\+\_\+node, Operator\+Less\+Than\+Const)
-\item 
-\mbox{\hyperlink{a00419_a3b55ec342f5ae9edf3bfebdced00a10a}{T\+E\+ST}} (\+\_\+node, Operator\+Less\+Than)
-\item 
-\mbox{\hyperlink{a00419_aaf50bec48dc7dbb8d40d556bfd6fdc78}{T\+E\+ST}} (\+\_\+node, Operator\+Greater\+Than\+Const)
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga0805e80d13b29aeddc35f0bcf3f16a1a}{Load\+OBJ}} (const char $\ast$obj\+\_\+path, \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5}{HF\+::\+Geometry\+::\+GROUP\+\_\+\+METHOD}} gm, float xrot, float yrot, float zrot, \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$$\ast$$\ast$out\+\_\+data\+\_\+array, int $\ast$num\+\_\+meshes)
+\begin{DoxyCompactList}\small\item\em Load an obj from the given path then rotate it by x,y, and z. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga6ac447e5805d3d7e65c9083ffa603cfe}{Store\+Mesh}} (\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$$\ast$out\+\_\+info, const int $\ast$indices, int num\+\_\+indices, const float $\ast$vertices, int num\+\_\+vertices, const char $\ast$name, int id)
+\begin{DoxyCompactList}\small\item\em Store a mesh in a format usable with DHARTAPI. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga907c8e39b159c8bad22645448bc97f57}{Rotate\+Mesh}} (\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$mesh\+\_\+to\+\_\+rotate, float xrot, float yrot, float zrot)
+\begin{DoxyCompactList}\small\item\em Rotate an existing mesh (\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga89fc0803b894e7fa218ae271c46fb434}{Get\+Verts\+And\+Tris}} (const \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$MI, int $\ast$$\ast$index\+\_\+out, int $\ast$num\+\_\+triangles, float $\ast$$\ast$vertex\+\_\+out, int $\ast$num\+\_\+vertices)
+\begin{DoxyCompactList}\small\item\em Get a pointer to and the size of a mesh\textquotesingle{}s triangle and vertex arrays. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga2a86bca57b3efdafeeb001a8ba36a212}{Get\+Mesh\+Name}} (const \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$MI, char $\ast$$\ast$out\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Get the name of a mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_gaa07792b399e76e6101388bb6bbb96047}{Get\+Mesh\+ID}} (const \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$MI, int $\ast$out\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Get the ID of a mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga0ef9f7e63f067546b527947d4678dcd5}{Destroy\+Mesh\+Info}} (\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$mesh\+\_\+to\+\_\+destroy)
+\begin{DoxyCompactList}\small\item\em Free the memory addressed by mesh\+\_\+to\+\_\+destroy, which was allocated by either \mbox{\hyperlink{a00455_ga0805e80d13b29aeddc35f0bcf3f16a1a}{Load\+OBJ}} or \mbox{\hyperlink{a00455_ga6ac447e5805d3d7e65c9083ffa603cfe}{Store\+Mesh}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga9cb2dc8227bf88a06014493979b2b3e6}{Destroy\+Mesh\+Info\+Ptr\+Array}} (\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$$\ast$data\+\_\+array)
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-The following are tests for the code samples for \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}}. 
+Header file for functions related to loading/storing an OBJ file (a mesh) 
 
-\doxysubsection{Function Documentation}
-\mbox{\Hypertarget{a00419_ac00468cfab6fef2cafaab0b0e05c28e6}\label{a00419_ac00468cfab6fef2cafaab0b0e05c28e6}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+node}]{,  }\item[{Angle\+To}]{ }\end{DoxyParamCaption})}
+\begin{DoxyAuthor}{Author}
+TBA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+05 Aug 2020 
+\end{DoxyDate}
 
-T\+O\+DO code sample\+: line 40 of node.\+cpp -\/ \textquotesingle{}This needs an actual angle formula\textquotesingle{}
 
-Definition at line 828 of file Spatial\+Structures.\+cpp.
+Definition in file \mbox{\hyperlink{a00419_source}{objloader\+\_\+\+C.\+h}}.
 
-\mbox{\Hypertarget{a00419_ade2fe933be0f91e1932993f8682e6130}\label{a00419_ade2fe933be0f91e1932993f8682e6130}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Node}]{,  }\item[{Default\+Constructor}]{ }\end{DoxyParamCaption})}
 
 
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a00419_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}\label{a00419_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}} 
+\index{objloader\_C.h@{objloader\_C.h}!C\_INTERFACE@{C\_INTERFACE}}
+\index{C\_INTERFACE@{C\_INTERFACE}!objloader\_C.h@{objloader\_C.h}}
+\doxysubsubsection{\texorpdfstring{C\_INTERFACE}{C\_INTERFACE}}
+{\footnotesize\ttfamily \#define C\+\_\+\+INTERFACE~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int}
 
-Definition at line 796 of file Spatial\+Structures.\+cpp.
 
-\mbox{\Hypertarget{a00419_ac68b0176e9e9bf136dc8ab4e14c1949b}\label{a00419_ac68b0176e9e9bf136dc8ab4e14c1949b}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+node}]{,  }\item[{Direction\+To}]{ }\end{DoxyParamCaption})}
 
-
-
-Definition at line 832 of file Spatial\+Structures.\+cpp.
-
-
-
-References H\+F\+::\+Spatial\+Structures\+::\+Node\+::direction\+To().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00419_ac68b0176e9e9bf136dc8ab4e14c1949b_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00419_ae531762b8a1cc3bec235915b2f91161e}\label{a00419_ae531762b8a1cc3bec235915b2f91161e}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+node}]{,  }\item[{\mbox{\hyperlink{a00299_a68644d658b00e6ade10de66d9fc78952}{Distance\+To}}}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 821 of file Spatial\+Structures.\+cpp.
-
-
-
-References H\+F\+::\+Spatial\+Structures\+::\+Node\+::distance\+To(), and H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::euclidean\+\_\+distance().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00419_ae531762b8a1cc3bec235915b2f91161e_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00419_a22f65c9a54df6876a83d2691c5576880}\label{a00419_a22f65c9a54df6876a83d2691c5576880}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+node}]{,  }\item[{Get\+Array}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 839 of file Spatial\+Structures.\+cpp.
-
-
-
-References H\+F\+::\+Spatial\+Structures\+::\+Node\+::get\+Array(), and H\+F\+::\+Spatial\+Structures\+::\+Node\+::x.
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00419_a22f65c9a54df6876a83d2691c5576880_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00419_a1bef2a948ae3142bd53aa230a0c606e6}\label{a00419_a1bef2a948ae3142bd53aa230a0c606e6}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+node}]{,  }\item[{Operator\+Assignment}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 899 of file Spatial\+Structures.\+cpp.
-
-\mbox{\Hypertarget{a00419_adc75803d5726fdf6deeb7a71117cb743}\label{a00419_adc75803d5726fdf6deeb7a71117cb743}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+node}]{,  }\item[{Operator\+Equality}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 882 of file Spatial\+Structures.\+cpp.
-
-\mbox{\Hypertarget{a00419_aaf50bec48dc7dbb8d40d556bfd6fdc78}\label{a00419_aaf50bec48dc7dbb8d40d556bfd6fdc78}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+node}]{,  }\item[{Operator\+Greater\+Than\+Const}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 1002 of file Spatial\+Structures.\+cpp.
-
-\mbox{\Hypertarget{a00419_a7b34b68f2e98d47b296c764dd7deb932}\label{a00419_a7b34b68f2e98d47b296c764dd7deb932}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [9/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+node}]{,  }\item[{Operator\+Index\+By\+Ref}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 858 of file Spatial\+Structures.\+cpp.
-
-\mbox{\Hypertarget{a00419_af8dd9c7b6d74e0f976a669e2286a103e}\label{a00419_af8dd9c7b6d74e0f976a669e2286a103e}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [10/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+node}]{,  }\item[{Operator\+Index\+By\+Val}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 870 of file Spatial\+Structures.\+cpp.
-
-\mbox{\Hypertarget{a00419_a3b55ec342f5ae9edf3bfebdced00a10a}\label{a00419_a3b55ec342f5ae9edf3bfebdced00a10a}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [11/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+node}]{,  }\item[{Operator\+Less\+Than}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 980 of file Spatial\+Structures.\+cpp.
-
-\mbox{\Hypertarget{a00419_afde0c04a229e09228aec524d87e3fe3b}\label{a00419_afde0c04a229e09228aec524d87e3fe3b}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [12/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+node}]{,  }\item[{Operator\+Less\+Than\+Const}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 967 of file Spatial\+Structures.\+cpp.
-
-\mbox{\Hypertarget{a00419_aa4474ca27af9be07da68241755f0eb12}\label{a00419_aa4474ca27af9be07da68241755f0eb12}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [13/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+node}]{,  }\item[{Operator\+Minus}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 930 of file Spatial\+Structures.\+cpp.
-
-\mbox{\Hypertarget{a00419_a308909e60da2ac3a46206ed60c280556}\label{a00419_a308909e60da2ac3a46206ed60c280556}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [14/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+node}]{,  }\item[{Operator\+Multiply}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 955 of file Spatial\+Structures.\+cpp.
-
-\mbox{\Hypertarget{a00419_abd0cf2ca4f703c49ac4fa9277a2c827d}\label{a00419_abd0cf2ca4f703c49ac4fa9277a2c827d}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [15/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+node}]{,  }\item[{Operator\+N\+Equality}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 911 of file Spatial\+Structures.\+cpp.
-
-\mbox{\Hypertarget{a00419_a27dcd5e2b569e7798a64c7c452b32f79}\label{a00419_a27dcd5e2b569e7798a64c7c452b32f79}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [16/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+node}]{,  }\item[{Operator\+Plus}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 943 of file Spatial\+Structures.\+cpp.
-
-\mbox{\Hypertarget{a00419_ab7f7e2da0794a3f79b35505a6f290960}\label{a00419_ab7f7e2da0794a3f79b35505a6f290960}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [17/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Node}]{,  }\item[{Param\+Constructor\+Array}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 811 of file Spatial\+Structures.\+cpp.
-
-\mbox{\Hypertarget{a00419_a96c3acb5eeeea4fd634c510f4ed16211}\label{a00419_a96c3acb5eeeea4fd634c510f4ed16211}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [18/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+node}]{,  }\item[{Param\+Constructor\+Array\+Type\+ID}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 816 of file Spatial\+Structures.\+cpp.
-
-
-
-References H\+F\+::\+Spatial\+Structures\+::\+G\+R\+A\+PH.
-
-\mbox{\Hypertarget{a00419_aa8e074eedce557a43a403a6b545007e2}\label{a00419_aa8e074eedce557a43a403a6b545007e2}} 
-\index{NodeExampleTests@{NodeExampleTests}!TEST@{TEST}}
-\index{TEST@{TEST}!NodeExampleTests@{NodeExampleTests}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [19/19]}}
-{\footnotesize\ttfamily Node\+Example\+Tests\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Node}]{,  }\item[{Param\+Constructor\+No\+ID}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 807 of file Spatial\+Structures.\+cpp.
+Definition at line \mbox{\hyperlink{a00419_source_l00014}{14}} of file \mbox{\hyperlink{a00419_source}{objloader\+\_\+\+C.\+h}}.
 

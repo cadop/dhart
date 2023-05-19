@@ -1,0 +1,1148 @@
+\hypertarget{a00456}{}\doxysection{Pathfinding}
+\label{a00456}\index{Pathfinding@{Pathfinding}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00456_ga3dc85450e989a996a3c3fcfad0a5944e}{Create\+Path}} (const \mbox{\hyperlink{a01551}{HF\+::\+Spatial\+Structures\+::\+Graph}} $\ast$g, int start, int end, const char $\ast$cost\+\_\+type, int $\ast$out\+\_\+size, \mbox{\hyperlink{a02083}{HF\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$out\+\_\+path, \mbox{\hyperlink{a02079}{HF\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Find the shortest path from start to end. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00456_gae1ac2805c3b86883bb88269ed3868367}{Create\+Paths}} (const \mbox{\hyperlink{a01551}{HF\+::\+Spatial\+Structures\+::\+Graph}} $\ast$g, const int $\ast$start, const int $\ast$end, const char $\ast$cost\+\_\+type, \mbox{\hyperlink{a02083}{HF\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$out\+\_\+path\+\_\+ptr\+\_\+holder, \mbox{\hyperlink{a02079}{HF\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+path\+\_\+member\+\_\+ptr\+\_\+holder, int $\ast$out\+\_\+sizes, int num\+\_\+paths)
+\begin{DoxyCompactList}\small\item\em Find multiple shortest paths in paralllel. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00456_gaac725d282f4fecd3aba1b3273c26e7e1}{Get\+Path\+Info}} (\mbox{\hyperlink{a02083}{HF\+::\+Spatial\+Structures\+::\+Path}} $\ast$p, \mbox{\hyperlink{a02079}{HF\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+member\+\_\+ptr, int $\ast$out\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Get the size of a path and a pointer to its path members. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00456_ga884a3374d971261a01ccfd3b21e288e5}{Destroy\+Path}} (\mbox{\hyperlink{a02083}{HF\+::\+Spatial\+Structures\+::\+Path}} $\ast$path\+\_\+to\+\_\+destroy)
+\begin{DoxyCompactList}\small\item\em Delete a path. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00456_gaba6ec6ce84974dd6a311d7d65dd34221}{Create\+All\+To\+All\+Paths}} (const \mbox{\hyperlink{a01551}{HF\+::\+Spatial\+Structures\+::\+Graph}} $\ast$g, const char $\ast$cost\+\_\+type, \mbox{\hyperlink{a02083}{HF\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$out\+\_\+path\+\_\+ptr\+\_\+holder, \mbox{\hyperlink{a02079}{HF\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+path\+\_\+member\+\_\+ptr\+\_\+holder, int $\ast$out\+\_\+sizes, int num\+\_\+paths)
+\begin{DoxyCompactList}\small\item\em Find a path from every node in a graph to every other node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00456_ga27b1f45019ccbda909301520d1c738ca}{Calculate\+Distance\+And\+Predecessor}} (const \mbox{\hyperlink{a01551}{HF\+::\+Spatial\+Structures\+::\+Graph}} $\ast$g, const char $\ast$cost\+\_\+name, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+dist\+\_\+vector, float $\ast$$\ast$out\+\_\+dist\+\_\+data, std\+::vector$<$ int $>$ $\ast$$\ast$out\+\_\+pred\+\_\+vector, int $\ast$$\ast$out\+\_\+pred\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Calculate the distance and predecessor matricies for a graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Find paths between different points in a graph.\hypertarget{a00456_mesh_setup_energy_blob}{}\doxysubsection{Mesh setup (energy blob)}\label{a00456_mesh_setup_energy_blob}
+Begin by loading an .obj file\+:~\newline
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Status code variable, value returned by C Interface functions}}
+\DoxyCodeLine{\textcolor{comment}{// See documentation for HF::Exceptions::HF\_STATUS for error code definitions.}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} status = 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Get model path}}
+\DoxyCodeLine{\textcolor{comment}{// This is a relative path to your obj file.}}
+\DoxyCodeLine{\textcolor{keyword}{const} std::string obj\_path\_str = \textcolor{stringliteral}{"{}energy\_blob\_zup.obj"{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Size of obj file string (character count)}}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} obj\_length = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(obj\_path\_str.size());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// This will point to memory on free store.}}
+\DoxyCodeLine{\textcolor{comment}{// The memory will be allocated inside the LoadOBJ function,}}
+\DoxyCodeLine{\textcolor{comment}{// and it must be freed using DestroyMeshInfo.}}
+\DoxyCodeLine{std::vector<HF::Geometry::MeshInfo>* loaded\_obj = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Load mesh.}}
+\DoxyCodeLine{\textcolor{comment}{// Notice that we pass the address of the loaded\_obj pointer}}
+\DoxyCodeLine{\textcolor{comment}{// to LoadOBJ. We do not want to pass loaded\_obj by value, but by address -\/-\/}}
+\DoxyCodeLine{\textcolor{comment}{// so that we can dereference it and assign it to the address of (pointer to)}}
+\DoxyCodeLine{\textcolor{comment}{// the free store memory allocated within LoadOBJ.}}
+\DoxyCodeLine{\textcolor{keyword}{const} std::array<float, 3> rot \{ 0.0f, 0.0f, 0.0f \};    \textcolor{comment}{// No rotation.}}
+\DoxyCodeLine{status = \mbox{\hyperlink{a00455_ga0805e80d13b29aeddc35f0bcf3f16a1a}{LoadOBJ}}(obj\_path\_str.c\_str(), obj\_length, rot[0], rot[1], rot[2], \&loaded\_obj);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (status != 1) \{}
+\DoxyCodeLine{    \textcolor{comment}{// All C Interface functions return a status code.}}
+\DoxyCodeLine{    \textcolor{comment}{// Error!}}
+\DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"{}Error at LoadOBJ, code: "{}} << status << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}LoadOBJ loaded mesh successfully into loaded\_obj at address "{}} << loaded\_obj << \textcolor{stringliteral}{"{}, code: "{}} << status << std::endl;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Then, review the example at \mbox{\hyperlink{a00457_raytracer_setup}{Raytracer setup}} (how to create a BVH).~\newline
+\hypertarget{a00456_generate_graph}{}\doxysubsection{Graph generation}\label{a00456_generate_graph}
+You will then generate a graph, using the BVH\+:~\newline
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Define start point.}}
+\DoxyCodeLine{\textcolor{comment}{// These are Cartesian coordinates.}}
+\DoxyCodeLine{\textcolor{comment}{// If not above solid ground, no nodes will be generated.}}
+\DoxyCodeLine{\textcolor{keyword}{const} std::array<float, 3> start\_point\{ -\/30.0f, 0.0f, 20.0f \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Define spacing.}}
+\DoxyCodeLine{\textcolor{comment}{// This is the spacing between nodes, with respect to each axis.}}
+\DoxyCodeLine{\textcolor{comment}{// Lower values create more nodes, yielding a higher resolution graph.}}
+\DoxyCodeLine{\textcolor{keyword}{const} std::array<float, 3> spacing\{ 2.0f, 2.0f, 180.0f \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Value of -\/ 1 will generate infinitely many nodes.}}
+\DoxyCodeLine{\textcolor{comment}{// Final node count may be greater than this value.}}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} max\_nodes = 5000;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} up\_step = 30;                 \textcolor{comment}{// Maximum step height the graph can traverse.}}
+\DoxyCodeLine{                                        \textcolor{comment}{// Steps steeper than this are considered to be inaccessible.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} down\_step = 70;               \textcolor{comment}{// Maximum step down the graph can traverse.}}
+\DoxyCodeLine{                                        \textcolor{comment}{// Steps steeper than this are considered to be inaccessible.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} up\_slope = 60;                \textcolor{comment}{// Maximum upward slope the graph can traverse (in degrees).}}
+\DoxyCodeLine{                                        \textcolor{comment}{// Slopes steeper than this are considered to be inaccessible.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} down\_slope = 60;              \textcolor{comment}{// Maximum downward slope the graph can traverse (in degrees).}}
+\DoxyCodeLine{                                        \textcolor{comment}{// Slopes steeper than this are considered to be inaccessible.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} max\_step\_connections = 1;     \textcolor{comment}{// Multiplier for number of children to generate for each node.}}
+\DoxyCodeLine{                                        \textcolor{comment}{// Increasing this value increases the number of edges in the graph,}}
+\DoxyCodeLine{                                        \textcolor{comment}{// therefore increasing the memory footprint of the algorithm overall.}}
+\DoxyCodeLine{    }
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} min\_connections = 1;          \textcolor{comment}{// The required out-\/degree for a node to be valid and stored.}}
+\DoxyCodeLine{                                        \textcolor{comment}{// This must be greater than 0 and equal or less than the total connections created from max\_step\_connections.}}
+\DoxyCodeLine{                                        \textcolor{comment}{// Default is 1. A value of 8 when max\_step\_connections=1 would be a grid.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} core\_count = -\/1;              \textcolor{comment}{// CPU core count. A value of (-\/1) will use all available cores.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Generate graph.}}
+\DoxyCodeLine{\textcolor{comment}{// Notice that we pass the address of the graph pointer into GenerateGraph.}}
+\DoxyCodeLine{\textcolor{comment}{//}}
+\DoxyCodeLine{\textcolor{comment}{// GenerateGraph will assign the deferenced address to a pointer that points}}
+\DoxyCodeLine{\textcolor{comment}{// to memory on the free store. We will call DestroyGraph to release the memory resources later on.}}
+\DoxyCodeLine{\mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* graph = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{}
+\DoxyCodeLine{status = \mbox{\hyperlink{a00454_ga2df84a732d1edfb70b7bd26d3282e129}{GenerateGraph}}(bvh, start\_point.data(), spacing.data(), max\_nodes,}
+\DoxyCodeLine{    up\_step, down\_step, up\_slope, down\_slope,}
+\DoxyCodeLine{    max\_step\_connections, min\_connections, core\_count, \&graph);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (status != 1) \{}
+\DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"{}Error at GenerateGraph, code: "{}} << status << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}Generate graph ran successfully -\/ graph stored at address "{}} << graph << \textcolor{stringliteral}{"{}, code: "{}} << status << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Always compress the graph after generating a graph/adding new edges}}
+\DoxyCodeLine{status = \mbox{\hyperlink{a00458_gab7ecc1be5c746ed3f99ab7494316c65d}{Compress}}(graph);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (status != 1) \{}
+\DoxyCodeLine{    \textcolor{comment}{// Error!}}
+\DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"{}Error at Compress, code: "{}} << status << std::endl;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{a00456_get_all_nodes}{}\doxysubsection{Get nodes from graph}\label{a00456_get_all_nodes}
+You can retrieve the nodes from the generated graph like this\+:~\newline
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Get nodes.}}
+\DoxyCodeLine{\textcolor{comment}{//}}
+\DoxyCodeLine{\textcolor{comment}{// The address of the local variable node\_vector will be passed to GetAllNodesFromGraph;}}
+\DoxyCodeLine{\textcolor{comment}{// it will be dereferenced inside that function and assigned memory via operator new.}}
+\DoxyCodeLine{\textcolor{comment}{//}}
+\DoxyCodeLine{\textcolor{comment}{// We will have to call DestroyNodes on node\_vector to properly release this memory.}}
+\DoxyCodeLine{\textcolor{comment}{// node\_vector\_data points to the internal buffer that resides within *(node\_vector).}}
+\DoxyCodeLine{\textcolor{comment}{//}}
+\DoxyCodeLine{\textcolor{comment}{// When we call DestroyNodes, node\_vector\_data's memory will also be released.}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node>* node\_vector = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\mbox{\hyperlink{a02071}{HF::SpatialStructures::Node}}* node\_vector\_data = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{}
+\DoxyCodeLine{status = \mbox{\hyperlink{a00458_ga0cc5b82caab046c65a201e4e7be5e9d4}{GetAllNodesFromGraph}}(graph, \&node\_vector, \&node\_vector\_data);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (status != 1) \{}
+\DoxyCodeLine{    \textcolor{comment}{// Error!}}
+\DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"{}Error at GetAllNodesFromGraph, code: "{}} << status << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Get size of node vector}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} node\_vector\_size = -\/1;}
+\DoxyCodeLine{status = \mbox{\hyperlink{a00458_gac17c1fc05e6bf6900bac8689b7619bfb}{GetSizeOfNodeVector}}(node\_vector, \&node\_vector\_size);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (status != 1) \{}
+\DoxyCodeLine{    \textcolor{comment}{// Error!}}
+\DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"{}Error at GetSizeOfNodeVector code: "{}} << status << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Print number of nodes in the graph}}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} max\_node = node\_vector\_size -\/ 1;  \textcolor{comment}{// This is the max index of *node\_vector}}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"{}Graph Generated with "{}} << node\_vector\_size << \textcolor{stringliteral}{"{} nodes"{}} << std::endl;}
+
+\end{DoxyCode}
+\hypertarget{a00456_nodes_teardown}{}\doxysubsection{Destroy nodes from graph}\label{a00456_nodes_teardown}
+When you are finished with the graph node container, you must destroy it\+:~\newline
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// destroy vector<Node>}}
+\DoxyCodeLine{status = \mbox{\hyperlink{a00458_ga87e9b9ecfc5293712d75f3cb8c992c77}{DestroyNodes}}(node\_vector);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (status != 1) \{}
+\DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"{}Error at DestroyNodes, code: "{}} << status << std::endl;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{a00456_graph_teardown}{}\doxysubsection{Destroy graph}\label{a00456_graph_teardown}
+When you are finished with the graph, you must destroy it\+:~\newline
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// destroy graph}}
+\DoxyCodeLine{status = \mbox{\hyperlink{a00458_ga645abacd11e1fa535f953344aaa77727}{DestroyGraph}}(graph);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (status != 1) \{}
+\DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"{}Error at DestroyGraph, code: "{}} << status << std::endl;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00456_ga27b1f45019ccbda909301520d1c738ca}\label{a00456_ga27b1f45019ccbda909301520d1c738ca}} 
+\index{Pathfinding@{Pathfinding}!CalculateDistanceAndPredecessor@{CalculateDistanceAndPredecessor}}
+\index{CalculateDistanceAndPredecessor@{CalculateDistanceAndPredecessor}!Pathfinding@{Pathfinding}}
+\doxysubsubsection{\texorpdfstring{CalculateDistanceAndPredecessor()}{CalculateDistanceAndPredecessor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Calculate\+Distance\+And\+Predecessor (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01551}{HF\+::\+Spatial\+Structures\+::\+Graph}} $\ast$}]{g,  }\item[{const char $\ast$}]{cost\+\_\+name,  }\item[{std\+::vector$<$ float $>$ $\ast$$\ast$}]{out\+\_\+dist\+\_\+vector,  }\item[{float $\ast$$\ast$}]{out\+\_\+dist\+\_\+data,  }\item[{std\+::vector$<$ int $>$ $\ast$$\ast$}]{out\+\_\+pred\+\_\+vector,  }\item[{int $\ast$$\ast$}]{out\+\_\+pred\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00425}{Cinterface/pathfinder\+\_\+\+C.\+h}}$>$}
+
+
+
+Calculate the distance and predecessor matricies for a graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph calculate the distance and predecessor matricies for\\
+\hline
+{\em cost\+\_\+name} & The name of the cost type to use for generating paths. Leaving as an empty string will use the default cost of {\ttfamily g}.\\
+\hline
+{\em out\+\_\+dist\+\_\+vector} & Pointer to be updated with a vector containing the distance matrix \\
+\hline
+{\em out\+\_\+dist\+\_\+data} & Pointer to be updated with a pointer to the data contained by {\ttfamily out\+\_\+dist\+\_\+vector}\\
+\hline
+{\em out\+\_\+pred\+\_\+vector} & Pointer to be updated with the vector containing the predecessor matrix. \\
+\hline
+{\em out\+\_\+pred\+\_\+data} & Pointer to be updated with the data of {\ttfamily out\+\_\+pred\+\_\+vector}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily HF\+\_\+\+STATUS\+::\+OK} If the function completed successfully. 
+
+{\ttfamily HF\+\_\+\+STATUS\+::\+NO\+\_\+\+COST} If {\ttfamily cost type} was not the key of any existing cost type in the graph.
+\end{DoxyReturn}
+\begin{DoxyPostcond}{Postcondition}
+1) {\ttfamily out\+\_\+dist\+\_\+vector} is updated to contain a pointer to the newly created distance matrix 
+
+2) {\ttfamily out\+\_\+dist\+\_\+data} is updated to contain a pointer to the data of {\ttfamily out\+\_\+dist\+\_\+vector} 
+
+3) {\ttfamily out\+\_\+pred\+\_\+vector} is updated to contain a pointer to the newly created predecessor matrix 
+
+4) {\ttfamily out\+\_\+pred\+\_\+data} is updated to contain a pointer to the data of {\ttfamily out\+\_\+pred\+\_\+vector}
+\end{DoxyPostcond}
+\begin{DoxyWarning}{Warning}
+It is the caller\textquotesingle{}s responsibility to deallocate the distance and predecessor matricies by calling Destroy\+Int\+Vector and Destroy\+Float\+Vector. Failing to do so WILL leak memory. Do NOT attempt to delete the data arrays, they will automatically be deleted when their vectors are deleted.
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00457_raytracer_setup}{Raytracer setup}} (how to create a BVH), \mbox{\hyperlink{a00457_raytracer_teardown}{Raytracer teardown}} (how to destroy a BVH) 
+
+\mbox{\hyperlink{a00410_af77723a4383b278169e80cf0e361ec44}{Destroy\+Float\+Vector}} 
+
+\mbox{\hyperlink{a00410_aa1d3e9d7be8628eb59f2ef8f8e156a75}{Destroy\+Int\+Vector}} 
+
+\mbox{\hyperlink{a00456_ga884a3374d971261a01ccfd3b21e288e5}{Destroy\+Path}} for information on deleting the path after usage.
+\end{DoxySeeAlso}
+Begin by reviewing the example at \mbox{\hyperlink{a00457_raytracer_setup}{Raytracer setup}} to load an .obj file (mesh), and create a BVH from the mesh.~\newline
+ Then generate a graph (\mbox{\hyperlink{a00456_generate_graph}{Graph generation}}) from the BVH -- see \mbox{\hyperlink{a00456_get_all_nodes}{Get nodes from graph}} on how to retrieve nodes from the graph.~\newline
+
+
+\begin{DoxyParagraph}{Example}
+
+\end{DoxyParagraph}
+Create a graph, add some edges -- then invoke \mbox{\hyperlink{a00456_ga27b1f45019ccbda909301520d1c738ca}{Calculate\+Distance\+And\+Predecessor}} ~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{    \textcolor{comment}{// Create a graph}}
+\DoxyCodeLine{    Graph * g;}
+\DoxyCodeLine{    \mbox{\hyperlink{a00458_ga262a8f714fbd8d74840efa5832597fff}{CreateGraph}}(NULL, -\/1, \&g);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Create some nodes and add edges to the graph}}
+\DoxyCodeLine{    vector<vector<float>> nodes = \{}
+\DoxyCodeLine{        \{1, 2, 3\}, \{4, 5, 6\}, \{7, 8, 9\}, \{10, 1, 2\}}
+\DoxyCodeLine{    \};}
+\DoxyCodeLine{    \mbox{\hyperlink{a00458_ga43f715ce7f57fb92e78f8f6e90b84baf}{AddEdgeFromNodes}}(g, nodes[0].data(), nodes[1].data(), 10, \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{    \mbox{\hyperlink{a00458_ga43f715ce7f57fb92e78f8f6e90b84baf}{AddEdgeFromNodes}}(g, nodes[1].data(), nodes[2].data(), 20, \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{    \mbox{\hyperlink{a00458_ga43f715ce7f57fb92e78f8f6e90b84baf}{AddEdgeFromNodes}}(g, nodes[0].data(), nodes[2].data(), 5, \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{    \mbox{\hyperlink{a00458_ga43f715ce7f57fb92e78f8f6e90b84baf}{AddEdgeFromNodes}}(g, nodes[1].data(), nodes[0].data(), 10, \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{    \mbox{\hyperlink{a00458_gab7ecc1be5c746ed3f99ab7494316c65d}{Compress}}(g);}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{comment}{// Create output parameters}}
+\DoxyCodeLine{    std::vector<float>* dist\_vector; std::vector<int>* pred\_vector;}
+\DoxyCodeLine{    \textcolor{keywordtype}{float}* dist\_data; \textcolor{keywordtype}{int}* pred\_data;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Call into the new function}}
+\DoxyCodeLine{    \textcolor{keyword}{auto} status = \mbox{\hyperlink{a00456_ga27b1f45019ccbda909301520d1c738ca}{CalculateDistanceAndPredecessor}}(g,\textcolor{stringliteral}{"{}"{}}, \&dist\_vector, \&dist\_data, \&pred\_vector, \&pred\_data);}
+\DoxyCodeLine{        }
+
+\end{DoxyCodeInclude}
+
+
+Print the result\+:~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{comment}{// Print both matricies}}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{int} array\_length = dist\_vector-\/>size();}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}Distance Matrix: ["{}};}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < array\_length; i++)}
+\DoxyCodeLine{        std::cout << dist\_vector-\/>at(i) << (i ==  array\_length -\/ 1 ? \textcolor{stringliteral}{"{}]\(\backslash\)r\(\backslash\)nPredecessor Mattrix: ["{}} : \textcolor{stringliteral}{"{}, "{}});}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < array\_length; i++)}
+\DoxyCodeLine{        std::cout << pred\_vector-\/>at(i) << (i == array\_length -\/ 1 ? \textcolor{stringliteral}{"{}]\(\backslash\)r\(\backslash\)n"{}} : \textcolor{stringliteral}{"{}, "{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Cleanup memory}}
+\DoxyCodeLine{    \mbox{\hyperlink{a00410_aa1d3e9d7be8628eb59f2ef8f8e156a75}{DestroyIntVector}}(pred\_vector);}
+\DoxyCodeLine{    \mbox{\hyperlink{a00410_af77723a4383b278169e80cf0e361ec44}{DestroyFloatVector}}(dist\_vector);}
+\DoxyCodeLine{}
+
+\end{DoxyCodeInclude}
+
+
+~\newline
+ {\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Distance Matrix\+: \mbox{[}0.\+000000, 10.\+000000, 5.\+000000, 10.\+000000, 0.\+000000, 15.\+000000, -\/1.\+000000, -\/1.\+000000, 0.\+000000\mbox{]}}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Predecessor Matrix\+: \mbox{[}0, 0, 0, 1, 1, 0, -\/1, -\/1, 2\mbox{]}\textbackslash{}n} 
+
+Definition at line \mbox{\hyperlink{a00422_source_l00171}{171}} of file \mbox{\hyperlink{a00422_source}{pathfinder\+\_\+\+C.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00203_source_l00320}{HF\+::\+Pathfinding\+::\+Create\+Boost\+Graph()}}, \mbox{\hyperlink{a00206_source_l00410}{HF\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::dist}}, \mbox{\hyperlink{a00203_source_l00267}{HF\+::\+Pathfinding\+::\+Generate\+Distance\+And\+Pred()}}, and \mbox{\hyperlink{a00206_source_l00411}{HF\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::pred}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00456_ga27b1f45019ccbda909301520d1c738ca_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00456_gaba6ec6ce84974dd6a311d7d65dd34221}\label{a00456_gaba6ec6ce84974dd6a311d7d65dd34221}} 
+\index{Pathfinding@{Pathfinding}!CreateAllToAllPaths@{CreateAllToAllPaths}}
+\index{CreateAllToAllPaths@{CreateAllToAllPaths}!Pathfinding@{Pathfinding}}
+\doxysubsubsection{\texorpdfstring{CreateAllToAllPaths()}{CreateAllToAllPaths()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Create\+All\+To\+All\+Paths (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01551}{HF\+::\+Spatial\+Structures\+::\+Graph}} $\ast$}]{g,  }\item[{const char $\ast$}]{cost\+\_\+type,  }\item[{\mbox{\hyperlink{a02083}{HF\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$}]{out\+\_\+path\+\_\+ptr\+\_\+holder,  }\item[{\mbox{\hyperlink{a02079}{HF\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$}]{out\+\_\+path\+\_\+member\+\_\+ptr\+\_\+holder,  }\item[{int $\ast$}]{out\+\_\+sizes,  }\item[{int}]{num\+\_\+paths }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00425}{Cinterface/pathfinder\+\_\+\+C.\+h}}$>$}
+
+
+
+Find a path from every node in a graph to every other node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph to conduct the search on nodes that already exist within the graph.\\
+\hline
+{\em cost\+\_\+name} & The name of the cost type to use for generating paths. Leaving as an empty string will use the default cost of {\ttfamily g}.\\
+\hline
+{\em out\+\_\+size} & An empty array of integers that will be updated to contain the length of every path in {\ttfamily path\+\_\+members}. Paths that could not be generated will be left with a length of zero.\\
+\hline
+{\em out\+\_\+path} & Location for the the path pointer array to be created. Paths that could not be generated will be left as null pointers.\\
+\hline
+{\em out\+\_\+data} & Location for the pathmember pointer array to be created. All path member pointers will point to the Path\+Members of the Path in paths at the same index. Paths that could not be generated will be left as null pointers.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily HF\+\_\+\+STATUS\+::\+OK} The completed successfully and all postconditions were fulfilled. 
+
+{\ttfamily HF\+\_\+\+STATUS\+::\+NO\+\_\+\+COST} {\ttfamily cost\+\_\+name} is not a valid cost type name
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+If {\ttfamily cost\+\_\+type} is specified, {\ttfamily cost\+\_\+type} must be the the key of an already existing cost in {\ttfamily g}
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+1) {\ttfamily out\+\_\+path\+\_\+members} will point to a vector of pointers to vectors of Path\+Members with an element for every path. Paths that could not be generated will be set to null pointers. 
+
+2) {\ttfamily out\+\_\+paths} will point to a vector of pointers to paths with an element for every path. Paths that could not be generated will be set to null pointers. 
+
+3) {\ttfamily out\+\_\+sizes} will point to an array of integers containing the size of every path in {\ttfamily out\+\_\+paths}. Paths that could not be generated will have a size of 0.
+\end{DoxyPostcond}
+\begin{DoxyWarning}{Warning}
+The caller is responsible for freeing all of the memory allocated in {\ttfamily out\+\_\+paths}and {\ttfamily out\+\_\+sizes}. The contents of {\ttfamily out\+\_\+path\+\_\+members} will automatically be deleted when the path they belong to is deleted. Do not try to manually delete {\ttfamily out\+\_\+path\+\_\+members} or the path that owns it will throw a null pointer exception when it is deleted.
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00455_mesh_setup}{Mesh setup}} (how to load an .OBJ file/create a mesh) 
+
+\mbox{\hyperlink{a00457_raytracer_setup}{Raytracer setup}} (how to create a BVH) 
+
+\mbox{\hyperlink{a00456_generate_graph}{Graph generation}} (how to generate a graph from a BVH) 
+
+\mbox{\hyperlink{a00456_get_all_nodes}{Get nodes from graph}} (how to retrieve nodes from a graph) 
+
+\mbox{\hyperlink{a00456_ga884a3374d971261a01ccfd3b21e288e5}{Destroy\+Path}} for information on deleting the path after usage. 
+
+\mbox{\hyperlink{a00456_nodes_teardown}{Destroy nodes from graph}} (how to destroy nodes from a graph) 
+
+\mbox{\hyperlink{a00456_graph_teardown}{Destroy graph}} (how to destroy a graph) 
+
+\mbox{\hyperlink{a00457_raytracer_teardown}{Raytracer teardown}} (how to destroy a BVH) 
+
+\mbox{\hyperlink{a00455_mesh_teardown}{Mesh teardown}} (how to destroy a mesh)
+\end{DoxySeeAlso}
+Now we are ready to invoke \mbox{\hyperlink{a00456_gaba6ec6ce84974dd6a311d7d65dd34221}{Create\+All\+To\+All\+Paths}} . 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}} g;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Add the edges}}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(0, 1, 1);}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(0, 2, 2);}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(1, 3, 3);}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(1, 4, 4);}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(2, 4, 4);}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(3, 5, 5);}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(4, 6, 3);}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(5, 6, 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Always compress the graph after adding edges}}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a41cece77d0eee98df39ecc6d3a366ec8}{Compress}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Create a BoostGraph (std::unique\_ptr)}}
+\DoxyCodeLine{        \textcolor{keyword}{auto} bg = \mbox{\hyperlink{a00472_ae2106e09eb44d681fbc6c0f66a3d3ac4}{CreateBoostGraph}}(g);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Total paths is node\_count \string^ 2}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} node\_count = g.\mbox{\hyperlink{a01551_aa70347b8a33b57c6f0a72d6eca4248d7}{Nodes}}().size();}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} path\_count = node\_count * node\_count;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Buffer of (Path *). Each Path * must be freed using DestroyPath.}}
+\DoxyCodeLine{        std::vector<Path*> out\_paths(path\_count);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Buffer of (PathMember *). These pointers address the vector<PathMember> buffers in all *p in out\_paths. }}
+\DoxyCodeLine{        std::vector<PathMember*> out\_path\_member(path\_count);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Pointer to buffer of (int)}}
+\DoxyCodeLine{        std::vector<int> sizes(path\_count);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// The two loops for start\_points and end\_points}}
+\DoxyCodeLine{        \textcolor{comment}{// are just for the output.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{keywordtype}{int} curr\_id = 0;}
+\DoxyCodeLine{        std::vector<int> start\_points(path\_count);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Populate the start points,}}
+\DoxyCodeLine{        \textcolor{comment}{// size will be (node\_count)\string^2}}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < node\_count; i++) \{}
+\DoxyCodeLine{            \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < node\_count; k++) \{}
+\DoxyCodeLine{                start\_points[curr\_id++] = i;}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        curr\_id = 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        std::vector<int> end\_points(path\_count);}
+\DoxyCodeLine{        \textcolor{comment}{// Populate the end points,}}
+\DoxyCodeLine{        \textcolor{comment}{// size will be (node\_count)\string^2}}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < node\_count; i++) \{}
+\DoxyCodeLine{            \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < node\_count; k++) \{}
+\DoxyCodeLine{                end\_points[curr\_id++] = k;}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \mbox{\hyperlink{a00456_gaba6ec6ce84974dd6a311d7d65dd34221}{CreateAllToAllPaths}}(\&g, \textcolor{stringliteral}{"{}"{}}, out\_paths.data(), out\_path\_member.data(), sizes.data(), path\_count);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keyword}{auto} start\_points\_it = start\_points.begin();}
+\DoxyCodeLine{        \textcolor{keyword}{auto} end\_points\_it = end\_points.begin();}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} p : out\_paths) \{}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (p) \{}
+\DoxyCodeLine{                \textcolor{comment}{// Always check if out\_paths[i] is nonnull!}}
+\DoxyCodeLine{                \textcolor{keywordtype}{int} total\_cost = 0;}
+\DoxyCodeLine{                std::cout << \textcolor{stringliteral}{"{}Path from "{}} << *(start\_points\_it++) << \textcolor{stringliteral}{"{} to "{}} << *(end\_points\_it++) << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{                \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} m : p-\/>members) \{}
+\DoxyCodeLine{                    total\_cost += m.cost;}
+\DoxyCodeLine{                    std::cout << \textcolor{stringliteral}{"{}node ID: "{}} << m.node << \textcolor{stringliteral}{"{}\(\backslash\)tcost "{}} << m.cost << std::endl;}
+\DoxyCodeLine{                \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{                std::cout << \textcolor{stringliteral}{"{}Total cost: "{}} << total\_cost << std::endl;}
+\DoxyCodeLine{                std::cout << \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}} << std::endl;}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Resource cleanup}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& p : out\_paths) \{}
+\DoxyCodeLine{            \mbox{\hyperlink{a00456_ga884a3374d971261a01ccfd3b21e288e5}{DestroyPath}}(p);}
+\DoxyCodeLine{            p = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{        \}}
+
+\end{DoxyCodeInclude}
+
+
+~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        Path from 0 to 1}
+\DoxyCodeLine{        node ID : 0      cost 1}
+\DoxyCodeLine{        node ID : 1      cost 0}
+\DoxyCodeLine{        Total cost : 1}
+\DoxyCodeLine{        -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{        Path from 0 to 2}
+\DoxyCodeLine{        node ID : 0      cost 2}
+\DoxyCodeLine{        node ID : 2      cost 0}
+\DoxyCodeLine{        Total cost : 2}
+\DoxyCodeLine{        -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{        Path from 0 to 3}
+\DoxyCodeLine{        node ID : 0      cost 1}
+\DoxyCodeLine{        node ID : 1      cost 3}
+\DoxyCodeLine{        node ID : 3      cost 0}
+\DoxyCodeLine{        Total cost : 4}
+\DoxyCodeLine{        -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{        Path from 0 to 4}
+\DoxyCodeLine{        node ID : 0      cost 1}
+\DoxyCodeLine{        node ID : 1      cost 4}
+\DoxyCodeLine{        node ID : 4      cost 0}
+\DoxyCodeLine{        Total cost : 5}
+\DoxyCodeLine{        -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{        Path from 0 to 5}
+\DoxyCodeLine{        node ID : 0      cost 1}
+\DoxyCodeLine{        node ID : 1      cost 3}
+\DoxyCodeLine{        node ID : 3      cost 5}
+\DoxyCodeLine{        node ID : 5      cost 0}
+\DoxyCodeLine{        Total cost : 9}
+\DoxyCodeLine{        -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{        Path from 0 to 6}
+\DoxyCodeLine{        node ID : 0      cost 1}
+\DoxyCodeLine{        node ID : 1      cost 4}
+\DoxyCodeLine{        node ID : 4      cost 3}
+\DoxyCodeLine{        node ID : 6      cost 0}
+\DoxyCodeLine{        Total cost : 8}
+\DoxyCodeLine{        -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{        Path from 1 to 3}
+\DoxyCodeLine{        node ID : 1      cost 3}
+\DoxyCodeLine{        node ID : 3      cost 0}
+\DoxyCodeLine{        Total cost : 3}
+\DoxyCodeLine{        -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{        Path from 1 to 4}
+\DoxyCodeLine{        node ID : 1      cost 4}
+\DoxyCodeLine{        node ID : 4      cost 0}
+\DoxyCodeLine{        Total cost : 4}
+\DoxyCodeLine{        -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{        Path from 1 to 5}
+\DoxyCodeLine{        node ID : 1      cost 3}
+\DoxyCodeLine{        node ID : 3      cost 5}
+\DoxyCodeLine{        node ID : 5      cost 0}
+\DoxyCodeLine{        Total cost : 8}
+\DoxyCodeLine{        -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{        Path from 1 to 6}
+\DoxyCodeLine{        node ID : 1      cost 4}
+\DoxyCodeLine{        node ID : 4      cost 3}
+\DoxyCodeLine{        node ID : 6      cost 0}
+\DoxyCodeLine{        Total cost : 7}
+\DoxyCodeLine{        -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{        Path from 2 to 4}
+\DoxyCodeLine{        node ID : 2      cost 4}
+\DoxyCodeLine{        node ID : 4      cost 0}
+\DoxyCodeLine{        Total cost : 4}
+\DoxyCodeLine{        -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{        Path from 2 to 6}
+\DoxyCodeLine{        node ID : 2      cost 4}
+\DoxyCodeLine{        node ID : 4      cost 3}
+\DoxyCodeLine{        node ID : 6      cost 0}
+\DoxyCodeLine{        Total cost : 7}
+\DoxyCodeLine{        -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{        Path from 3 to 5}
+\DoxyCodeLine{        node ID : 3      cost 5}
+\DoxyCodeLine{        node ID : 5      cost 0}
+\DoxyCodeLine{        Total cost : 5}
+\DoxyCodeLine{        -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{        Path from 3 to 6}
+\DoxyCodeLine{        node ID : 3      cost 5}
+\DoxyCodeLine{        node ID : 5      cost 1}
+\DoxyCodeLine{        node ID : 6      cost 0}
+\DoxyCodeLine{        Total cost : 6}
+\DoxyCodeLine{        -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{        Path from 4 to 6}
+\DoxyCodeLine{        node ID : 4      cost 3}
+\DoxyCodeLine{        node ID : 6      cost 0}
+\DoxyCodeLine{        Total cost : 3}
+\DoxyCodeLine{        -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{        Path from 5 to 6}
+\DoxyCodeLine{        node ID : 5      cost 1}
+\DoxyCodeLine{        node ID : 6      cost 0}
+\DoxyCodeLine{        Total cost : 1}
+\DoxyCodeLine{        -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{a00422_source_l00138}{138}} of file \mbox{\hyperlink{a00422_source}{pathfinder\+\_\+\+C.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00203_source_l00320}{HF\+::\+Pathfinding\+::\+Create\+Boost\+Graph()}}, and \mbox{\hyperlink{a00203_source_l00329}{HF\+::\+Pathfinding\+::\+Insert\+All\+To\+All\+Paths\+Into\+Array()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00456_gaba6ec6ce84974dd6a311d7d65dd34221_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00456_ga3dc85450e989a996a3c3fcfad0a5944e}\label{a00456_ga3dc85450e989a996a3c3fcfad0a5944e}} 
+\index{Pathfinding@{Pathfinding}!CreatePath@{CreatePath}}
+\index{CreatePath@{CreatePath}!Pathfinding@{Pathfinding}}
+\doxysubsubsection{\texorpdfstring{CreatePath()}{CreatePath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Create\+Path (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01551}{HF\+::\+Spatial\+Structures\+::\+Graph}} $\ast$}]{g,  }\item[{int}]{start,  }\item[{int}]{end,  }\item[{const char $\ast$}]{cost\+\_\+type,  }\item[{int $\ast$}]{out\+\_\+size,  }\item[{\mbox{\hyperlink{a02083}{HF\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$}]{out\+\_\+path,  }\item[{\mbox{\hyperlink{a02079}{HF\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$}]{out\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00425}{Cinterface/pathfinder\+\_\+\+C.\+h}}$>$}
+
+
+
+Find the shortest path from start to end. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph to conduct the search on. \\
+\hline
+{\em start} & Start node of the path. \\
+\hline
+{\em end} & End node of the path.\\
+\hline
+{\em cost\+\_\+name} & The name of the cost in {\ttfamily g} to use for shortest path calculations. Set to an empty string to use the cost {\ttfamily g} was constructed with.\\
+\hline
+{\em out\+\_\+size} & Updated to the length of the found path on success. Set to 0 if no path could be found. \\
+\hline
+{\em out\+\_\+path} & Output parameter for a pointer to the generated path. Will be null if no path could be found \\
+\hline
+{\em out\+\_\+data} & Output parameter for a pointer to the data of the generated path. Will be null if no path could be found.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily HF\+\_\+\+STATUS\+::\+OK} The function completed successfully. 
+
+{\ttfamily HF\+\_\+\+STATUS\+::\+NO\+\_\+\+PATH} No path could be found 
+
+{\ttfamily HF\+\_\+\+STATUS\+::\+NO\+\_\+\+COST} {\ttfamily cost\+\_\+name} is not an empty string or the key of a cost that already exists in G
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+1) {\ttfamily start} and {\ttfamily end} contain both contain the Ids of nodes already in the graph 
+
+2) If not set to the empty string, {\ttfamily cost\+\_\+name} is the key to a valid cost type already defined in {\ttfamily g}.
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+If {\ttfamily OK} is returned, a path between start and end was found and {\ttfamily out\+\_\+size}, {\ttfamily out\+\_\+path}, and {\ttfamily out\+\_\+data}, are updated to contain the number of nodes in the path, a pointer to the path itself, and a pointer to the Path\+Members it holds respectively.
+\end{DoxyPostcond}
+\begin{DoxyWarning}{Warning}
+The caller is responsible for deleting the path returned by out\+\_\+path by calling Destroy\+Path if this function completes successfully. Freeing the memory for a path will also free the memory for its path members, so do not attempt to access its members after deletion.
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00455_mesh_setup}{Mesh setup}} (how to load an .OBJ file/create a mesh) 
+
+\mbox{\hyperlink{a00457_raytracer_setup}{Raytracer setup}} (how to create a BVH) 
+
+\mbox{\hyperlink{a00456_generate_graph}{Graph generation}} (how to generate a graph from a BVH) 
+
+\mbox{\hyperlink{a00456_get_all_nodes}{Get nodes from graph}} (how to retrieve nodes from a graph) 
+
+\mbox{\hyperlink{a00456_ga884a3374d971261a01ccfd3b21e288e5}{Destroy\+Path}} for information on deleting the path after usage. 
+
+\mbox{\hyperlink{a00456_nodes_teardown}{Destroy nodes from graph}} (how to destroy nodes from a graph) 
+
+\mbox{\hyperlink{a00456_graph_teardown}{Destroy graph}} (how to destroy a graph) 
+
+\mbox{\hyperlink{a00457_raytracer_teardown}{Raytracer teardown}} (how to destroy a BVH) 
+
+\mbox{\hyperlink{a00455_mesh_teardown}{Mesh teardown}} (how to destroy a mesh)
+\end{DoxySeeAlso}
+Begin by reviewing the example at \mbox{\hyperlink{a00457_raytracer_setup}{Raytracer setup}} to load an .obj file (mesh), and create a BVH from the mesh.~\newline
+ Then generate a graph (\mbox{\hyperlink{a00456_generate_graph}{Graph generation}}) from the BVH -- see \mbox{\hyperlink{a00456_get_all_nodes}{Get nodes from graph}} on how to retrieve nodes from the graph.~\newline
+
+
+Now we are ready to create a path. We will find the path from the first node to the last indexed node. ~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Call Dijkstra's Shortest Path Algorithm}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Retrieve the first ID and the last ID indexed in *node\_vector.}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{int} start\_id = 0;}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{int} end\_id = node\_vector-\/>size() -\/ 1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// empty string means to use the cost type that the graph was constructed with}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{char}* cost\_type = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Will be set to the size of the found path. Output value of 0 means no path was constructed.}}
+\DoxyCodeLine{        \textcolor{keywordtype}{int} path\_size = -\/1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// If a path is found, path will address memory for a Path.}}
+\DoxyCodeLine{        \textcolor{comment}{// DestroyPath must be called on path when finished with use.}}
+\DoxyCodeLine{        \mbox{\hyperlink{a02083}{HF::SpatialStructures::Path}}* path = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Will address the underlying buffer of a member container within *path.}}
+\DoxyCodeLine{        \textcolor{comment}{// When DestroyPath is called on path, path\_data will no longer be valid.}}
+\DoxyCodeLine{        \textcolor{comment}{// Likewise, if path remains null after attempting to create a path,}}
+\DoxyCodeLine{        \textcolor{comment}{// path\_data will also be null.}}
+\DoxyCodeLine{        \mbox{\hyperlink{a02079}{HF::SpatialStructures::PathMember}}* path\_data = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Create a path.}}
+\DoxyCodeLine{        status = \mbox{\hyperlink{a00456_ga3dc85450e989a996a3c3fcfad0a5944e}{CreatePath}}(graph, start\_id, end\_id, cost\_type, \&path\_size, \&path, \&path\_data);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (status != 1) \{}
+\DoxyCodeLine{            std::cerr << \textcolor{stringliteral}{"{}Error at CreatePath, code: "{}} << status << std::endl;}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{        \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (path) \{}
+\DoxyCodeLine{                std::cout << \textcolor{stringliteral}{"{}CreatePath stored path successfully -\/ path stored at address "{}} << path << \textcolor{stringliteral}{"{}, code: "{}} << status << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{                \textcolor{comment}{// Get total path cost \& output the result.}}
+\DoxyCodeLine{                \textcolor{keyword}{auto} path\_sum = 0.0f;}
+\DoxyCodeLine{                \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& member : path-\/>\mbox{\hyperlink{a02083_a864cebbf4e5d7c135c501a63d42f8708}{members}}) \{ path\_sum += member.cost; \}}
+\DoxyCodeLine{                std::cout << \textcolor{stringliteral}{"{}Total path cost: "{}} << path\_sum << std::endl;}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{        \}}
+
+\end{DoxyCodeInclude}
+
+
+From here, please review the examples on how to destroy a path (\mbox{\hyperlink{a00456_ga884a3374d971261a01ccfd3b21e288e5}{Destroy\+Path}}),~\newline
+ as well as how to destroy a vector\texorpdfstring{$<$}{<}\mbox{\hyperlink{a02071}{HF\+::\+Spatial\+Structures\+::\+Node}}\texorpdfstring{$>$}{>} (\mbox{\hyperlink{a00456_nodes_teardown}{Destroy nodes from graph}}),~\newline
+ how to destroy a \mbox{\hyperlink{a01551}{HF\+::\+Spatial\+Structures\+::\+Graph}} (\mbox{\hyperlink{a00456_graph_teardown}{Destroy graph}}),~\newline
+ how to destroy a \mbox{\hyperlink{a01411}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} (\mbox{\hyperlink{a00457_raytracer_teardown}{Raytracer teardown}}),~\newline
+ and how to destroy a vector\texorpdfstring{$<$}{<}\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}\texorpdfstring{$>$}{>} (\mbox{\hyperlink{a00455_mesh_teardown}{Mesh teardown}}).
+
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Load\+OBJ loaded mesh successfully into loaded\+\_\+obj at address 000001DF01\+EB9470, code\+: 1}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 000001DF01\+EB5100, code\+: 1}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Generate graph ran successfully -\/ graph stored at address 000001DF0\+BCEDDA0, code\+: 1}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Graph Generated with 886 nodes}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Create\+Path stored path successfully -\/ path stored at address 000001DF01\+EB9590, code\+: 1}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Total path cost\+: 77.\+6772}~\newline
+
+
+Definition at line \mbox{\hyperlink{a00422_source_l00023}{23}} of file \mbox{\hyperlink{a00422_source}{pathfinder\+\_\+\+C.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00203_source_l00320}{HF\+::\+Pathfinding\+::\+Create\+Boost\+Graph()}}, \mbox{\hyperlink{a00278_source_l00016}{HF\+::\+Spatial\+Structures\+::\+Path\+::empty()}}, \mbox{\hyperlink{a00203_source_l00166}{HF\+::\+Pathfinding\+::\+Find\+Path()}}, \mbox{\hyperlink{a00176_source_l00038}{HF\+::\+Exceptions\+::\+GENERIC\+\_\+\+ERROR}}, \mbox{\hyperlink{a00278_source_l00056}{HF\+::\+Spatial\+Structures\+::\+Path\+::\+Get\+PMPointer()}}, \mbox{\hyperlink{a00176_source_l00050}{HF\+::\+Exceptions\+::\+NO\+\_\+\+COST}}, \mbox{\hyperlink{a00176_source_l00049}{HF\+::\+Exceptions\+::\+NO\+\_\+\+PATH}}, \mbox{\hyperlink{a00176_source_l00032}{HF\+::\+Exceptions\+::\+OK}}, and \mbox{\hyperlink{a00278_source_l00020}{HF\+::\+Spatial\+Structures\+::\+Path\+::size()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00456_ga3dc85450e989a996a3c3fcfad0a5944e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00456_gae1ac2805c3b86883bb88269ed3868367}\label{a00456_gae1ac2805c3b86883bb88269ed3868367}} 
+\index{Pathfinding@{Pathfinding}!CreatePaths@{CreatePaths}}
+\index{CreatePaths@{CreatePaths}!Pathfinding@{Pathfinding}}
+\doxysubsubsection{\texorpdfstring{CreatePaths()}{CreatePaths()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Create\+Paths (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01551}{HF\+::\+Spatial\+Structures\+::\+Graph}} $\ast$}]{g,  }\item[{const int $\ast$}]{start,  }\item[{const int $\ast$}]{end,  }\item[{const char $\ast$}]{cost\+\_\+type,  }\item[{\mbox{\hyperlink{a02083}{HF\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$}]{out\+\_\+path\+\_\+ptr\+\_\+holder,  }\item[{\mbox{\hyperlink{a02079}{HF\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$}]{out\+\_\+path\+\_\+member\+\_\+ptr\+\_\+holder,  }\item[{int $\ast$}]{out\+\_\+sizes,  }\item[{int}]{num\+\_\+paths }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00425}{Cinterface/pathfinder\+\_\+\+C.\+h}}$>$}
+
+
+
+Find multiple shortest paths in paralllel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph to conduct the search on\\
+\hline
+{\em start} & An array of ids for starting nodes. Length must match that of end and all the IDS must belong to nodes that already exist within the graph.\\
+\hline
+{\em end} & An array of ids for ending nodes. Length must match that of start and all the IDS must belong to nodes that already exist within the graph.\\
+\hline
+{\em cost\+\_\+name} & The name of the cost type to use for generating paths. Leaving as an empty string will use the default cost of {\ttfamily g}.\\
+\hline
+{\em out\+\_\+size} & An empty array of integers that will be updated to contain the length of every path in {\ttfamily path\+\_\+members}. Paths that could not be generated will be left with a length of zero.\\
+\hline
+{\em out\+\_\+path} & Location for the the path pointer array to be created. Paths that could not be generated will be left as null pointers.\\
+\hline
+{\em out\+\_\+data} & Location for the pathmember pointer array to be created. All path member pointers will point to the Path\+Members of the Path in paths at the same index. Paths that could not be generated will be left as null pointers.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily HF\+\_\+\+STATUS\+::\+OK} if the function completes successfully 
+
+{\ttfamily HF\+\_\+\+STATUS\+::\+NO\+\_\+\+COST} is {\ttfamily cost\+\_\+name} is not a valid cost type name
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+1) The length of {\ttfamily start\+\_\+ids}, {\ttfamily end\+\_\+ids}, and {\ttfamily out\+\_\+size} must be equal. 
+
+2) If {\ttfamily cost\+\_\+type} is specified, {\ttfamily cost\+\_\+type} must be the the key of an already existing cost in {\ttfamily g}
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+1) {\ttfamily out\+\_\+path\+\_\+members} will point to a vector of pointers to vectors of Path\+Members with an element for every path. paths that could not be generated will be set to null pointers. 
+
+2) {\ttfamily out\+\_\+paths} will point to a vector of pointers to paths with an element for every path. Paths that could not be generated will be set to null pointers. 
+
+3) {\ttfamily out\+\_\+sizes} will point to an array of integers containing the size of every path in {\ttfamily out\+\_\+paths}. Paths that could not be generated will have a size of 0.
+\end{DoxyPostcond}
+\begin{DoxyWarning}{Warning}
+The caller is responsible for freeing all of the memory allocated in {\ttfamily out\+\_\+paths} and {\ttfamily out\+\_\+sizes}. The contents of {\ttfamily out\+\_\+path\+\_\+members} will automatically be deleted when the path they belong to is deleted. Do not try to manually delete {\ttfamily out\+\_\+path\+\_\+members} or the path that owns it will throw a null pointer exception when it is deleted.
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00455_mesh_setup}{Mesh setup}} (how to load an .OBJ file/create a mesh) 
+
+\mbox{\hyperlink{a00457_raytracer_setup}{Raytracer setup}} (how to create a BVH) 
+
+\mbox{\hyperlink{a00456_generate_graph}{Graph generation}} (how to generate a graph from a BVH) 
+
+\mbox{\hyperlink{a00456_get_all_nodes}{Get nodes from graph}} (how to retrieve nodes from a graph) 
+
+\mbox{\hyperlink{a00456_ga884a3374d971261a01ccfd3b21e288e5}{Destroy\+Path}} for information on deleting the path after usage. 
+
+\mbox{\hyperlink{a00456_nodes_teardown}{Destroy nodes from graph}} (how to destroy nodes from a graph) 
+
+\mbox{\hyperlink{a00456_graph_teardown}{Destroy graph}} (how to destroy a graph) 
+
+\mbox{\hyperlink{a00457_raytracer_teardown}{Raytracer teardown}} (how to destroy a BVH) 
+
+\mbox{\hyperlink{a00455_mesh_teardown}{Mesh teardown}} (how to destroy a mesh)
+\end{DoxySeeAlso}
+No cost type\+:~\newline
+
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Requires \#include "{}pathfinder\_C.h"{}, \#include "{}graph.h"{}, \#include "{}path.h"{}, \#include "{}path\_finder.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// for brevity}}
+\DoxyCodeLine{        \textcolor{keyword}{using }\mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}};}
+\DoxyCodeLine{        \textcolor{keyword}{using }\mbox{\hyperlink{a02083}{HF::SpatialStructures::Path}};}
+\DoxyCodeLine{        \textcolor{keyword}{using }\mbox{\hyperlink{a02079}{HF::SpatialStructures::PathMember}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        Graph g;}
+\DoxyCodeLine{        g.addEdge(0, 1, 1);}
+\DoxyCodeLine{        g.addEdge(0, 2, 2);}
+\DoxyCodeLine{        g.addEdge(1, 3, 3);}
+\DoxyCodeLine{        g.addEdge(2, 4, 1);}
+\DoxyCodeLine{        g.addEdge(3, 4, 5);}
+\DoxyCodeLine{        g.Compress();}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Maximum amount of paths to search}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{int} MAX\_PATHS = 2;}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{int} MAX\_PATHMEMBERS = 2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Create a Graph g, and compress it}}
+\DoxyCodeLine{        \textcolor{keyword}{auto} boostGraph = \mbox{\hyperlink{a00472_ae2106e09eb44d681fbc6c0f66a3d3ac4}{HF::Pathfinding::CreateBoostGraph}}(g);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// We want to find the shortest paths from 0 to 3, and 0 to 4.}}
+\DoxyCodeLine{        std::array<int, 2> start\_nodes\{ 0, 0 \};}
+\DoxyCodeLine{        std::array<int, 2> end\_nodes\{ 3, 4 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Create arrays of pointers to Path. We have MAX\_PATHS total paths to assess.}}
+\DoxyCodeLine{        \textcolor{comment}{// Create arrays of pointers to PathMember. The anticipated maximum amount of "{}hops"{} per path is MAX\_PATHMEMBERS.}}
+\DoxyCodeLine{        std::array<Path*, MAX\_PATHS> out\_path;}
+\DoxyCodeLine{        std::array<PathMember*, MAX\_PATHMEMBERS> out\_path\_member;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Sizes of paths generated by CreatePaths. Sizes of 0 mean that a path was unable to be generated.}}
+\DoxyCodeLine{        \textcolor{comment}{// Should be the same as}}
+\DoxyCodeLine{        std::array<int, MAX\_PATHS> out\_sizes;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Use CreatePaths}}
+\DoxyCodeLine{        \mbox{\hyperlink{a00456_gae1ac2805c3b86883bb88269ed3868367}{CreatePaths}}(\&g, start\_nodes.data(), end\_nodes.data(), \textcolor{stringliteral}{"{}\(\backslash\)0"{}}, out\_path.data(), out\_path\_member.data(), out\_sizes.data(), MAX\_PATHS);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Resource cleanup.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& p : out\_path) \{}
+\DoxyCodeLine{            \mbox{\hyperlink{a00456_ga884a3374d971261a01ccfd3b21e288e5}{DestroyPath}}(p);}
+\DoxyCodeLine{            p = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{        \}}
+
+\end{DoxyCodeInclude}
+
+
+With a cost type\+:~\newline
+
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Requires \#include "{}pathfinder\_C.h"{}, \#include "{}graph.h"{}, \#include "{}path.h"{}, \#include "{}path\_finder.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// for brevity}}
+\DoxyCodeLine{        \textcolor{keyword}{using }\mbox{\hyperlink{a02071}{HF::SpatialStructures::Node}};}
+\DoxyCodeLine{        \textcolor{keyword}{using }\mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}};}
+\DoxyCodeLine{        \textcolor{keyword}{using }\mbox{\hyperlink{a01383}{HF::Pathfinding::BoostGraph}};}
+\DoxyCodeLine{        \textcolor{keyword}{using }\mbox{\hyperlink{a00475_ac51f2e76c00356f8a6145bee865cd922}{HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{        Node node\_0(1.0f, 1.0f, 2.0f);}
+\DoxyCodeLine{        Node node\_1(2.0f, 3.0f, 4.0f);}
+\DoxyCodeLine{        Node node\_2(11.0f, 22.0f, 14.0f);}
+\DoxyCodeLine{        Node node\_3(62.9f, 39.1f, 18.0f);}
+\DoxyCodeLine{        Node node\_4(99.5f, 47.1f, 29.9f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Create a graph. No nodes/edges for now.}}
+\DoxyCodeLine{        Graph graph;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Add edges. These will have the default edge values, forming the default graph.}}
+\DoxyCodeLine{        graph.addEdge(node\_0, node\_1, 1);}
+\DoxyCodeLine{        graph.addEdge(node\_0, node\_2, 2.5);}
+\DoxyCodeLine{        graph.addEdge(node\_1, node\_3, 54.0);}
+\DoxyCodeLine{        graph.addEdge(node\_2, node\_4, 39.0);}
+\DoxyCodeLine{        graph.addEdge(node\_3, node\_4, 1.2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Always compress the graph after adding edges!}}
+\DoxyCodeLine{        graph.Compress();}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Retrieve a Subgraph, parent node ID 0 -\/-\/ of alternate edge costs.}}
+\DoxyCodeLine{        \textcolor{comment}{// Add these alternate edges to graph.}}
+\DoxyCodeLine{        std::string desired\_cost\_type = \mbox{\hyperlink{a00437_a047beaeb65d7842c75f024915219177e}{AlgorithmCostTitle}}(\mbox{\hyperlink{a00437_ac8fff1d29507d50c7848ea3fdbbbb0fca0ff5aa5181f1f5d5e6461b76852dd6b3}{COST\_ALG\_KEY::CROSS\_SLOPE}});}
+\DoxyCodeLine{        \textcolor{keyword}{auto} edge\_set = \mbox{\hyperlink{a00475_ac51f2e76c00356f8a6145bee865cd922}{CalculateEnergyExpenditure}}(graph);}
+\DoxyCodeLine{        graph.AddEdges(edge\_set, desired\_cost\_type);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Maximum amount of paths to search}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{int} MAX\_PATHS = 2;}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{int} MAX\_PATHMEMBERS = 2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Create a Graph g, and compress it}}
+\DoxyCodeLine{        \textcolor{keyword}{auto} boostGraph = \mbox{\hyperlink{a00472_ae2106e09eb44d681fbc6c0f66a3d3ac4}{HF::Pathfinding::CreateBoostGraph}}(graph);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// We want to find the shortest paths from 0 to 3, and 0 to 4.}}
+\DoxyCodeLine{        std::array<int, 2> start\_nodes\{ 0, 0 \};}
+\DoxyCodeLine{        std::array<int, 2> end\_nodes\{ 3, 4 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Create arrays of pointers to Path. We have MAX\_PATHS total paths to assess.}}
+\DoxyCodeLine{        \textcolor{comment}{// Create arrays of pointers to PathMember. The anticipated maximum amount of "{}hops"{} per path is MAX\_PATHMEMBERS.}}
+\DoxyCodeLine{        std::array<Path*, MAX\_PATHS> out\_path;}
+\DoxyCodeLine{        std::array<PathMember*, MAX\_PATHMEMBERS> out\_path\_member;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Sizes of paths generated by CreatePaths. Sizes of 0 mean that a path was unable to be generated.}}
+\DoxyCodeLine{        \textcolor{comment}{// Should be the same as}}
+\DoxyCodeLine{        std::array<int, MAX\_PATHS> out\_sizes;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Use CreatePathsCostType, be sure to use the .c\_str() method if using a std::string for desired\_cost\_type}}
+\DoxyCodeLine{        \mbox{\hyperlink{a00456_gae1ac2805c3b86883bb88269ed3868367}{CreatePaths}}(\&graph, start\_nodes.data(), end\_nodes.data(), desired\_cost\_type.c\_str(), out\_path.data(), out\_path\_member.data(), out\_sizes.data(), MAX\_PATHS);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Use out\_path, out\_path\_member}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Resource cleanup}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& p : out\_path) \{}
+\DoxyCodeLine{            \mbox{\hyperlink{a00456_ga884a3374d971261a01ccfd3b21e288e5}{DestroyPath}}(p);}
+\DoxyCodeLine{            p = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{        \}}
+
+\end{DoxyCodeInclude}
+
+
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} TODO output}~\newline
+
+
+Definition at line \mbox{\hyperlink{a00422_source_l00070}{70}} of file \mbox{\hyperlink{a00422_source}{pathfinder\+\_\+\+C.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00203_source_l00320}{HF\+::\+Pathfinding\+::\+Create\+Boost\+Graph()}}, \mbox{\hyperlink{a00176_source_l00038}{HF\+::\+Exceptions\+::\+GENERIC\+\_\+\+ERROR}}, \mbox{\hyperlink{a00203_source_l00201}{HF\+::\+Pathfinding\+::\+Insert\+Paths\+Into\+Array()}}, \mbox{\hyperlink{a00176_source_l00050}{HF\+::\+Exceptions\+::\+NO\+\_\+\+COST}}, and \mbox{\hyperlink{a00176_source_l00032}{HF\+::\+Exceptions\+::\+OK}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00456_gae1ac2805c3b86883bb88269ed3868367_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00456_ga884a3374d971261a01ccfd3b21e288e5}\label{a00456_ga884a3374d971261a01ccfd3b21e288e5}} 
+\index{Pathfinding@{Pathfinding}!DestroyPath@{DestroyPath}}
+\index{DestroyPath@{DestroyPath}!Pathfinding@{Pathfinding}}
+\doxysubsubsection{\texorpdfstring{DestroyPath()}{DestroyPath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Destroy\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a02083}{HF\+::\+Spatial\+Structures\+::\+Path}} $\ast$}]{path\+\_\+to\+\_\+destroy }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00425}{Cinterface/pathfinder\+\_\+\+C.\+h}}$>$}
+
+
+
+Delete a path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path\+\_\+to\+\_\+destroy} & Pointer to the path to delete.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+HF\+\_\+\+STATUS\+::\+OK on return.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00455_mesh_setup}{Mesh setup}} (how to load an .OBJ file/create a mesh) 
+
+\mbox{\hyperlink{a00457_raytracer_setup}{Raytracer setup}} (how to create a BVH) 
+
+\mbox{\hyperlink{a00456_generate_graph}{Graph generation}} (how to generate a graph from a BVH) 
+
+\mbox{\hyperlink{a00456_get_all_nodes}{Get nodes from graph}} (how to retrieve nodes from a graph) 
+
+\mbox{\hyperlink{a00456_ga884a3374d971261a01ccfd3b21e288e5}{Destroy\+Path}} for information on deleting the path after usage. 
+
+\mbox{\hyperlink{a00456_nodes_teardown}{Destroy nodes from graph}} (how to destroy nodes from a graph) 
+
+\mbox{\hyperlink{a00456_graph_teardown}{Destroy graph}} (how to destroy a graph) 
+
+\mbox{\hyperlink{a00457_raytracer_teardown}{Raytracer teardown}} (how to destroy a BVH) 
+
+\mbox{\hyperlink{a00455_mesh_teardown}{Mesh teardown}} (how to destroy a mesh)
+\end{DoxySeeAlso}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Requires \#include "{}pathfinder\_C.h"{}, \#include "{}graph.h"{}, \#include "{}path.h"{}, \#include "{}path\_finder.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Create a Graph g, and compress it.}}
+\DoxyCodeLine{        \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}} g;}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(0, 1, 1);}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(0, 2, 2);}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(1, 3, 3);}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(2, 4, 1);}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(3, 4, 5);}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a41cece77d0eee98df39ecc6d3a366ec8}{Compress}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Create a boostGraph from g}}
+\DoxyCodeLine{        \textcolor{keyword}{auto} boostGraph = \mbox{\hyperlink{a00472_ae2106e09eb44d681fbc6c0f66a3d3ac4}{HF::Pathfinding::CreateBoostGraph}}(g);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \mbox{\hyperlink{a02083}{HF::SpatialStructures::Path}}* out\_path = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{        \mbox{\hyperlink{a02079}{HF::SpatialStructures::PathMember}}* out\_path\_member = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{        \textcolor{keywordtype}{int} out\_size = -\/1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \mbox{\hyperlink{a00456_ga3dc85450e989a996a3c3fcfad0a5944e}{CreatePath}}(\&g, 0, 4, \textcolor{stringliteral}{"{}\(\backslash\)0"{}}, \&out\_size, \&out\_path, \&out\_path\_member);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Use out\_path, out\_path\_member}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Remember to free resources when finished}}
+\DoxyCodeLine{        \mbox{\hyperlink{a00456_ga884a3374d971261a01ccfd3b21e288e5}{DestroyPath}}(out\_path);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// At this point, out\_path\_member has also been destroyed, so we set this to nullptr}}
+\DoxyCodeLine{        out\_path\_member = \textcolor{keyword}{nullptr};}
+
+\end{DoxyCodeInclude}
+
+
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} TODO output}~\newline
+
+
+Definition at line \mbox{\hyperlink{a00422_source_l00133}{133}} of file \mbox{\hyperlink{a00422_source}{pathfinder\+\_\+\+C.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00413_source_l00112}{Delete\+Raw\+Ptr()}}, and \mbox{\hyperlink{a00176_source_l00032}{HF\+::\+Exceptions\+::\+OK}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{a00456_ga884a3374d971261a01ccfd3b21e288e5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00456_gaac725d282f4fecd3aba1b3273c26e7e1}\label{a00456_gaac725d282f4fecd3aba1b3273c26e7e1}} 
+\index{Pathfinding@{Pathfinding}!GetPathInfo@{GetPathInfo}}
+\index{GetPathInfo@{GetPathInfo}!Pathfinding@{Pathfinding}}
+\doxysubsubsection{\texorpdfstring{GetPathInfo()}{GetPathInfo()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Get\+Path\+Info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a02083}{HF\+::\+Spatial\+Structures\+::\+Path}} $\ast$}]{p,  }\item[{\mbox{\hyperlink{a02079}{Path\+Member}} $\ast$$\ast$}]{out\+\_\+member\+\_\+ptr,  }\item[{int $\ast$}]{out\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00425}{Cinterface/pathfinder\+\_\+\+C.\+h}}$>$}
+
+
+
+Get the size of a path and a pointer to its path members. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Pointer to the path to get information from. This can handle null values. \\
+\hline
+{\em out\+\_\+member\+\_\+ptr} & Pointer to the path to get information from. Should not be null. \\
+\hline
+{\em out\+\_\+size} & The number of path members in the path. (Path\+Member count within $\ast$p)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+HF\+\_\+\+STATUS\+::\+OK on success, HF\+\_\+\+STATUS\+::\+NO\+\_\+\+PATH if the path $\ast$p is invalid
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00455_mesh_setup}{Mesh setup}} (how to load an .OBJ file/create a mesh) 
+
+\mbox{\hyperlink{a00457_raytracer_setup}{Raytracer setup}} (how to create a BVH) 
+
+\mbox{\hyperlink{a00456_generate_graph}{Graph generation}} (how to generate a graph from a BVH) 
+
+\mbox{\hyperlink{a00456_get_all_nodes}{Get nodes from graph}} (how to retrieve nodes from a graph) 
+
+\mbox{\hyperlink{a00456_ga884a3374d971261a01ccfd3b21e288e5}{Destroy\+Path}} for information on deleting the path after usage. 
+
+\mbox{\hyperlink{a00456_nodes_teardown}{Destroy nodes from graph}} (how to destroy nodes from a graph) 
+
+\mbox{\hyperlink{a00456_graph_teardown}{Destroy graph}} (how to destroy a graph) 
+
+\mbox{\hyperlink{a00457_raytracer_teardown}{Raytracer teardown}} (how to destroy a BVH) 
+
+\mbox{\hyperlink{a00455_mesh_teardown}{Mesh teardown}} (how to destroy a mesh)
+\end{DoxySeeAlso}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Requires \#include "{}pathfinder\_C.h"{}, \#include "{}graph.h"{}, \#include "{}path.h"{}, \#include "{}path\_finder.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Create a Graph g, and compress it.}}
+\DoxyCodeLine{        \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}} g;}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(0, 1, 1);}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(0, 2, 2);}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(1, 3, 3);}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(2, 4, 1);}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{addEdge}}(3, 4, 5);}
+\DoxyCodeLine{        g.\mbox{\hyperlink{a01551_a41cece77d0eee98df39ecc6d3a366ec8}{Compress}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Create a boostGraph from g}}
+\DoxyCodeLine{        \textcolor{keyword}{auto} boostGraph = \mbox{\hyperlink{a00472_ae2106e09eb44d681fbc6c0f66a3d3ac4}{HF::Pathfinding::CreateBoostGraph}}(g);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \mbox{\hyperlink{a02083}{HF::SpatialStructures::Path}}* out\_path = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{        \mbox{\hyperlink{a02079}{HF::SpatialStructures::PathMember}}* out\_path\_member = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{        \textcolor{keywordtype}{int} out\_size = -\/1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \mbox{\hyperlink{a00456_ga3dc85450e989a996a3c3fcfad0a5944e}{CreatePath}}(\&g, 0, 4, \textcolor{stringliteral}{"{}\(\backslash\)0"{}}, \&out\_size, \&out\_path, \&out\_path\_member);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Get out\_path's info, store results in out\_path\_member and out\_size}}
+\DoxyCodeLine{        \mbox{\hyperlink{a00456_gaac725d282f4fecd3aba1b3273c26e7e1}{GetPathInfo}}(out\_path, \&out\_path\_member, \&out\_size);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Remember to free resources when finished}}
+\DoxyCodeLine{        \mbox{\hyperlink{a00456_ga884a3374d971261a01ccfd3b21e288e5}{DestroyPath}}(out\_path);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// At this point, out\_path\_member has also been destroyed, so we set this to nullptr}}
+\DoxyCodeLine{        out\_path\_member = \textcolor{keyword}{nullptr};}
+
+\end{DoxyCodeInclude}
+
+
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} TODO output}~\newline
+ Get the size of a path and a pointer to its path members. 
+
+Definition at line \mbox{\hyperlink{a00422_source_l00115}{115}} of file \mbox{\hyperlink{a00422_source}{pathfinder\+\_\+\+C.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00278_source_l00056}{HF\+::\+Spatial\+Structures\+::\+Path\+::\+Get\+PMPointer()}}, \mbox{\hyperlink{a00176_source_l00049}{HF\+::\+Exceptions\+::\+NO\+\_\+\+PATH}}, \mbox{\hyperlink{a00176_source_l00032}{HF\+::\+Exceptions\+::\+OK}}, and \mbox{\hyperlink{a00278_source_l00020}{HF\+::\+Spatial\+Structures\+::\+Path\+::size()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=293pt]{a00456_gaac725d282f4fecd3aba1b3273c26e7e1_cgraph}
+\end{center}
+\end{figure}

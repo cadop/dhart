@@ -1,0 +1,77 @@
+\hypertarget{a00257}{}\doxysection{Cpp/spatialstructures/src/cost\+\_\+algorithms.h File Reference}
+\label{a00257}\index{Cpp/spatialstructures/src/cost\_algorithms.h@{Cpp/spatialstructures/src/cost\_algorithms.h}}
+
+
+Contains implementation for the \mbox{\hyperlink{a00475}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms}} namespace.  
+
+
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include \char`\"{}Constants.\+h\char`\"{}}\newline
+Include dependency graph for cost\+\_\+algorithms.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{a00258}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00259}
+\end{center}
+\end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{a00462}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{a00465}{HF\+::\+Spatial\+Structures}}
+\begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout DHARTAPI. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{a00475}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00001_a02139}{double}} \mbox{\hyperlink{a00475_ae7b446fefe0b9994859f47b85de79039}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::to\+\_\+radians}} (\mbox{\hyperlink{a00001_a02139}{double}} degrees)
+\item 
+\mbox{\hyperlink{a00001_a02139}{double}} \mbox{\hyperlink{a00475_adee2fb2573f4dbc2e5c7db153dff2694}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::to\+\_\+degrees}} (\mbox{\hyperlink{a00001_a02139}{double}} radians)
+\item 
+{\footnotesize template$<$size\+\_\+t dimension, typename float\+\_\+precision  = float$>$ }\\float\+\_\+precision \mbox{\hyperlink{a00475_a355d486f17db42f6c56411cc53f76aec}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::euclidean\+\_\+distance}} (float\+\_\+precision point\+\_\+a\mbox{[}$\,$\mbox{]}, float\+\_\+precision point\+\_\+b\mbox{[}$\,$\mbox{]})
+\item 
+{\footnotesize template$<$size\+\_\+t dimension, typename float\+\_\+precision  = float$>$ }\\float\+\_\+precision \mbox{\hyperlink{a00475_afa250ed24ee2219f6632aaebfd7bd150}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::dot\+\_\+product}} (float\+\_\+precision vec\+\_\+U\mbox{[}$\,$\mbox{]}, float\+\_\+precision vec\+\_\+V\mbox{[}$\,$\mbox{]})
+\item 
+{\footnotesize template$<$size\+\_\+t dimension, typename float\+\_\+precision  = float$>$ }\\bool \mbox{\hyperlink{a00475_a3de857e1e14eb6872146c36bef3b3fad}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::is\+\_\+perpendicular}} (float\+\_\+precision vec\+\_\+U\mbox{[}$\,$\mbox{]}, float\+\_\+precision vec\+\_\+V\mbox{[}$\,$\mbox{]})
+\item 
+{\footnotesize template$<$size\+\_\+t dimension, typename float\+\_\+precision  = float$>$ }\\std\+::vector$<$ Edge $>$ \mbox{\hyperlink{a00475_aeec6f9a28592565ad59609852e482663}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Get\+Perpendicular\+Edges}} (const Subgraph \&sg, const Node \&child\+\_\+node\+\_\+a)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{a01531}{Int\+Edge}} $>$ \mbox{\hyperlink{a00475_a51b88e596c3b5f68b7abbcbc91e30bdf}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Cross\+Slope}} (const \mbox{\hyperlink{a00465_a01543}{Subgraph}} \&sg)
+\item 
+std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{a01531}{Int\+Edge}} $>$ $>$ \mbox{\hyperlink{a00475_a6d12a3af69887cb335b490304138afc6}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Cross\+Slope}} (const \mbox{\hyperlink{a01551}{Graph}} \&g)
+\item 
+\mbox{\hyperlink{a01535}{Edge\+Set}} \mbox{\hyperlink{a00475_ac51f2e76c00356f8a6145bee865cd922}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Energy\+Expenditure}} (const \mbox{\hyperlink{a00465_a01543}{Subgraph}} \&sg)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{a01535}{Edge\+Set}} $>$ \mbox{\hyperlink{a00475_adbe5e58355a884494d6e99bf17fc5f7b}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Energy\+Expenditure}} (const \mbox{\hyperlink{a01551}{Graph}} \&g)
+\item 
+\mbox{\hyperlink{a00001_a02139}{double}} \mbox{\hyperlink{a00475_ae06eb693d0d7858d7a863fae3a6eee2c}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Slope}} (\mbox{\hyperlink{a02071}{Node}} \&parent, \mbox{\hyperlink{a02071}{Node}} \&child)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains implementation for the \mbox{\hyperlink{a00475}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms}} namespace. 
+
+Contains declarations for the \mbox{\hyperlink{a00475}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms}} namespace.
+
+\begin{DoxyAuthor}{Author}
+TBA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+03 Jul 2020 
+\end{DoxyDate}
+
+
+Definition in file \mbox{\hyperlink{a00257_source}{cost\+\_\+algorithms.\+h}}.
+

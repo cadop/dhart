@@ -1,22 +1,13 @@
 var a00203 =
 [
-    [ "HF::SpatialStructures::CSRPtrs", "a01473.html", "a01473" ],
-    [ "HF::SpatialStructures::Subgraph", "a00399.html#a01477", [
-      [ "m_edges", "a00399.html#ac1403ade5ddeb5410a523871f96e1e64", null ],
-      [ "m_parent", "a00399.html#a2f8de99f10387d075d7d69336e4d5dd7", null ]
-    ] ],
-    [ "HF::SpatialStructures::EdgeCostSet", "a01481.html", "a01481" ],
-    [ "HF::SpatialStructures::Graph", "a01485.html", "a01485" ],
-    [ "EdgeMatrix", "a00203.html#a40b235356dfcdd3f2e1adc0f3c342007", null ],
-    [ "TempMatrix", "a00203.html#aaf74b9079d1b97124b8d1e4dae2cc13c", null ],
-    [ "COST_AGGREGATE", "a00203.html#a6b23c0b2531c78f6d5049873c184f4f9", [
-      [ "SUM", "a00203.html#a6b23c0b2531c78f6d5049873c184f4f9a6970bdc2201030b9c03fbdcf3973858a", null ],
-      [ "AVERAGE", "a00203.html#a6b23c0b2531c78f6d5049873c184f4f9a16de38737a9f8366e9b2042b4e9b6290", null ],
-      [ "COUNT", "a00203.html#a6b23c0b2531c78f6d5049873c184f4f9a4905ac9d6a22bdfc1ae096094ce6248d", null ]
-    ] ],
-    [ "Direction", "a00203.html#afac7c4ef1cb1104941f4d5a27973b47e", [
-      [ "INCOMING", "a00203.html#afac7c4ef1cb1104941f4d5a27973b47eafb4081bff9f77d65456ceb00b153e4d4", null ],
-      [ "OUTGOING", "a00203.html#afac7c4ef1cb1104941f4d5a27973b47ea1741b869c82993c62163223d8fefbba4", null ],
-      [ "BOTH", "a00203.html#afac7c4ef1cb1104941f4d5a27973b47ea6328e5e3186c227a021ef2ff77e40197", null ]
-    ] ]
+    [ "HF::Pathfinding::DistPred", "a01387.html", "a01387" ],
+    [ "BuildDistanceAndPredecessor", "a00203.html#a9f6490539108da057db2486295458886", null ],
+    [ "ConstructShortestPathFromPred", "a00203.html#a322ac32effd41c99359b82df0890e34a", null ],
+    [ "ConstructShortestPathFromPred", "a00203.html#a977e4c93a977ab4e9e784d1e6fec79f4", null ],
+    [ "CreateBoostGraph", "a00203.html#ae2106e09eb44d681fbc6c0f66a3d3ac4", null ],
+    [ "FindPath", "a00203.html#a47d06b1c4bd84f4d0a7519ea0e96ff02", null ],
+    [ "FindPaths", "a00203.html#a15badb9d0a17849de7b21105605c9c91", null ],
+    [ "GenerateDistanceAndPred", "a00203.html#ab58662be8e56c333d74d60a823e810e3", null ],
+    [ "InsertAllToAllPathsIntoArray", "a00203.html#a69bd3efcc13788e7c4be43b67d6002e5", null ],
+    [ "InsertPathsIntoArray", "a00203.html#a417084c97d0672af2da7739157a9d8c0", null ]
 ];

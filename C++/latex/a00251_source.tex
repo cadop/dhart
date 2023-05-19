@@ -1,0 +1,84 @@
+\hypertarget{a00251_source}{}\doxysection{Constants.\+h}
+\label{a00251_source}\index{Cpp/spatialstructures/src/Constants.h@{Cpp/spatialstructures/src/Constants.h}}
+\mbox{\hyperlink{a00251}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00008}00008 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00009}00009 \textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00010}00010 }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00011}00011 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00462}{HF}} \{}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00012}00012 }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00021}00021     \textcolor{keyword}{namespace }SpatialStructures \{}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00022}00022 }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00030}\mbox{\hyperlink{a00465_a0140105869479399be75147c8f77e724}{00030}}         \textcolor{keyword}{constexpr} \textcolor{keywordtype}{float} \mbox{\hyperlink{a00465_a0140105869479399be75147c8f77e724}{ROUNDING\_PRECISION}} = 0.0001f; \textcolor{comment}{// Used to convert back to original value}}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00031}\mbox{\hyperlink{a00465_a8e1deca302502a6ab0e0943c292f33b6}{00031}}         \textcolor{keyword}{constexpr} \textcolor{keywordtype}{float} \mbox{\hyperlink{a00465_a8e1deca302502a6ab0e0943c292f33b6}{FLOAT\_PRECISION}} = 10000.0f;  }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00032}\mbox{\hyperlink{a00465_a78ab286d1837e1db2b8b4ce90bc9fffa}{00032}}         \textcolor{keyword}{constexpr} \textcolor{keywordtype}{float} \mbox{\hyperlink{a00465_a78ab286d1837e1db2b8b4ce90bc9fffa}{GROUND\_OFFSET}} = 0.001f; }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00043}00043         \textcolor{keyword}{template}<\textcolor{keyword}{typename} desired\_type, \textcolor{keyword}{typename} numeric\_type>}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00044}\mbox{\hyperlink{a00465_a0e25afd4cd04c2b85f5283b27e8acdef}{00044}}         \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} desired\_type \mbox{\hyperlink{a00465_a0e25afd4cd04c2b85f5283b27e8acdef}{DivideBy1}}(numeric\_type n) \{}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00045}00045             \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}desired\_type\textcolor{keyword}{>}(1) / \textcolor{keyword}{static\_cast<}desired\_type\textcolor{keyword}{>}(n);}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00046}00046         \}}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00047}00047 }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00055}00055 }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00065}00065         \textcolor{keywordtype}{float} \mbox{\hyperlink{a00465_a7055938c4b6cc98ac7d1e4409e1f63e9}{roundhf}}(\textcolor{keywordtype}{float} f, \textcolor{keywordtype}{float} p = \mbox{\hyperlink{a00465_a8e1deca302502a6ab0e0943c292f33b6}{FLOAT\_PRECISION}}, \textcolor{keywordtype}{float} r = \mbox{\hyperlink{a00465_a0140105869479399be75147c8f77e724}{ROUNDING\_PRECISION}});}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00066}00066 }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00074}00074         \textcolor{keywordtype}{float} \mbox{\hyperlink{a00465_a7819d69862372eb198ca0e74d2ecf5f0}{trunchf}}(\textcolor{keywordtype}{float} f, \textcolor{keywordtype}{float} p = 1000.0, \textcolor{keywordtype}{float} r = 0.001);}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00075}00075 }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00088}00088         \textcolor{keyword}{template} <\textcolor{keyword}{typename} numeric\_type>}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00089}\mbox{\hyperlink{a00465_a0e6690272fb70b92279b9ab082a24302}{00089}}         numeric\_type \mbox{\hyperlink{a00465_a0e6690272fb70b92279b9ab082a24302}{roundhf\_tail}}(numeric\_type f, \textcolor{keywordtype}{int} precision)}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00090}00090         \{}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00091}00091             numeric\_type r = 0; \textcolor{comment}{// final rounded value}}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00092}00092             \textcolor{keywordtype}{int} precision\_2 = precision * 10; \textcolor{comment}{// the precision one more than the one we are interested in}}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00093}00093             r = std::round(f * precision\_2);}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00094}00094             r = std::round(r * 0.1); \textcolor{comment}{// Move decimal one over and round again}}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00095}00095             r = r / precision;}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00096}00096 }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00097}00097             \textcolor{keywordflow}{return} r;}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00098}00098         \}}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00099}00099 }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00113}00113         \textcolor{keyword}{template} <\textcolor{keyword}{typename} numeric\_type>}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00114}\mbox{\hyperlink{a00465_a5db5f0307882796fcf7cdad83cb20c65}{00114}}         \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} numeric\_type \mbox{\hyperlink{a00465_a5db5f0307882796fcf7cdad83cb20c65}{roundhf\_tmp}}(}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00115}00115             numeric\_type f,}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00116}00116             numeric\_type p,}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00117}00117             numeric\_type r}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00118}00118         ) \{ \textcolor{keywordflow}{return} std::round(f * p) * r;   \}}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00119}00119 }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00132}00132         \textcolor{keyword}{template} <\textcolor{keyword}{typename} desired\_type, \textcolor{keyword}{typename} numeric\_type>}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00133}\mbox{\hyperlink{a00465_a34027bdf606bd5f03f7a473c61a3a4de}{00133}}         \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} desired\_type \mbox{\hyperlink{a00465_a5db5f0307882796fcf7cdad83cb20c65}{roundhf\_tmp}}(numeric\_type f,    numeric\_type p) \{}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00134}00134             \textcolor{keywordflow}{return} \mbox{\hyperlink{a00465_a5db5f0307882796fcf7cdad83cb20c65}{roundhf\_tmp}}(\textcolor{keyword}{static\_cast<}desired\_type\textcolor{keyword}{>}(f), DivideBy1<desired\_type>(p), \textcolor{keyword}{static\_cast<}desired\_type\textcolor{keyword}{>}(p));}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00135}00135         \}}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00136}00136         \textcolor{keyword}{template} <\textcolor{keyword}{typename} desired\_type, \textcolor{keyword}{typename} numeric\_type>}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00148}\mbox{\hyperlink{a00465_a863bb6ac51410385569635e0b0e08ee2}{00148}}         \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} desired\_type \mbox{\hyperlink{a00465_a5db5f0307882796fcf7cdad83cb20c65}{roundhf\_tmp}}(numeric\_type f) \{}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00149}00149             \textcolor{keywordflow}{return} \mbox{\hyperlink{a00465_a5db5f0307882796fcf7cdad83cb20c65}{roundhf\_tmp}}(}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00150}00150                 \textcolor{keyword}{static\_cast<}desired\_type\textcolor{keyword}{>}(f),}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00151}00151                 DivideBy1<desired\_type>(\mbox{\hyperlink{a00465_a0140105869479399be75147c8f77e724}{ROUNDING\_PRECISION}}),}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00152}00152                 \textcolor{keyword}{static\_cast<}desired\_type\textcolor{keyword}{>}(\mbox{\hyperlink{a00465_a0140105869479399be75147c8f77e724}{ROUNDING\_PRECISION}})}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00153}00153             );}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00154}00154         \}}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00155}00155 }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00169}00169         \textcolor{keyword}{template} <\textcolor{keyword}{typename} numeric\_type>}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00170}\mbox{\hyperlink{a00465_ab374c207312422f0543df4ea73f8bc85}{00170}}         \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} numeric\_type \mbox{\hyperlink{a00465_ab374c207312422f0543df4ea73f8bc85}{trunchf\_tmp}}(}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00171}00171             numeric\_type f,}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00172}00172             numeric\_type p,}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00173}00173             numeric\_type r}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00174}00174         ) \{ \textcolor{keywordflow}{return} std::trunc(f * p) * r; \}}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00175}00175         }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00188}00188         \textcolor{keyword}{template} <\textcolor{keyword}{typename} desired\_type, \textcolor{keyword}{typename} numeric\_type>}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00189}\mbox{\hyperlink{a00465_ad37544fd332717ce6a1d310c71e06a3d}{00189}}         \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} desired\_type \mbox{\hyperlink{a00465_ab374c207312422f0543df4ea73f8bc85}{trunchf\_tmp}}(numeric\_type f, numeric\_type p) \{}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00190}00190             \textcolor{keywordflow}{return} \mbox{\hyperlink{a00465_ab374c207312422f0543df4ea73f8bc85}{trunchf\_tmp}}(\textcolor{keyword}{static\_cast<}desired\_type\textcolor{keyword}{>}(f), DivideBy1<desired\_type>(p), \textcolor{keyword}{static\_cast<}desired\_type\textcolor{keyword}{>}(p));}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00191}00191         \}}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00203}00203         \textcolor{keyword}{template} <\textcolor{keyword}{typename} desired\_type, \textcolor{keyword}{typename} numeric\_type>}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00204}\mbox{\hyperlink{a00465_a4f738c546072f01f11a3b9f11f949291}{00204}}         \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} desired\_type \mbox{\hyperlink{a00465_ab374c207312422f0543df4ea73f8bc85}{trunchf\_tmp}}(numeric\_type f) \{}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00205}00205             \textcolor{keywordflow}{return} \mbox{\hyperlink{a00465_ab374c207312422f0543df4ea73f8bc85}{trunchf\_tmp}}(}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00206}00206                 \textcolor{keyword}{static\_cast<}desired\_type\textcolor{keyword}{>}(f),}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00207}00207                 DivideBy1<desired\_type>(\mbox{\hyperlink{a00465_a0140105869479399be75147c8f77e724}{ROUNDING\_PRECISION}}),}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00208}00208                 \textcolor{keyword}{static\_cast<}desired\_type\textcolor{keyword}{>}(\mbox{\hyperlink{a00465_a0140105869479399be75147c8f77e724}{ROUNDING\_PRECISION}})}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00209}00209             );}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00210}00210         \}}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00211}00211 }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00212}00212 }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00213}00213 }
+\DoxyCodeLine{\Hypertarget{a00251_source_l00214}00214     \}}
+\DoxyCodeLine{\Hypertarget{a00251_source_l00215}00215 \}}
+
+\end{DoxyCode}

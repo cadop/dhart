@@ -1,0 +1,222 @@
+\hypertarget{a01423}{}\doxysection{nanort\+::Stack\+Allocator\texorpdfstring{$<$}{<} T, stack\+\_\+capacity \texorpdfstring{$>$}{>} Class Template Reference}
+\label{a01423}\index{nanort::StackAllocator$<$ T, stack\_capacity $>$@{nanort::StackAllocator$<$ T, stack\_capacity $>$}}
+
+
+{\ttfamily \#include $<$nanort.\+h$>$}
+
+
+
+Inheritance diagram for nanort\+::Stack\+Allocator\texorpdfstring{$<$}{<} T, stack\+\_\+capacity \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=193pt]{a01422}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for nanort\+::Stack\+Allocator\texorpdfstring{$<$}{<} T, stack\+\_\+capacity \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01421}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a01423_a01431}{rebind}}
+\item 
+struct \mbox{\hyperlink{a01427}{Source}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::allocator$<$ T $>$\+::pointer \mbox{\hyperlink{a01423_a6397373387f6be6e360ce62d29cd97fa}{pointer}}
+\item 
+typedef std\+::allocator$<$ T $>$\+::size\+\_\+type \mbox{\hyperlink{a01423_a19e16d250851f2e0cc2b6bf1758ca4e5}{size\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01423_abb6fcf8f97b38ce41e00019887efcbeb}{Stack\+Allocator}} (const \mbox{\hyperlink{a01423}{Stack\+Allocator}}$<$ T, stack\+\_\+capacity $>$ \&rhs)
+\item 
+{\footnotesize template$<$typename U , size\+\_\+t other\+\_\+capacity$>$ }\\\mbox{\hyperlink{a01423_ae41a8dc7b8467e183cb2755ecc61df30}{Stack\+Allocator}} (const \mbox{\hyperlink{a01423}{Stack\+Allocator}}$<$ U, other\+\_\+capacity $>$ \&other)
+\item 
+\mbox{\hyperlink{a01423_ae1227fcf2c34e5516b580a40178d4a66}{Stack\+Allocator}} (\mbox{\hyperlink{a01427}{Source}} $\ast$source)
+\item 
+\mbox{\hyperlink{a01423_a6397373387f6be6e360ce62d29cd97fa}{pointer}} \mbox{\hyperlink{a01423_a5e0ce428678fdd1f7e29856b1d2ef0e5}{allocate}} (\mbox{\hyperlink{a01423_a19e16d250851f2e0cc2b6bf1758ca4e5}{size\+\_\+type}} n, void $\ast$hint=0)
+\item 
+void \mbox{\hyperlink{a01423_ab75f6481223b08774332f16eee4747b9}{deallocate}} (\mbox{\hyperlink{a01423_a6397373387f6be6e360ce62d29cd97fa}{pointer}} p, \mbox{\hyperlink{a01423_a19e16d250851f2e0cc2b6bf1758ca4e5}{size\+\_\+type}} n)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01427}{Source}} $\ast$ \mbox{\hyperlink{a01423_ad719f77abb3cff5d39872840de127cf0}{source\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T, size\+\_\+t stack\+\_\+capacity$>$\newline
+class nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$}
+
+
+Definition at line \mbox{\hyperlink{a00227_source_l00138}{138}} of file \mbox{\hyperlink{a00227_source}{nanort.\+h}}.
+
+
+
+\doxysubsection{Class Documentation}
+\index{nanort::StackAllocator::rebind@{nanort::StackAllocator::rebind}}\label{a01431}
+\Hypertarget{a01423_a01431}
+\doxysubsubsection{struct nanort\+::Stack\+Allocator\+::rebind}
+\subsubsection*{template$<$typename T, size\+\_\+t stack\+\_\+capacity$>$\newline
+template$<$typename U$>$\newline
+struct nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::rebind$<$ U $>$}
+
+
+Definition at line \mbox{\hyperlink{a00227_source_l00174}{174}} of file \mbox{\hyperlink{a00227_source}{nanort.\+h}}.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a01423_a698baf091fd2fa48069785c07d96a0bc}\label{a01423_a698baf091fd2fa48069785c07d96a0bc}} 
+typedef \mbox{\hyperlink{a01423}{StackAllocator}}$<$ U, stack\_capacity $>$&
+other&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{a01423_a6397373387f6be6e360ce62d29cd97fa}\label{a01423_a6397373387f6be6e360ce62d29cd97fa}} 
+\index{nanort::StackAllocator$<$ T, stack\_capacity $>$@{nanort::StackAllocator$<$ T, stack\_capacity $>$}!pointer@{pointer}}
+\index{pointer@{pointer}!nanort::StackAllocator$<$ T, stack\_capacity $>$@{nanort::StackAllocator$<$ T, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{pointer}{pointer}}
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t stack\+\_\+capacity$>$ \\
+typedef std\+::allocator$<$T$>$\+::pointer \mbox{\hyperlink{a01423}{nanort\+::\+Stack\+Allocator}}$<$ T, stack\+\_\+capacity $>$\+::pointer}
+
+
+
+Definition at line \mbox{\hyperlink{a00227_source_l00140}{140}} of file \mbox{\hyperlink{a00227_source}{nanort.\+h}}.
+
+\mbox{\Hypertarget{a01423_a19e16d250851f2e0cc2b6bf1758ca4e5}\label{a01423_a19e16d250851f2e0cc2b6bf1758ca4e5}} 
+\index{nanort::StackAllocator$<$ T, stack\_capacity $>$@{nanort::StackAllocator$<$ T, stack\_capacity $>$}!size\_type@{size\_type}}
+\index{size\_type@{size\_type}!nanort::StackAllocator$<$ T, stack\_capacity $>$@{nanort::StackAllocator$<$ T, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{size\_type}{size\_type}}
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t stack\+\_\+capacity$>$ \\
+typedef std\+::allocator$<$T$>$\+::size\+\_\+type \mbox{\hyperlink{a01423}{nanort\+::\+Stack\+Allocator}}$<$ T, stack\+\_\+capacity $>$\+::size\+\_\+type}
+
+
+
+Definition at line \mbox{\hyperlink{a00227_source_l00141}{141}} of file \mbox{\hyperlink{a00227_source}{nanort.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01423_abb6fcf8f97b38ce41e00019887efcbeb}\label{a01423_abb6fcf8f97b38ce41e00019887efcbeb}} 
+\index{nanort::StackAllocator$<$ T, stack\_capacity $>$@{nanort::StackAllocator$<$ T, stack\_capacity $>$}!StackAllocator@{StackAllocator}}
+\index{StackAllocator@{StackAllocator}!nanort::StackAllocator$<$ T, stack\_capacity $>$@{nanort::StackAllocator$<$ T, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{StackAllocator()}{StackAllocator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t stack\+\_\+capacity$>$ \\
+\mbox{\hyperlink{a01423}{nanort\+::\+Stack\+Allocator}}$<$ T, stack\+\_\+capacity $>$\+::\+Stack\+Allocator (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01423}{Stack\+Allocator}}$<$ T, stack\+\_\+capacity $>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00227_source_l00179}{179}} of file \mbox{\hyperlink{a00227_source}{nanort.\+h}}.
+
+\mbox{\Hypertarget{a01423_ae41a8dc7b8467e183cb2755ecc61df30}\label{a01423_ae41a8dc7b8467e183cb2755ecc61df30}} 
+\index{nanort::StackAllocator$<$ T, stack\_capacity $>$@{nanort::StackAllocator$<$ T, stack\_capacity $>$}!StackAllocator@{StackAllocator}}
+\index{StackAllocator@{StackAllocator}!nanort::StackAllocator$<$ T, stack\_capacity $>$@{nanort::StackAllocator$<$ T, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{StackAllocator()}{StackAllocator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t stack\+\_\+capacity$>$ \\
+template$<$typename U , size\+\_\+t other\+\_\+capacity$>$ \\
+\mbox{\hyperlink{a01423}{nanort\+::\+Stack\+Allocator}}$<$ T, stack\+\_\+capacity $>$\+::\+Stack\+Allocator (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01423}{Stack\+Allocator}}$<$ U, other\+\_\+capacity $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00227_source_l00192}{192}} of file \mbox{\hyperlink{a00227_source}{nanort.\+h}}.
+
+\mbox{\Hypertarget{a01423_ae1227fcf2c34e5516b580a40178d4a66}\label{a01423_ae1227fcf2c34e5516b580a40178d4a66}} 
+\index{nanort::StackAllocator$<$ T, stack\_capacity $>$@{nanort::StackAllocator$<$ T, stack\_capacity $>$}!StackAllocator@{StackAllocator}}
+\index{StackAllocator@{StackAllocator}!nanort::StackAllocator$<$ T, stack\_capacity $>$@{nanort::StackAllocator$<$ T, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{StackAllocator()}{StackAllocator()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t stack\+\_\+capacity$>$ \\
+\mbox{\hyperlink{a01423}{nanort\+::\+Stack\+Allocator}}$<$ T, stack\+\_\+capacity $>$\+::\+Stack\+Allocator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01427}{Source}} $\ast$}]{source }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00227_source_l00197}{197}} of file \mbox{\hyperlink{a00227_source}{nanort.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01423_a5e0ce428678fdd1f7e29856b1d2ef0e5}\label{a01423_a5e0ce428678fdd1f7e29856b1d2ef0e5}} 
+\index{nanort::StackAllocator$<$ T, stack\_capacity $>$@{nanort::StackAllocator$<$ T, stack\_capacity $>$}!allocate@{allocate}}
+\index{allocate@{allocate}!nanort::StackAllocator$<$ T, stack\_capacity $>$@{nanort::StackAllocator$<$ T, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{allocate()}{allocate()}}
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t stack\+\_\+capacity$>$ \\
+\mbox{\hyperlink{a01423_a6397373387f6be6e360ce62d29cd97fa}{pointer}} \mbox{\hyperlink{a01423}{nanort\+::\+Stack\+Allocator}}$<$ T, stack\+\_\+capacity $>$\+::allocate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01423_a19e16d250851f2e0cc2b6bf1758ca4e5}{size\+\_\+type}}}]{n,  }\item[{void $\ast$}]{hint = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00227_source_l00202}{202}} of file \mbox{\hyperlink{a00227_source}{nanort.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00227_source_l00223}{nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::source\+\_\+}}, \mbox{\hyperlink{a00227_source_l00150}{nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::\+Source\+::stack\+\_\+buffer()}}, and \mbox{\hyperlink{a00227_source_l00169}{nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::\+Source\+::used\+\_\+stack\+\_\+buffer\+\_\+}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{a01423_a5e0ce428678fdd1f7e29856b1d2ef0e5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01423_ab75f6481223b08774332f16eee4747b9}\label{a01423_ab75f6481223b08774332f16eee4747b9}} 
+\index{nanort::StackAllocator$<$ T, stack\_capacity $>$@{nanort::StackAllocator$<$ T, stack\_capacity $>$}!deallocate@{deallocate}}
+\index{deallocate@{deallocate}!nanort::StackAllocator$<$ T, stack\_capacity $>$@{nanort::StackAllocator$<$ T, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{deallocate()}{deallocate()}}
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t stack\+\_\+capacity$>$ \\
+void \mbox{\hyperlink{a01423}{nanort\+::\+Stack\+Allocator}}$<$ T, stack\+\_\+capacity $>$\+::deallocate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01423_a6397373387f6be6e360ce62d29cd97fa}{pointer}}}]{p,  }\item[{\mbox{\hyperlink{a01423_a19e16d250851f2e0cc2b6bf1758ca4e5}{size\+\_\+type}}}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00227_source_l00215}{215}} of file \mbox{\hyperlink{a00227_source}{nanort.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00227_source_l00223}{nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::source\+\_\+}}, \mbox{\hyperlink{a00227_source_l00150}{nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::\+Source\+::stack\+\_\+buffer()}}, and \mbox{\hyperlink{a00227_source_l00169}{nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::\+Source\+::used\+\_\+stack\+\_\+buffer\+\_\+}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{a01423_ab75f6481223b08774332f16eee4747b9_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01423_ad719f77abb3cff5d39872840de127cf0}\label{a01423_ad719f77abb3cff5d39872840de127cf0}} 
+\index{nanort::StackAllocator$<$ T, stack\_capacity $>$@{nanort::StackAllocator$<$ T, stack\_capacity $>$}!source\_@{source\_}}
+\index{source\_@{source\_}!nanort::StackAllocator$<$ T, stack\_capacity $>$@{nanort::StackAllocator$<$ T, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{source\_}{source\_}}
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t stack\+\_\+capacity$>$ \\
+\mbox{\hyperlink{a01427}{Source}}$\ast$ \mbox{\hyperlink{a01423}{nanort\+::\+Stack\+Allocator}}$<$ T, stack\+\_\+capacity $>$\+::source\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00227_source_l00223}{223}} of file \mbox{\hyperlink{a00227_source}{nanort.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00227_source_l00202}{nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::allocate()}}, and \mbox{\hyperlink{a00227_source_l00215}{nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::deallocate()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/raytracer/src/\mbox{\hyperlink{a00227}{nanort.\+h}}\end{DoxyCompactItemize}

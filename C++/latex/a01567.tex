@@ -1,0 +1,153 @@
+\hypertarget{a01567}{}\doxysection{nlohmann\+::detail\+::invalid\+\_\+iterator Class Reference}
+\label{a01567}\index{nlohmann::detail::invalid\_iterator@{nlohmann::detail::invalid\_iterator}}
+
+
+exception indicating errors with iterators  
+
+
+
+
+{\ttfamily \#include $<$json.\+hpp$>$}
+
+
+
+Inheritance diagram for nlohmann\+::detail\+::invalid\+\_\+iterator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=215pt]{a01566}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for nlohmann\+::detail\+::invalid\+\_\+iterator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=274pt]{a01565}
+\end{center}
+\end{figure}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{a01567}{invalid\+\_\+iterator}} \mbox{\hyperlink{a01567_a4e849260a3caa1b288c7e619130c6c09}{create}} (int id\+\_\+, const std\+::string \&what\+\_\+arg)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01567_adf4a6697420f3bddb4addfc0b98f6ee2}{invalid\+\_\+iterator}} (int id\+\_\+, const char $\ast$what\+\_\+arg)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+exception indicating errors with iterators 
+
+This exception is thrown if iterators passed to a library function do not match the expected semantics.
+
+Exceptions have ids 2xx.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ name / id   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ example message   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ description    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ name / id   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ example message   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ description    }\\\cline{1-3}
+\endhead
+json.\+exception.\+invalid\+\_\+iterator.\+201   &iterators are not compatible   &The iterators passed to constructor basic\+\_\+json(\+Input\+IT first, Input\+IT last) are not compatible, meaning they do not belong to the same container. Therefore, the range ({\itshape first}, {\itshape last}) is invalid.    \\\cline{1-3}
+json.\+exception.\+invalid\+\_\+iterator.\+202   &iterator does not fit current value   &In an erase or insert function, the passed iterator {\itshape pos} does not belong to the JSON value for which the function was called. It hence does not define a valid position for the deletion/insertion.    \\\cline{1-3}
+json.\+exception.\+invalid\+\_\+iterator.\+203   &iterators do not fit current value   &Either iterator passed to function erase(\+Iterator\+Type first, Iterator\+Type last) does not belong to the JSON value from which values shall be erased. It hence does not define a valid range to delete values from.    \\\cline{1-3}
+json.\+exception.\+invalid\+\_\+iterator.\+204   &iterators out of range   &When an iterator range for a primitive type (number, boolean, or string) is passed to a constructor or an erase function, this range has to be exactly (begin(), end()), because this is the only way the single stored value is expressed. All other ranges are invalid.    \\\cline{1-3}
+json.\+exception.\+invalid\+\_\+iterator.\+205   &iterator out of range   &When an iterator for a primitive type (number, boolean, or string) is passed to an erase function, the iterator has to be the begin() iterator, because it is the only way to address the stored value. All other iterators are invalid.    \\\cline{1-3}
+json.\+exception.\+invalid\+\_\+iterator.\+206   &cannot construct with iterators from null   &The iterators passed to constructor basic\+\_\+json(\+Input\+IT first, Input\+IT last) belong to a JSON null value and hence to not define a valid range.    \\\cline{1-3}
+json.\+exception.\+invalid\+\_\+iterator.\+207   &cannot use \mbox{\hyperlink{a00477_a2fb6dae6578e06ae73ca0d7cc8512b1aa3c6e0b8a9c15224a8228b9a98ca1531d}{key()}} for non-\/object iterators   &The \mbox{\hyperlink{a00477_a2fb6dae6578e06ae73ca0d7cc8512b1aa3c6e0b8a9c15224a8228b9a98ca1531d}{key()}} member function can only be used on iterators belonging to a JSON object, because other types do not have a concept of a key.    \\\cline{1-3}
+json.\+exception.\+invalid\+\_\+iterator.\+208   &cannot use operator\mbox{[}\mbox{]} for object iterators   &The operator\mbox{[}\mbox{]} to specify a concrete offset cannot be used on iterators belonging to a JSON object, because JSON objects are unordered.    \\\cline{1-3}
+json.\+exception.\+invalid\+\_\+iterator.\+209   &cannot use offsets with object iterators   &The offset operators (+, -\/, +=, -\/=) cannot be used on iterators belonging to a JSON object, because JSON objects are unordered.    \\\cline{1-3}
+json.\+exception.\+invalid\+\_\+iterator.\+210   &iterators do not fit   &The iterator range passed to the insert function are not compatible, meaning they do not belong to the same container. Therefore, the range ({\itshape first}, {\itshape last}) is invalid.    \\\cline{1-3}
+json.\+exception.\+invalid\+\_\+iterator.\+211   &passed iterators may not belong to container   &The iterator range passed to the insert function must not be a subrange of the container to insert to.    \\\cline{1-3}
+json.\+exception.\+invalid\+\_\+iterator.\+212   &cannot compare iterators of different containers   &When two iterators are compared, they must belong to the same container.    \\\cline{1-3}
+json.\+exception.\+invalid\+\_\+iterator.\+213   &cannot compare order of object iterators   &The order of object iterators cannot be compared, because JSON objects are unordered.    \\\cline{1-3}
+json.\+exception.\+invalid\+\_\+iterator.\+214   &cannot get value   &Cannot get value for iterator\+: Either the iterator belongs to a null value or it is an iterator to a primitive type (number, boolean, or string), but the iterator is different to begin().   \\\cline{1-3}
+\end{longtabu}
+
+
+@liveexample\{The following code shows how an {\ttfamily \mbox{\hyperlink{a01567}{invalid\+\_\+iterator}}} exception can be caught.,\mbox{\hyperlink{a01567}{invalid\+\_\+iterator}}\}
+
+\begin{DoxySeeAlso}{See also}
+-\/ \mbox{\hyperlink{a01559}{exception}} for the base class of the library exceptions 
+
+-\/ \mbox{\hyperlink{a01563}{parse\+\_\+error}} for exceptions indicating a parse \mbox{\hyperlink{a00477_a58bb1ef1a9ad287a9cfaf1855784d9acacb5e100e5a9a3e7f6d1fd97512215282}{error}} 
+
+-\/ \mbox{\hyperlink{a01571}{type\+\_\+error}} for exceptions indicating executing a member function with a wrong type 
+
+-\/ \mbox{\hyperlink{a01575}{out\+\_\+of\+\_\+range}} for exceptions indicating access out of the defined range 
+
+-\/ \mbox{\hyperlink{a01579}{other\+\_\+error}} for exceptions indicating other library errors
+\end{DoxySeeAlso}
+\begin{DoxySince}{Since}
+version 3.\+0.\+0 
+\end{DoxySince}
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l02510}{2510}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01567_adf4a6697420f3bddb4addfc0b98f6ee2}\label{a01567_adf4a6697420f3bddb4addfc0b98f6ee2}} 
+\index{nlohmann::detail::invalid\_iterator@{nlohmann::detail::invalid\_iterator}!invalid\_iterator@{invalid\_iterator}}
+\index{invalid\_iterator@{invalid\_iterator}!nlohmann::detail::invalid\_iterator@{nlohmann::detail::invalid\_iterator}}
+\doxysubsubsection{\texorpdfstring{invalid\_iterator()}{invalid\_iterator()}}
+{\footnotesize\ttfamily nlohmann\+::detail\+::invalid\+\_\+iterator\+::invalid\+\_\+iterator (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+,  }\item[{const char $\ast$}]{what\+\_\+arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l02521}{2521}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01567_a4e849260a3caa1b288c7e619130c6c09}\label{a01567_a4e849260a3caa1b288c7e619130c6c09}} 
+\index{nlohmann::detail::invalid\_iterator@{nlohmann::detail::invalid\_iterator}!create@{create}}
+\index{create@{create}!nlohmann::detail::invalid\_iterator@{nlohmann::detail::invalid\_iterator}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{a01567}{invalid\+\_\+iterator}} nlohmann\+::detail\+::invalid\+\_\+iterator\+::create (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+,  }\item[{const std\+::string \&}]{what\+\_\+arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l02513}{2513}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l02369}{nlohmann\+::detail\+::exception\+::name()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00272_source_l18406}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::basic\+\_\+json()}}, \mbox{\hyperlink{a00272_source_l20516}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::erase()}}, \mbox{\hyperlink{a00272_source_l22022}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::insert()}}, \mbox{\hyperlink{a00272_source_l11378}{nlohmann\+::detail\+::iter\+\_\+impl$<$ Basic\+Json\+Type $>$\+::key()}}, \mbox{\hyperlink{a00272_source_l11008}{nlohmann\+::detail\+::iter\+\_\+impl$<$ Basic\+Json\+Type $>$\+::operator$\ast$()}}, \mbox{\hyperlink{a00272_source_l11255}{nlohmann\+::detail\+::iter\+\_\+impl$<$ Basic\+Json\+Type $>$\+::operator+=()}}, \mbox{\hyperlink{a00272_source_l11326}{nlohmann\+::detail\+::iter\+\_\+impl$<$ Basic\+Json\+Type $>$\+::operator-\/()}}, \mbox{\hyperlink{a00272_source_l11045}{nlohmann\+::detail\+::iter\+\_\+impl$<$ Basic\+Json\+Type $>$\+::operator-\/$>$()}}, \mbox{\hyperlink{a00272_source_l11201}{nlohmann\+::detail\+::iter\+\_\+impl$<$ Basic\+Json\+Type $>$\+::operator$<$()}}, \mbox{\hyperlink{a00272_source_l11165}{nlohmann\+::detail\+::iter\+\_\+impl$<$ Basic\+Json\+Type $>$\+::operator==()}}, \mbox{\hyperlink{a00272_source_l11347}{nlohmann\+::detail\+::iter\+\_\+impl$<$ Basic\+Json\+Type $>$\+::operator\mbox{[}$\,$\mbox{]}()}}, and \mbox{\hyperlink{a00272_source_l22308}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::update()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01567_a4e849260a3caa1b288c7e619130c6c09_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01567_a4e849260a3caa1b288c7e619130c6c09_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00272}{json.\+hpp}}\end{DoxyCompactItemize}

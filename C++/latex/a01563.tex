@@ -1,0 +1,256 @@
+\hypertarget{a01563}{}\doxysection{nlohmann\+::detail\+::parse\+\_\+error Class Reference}
+\label{a01563}\index{nlohmann::detail::parse\_error@{nlohmann::detail::parse\_error}}
+
+
+exception indicating a parse error  
+
+
+
+
+{\ttfamily \#include $<$json.\+hpp$>$}
+
+
+
+Inheritance diagram for nlohmann\+::detail\+::parse\+\_\+error\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=215pt]{a01562}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for nlohmann\+::detail\+::parse\+\_\+error\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=309pt]{a01561}
+\end{center}
+\end{figure}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{a01563}{parse\+\_\+error}} \mbox{\hyperlink{a01563_a137ea4d27de45d8a844fd13451d40f3d}{create}} (int id\+\_\+, const \mbox{\hyperlink{a01555}{position\+\_\+t}} \&pos, const std\+::string \&what\+\_\+arg)
+\begin{DoxyCompactList}\small\item\em create a parse error exception \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{a01563}{parse\+\_\+error}} \mbox{\hyperlink{a01563_a9fd60ad6bce80fd99686ad332faefd37}{create}} (int id\+\_\+, std\+::size\+\_\+t byte\+\_\+, const std\+::string \&what\+\_\+arg)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::size\+\_\+t \mbox{\hyperlink{a01563_a9505aaa1ca943be927eec7cc579592ff}{byte}}
+\begin{DoxyCompactList}\small\item\em byte index of the parse error \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01563_a0ea816ea3521d7109407948cb1b850f7}{parse\+\_\+error}} (int id\+\_\+, std\+::size\+\_\+t byte\+\_\+, const char $\ast$what\+\_\+arg)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \mbox{\hyperlink{a01563_aefe74adeaa48781464ba2fd2ec63d221}{position\+\_\+string}} (const \mbox{\hyperlink{a01555}{position\+\_\+t}} \&pos)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+exception indicating a parse error 
+
+This exception is thrown by the library when a parse error occurs. Parse errors can occur during the deserialization of JSON text, CBOR, Message\+Pack, as well as when using JSON Patch.
+
+Member {\itshape byte} holds the byte index of the last read character in the input file.
+
+Exceptions have ids 1xx.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ name / id   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ example message   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ description    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ name / id   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ example message   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ description    }\\\cline{1-3}
+\endhead
+json.\+exception.\+parse\+\_\+error.\+101   &parse error at 2\+: unexpected end of input; expected string literal   &This error indicates a syntax error while deserializing a JSON text. The error message describes that an unexpected token (character) was encountered, and the member {\itshape byte} indicates the error position.    \\\cline{1-3}
+json.\+exception.\+parse\+\_\+error.\+102   &parse error at 14\+: missing or wrong low surrogate   &JSON uses the {\ttfamily \textbackslash{}uxxxx} format to describe Unicode characters. Code points above above 0x\+FFFF are split into two {\ttfamily \textbackslash{}uxxxx} entries (\char`\"{}surrogate pairs\char`\"{}). This error indicates that the surrogate pair is incomplete or contains an invalid code point.    \\\cline{1-3}
+json.\+exception.\+parse\+\_\+error.\+103   &parse error\+: code points above 0x10\+FFFF are invalid   &Unicode supports code points up to 0x10\+FFFF. Code points above 0x10\+FFFF are invalid.    \\\cline{1-3}
+json.\+exception.\+parse\+\_\+error.\+104   &parse error\+: JSON patch must be an array of objects   &\href{https://tools.ietf.org/html/rfc6902}{\texttt{ RFC 6902}} requires a JSON Patch document to be a JSON document that represents an array of objects.    \\\cline{1-3}
+json.\+exception.\+parse\+\_\+error.\+105   &parse error\+: operation must have string member \textquotesingle{}op\textquotesingle{}   &An operation of a JSON Patch document must contain exactly one \char`\"{}op\char`\"{} member, whose value indicates the operation to perform. Its value must be one of \char`\"{}add\char`\"{}, \char`\"{}remove\char`\"{}, \char`\"{}replace\char`\"{}, \char`\"{}move\char`\"{}, \char`\"{}copy\char`\"{}, or \char`\"{}test\char`\"{}; other values are errors.    \\\cline{1-3}
+json.\+exception.\+parse\+\_\+error.\+106   &parse error\+: array index \textquotesingle{}01\textquotesingle{} must not begin with \textquotesingle{}0\textquotesingle{}   &An array index in a JSON Pointer (\href{https://tools.ietf.org/html/rfc6901}{\texttt{ RFC 6901}}) may be {\ttfamily 0} or any number without a leading {\ttfamily 0}.    \\\cline{1-3}
+json.\+exception.\+parse\+\_\+error.\+107   &parse error\+: JSON pointer must be empty or begin with \textquotesingle{}/\textquotesingle{} -\/ was\+: \textquotesingle{}foo\textquotesingle{}   &A JSON Pointer must be a Unicode string containing a sequence of zero or more reference tokens, each prefixed by a {\ttfamily /} character.    \\\cline{1-3}
+json.\+exception.\+parse\+\_\+error.\+108   &parse error\+: escape character \textquotesingle{}$\sim$\textquotesingle{} must be followed with \textquotesingle{}0\textquotesingle{} or \textquotesingle{}1\textquotesingle{}   &In a JSON Pointer, only {\ttfamily $\sim$0} and {\ttfamily $\sim$1} are valid escape sequences.    \\\cline{1-3}
+json.\+exception.\+parse\+\_\+error.\+109   &parse error\+: array index \textquotesingle{}one\textquotesingle{} is not a number   &A JSON Pointer array index must be a number.    \\\cline{1-3}
+json.\+exception.\+parse\+\_\+error.\+110   &parse error at 1\+: cannot read 2 bytes from vector   &When parsing CBOR or Message\+Pack, the byte vector ends before the complete value has been read.    \\\cline{1-3}
+json.\+exception.\+parse\+\_\+error.\+112   &parse error at 1\+: error reading CBOR; last byte\+: 0x\+F8   &Not all types of CBOR or Message\+Pack are supported. This exception occurs if an unsupported byte was read.    \\\cline{1-3}
+json.\+exception.\+parse\+\_\+error.\+113   &parse error at 2\+: expected a CBOR string; last byte\+: 0x98   &While parsing a map key, a value that is not a string has been read.    \\\cline{1-3}
+json.\+exception.\+parse\+\_\+error.\+114   &parse error\+: Unsupported BSON record type 0x0F   &The parsing of the corresponding BSON record type is not implemented (yet).    \\\cline{1-3}
+json.\+exception.\+parse\+\_\+error.\+115   &parse error at byte 5\+: syntax error while parsing UBJSON high-\/precision number\+: invalid number text\+: 1A   &A UBJSON high-\/precision number could not be parsed.   \\\cline{1-3}
+\end{longtabu}
+
+
+\begin{DoxyNote}{Note}
+For an input with n bytes, 1 is the index of the first character and n+1 is the index of the terminating null byte or the end of file. This also holds true when reading a byte vector (CBOR or Message\+Pack).
+\end{DoxyNote}
+@liveexample\{The following code shows how a {\ttfamily \mbox{\hyperlink{a01563}{parse\+\_\+error}}} exception can be caught.,\mbox{\hyperlink{a01563}{parse\+\_\+error}}\}
+
+\begin{DoxySeeAlso}{See also}
+-\/ \mbox{\hyperlink{a01559}{exception}} for the base class of the library exceptions 
+
+-\/ \mbox{\hyperlink{a01567}{invalid\+\_\+iterator}} for exceptions indicating errors with iterators 
+
+-\/ \mbox{\hyperlink{a01571}{type\+\_\+error}} for exceptions indicating executing a member function with a wrong type 
+
+-\/ \mbox{\hyperlink{a01575}{out\+\_\+of\+\_\+range}} for exceptions indicating access out of the defined range 
+
+-\/ \mbox{\hyperlink{a01579}{other\+\_\+error}} for exceptions indicating other library errors
+\end{DoxySeeAlso}
+\begin{DoxySince}{Since}
+version 3.\+0.\+0 
+\end{DoxySince}
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l02424}{2424}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01563_a0ea816ea3521d7109407948cb1b850f7}\label{a01563_a0ea816ea3521d7109407948cb1b850f7}} 
+\index{nlohmann::detail::parse\_error@{nlohmann::detail::parse\_error}!parse\_error@{parse\_error}}
+\index{parse\_error@{parse\_error}!nlohmann::detail::parse\_error@{nlohmann::detail::parse\_error}}
+\doxysubsubsection{\texorpdfstring{parse\_error()}{parse\_error()}}
+{\footnotesize\ttfamily nlohmann\+::detail\+::parse\+\_\+error\+::parse\+\_\+error (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+,  }\item[{std\+::size\+\_\+t}]{byte\+\_\+,  }\item[{const char $\ast$}]{what\+\_\+arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l02463}{2463}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01563_a137ea4d27de45d8a844fd13451d40f3d}\label{a01563_a137ea4d27de45d8a844fd13451d40f3d}} 
+\index{nlohmann::detail::parse\_error@{nlohmann::detail::parse\_error}!create@{create}}
+\index{create@{create}!nlohmann::detail::parse\_error@{nlohmann::detail::parse\_error}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{a01563}{parse\+\_\+error}} nlohmann\+::detail\+::parse\+\_\+error\+::create (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+,  }\item[{const \mbox{\hyperlink{a01555}{position\+\_\+t}} \&}]{pos,  }\item[{const std\+::string \&}]{what\+\_\+arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+create a parse error exception 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em id\+\_\+} & the id of the exception \\
+\hline
+\mbox{\texttt{ in}}  & {\em pos} & the position where the error occurred (or with chars\+\_\+read\+\_\+total=0 if the position cannot be determined) \\
+\hline
+\mbox{\texttt{ in}}  & {\em what\+\_\+arg} & the explanatory string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{a01563}{parse\+\_\+error}} object 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l02436}{2436}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l00089}{nlohmann\+::detail\+::position\+\_\+t\+::chars\+\_\+read\+\_\+total}}, \mbox{\hyperlink{a00272_source_l02369}{nlohmann\+::detail\+::exception\+::name()}}, and \mbox{\hyperlink{a00272_source_l02466}{position\+\_\+string()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00272_source_l11869}{nlohmann\+::json\+\_\+pointer$<$ Basic\+Json\+Type $>$\+::array\+\_\+index()}}, \mbox{\hyperlink{a00272_source_l07870}{nlohmann\+::detail\+::binary\+\_\+reader$<$ Basic\+Json\+Type, Input\+Adapter\+Type, SAX $>$\+::get\+\_\+bson\+\_\+binary()}}, \mbox{\hyperlink{a00272_source_l07849}{nlohmann\+::detail\+::binary\+\_\+reader$<$ Basic\+Json\+Type, Input\+Adapter\+Type, SAX $>$\+::get\+\_\+bson\+\_\+string()}}, \mbox{\hyperlink{a00272_source_l08582}{nlohmann\+::detail\+::binary\+\_\+reader$<$ Basic\+Json\+Type, Input\+Adapter\+Type, SAX $>$\+::get\+\_\+cbor\+\_\+binary()}}, \mbox{\hyperlink{a00272_source_l08487}{nlohmann\+::detail\+::binary\+\_\+reader$<$ Basic\+Json\+Type, Input\+Adapter\+Type, SAX $>$\+::get\+\_\+cbor\+\_\+string()}}, \mbox{\hyperlink{a00272_source_l09147}{nlohmann\+::detail\+::binary\+\_\+reader$<$ Basic\+Json\+Type, Input\+Adapter\+Type, SAX $>$\+::get\+\_\+msgpack\+\_\+string()}}, \mbox{\hyperlink{a00272_source_l09828}{nlohmann\+::detail\+::binary\+\_\+reader$<$ Basic\+Json\+Type, Input\+Adapter\+Type, SAX $>$\+::get\+\_\+ubjson\+\_\+high\+\_\+precision\+\_\+number()}}, \mbox{\hyperlink{a00272_source_l09549}{nlohmann\+::detail\+::binary\+\_\+reader$<$ Basic\+Json\+Type, Input\+Adapter\+Type, SAX $>$\+::get\+\_\+ubjson\+\_\+size\+\_\+type()}}, \mbox{\hyperlink{a00272_source_l09472}{nlohmann\+::detail\+::binary\+\_\+reader$<$ Basic\+Json\+Type, Input\+Adapter\+Type, SAX $>$\+::get\+\_\+ubjson\+\_\+size\+\_\+value()}}, \mbox{\hyperlink{a00272_source_l09418}{nlohmann\+::detail\+::binary\+\_\+reader$<$ Basic\+Json\+Type, Input\+Adapter\+Type, SAX $>$\+::get\+\_\+ubjson\+\_\+string()}}, \mbox{\hyperlink{a00272_source_l09590}{nlohmann\+::detail\+::binary\+\_\+reader$<$ Basic\+Json\+Type, Input\+Adapter\+Type, SAX $>$\+::get\+\_\+ubjson\+\_\+value()}}, \mbox{\hyperlink{a00272_source_l10196}{nlohmann\+::detail\+::parser$<$ Basic\+Json\+Type, Input\+Adapter\+Type $>$\+::parse()}}, \mbox{\hyperlink{a00272_source_l07896}{nlohmann\+::detail\+::binary\+\_\+reader$<$ Basic\+Json\+Type, Input\+Adapter\+Type, SAX $>$\+::parse\+\_\+bson\+\_\+element\+\_\+internal()}}, \mbox{\hyperlink{a00272_source_l08042}{nlohmann\+::detail\+::binary\+\_\+reader$<$ Basic\+Json\+Type, Input\+Adapter\+Type, SAX $>$\+::parse\+\_\+cbor\+\_\+internal()}}, \mbox{\hyperlink{a00272_source_l08767}{nlohmann\+::detail\+::binary\+\_\+reader$<$ Basic\+Json\+Type, Input\+Adapter\+Type, SAX $>$\+::parse\+\_\+msgpack\+\_\+internal()}}, \mbox{\hyperlink{a00272_source_l24662}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::patch()}}, \mbox{\hyperlink{a00272_source_l07733}{nlohmann\+::detail\+::binary\+\_\+reader$<$ Basic\+Json\+Type, Input\+Adapter\+Type, SAX $>$\+::sax\+\_\+parse()}}, \mbox{\hyperlink{a00272_source_l10265}{nlohmann\+::detail\+::parser$<$ Basic\+Json\+Type, Input\+Adapter\+Type $>$\+::sax\+\_\+parse()}}, \mbox{\hyperlink{a00272_source_l10285}{nlohmann\+::detail\+::parser$<$ Basic\+Json\+Type, Input\+Adapter\+Type $>$\+::sax\+\_\+parse\+\_\+internal()}}, \mbox{\hyperlink{a00272_source_l12276}{nlohmann\+::json\+\_\+pointer$<$ Basic\+Json\+Type $>$\+::split()}}, and \mbox{\hyperlink{a00272_source_l10024}{nlohmann\+::detail\+::binary\+\_\+reader$<$ Basic\+Json\+Type, Input\+Adapter\+Type, SAX $>$\+::unexpect\+\_\+eof()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01563_a137ea4d27de45d8a844fd13451d40f3d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01563_a137ea4d27de45d8a844fd13451d40f3d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01563_a9fd60ad6bce80fd99686ad332faefd37}\label{a01563_a9fd60ad6bce80fd99686ad332faefd37}} 
+\index{nlohmann::detail::parse\_error@{nlohmann::detail::parse\_error}!create@{create}}
+\index{create@{create}!nlohmann::detail::parse\_error@{nlohmann::detail::parse\_error}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{a01563}{parse\+\_\+error}} nlohmann\+::detail\+::parse\+\_\+error\+::create (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+,  }\item[{std\+::size\+\_\+t}]{byte\+\_\+,  }\item[{const std\+::string \&}]{what\+\_\+arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l02443}{2443}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l02369}{nlohmann\+::detail\+::exception\+::name()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01563_a9fd60ad6bce80fd99686ad332faefd37_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01563_aefe74adeaa48781464ba2fd2ec63d221}\label{a01563_aefe74adeaa48781464ba2fd2ec63d221}} 
+\index{nlohmann::detail::parse\_error@{nlohmann::detail::parse\_error}!position\_string@{position\_string}}
+\index{position\_string@{position\_string}!nlohmann::detail::parse\_error@{nlohmann::detail::parse\_error}}
+\doxysubsubsection{\texorpdfstring{position\_string()}{position\_string()}}
+{\footnotesize\ttfamily static std\+::string nlohmann\+::detail\+::parse\+\_\+error\+::position\+\_\+string (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01555}{position\+\_\+t}} \&}]{pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l02466}{2466}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l00091}{nlohmann\+::detail\+::position\+\_\+t\+::chars\+\_\+read\+\_\+current\+\_\+line}}, and \mbox{\hyperlink{a00272_source_l00093}{nlohmann\+::detail\+::position\+\_\+t\+::lines\+\_\+read}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00272_source_l02436}{create()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01563_aefe74adeaa48781464ba2fd2ec63d221_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01563_a9505aaa1ca943be927eec7cc579592ff}\label{a01563_a9505aaa1ca943be927eec7cc579592ff}} 
+\index{nlohmann::detail::parse\_error@{nlohmann::detail::parse\_error}!byte@{byte}}
+\index{byte@{byte}!nlohmann::detail::parse\_error@{nlohmann::detail::parse\_error}}
+\doxysubsubsection{\texorpdfstring{byte}{byte}}
+{\footnotesize\ttfamily const std\+::size\+\_\+t nlohmann\+::detail\+::parse\+\_\+error\+::byte}
+
+
+
+byte index of the parse error 
+
+The byte index of the last read character in the input file.
+
+\begin{DoxyNote}{Note}
+For an input with n bytes, 1 is the index of the first character and n+1 is the index of the terminating null byte or the end of file. This also holds true when reading a byte vector (CBOR or Message\+Pack). 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l02460}{2460}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00272}{json.\+hpp}}\end{DoxyCompactItemize}

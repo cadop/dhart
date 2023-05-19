@@ -1,11 +1,16 @@
 var a00188 =
 [
-    [ "_USE_MATH_DEFINES", "a00188.html#a525335710b53cb064ca56b936120431e", null ],
-    [ "CalculateCrossSlope", "a00188.html#a6d12a3af69887cb335b490304138afc6", null ],
-    [ "CalculateCrossSlope", "a00188.html#a51b88e596c3b5f68b7abbcbc91e30bdf", null ],
-    [ "CalculateEnergyExpenditure", "a00188.html#adbe5e58355a884494d6e99bf17fc5f7b", null ],
-    [ "CalculateEnergyExpenditure", "a00188.html#ac51f2e76c00356f8a6145bee865cd922", null ],
-    [ "CalculateSlope", "a00188.html#ae06eb693d0d7858d7a863fae3a6eee2c", null ],
-    [ "to_degrees", "a00188.html#adee2fb2573f4dbc2e5c7db153dff2694", null ],
-    [ "to_radians", "a00188.html#ae7b446fefe0b9994859f47b85de79039", null ]
+    [ "TINYOBJLOADER_IMPLEMENTATION", "a00188.html#af14fac7fbc250522a78849d58d5b0811", null ],
+    [ "TINYOBJLOADER_USE_DOUBLE", "a00188.html#ad1ceae03a73fd42494508a2d57eaf1fe", null ],
+    [ "CreateReader", "a00188.html#aece9b1559429cfcd59fc5c60bc3dc5b1", null ],
+    [ "GetTestOBJPath", "a00188.html#adec2459f5c4ee10fd9d2154114d751de", null ],
+    [ "LoadMeshesFromTinyOBJ", "a00188.html#a9bbdc23c626ed431d5a084722c22f99f", null ],
+    [ "LoadMeshObjects", "a00188.html#a06c0c11adb62f8b204e42f75ac1990ac", null ],
+    [ "LoadMeshObjects", "a00188.html#a5e3b85fb47ef06f7693802f3fe90e996", null ],
+    [ "LoadObj", "a00188.html#ad8e91aefa202de3abee6fd9914299e46", null ],
+    [ "LoadRawVertices", "a00188.html#aec1df746155d224838048d3a43c2fe96", null ],
+    [ "MakeMaterials", "a00188.html#abc6b7e5052eb1564d1bb3c67d9f93031", null ],
+    [ "MakeShape", "a00188.html#a1d0272a1cc56fb0cb8fa5a0b968797ed", null ],
+    [ "MakeShapes", "a00188.html#a02e98028a7e54dc32b0f148f0b6d1ba5", null ],
+    [ "test_model_paths", "a00188.html#a13874b607886c8f427b2a8f332148553", null ]
 ];

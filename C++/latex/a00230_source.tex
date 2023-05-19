@@ -1,0 +1,170 @@
+\hypertarget{a00230_source}{}\doxysection{nanort\+\_\+raytracer.\+cpp}
+\label{a00230_source}\index{Cpp/raytracer/src/nanort\_raytracer.cpp@{Cpp/raytracer/src/nanort\_raytracer.cpp}}
+\mbox{\hyperlink{a00230}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00001}\mbox{\hyperlink{a00230_a441fa2508d213da8cf510e90af3762e3}{00001}} \textcolor{preprocessor}{\#define NANORT\_USE\_CPP11\_FEATURE }}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00002}00002 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00239}{ray\_data.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00003}00003 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00185}{meshinfo.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00004}00004 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00227}{nanort.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00005}00005 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00006}00006 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00007}00007 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00008}00008 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00009}00009 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00010}\mbox{\hyperlink{a01515_a0ae198ce1631e5d96a2fa44ccd4d1acc}{00010}} \mbox{\hyperlink{a01515_a2383cbed15c0012ff96ebc4da296af0a}{nanoRT\_Data::nanoRT\_Data}}(\mbox{\hyperlink{a00470_a01339}{HF::nanoGeom::Mesh}} * m) : }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00011}00011     \mbox{\hyperlink{a00474}{nanort}}::TriangleIntersector<\mbox{\hyperlink{a00001_a02139}{double}}, \mbox{\hyperlink{a00474}{nanort}}::TriangleIntersection<\mbox{\hyperlink{a00001_a02139}{double}}>>}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00012}00012     (m-\/>vertices, m-\/>faces, sizeof(\mbox{\hyperlink{a00001_a02139}{double}}) * 3)}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00013}00013 \{}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00014}00014     \textcolor{comment}{// Set the mesh data}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00015}00015     this-\/>\mbox{\hyperlink{a01515_a949f0f10008ed14b2183510786efe24e}{mesh}} = m;}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00016}00016 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00017}00017     \textcolor{comment}{// Setup a no hit (for safety)}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00018}00018     \mbox{\hyperlink{a01515_af9f21fbf5a65e0b29495fff58e466c57}{hit}}.\mbox{\hyperlink{a00474_a3deaad23e30bd59d6932533d99a9927a}{u}} = -\/1;}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00019}00019     \mbox{\hyperlink{a01515_af9f21fbf5a65e0b29495fff58e466c57}{hit}}.\mbox{\hyperlink{a00474_a19beb63051e1c58b701fa132554816b1}{v}} = -\/1;}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00020}00020     \mbox{\hyperlink{a01515_af9f21fbf5a65e0b29495fff58e466c57}{hit}}.\mbox{\hyperlink{a00474_ac6905be589222ab5c6d8367bee4370aa}{t}} = -\/1;}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00021}00021     \mbox{\hyperlink{a01515_af9f21fbf5a65e0b29495fff58e466c57}{hit}}.\mbox{\hyperlink{a00474_a1e3062943d9c131ef207cf4f92cd15b9}{prim\_id}} = -\/1;}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00022}00022 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00023}00023     \textcolor{comment}{// Setup the ray}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00024}00024     \textcolor{comment}{// Set origin of ray}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00025}00025     this-\/>\mbox{\hyperlink{a01515_ab057f30627ea451e58b9c6cd2d39134a}{ray}}.\mbox{\hyperlink{a01447_aea9fcda185648fe74d64f8e6bcad01ec}{org}}[0] = 0.0;}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00026}00026     this-\/>\mbox{\hyperlink{a01515_ab057f30627ea451e58b9c6cd2d39134a}{ray}}.\mbox{\hyperlink{a01447_aea9fcda185648fe74d64f8e6bcad01ec}{org}}[1] = 0.0;}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00027}00027     this-\/>\mbox{\hyperlink{a01515_ab057f30627ea451e58b9c6cd2d39134a}{ray}}.\mbox{\hyperlink{a01447_aea9fcda185648fe74d64f8e6bcad01ec}{org}}[2] = 0.0;}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00029}00029     this-\/>\mbox{\hyperlink{a01515_ab057f30627ea451e58b9c6cd2d39134a}{ray}}.\mbox{\hyperlink{a01447_a5538d88576be3ac0175145685ac320c2}{dir}}[0] = 0.0;}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00030}00030     this-\/>\mbox{\hyperlink{a01515_ab057f30627ea451e58b9c6cd2d39134a}{ray}}.\mbox{\hyperlink{a01447_a5538d88576be3ac0175145685ac320c2}{dir}}[1] = 0.0;}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00031}00031     this-\/>\mbox{\hyperlink{a01515_ab057f30627ea451e58b9c6cd2d39134a}{ray}}.\mbox{\hyperlink{a01447_a5538d88576be3ac0175145685ac320c2}{dir}}[2] = 0.0;}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00032}00032 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00033}00033     \textcolor{comment}{// Set max and min location }}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00034}00034     this-\/>\mbox{\hyperlink{a01515_ab057f30627ea451e58b9c6cd2d39134a}{ray}}.\mbox{\hyperlink{a01447_a0e35bd37e6eb93f8233d903725d75de4}{min\_t}} = 0.0f;}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00035}00035     this-\/>\mbox{\hyperlink{a01515_ab057f30627ea451e58b9c6cd2d39134a}{ray}}.\mbox{\hyperlink{a01447_ae36571adc2758974ef58912c4896c5e6}{max\_t}} = 20000.0f;}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00036}00036 \}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00037}00037 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00038}\mbox{\hyperlink{a01515_a0300eeb238ac5748f98b59b9a262450d}{00038}} \mbox{\hyperlink{a01515_a0300eeb238ac5748f98b59b9a262450d}{nanoRT\_Data::\string~nanoRT\_Data}}() \{}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00039}00039         \textcolor{comment}{// Mesh data was constructed with new, delete here}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00040}00040         \textcolor{keyword}{delete}[] this-\/>\mbox{\hyperlink{a01515_a949f0f10008ed14b2183510786efe24e}{mesh}}-\/>\mbox{\hyperlink{a00470_a9ba8fa062d05f24f9a4a30ed35ac6754}{vertices}};}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00041}00041         \textcolor{keyword}{delete}[] this-\/>\mbox{\hyperlink{a01515_a949f0f10008ed14b2183510786efe24e}{mesh}}-\/>\mbox{\hyperlink{a00470_a0f21ead8835aeab4258b117d9aa66793}{faces}};}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00042}00042         std::cout << \textcolor{stringliteral}{"{}Destroyed"{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00043}00043 \}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00044}00044 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00045}00045 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00470}{HF::nanoGeom}} \{}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00046}00046 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00047}\mbox{\hyperlink{a00470_ae4ab3809e1f437e93ae1ad78c2792025}{00047}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00470_ae4ab3809e1f437e93ae1ad78c2792025}{nanoRT\_RayCast}}(\mbox{\hyperlink{a01483}{nanort::BVHAccel<double>}}\& accel,}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00048}00048         \mbox{\hyperlink{a01499}{nanort::TriangleIntersector}}<\textcolor{keywordtype}{double}, \mbox{\hyperlink{a00474_a01495}{nanort::TriangleIntersection<double>}} >\& triangle\_intersector,}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00049}00049         \mbox{\hyperlink{a01447}{nanort::Ray<double>}}\& ray,}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00050}00050         \mbox{\hyperlink{a00474_a01495}{nanort::TriangleIntersection<double>}}\& isect)}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00051}00051     \{}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00052}00052         \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00053}00053 \textcolor{comment}{        Not used}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00054}00054 \textcolor{comment}{        Just a clarity function for now to show that the Raycasting really needs a list of inputs}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00055}00055 \textcolor{comment}{        but the class is abstracting them.}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00056}00056 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00057}00057 \textcolor{comment}{        */}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00058}00058 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00059}00059 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00060}00060         \textcolor{comment}{// Performs an intersection of a ray and mesh (via BVH object)}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00061}00061         \textcolor{comment}{// Modifies the input (by reference) isect }}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00062}00062 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00063}00063         \textcolor{comment}{// perform intersection of ray on BVH}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00064}00064         \textcolor{comment}{// \&isect is modified and the u,v,t values of intersection are changed in place}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00065}00065         \textcolor{keywordtype}{bool} hit = accel.\mbox{\hyperlink{a01483_a4d07d0fc035d860dd1bfbeaa90c14a11}{Traverse}}(ray, triangle\_intersector, \&isect);}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00066}00066         \textcolor{keywordflow}{if} (hit)}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00067}00067             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00068}00068 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00069}00069         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00070}00070     \}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00071}00071 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00072}\mbox{\hyperlink{a00470_a1cb19dd0ff847089a65139f01ee06b8c}{00072}}     \mbox{\hyperlink{a01483}{nanort::BVHAccel<double>}} \mbox{\hyperlink{a00470_a1cb19dd0ff847089a65139f01ee06b8c}{nanoRT\_BVH}}(\mbox{\hyperlink{a00470_a01339}{Mesh}}\& mesh)}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00073}00073     \{}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00074}00074         \textcolor{keywordtype}{bool} ret = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00075}00075 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00076}00076         \textcolor{comment}{// Setup nanort tracer BVH options}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00077}00077         \mbox{\hyperlink{a01459}{nanort::BVHBuildOptions<double>}} build\_options; \textcolor{comment}{// Use default option}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00078}00078         build\_options.\mbox{\hyperlink{a01459_a99d7328a59abcb9aeaa23cede349e251}{cache\_bbox}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00079}00079 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00080}00080         \textcolor{comment}{// Construct datatype using verts and indices for building BVH}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00081}00081         \mbox{\hyperlink{a01491}{nanort::TriangleMesh<double>}} triangle\_mesh(mesh.\mbox{\hyperlink{a00470_a9ba8fa062d05f24f9a4a30ed35ac6754}{vertices}}, mesh.\mbox{\hyperlink{a00470_a0f21ead8835aeab4258b117d9aa66793}{faces}}, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}) * 3);}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00082}00082         \mbox{\hyperlink{a01487}{nanort::TriangleSAHPred<double>}} triangle\_pred(mesh.\mbox{\hyperlink{a00470_a9ba8fa062d05f24f9a4a30ed35ac6754}{vertices}}, mesh.\mbox{\hyperlink{a00470_a0f21ead8835aeab4258b117d9aa66793}{faces}}, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}) * 3);}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00083}00083 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00084}00084         \textcolor{comment}{// build BVH}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00085}00085         \mbox{\hyperlink{a01483}{nanort::BVHAccel<double>}} accel;}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00086}00086         ret = accel.\mbox{\hyperlink{a01483_a96521982d08e0ccd728798410dabeed5}{Build}}(mesh.\mbox{\hyperlink{a00470_a23f10e5b6d63da186e7bd477ba8b34d8}{num\_faces}}, triangle\_mesh, triangle\_pred, build\_options);}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00087}00087 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00088}00088         \textcolor{comment}{// This shouldn't fail}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00089}00089         assert(ret);}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00090}00090 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00091}00091         \textcolor{comment}{// Return the BVH object}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00092}00092         \textcolor{keywordflow}{return} accel;}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00093}00093     \}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00094}\mbox{\hyperlink{a00470_a6291ce624c796ab1fe2a45a92eb0c6b0}{00094}}     \mbox{\hyperlink{a01483}{nanort::BVHAccel<double>}} \mbox{\hyperlink{a00470_a1cb19dd0ff847089a65139f01ee06b8c}{nanoRT\_BVH}}(\mbox{\hyperlink{a00470_a01339}{Mesh}} mesh) \{}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00095}00095         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00470_a1cb19dd0ff847089a65139f01ee06b8c}{nanoRT\_BVH}}(mesh.\mbox{\hyperlink{a00470_a0f21ead8835aeab4258b117d9aa66793}{faces}}, mesh.\mbox{\hyperlink{a00470_a9ba8fa062d05f24f9a4a30ed35ac6754}{vertices}}, mesh.\mbox{\hyperlink{a00470_a623bb7021165e4caf385245729f1c2f1}{num\_vertices}}, mesh.\mbox{\hyperlink{a00470_a23f10e5b6d63da186e7bd477ba8b34d8}{num\_faces}});}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00096}00096     \}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00097}00097 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00098}\mbox{\hyperlink{a00470_ab842b43dc319eba17876627bae3286f6}{00098}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00470_ab842b43dc319eba17876627bae3286f6}{nanoRT\_Intersect}}(\mbox{\hyperlink{a00470_a01339}{Mesh}}\& mesh, \mbox{\hyperlink{a01483}{nanort::BVHAccel<double>}}\& accel, \mbox{\hyperlink{a01515}{nanoRT\_Data}}\& intersector)}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00099}00099     \{}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00100}00100         \textcolor{comment}{// Performs an intersection of a ray and mesh (via BVH object)}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00101}00101         \textcolor{comment}{// Modifies the input (by reference) isect }}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00102}00102 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00103}00103         \textcolor{comment}{// perform intersection of ray on BVH}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00104}00104         \textcolor{comment}{// \&isect is modified and the u,v,t values of intersection are changed in place}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00105}00105         \textcolor{keywordtype}{bool} hit = accel.\mbox{\hyperlink{a01483_a4d07d0fc035d860dd1bfbeaa90c14a11}{Traverse}}(intersector.\mbox{\hyperlink{a01515_ab057f30627ea451e58b9c6cd2d39134a}{ray}}, intersector, \&intersector.\mbox{\hyperlink{a01515_af9f21fbf5a65e0b29495fff58e466c57}{hit}});}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00106}00106         \textcolor{keywordflow}{if} (hit) \{}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00107}00107             \textcolor{comment}{// Translate the point along the direction vector }}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00108}00108             intersector.\mbox{\hyperlink{a01515_aed0de5480c190a177f5adf4ee086719d}{point}}[0] = intersector.\mbox{\hyperlink{a01515_ab057f30627ea451e58b9c6cd2d39134a}{ray}}.\mbox{\hyperlink{a01447_aea9fcda185648fe74d64f8e6bcad01ec}{org}}[0] + (intersector.\mbox{\hyperlink{a01515_ab057f30627ea451e58b9c6cd2d39134a}{ray}}.\mbox{\hyperlink{a01447_a5538d88576be3ac0175145685ac320c2}{dir}}[0] * intersector.\mbox{\hyperlink{a01515_af9f21fbf5a65e0b29495fff58e466c57}{hit}}.\mbox{\hyperlink{a00474_ac6905be589222ab5c6d8367bee4370aa}{t}});}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00109}00109             intersector.\mbox{\hyperlink{a01515_aed0de5480c190a177f5adf4ee086719d}{point}}[1] = intersector.\mbox{\hyperlink{a01515_ab057f30627ea451e58b9c6cd2d39134a}{ray}}.\mbox{\hyperlink{a01447_aea9fcda185648fe74d64f8e6bcad01ec}{org}}[1] + (intersector.\mbox{\hyperlink{a01515_ab057f30627ea451e58b9c6cd2d39134a}{ray}}.\mbox{\hyperlink{a01447_a5538d88576be3ac0175145685ac320c2}{dir}}[1] * intersector.\mbox{\hyperlink{a01515_af9f21fbf5a65e0b29495fff58e466c57}{hit}}.\mbox{\hyperlink{a00474_ac6905be589222ab5c6d8367bee4370aa}{t}});}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00110}00110             intersector.\mbox{\hyperlink{a01515_aed0de5480c190a177f5adf4ee086719d}{point}}[2] = intersector.\mbox{\hyperlink{a01515_ab057f30627ea451e58b9c6cd2d39134a}{ray}}.\mbox{\hyperlink{a01447_aea9fcda185648fe74d64f8e6bcad01ec}{org}}[2] + (intersector.\mbox{\hyperlink{a01515_ab057f30627ea451e58b9c6cd2d39134a}{ray}}.\mbox{\hyperlink{a01447_a5538d88576be3ac0175145685ac320c2}{dir}}[2] * intersector.\mbox{\hyperlink{a01515_af9f21fbf5a65e0b29495fff58e466c57}{hit}}.\mbox{\hyperlink{a00474_ac6905be589222ab5c6d8367bee4370aa}{t}});}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00111}00111 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00112}00112             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00113}00113         \}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00114}00114 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00115}00115 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00116}00116         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00117}00117     \}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00118}00118 \}; \textcolor{comment}{// end namespace}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00119}00119 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00120}00120 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00464}{HF::RayTracer}}\{}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00121}00121    }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00122}\mbox{\hyperlink{a01519_a0229249855045b4fbf7097c31827f6e6}{00122}}     \mbox{\hyperlink{a01519_a0229249855045b4fbf7097c31827f6e6}{NanoRTRayTracer::NanoRTRayTracer}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo<float>}}\& MI) \{}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00123}00123         \textcolor{comment}{// Get the index and vertex arrays of the meshinfo}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00124}00124         \textcolor{keyword}{auto} mi\_vertices = MI.\mbox{\hyperlink{a01351_aa88fe8bcfc24db635994e529fac008da}{GetVertexPointer}}().CopyArray();}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00125}00125         \mbox{\hyperlink{a01519_a1dd268c8755f0a9dd72b2508164411a0}{vertices}}.resize(mi\_vertices.size());}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00126}00126         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < mi\_vertices.size(); i++)}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00127}00127             \mbox{\hyperlink{a01519_a1dd268c8755f0a9dd72b2508164411a0}{vertices}}[i] = \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{a00001_a02139}{vertex\_t}}\textcolor{keyword}{>}(mi\_vertices[i]);}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00128}00128 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00129}00129         \textcolor{comment}{// Convert indices to unsigned integer because that's what nanoRT uses}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00130}00130         \textcolor{keyword}{auto} mi\_indices = MI.\mbox{\hyperlink{a01351_a9ca41370061bec524b5c84d689114e41}{GetIndexPointer}}().CopyArray();}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00131}00131         \mbox{\hyperlink{a01519_ab5a9d1b264633514d5323cc12eabbf1a}{indices}}.resize(mi\_indices.size());}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00132}00132         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < mi\_indices.size(); i++)}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00133}00133             \mbox{\hyperlink{a01519_ab5a9d1b264633514d5323cc12eabbf1a}{indices}}[i] = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}\textcolor{keyword}{>}(mi\_indices[i]);}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00134}00134 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00135}00135         \textcolor{comment}{// Build the BVH}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00136}00136         \mbox{\hyperlink{a01519_a4f0caa6e76a3db1d6d70529b753a20f6}{bvh}} = HF::nanoGeom::nanoRT\_BVH<vertex\_t>(\mbox{\hyperlink{a01519_ab5a9d1b264633514d5323cc12eabbf1a}{indices}}.data(), \mbox{\hyperlink{a01519_a1dd268c8755f0a9dd72b2508164411a0}{vertices}}.data(), \mbox{\hyperlink{a01519_a1dd268c8755f0a9dd72b2508164411a0}{vertices}}.size() / 3, \mbox{\hyperlink{a01519_ab5a9d1b264633514d5323cc12eabbf1a}{indices}}.size() / 3);}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00137}00137 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00138}00138         \textcolor{comment}{// Create a new intersector. Note: This can't be held as a member by value since you can't even construct this object without}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00139}00139         \textcolor{comment}{// the proper input arguments, however the input arguments cannot be created until we've copied the data from}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00140}00140         \textcolor{comment}{// the mesh and converted it to the proper types. Using a pointer allows us to construct an intersector later.}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00141}00141         \mbox{\hyperlink{a01519_a0481453571121245999f194dd8fdcb7b}{intersector}} = std::unique\_ptr<Intersector>(\textcolor{keyword}{new} \mbox{\hyperlink{a01519_aadda889460625a691bcdd56f594c8ea6}{Intersector}}(\mbox{\hyperlink{a01519_a1dd268c8755f0a9dd72b2508164411a0}{vertices}}.data(), \mbox{\hyperlink{a01519_ab5a9d1b264633514d5323cc12eabbf1a}{indices}}.data(), \textcolor{keyword}{sizeof}(\mbox{\hyperlink{a00001_a02139}{real\_t}}) * 3));}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00142}00142     \}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00143}\mbox{\hyperlink{a01519_a7bc4330f5bce3674ee9c25c47db6e498}{00143}}     \mbox{\hyperlink{a01519_a0229249855045b4fbf7097c31827f6e6}{NanoRTRayTracer::NanoRTRayTracer}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo<double>}}\& MI) \{}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00144}00144         \textcolor{comment}{// Get the index and vertex arrays of the meshinfo}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00145}00145         \textcolor{keyword}{auto} mi\_vertices = MI.\mbox{\hyperlink{a01351_aa88fe8bcfc24db635994e529fac008da}{GetVertexPointer}}().CopyArray();}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00146}00146         \mbox{\hyperlink{a01519_a1dd268c8755f0a9dd72b2508164411a0}{vertices}}.resize(mi\_vertices.size());}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00147}00147         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < mi\_vertices.size(); i++)}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00148}00148             \mbox{\hyperlink{a01519_a1dd268c8755f0a9dd72b2508164411a0}{vertices}}[i] = \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{a00001_a02139}{vertex\_t}}\textcolor{keyword}{>}(mi\_vertices[i]);}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00149}00149 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00150}00150         \textcolor{comment}{// Convert indices to unsigned integer because that's what nanoRT uses}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00151}00151         \textcolor{keyword}{auto} mi\_indices = MI.\mbox{\hyperlink{a01351_a9ca41370061bec524b5c84d689114e41}{GetIndexPointer}}().CopyArray();}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00152}00152         \mbox{\hyperlink{a01519_ab5a9d1b264633514d5323cc12eabbf1a}{indices}}.resize(mi\_indices.size());}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00153}00153         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < mi\_indices.size(); i++)}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00154}00154             \mbox{\hyperlink{a01519_ab5a9d1b264633514d5323cc12eabbf1a}{indices}}[i] = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}\textcolor{keyword}{>}(mi\_indices[i]);}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00155}00155 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00156}00156         \textcolor{comment}{// Build the BVH}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00157}00157         \mbox{\hyperlink{a01519_a4f0caa6e76a3db1d6d70529b753a20f6}{bvh}} = HF::nanoGeom::nanoRT\_BVH<vertex\_t>(\mbox{\hyperlink{a01519_ab5a9d1b264633514d5323cc12eabbf1a}{indices}}.data(), \mbox{\hyperlink{a01519_a1dd268c8755f0a9dd72b2508164411a0}{vertices}}.data(), \mbox{\hyperlink{a01519_a1dd268c8755f0a9dd72b2508164411a0}{vertices}}.size() / 3, \mbox{\hyperlink{a01519_ab5a9d1b264633514d5323cc12eabbf1a}{indices}}.size() / 3);}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00158}00158 }
+\DoxyCodeLine{\Hypertarget{a00230_source_l00159}00159         \textcolor{comment}{// Create a new intersector. Note: This can't be held as a member by value since you can't even construct this object without}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00160}00160         \textcolor{comment}{// the proper input arguments, however the input arguments cannot be created until we've copied the data from}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00161}00161         \textcolor{comment}{// the mesh and converted it to the proper types. Using a pointer allows us to construct an intersector later.}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00162}00162         \mbox{\hyperlink{a01519_a0481453571121245999f194dd8fdcb7b}{intersector}} = std::unique\_ptr<Intersector>(\textcolor{keyword}{new} \mbox{\hyperlink{a01519_aadda889460625a691bcdd56f594c8ea6}{Intersector}}(\mbox{\hyperlink{a01519_a1dd268c8755f0a9dd72b2508164411a0}{vertices}}.data(), \mbox{\hyperlink{a01519_ab5a9d1b264633514d5323cc12eabbf1a}{indices}}.data(), \textcolor{keyword}{sizeof}(\mbox{\hyperlink{a00001_a02139}{real\_t}}) * 3));}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00163}00163     \}}
+\DoxyCodeLine{\Hypertarget{a00230_source_l00164}00164 \}}
+
+\end{DoxyCode}

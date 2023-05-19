@@ -12,31 +12,31 @@
 \DoxyCodeLine{\Hypertarget{a00026_source_l00013}00013 \textcolor{preprocessor}{\#include<algorithm>}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00014}00014 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00015}00015 \textcolor{preprocessor}{\#include <robin\_hood.h>}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00016}00016 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00203}{graph.h}}>}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00017}00017 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00146}{embree\_raytracer.h}}>}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00018}00018 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00197}{Edge.h}}>}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00019}00019 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00209}{node.h}}>}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00020}00020 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00185}{Constants.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00016}00016 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00269}{graph.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00017}00017 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00212}{embree\_raytracer.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00018}00018 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00263}{Edge.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00019}00019 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00275}{node.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00020}00020 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00251}{Constants.h}}>}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00021}00021 }
-\DoxyCodeLine{\Hypertarget{a00026_source_l00022}00022 \textcolor{keyword}{using namespace }\mbox{\hyperlink{a00396}{HF}};}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00023}00023 \textcolor{keyword}{using namespace }\mbox{\hyperlink{a00399}{HF::SpatialStructures}};}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00024}00024 \textcolor{keyword}{using }\mbox{\hyperlink{a01345}{HF::RayTracer::EmbreeRayTracer}};}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00022}00022 \textcolor{keyword}{using namespace }\mbox{\hyperlink{a00462}{HF}};}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00023}00023 \textcolor{keyword}{using namespace }\mbox{\hyperlink{a00465}{HF::SpatialStructures}};}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00024}00024 \textcolor{keyword}{using }\mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}};}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00025}00025 \textcolor{keyword}{using }std::vector;}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00026}00026 \textcolor{keyword}{using }std::array;}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00027}00027 }
-\DoxyCodeLine{\Hypertarget{a00026_source_l00028}\mbox{\hyperlink{a00401}{00028}} \textcolor{keyword}{namespace }\mbox{\hyperlink{a00401}{HF::VisibilityGraph}} \{}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00047}\mbox{\hyperlink{a00401_af811d21e4c49275521912df9254bb737}{00047}}     \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00401_af811d21e4c49275521912df9254bb737}{HeightCheck}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& \mbox{\hyperlink{a02005}{Node}}, \textcolor{keywordtype}{float} height, \mbox{\hyperlink{a01345}{EmbreeRayTracer}}\& ert) \{}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00028}\mbox{\hyperlink{a00467}{00028}} \textcolor{keyword}{namespace }\mbox{\hyperlink{a00467}{HF::VisibilityGraph}} \{}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00047}\mbox{\hyperlink{a00467_af811d21e4c49275521912df9254bb737}{00047}}     \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00467_af811d21e4c49275521912df9254bb737}{HeightCheck}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02071}{Node}}\& \mbox{\hyperlink{a02071}{Node}}, \textcolor{keywordtype}{float} height, \mbox{\hyperlink{a01411}{EmbreeRayTracer}}\& ert) \{}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00048}00048         \textcolor{keyword}{const} array<float, 3> up\{ 0,0,1 \};}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00049}00049         \textcolor{comment}{// Create a copy of this node that's slightly offset off of the ground to ensure}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00050}00050         \textcolor{comment}{// it doesn't intersect with the ground}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00051}00051         \textcolor{keyword}{auto} node\_copy = array<float, 3>\{\mbox{\hyperlink{a02005}{Node}}[0], \mbox{\hyperlink{a02005}{Node}}[1], \mbox{\hyperlink{a02005}{Node}}[2] + \mbox{\hyperlink{a00399_a0140105869479399be75147c8f77e724}{ROUNDING\_PRECISION}}\};}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00051}00051         \textcolor{keyword}{auto} node\_copy = array<float, 3>\{\mbox{\hyperlink{a02071}{Node}}[0], \mbox{\hyperlink{a02071}{Node}}[1], \mbox{\hyperlink{a02071}{Node}}[2] + \mbox{\hyperlink{a00465_a0140105869479399be75147c8f77e724}{ROUNDING\_PRECISION}}\};}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00052}00052         }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00053}00053         \textcolor{comment}{// Cast an occlusion ray straight up with a distance of height.}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00054}00054         \textcolor{keywordflow}{return} !ert.\mbox{\hyperlink{a01345_a3a7488f8e41c8a9e3dc9c334047c6457}{Occluded}}(node\_copy, up, height);}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00054}00054         \textcolor{keywordflow}{return} !ert.\mbox{\hyperlink{a01411_a3a7488f8e41c8a9e3dc9c334047c6457}{Occluded}}(node\_copy, up, height);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00055}00055     \}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00056}00056 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00057}00057 }
-\DoxyCodeLine{\Hypertarget{a00026_source_l00069}\mbox{\hyperlink{a00401_a05b8a83ab27113369c95649470d864b9}{00069}}     vector<int> \mbox{\hyperlink{a00401_a05b8a83ab27113369c95649470d864b9}{HeightCheckAllNodes}}(\textcolor{keyword}{const} vector<Node>\& nodes\_to\_filter, \textcolor{keywordtype}{float} height, \mbox{\hyperlink{a01345}{EmbreeRayTracer}}\& ert) \{}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00069}\mbox{\hyperlink{a00467_a05b8a83ab27113369c95649470d864b9}{00069}}     vector<int> \mbox{\hyperlink{a00467_a05b8a83ab27113369c95649470d864b9}{HeightCheckAllNodes}}(\textcolor{keyword}{const} vector<Node>\& nodes\_to\_filter, \textcolor{keywordtype}{float} height, \mbox{\hyperlink{a01411}{EmbreeRayTracer}}\& ert) \{}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00070}00070         vector<int> valid\_nodes;}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00071}00071 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00072}00072         \textcolor{comment}{// Loop through every node in nodes\_to\_filter}}
@@ -45,16 +45,16 @@
 \DoxyCodeLine{\Hypertarget{a00026_source_l00075}00075             \textcolor{comment}{// If the node passes the height check, insert its index}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00076}00076             \textcolor{comment}{// into valid\_nodes.}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00077}00077             \textcolor{keyword}{const} \textcolor{keyword}{auto}\& node = nodes\_to\_filter[i];}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00078}00078             \textcolor{keywordflow}{if} (\mbox{\hyperlink{a00401_af811d21e4c49275521912df9254bb737}{HeightCheck}}(node, height, ert))}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00078}00078             \textcolor{keywordflow}{if} (\mbox{\hyperlink{a00467_af811d21e4c49275521912df9254bb737}{HeightCheck}}(node, height, ert))}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00079}00079                 valid\_nodes.push\_back(i);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00080}00080         \}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00081}00081         \textcolor{keywordflow}{return} valid\_nodes;}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00082}00082     \}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00083}00083 }
-\DoxyCodeLine{\Hypertarget{a00026_source_l00103}\mbox{\hyperlink{a00401_a4d9cf77879eb78075f7f7b0a7e31119a}{00103}}     \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00401_a4d9cf77879eb78075f7f7b0a7e31119a}{IsOcclusionBetween}}(}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00104}00104         \textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& node\_a,}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00105}00105         \textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& node\_b,}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00106}00106         \mbox{\hyperlink{a01345}{EmbreeRayTracer}}\& ert,}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00103}\mbox{\hyperlink{a00467_a4d9cf77879eb78075f7f7b0a7e31119a}{00103}}     \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00467_a4d9cf77879eb78075f7f7b0a7e31119a}{IsOcclusionBetween}}(}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00104}00104         \textcolor{keyword}{const} \mbox{\hyperlink{a02071}{Node}}\& node\_a,}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00105}00105         \textcolor{keyword}{const} \mbox{\hyperlink{a02071}{Node}}\& node\_b,}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00106}00106         \mbox{\hyperlink{a01411}{EmbreeRayTracer}}\& ert,}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00107}00107         \textcolor{keywordtype}{float} height = 1.7f,}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00108}00108         \textcolor{keywordtype}{float} pre\_calculated\_distance = 0.0f}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00109}00109     ) \{}
@@ -65,21 +65,21 @@
 \DoxyCodeLine{\Hypertarget{a00026_source_l00114}00114         \textcolor{comment}{// Only calculate distance if it wasn't already passed to us}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00115}00115         \textcolor{keywordtype}{float} distance;}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00116}00116         \textcolor{keywordflow}{if} (pre\_calculated\_distance == 0.0f)}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00117}00117             distance = node\_a.\mbox{\hyperlink{a02005_abbd66b566460f9557a373b5fbcc30bb1}{distanceTo}}(node\_b);}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00117}00117             distance = node\_a.\mbox{\hyperlink{a02071_abbd66b566460f9557a373b5fbcc30bb1}{distanceTo}}(node\_b);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00118}00118         \textcolor{keywordflow}{else}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00119}00119             distance = pre\_calculated\_distance;}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00120}00120 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00121}00121         \textcolor{comment}{// Calculate the direction between node\_a and node\_b}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00122}00122         \textcolor{keyword}{auto} direction = node\_a.\mbox{\hyperlink{a02005_ad3f7898ef3178eef0c3579869a7f5c67}{directionTo}}(node\_b);}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00122}00122         \textcolor{keyword}{auto} direction = node\_a.\mbox{\hyperlink{a02071_ad3f7898ef3178eef0c3579869a7f5c67}{directionTo}}(node\_b);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00123}00123 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00124}00124         \textcolor{comment}{// Cast the ray and return the result.}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00125}00125         \textcolor{keywordflow}{return} ert.\mbox{\hyperlink{a01345_a3a7488f8e41c8a9e3dc9c334047c6457}{Occluded}}(heightened\_node, direction, distance);}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00125}00125         \textcolor{keywordflow}{return} ert.\mbox{\hyperlink{a01411_a3a7488f8e41c8a9e3dc9c334047c6457}{Occluded}}(heightened\_node, direction, distance);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00126}00126     \}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00127}00127 }
-\DoxyCodeLine{\Hypertarget{a00026_source_l00128}\mbox{\hyperlink{a00401_a12eb1e4c06400c4625cd22d925927b03}{00128}}     \mbox{\hyperlink{a01485}{Graph}} \mbox{\hyperlink{a00401_a12eb1e4c06400c4625cd22d925927b03}{AllToAll}}(\mbox{\hyperlink{a01345}{EmbreeRayTracer}}\& ert, \textcolor{keyword}{const} vector<Node>\& nodes, \textcolor{keywordtype}{float} height) \{}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00128}\mbox{\hyperlink{a00467_a12eb1e4c06400c4625cd22d925927b03}{00128}}     \mbox{\hyperlink{a01551}{Graph}} \mbox{\hyperlink{a00467_a12eb1e4c06400c4625cd22d925927b03}{AllToAll}}(\mbox{\hyperlink{a01411}{EmbreeRayTracer}}\& ert, \textcolor{keyword}{const} vector<Node>\& nodes, \textcolor{keywordtype}{float} height) \{}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00129}00129 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00130}00130         \textcolor{comment}{// Create a jagged array for edges and costs}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00131}00131         \textcolor{keyword}{const} \textcolor{keywordtype}{int} n = nodes.\mbox{\hyperlink{a01485_a2710af2a75976862d7a235793567d2f3}{size}}();}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00131}00131         \textcolor{keyword}{const} \textcolor{keywordtype}{int} n = nodes.\mbox{\hyperlink{a01551_a2710af2a75976862d7a235793567d2f3}{size}}();}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00132}00132         vector<vector<int>> edges(n);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00133}00133         vector<vector<float>> costs(n);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00134}00134 }
@@ -93,7 +93,7 @@
 \DoxyCodeLine{\Hypertarget{a00026_source_l00142}00142             omp\_set\_num\_threads(cores);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00143}00143 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00144}00144         \textcolor{comment}{// Discard nodes that don't pass the height check. }}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00145}00145         \textcolor{keyword}{auto} valid\_nodes = \mbox{\hyperlink{a00401_a05b8a83ab27113369c95649470d864b9}{HeightCheckAllNodes}}(nodes, height, ert);}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00145}00145         \textcolor{keyword}{auto} valid\_nodes = \mbox{\hyperlink{a00467_a05b8a83ab27113369c95649470d864b9}{HeightCheckAllNodes}}(nodes, height, ert);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00146}00146         }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00147}00147         \textcolor{comment}{// Calculate edges for every node in parallel}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00148}00148 \textcolor{preprocessor}{\#pragma omp parallel for schedule(static)}}
@@ -103,7 +103,7 @@
 \DoxyCodeLine{\Hypertarget{a00026_source_l00152}00152             \textcolor{keywordtype}{int} node\_id = valid\_nodes[i];}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00153}00153             }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00154}00154             \textcolor{comment}{// Get the node we're calculating the edges for}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00155}00155             \textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& node\_a = nodes[node\_id];}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00155}00155             \textcolor{keyword}{const} \mbox{\hyperlink{a02071}{Node}}\& node\_a = nodes[node\_id];}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00156}00156         }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00157}00157             \textcolor{comment}{// Get references to the cost and edge arrays for this node}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00158}00158             \textcolor{comment}{// to save an index operation  for every check.}}
@@ -120,12 +120,12 @@
 \DoxyCodeLine{\Hypertarget{a00026_source_l00169}00169                 \textcolor{keywordtype}{int} node\_b\_id = valid\_nodes[k];}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00170}00170 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00171}00171                 \textcolor{comment}{// Calculate distance between node\_a and node\_b}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00172}00172                 \textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& node\_b = nodes[node\_b\_id];}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00173}00173                 \textcolor{keywordtype}{float} distance = node\_a.\mbox{\hyperlink{a02005_abbd66b566460f9557a373b5fbcc30bb1}{distanceTo}}(node\_b);}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00172}00172                 \textcolor{keyword}{const} \mbox{\hyperlink{a02071}{Node}}\& node\_b = nodes[node\_b\_id];}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00173}00173                 \textcolor{keywordtype}{float} distance = node\_a.\mbox{\hyperlink{a02071_abbd66b566460f9557a373b5fbcc30bb1}{distanceTo}}(node\_b);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00174}00174 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00175}00175                 \textcolor{comment}{// Check if they have a clear line of sight. If they do, then add the distance}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00176}00176                 \textcolor{comment}{// between them, and node\_b's id to node\_a's edge and cost array. }}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00177}00177                 \textcolor{keywordflow}{if} (!\mbox{\hyperlink{a00401_a4d9cf77879eb78075f7f7b0a7e31119a}{IsOcclusionBetween}}(node\_a, nodes[node\_b\_id], ert, height, distance)) \{}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00177}00177                 \textcolor{keywordflow}{if} (!\mbox{\hyperlink{a00467_a4d9cf77879eb78075f7f7b0a7e31119a}{IsOcclusionBetween}}(node\_a, nodes[node\_b\_id], ert, height, distance)) \{}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00178}00178                     edge\_list.push\_back(node\_b\_id);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00179}00179                     cost\_list.push\_back(distance);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00180}00180                 \}}
@@ -133,13 +133,13 @@
 \DoxyCodeLine{\Hypertarget{a00026_source_l00182}00182         \}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00183}00183         \textcolor{comment}{// Construct and return a graph from the set of nodes, the edge array}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00184}00184         \textcolor{comment}{// and the node array.}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00185}00185         \textcolor{keywordflow}{return} \mbox{\hyperlink{a01485}{Graph}}(edges, costs, nodes);}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00185}00185         \textcolor{keywordflow}{return} \mbox{\hyperlink{a01551}{Graph}}(edges, costs, nodes);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00186}00186     \}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00187}00187 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00188}00188 }
-\DoxyCodeLine{\Hypertarget{a00026_source_l00189}\mbox{\hyperlink{a00401_ae42a5aafdfcc29b6a668355c07602efb}{00189}}     \mbox{\hyperlink{a01485}{Graph}} \mbox{\hyperlink{a00401_ae42a5aafdfcc29b6a668355c07602efb}{GroupToGroup}}(\mbox{\hyperlink{a01345}{EmbreeRayTracer}}\& ert, \textcolor{keyword}{const} vector<Node>\& from, \textcolor{keyword}{const} vector<Node>\& to, \textcolor{keywordtype}{float} height) \{}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00189}\mbox{\hyperlink{a00467_ae42a5aafdfcc29b6a668355c07602efb}{00189}}     \mbox{\hyperlink{a01551}{Graph}} \mbox{\hyperlink{a00467_ae42a5aafdfcc29b6a668355c07602efb}{GroupToGroup}}(\mbox{\hyperlink{a01411}{EmbreeRayTracer}}\& ert, \textcolor{keyword}{const} vector<Node>\& from, \textcolor{keyword}{const} vector<Node>\& to, \textcolor{keywordtype}{float} height) \{}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00190}00190         \textcolor{comment}{// Determine how many nodes are in both arrays}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00191}00191         \textcolor{keyword}{const} \textcolor{keywordtype}{int} from\_count = from.\mbox{\hyperlink{a01485_a2710af2a75976862d7a235793567d2f3}{size}}();}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00191}00191         \textcolor{keyword}{const} \textcolor{keywordtype}{int} from\_count = from.\mbox{\hyperlink{a01551_a2710af2a75976862d7a235793567d2f3}{size}}();}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00192}00192         \textcolor{keyword}{const} \textcolor{keywordtype}{int} to\_count = to.size();}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00193}00193 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00194}00194         \textcolor{comment}{// Create an jagged array of edges and costs based on how many nodes}}
@@ -158,8 +158,8 @@
 \DoxyCodeLine{\Hypertarget{a00026_source_l00207}00207         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (cores > 0) omp\_set\_num\_threads(cores);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00208}00208 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00209}00209         \textcolor{comment}{// Perform height check on every node in nodes.}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00210}00210         \textcolor{keyword}{auto} valid\_nodes = \mbox{\hyperlink{a00401_a05b8a83ab27113369c95649470d864b9}{HeightCheckAllNodes}}(from, height, ert);}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00211}00211         \textcolor{keyword}{auto} valid\_to\_nodes = \mbox{\hyperlink{a00401_a05b8a83ab27113369c95649470d864b9}{HeightCheckAllNodes}}(to, height, ert);}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00210}00210         \textcolor{keyword}{auto} valid\_nodes = \mbox{\hyperlink{a00467_a05b8a83ab27113369c95649470d864b9}{HeightCheckAllNodes}}(from, height, ert);}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00211}00211         \textcolor{keyword}{auto} valid\_to\_nodes = \mbox{\hyperlink{a00467_a05b8a83ab27113369c95649470d864b9}{HeightCheckAllNodes}}(to, height, ert);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00212}00212 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00213}00213         \textcolor{comment}{// Iterate through every node in valid\_nodes in parallel}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00214}00214 \textcolor{preprocessor}{\#pragma omp parallel for schedule(static)}}
@@ -167,7 +167,7 @@
 \DoxyCodeLine{\Hypertarget{a00026_source_l00216}00216             }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00217}00217             \textcolor{comment}{// Get the id, node, and references to its arrays.}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00218}00218             \textcolor{keywordtype}{int} \textcolor{keywordtype}{id} = valid\_nodes[i];}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00219}00219             \textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& node\_a = from[id];}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00219}00219             \textcolor{keyword}{const} \mbox{\hyperlink{a02071}{Node}}\& node\_a = from[id];}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00220}00220             vector<int>\& edge\_list = edges[id];}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00221}00221             vector<float>\& cost\_list = costs[id];}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00222}00222 }
@@ -176,14 +176,14 @@
 \DoxyCodeLine{\Hypertarget{a00026_source_l00225}00225 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00226}00226                 \textcolor{comment}{// Get the node at this ID in to}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00227}00227                 \textcolor{keywordtype}{int} to\_id = valid\_to\_nodes[k];}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00228}00228                 \textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& node\_b = to[to\_id];}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00228}00228                 \textcolor{keyword}{const} \mbox{\hyperlink{a02071}{Node}}\& node\_b = to[to\_id];}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00229}00229 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00230}00230                 \textcolor{comment}{// Calculate the distance between node\_a and node\_b}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00231}00231                 \textcolor{keywordtype}{float} distance = node\_a.\mbox{\hyperlink{a02005_abbd66b566460f9557a373b5fbcc30bb1}{distanceTo}}(node\_b);}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00231}00231                 \textcolor{keywordtype}{float} distance = node\_a.\mbox{\hyperlink{a02071_abbd66b566460f9557a373b5fbcc30bb1}{distanceTo}}(node\_b);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00232}00232 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00233}00233                 \textcolor{comment}{// Check if there's an occlusion between node\_a and node\_b. If they have}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00234}00234                 \textcolor{comment}{// a clear line of sight, then add the edge and cost to node\_a's arrays.}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00235}00235                 \textcolor{keywordflow}{if} (!\mbox{\hyperlink{a00401_a4d9cf77879eb78075f7f7b0a7e31119a}{IsOcclusionBetween}}(node\_a, node\_b, ert, height, distance)) \{}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00235}00235                 \textcolor{keywordflow}{if} (!\mbox{\hyperlink{a00467_a4d9cf77879eb78075f7f7b0a7e31119a}{IsOcclusionBetween}}(node\_a, node\_b, ert, height, distance)) \{}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00236}00236 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00237}00237                     edge\_list.push\_back(to\_id + from\_count);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00238}00238                     cost\_list.push\_back(distance);}
@@ -197,11 +197,11 @@
 \DoxyCodeLine{\Hypertarget{a00026_source_l00246}00246         std::copy(to.begin(), to.end(), graph\_nodes.begin() + from.size());}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00247}00247 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00248}00248         \textcolor{comment}{// Create a new graph. }}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00249}00249         \textcolor{keywordflow}{return} \mbox{\hyperlink{a01485}{Graph}}(edges, costs, graph\_nodes);}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00249}00249         \textcolor{keywordflow}{return} \mbox{\hyperlink{a01551}{Graph}}(edges, costs, graph\_nodes);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00250}00250     \}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00251}00251 }
-\DoxyCodeLine{\Hypertarget{a00026_source_l00252}\mbox{\hyperlink{a00401_ab1db87927118f70786a664c3b3cc7905}{00252}}     \mbox{\hyperlink{a01485}{Graph}} \mbox{\hyperlink{a00401_ab1db87927118f70786a664c3b3cc7905}{AllToAllUndirected}}(\mbox{\hyperlink{a01345}{EmbreeRayTracer}}\& ert, \textcolor{keyword}{const} vector<Node>\& nodes, \textcolor{keywordtype}{float} height, \textcolor{keywordtype}{int} cores) \{}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00253}00253         \textcolor{keyword}{const} \textcolor{keywordtype}{int} n = nodes.\mbox{\hyperlink{a01485_a2710af2a75976862d7a235793567d2f3}{size}}();}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00252}\mbox{\hyperlink{a00467_ab1db87927118f70786a664c3b3cc7905}{00252}}     \mbox{\hyperlink{a01551}{Graph}} \mbox{\hyperlink{a00467_ab1db87927118f70786a664c3b3cc7905}{AllToAllUndirected}}(\mbox{\hyperlink{a01411}{EmbreeRayTracer}}\& ert, \textcolor{keyword}{const} vector<Node>\& nodes, \textcolor{keywordtype}{float} height, \textcolor{keywordtype}{int} cores) \{}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00253}00253         \textcolor{keyword}{const} \textcolor{keywordtype}{int} n = nodes.\mbox{\hyperlink{a01551_a2710af2a75976862d7a235793567d2f3}{size}}();}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00254}00254         vector<vector<int>> edges(n);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00255}00255         vector<vector<float>> costs(n);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00256}00256 }
@@ -214,7 +214,7 @@
 \DoxyCodeLine{\Hypertarget{a00026_source_l00263}00263             omp\_set\_num\_threads(cores);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00264}00264 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00265}00265         \textcolor{comment}{// Perform a height check on every node}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00266}00266         \textcolor{keyword}{const} \textcolor{keyword}{auto} valid\_nodes = \mbox{\hyperlink{a00401_a05b8a83ab27113369c95649470d864b9}{HeightCheckAllNodes}}(nodes, height, ert);}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00266}00266         \textcolor{keyword}{const} \textcolor{keyword}{auto} valid\_nodes = \mbox{\hyperlink{a00467_a05b8a83ab27113369c95649470d864b9}{HeightCheckAllNodes}}(nodes, height, ert);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00267}00267 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00268}00268         \textcolor{comment}{// Iterate through every node in nodes}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00269}00269 \textcolor{preprocessor}{\#pragma omp parallel}}
@@ -224,7 +224,7 @@
 \DoxyCodeLine{\Hypertarget{a00026_source_l00273}00273                 }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00274}00274                 \textcolor{comment}{// Get the node and a reference to its edge/cost arrays}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00275}00275                 \textcolor{keywordtype}{int} node\_a\_id = valid\_nodes[i];}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00276}00276                 \textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& node\_a = nodes[node\_a\_id];}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00276}00276                 \textcolor{keyword}{const} \mbox{\hyperlink{a02071}{Node}}\& node\_a = nodes[node\_a\_id];}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00277}00277                 vector<int>\& edge\_list = edges[node\_a\_id];}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00278}00278                 vector<float>\& cost\_list = costs[node\_a\_id];}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00279}00279 }
@@ -235,11 +235,11 @@
 \DoxyCodeLine{\Hypertarget{a00026_source_l00284}00284                     }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00285}00285                     \textcolor{comment}{// Get the second node in nodes}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00286}00286                     \textcolor{keywordtype}{int} node\_b\_id = valid\_nodes[k];}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00287}00287                     \textcolor{keyword}{const} \mbox{\hyperlink{a02005}{Node}}\& node\_b = nodes[node\_b\_id];}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00288}00288                     \textcolor{keywordtype}{float} distance = node\_a.\mbox{\hyperlink{a02005_abbd66b566460f9557a373b5fbcc30bb1}{distanceTo}}(node\_b);}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00287}00287                     \textcolor{keyword}{const} \mbox{\hyperlink{a02071}{Node}}\& node\_b = nodes[node\_b\_id];}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00288}00288                     \textcolor{keywordtype}{float} distance = node\_a.\mbox{\hyperlink{a02071_abbd66b566460f9557a373b5fbcc30bb1}{distanceTo}}(node\_b);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00289}00289                     }
 \DoxyCodeLine{\Hypertarget{a00026_source_l00290}00290                     \textcolor{comment}{// Add an edge to this node's arrays if it has a line of sight}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00291}00291                     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{a00401_a4d9cf77879eb78075f7f7b0a7e31119a}{IsOcclusionBetween}}(node\_a, nodes[k], ert, height, distance)) \{}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00291}00291                     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{a00467_a4d9cf77879eb78075f7f7b0a7e31119a}{IsOcclusionBetween}}(node\_a, nodes[k], ert, height, distance)) \{}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00292}00292                         edge\_list.emplace\_back(node\_b\_id);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00293}00293                         cost\_list.emplace\_back(distance);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00294}00294                     \}}
@@ -247,7 +247,7 @@
 \DoxyCodeLine{\Hypertarget{a00026_source_l00296}00296             \}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00297}00297         \}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00298}00298         \textcolor{comment}{// Create and return a new graph from this information.}}
-\DoxyCodeLine{\Hypertarget{a00026_source_l00299}00299         \textcolor{keywordflow}{return} \mbox{\hyperlink{a01485}{Graph}}(edges, costs, nodes);}
+\DoxyCodeLine{\Hypertarget{a00026_source_l00299}00299         \textcolor{keywordflow}{return} \mbox{\hyperlink{a01551}{Graph}}(edges, costs, nodes);}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00300}00300     \}}
 \DoxyCodeLine{\Hypertarget{a00026_source_l00301}00301 \}}
 

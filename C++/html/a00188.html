@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>DHART: Cpp/spatialstructures/src/cost_algorithms.cpp File Reference</title>
+<title>DHART: Cpp/objloader/src/objloader.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -93,22 +93,29 @@ $(document).ready(function(){initNavTree('a00188.html',''); initResizable(); });
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">cost_algorithms.cpp File Reference</div></div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">objloader.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cmath&gt;</code><br />
-<code>#include &lt;algorithm&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00191_source.html">cost_algorithms.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00203_source.html">graph.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00185_source.html">Constants.h</a>&quot;</code><br />
+
+<p>Contains implementation for the <a class="el" href="a00469.html">Geometry</a> namespace.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;<a class="el" href="a00191_source.html">objloader.h</a>&gt;</code><br />
+<code>#include &lt;Dense&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00185_source.html">meshinfo.h</a>&gt;</code><br />
+<code>#include &lt;tiny_obj_loader.h&gt;</code><br />
+<code>#include &lt;robin_hood.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00176_source.html">HFExceptions.h</a>&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;filesystem&gt;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for cost_algorithms.cpp:</div>
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for objloader.cpp:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00189.svg" width="743" height="352"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00189.svg" width="907" height="262"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
@@ -116,51 +123,95 @@ $(document).ready(function(){initNavTree('a00188.html',''); initResizable(); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00396"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00396.html">HF</a></td></tr>
-<tr class="memdesc:a00396"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform human scale analysis on 3D environments. <br /></td></tr>
+<tr class="memitem:a00462"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00462.html">HF</a></td></tr>
+<tr class="memdesc:a00462"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform human scale analysis on 3D environments. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00399"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00399.html">HF::SpatialStructures</a></td></tr>
-<tr class="memdesc:a00399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains standard fundamental data structures for representing space used throughout DHARTAPI. <br /></td></tr>
+<tr class="memitem:a00470"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00470.html">HF::nanoGeom</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00409"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00409.html">HF::SpatialStructures::CostAlgorithms</a></td></tr>
+<tr class="memitem:a00469"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00469.html">HF::Geometry</a></td></tr>
+<tr class="memdesc:a00469"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manipulate and load geometry from disk. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a525335710b53cb064ca56b936120431e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00188.html#a525335710b53cb064ca56b936120431e">_USE_MATH_DEFINES</a></td></tr>
-<tr class="separator:a525335710b53cb064ca56b936120431e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af14fac7fbc250522a78849d58d5b0811"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00188.html#af14fac7fbc250522a78849d58d5b0811">TINYOBJLOADER_IMPLEMENTATION</a></td></tr>
+<tr class="memdesc:af14fac7fbc250522a78849d58d5b0811"><td class="mdescLeft">&#160;</td><td class="mdescRight">This MUST be defined before importing tiny_obj_loader.h.  <a href="a00188.html#af14fac7fbc250522a78849d58d5b0811">More...</a><br /></td></tr>
+<tr class="separator:af14fac7fbc250522a78849d58d5b0811"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1ceae03a73fd42494508a2d57eaf1fe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00188.html#ad1ceae03a73fd42494508a2d57eaf1fe">TINYOBJLOADER_USE_DOUBLE</a></td></tr>
+<tr class="separator:ad1ceae03a73fd42494508a2d57eaf1fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae7b446fefe0b9994859f47b85de79039"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00001.html#a02073">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00409.html#ae7b446fefe0b9994859f47b85de79039">HF::SpatialStructures::CostAlgorithms::to_radians</a> (<a class="el" href="a00001.html#a02073">double</a> degrees)</td></tr>
-<tr class="separator:ae7b446fefe0b9994859f47b85de79039"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adee2fb2573f4dbc2e5c7db153dff2694"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00001.html#a02073">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00409.html#adee2fb2573f4dbc2e5c7db153dff2694">HF::SpatialStructures::CostAlgorithms::to_degrees</a> (<a class="el" href="a00001.html#a02073">double</a> radians)</td></tr>
-<tr class="separator:adee2fb2573f4dbc2e5c7db153dff2694"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae06eb693d0d7858d7a863fae3a6eee2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00001.html#a02073">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00409.html#ae06eb693d0d7858d7a863fae3a6eee2c">HF::SpatialStructures::CostAlgorithms::CalculateSlope</a> (<a class="el" href="a02005.html">Node</a> &amp;parent, <a class="el" href="a02005.html">Node</a> &amp;child)</td></tr>
-<tr class="separator:ae06eb693d0d7858d7a863fae3a6eee2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac51f2e76c00356f8a6145bee865cd922"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01469.html">EdgeSet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00409.html#ac51f2e76c00356f8a6145bee865cd922">HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure</a> (const <a class="el" href="a00399.html#a01477">Subgraph</a> &amp;sg)</td></tr>
-<tr class="separator:ac51f2e76c00356f8a6145bee865cd922"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbe5e58355a884494d6e99bf17fc5f7b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="a01469.html">EdgeSet</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00409.html#adbe5e58355a884494d6e99bf17fc5f7b">HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure</a> (const <a class="el" href="a01485.html">Graph</a> &amp;g)</td></tr>
-<tr class="separator:adbe5e58355a884494d6e99bf17fc5f7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51b88e596c3b5f68b7abbcbc91e30bdf"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="a01465.html">IntEdge</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00409.html#a51b88e596c3b5f68b7abbcbc91e30bdf">HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope</a> (const <a class="el" href="a00399.html#a01477">Subgraph</a> &amp;sg)</td></tr>
-<tr class="separator:a51b88e596c3b5f68b7abbcbc91e30bdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d12a3af69887cb335b490304138afc6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; <a class="el" href="a01465.html">IntEdge</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00409.html#a6d12a3af69887cb335b490304138afc6">HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope</a> (const <a class="el" href="a01485.html">Graph</a> &amp;g)</td></tr>
-<tr class="separator:a6d12a3af69887cb335b490304138afc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8e91aefa202de3abee6fd9914299e46"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00470.html#ad8e91aefa202de3abee6fd9914299e46">HF::nanoGeom::LoadObj</a> (Mesh &amp;mesh, const char *filename)</td></tr>
+<tr class="separator:ad8e91aefa202de3abee6fd9914299e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aece9b1559429cfcd59fc5c60bc3dc5b1"><td class="memItemLeft" align="right" valign="top">tinyobj::ObjReader&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00469.html#aece9b1559429cfcd59fc5c60bc3dc5b1">HF::Geometry::CreateReader</a> (const std::string &amp;path)</td></tr>
+<tr class="separator:aece9b1559429cfcd59fc5c60bc3dc5b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d0272a1cc56fb0cb8fa5a0b968797ed"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a1d0272a1cc56fb0cb8fa5a0b968797ed"><td class="memTemplItemLeft" align="right" valign="top">tinyobj_shape&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00469.html#a1d0272a1cc56fb0cb8fa5a0b968797ed">HF::Geometry::MakeShape</a> (const tinyobj::shape_t &amp;shape)</td></tr>
+<tr class="separator:a1d0272a1cc56fb0cb8fa5a0b968797ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02e98028a7e54dc32b0f148f0b6d1ba5"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a02e98028a7e54dc32b0f148f0b6d1ba5"><td class="memTemplItemLeft" align="right" valign="top">vector&lt; tinyobj_shape&lt; T &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00469.html#a02e98028a7e54dc32b0f148f0b6d1ba5">HF::Geometry::MakeShapes</a> (const vector&lt; tinyobj::shape_t &gt; &amp;shapes)</td></tr>
+<tr class="separator:a02e98028a7e54dc32b0f148f0b6d1ba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc6b7e5052eb1564d1bb3c67d9f93031"><td class="memItemLeft" align="right" valign="top">vector&lt; tinyobj_material &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00469.html#abc6b7e5052eb1564d1bb3c67d9f93031">HF::Geometry::MakeMaterials</a> (const vector&lt; tinyobj::material_t &gt; &amp;materials)</td></tr>
+<tr class="separator:abc6b7e5052eb1564d1bb3c67d9f93031"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bbdc23c626ed431d5a084722c22f99f"><td class="memItemLeft" align="right" valign="top">tinyobj_geometry&lt; <a class="el" href="a00001.html#a02139">double</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00469.html#a9bbdc23c626ed431d5a084722c22f99f">HF::Geometry::LoadMeshesFromTinyOBJ</a> (std::string path)</td></tr>
+<tr class="separator:a9bbdc23c626ed431d5a084722c22f99f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06c0c11adb62f8b204e42f75ac1990ac"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="a00428.html#acea841c68a73d07ad9d772ec2e94a683">MeshInfo</a>&lt; float &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00469.html#a06c0c11adb62f8b204e42f75ac1990ac">HF::Geometry::LoadMeshObjects</a> (std::string path, GROUP_METHOD gm=ONLY_FILE, bool change_coords=false, int scale=1)</td></tr>
+<tr class="memdesc:a06c0c11adb62f8b204e42f75ac1990ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create <a class="el" href="a01351.html" title="A collection of vertices and indices representing geometry.">MeshInfo</a> instances from the OBJ at path.   <a href="a00469.html#a06c0c11adb62f8b204e42f75ac1990ac">More...</a><br /></td></tr>
+<tr class="separator:a06c0c11adb62f8b204e42f75ac1990ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec1df746155d224838048d3a43c2fe96"><td class="memItemLeft" align="right" valign="top">vector&lt; array&lt; float, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00469.html#aec1df746155d224838048d3a43c2fe96">HF::Geometry::LoadRawVertices</a> (std::string path)</td></tr>
+<tr class="memdesc:aec1df746155d224838048d3a43c2fe96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a list of vertices directly from an OBJ file.  <a href="a00469.html#aec1df746155d224838048d3a43c2fe96">More...</a><br /></td></tr>
+<tr class="separator:aec1df746155d224838048d3a43c2fe96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adec2459f5c4ee10fd9d2154114d751de"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00469.html#adec2459f5c4ee10fd9d2154114d751de">HF::Geometry::GetTestOBJPath</a> (std::string key)</td></tr>
+<tr class="memdesc:adec2459f5c4ee10fd9d2154114d751de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the path to the OBJ with the given key.  <a href="a00469.html#adec2459f5c4ee10fd9d2154114d751de">More...</a><br /></td></tr>
+<tr class="separator:adec2459f5c4ee10fd9d2154114d751de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e3b85fb47ef06f7693802f3fe90e996"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="a00428.html#acea841c68a73d07ad9d772ec2e94a683">MeshInfo</a>&lt; float &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00469.html#a5e3b85fb47ef06f7693802f3fe90e996">HF::Geometry::LoadMeshObjects</a> (std::vector&lt; std::string &gt; &amp;path, GROUP_METHOD gm=ONLY_FILE, bool change_coords=false, int scale=1)</td></tr>
+<tr class="memdesc:a5e3b85fb47ef06f7693802f3fe90e996"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create <a class="el" href="a01351.html" title="A collection of vertices and indices representing geometry.">MeshInfo</a> instances from the OBJ files in path.   <a href="a00469.html#a5e3b85fb47ef06f7693802f3fe90e996">More...</a><br /></td></tr>
+<tr class="separator:a5e3b85fb47ef06f7693802f3fe90e996"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a13874b607886c8f427b2a8f332148553"><td class="memItemLeft" align="right" valign="top">static robin_hood::unordered_map&lt; string, string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00469.html#a13874b607886c8f427b2a8f332148553">HF::Geometry::test_model_paths</a></td></tr>
+<tr class="separator:a13874b607886c8f427b2a8f332148553"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a525335710b53cb064ca56b936120431e" name="a525335710b53cb064ca56b936120431e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a525335710b53cb064ca56b936120431e">&#9670;&#160;</a></span>_USE_MATH_DEFINES</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Contains implementation for the <a class="el" href="a00469.html">Geometry</a> namespace. </p>
+<dl class="section author"><dt>Author</dt><dd>TBA </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16 Jun 2020 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="a00188_source.html">objloader.cpp</a>.</p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="af14fac7fbc250522a78849d58d5b0811" name="af14fac7fbc250522a78849d58d5b0811"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af14fac7fbc250522a78849d58d5b0811">&#9670;&#160;</a></span>TINYOBJLOADER_IMPLEMENTATION</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define _USE_MATH_DEFINES</td>
+          <td class="memname">#define TINYOBJLOADER_IMPLEMENTATION</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00188_source.html#l00009">9</a> of file <a class="el" href="a00188_source.html">cost_algorithms.cpp</a>.</p>
+<p>This MUST be defined before importing tiny_obj_loader.h. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00188_source.html#l00011">11</a> of file <a class="el" href="a00188_source.html">objloader.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ad1ceae03a73fd42494508a2d57eaf1fe" name="ad1ceae03a73fd42494508a2d57eaf1fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1ceae03a73fd42494508a2d57eaf1fe">&#9670;&#160;</a></span>TINYOBJLOADER_USE_DOUBLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TINYOBJLOADER_USE_DOUBLE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00188_source.html#l00012">12</a> of file <a class="el" href="a00188_source.html">objloader.cpp</a>.</p>
 
 </div>
 </div>
@@ -169,7 +220,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_66731bdf74d76a38b2c500ac62cfdf48.html">spatialstructures</a></li><li class="navelem"><a class="el" href="dir_7fdf8b1285a3d76ae7bf3420b7ffebee.html">src</a></li><li class="navelem"><a class="el" href="a00188.html">cost_algorithms.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_46f038d98c29b85ae873c4d3a30697d6.html">objloader</a></li><li class="navelem"><a class="el" href="dir_e8729f7e450b4a44d154406cba6833f7.html">src</a></li><li class="navelem"><a class="el" href="a00188.html">objloader.cpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
   </ul>
 </div>

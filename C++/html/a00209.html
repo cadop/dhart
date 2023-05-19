@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>DHART: Cpp/spatialstructures/src/node.h File Reference</title>
+<title>DHART: Cpp/raytracer/src/embree_raytracer.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -93,31 +93,28 @@ $(document).ready(function(){initNavTree('a00209.html',''); initResizable(); });
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">node.h File Reference</div></div>
+  <div class="headertitle"><div class="title">embree_raytracer.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Contains definitions for the <a class="el" href="a02005.html">Node</a> structure.  
+<p>Contains implementation for the <a class="el" href="a01411.html">EmbreeRayTracer</a>  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;array&gt;</code><br />
-<code>#include &lt;ostream&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="a00212_source.html">embree_raytracer.h</a>&gt;</code><br />
+<code>#include &lt;corecrt_math_defines.h&gt;</code><br />
+<code>#include &lt;functional&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;thread&gt;</code><br />
+<code>#include &lt;robin_hood.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00185_source.html">meshinfo.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00236_source.html">RayRequest.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00176_source.html">HFExceptions.h</a>&gt;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for node.h:</div>
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for embree_raytracer.cpp:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00210.svg" width="160" height="128"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-</div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00211.svg" width="1899" height="326"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00210.svg" width="1259" height="203"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
@@ -125,72 +122,147 @@ $(document).ready(function(){initNavTree('a00209.html',''); initResizable(); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02005.html">HF::SpatialStructures::Node</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A point in space with an ID.   <a href="a02005.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02009.html">std::hash&lt; HF::SpatialStructures::Node &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hash this node by combining the hashes of all of it's position elements.  <a href="a02009.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01399"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00464.html#a01399">HF::RayTracer::Vertex</a></td></tr>
+<tr class="memdesc:a01399"><td class="mdescLeft">&#160;</td><td class="mdescRight">A vertex. Used internally in Embree.   <a href="a00464.html#a01399">More...</a><br /></td></tr>
+<tr class="separator:a01399"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01403"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00464.html#a01403">HF::RayTracer::Triangle</a></td></tr>
+<tr class="memdesc:a01403"><td class="mdescLeft">&#160;</td><td class="mdescRight">A triangle. Used internally in Embree.   <a href="a00464.html#a01403">More...</a><br /></td></tr>
+<tr class="separator:a01403"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00396"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00396.html">HF</a></td></tr>
-<tr class="memdesc:a00396"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform human scale analysis on 3D environments. <br /></td></tr>
+<tr class="memitem:a00462"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00462.html">HF</a></td></tr>
+<tr class="memdesc:a00462"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform human scale analysis on 3D environments. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00399"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00399.html">HF::SpatialStructures</a></td></tr>
-<tr class="memdesc:a00399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains standard fundamental data structures for representing space used throughout DHARTAPI. <br /></td></tr>
+<tr class="memitem:a00464"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00464.html">HF::RayTracer</a></td></tr>
+<tr class="memdesc:a00464"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast rays to determine if and where they intersect geometry. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00395"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00395.html">std</a></td></tr>
-<tr class="memdesc:a00395"><td class="mdescLeft">&#160;</td><td class="mdescRight">STL namespace. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ae4ffe42f069a68102473a4f7c8328437"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00209.html#ae4ffe42f069a68102473a4f7c8328437">HF_NODE</a></td></tr>
-<tr class="separator:ae4ffe42f069a68102473a4f7c8328437"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:aa8ecd83cd353318532d791fc819343cc"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00399.html#aa8ecd83cd353318532d791fc819343cc">HF::SpatialStructures::NODE_TYPE</a> { <a class="el" href="a00399.html#aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8">HF::SpatialStructures::GRAPH</a> = 0
-, <a class="el" href="a00399.html#aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad">HF::SpatialStructures::POI</a> = 1
-, <a class="el" href="a00399.html#aa8ecd83cd353318532d791fc819343cca996f30fa669937983b628671c4493b8e">HF::SpatialStructures::OTHER</a> = 2
- }</td></tr>
-<tr class="memdesc:aa8ecd83cd353318532d791fc819343cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of node this is.  <a href="a00399.html#aa8ecd83cd353318532d791fc819343cc">More...</a><br /></td></tr>
-<tr class="separator:aa8ecd83cd353318532d791fc819343cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3340e7ae931e28e5c83e07f1d48d3ea2"><td class="memTemplParams" colspan="2">template&lt;typename SizeT &gt; </td></tr>
-<tr class="memitem:a3340e7ae931e28e5c83e07f1d48d3ea2"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00395.html#a3340e7ae931e28e5c83e07f1d48d3ea2">std::hash_combine_impl</a> (SizeT &amp;seed, SizeT value) noexcept</td></tr>
-<tr class="memdesc:a3340e7ae931e28e5c83e07f1d48d3ea2"><td class="mdescLeft">&#160;</td><td class="mdescRight">combine value into the hash value of seed  <a href="a00395.html#a3340e7ae931e28e5c83e07f1d48d3ea2">More...</a><br /></td></tr>
-<tr class="separator:a3340e7ae931e28e5c83e07f1d48d3ea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f937593ac78b8c8c74c0a02b8a22124"><td class="memItemLeft" align="right" valign="top">ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00395.html#a8f937593ac78b8c8c74c0a02b8a22124">std::operator&lt;&lt;</a> (ostream &amp;os, const <a class="el" href="a02005.html">HF::SpatialStructures::Node</a> n)</td></tr>
-<tr class="memdesc:a8f937593ac78b8c8c74c0a02b8a22124"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a string containing the x,y,z position of this node.  <a href="a00395.html#a8f937593ac78b8c8c74c0a02b8a22124">More...</a><br /></td></tr>
-<tr class="separator:a8f937593ac78b8c8c74c0a02b8a22124"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a355c64f937cab181506eb61a8dde2006"><td class="memItemLeft" align="right" valign="top">ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00395.html#a355c64f937cab181506eb61a8dde2006">std::operator&lt;&lt;</a> (ostream &amp;os, const std::array&lt; float, 3 &gt; n)</td></tr>
-<tr class="memdesc:a355c64f937cab181506eb61a8dde2006"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a string containing the x,y,z positions of this array.  <a href="a00395.html#a355c64f937cab181506eb61a8dde2006">More...</a><br /></td></tr>
-<tr class="separator:a355c64f937cab181506eb61a8dde2006"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a864ebcf0023de27e610ee897de5436c2"><td class="memTemplParams" colspan="2">template&lt;typename numeric1 , typename numeric2 , typename dist_type  = float&gt; </td></tr>
+<tr class="memitem:a864ebcf0023de27e610ee897de5436c2"><td class="memTemplItemLeft" align="right" valign="top">RTCRayHit&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00464.html#a864ebcf0023de27e610ee897de5436c2">HF::RayTracer::ConstructHit</a> (numeric1 x, numeric1 y, numeric1 z, numeric2 dx, numeric2 dy, numeric2 dz, dist_type distance=-1.0f, int mesh_id=-1)</td></tr>
+<tr class="separator:a864ebcf0023de27e610ee897de5436c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76e5d26b5063f0e5b49b4ba835f1da93"><td class="memTemplParams" colspan="2">template&lt;typename numeric1 , typename numeric2 , typename dist_type  = float&gt; </td></tr>
+<tr class="memitem:a76e5d26b5063f0e5b49b4ba835f1da93"><td class="memTemplItemLeft" align="right" valign="top">RTCRay&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00464.html#a76e5d26b5063f0e5b49b4ba835f1da93">HF::RayTracer::ConstructRay</a> (numeric1 x, numeric1 y, numeric1 z, numeric2 dx, numeric2 dy, numeric2 dz, dist_type distance=-1.0f, int mesh_id=-1)</td></tr>
+<tr class="separator:a76e5d26b5063f0e5b49b4ba835f1da93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19e11d13f73136d6819b8abee57b0fd9"><td class="memItemLeft" align="right" valign="top">RTCError&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00464.html#a19e11d13f73136d6819b8abee57b0fd9">HF::RayTracer::CheckState</a> (RTCDevice &amp;device)</td></tr>
+<tr class="memdesc:a19e11d13f73136d6819b8abee57b0fd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check an embree device for errors.   <a href="a00464.html#a19e11d13f73136d6819b8abee57b0fd9">More...</a><br /></td></tr>
+<tr class="separator:a19e11d13f73136d6819b8abee57b0fd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a732eb910d06064bea04e6a959fd235f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00464.html#a732eb910d06064bea04e6a959fd235f0">HF::RayTracer::vectorsToBuffers</a> (const std::vector&lt; std::array&lt; float, 3 &gt; &gt; &amp;vertices, std::vector&lt; Triangle &gt; &amp;Tribuffer, std::vector&lt; Vertex &gt; &amp;Vbuffer)</td></tr>
+<tr class="memdesc:a732eb910d06064bea04e6a959fd235f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index a list of verticies and place them into a triangle and vertex buffer.   <a href="a00464.html#a732eb910d06064bea04e6a959fd235f0">More...</a><br /></td></tr>
+<tr class="separator:a732eb910d06064bea04e6a959fd235f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac8c0b245ea813969c50b6496cc67945"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00464.html#aac8c0b245ea813969c50b6496cc67945">HF::RayTracer::buffersToStructs</a> (std::vector&lt; float &gt; &amp;in_vertices, std::vector&lt; int &gt; &amp;in_indices, std::vector&lt; Vertex &gt; &amp;out_vertices, std::vector&lt; Triangle &gt; &amp;out_triangles)</td></tr>
+<tr class="memdesc:aac8c0b245ea813969c50b6496cc67945"><td class="mdescLeft">&#160;</td><td class="mdescRight">Package raw arrays of floats and indices in buffers to the required Embree types.   <a href="a00464.html#aac8c0b245ea813969c50b6496cc67945">More...</a><br /></td></tr>
+<tr class="separator:aac8c0b245ea813969c50b6496cc67945"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16f9f26b0140f023ce820ec55e38c66b"><td class="memItemLeft" align="right" valign="top">Vector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00464.html#a16f9f26b0140f023ce820ec55e38c66b">HF::RayTracer::cross</a> (const Vector3D &amp;x, const Vector3D &amp;y)</td></tr>
+<tr class="separator:a16f9f26b0140f023ce820ec55e38c66b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae551c109488ce94d0a568712b50da689"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00001.html#a02139">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00464.html#ae551c109488ce94d0a568712b50da689">HF::RayTracer::dot</a> (const Vector3D &amp;v1, const Vector3D &amp;v2)</td></tr>
+<tr class="separator:ae551c109488ce94d0a568712b50da689"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac419170961bff9b1236fe017f6bc3289"><td class="memItemLeft" align="right" valign="top">Vector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00464.html#ac419170961bff9b1236fe017f6bc3289">HF::RayTracer::InvertVector</a> (const Vector3D &amp;V)</td></tr>
+<tr class="separator:ac419170961bff9b1236fe017f6bc3289"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9498ae7ffabd8c5bca4026374ac862e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00001.html#a02139">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00464.html#a9498ae7ffabd8c5bca4026374ac862e9">HF::RayTracer::RayTriangleIntersection</a> (const Vector3D &amp;origin, const Vector3D &amp;direction, const Vector3D &amp;v1, const Vector3D &amp;v2, const Vector3D &amp;v3)</td></tr>
+<tr class="memdesc:a9498ae7ffabd8c5bca4026374ac862e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine the distance between a ray's origin and it's point of intersection with a triangle.  <a href="a00464.html#a9498ae7ffabd8c5bca4026374ac862e9">More...</a><br /></td></tr>
+<tr class="separator:a9498ae7ffabd8c5bca4026374ac862e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e20c473674ea46f649ef827818841d2"><td class="memItemLeft" align="right" valign="top">Vector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00464.html#a6e20c473674ea46f649ef827818841d2">HF::RayTracer::GetPointFromBuffer</a> (int index, Vertex *buffer)</td></tr>
+<tr class="separator:a6e20c473674ea46f649ef827818841d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Contains definitions for the <a class="el" href="a02005.html">Node</a> structure. </p>
+<div class="textblock"><p >Contains implementation for the <a class="el" href="a01411.html">EmbreeRayTracer</a> </p>
 <dl class="section author"><dt>Author</dt><dd>TBA </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>06 Jun 2020 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>26 Jun 2020 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="a00209_source.html">node.h</a>.</p>
-</div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="ae4ffe42f069a68102473a4f7c8328437" name="ae4ffe42f069a68102473a4f7c8328437"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4ffe42f069a68102473a4f7c8328437">&#9670;&#160;</a></span>HF_NODE</h2>
+<p class="definition">Definition in file <a class="el" href="a00209_source.html">embree_raytracer.cpp</a>.</p>
+</div><hr/><h2 class="groupheader">Class Documentation</h2>
+<a name="a01399" id="a01399"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01399">&#9670;&#160;</a></span>HF::RayTracer::Vertex</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define HF_NODE</td>
+          <td class="memname">struct HF::RayTracer::Vertex</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<div class="textblock"><p >A vertex. Used internally in Embree.  </p>
 
-<p class="definition">Definition at line <a class="el" href="a00209_source.html#l00011">11</a> of file <a class="el" href="a00209_source.html">node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00209_source.html#l00077">77</a> of file <a class="el" href="a00209_source.html">embree_raytracer.cpp</a>.</p>
+</div><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for HF::RayTracer::Vertex:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a01397.svg" width="163" height="160"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="aad8e270f026ac9dd20ee294b2b1a21de" name="aad8e270f026ac9dd20ee294b2b1a21de"></a>float</td>
+<td class="fieldname">
+x</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="aa27c7b22316499f43093c2b7768c06ea" name="aa27c7b22316499f43093c2b7768c06ea"></a>float</td>
+<td class="fieldname">
+y</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ab8599cc6220e686dac319622f7d2f364" name="ab8599cc6220e686dac319622f7d2f364"></a>float</td>
+<td class="fieldname">
+z</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="a01403" id="a01403"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01403">&#9670;&#160;</a></span>HF::RayTracer::Triangle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct HF::RayTracer::Triangle</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"><p >A triangle. Used internally in Embree.  </p>
+
+<p class="definition">Definition at line <a class="el" href="a00209_source.html#l00082">82</a> of file <a class="el" href="a00209_source.html">embree_raytracer.cpp</a>.</p>
+</div><div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Collaboration diagram for HF::RayTracer::Triangle:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a01401.svg" width="170" height="160"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="a504a02b108984ddfa3f521cf40b17e61" name="a504a02b108984ddfa3f521cf40b17e61"></a>int</td>
+<td class="fieldname">
+v0</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="afc086ccfe3fc951af959d905056358c4" name="afc086ccfe3fc951af959d905056358c4"></a>int</td>
+<td class="fieldname">
+v1</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ab7bfa105fb125dfc9e31ecf8cbf0f9fa" name="ab7bfa105fb125dfc9e31ecf8cbf0f9fa"></a>int</td>
+<td class="fieldname">
+v2</td>
+<td class="fielddoc">
+</td></tr>
+</table>
 
 </div>
 </div>
@@ -199,7 +271,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_66731bdf74d76a38b2c500ac62cfdf48.html">spatialstructures</a></li><li class="navelem"><a class="el" href="dir_7fdf8b1285a3d76ae7bf3420b7ffebee.html">src</a></li><li class="navelem"><a class="el" href="a00209.html">node.h</a></li>
+    <li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_1061d284018fbd45bbbfc991ca095c8e.html">raytracer</a></li><li class="navelem"><a class="el" href="dir_198e8c151f4aa06153c41e30091296f4.html">src</a></li><li class="navelem"><a class="el" href="a00209.html">embree_raytracer.cpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
   </ul>
 </div>

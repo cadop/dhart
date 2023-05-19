@@ -1,10 +1,10 @@
 var modules =
 [
-    [ "Geometry", "a00389.html", "a00389" ],
-    [ "GraphGenerator", "a00388.html", "a00388" ],
-    [ "Pathfinding", "a00390.html", "a00390" ],
-    [ "RayTracer", "a00391.html", "a00391" ],
-    [ "SpatialStructures", "a00392.html", "a00392" ],
-    [ "ViewAnalysis", "a00393.html", "a00393" ],
-    [ "VisibilityGraph", "a00394.html", "a00394" ]
+    [ "Geometry", "a00455.html", "a00455" ],
+    [ "GraphGenerator", "a00454.html", "a00454" ],
+    [ "Pathfinding", "a00456.html", "a00456" ],
+    [ "RayTracer", "a00457.html", "a00457" ],
+    [ "SpatialStructures", "a00458.html", "a00458" ],
+    [ "ViewAnalysis", "a00459.html", "a00459" ],
+    [ "VisibilityGraph", "a00460.html", "a00460" ]
 ];

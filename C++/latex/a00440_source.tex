@@ -1,0 +1,161 @@
+\hypertarget{a00440_source}{}\doxysection{view\+\_\+analysis\+\_\+\+C.\+cpp}
+\label{a00440_source}\index{Cinterface/view\_analysis\_C.cpp@{Cinterface/view\_analysis\_C.cpp}}
+\mbox{\hyperlink{a00440}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00001}00001 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00443}{view\_analysis\_C.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00002}00002 \textcolor{preprocessor}{\#include <robin\_hood.h>}}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00004}00004 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00176}{HFExceptions.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00005}00005 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00023}{view\_analysis.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00006}00006 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00212}{embree\_raytracer.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00007}00007 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00269}{graph.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00008}00008 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00275}{node.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00009}00009 }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00010}00010 \textcolor{keyword}{using }\mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}};}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00011}00011 \textcolor{keyword}{using namespace }\mbox{\hyperlink{a00468}{HF::Exceptions}};}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00012}00012 \textcolor{keyword}{using }\mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}};}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00013}00013 \textcolor{keyword}{using }std::vector;}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00014}00014 \textcolor{keyword}{using }\mbox{\hyperlink{a02071}{HF::SpatialStructures::Node}};}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00015}00015 \textcolor{keyword}{using namespace }\mbox{\hyperlink{a00462}{HF}};}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00016}00016 }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00017}\mbox{\hyperlink{a00459_gab6b8e3eab649b42ac014fb7d02d54892}{00017}} \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00459_gab6b8e3eab649b42ac014fb7d02d54892}{SphereicalViewAnalysisAggregate}}(}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00018}00018     \mbox{\hyperlink{a01411}{EmbreeRayTracer}}* ERT, }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00019}00019     \mbox{\hyperlink{a02071}{Node}} * node\_ptr,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00020}00020     \textcolor{keywordtype}{int} node\_size,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00021}00021     \textcolor{keywordtype}{int} max\_rays,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00022}00022     \textcolor{keywordtype}{float} upward\_fov,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00023}00023     \textcolor{keywordtype}{float} downward\_fov,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00024}00024     \textcolor{keywordtype}{float} height,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00025}00025     \mbox{\hyperlink{a00443_a8a1aa9474094ff70818051c921c0537f}{AGGREGATE\_TYPE}} AT,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00026}00026     vector<float>** out\_scores,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00027}00027     \textcolor{keywordtype}{float}** out\_scores\_ptr, }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00028}00028     \textcolor{keywordtype}{int}* out\_scores\_size)}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00029}00029 \{}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00030}00030     vector<float>* scores = \textcolor{keyword}{new} vector<float>();}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00031}00031     vector<Node> nodes(node\_ptr, node\_ptr + node\_size);}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00032}00032     }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00033}00033     *scores = \mbox{\hyperlink{a00459_ga78f77d24531d0fa55c9b60d7ec1bf32a}{ViewAnalysis::SphericalRayshootWithAnyRTForDistance}}(}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00034}00034         *ERT,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00035}00035         nodes,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00036}00036         max\_rays,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00037}00037         upward\_fov,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00038}00038         downward\_fov,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00039}00039         height,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00040}00040         (\mbox{\hyperlink{a00466_a1fcaa17d2a8df8896a3b0447973bd07b}{ViewAnalysis::AGGREGATE\_TYPE}})AT}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00041}00041     );}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00042}00042 }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00043}00043     *out\_scores = scores;}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00044}00044     *out\_scores\_ptr = scores-\/>data();}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00045}00045     *out\_scores\_size = scores-\/>size(); \textcolor{comment}{// Shouldn't this always be the same?}}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00046}00046 }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00047}00047     \textcolor{keywordflow}{return} \mbox{\hyperlink{a00468_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}{OK}};}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00048}00048 \}}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00049}00049 }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00050}\mbox{\hyperlink{a00459_gaa4c5714c1e557ef83a03d447eb30c6d0}{00050}} \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00459_gaa4c5714c1e557ef83a03d447eb30c6d0}{SphereicalViewAnalysisAggregateFlat}}(\mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}}* ERT, \textcolor{keyword}{const} \textcolor{keywordtype}{float}* node\_ptr, \textcolor{keywordtype}{int} node\_size, \textcolor{keywordtype}{int} max\_rays, \textcolor{keywordtype}{float} upward\_fov, \textcolor{keywordtype}{float} downward\_fov, \textcolor{keywordtype}{float} height, \mbox{\hyperlink{a00443_a8a1aa9474094ff70818051c921c0537f}{AGGREGATE\_TYPE}} AT, std::vector<float>** out\_scores, \textcolor{keywordtype}{float}** out\_scores\_ptr, \textcolor{keywordtype}{int}* out\_scores\_size)}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00051}00051 \{}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00052}00052     vector<float>* scores = \textcolor{keyword}{new} vector<float>();}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00053}00053     vector<std::array<float, 3>> nodes = \mbox{\hyperlink{a00245_a603d456361c9737b88a091e6683db12b}{ConvertRawFloatArrayToPoints}}(node\_ptr, node\_size);}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00054}00054 }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00055}00055     *scores = \mbox{\hyperlink{a00459_ga78f77d24531d0fa55c9b60d7ec1bf32a}{ViewAnalysis::SphericalRayshootWithAnyRTForDistance}}(}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00056}00056         *ERT,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00057}00057         nodes,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00058}00058         max\_rays,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00059}00059         upward\_fov,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00060}00060         downward\_fov,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00061}00061         height,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00062}00062         (\mbox{\hyperlink{a00466_a1fcaa17d2a8df8896a3b0447973bd07b}{ViewAnalysis::AGGREGATE\_TYPE}})AT}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00063}00063     );}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00064}00064 }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00065}00065     *out\_scores = scores;}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00066}00066     *out\_scores\_ptr = scores-\/>data();}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00067}00067     *out\_scores\_size = scores-\/>size(); \textcolor{comment}{// Shouldn't this always be the same?}}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00068}00068 }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00069}00069     \textcolor{keywordflow}{return} \mbox{\hyperlink{a00468_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}{OK}};}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00070}00070 \}}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00071}00071 }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00072}00072 }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00073}\mbox{\hyperlink{a00459_ga94d3ddc3981020e2852fc77e51266185}{00073}} \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00459_ga94d3ddc3981020e2852fc77e51266185}{SphericalViewAnalysisNoAggregate}}(}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00074}00074     \mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}}* ERT,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00075}00075     \textcolor{keyword}{const} \mbox{\hyperlink{a02071}{HF::SpatialStructures::Node}}* node\_ptr,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00076}00076     \textcolor{keywordtype}{int} node\_size,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00077}00077     \textcolor{keywordtype}{int} * max\_rays,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00078}00078     \textcolor{keywordtype}{float} upward\_fov,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00079}00079     \textcolor{keywordtype}{float} downward\_fov,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00080}00080     \textcolor{keywordtype}{float} height,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00081}00081     std::vector<RayResult> ** out\_results,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00082}00082     \mbox{\hyperlink{a02087}{RayResult}} ** out\_results\_ptr}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00083}00083     \textcolor{comment}{//std::vector<float>** out\_directions}}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00084}00084     )}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00085}00085 \{}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00086}00086     }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00087}00087     vector<RayResult> * scores = \textcolor{keyword}{new} vector<RayResult>();}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00088}00088     vector<Node> nodes(node\_ptr, node\_ptr + node\_size);}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00089}00089     }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00090}00090     *scores = ViewAnalysis::SphericalViewAnalysis<RayResult>(}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00091}00091         *ERT,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00092}00092         nodes,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00093}00093         *max\_rays,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00094}00094         upward\_fov,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00095}00095         downward\_fov,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00096}00096         height}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00097}00097     );}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00098}00098 }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00099}00099     *out\_results = scores;}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00100}00100     *out\_results\_ptr = scores-\/>data();}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00101}00101     *max\_rays = scores-\/>size()/node\_size;}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00102}00102     \textcolor{comment}{//printf("{}Score size: \%d\(\backslash\)n"{}, *max\_rays);}}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00103}00103     \textcolor{keywordflow}{return} \mbox{\hyperlink{a00468_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}{OK}};}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00104}00104 \}}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00105}00105 }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00106}\mbox{\hyperlink{a00459_ga348af4492f3e4e7ffab6da3e86de3924}{00106}} \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00459_ga348af4492f3e4e7ffab6da3e86de3924}{SphericalViewAnalysisNoAggregateFlat}}(\mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}}* ERT, \textcolor{keyword}{const} \textcolor{keywordtype}{float}* node\_ptr, \textcolor{keywordtype}{int} node\_size, \textcolor{keywordtype}{int}* max\_rays, \textcolor{keywordtype}{float} upward\_fov, \textcolor{keywordtype}{float} downward\_fov, \textcolor{keywordtype}{float} height, std::vector<RayResult>** out\_results, \mbox{\hyperlink{a02087}{RayResult}}** out\_results\_ptr)}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00107}00107 \{}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00108}00108     vector<RayResult>* scores = \textcolor{keyword}{new} vector<RayResult>();}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00109}00109     \textcolor{keyword}{auto} nodes = \mbox{\hyperlink{a00245_a603d456361c9737b88a091e6683db12b}{ConvertRawFloatArrayToPoints}}(node\_ptr,node\_size);}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00110}00110 }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00111}00111     *scores = ViewAnalysis::SphericalViewAnalysis<RayResult>(}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00112}00112         *ERT,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00113}00113         nodes,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00114}00114         *max\_rays,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00115}00115         upward\_fov,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00116}00116         downward\_fov,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00117}00117         height}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00118}00118         );}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00119}00119 }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00120}00120     *out\_results = scores;}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00121}00121     *out\_results\_ptr = scores-\/>data();}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00122}00122     *max\_rays = scores-\/>size() / node\_size;}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00123}00123     \textcolor{keywordflow}{return} \mbox{\hyperlink{a00468_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}{OK}};}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00124}00124 \}}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00125}00125 }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00126}\mbox{\hyperlink{a00459_gaf572b7bec28d55bf2c72719742703dff}{00126}} \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00459_gaf572b7bec28d55bf2c72719742703dff}{SphericalDistribute}}(}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00127}00127     \textcolor{keywordtype}{int} * num\_rays, }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00128}00128     vector<float>** out\_direction\_vector,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00129}00129     \textcolor{keywordtype}{float}** out\_direction\_data,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00130}00130     \textcolor{keywordtype}{float} upward\_fov,}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00131}00131     \textcolor{keywordtype}{float} downward\_fov) }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00132}00132 \{}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00133}00133     *out\_direction\_vector = \textcolor{keyword}{new} vector<float>();}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00134}00134     \textcolor{keyword}{auto} array\_array = \mbox{\hyperlink{a00459_ga6ca336e3887ef82d17b0713c2bf862df}{ViewAnalysis::FibbonacciDistributePoints}}(*num\_rays, upward\_fov, downward\_fov);}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00135}00135     }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00136}00136     \textcolor{keyword}{auto}\& out\_directions = **out\_direction\_vector;}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00137}00137     }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00138}00138     out\_directions.resize(array\_array.size()*3);}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00139}00139     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < array\_array.size(); i += 1)}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00140}00140     \{}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00141}00141         \textcolor{keywordtype}{int} os = i * 3;}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00142}00142         \textcolor{keywordtype}{int} y\_idx = os + 1;}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00143}00143         \textcolor{keywordtype}{int} z\_idx = os + 2;}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00144}00144         \textcolor{keyword}{const} \textcolor{keyword}{auto}\& arr = array\_array[i];}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00145}00145         out\_directions[os] = arr[0];}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00146}00146         out\_directions[y\_idx] = arr[1];}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00147}00147         out\_directions[z\_idx] = arr[2];}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00148}00148     \}}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00149}00149 }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00150}00150     *out\_direction\_data = out\_directions.data();}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00151}00151     *num\_rays = array\_array.size();}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00152}00152     \textcolor{keywordflow}{return} \mbox{\hyperlink{a00468_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}{OK}};}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00153}00153 \}}
+\DoxyCodeLine{\Hypertarget{a00440_source_l00154}00154 }
+\DoxyCodeLine{\Hypertarget{a00440_source_l00155}00155 }
+
+\end{DoxyCode}

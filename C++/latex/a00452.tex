@@ -1,0 +1,123 @@
+
+\begin{DoxyRefList}
+\item[Member \mbox{\hyperlink{a00469_a06c0c11adb62f8b204e42f75ac1990ac}{HF\+::Geometry\+::Load\+Mesh\+Objects}} (std\+::string path, GROUP\+\_\+\+METHOD gm=ONLY\+\_\+\+FILE, bool change\+\_\+coords=false, int scale=1)]\label{a00452__todo000014}%
+\Hypertarget{a00452__todo000014}%
+the name of the mesh should probably just be the filename if the group type is ONLY\+\_\+\+FILE. 
+
+
+
+Definitely some areas for minor speed gains by using indexing instead of .push\+\_\+bcaks 
+
+
+
+Change std\+::exception to std\+::out\+\_\+of\+\_\+range. 
+
+
+
+Refactor this to break out whatever code can be repeated or reused. This has a Mc\+Cabe complexity of 25!!!! 
+\item[Member \mbox{\hyperlink{a00469_aec1df746155d224838048d3a43c2fe96}{HF\+::Geometry\+::Load\+Raw\+Vertices}} (std\+::string path)]\label{a00452__todo000015}%
+\Hypertarget{a00452__todo000015}%
+Check if the file exists then thow file not found exception instead of invalidobj. 
+\item[Member \mbox{\hyperlink{a01351_a05d1a3ebca83e841e8902baaecc59930}{HF\+::Geometry\+::Mesh\+Info\texorpdfstring{$<$}{<} numeric\+\_\+type \texorpdfstring{$>$}{>}\+::Add\+Verts}} (const std\+::vector\texorpdfstring{$<$}{<} std\+::array$<$ numeric\+\_\+type, 3 $>$ \texorpdfstring{$>$}{>} \&verts)]\label{a00452__todo000009}%
+\Hypertarget{a00452__todo000009}%
+Change std\+::exception to DHARTAPI\+::\+Invalid\+OBJ.  
+\item[Member \mbox{\hyperlink{a01351_a5f067dbc661b07c1762b402da03f2041}{HF\+::Geometry\+::Mesh\+Info\texorpdfstring{$<$}{<} numeric\+\_\+type \texorpdfstring{$>$}{>}\+::Convert\+To\+OBJCoordinates}} ()]\label{a00452__todo000011}%
+\Hypertarget{a00452__todo000011}%
+Rename this to Convert\+To\+Yup. 
+
+
+
+Just use the Rotate\+Mesh function. 
+\item[Member \mbox{\hyperlink{a01351_af1152233ddbd8fac736f761347e6d3b8}{HF\+::Geometry\+::Mesh\+Info\texorpdfstring{$<$}{<} numeric\+\_\+type \texorpdfstring{$>$}{>}\+::Convert\+To\+Rhino\+Coordinates}} ()]\label{a00452__todo000010}%
+\Hypertarget{a00452__todo000010}%
+Rename this to Convert\+To\+ZUp. 
+
+
+
+Just use the Rotate\+Mesh function. 
+
+
+
+Change exception to an assertion since it shouldn\textquotesingle{}t happen in production code.  
+\item[Member \mbox{\hyperlink{a01351_af2d1b696c55aa036cff585d2e7eba50b}{HF\+::Geometry\+::Mesh\+Info\texorpdfstring{$<$}{<} numeric\+\_\+type \texorpdfstring{$>$}{>}\+::Get\+Indexed\+Vertices}} () const]\label{a00452__todo000012}%
+\Hypertarget{a00452__todo000012}%
+ Make a version of this function that just returns a const reference or pointer to the data. There\textquotesingle{}s not much reason to do a copy here.  
+\item[Member \mbox{\hyperlink{a01351_afddea10734ba213b2bb5cc148c24c942}{HF\+::Geometry\+::Mesh\+Info\texorpdfstring{$<$}{<} numeric\+\_\+type \texorpdfstring{$>$}{>}\+::get\+Raw\+Indices}} () const]\label{a00452__todo000013}%
+\Hypertarget{a00452__todo000013}%
+ Version of this function that just returns a const reference to the data. There\textquotesingle{}s not much reason to do a copy here. 
+\item[Member \mbox{\hyperlink{a01351_a1487a083b0dc49eea88d7a0f04b270d0}{HF\+::Geometry\+::Mesh\+Info\texorpdfstring{$<$}{<} numeric\+\_\+type \texorpdfstring{$>$}{>}\+::Mesh\+Info}} (const std\+::vector\texorpdfstring{$<$}{<} std\+::array$<$ numeric\+\_\+type, 3 $>$ \texorpdfstring{$>$}{>} \&vertices, int id, std\+::string name=\char`\"{}\char`\"{})]\label{a00452__todo000008}%
+\Hypertarget{a00452__todo000008}%
+Change the std\+::exception to also be an Invalid\+OBJ exception. 
+
+
+
+Check for a number of vertices that aren\textquotesingle{}t a multiple of 3 like the other functions.  
+\item[Class \mbox{\hyperlink{a01315}{HF\+::Graph\+Generator\+::Unique\+Queue}} ]\label{a00452__todo000001}%
+\Hypertarget{a00452__todo000001}%
+This could be a useful standalone templated class.  
+\item[Member \mbox{\hyperlink{a01315_ae941f357ddbefc3b670c43ce2d90b589}{HF\+::Graph\+Generator\+::Unique\+Queue\+::pop\+Many}} (int max=-\/1)]\label{a00452__todo000002}%
+\Hypertarget{a00452__todo000002}%
+Opetion to pop every node by setting max to -\/1. 
+\item[Member \mbox{\hyperlink{a00472_a977e4c93a977ab4e9e784d1e6fec79f4}{HF\+::Pathfinding\+::Construct\+Shortest\+Path\+From\+Pred}} (int start, int end, const std\+::vector$<$ size\+\_\+t $>$ \&pred, const std\+::vector$<$ float $>$ \&distances)]\label{a00452__todo000017}%
+\Hypertarget{a00452__todo000017}%
+Replace exception with an assert statment. It shouldn\textquotesingle{}t be triggered unless there\textquotesingle{}s a problem with this algorithm?  
+\item[Member \mbox{\hyperlink{a00472_abb65ba6c3ed7a1999d9f40ae14ba3269}{HF\+::Pathfinding\+::Find\+All\+Paths}} (\mbox{\hyperlink{a01383}{Boost\+Graph}} $\ast$bg)]\label{a00452__todo000019}%
+\Hypertarget{a00452__todo000019}%
+Implement this function to the specifications outlined here.  
+\item[Member \mbox{\hyperlink{a00472_a15badb9d0a17849de7b21105605c9c91}{HF\+::Pathfinding\+::Find\+Paths}} (\mbox{\hyperlink{a01383}{Boost\+Graph}} $\ast$bg, const std\+::vector$<$ int $>$ \&start\+\_\+points, const std\+::vector$<$ int $>$ \&end\+\_\+points)]\label{a00452__todo000018}%
+\Hypertarget{a00452__todo000018}%
+This isn\textquotesingle{}t in parallel! Can be implemented using a similar approach to Insert\+Paths\+Into\+Array.  
+\item[Class \mbox{\hyperlink{a00472}{HF\+::Pathfinding\+::vertex\+\_\+data}} ]\label{a00452__todo000016}%
+\Hypertarget{a00452__todo000016}%
+Is the double d needed? 
+\item[Member \mbox{\hyperlink{a00464_aac8c0b245ea813969c50b6496cc67945}{HF\+::Ray\+Tracer\+::buffers\+To\+Structs}} (std\+::vector$<$ float $>$ \&in\+\_\+vertices, std\+::vector$<$ int $>$ \&in\+\_\+indices, std\+::vector$<$ Vertex $>$ \&out\+\_\+vertices, std\+::vector$<$ Triangle $>$ \&out\+\_\+triangles)]\label{a00452__todo000021}%
+\Hypertarget{a00452__todo000021}%
+May be faster as a std\+::move or std\+::copy.  
+\item[Class \mbox{\hyperlink{a01411}{HF\+::Ray\+Tracer\+::Embree\+Ray\+Tracer}} ]\label{a00452__todo000022}%
+\Hypertarget{a00452__todo000022}%
+Many functions support Mesh\+ID but don\textquotesingle{}t actually check for it.  
+\item[Member \mbox{\hyperlink{a01411_a0a3fa22a253ce3a7738f01286c11f589}{HF\+::Ray\+Tracer\+::Embree\+Ray\+Tracer\+::Embree\+Ray\+Tracer}} (std\+::vector\texorpdfstring{$<$}{<} HF\+::\+Geometry\+::\+Mesh\+Info$<$ float $>$ \texorpdfstring{$>$}{>} \&MI, bool use\+\_\+precise\+\_\+intersection=false)]\label{a00452__todo000023}%
+\Hypertarget{a00452__todo000023}%
+This function calls {\ttfamily  throw; } \href{https://en.cppreference.com/w/cpp/language/throw}{\texttt{ }} which is meant to only be used to rethrow previously thrown exceptions. This should be throwing \mbox{\hyperlink{a01323}{HF\+::\+Exceptions\+::\+Invalid\+OBJ}}  
+\item[Member \mbox{\hyperlink{a00464_a732eb910d06064bea04e6a959fd235f0}{HF\+::Ray\+Tracer\+::vectors\+To\+Buffers}} (const std\+::vector\texorpdfstring{$<$}{<} std\+::array$<$ float, 3 $>$ \texorpdfstring{$>$}{>} \&vertices, std\+::vector$<$ Triangle $>$ \&Tribuffer, std\+::vector$<$ Vertex $>$ \&Vbuffer)]\label{a00452__todo000020}%
+\Hypertarget{a00452__todo000020}%
+Performance here can be improved by using indexing.  
+\item[Member \mbox{\hyperlink{a01551_a37be5c12e488072dea7fa1c8c64346f7}{HF\+::Spatial\+Structures\+::Graph\+::add\+Edge}} (const \mbox{\hyperlink{a02071}{Node}} \&parent, const \mbox{\hyperlink{a02071}{Node}} \&child, float score=1.\+0f, const std\+::string \&cost\+\_\+type=\char`\"{}\char`\"{})]\label{a00452__todo000026}%
+\Hypertarget{a00452__todo000026}%
+How should this signal that the graph can\textquotesingle{}t have edges added to it? Or how do we add edges to an existing graph quickly without adding to its edge list? 
+\item[Member \mbox{\hyperlink{a01551_a0584ab845d5c21979b1542651a4cf3aa}{HF\+::Spatial\+Structures\+::Graph\+::add\+Edge}} (int parent\+\_\+id, int child\+\_\+id, float score, const std\+::string \&cost\+\_\+type=\char`\"{}\char`\"{})]\label{a00452__todo000027}%
+\Hypertarget{a00452__todo000027}%
+How should this signal that the graph can\textquotesingle{}t have edges added to it? Or how do we add edges to an existing graph quickly without adding to its edge list? 
+\item[Member \mbox{\hyperlink{a01551_a7c2ea4fda7d310b500456ff14527bab9}{HF\+::Spatial\+Structures\+::Graph\+::operator\mbox{[}\mbox{]}}} (const \mbox{\hyperlink{a02071}{Node}} \&n) const]\label{a00452__todo000025}%
+\Hypertarget{a00452__todo000025}%
+Should this just return an empty list instead of throwing?  
+\item[Member \mbox{\hyperlink{a02071_a556efc898ddc67b64fff560d0c7b5a0a}{HF\+::Spatial\+Structures\+::Node\+::operator\mbox{[}\mbox{]}}} (int i)]\label{a00452__todo000028}%
+\Hypertarget{a00452__todo000028}%
+Exception should be std\+::out\+\_\+of\+\_\+range to match other functionality 
+\item[Member \mbox{\hyperlink{a02071_ae3e88bd4eecfdbd93431953ed07b8a7b}{HF\+::Spatial\+Structures\+::Node\+::operator\mbox{[}\mbox{]}}} (int i) const]\label{a00452__todo000029}%
+\Hypertarget{a00452__todo000029}%
+Exception should be std\+::out\+\_\+of\+\_\+range to match other functionality 
+\item[Member \mbox{\hyperlink{a00466_a38c197b654c753cb656ab60e88d65120}{HF\+::View\+Analysis\+::Aggregate}} (float \&out\+\_\+total, float new\+\_\+value, const AGGREGATE\+\_\+\+TYPE agg\+\_\+type, int count=0)]\label{a00452__todo000003}%
+\Hypertarget{a00452__todo000003}%
+Min/\+Max and maybe the other functions should handle Na\+Ns for min/max to signal that no value already exists. The user can use the min and max numeric limits or zero for defaults like in the example, but it would be great to be able to use one value that would be reliably handled as default input for every case.  
+\item[Member \mbox{\hyperlink{a00459_ga78f77d24531d0fa55c9b60d7ec1bf32a}{HF\+::View\+Analysis\+::Spherical\+Rayshoot\+With\+Any\+RTFor\+Distance}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f, const AGGREGATE\+\_\+\+TYPE aggregation=\mbox{\hyperlink{a00466_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}{AGGREGATE\+\_\+\+TYPE\+::\+SUM}})]\label{a00452__todo000005}%
+\Hypertarget{a00452__todo000005}%
+Should this have a height check like the one in the \mbox{\hyperlink{a00467}{Visibility\+Graph}}?
+
+\label{a00452__todo000006}%
+\Hypertarget{a00452__todo000006}%
+Rename this to View\+Analysis\+Aggregate.
+
+\label{a00452__todo000007}%
+\Hypertarget{a00452__todo000007}%
+Potential speed up here by using a Raytracer function that doesn\textquotesingle{}t return the point of intersection.  
+\item[Member \mbox{\hyperlink{a00459_gaecaa04882696ac6d73173227bd28e91b}{HF\+::View\+Analysis\+::Spherical\+View\+Analysis}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f)]\label{a00452__todo000004}%
+\Hypertarget{a00452__todo000004}%
+Should this have a height check like the one in the \mbox{\hyperlink{a00467}{Visibility\+Graph}}? 
+\item[Member \mbox{\hyperlink{a00459_gab6b8e3eab649b42ac014fb7d02d54892}{Sphereical\+View\+Analysis\+Aggregate}} (\mbox{\hyperlink{a01411}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$\+ERT, \mbox{\hyperlink{a02071}{HF\+::\+Spatial\+Structures\+::\+Node}} $\ast$node\+\_\+ptr, int node\+\_\+size, int max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, AGGREGATE\+\_\+\+TYPE AT, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+scores, float $\ast$$\ast$out\+\_\+scores\+\_\+ptr, int $\ast$out\+\_\+scores\+\_\+size)]\label{a00452__todo000030}%
+\Hypertarget{a00452__todo000030}%
+Is there any situation where out\+\_\+scores\+\_\+size is smaller than node\+\_\+size? 
+\item[Member \mbox{\hyperlink{a00459_gaa4c5714c1e557ef83a03d447eb30c6d0}{Sphereical\+View\+Analysis\+Aggregate\+Flat}} (\mbox{\hyperlink{a01411}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$\+ERT, const float $\ast$node\+\_\+ptr, int node\+\_\+size, int max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, AGGREGATE\+\_\+\+TYPE AT, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+scores, float $\ast$$\ast$out\+\_\+scores\+\_\+ptr, int $\ast$out\+\_\+scores\+\_\+size)]\label{a00452__todo000031}%
+\Hypertarget{a00452__todo000031}%
+Is there any situation where out\+\_\+scores\+\_\+size is smaller than node\+\_\+size?
+\end{DoxyRefList}

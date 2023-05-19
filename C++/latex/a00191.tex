@@ -1,19 +1,19 @@
-\hypertarget{a00191}{}\doxysection{Cpp/spatialstructures/src/cost\+\_\+algorithms.h File Reference}
-\label{a00191}\index{Cpp/spatialstructures/src/cost\_algorithms.h@{Cpp/spatialstructures/src/cost\_algorithms.h}}
+\hypertarget{a00191}{}\doxysection{Cpp/objloader/src/objloader.h File Reference}
+\label{a00191}\index{Cpp/objloader/src/objloader.h@{Cpp/objloader/src/objloader.h}}
 
 
-Contains implementation for the \mbox{\hyperlink{a00409}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms}} namespace.  
+Contains definitions for the \mbox{\hyperlink{a00469}{Geometry}} namespace.  
 
 
 {\ttfamily \#include $<$vector$>$}\newline
 {\ttfamily \#include $<$string$>$}\newline
-{\ttfamily \#include \char`\"{}Constants.\+h\char`\"{}}\newline
-Include dependency graph for cost\+\_\+algorithms.\+h\+:
+{\ttfamily \#include \char`\"{}meshinfo.\+h\char`\"{}}\newline
+Include dependency graph for objloader.\+h\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=266pt]{a00192}
+\includegraphics[width=278pt]{a00192}
 \end{center}
 \end{figure}
 This graph shows which files directly or indirectly include this file\+:
@@ -24,54 +24,217 @@ This graph shows which files directly or indirectly include this file\+:
 \includegraphics[width=350pt]{a00193}
 \end{center}
 \end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a00469_a01355}{HF\+::\+Geometry\+::tinyobj\+\_\+attr$<$ T $>$}}
+\item 
+struct \mbox{\hyperlink{a00469_a01359}{HF\+::\+Geometry\+::tinyobj\+\_\+shape$<$ T $>$}}
+\item 
+struct \mbox{\hyperlink{a00469_a01363}{HF\+::\+Geometry\+::tinyobj\+\_\+material}}
+\item 
+struct \mbox{\hyperlink{a00469_a01367}{HF\+::\+Geometry\+::tinyobj\+\_\+geometry$<$ T $>$}}
+\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
-namespace \mbox{\hyperlink{a00396}{HF}}
+namespace \mbox{\hyperlink{a00471}{Eigen}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a00471}{Eigen}} a C++ template library for linear algebra\+: matrices, vectors, numerical solvers, and related algorithms. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{a00462}{HF}}
 \begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
-namespace \mbox{\hyperlink{a00399}{HF\+::\+Spatial\+Structures}}
-\begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout DHARTAPI. \end{DoxyCompactList}\item 
-namespace \mbox{\hyperlink{a00409}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms}}
+namespace \mbox{\hyperlink{a00470}{HF\+::nano\+Geom}}
+\item 
+namespace \mbox{\hyperlink{a00469}{HF\+::\+Geometry}}
+\begin{DoxyCompactList}\small\item\em Manipulate and load geometry from disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a00191_a4104f7562d27efe7c2f57dc557d2ce16}{OBJLOADER\+\_\+H}}
 \end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5}{HF\+::\+Geometry\+::\+GROUP\+\_\+\+METHOD}} \{ \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e}{HF\+::\+Geometry\+::\+ONLY\+\_\+\+FILE}} = 0
+, \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5afeacc3d8dc97902c6bf9332bdcda9912}{HF\+::\+Geometry\+::\+BY\+\_\+\+GROUP}} = 1
+, \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5ac47c481b667efc6c2689d46cd456237c}{HF\+::\+Geometry\+::\+BY\+\_\+\+MATERIAL}} = 2
+, \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5a42c850fb543d857db34aea03c8671f2b}{HF\+::\+Geometry\+::\+MATERIAL\+\_\+\+AND\+\_\+\+FILE}} = 3
+ \}
+\begin{DoxyCompactList}\small\item\em Method of grouping submeshes in OBJ files. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a00001_a02073}{double}} \mbox{\hyperlink{a00409_ae7b446fefe0b9994859f47b85de79039}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::to\+\_\+radians}} (\mbox{\hyperlink{a00001_a02073}{double}} degrees)
+bool \mbox{\hyperlink{a00470_ad8e91aefa202de3abee6fd9914299e46}{HF\+::nano\+Geom\+::\+Load\+Obj}} (Mesh \&mesh, const char $\ast$filename)
 \item 
-\mbox{\hyperlink{a00001_a02073}{double}} \mbox{\hyperlink{a00409_adee2fb2573f4dbc2e5c7db153dff2694}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::to\+\_\+degrees}} (\mbox{\hyperlink{a00001_a02073}{double}} radians)
+tinyobj\+\_\+geometry$<$ \mbox{\hyperlink{a00001_a02139}{double}} $>$ \mbox{\hyperlink{a00469_a9bbdc23c626ed431d5a084722c22f99f}{HF\+::\+Geometry\+::\+Load\+Meshes\+From\+Tiny\+OBJ}} (std\+::string path)
 \item 
-{\footnotesize template$<$size\+\_\+t dimension, typename float\+\_\+precision  = float$>$ }\\float\+\_\+precision \mbox{\hyperlink{a00409_a355d486f17db42f6c56411cc53f76aec}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::euclidean\+\_\+distance}} (float\+\_\+precision point\+\_\+a\mbox{[}$\,$\mbox{]}, float\+\_\+precision point\+\_\+b\mbox{[}$\,$\mbox{]})
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$ \mbox{\hyperlink{a00469_a945c4699b13a7c924fd6532ae66963ca}{HF\+::\+Geometry\+::\+Load\+TMPMesh\+Objects}} (const std\+::string \&path)
 \item 
-{\footnotesize template$<$size\+\_\+t dimension, typename float\+\_\+precision  = float$>$ }\\float\+\_\+precision \mbox{\hyperlink{a00409_afa250ed24ee2219f6632aaebfd7bd150}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::dot\+\_\+product}} (float\+\_\+precision vec\+\_\+U\mbox{[}$\,$\mbox{]}, float\+\_\+precision vec\+\_\+V\mbox{[}$\,$\mbox{]})
-\item 
-{\footnotesize template$<$size\+\_\+t dimension, typename float\+\_\+precision  = float$>$ }\\bool \mbox{\hyperlink{a00409_a3de857e1e14eb6872146c36bef3b3fad}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::is\+\_\+perpendicular}} (float\+\_\+precision vec\+\_\+U\mbox{[}$\,$\mbox{]}, float\+\_\+precision vec\+\_\+V\mbox{[}$\,$\mbox{]})
-\item 
-{\footnotesize template$<$size\+\_\+t dimension, typename float\+\_\+precision  = float$>$ }\\std\+::vector$<$ Edge $>$ \mbox{\hyperlink{a00409_aeec6f9a28592565ad59609852e482663}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Get\+Perpendicular\+Edges}} (const Subgraph \&sg, const Node \&child\+\_\+node\+\_\+a)
-\item 
-std\+::vector$<$ \mbox{\hyperlink{a01465}{Int\+Edge}} $>$ \mbox{\hyperlink{a00409_a51b88e596c3b5f68b7abbcbc91e30bdf}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Cross\+Slope}} (const \mbox{\hyperlink{a00399_a01477}{Subgraph}} \&sg)
-\item 
-std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{a01465}{Int\+Edge}} $>$ $>$ \mbox{\hyperlink{a00409_a6d12a3af69887cb335b490304138afc6}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Cross\+Slope}} (const \mbox{\hyperlink{a01485}{Graph}} \&g)
-\item 
-\mbox{\hyperlink{a01469}{Edge\+Set}} \mbox{\hyperlink{a00409_ac51f2e76c00356f8a6145bee865cd922}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Energy\+Expenditure}} (const \mbox{\hyperlink{a00399_a01477}{Subgraph}} \&sg)
-\item 
-std\+::vector$<$ \mbox{\hyperlink{a01469}{Edge\+Set}} $>$ \mbox{\hyperlink{a00409_adbe5e58355a884494d6e99bf17fc5f7b}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Energy\+Expenditure}} (const \mbox{\hyperlink{a01485}{Graph}} \&g)
-\item 
-\mbox{\hyperlink{a00001_a02073}{double}} \mbox{\hyperlink{a00409_ae06eb693d0d7858d7a863fae3a6eee2c}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Slope}} (\mbox{\hyperlink{a02005}{Node}} \&parent, \mbox{\hyperlink{a02005}{Node}} \&child)
-\end{DoxyCompactItemize}
+vector$<$ \mbox{\hyperlink{a00428_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}}$<$ float $>$ $>$ \mbox{\hyperlink{a00469_a06c0c11adb62f8b204e42f75ac1990ac}{HF\+::\+Geometry\+::\+Load\+Mesh\+Objects}} (std\+::string path, GROUP\+\_\+\+METHOD gm=ONLY\+\_\+\+FILE, bool change\+\_\+coords=false, int scale=1)
+\begin{DoxyCompactList}\small\item\em Create \mbox{\hyperlink{a01351}{Mesh\+Info}} instances from the OBJ at path.  \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{a00428_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}}$<$ float $>$ $>$ \mbox{\hyperlink{a00469_a5e3b85fb47ef06f7693802f3fe90e996}{HF\+::\+Geometry\+::\+Load\+Mesh\+Objects}} (std\+::vector$<$ std\+::string $>$ \&path, GROUP\+\_\+\+METHOD gm=ONLY\+\_\+\+FILE, bool change\+\_\+coords=false, int scale=1)
+\begin{DoxyCompactList}\small\item\em Create \mbox{\hyperlink{a01351}{Mesh\+Info}} instances from the OBJ files in path.  \end{DoxyCompactList}\item 
+vector$<$ array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00469_aec1df746155d224838048d3a43c2fe96}{HF\+::\+Geometry\+::\+Load\+Raw\+Vertices}} (std\+::string path)
+\begin{DoxyCompactList}\small\item\em Load a list of vertices directly from an OBJ file. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{a00469_adec2459f5c4ee10fd9d2154114d751de}{HF\+::\+Geometry\+::\+Get\+Test\+OBJPath}} (std\+::string key)
+\begin{DoxyCompactList}\small\item\em Get the path to the OBJ with the given key. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Contains implementation for the \mbox{\hyperlink{a00409}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms}} namespace. 
-
-Contains declarations for the \mbox{\hyperlink{a00409}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms}} namespace.
+Contains definitions for the \mbox{\hyperlink{a00469}{Geometry}} namespace. 
 
 \begin{DoxyAuthor}{Author}
 TBA 
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
-03 Jul 2020 
+16 Jun 2020 
 \end{DoxyDate}
 
 
-Definition in file \mbox{\hyperlink{a00191_source}{cost\+\_\+algorithms.\+h}}.
+Definition in file \mbox{\hyperlink{a00191_source}{objloader.\+h}}.
+
+
+
+\doxysubsection{Class Documentation}
+\index{HF::Geometry::tinyobj\_attr@{HF::Geometry::tinyobj\_attr}}\label{a01355}
+\Hypertarget{a00469_a01355}
+\doxysubsubsection{struct HF\+::Geometry\+::tinyobj\+\_\+attr}
+\subsubsection*{template$<$typename T$>$\newline
+struct HF\+::\+Geometry\+::tinyobj\+\_\+attr$<$ T $>$}
+
+
+Definition at line \mbox{\hyperlink{a00191_source_l00072}{72}} of file \mbox{\hyperlink{a00191_source}{objloader.\+h}}.
+
+
+
+Collaboration diagram for HF\+::Geometry\+::tinyobj\+\_\+attr\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{a01353}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00469_a9de3755934a7e392e9b392e23a541d8e}\label{a00469_a9de3755934a7e392e9b392e23a541d8e}} 
+vector$<$ T $>$&
+vertices&
+\\
+\hline
+
+\end{DoxyFields}
+\index{HF::Geometry::tinyobj\_shape@{HF::Geometry::tinyobj\_shape}}\label{a01359}
+\Hypertarget{a00469_a01359}
+\doxysubsubsection{struct HF\+::Geometry\+::tinyobj\+\_\+shape}
+\subsubsection*{template$<$typename T$>$\newline
+struct HF\+::\+Geometry\+::tinyobj\+\_\+shape$<$ T $>$}
+
+
+Definition at line \mbox{\hyperlink{a00191_source_l00078}{78}} of file \mbox{\hyperlink{a00191_source}{objloader.\+h}}.
+
+
+
+Collaboration diagram for HF\+::Geometry\+::tinyobj\+\_\+shape\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=265pt]{a01357}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00469_ac9a66a69cf7f1688351a54806afe25ce}\label{a00469_ac9a66a69cf7f1688351a54806afe25ce}} 
+vector$<$ int $>$&
+indices&
+\\
+\hline
+
+\mbox{\Hypertarget{a00469_a1326b7839d7fe477f6bc7d0d699eadfb}\label{a00469_a1326b7839d7fe477f6bc7d0d699eadfb}} 
+vector$<$ int $>$&
+mat\_ids&
+\\
+\hline
+
+\mbox{\Hypertarget{a00469_a05d64e665db54cf98c8b159326c636f9}\label{a00469_a05d64e665db54cf98c8b159326c636f9}} 
+string&
+name&
+\\
+\hline
+
+\end{DoxyFields}
+\index{HF::Geometry::tinyobj\_material@{HF::Geometry::tinyobj\_material}}\label{a01363}
+\Hypertarget{a00469_a01363}
+\doxysubsubsection{struct HF\+::Geometry\+::tinyobj\+\_\+material}
+
+
+Definition at line \mbox{\hyperlink{a00191_source_l00084}{84}} of file \mbox{\hyperlink{a00191_source}{objloader.\+h}}.
+
+
+
+Collaboration diagram for HF\+::Geometry\+::tinyobj\+\_\+material\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{a01361}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00469_ae4cf96eab579f41afb748b1714b21ecb}\label{a00469_ae4cf96eab579f41afb748b1714b21ecb}} 
+string&
+name&
+\\
+\hline
+
+\end{DoxyFields}
+\index{HF::Geometry::tinyobj\_geometry@{HF::Geometry::tinyobj\_geometry}}\label{a01367}
+\Hypertarget{a00469_a01367}
+\doxysubsubsection{struct HF\+::Geometry\+::tinyobj\+\_\+geometry}
+\subsubsection*{template$<$typename T$>$\newline
+struct HF\+::\+Geometry\+::tinyobj\+\_\+geometry$<$ T $>$}
+
+
+Definition at line \mbox{\hyperlink{a00191_source_l00089}{89}} of file \mbox{\hyperlink{a00191_source}{objloader.\+h}}.
+
+
+
+Collaboration diagram for HF\+::Geometry\+::tinyobj\+\_\+geometry\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01365}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00469_a54c1f870295e1d35ec13f5aab4d4c3b9}\label{a00469_a54c1f870295e1d35ec13f5aab4d4c3b9}} 
+\mbox{\hyperlink{a00469_a01355}{tinyobj\_attr}}$<$ T $>$&
+attributes&
+\\
+\hline
+
+\mbox{\Hypertarget{a00469_a4a3ee4a16a711ab365e1f073633fda57}\label{a00469_a4a3ee4a16a711ab365e1f073633fda57}} 
+vector$<$ \mbox{\hyperlink{a00469_a01363}{tinyobj\_material}} $>$&
+materials&
+\\
+\hline
+
+\mbox{\Hypertarget{a00469_a93f2dc0a104bbd96931921e366b7ddb2}\label{a00469_a93f2dc0a104bbd96931921e366b7ddb2}} 
+vector$<$ \mbox{\hyperlink{a00469_a01359}{tinyobj\_shape}}$<$ T $>$ $>$&
+shapes&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a00191_a4104f7562d27efe7c2f57dc557d2ce16}\label{a00191_a4104f7562d27efe7c2f57dc557d2ce16}} 
+\index{objloader.h@{objloader.h}!OBJLOADER\_H@{OBJLOADER\_H}}
+\index{OBJLOADER\_H@{OBJLOADER\_H}!objloader.h@{objloader.h}}
+\doxysubsubsection{\texorpdfstring{OBJLOADER\_H}{OBJLOADER\_H}}
+{\footnotesize\ttfamily \#define OBJLOADER\+\_\+H}
+
+
+
+Definition at line \mbox{\hyperlink{a00191_source_l00010}{10}} of file \mbox{\hyperlink{a00191_source}{objloader.\+h}}.
 

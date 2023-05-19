@@ -1,0 +1,113 @@
+\hypertarget{a00404_source}{}\doxysection{analysis\+\_\+\+C.\+cpp}
+\label{a00404_source}\index{Cinterface/analysis\_C.cpp@{Cinterface/analysis\_C.cpp}}
+\mbox{\hyperlink{a00404}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00001}00001 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00407}{analysis\_C.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00002}00002 }
+\DoxyCodeLine{\Hypertarget{a00404_source_l00003}00003 \textcolor{preprocessor}{\#include <robin\_hood.h>}}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00004}00004 }
+\DoxyCodeLine{\Hypertarget{a00404_source_l00005}00005 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00176}{HFExceptions.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00006}00006 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00212}{embree\_raytracer.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00007}00007 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00008}{graph\_generator.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00008}00008 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00269}{graph.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00009}00009 }
+\DoxyCodeLine{\Hypertarget{a00404_source_l00010}00010 \textcolor{keyword}{using }\mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}};}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00011}00011 \textcolor{keyword}{using }\mbox{\hyperlink{a01311}{HF::GraphGenerator::GraphGenerator}};}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00012}00012 \textcolor{keyword}{using namespace }\mbox{\hyperlink{a00468}{HF::Exceptions}};}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00013}00013 }
+\DoxyCodeLine{\Hypertarget{a00404_source_l00014}00014 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> }
+\DoxyCodeLine{\Hypertarget{a00404_source_l00015}\mbox{\hyperlink{a00404_ae57988500f66a8ab4a31a9b50ed58b02}{00015}} std::vector<T> \mbox{\hyperlink{a00404_ae57988500f66a8ab4a31a9b50ed58b02}{MapToVector}}(\textcolor{keywordtype}{int} length, \textcolor{keyword}{const} T * in\_ptr)\{}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00016}00016     \textcolor{keywordflow}{if} (length == 0)}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00017}00017         \textcolor{keywordflow}{return} std::vector<T>(0);}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00018}00018     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00019}00019         \textcolor{keywordflow}{return} std::vector<T>(in\_ptr, in\_ptr + length);}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00020}00020 \}}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00021}00021 }
+\DoxyCodeLine{\Hypertarget{a00404_source_l00022}\mbox{\hyperlink{a00454_ga2df84a732d1edfb70b7bd26d3282e129}{00022}} \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00454_ga2df84a732d1edfb70b7bd26d3282e129}{GenerateGraph}}(}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00023}00023     \mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}}* ray\_tracer,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00024}00024     \textcolor{keyword}{const} \textcolor{keywordtype}{float}* start\_point,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00025}00025     \textcolor{keyword}{const} \textcolor{keywordtype}{float}* spacing,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00026}00026     \textcolor{keywordtype}{int} MaxNodes,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00027}00027     \textcolor{keywordtype}{float} UpStep,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00028}00028     \textcolor{keywordtype}{float} UpSlope,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00029}00029     \textcolor{keywordtype}{float} DownStep,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00030}00030     \textcolor{keywordtype}{float} DownSlope,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00031}00031     \textcolor{keywordtype}{int} max\_step\_connections,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00032}00032     \textcolor{keywordtype}{int} min\_connections,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00033}00033     \textcolor{keywordtype}{int} core\_count,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00034}00034     \mbox{\hyperlink{a01551}{Graph}}** out\_graph}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00035}00035 )\{}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00036}00036     \textcolor{keyword}{const} std::array<float, 3> start\_array\{ start\_point[0], start\_point[1], start\_point[2] \};}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00037}00037     \textcolor{keyword}{const} std::array<double, 3> spacing\_array\{ spacing[0], spacing[1], spacing[2] \};}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00038}00038 }
+\DoxyCodeLine{\Hypertarget{a00404_source_l00039}00039     \mbox{\hyperlink{a01551}{Graph}}* G = \textcolor{keyword}{new} \mbox{\hyperlink{a01551}{Graph}}();}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00040}00040     \mbox{\hyperlink{a01311}{GraphGenerator}} GraphGen(*ray\_tracer);}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00041}00041     *G = GraphGen.\mbox{\hyperlink{a01311_a0c12341433bbec41cc12cc1dbb41a976}{BuildNetwork}}(}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00042}00042         start\_array,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00043}00043         spacing\_array,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00044}00044         MaxNodes,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00045}00045         UpStep,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00046}00046         UpSlope,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00047}00047         DownStep,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00048}00048         DownSlope,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00049}00049         max\_step\_connections,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00050}00050         min\_connections,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00051}00051         core\_count}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00052}00052     );}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00053}00053 }
+\DoxyCodeLine{\Hypertarget{a00404_source_l00054}00054     \textcolor{keywordflow}{if} (G-\/>\mbox{\hyperlink{a01551_aa70347b8a33b57c6f0a72d6eca4248d7}{Nodes}}().size() < 1) \{}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00055}00055         \textcolor{keyword}{delete} G;}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00056}00056         \textcolor{keywordflow}{return} HF\_STATUS::NO\_GRAPH;}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00057}00057     \}}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00058}00058     *out\_graph = G;}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00059}00059     \textcolor{keywordflow}{return} \mbox{\hyperlink{a00468_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}{OK}};}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00060}00060 \}}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00061}00061 }
+\DoxyCodeLine{\Hypertarget{a00404_source_l00062}\mbox{\hyperlink{a00454_gab9f58e3ecc686fa9bc34519b0faed734}{00062}} \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00454_gab9f58e3ecc686fa9bc34519b0faed734}{GenerateGraphObstacles}}(}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00063}00063     \mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}}* ray\_tracer,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00064}00064     \textcolor{keyword}{const} \textcolor{keywordtype}{float}* start\_point,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00065}00065     \textcolor{keyword}{const} \textcolor{keywordtype}{float}* spacing,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00066}00066     \textcolor{keywordtype}{int} MaxNodes,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00067}00067     \textcolor{keywordtype}{float} UpStep,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00068}00068     \textcolor{keywordtype}{float} UpSlope,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00069}00069     \textcolor{keywordtype}{float} DownStep,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00070}00070     \textcolor{keywordtype}{float} DownSlope,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00071}00071     \textcolor{keywordtype}{int} max\_step\_connections,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00072}00072     \textcolor{keywordtype}{int} min\_connections,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00073}00073     \textcolor{keywordtype}{int} core\_count,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00074}00074     \textcolor{keyword}{const} \textcolor{keywordtype}{int}* obstacle\_ids,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00075}00075     \textcolor{keyword}{const} \textcolor{keywordtype}{int}* walkable\_ids,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00076}00076     \textcolor{keywordtype}{int} num\_obstacles,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00077}00077     \textcolor{keywordtype}{int} num\_walkables,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00078}00078     \mbox{\hyperlink{a01551}{Graph}}** out\_graph}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00079}00079 ) \{}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00080}00080     \textcolor{keyword}{const} std::array<float, 3> start\_array\{ start\_point[0], start\_point[1], start\_point[2] \};}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00081}00081     \textcolor{keyword}{const} std::array<double, 3> spacing\_array\{ spacing[0], spacing[1], spacing[2] \};}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00082}00082 }
+\DoxyCodeLine{\Hypertarget{a00404_source_l00083}00083     \textcolor{keyword}{const} std::vector<int> obstacle\_vector = \mbox{\hyperlink{a00404_ae57988500f66a8ab4a31a9b50ed58b02}{MapToVector}}(num\_obstacles, obstacle\_ids);}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00084}00084     \textcolor{keyword}{const} std::vector<int> walkable\_vector = \mbox{\hyperlink{a00404_ae57988500f66a8ab4a31a9b50ed58b02}{MapToVector}}(num\_walkables, walkable\_ids);}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00085}00085 }
+\DoxyCodeLine{\Hypertarget{a00404_source_l00086}00086     \mbox{\hyperlink{a01551}{Graph}}* G = \textcolor{keyword}{new} \mbox{\hyperlink{a01551}{Graph}}();}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00087}00087     \mbox{\hyperlink{a01311}{GraphGenerator}} GraphGen(*ray\_tracer, obstacle\_vector, walkable\_vector);}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00088}00088     *G = GraphGen.\mbox{\hyperlink{a01311_a0c12341433bbec41cc12cc1dbb41a976}{BuildNetwork}}(}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00089}00089         start\_array,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00090}00090         spacing\_array,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00091}00091         MaxNodes,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00092}00092         UpStep,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00093}00093         UpSlope,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00094}00094         DownStep,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00095}00095         DownSlope,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00096}00096         max\_step\_connections,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00097}00097         min\_connections,}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00098}00098         core\_count}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00099}00099     );}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00100}00100 }
+\DoxyCodeLine{\Hypertarget{a00404_source_l00101}00101     \textcolor{keywordflow}{if} (G-\/>\mbox{\hyperlink{a01551_aa70347b8a33b57c6f0a72d6eca4248d7}{Nodes}}().size() < 1) \{}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00102}00102         \textcolor{keyword}{delete} G;}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00103}00103         \textcolor{keywordflow}{return} HF\_STATUS::NO\_GRAPH;}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00104}00104     \}}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00105}00105     *out\_graph = G;}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00106}00106     \textcolor{keywordflow}{return} \mbox{\hyperlink{a00468_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}{OK}};}
+\DoxyCodeLine{\Hypertarget{a00404_source_l00107}00107 \}}
+
+\end{DoxyCode}

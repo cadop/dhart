@@ -1,0 +1,177 @@
+\hypertarget{a00437_source}{}\doxysection{spatialstructures\+\_\+\+C.\+h}
+\label{a00437_source}\index{Cinterface/spatialstructures\_C.h@{Cinterface/spatialstructures\_C.h}}
+\mbox{\hyperlink{a00437}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00009}00009 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00413}{cinterface\_utils.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00010}00010 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00011}00011 \textcolor{preprocessor}{\#include <array>}}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00012}00012 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00018}\mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{00018}} \textcolor{preprocessor}{\#define C\_INTERFACE extern "{}C"{}} \_\_declspec(dllexport) int}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00019}00019 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00020}00020 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00462}{HF}} \{}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00021}00021     \textcolor{keyword}{namespace }SpatialStructures \{}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00022}00022         \textcolor{keyword}{class }Graph;}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00023}00023         \textcolor{keyword}{struct }Subgraph;}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00024}00024 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00025}00025         \textcolor{keyword}{enum class} \mbox{\hyperlink{a00465_a6b23c0b2531c78f6d5049873c184f4f9}{COST\_AGGREGATE}} : int;}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00026}00026 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00027}00027         \textcolor{keyword}{struct }Node;    \textcolor{comment}{// Careful with these forward declares!}}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00028}00028         \textcolor{keyword}{struct }Edge;    \textcolor{comment}{// Spent like 2 hours reading mangled names }}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00029}00029                         \textcolor{comment}{// because I accidentally defined these }}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00030}00030                         \textcolor{comment}{// as classes (V) instead of structs (U)}}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00031}00031 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00032}00032         \textcolor{keyword}{enum class} \mbox{\hyperlink{a00465_afac7c4ef1cb1104941f4d5a27973b47e}{Direction}} : int;}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00033}00033     \}}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00034}00034 \}}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00035}00035 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00040}\mbox{\hyperlink{a00437_ac8fff1d29507d50c7848ea3fdbbbb0fc}{00040}} \textcolor{keyword}{const} \textcolor{keyword}{enum} \mbox{\hyperlink{a00437_ac8fff1d29507d50c7848ea3fdbbbb0fc}{COST\_ALG\_KEY}} \{}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00041}\mbox{\hyperlink{a00437_ac8fff1d29507d50c7848ea3fdbbbb0fca0ff5aa5181f1f5d5e6461b76852dd6b3}{00041}}     \mbox{\hyperlink{a00437_ac8fff1d29507d50c7848ea3fdbbbb0fca0ff5aa5181f1f5d5e6461b76852dd6b3}{CROSS\_SLOPE}},     }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00042}00042     \mbox{\hyperlink{a00437_ac8fff1d29507d50c7848ea3fdbbbb0fcae9ab743e91700df76bc0aece0db5195c}{ENERGY\_EXPENDITURE}}    }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00043}\mbox{\hyperlink{a00437_ac8fff1d29507d50c7848ea3fdbbbb0fcae9ab743e91700df76bc0aece0db5195c}{00043}} \};}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00044}00044 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00049}\mbox{\hyperlink{a00437_a5943f15abc63299d7caba81e989df706}{00049}} \textcolor{keyword}{const} std::vector<std::string> \mbox{\hyperlink{a00437_a5943f15abc63299d7caba81e989df706}{Key\_To\_Costs}} \{}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00050}00050     \textcolor{stringliteral}{"{}CrossSlope"{}},}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00051}00051     \textcolor{stringliteral}{"{}EnergyExpenditure"{}}}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00052}00052 \};}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00053}00053 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00072}\mbox{\hyperlink{a00437_a047beaeb65d7842c75f024915219177e}{00072}} \textcolor{keyword}{inline} std::string \mbox{\hyperlink{a00437_a047beaeb65d7842c75f024915219177e}{AlgorithmCostTitle}}(\mbox{\hyperlink{a00437_ac8fff1d29507d50c7848ea3fdbbbb0fc}{COST\_ALG\_KEY}} key) \{}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00073}00073     \textcolor{keywordflow}{return} \mbox{\hyperlink{a00437_a5943f15abc63299d7caba81e989df706}{Key\_To\_Costs}}[key];}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00074}00074 \}}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00075}00075 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00239}00239 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_ga0cc5b82caab046c65a201e4e7be5e9d4}{GetAllNodesFromGraph}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00240}00240     \textcolor{keyword}{const} \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* graph,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00241}00241     std::vector<HF::SpatialStructures::Node>** out\_vector\_ptr,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00242}00242     \mbox{\hyperlink{a02071}{HF::SpatialStructures::Node}}** out\_data\_ptr}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00243}00243 );}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00244}00244 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00276}\mbox{\hyperlink{a00458_gab39b5c750b266835efbc3c6c9da0a431}{00276}} \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_gab39b5c750b266835efbc3c6c9da0a431}{GetEdgesForNode}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00277}00277     \textcolor{keyword}{const} \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* graph,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00278}00278     \textcolor{keyword}{const} \mbox{\hyperlink{a02071}{HF::SpatialStructures::Node}}* Node,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00279}00279     std::vector<HF::SpatialStructures::Edge>** out\_vector\_ptr,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00280}00280     \mbox{\hyperlink{a01527}{HF::SpatialStructures::Edge}}** out\_edge\_list\_ptr,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00281}00281     \textcolor{keywordtype}{int}* out\_edge\_list\_size}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00282}00282 );}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00283}00283 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00314}00314 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_gac17c1fc05e6bf6900bac8689b7619bfb}{GetSizeOfNodeVector}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00315}00315     \textcolor{keyword}{const} std::vector<HF::SpatialStructures::Node>* node\_list,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00316}00316     \textcolor{keywordtype}{int}* out\_size}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00317}00317 );}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00318}00318 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00329}00329 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_ga712f182888672382dd4a1776f850915a}{GetSizeOfEdgeVector}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00330}00330     \textcolor{keyword}{const} std::vector<HF::SpatialStructures::Edge>* edge\_list,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00331}00331     \textcolor{keywordtype}{int}* out\_size}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00332}00332 );}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00333}00333 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00334}00334 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00369}00369 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_ga926ab7057d3b6709c73de5af085a2ee8}{GetEdgeCost}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00370}00370     \textcolor{keyword}{const} \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}} * g,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00371}00371     \textcolor{keywordtype}{int} parent,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00372}00372     \textcolor{keywordtype}{int} child,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00373}00373     \textcolor{keyword}{const} \textcolor{keywordtype}{char} * cost\_type,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00374}00374     \textcolor{keywordtype}{float}* out\_float}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00375}00375 );}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00376}00376 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00412}00412 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_ga0b0293bbac3cdc8bdaa1d2c36bec0a26}{AggregateCosts}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00413}00413     \textcolor{keyword}{const} \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* graph,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00414}00414     \textcolor{keywordtype}{int} agg,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00415}00415     \textcolor{keywordtype}{bool} directed,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00416}00416     \textcolor{keyword}{const} \textcolor{keywordtype}{char}* cost\_type,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00417}00417     std::vector<float>** out\_vector\_ptr,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00418}00418     \textcolor{keywordtype}{float}** out\_data\_ptr}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00419}00419 );}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00420}00420 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00434}00434 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_ga262a8f714fbd8d74840efa5832597fff}{CreateGraph}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00435}00435     \textcolor{keyword}{const} \textcolor{keywordtype}{float}* nodes,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00436}00436     \textcolor{keywordtype}{int} num\_nodes,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00437}00437     \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}** out\_graph}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00438}00438 );}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00439}00439 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00475}00475 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_ga43f715ce7f57fb92e78f8f6e90b84baf}{AddEdgeFromNodes}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00476}00476     \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* graph,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00477}00477     \textcolor{keyword}{const} \textcolor{keywordtype}{float}* parent,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00478}00478     \textcolor{keyword}{const} \textcolor{keywordtype}{float}* child,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00479}00479     \textcolor{keywordtype}{float} score,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00480}00480     \textcolor{keyword}{const} \textcolor{keywordtype}{char} * cost\_type}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00481}00481 );}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00482}00482 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00505}00505 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_ga02213608939a85d5165da6c0a47c113b}{AddEdgeFromNodeIDs}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00506}00506     \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* graph,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00507}00507     \textcolor{keywordtype}{int} parent\_id,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00508}00508     \textcolor{keywordtype}{int} child\_id,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00509}00509     \textcolor{keywordtype}{float} score,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00510}00510     \textcolor{keyword}{const} \textcolor{keywordtype}{char} * cost\_type}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00511}00511 );}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00512}00512 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00535}00535 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_ga58e27a4c3b5a2d9692536877c2e13691}{GetCSRPointers}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00536}00536     \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* graph,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00537}00537     \textcolor{keywordtype}{int}* out\_nnz,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00538}00538     \textcolor{keywordtype}{int}* out\_num\_rows,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00539}00539     \textcolor{keywordtype}{int}* out\_num\_cols,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00540}00540     \textcolor{keywordtype}{float}** out\_data\_ptr,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00541}00541     \textcolor{keywordtype}{int}** out\_inner\_indices\_ptr,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00542}00542     \textcolor{keywordtype}{int}** out\_outer\_indices\_ptr,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00543}00543     \textcolor{keyword}{const} \textcolor{keywordtype}{char}* cost\_type}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00544}00544 );}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00545}00545 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00578}00578 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_ga31fad78ce410cd523bb337f46b078b4c}{GetNodeID}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00579}00579     \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* graph,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00580}00580     \textcolor{keyword}{const} \textcolor{keywordtype}{float}* point,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00581}00581     \textcolor{keywordtype}{int}* out\_id}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00582}00582 );}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00583}00583 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00601}00601 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_gab7ecc1be5c746ed3f99ab7494316c65d}{Compress}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00602}00602     \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* graph}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00603}00603 );}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00604}00604 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00634}00634 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_gac9581ead92b8caa513a77012af10aa63}{ClearGraph}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00635}00635     \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* graph,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00636}00636     \textcolor{keyword}{const} \textcolor{keywordtype}{char}* cost\_type}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00637}00637 );}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00638}00638 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00648}00648 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_ga87e9b9ecfc5293712d75f3cb8c992c77}{DestroyNodes}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00649}00649     std::vector<HF::SpatialStructures::Node>* nodelist\_to\_destroy}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00650}00650 );}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00651}00651 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00661}00661 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_gac46191088d698cc007a2176ab6b5674d}{DestroyEdges}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00662}00662     std::vector<HF::SpatialStructures::Edge>* edgelist\_to\_destroy}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00663}00663 );}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00664}00664 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00674}00674 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_ga645abacd11e1fa535f953344aaa77727}{DestroyGraph}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00675}00675     \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* graph\_to\_destroy}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00676}00676 );}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00677}00677 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00703}00703 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_gad7f7fa84fbf7484d38228ccd346d1ae0}{CalculateAndStoreCrossSlope}}(\mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* g);}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00704}00704 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00732}00732 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_ga76d98cf2df63a766a74137dfa815d9a9}{CalculateAndStoreEnergyExpenditure}}(\mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* g);}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00733}00733 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00775}00775 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_gad7060ed66926e8d028cd2e43e0cb73e6}{AddNodeAttributes}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00776}00776     \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* g,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00777}00777     \textcolor{keyword}{const} \textcolor{keywordtype}{int}* ids,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00778}00778     \textcolor{keyword}{const} \textcolor{keywordtype}{char}* attribute,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00779}00779     \textcolor{keyword}{const} \textcolor{keywordtype}{char}** scores, }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00780}00780     \textcolor{keywordtype}{int} num\_nodes}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00781}00781 );}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00782}00782 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00822}00822 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_ga755a13df931e2e3047ed665958727ccb}{GetNodeAttributes}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00823}00823     \textcolor{keyword}{const} \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* g,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00824}00824     \textcolor{keyword}{const} \textcolor{keywordtype}{char}* attribute,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00825}00825     \textcolor{keywordtype}{char}** out\_scores,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00826}00826     \textcolor{keywordtype}{int}* out\_score\_size}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00827}00827 );}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00828}00828 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00839}00839 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_gad6d3a72e20e71132c774b931567d76f7}{DeleteScoreArray}}(\textcolor{keywordtype}{char}** scores\_to\_delete, \textcolor{keywordtype}{int} num\_char\_arrays);}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00840}00840 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00870}00870 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_ga718c5819f2cc2ffad1b9e8d0cb61dd9c}{ClearAttributeType}}(\mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* g, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* s);}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00871}00871 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00898}00898 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_ga5bbc8687b0d04c0f177fbb8385302a56}{GetSizeOfGraph}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* g, \textcolor{keywordtype}{int}* out\_size);}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00899}00899 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00900}00900 }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00914}00914 \mbox{\hyperlink{a00437_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00458_ga72f40d5fd30732923620559392d5535a}{GraphAttrsToCosts}}(}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00915}00915     \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}} * graph\_ptr, }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00916}00916     \textcolor{keyword}{const} \textcolor{keywordtype}{char} * attr\_key,}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00917}00917     \textcolor{keyword}{const} \textcolor{keywordtype}{char} * cost\_string, }
+\DoxyCodeLine{\Hypertarget{a00437_source_l00918}00918     \mbox{\hyperlink{a00465_afac7c4ef1cb1104941f4d5a27973b47e}{HF::SpatialStructures::Direction}} dir);}
+\DoxyCodeLine{\Hypertarget{a00437_source_l00919}00919 }
+
+\end{DoxyCode}

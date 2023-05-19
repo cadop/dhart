@@ -1,91 +1,153 @@
-\hypertarget{a00209}{}\doxysection{Cpp/spatialstructures/src/node.h File Reference}
-\label{a00209}\index{Cpp/spatialstructures/src/node.h@{Cpp/spatialstructures/src/node.h}}
+\hypertarget{a00209}{}\doxysection{Cpp/raytracer/src/embree\+\_\+raytracer.cpp File Reference}
+\label{a00209}\index{Cpp/raytracer/src/embree\_raytracer.cpp@{Cpp/raytracer/src/embree\_raytracer.cpp}}
 
 
-Contains definitions for the \mbox{\hyperlink{a02005}{Node}} structure.  
+Contains implementation for the \mbox{\hyperlink{a01411}{Embree\+Ray\+Tracer}}  
 
 
-{\ttfamily \#include $<$array$>$}\newline
-{\ttfamily \#include $<$ostream$>$}\newline
-Include dependency graph for node.\+h\+:
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
+{\ttfamily \#include $<$corecrt\+\_\+math\+\_\+defines.\+h$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$robin\+\_\+hood.\+h$>$}\newline
+{\ttfamily \#include $<$meshinfo.\+h$>$}\newline
+{\ttfamily \#include $<$Ray\+Request.\+h$>$}\newline
+{\ttfamily \#include $<$HFExceptions.\+h$>$}\newline
+Include dependency graph for embree\+\_\+raytracer.\+cpp\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=192pt]{a00210}
-\end{center}
-\end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00211}
+\includegraphics[width=350pt]{a00210}
 \end{center}
 \end{figure}
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}}
-\begin{DoxyCompactList}\small\item\em A point in space with an ID.  \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{a02009}{std\+::hash$<$ HF\+::\+Spatial\+Structures\+::\+Node $>$}}
-\begin{DoxyCompactList}\small\item\em Hash this node by combining the hashes of all of it\textquotesingle{}s position elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+struct \mbox{\hyperlink{a00464_a01399}{HF\+::\+Ray\+Tracer\+::\+Vertex}}
+\begin{DoxyCompactList}\small\item\em A vertex. Used internally in Embree.   \mbox{\hyperlink{a00464_a01399}{More...}}\end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00464_a01403}{HF\+::\+Ray\+Tracer\+::\+Triangle}}
+\begin{DoxyCompactList}\small\item\em A triangle. Used internally in Embree.   \mbox{\hyperlink{a00464_a01403}{More...}}\end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
-namespace \mbox{\hyperlink{a00396}{HF}}
+namespace \mbox{\hyperlink{a00462}{HF}}
 \begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
-namespace \mbox{\hyperlink{a00399}{HF\+::\+Spatial\+Structures}}
-\begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout DHARTAPI. \end{DoxyCompactList}\item 
-namespace \mbox{\hyperlink{a00395}{std}}
-\begin{DoxyCompactList}\small\item\em STL namespace. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Macros}
-\begin{DoxyCompactItemize}
-\item 
-\#define \mbox{\hyperlink{a00209_ae4ffe42f069a68102473a4f7c8328437}{HF\+\_\+\+NODE}}
-\end{DoxyCompactItemize}
-\doxysubsection*{Enumerations}
-\begin{DoxyCompactItemize}
-\item 
-enum \mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cc}{HF\+::\+Spatial\+Structures\+::\+NODE\+\_\+\+TYPE}} \{ \mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}{HF\+::\+Spatial\+Structures\+::\+GRAPH}} = 0
-, \mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad}{HF\+::\+Spatial\+Structures\+::\+POI}} = 1
-, \mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cca996f30fa669937983b628671c4493b8e}{HF\+::\+Spatial\+Structures\+::\+OTHER}} = 2
- \}
-\begin{DoxyCompactList}\small\item\em The type of node this is. \end{DoxyCompactList}\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{a00464}{HF\+::\+Ray\+Tracer}}
+\begin{DoxyCompactList}\small\item\em Cast rays to determine if and where they intersect geometry. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename SizeT $>$ }\\void \mbox{\hyperlink{a00395_a3340e7ae931e28e5c83e07f1d48d3ea2}{std\+::hash\+\_\+combine\+\_\+impl}} (SizeT \&seed, SizeT value) noexcept
-\begin{DoxyCompactList}\small\item\em combine value into the hash value of seed \end{DoxyCompactList}\item 
-ostream \& \mbox{\hyperlink{a00395_a8f937593ac78b8c8c74c0a02b8a22124}{std\+::operator$<$$<$}} (ostream \&os, const \mbox{\hyperlink{a02005}{HF\+::\+Spatial\+Structures\+::\+Node}} n)
-\begin{DoxyCompactList}\small\item\em Create a string containing the x,y,z position of this node. \end{DoxyCompactList}\item 
-ostream \& \mbox{\hyperlink{a00395_a355c64f937cab181506eb61a8dde2006}{std\+::operator$<$$<$}} (ostream \&os, const std\+::array$<$ float, 3 $>$ n)
-\begin{DoxyCompactList}\small\item\em Create a string containing the x,y,z positions of this array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+{\footnotesize template$<$typename numeric1 , typename numeric2 , typename dist\+\_\+type  = float$>$ }\\RTCRay\+Hit \mbox{\hyperlink{a00464_a864ebcf0023de27e610ee897de5436c2}{HF\+::\+Ray\+Tracer\+::\+Construct\+Hit}} (numeric1 x, numeric1 y, numeric1 z, numeric2 dx, numeric2 dy, numeric2 dz, dist\+\_\+type distance=-\/1.\+0f, int mesh\+\_\+id=-\/1)
+\item 
+{\footnotesize template$<$typename numeric1 , typename numeric2 , typename dist\+\_\+type  = float$>$ }\\RTCRay \mbox{\hyperlink{a00464_a76e5d26b5063f0e5b49b4ba835f1da93}{HF\+::\+Ray\+Tracer\+::\+Construct\+Ray}} (numeric1 x, numeric1 y, numeric1 z, numeric2 dx, numeric2 dy, numeric2 dz, dist\+\_\+type distance=-\/1.\+0f, int mesh\+\_\+id=-\/1)
+\item 
+RTCError \mbox{\hyperlink{a00464_a19e11d13f73136d6819b8abee57b0fd9}{HF\+::\+Ray\+Tracer\+::\+Check\+State}} (RTCDevice \&device)
+\begin{DoxyCompactList}\small\item\em Check an embree device for errors.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00464_a732eb910d06064bea04e6a959fd235f0}{HF\+::\+Ray\+Tracer\+::vectors\+To\+Buffers}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&vertices, std\+::vector$<$ Triangle $>$ \&Tribuffer, std\+::vector$<$ Vertex $>$ \&Vbuffer)
+\begin{DoxyCompactList}\small\item\em Index a list of verticies and place them into a triangle and vertex buffer.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00464_aac8c0b245ea813969c50b6496cc67945}{HF\+::\+Ray\+Tracer\+::buffers\+To\+Structs}} (std\+::vector$<$ float $>$ \&in\+\_\+vertices, std\+::vector$<$ int $>$ \&in\+\_\+indices, std\+::vector$<$ Vertex $>$ \&out\+\_\+vertices, std\+::vector$<$ Triangle $>$ \&out\+\_\+triangles)
+\begin{DoxyCompactList}\small\item\em Package raw arrays of floats and indices in buffers to the required Embree types.  \end{DoxyCompactList}\item 
+Vector3D \mbox{\hyperlink{a00464_a16f9f26b0140f023ce820ec55e38c66b}{HF\+::\+Ray\+Tracer\+::cross}} (const Vector3D \&x, const Vector3D \&y)
+\item 
+\mbox{\hyperlink{a00001_a02139}{double}} \mbox{\hyperlink{a00464_ae551c109488ce94d0a568712b50da689}{HF\+::\+Ray\+Tracer\+::dot}} (const Vector3D \&v1, const Vector3D \&v2)
+\item 
+Vector3D \mbox{\hyperlink{a00464_ac419170961bff9b1236fe017f6bc3289}{HF\+::\+Ray\+Tracer\+::\+Invert\+Vector}} (const Vector3D \&V)
+\item 
+\mbox{\hyperlink{a00001_a02139}{double}} \mbox{\hyperlink{a00464_a9498ae7ffabd8c5bca4026374ac862e9}{HF\+::\+Ray\+Tracer\+::\+Ray\+Triangle\+Intersection}} (const Vector3D \&origin, const Vector3D \&direction, const Vector3D \&v1, const Vector3D \&v2, const Vector3D \&v3)
+\begin{DoxyCompactList}\small\item\em Determine the distance between a ray\textquotesingle{}s origin and it\textquotesingle{}s point of intersection with a triangle. \end{DoxyCompactList}\item 
+Vector3D \mbox{\hyperlink{a00464_a6e20c473674ea46f649ef827818841d2}{HF\+::\+Ray\+Tracer\+::\+Get\+Point\+From\+Buffer}} (int index, Vertex $\ast$buffer)
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Contains definitions for the \mbox{\hyperlink{a02005}{Node}} structure. 
+Contains implementation for the \mbox{\hyperlink{a01411}{Embree\+Ray\+Tracer}} 
 
 \begin{DoxyAuthor}{Author}
 TBA 
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
-06 Jun 2020 
+26 Jun 2020 
 \end{DoxyDate}
 
 
-Definition in file \mbox{\hyperlink{a00209_source}{node.\+h}}.
+Definition in file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
 
 
 
-\doxysubsection{Macro Definition Documentation}
-\mbox{\Hypertarget{a00209_ae4ffe42f069a68102473a4f7c8328437}\label{a00209_ae4ffe42f069a68102473a4f7c8328437}} 
-\index{node.h@{node.h}!HF\_NODE@{HF\_NODE}}
-\index{HF\_NODE@{HF\_NODE}!node.h@{node.h}}
-\doxysubsubsection{\texorpdfstring{HF\_NODE}{HF\_NODE}}
-{\footnotesize\ttfamily \#define HF\+\_\+\+NODE}
+\doxysubsection{Class Documentation}
+\index{HF::RayTracer::Vertex@{HF::RayTracer::Vertex}}\label{a01399}
+\Hypertarget{a00464_a01399}
+\doxysubsubsection{struct HF\+::Ray\+Tracer\+::Vertex}
+A vertex. Used internally in Embree.  
+
+Definition at line \mbox{\hyperlink{a00209_source_l00077}{77}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
 
 
 
-Definition at line \mbox{\hyperlink{a00209_source_l00011}{11}} of file \mbox{\hyperlink{a00209_source}{node.\+h}}.
+Collaboration diagram for HF\+::Ray\+Tracer\+::Vertex\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{a01397}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00464_aad8e270f026ac9dd20ee294b2b1a21de}\label{a00464_aad8e270f026ac9dd20ee294b2b1a21de}} 
+float&
+x&
+\\
+\hline
 
+\mbox{\Hypertarget{a00464_aa27c7b22316499f43093c2b7768c06ea}\label{a00464_aa27c7b22316499f43093c2b7768c06ea}} 
+float&
+y&
+\\
+\hline
+
+\mbox{\Hypertarget{a00464_ab8599cc6220e686dac319622f7d2f364}\label{a00464_ab8599cc6220e686dac319622f7d2f364}} 
+float&
+z&
+\\
+\hline
+
+\end{DoxyFields}
+\index{HF::RayTracer::Triangle@{HF::RayTracer::Triangle}}\label{a01403}
+\Hypertarget{a00464_a01403}
+\doxysubsubsection{struct HF\+::Ray\+Tracer\+::Triangle}
+A triangle. Used internally in Embree.  
+
+Definition at line \mbox{\hyperlink{a00209_source_l00082}{82}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+Collaboration diagram for HF\+::Ray\+Tracer\+::Triangle\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=199pt]{a01401}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00464_a504a02b108984ddfa3f521cf40b17e61}\label{a00464_a504a02b108984ddfa3f521cf40b17e61}} 
+int&
+v0&
+\\
+\hline
+
+\mbox{\Hypertarget{a00464_afc086ccfe3fc951af959d905056358c4}\label{a00464_afc086ccfe3fc951af959d905056358c4}} 
+int&
+v1&
+\\
+\hline
+
+\mbox{\Hypertarget{a00464_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}\label{a00464_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}} 
+int&
+v2&
+\\
+\hline
+
+\end{DoxyFields}

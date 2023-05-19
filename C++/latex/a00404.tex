@@ -1,244 +1,51 @@
-\hypertarget{a00404}{}\doxysection{HF\+::nano\+Geom Namespace Reference}
-\label{a00404}\index{HF::nanoGeom@{HF::nanoGeom}}
-\doxysubsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct \mbox{\hyperlink{a00404_a01273}{Mesh}}
-\end{DoxyCompactItemize}
+\hypertarget{a00404}{}\doxysection{Cinterface/analysis\+\_\+C.cpp File Reference}
+\label{a00404}\index{Cinterface/analysis\_C.cpp@{Cinterface/analysis\_C.cpp}}
+{\ttfamily \#include $<$analysis\+\_\+\+C.\+h$>$}\newline
+{\ttfamily \#include $<$robin\+\_\+hood.\+h$>$}\newline
+{\ttfamily \#include $<$HFExceptions.\+h$>$}\newline
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
+{\ttfamily \#include $<$graph\+\_\+generator.\+h$>$}\newline
+{\ttfamily \#include $<$graph.\+h$>$}\newline
+Include dependency graph for analysis\+\_\+\+C.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00405}
+\end{center}
+\end{figure}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{a00404_ad8e91aefa202de3abee6fd9914299e46}{Load\+Obj}} (\mbox{\hyperlink{a00404_a01273}{Mesh}} \&mesh, const char $\ast$filename)
+{\footnotesize template$<$typename T $>$ }\\std\+::vector$<$ T $>$ \mbox{\hyperlink{a00404_ae57988500f66a8ab4a31a9b50ed58b02}{Map\+To\+Vector}} (int length, const T $\ast$in\+\_\+ptr)
 \item 
-bool \mbox{\hyperlink{a00404_ae4ab3809e1f437e93ae1ad78c2792025}{nano\+RT\+\_\+\+Ray\+Cast}} (\mbox{\hyperlink{a01417}{nanort\+::\+BVHAccel}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ \&accel, \mbox{\hyperlink{a01433}{nanort\+::\+Triangle\+Intersector}}$<$ \mbox{\hyperlink{a00001_a02073}{double}}, \mbox{\hyperlink{a00408_a01429}{nanort\+::\+Triangle\+Intersection}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ $>$ \&triangle\+\_\+intersector, \mbox{\hyperlink{a01381}{nanort\+::\+Ray}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ \&ray, \mbox{\hyperlink{a00408_a01429}{nanort\+::\+Triangle\+Intersection}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ \&isect)
-\item 
-\mbox{\hyperlink{a01417}{nanort\+::\+BVHAccel}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ \mbox{\hyperlink{a00404_a1cb19dd0ff847089a65139f01ee06b8c}{nano\+RT\+\_\+\+BVH}} (\mbox{\hyperlink{a00404_a01273}{Mesh}} \&mesh)
-\item 
-\mbox{\hyperlink{a01417}{nanort\+::\+BVHAccel}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ \mbox{\hyperlink{a00404_a6291ce624c796ab1fe2a45a92eb0c6b0}{nano\+RT\+\_\+\+BVH}} (\mbox{\hyperlink{a00404_a01273}{Mesh}} mesh)
-\item 
-bool \mbox{\hyperlink{a00404_ab842b43dc319eba17876627bae3286f6}{nano\+RT\+\_\+\+Intersect}} (\mbox{\hyperlink{a00404_a01273}{Mesh}} \&mesh, \mbox{\hyperlink{a01417}{nanort\+::\+BVHAccel}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ \&accel, \mbox{\hyperlink{a01449}{nano\+RT\+\_\+\+Data}} \&intersector)
-\item 
-{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{a01417}{nanort\+::\+BVHAccel}}$<$ T $>$ \mbox{\hyperlink{a00404_af0076b21d9b4daea635c98a24737da94}{nano\+RT\+\_\+\+BVH}} (unsigned int $\ast$indices, T $\ast$vertices, int num\+\_\+vertices, int num\+\_\+indices)
-\end{DoxyCompactItemize}
-
-
-\doxysubsection{Class Documentation}
-\index{HF::nanoGeom::Mesh@{HF::nanoGeom::Mesh}}\label{a01273}
-\Hypertarget{a00404_a01273}
-\doxysubsubsection{struct HF\+::nano\+Geom\+::Mesh}
-
-
-Definition at line \mbox{\hyperlink{a00119_source_l00019}{19}} of file \mbox{\hyperlink{a00119_source}{meshinfo.\+h}}.
-
-
-
-Collaboration diagram for HF\+::nano\+Geom\+::Mesh\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a01271}
-\end{center}
-\end{figure}
-\begin{DoxyFields}{Class Members}
-\mbox{\Hypertarget{a00404_a0f21ead8835aeab4258b117d9aa66793}\label{a00404_a0f21ead8835aeab4258b117d9aa66793}} 
-unsigned int $\ast$&
-faces&
-\mbox{[}xyz\mbox{]} $\ast$ 3(triangle) $\ast$ num\+\_\+faces \\
-\hline
-
-\mbox{\Hypertarget{a00404_a8a0fdd8265fc9b14a86c214fc49b3ed6}\label{a00404_a8a0fdd8265fc9b14a86c214fc49b3ed6}} 
-\mbox{\hyperlink{a00001_a02073}{double}} $\ast$&
-facevarying\_binormals&
-\mbox{[}xyz\mbox{]} $\ast$ 3(triangle) $\ast$ num\+\_\+faces \\
-\hline
-
-\mbox{\Hypertarget{a00404_aeb1e6fe888da7cabdb39f0f9cc78706d}\label{a00404_aeb1e6fe888da7cabdb39f0f9cc78706d}} 
-\mbox{\hyperlink{a00001_a02073}{double}} $\ast$&
-facevarying\_normals&
-\mbox{[}xyz\mbox{]} $\ast$ num\+\_\+vertices \\
-\hline
-
-\mbox{\Hypertarget{a00404_a8a4e09d8b8aad9fc1d316e3c7db75de3}\label{a00404_a8a4e09d8b8aad9fc1d316e3c7db75de3}} 
-\mbox{\hyperlink{a00001_a02073}{double}} $\ast$&
-facevarying\_tangents&
-\mbox{[}xyz\mbox{]} $\ast$ 3(triangle) $\ast$ num\+\_\+faces \\
-\hline
-
-\mbox{\Hypertarget{a00404_a8f03e2a8bbd8f41a4ebdac7722054611}\label{a00404_a8f03e2a8bbd8f41a4ebdac7722054611}} 
-\mbox{\hyperlink{a00001_a02073}{double}} $\ast$&
-facevarying\_uvs&
-\mbox{[}xyz\mbox{]} $\ast$ 3(triangle) $\ast$ num\+\_\+faces \\
-\hline
-
-\mbox{\Hypertarget{a00404_a57b8e268c3dde5befb03ffb3126abd9d}\label{a00404_a57b8e268c3dde5befb03ffb3126abd9d}} 
-\mbox{\hyperlink{a00001_a02073}{double}} $\ast$&
-facevarying\_vertex\_colors&
-\mbox{[}xyz\mbox{]} $\ast$ 3(triangle) $\ast$ num\+\_\+faces \\
-\hline
-
-\mbox{\Hypertarget{a00404_a9cea4532361289a5d18fa3a905d990fb}\label{a00404_a9cea4532361289a5d18fa3a905d990fb}} 
-unsigned int $\ast$&
-material\_ids&
-triangle x num\+\_\+faces \\
-\hline
-
-\mbox{\Hypertarget{a00404_a23f10e5b6d63da186e7bd477ba8b34d8}\label{a00404_a23f10e5b6d63da186e7bd477ba8b34d8}} 
-size\_t&
-num\_faces&
-\\
-\hline
-
-\mbox{\Hypertarget{a00404_a623bb7021165e4caf385245729f1c2f1}\label{a00404_a623bb7021165e4caf385245729f1c2f1}} 
-size\_t&
-num\_vertices&
-\\
-\hline
-
-\mbox{\Hypertarget{a00404_a9ba8fa062d05f24f9a4a30ed35ac6754}\label{a00404_a9ba8fa062d05f24f9a4a30ed35ac6754}} 
-\mbox{\hyperlink{a00001_a02073}{double}} $\ast$&
-vertices&
-\\
-\hline
-
-\end{DoxyFields}
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00454_ga2df84a732d1edfb70b7bd26d3282e129}{Generate\+Graph}} (\mbox{\hyperlink{a01411}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ray\+\_\+tracer, const float $\ast$start\+\_\+point, const float $\ast$spacing, int Max\+Nodes, float Up\+Step, float Up\+Slope, float Down\+Step, float Down\+Slope, int max\+\_\+step\+\_\+connections, int min\+\_\+connections, int core\+\_\+count, \mbox{\hyperlink{a01551}{Graph}} $\ast$$\ast$out\+\_\+graph)
+\begin{DoxyCompactList}\small\item\em Construct a graph by performing a breadth-\/first search of accessible space. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00454_gab9f58e3ecc686fa9bc34519b0faed734}{Generate\+Graph\+Obstacles}} (\mbox{\hyperlink{a01411}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ray\+\_\+tracer, const float $\ast$start\+\_\+point, const float $\ast$spacing, int Max\+Nodes, float Up\+Step, float Up\+Slope, float Down\+Step, float Down\+Slope, int max\+\_\+step\+\_\+connections, int min\+\_\+connections, int core\+\_\+count, const int $\ast$obstacle\+\_\+ids, const int $\ast$walkable\+\_\+ids, int num\+\_\+obstacles, int num\+\_\+walkables, \mbox{\hyperlink{a01551}{Graph}} $\ast$$\ast$out\+\_\+graph)
+\begin{DoxyCompactList}\small\item\em Construct a graph by performing a breadth-\/first search of accessible space, seperating obstacles from walkable geometry. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{a00404_ad8e91aefa202de3abee6fd9914299e46}\label{a00404_ad8e91aefa202de3abee6fd9914299e46}} 
-\index{HF::nanoGeom@{HF::nanoGeom}!LoadObj@{LoadObj}}
-\index{LoadObj@{LoadObj}!HF::nanoGeom@{HF::nanoGeom}}
-\doxysubsubsection{\texorpdfstring{LoadObj()}{LoadObj()}}
-{\footnotesize\ttfamily bool HF\+::nano\+Geom\+::\+Load\+Obj (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00404_a01273}{Mesh}} \&}]{mesh,  }\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{a00404_ae57988500f66a8ab4a31a9b50ed58b02}\label{a00404_ae57988500f66a8ab4a31a9b50ed58b02}} 
+\index{analysis\_C.cpp@{analysis\_C.cpp}!MapToVector@{MapToVector}}
+\index{MapToVector@{MapToVector}!analysis\_C.cpp@{analysis\_C.cpp}}
+\doxysubsubsection{\texorpdfstring{MapToVector()}{MapToVector()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ T $>$ Map\+To\+Vector (\begin{DoxyParamCaption}\item[{int}]{length,  }\item[{const T $\ast$}]{in\+\_\+ptr }\end{DoxyParamCaption})}
 
 
 
-Definition at line \mbox{\hyperlink{a00122_source_l00029}{29}} of file \mbox{\hyperlink{a00122_source}{objloader.\+cpp}}.
+Definition at line \mbox{\hyperlink{a00404_source_l00015}{15}} of file \mbox{\hyperlink{a00404_source}{analysis\+\_\+\+C.\+cpp}}.
 
 
 
-References \mbox{\hyperlink{a00119_source_l00028}{HF\+::nano\+Geom\+::\+Mesh\+::faces}}, \mbox{\hyperlink{a00119_source_l00021}{HF\+::nano\+Geom\+::\+Mesh\+::num\+\_\+faces}}, \mbox{\hyperlink{a00119_source_l00020}{HF\+::nano\+Geom\+::\+Mesh\+::num\+\_\+vertices}}, and \mbox{\hyperlink{a00119_source_l00022}{HF\+::nano\+Geom\+::\+Mesh\+::vertices}}.
+Referenced by \mbox{\hyperlink{a00404_source_l00062}{Generate\+Graph\+Obstacles()}}.
 
-\mbox{\Hypertarget{a00404_a1cb19dd0ff847089a65139f01ee06b8c}\label{a00404_a1cb19dd0ff847089a65139f01ee06b8c}} 
-\index{HF::nanoGeom@{HF::nanoGeom}!nanoRT\_BVH@{nanoRT\_BVH}}
-\index{nanoRT\_BVH@{nanoRT\_BVH}!HF::nanoGeom@{HF::nanoGeom}}
-\doxysubsubsection{\texorpdfstring{nanoRT\_BVH()}{nanoRT\_BVH()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01417}{nanort\+::\+BVHAccel}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ HF\+::nano\+Geom\+::nano\+RT\+\_\+\+BVH (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00404_a01273}{Mesh}} \&}]{mesh }\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{a00164_source_l00072}{72}} of file \mbox{\hyperlink{a00164_source}{nanort\+\_\+raytracer.\+cpp}}.
-
-
-
-References \mbox{\hyperlink{a00161_source_l01907}{nanort\+::\+BVHAccel$<$ T $>$\+::\+Build()}}, \mbox{\hyperlink{a00161_source_l00576}{nanort\+::\+BVHBuild\+Options$<$ T $>$\+::cache\+\_\+bbox}}, \mbox{\hyperlink{a00119_source_l00028}{HF\+::nano\+Geom\+::\+Mesh\+::faces}}, \mbox{\hyperlink{a00119_source_l00021}{HF\+::nano\+Geom\+::\+Mesh\+::num\+\_\+faces}}, and \mbox{\hyperlink{a00119_source_l00022}{HF\+::nano\+Geom\+::\+Mesh\+::vertices}}.
-
-
-
-Referenced by \mbox{\hyperlink{a00164_source_l00094}{nano\+RT\+\_\+\+BVH()}}.
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00404_a1cb19dd0ff847089a65139f01ee06b8c_cgraph}
-\end{center}
-\end{figure}
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a00404_a1cb19dd0ff847089a65139f01ee06b8c_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00404_a6291ce624c796ab1fe2a45a92eb0c6b0}\label{a00404_a6291ce624c796ab1fe2a45a92eb0c6b0}} 
-\index{HF::nanoGeom@{HF::nanoGeom}!nanoRT\_BVH@{nanoRT\_BVH}}
-\index{nanoRT\_BVH@{nanoRT\_BVH}!HF::nanoGeom@{HF::nanoGeom}}
-\doxysubsubsection{\texorpdfstring{nanoRT\_BVH()}{nanoRT\_BVH()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01417}{nanort\+::\+BVHAccel}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ HF\+::nano\+Geom\+::nano\+RT\+\_\+\+BVH (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00404_a01273}{Mesh}}}]{mesh }\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{a00164_source_l00094}{94}} of file \mbox{\hyperlink{a00164_source}{nanort\+\_\+raytracer.\+cpp}}.
-
-
-
-References \mbox{\hyperlink{a00119_source_l00028}{HF\+::nano\+Geom\+::\+Mesh\+::faces}}, \mbox{\hyperlink{a00164_source_l00072}{nano\+RT\+\_\+\+BVH()}}, \mbox{\hyperlink{a00119_source_l00021}{HF\+::nano\+Geom\+::\+Mesh\+::num\+\_\+faces}}, \mbox{\hyperlink{a00119_source_l00020}{HF\+::nano\+Geom\+::\+Mesh\+::num\+\_\+vertices}}, and \mbox{\hyperlink{a00119_source_l00022}{HF\+::nano\+Geom\+::\+Mesh\+::vertices}}.
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00404_a6291ce624c796ab1fe2a45a92eb0c6b0_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00404_af0076b21d9b4daea635c98a24737da94}\label{a00404_af0076b21d9b4daea635c98a24737da94}} 
-\index{HF::nanoGeom@{HF::nanoGeom}!nanoRT\_BVH@{nanoRT\_BVH}}
-\index{nanoRT\_BVH@{nanoRT\_BVH}!HF::nanoGeom@{HF::nanoGeom}}
-\doxysubsubsection{\texorpdfstring{nanoRT\_BVH()}{nanoRT\_BVH()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily template$<$typename T $>$ \\
-\mbox{\hyperlink{a01417}{nanort\+::\+BVHAccel}}$<$ T $>$ HF\+::nano\+Geom\+::nano\+RT\+\_\+\+BVH (\begin{DoxyParamCaption}\item[{unsigned int $\ast$}]{indices,  }\item[{T $\ast$}]{vertices,  }\item[{int}]{num\+\_\+vertices,  }\item[{int}]{num\+\_\+indices }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line \mbox{\hyperlink{a00173_source_l00112}{112}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
-
-
-
-References \mbox{\hyperlink{a00161_source_l01907}{nanort\+::\+BVHAccel$<$ T $>$\+::\+Build()}}, and \mbox{\hyperlink{a00161_source_l00576}{nanort\+::\+BVHBuild\+Options$<$ T $>$\+::cache\+\_\+bbox}}.
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00404_af0076b21d9b4daea635c98a24737da94_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00404_ab842b43dc319eba17876627bae3286f6}\label{a00404_ab842b43dc319eba17876627bae3286f6}} 
-\index{HF::nanoGeom@{HF::nanoGeom}!nanoRT\_Intersect@{nanoRT\_Intersect}}
-\index{nanoRT\_Intersect@{nanoRT\_Intersect}!HF::nanoGeom@{HF::nanoGeom}}
-\doxysubsubsection{\texorpdfstring{nanoRT\_Intersect()}{nanoRT\_Intersect()}}
-{\footnotesize\ttfamily bool HF\+::nano\+Geom\+::nano\+RT\+\_\+\+Intersect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00404_a01273}{Mesh}} \&}]{mesh,  }\item[{\mbox{\hyperlink{a01417}{nanort\+::\+BVHAccel}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ \&}]{accel,  }\item[{\mbox{\hyperlink{a01449}{nano\+RT\+\_\+\+Data}} \&}]{intersector }\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{a00164_source_l00098}{98}} of file \mbox{\hyperlink{a00164_source}{nanort\+\_\+raytracer.\+cpp}}.
-
-
-
-References \mbox{\hyperlink{a00161_source_l00496}{nanort\+::\+Ray$<$ T $>$\+::dir}}, \mbox{\hyperlink{a00173_source_l00088}{nano\+RT\+\_\+\+Data\+::hit}}, \mbox{\hyperlink{a00161_source_l00495}{nanort\+::\+Ray$<$ T $>$\+::org}}, \mbox{\hyperlink{a00173_source_l00091}{nano\+RT\+\_\+\+Data\+::point}}, \mbox{\hyperlink{a00173_source_l00086}{nano\+RT\+\_\+\+Data\+::ray}}, \mbox{\hyperlink{a00161_source_l00978}{nanort\+::\+Triangle\+Intersection$<$ T $>$\+::t}}, and \mbox{\hyperlink{a00161_source_l02505}{nanort\+::\+BVHAccel$<$ T $>$\+::\+Traverse()}}.
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00404_ab842b43dc319eba17876627bae3286f6_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00404_ae4ab3809e1f437e93ae1ad78c2792025}\label{a00404_ae4ab3809e1f437e93ae1ad78c2792025}} 
-\index{HF::nanoGeom@{HF::nanoGeom}!nanoRT\_RayCast@{nanoRT\_RayCast}}
-\index{nanoRT\_RayCast@{nanoRT\_RayCast}!HF::nanoGeom@{HF::nanoGeom}}
-\doxysubsubsection{\texorpdfstring{nanoRT\_RayCast()}{nanoRT\_RayCast()}}
-{\footnotesize\ttfamily bool HF\+::nano\+Geom\+::nano\+RT\+\_\+\+Ray\+Cast (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01417}{nanort\+::\+BVHAccel}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ \&}]{accel,  }\item[{\mbox{\hyperlink{a01433}{nanort\+::\+Triangle\+Intersector}}$<$ \mbox{\hyperlink{a00001_a02073}{double}}, \mbox{\hyperlink{a00408_a01429}{nanort\+::\+Triangle\+Intersection}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ $>$ \&}]{triangle\+\_\+intersector,  }\item[{\mbox{\hyperlink{a01381}{nanort\+::\+Ray}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ \&}]{ray,  }\item[{\mbox{\hyperlink{a00408_a01429}{nanort\+::\+Triangle\+Intersection}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ \&}]{isect }\end{DoxyParamCaption})}
-
-
-
-Definition at line \mbox{\hyperlink{a00164_source_l00047}{47}} of file \mbox{\hyperlink{a00164_source}{nanort\+\_\+raytracer.\+cpp}}.
-
-
-
-References \mbox{\hyperlink{a00161_source_l02505}{nanort\+::\+BVHAccel$<$ T $>$\+::\+Traverse()}}.
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00404_ae4ab3809e1f437e93ae1ad78c2792025_cgraph}
+\includegraphics[width=316pt]{a00404_ae57988500f66a8ab4a31a9b50ed58b02_icgraph}
 \end{center}
 \end{figure}

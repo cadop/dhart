@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>DHART: Cpp/spatialstructures/src/graph.cpp File Reference</title>
+<title>DHART: Cpp/pathfinding/src/boost_graph.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,46 +90,182 @@ $(document).ready(function(){initNavTree('a00200.html',''); initResizable(); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">graph.cpp File Reference</div></div>
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">boost_graph.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Contains implementation for the <a class="el" href="a01485.html">Graph</a> class.  
+<p>Contains definitions for the <a class="el" href="a01383.html">BoostGraph</a> class.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="a00203_source.html">graph.h</a>&gt;</code><br />
-<code>#include &lt;algorithm&gt;</code><br />
-<code>#include &lt;cmath&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00185_source.html">Constants.h</a>&gt;</code><br />
-<code>#include &lt;cassert&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00110_source.html">HFExceptions.h</a>&gt;</code><br />
-<code>#include &lt;numeric&gt;</code><br />
-<code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;charconv&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00206_source.html">json.hpp</a>&gt;</code><br />
-<code>#include &lt;fstream&gt;</code><br />
-<code>#include &lt;ostream&gt;</code><br />
+<div class="textblock"><code>#include &lt;boost/graph/graph_traits.hpp&gt;</code><br />
+<code>#include &lt;boost/graph/adjacency_matrix.hpp&gt;</code><br />
+<code>#include &lt;boost/graph/directed_graph.hpp&gt;</code><br />
+<code>#include &lt;boost/graph/compressed_sparse_row_graph.hpp&gt;</code><br />
+<code>#include &lt;boost/graph/adjacency_list.hpp&gt;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for graph.cpp:</div>
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for boost_graph.h:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00201.svg" width="3426" height="352"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00201.svg" width="902" height="144"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00202.svg" width="299" height="144"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
 <p><a href="a00200_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01371.html">std::hash&lt; std::array&lt; float, 3 &gt; &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01375"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00472.html#a01375">HF::Pathfinding::Edge_Cost</a></td></tr>
+<tr class="memdesc:a01375"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data stored for every edge in the <a class="el" href="a01383.html" title="A graph usable with the BoostGraphLibrary.">BoostGraph</a>.   <a href="a00472.html#a01375">More...</a><br /></td></tr>
+<tr class="separator:a01375"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01379"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00472.html#a01379">HF::Pathfinding::vertex_data</a></td></tr>
+<tr class="memdesc:a01379"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data stored for every vertex in the <a class="el" href="a01383.html" title="A graph usable with the BoostGraphLibrary.">BoostGraph</a>.  <a href="a00472.html#a01379">More...</a><br /></td></tr>
+<tr class="separator:a01379"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01383.html">HF::Pathfinding::BoostGraph</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A graph usable with the BoostGraphLibrary.  <a href="a01383.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00461"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00461.html">std</a></td></tr>
+<tr class="memdesc:a00461"><td class="mdescLeft">&#160;</td><td class="mdescRight">STL namespace. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00473"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00473.html">boost</a></td></tr>
+<tr class="memdesc:a00473"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Boost C++ library. <a href="https://www.boost.org/">https://www.boost.org/</a>. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00462"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00462.html">HF</a></td></tr>
+<tr class="memdesc:a00462"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform human scale analysis on 3D environments. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00465"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00465.html">HF::SpatialStructures</a></td></tr>
+<tr class="memdesc:a00465"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains standard fundamental data structures for representing space used throughout DHARTAPI. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00472"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00472.html">HF::Pathfinding</a></td></tr>
+<tr class="memdesc:a00472"><td class="mdescLeft">&#160;</td><td class="mdescRight">Algorithms to find the shortest path between nodes in a <a class="el" href="a01551.html" title="A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.">HF::SpatialStructures::Graph</a>. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a9314d552e0a8092644fa080c9945bd25"><td class="memItemLeft" align="right" valign="top">typedef boost::compressed_sparse_row_graph&lt; boost::directedS, vertex_data, Edge_Cost &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00472.html#a9314d552e0a8092644fa080c9945bd25">HF::Pathfinding::graph_t</a></td></tr>
+<tr class="memdesc:a9314d552e0a8092644fa080c9945bd25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of graph held by the <a class="el" href="a01383.html" title="A graph usable with the BoostGraphLibrary.">BoostGraph</a>.  <a href="a00472.html#a9314d552e0a8092644fa080c9945bd25">More...</a><br /></td></tr>
+<tr class="separator:a9314d552e0a8092644fa080c9945bd25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dc50f188646ed884b58b3e26c7932a5"><td class="memItemLeft" align="right" valign="top">typedef boost::graph_traits&lt; graph_t &gt;::vertex_descriptor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00472.html#a4dc50f188646ed884b58b3e26c7932a5">HF::Pathfinding::vertex_descriptor</a></td></tr>
+<tr class="memdesc:a4dc50f188646ed884b58b3e26c7932a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quick alias to shorten the typename of vertex descriptors for our graph_t type. /summary&gt;  <a href="a00472.html#a4dc50f188646ed884b58b3e26c7932a5">More...</a><br /></td></tr>
+<tr class="separator:a4dc50f188646ed884b58b3e26c7932a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc378c1e475802d96758aaef12d33dbc"><td class="memItemLeft" align="right" valign="top">typedef std::pair&lt; int, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00472.html#acc378c1e475802d96758aaef12d33dbc">HF::Pathfinding::pair</a></td></tr>
+<tr class="memdesc:acc378c1e475802d96758aaef12d33dbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shorten std::pair to simplify graph construction.   <a href="a00472.html#acc378c1e475802d96758aaef12d33dbc">More...</a><br /></td></tr>
+<tr class="separator:acc378c1e475802d96758aaef12d33dbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a78d69e3306ec9cf190f79b72217f2340"><td class="memTemplParams" colspan="2">template&lt;typename SizeT &gt; </td></tr>
+<tr class="memitem:a78d69e3306ec9cf190f79b72217f2340"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00461.html#a78d69e3306ec9cf190f79b72217f2340">std::array_hash_combine_impl</a> (SizeT &amp;seed, SizeT value)</td></tr>
+<tr class="memdesc:a78d69e3306ec9cf190f79b72217f2340"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combine the hash of value into seed.   <a href="a00461.html#a78d69e3306ec9cf190f79b72217f2340">More...</a><br /></td></tr>
+<tr class="separator:a78d69e3306ec9cf190f79b72217f2340"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Contains implementation for the <a class="el" href="a01485.html">Graph</a> class. </p>
+<div class="textblock"><p >Contains definitions for the <a class="el" href="a01383.html">BoostGraph</a> class. </p>
 <dl class="section author"><dt>Author</dt><dd>TBA </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>06 Jun 2020 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>17 Jun 2020 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="a00200_source.html">graph.cpp</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition in file <a class="el" href="a00200_source.html">boost_graph.h</a>.</p>
+</div><hr/><h2 class="groupheader">Class Documentation</h2>
+<a name="a01375" id="a01375"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01375">&#9670;&#160;</a></span>HF::Pathfinding::Edge_Cost</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct HF::Pathfinding::Edge_Cost</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"><p >Data stored for every edge in the <a class="el" href="a01383.html" title="A graph usable with the BoostGraphLibrary.">BoostGraph</a>.  </p>
+<p >Each edge in the graph only stores its weight as a float. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00200_source.html#l00099">99</a> of file <a class="el" href="a00200_source.html">boost_graph.h</a>.</p>
+</div><div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Collaboration diagram for HF::Pathfinding::Edge_Cost:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a01373.svg" width="194" height="128"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="aefea62ffa2c7078ac7d9f2eefaa96e07" name="aefea62ffa2c7078ac7d9f2eefaa96e07"></a>float</td>
+<td class="fieldname">
+weight</td>
+<td class="fielddoc">
+Cost of traversing this edge. </td></tr>
+</table>
+
+</div>
+</div>
+<a name="a01379" id="a01379"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01379">&#9670;&#160;</a></span>HF::Pathfinding::vertex_data</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct HF::Pathfinding::vertex_data</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"><p >Data stored for every vertex in the <a class="el" href="a01383.html" title="A graph usable with the BoostGraphLibrary.">BoostGraph</a>. </p>
+<p >Every vertex stores in the graph stores it's index p and a unique double d.</p>
+<dl class="todo"><dt><b><a class="el" href="a00452.html#_todo000016">Todo:</a></b></dt><dd>Is the double d needed?</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00200_source.html#l00111">111</a> of file <a class="el" href="a00200_source.html">boost_graph.h</a>.</p>
+</div><div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Collaboration diagram for HF::Pathfinding::vertex_data:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a01377.svg" width="219" height="128"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="a3f23d92f8d538033cf4096201083944e" name="a3f23d92f8d538033cf4096201083944e"></a><a class="el" href="a00001.html#a02139">double</a></td>
+<td class="fieldname">
+d</td>
+<td class="fielddoc">
+Unknown may have been used for the colormap. </td></tr>
+<tr><td class="fieldtype">
+<a id="a6d7facb34a520e63bf016898c8352648" name="a6d7facb34a520e63bf016898c8352648"></a>graph_traits&lt; compressed_sparse_row_graph&lt; directedS &gt; &gt;<a class="el" href="a00472.html#a4dc50f188646ed884b58b3e26c7932a5">::vertex_descriptor</a></td>
+<td class="fieldname">
+p</td>
+<td class="fielddoc">
+The index of a vertex in the CSR. </td></tr>
+</table>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_66731bdf74d76a38b2c500ac62cfdf48.html">spatialstructures</a></li><li class="navelem"><a class="el" href="dir_7fdf8b1285a3d76ae7bf3420b7ffebee.html">src</a></li><li class="navelem"><a class="el" href="a00200.html">graph.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_0e02576f053bf9c676481922c38373d1.html">pathfinding</a></li><li class="navelem"><a class="el" href="dir_d9dda2ac126eb26464c89893175cb5d7.html">src</a></li><li class="navelem"><a class="el" href="a00200.html">boost_graph.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
   </ul>
 </div>

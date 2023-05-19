@@ -1,0 +1,39 @@
+\hypertarget{a00413_source}{}\doxysection{cinterface\+\_\+utils.\+h}
+\label{a00413_source}\index{Cinterface/cinterface\_utils.h@{Cinterface/cinterface\_utils.h}}
+\mbox{\hyperlink{a00413}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00413_source_l00001}00001 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{\Hypertarget{a00413_source_l00002}00002 \textcolor{preprocessor}{\#include <array>}}
+\DoxyCodeLine{\Hypertarget{a00413_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{a00413_source_l00004}00004 \textcolor{preprocessor}{\#ifndef HF\_SPATIAL\_STRUCTURES}}
+\DoxyCodeLine{\Hypertarget{a00413_source_l00005}00005 \textcolor{preprocessor}{\#define HF\_SPATIAL\_STRUCTURES}}
+\DoxyCodeLine{\Hypertarget{a00413_source_l00006}00006 }
+\DoxyCodeLine{\Hypertarget{a00413_source_l00015}00015 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00462}{HF}} \{}
+\DoxyCodeLine{\Hypertarget{a00413_source_l00016}00016 \}}
+\DoxyCodeLine{\Hypertarget{a00413_source_l00017}00017 }
+\DoxyCodeLine{\Hypertarget{a00413_source_l00018}\mbox{\hyperlink{a00413_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{00018}} \textcolor{preprocessor}{\#define C\_INTERFACE extern "{}C"{}} \_\_declspec(dllexport) int}
+\DoxyCodeLine{\Hypertarget{a00413_source_l00019}00019 }
+\DoxyCodeLine{\Hypertarget{a00413_source_l00026}00026 }
+\DoxyCodeLine{\Hypertarget{a00413_source_l00037}00037 std::vector<std::array<float, 3>> \mbox{\hyperlink{a00413_a603d456361c9737b88a091e6683db12b}{ConvertRawFloatArrayToPoints}}(\textcolor{keyword}{const} \textcolor{keywordtype}{float}* raw\_array, \textcolor{keywordtype}{int} size);}
+\DoxyCodeLine{\Hypertarget{a00413_source_l00038}00038 }
+\DoxyCodeLine{\Hypertarget{a00413_source_l00045}00045 }
+\DoxyCodeLine{\Hypertarget{a00413_source_l00056}00056 std::vector<std::array<int, 3>> \mbox{\hyperlink{a00413_ae995da63f3da32e08aee46c1b083f5b0}{ConvertRawIntArrayToPoints}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int}* raw\_array, \textcolor{keywordtype}{int} size);}
+\DoxyCodeLine{\Hypertarget{a00413_source_l00057}00057 }
+\DoxyCodeLine{\Hypertarget{a00413_source_l00061}00061 }
+\DoxyCodeLine{\Hypertarget{a00413_source_l00077}00077 \mbox{\hyperlink{a00413_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00413_af77723a4383b278169e80cf0e361ec44}{DestroyFloatVector}}(std::vector<float>* float\_vector);}
+\DoxyCodeLine{\Hypertarget{a00413_source_l00078}00078 }
+\DoxyCodeLine{\Hypertarget{a00413_source_l00079}00079 }
+\DoxyCodeLine{\Hypertarget{a00413_source_l00087}00087 \mbox{\hyperlink{a00413_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00413_aa1d3e9d7be8628eb59f2ef8f8e156a75}{DestroyIntVector}}(std::vector<int>* int\_vector);}
+\DoxyCodeLine{\Hypertarget{a00413_source_l00088}00088 }
+\DoxyCodeLine{\Hypertarget{a00413_source_l00089}00089 \mbox{\hyperlink{a00413_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00413_a26d5b0a8e6f338c26176fb78d394d25b}{DestroyCharArray}}(\textcolor{keywordtype}{char}* char\_array);}
+\DoxyCodeLine{\Hypertarget{a00413_source_l00090}00090 }
+\DoxyCodeLine{\Hypertarget{a00413_source_l00095}00095 }
+\DoxyCodeLine{\Hypertarget{a00413_source_l00111}00111 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00413_source_l00112}\mbox{\hyperlink{a00413_a1746287300e1f05c45d84f3837e24557}{00112}} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a00413_a1746287300e1f05c45d84f3837e24557}{DeleteRawPtr}}(T * ptr ) \{}
+\DoxyCodeLine{\Hypertarget{a00413_source_l00113}00113     \textcolor{keywordflow}{if} (ptr)}
+\DoxyCodeLine{\Hypertarget{a00413_source_l00114}00114         \textcolor{keyword}{delete} ptr;}
+\DoxyCodeLine{\Hypertarget{a00413_source_l00115}00115 \}}
+\DoxyCodeLine{\Hypertarget{a00413_source_l00116}00116 }
+\DoxyCodeLine{\Hypertarget{a00413_source_l00117}00117 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

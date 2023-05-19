@@ -1,0 +1,73 @@
+\hypertarget{a00419_source}{}\doxysection{objloader\+\_\+\+C.\+h}
+\label{a00419_source}\index{Cinterface/objloader\_C.h@{Cinterface/objloader\_C.h}}
+\mbox{\hyperlink{a00419}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{a00419_source_l00009}00009 \textcolor{preprocessor}{\#ifndef OBJLOADER\_C\_H}}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00010}00010 \textcolor{preprocessor}{\#define OBJLOADER\_C\_H}}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00011}00011 }
+\DoxyCodeLine{\Hypertarget{a00419_source_l00012}00012 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00013}00013 }
+\DoxyCodeLine{\Hypertarget{a00419_source_l00014}\mbox{\hyperlink{a00419_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{00014}} \textcolor{preprocessor}{\#define C\_INTERFACE extern "{}C"{}} \_\_declspec(dllexport) int}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00015}00015 }
+\DoxyCodeLine{\Hypertarget{a00419_source_l00016}00016 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00462}{HF}} \{}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00017}00017     \textcolor{keyword}{namespace }Geometry \{}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00018}00018         \textcolor{keyword}{template}<\textcolor{keyword}{typename} T> \textcolor{keyword}{class }\mbox{\hyperlink{a01351}{MeshInfo}};}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00019}00019         \textcolor{keyword}{enum} \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5}{GROUP\_METHOD}};}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00020}00020     \}}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00021}00021 \}}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00022}00022 }
+\DoxyCodeLine{\Hypertarget{a00419_source_l00136}00136 \mbox{\hyperlink{a00419_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00455_ga0805e80d13b29aeddc35f0bcf3f16a1a}{LoadOBJ}}(}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00137}00137     \textcolor{keyword}{const} \textcolor{keywordtype}{char}* obj\_path,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00138}00138     \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5}{HF::Geometry::GROUP\_METHOD}} gm,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00139}00139     \textcolor{keywordtype}{float} xrot,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00140}00140     \textcolor{keywordtype}{float} yrot,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00141}00141     \textcolor{keywordtype}{float} zrot,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00142}00142     \mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo<float>}} *** out\_data\_array,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00143}00143     \textcolor{keywordtype}{int} * num\_meshes}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00144}00144 );}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00145}00145 }
+\DoxyCodeLine{\Hypertarget{a00419_source_l00179}00179 \mbox{\hyperlink{a00419_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00455_ga6ac447e5805d3d7e65c9083ffa603cfe}{StoreMesh}}(}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00180}00180     \mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo<float>}} ** out\_info,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00181}00181     \textcolor{keyword}{const} \textcolor{keywordtype}{int}* indices,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00182}00182     \textcolor{keywordtype}{int} num\_indices,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00183}00183     \textcolor{keyword}{const} \textcolor{keywordtype}{float}* vertices,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00184}00184     \textcolor{keywordtype}{int} num\_vertices,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00185}00185     \textcolor{keyword}{const} \textcolor{keywordtype}{char}* name,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00186}00186     \textcolor{keywordtype}{int} \textcolor{keywordtype}{id}}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00187}00187 );}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00188}00188 }
+\DoxyCodeLine{\Hypertarget{a00419_source_l00203}00203 \mbox{\hyperlink{a00419_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00455_ga907c8e39b159c8bad22645448bc97f57}{RotateMesh}}(}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00204}00204     \mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo<float>}} * mesh\_to\_rotate,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00205}00205     \textcolor{keywordtype}{float} xrot,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00206}00206     \textcolor{keywordtype}{float} yrot,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00207}00207     \textcolor{keywordtype}{float} zrot}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00208}00208 );}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00209}00209 }
+\DoxyCodeLine{\Hypertarget{a00419_source_l00210}00210 }
+\DoxyCodeLine{\Hypertarget{a00419_source_l00224}00224 \mbox{\hyperlink{a00419_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00455_ga89fc0803b894e7fa218ae271c46fb434}{GetVertsAndTris}}(}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00225}00225     \textcolor{keyword}{const} \mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo<float>}} * MI,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00226}00226     \textcolor{keywordtype}{int}** index\_out,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00227}00227     \textcolor{keywordtype}{int}* num\_triangles,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00228}00228     \textcolor{keywordtype}{float}** vertex\_out,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00229}00229     \textcolor{keywordtype}{int}* num\_vertices}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00230}00230 );}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00231}00231 }
+\DoxyCodeLine{\Hypertarget{a00419_source_l00241}00241 \mbox{\hyperlink{a00419_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00455_ga2a86bca57b3efdafeeb001a8ba36a212}{GetMeshName}}(}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00242}00242     \textcolor{keyword}{const} \mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo<float>}}* MI,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00243}00243     \textcolor{keywordtype}{char}** out\_name}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00244}00244 );}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00245}00245 }
+\DoxyCodeLine{\Hypertarget{a00419_source_l00254}00254 \mbox{\hyperlink{a00419_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00455_gaa07792b399e76e6101388bb6bbb96047}{GetMeshID}}(}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00255}00255     \textcolor{keyword}{const} \mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo<float>}}* MI,}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00256}00256     \textcolor{keywordtype}{int} * out\_id}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00257}00257 );}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00258}00258 }
+\DoxyCodeLine{\Hypertarget{a00419_source_l00268}00268 \mbox{\hyperlink{a00419_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00455_ga0ef9f7e63f067546b527947d4678dcd5}{DestroyMeshInfo}}(\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo<float>}} * mesh\_to\_destroy);}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00269}00269 }
+\DoxyCodeLine{\Hypertarget{a00419_source_l00270}00270 }
+\DoxyCodeLine{\Hypertarget{a00419_source_l00271}00271 \mbox{\hyperlink{a00419_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00455_ga9cb2dc8227bf88a06014493979b2b3e6}{DestroyMeshInfoPtrArray}}(\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo<float>}}** data\_array);}
+\DoxyCodeLine{\Hypertarget{a00419_source_l00272}00272 }
+\DoxyCodeLine{\Hypertarget{a00419_source_l00275}00275 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* OBJLOADER\_C\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

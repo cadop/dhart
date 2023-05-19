@@ -1,0 +1,93 @@
+\hypertarget{a01959}{}\doxysection{nlohmann\+::detail\+::span\+\_\+input\+\_\+adapter Class Reference}
+\label{a01959}\index{nlohmann::detail::span\_input\_adapter@{nlohmann::detail::span\_input\_adapter}}
+
+
+{\ttfamily \#include $<$json.\+hpp$>$}
+
+
+
+Collaboration diagram for nlohmann\+::detail\+::span\+\_\+input\+\_\+adapter\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{a01957}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename CharT , typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+pointer$<$ CharT $>$\mbox{\hyperlink{a00477_a2fb6dae6578e06ae73ca0d7cc8512b1aa2063c1608d6e0baf80249c42e2be5804}{\+::value}} \&\&std\+::is\+\_\+integral$<$ typename std\+::remove\+\_\+pointer$<$ CharT $>$\+::type $>$\mbox{\hyperlink{a00477_a2fb6dae6578e06ae73ca0d7cc8512b1aa2063c1608d6e0baf80249c42e2be5804}{\+::value}} \&\&sizeof(typename std\+::remove\+\_\+pointer$<$ CharT $>$\+::type)==1, int $>$\+::type  = 0$>$ }\\\mbox{\hyperlink{a01959_a3a328a45b2c2c87145106ce4b2d02365}{span\+\_\+input\+\_\+adapter}} (CharT b, std\+::size\+\_\+t l)
+\item 
+{\footnotesize template$<$class Iterator\+Type , typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+same$<$ typename \mbox{\hyperlink{a00477_a01631}{iterator\+\_\+traits}}$<$ Iterator\+Type $>$\+::iterator\+\_\+category, std\+::random\+\_\+access\+\_\+iterator\+\_\+tag $>$\mbox{\hyperlink{a00477_a2fb6dae6578e06ae73ca0d7cc8512b1aa2063c1608d6e0baf80249c42e2be5804}{\+::value}}, int $>$\+::type  = 0$>$ }\\\mbox{\hyperlink{a01959_a714c6cf8e15b9af4e1723d9f7f92d4c8}{span\+\_\+input\+\_\+adapter}} (Iterator\+Type first, Iterator\+Type last)
+\item 
+\mbox{\hyperlink{a00477_abc51edd46a1d1a0ff06a19f08ceff563}{contiguous\+\_\+bytes\+\_\+input\+\_\+adapter}} \&\& \mbox{\hyperlink{a01959_a20f57e8bfcf0afb40e8c02f34080784e}{get}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00477_abc51edd46a1d1a0ff06a19f08ceff563}{contiguous\+\_\+bytes\+\_\+input\+\_\+adapter}} \mbox{\hyperlink{a01959_a3e223a7784502be20ace441e84f8cf43}{ia}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l05147}{5147}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01959_a3a328a45b2c2c87145106ce4b2d02365}\label{a01959_a3a328a45b2c2c87145106ce4b2d02365}} 
+\index{nlohmann::detail::span\_input\_adapter@{nlohmann::detail::span\_input\_adapter}!span\_input\_adapter@{span\_input\_adapter}}
+\index{span\_input\_adapter@{span\_input\_adapter}!nlohmann::detail::span\_input\_adapter@{nlohmann::detail::span\_input\_adapter}}
+\doxysubsubsection{\texorpdfstring{span\_input\_adapter()}{span\_input\_adapter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename CharT , typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+pointer$<$ CharT $>$\mbox{\hyperlink{a00477_a2fb6dae6578e06ae73ca0d7cc8512b1aa2063c1608d6e0baf80249c42e2be5804}{\+::value}} \&\&std\+::is\+\_\+integral$<$ typename std\+::remove\+\_\+pointer$<$ CharT $>$\+::type $>$\mbox{\hyperlink{a00477_a2fb6dae6578e06ae73ca0d7cc8512b1aa2063c1608d6e0baf80249c42e2be5804}{\+::value}} \&\&sizeof(typename std\+::remove\+\_\+pointer$<$ CharT $>$\+::type)==1, int $>$\+::type  = 0$>$ \\
+nlohmann\+::detail\+::span\+\_\+input\+\_\+adapter\+::span\+\_\+input\+\_\+adapter (\begin{DoxyParamCaption}\item[{CharT}]{b,  }\item[{std\+::size\+\_\+t}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l05156}{5156}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+\mbox{\Hypertarget{a01959_a714c6cf8e15b9af4e1723d9f7f92d4c8}\label{a01959_a714c6cf8e15b9af4e1723d9f7f92d4c8}} 
+\index{nlohmann::detail::span\_input\_adapter@{nlohmann::detail::span\_input\_adapter}!span\_input\_adapter@{span\_input\_adapter}}
+\index{span\_input\_adapter@{span\_input\_adapter}!nlohmann::detail::span\_input\_adapter@{nlohmann::detail::span\_input\_adapter}}
+\doxysubsubsection{\texorpdfstring{span\_input\_adapter()}{span\_input\_adapter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Iterator\+Type , typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+same$<$ typename \mbox{\hyperlink{a00477_a01631}{iterator\+\_\+traits}}$<$ Iterator\+Type $>$\+::iterator\+\_\+category, std\+::random\+\_\+access\+\_\+iterator\+\_\+tag $>$\mbox{\hyperlink{a00477_a2fb6dae6578e06ae73ca0d7cc8512b1aa2063c1608d6e0baf80249c42e2be5804}{\+::value}}, int $>$\+::type  = 0$>$ \\
+nlohmann\+::detail\+::span\+\_\+input\+\_\+adapter\+::span\+\_\+input\+\_\+adapter (\begin{DoxyParamCaption}\item[{Iterator\+Type}]{first,  }\item[{Iterator\+Type}]{last }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l05163}{5163}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01959_a20f57e8bfcf0afb40e8c02f34080784e}\label{a01959_a20f57e8bfcf0afb40e8c02f34080784e}} 
+\index{nlohmann::detail::span\_input\_adapter@{nlohmann::detail::span\_input\_adapter}!get@{get}}
+\index{get@{get}!nlohmann::detail::span\_input\_adapter@{nlohmann::detail::span\_input\_adapter}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00477_abc51edd46a1d1a0ff06a19f08ceff563}{contiguous\+\_\+bytes\+\_\+input\+\_\+adapter}} \&\& nlohmann\+::detail\+::span\+\_\+input\+\_\+adapter\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l05166}{5166}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01959_a3e223a7784502be20ace441e84f8cf43}\label{a01959_a3e223a7784502be20ace441e84f8cf43}} 
+\index{nlohmann::detail::span\_input\_adapter@{nlohmann::detail::span\_input\_adapter}!ia@{ia}}
+\index{ia@{ia}!nlohmann::detail::span\_input\_adapter@{nlohmann::detail::span\_input\_adapter}}
+\doxysubsubsection{\texorpdfstring{ia}{ia}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00477_abc51edd46a1d1a0ff06a19f08ceff563}{contiguous\+\_\+bytes\+\_\+input\+\_\+adapter}} nlohmann\+::detail\+::span\+\_\+input\+\_\+adapter\+::ia\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l05172}{5172}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00272}{json.\+hpp}}\end{DoxyCompactItemize}

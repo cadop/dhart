@@ -1,71 +1,31 @@
-\hypertarget{a00173}{}\doxysection{Cpp/raytracer/src/ray\+\_\+data.h File Reference}
-\label{a00173}\index{Cpp/raytracer/src/ray\_data.h@{Cpp/raytracer/src/ray\_data.h}}
-{\ttfamily \#include \char`\"{}nanort.\+h\char`\"{}}\newline
-{\ttfamily \#include $<$Hit\+Struct.\+h$>$}\newline
-{\ttfamily \#include $<$iostream$>$}\newline
-{\ttfamily \#include $<$array$>$}\newline
-Include dependency graph for ray\+\_\+data.\+h\+:
+\hypertarget{a00173}{}\doxysection{Cpp/exceptions/src/\+HFExceptions.cpp File Reference}
+\label{a00173}\index{Cpp/exceptions/src/HFExceptions.cpp@{Cpp/exceptions/src/HFExceptions.cpp}}
+
+
+Contains implementation for the \mbox{\hyperlink{a00468}{Exceptions}} namespace.  
+
+
+{\ttfamily \#include $<$HFExceptions.\+h$>$}\newline
+Include dependency graph for HFExceptions.\+cpp\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{a00174}
+\includegraphics[width=278pt]{a00174}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00175}
-\end{center}
-\end{figure}
-\doxysubsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct \mbox{\hyperlink{a01445}{HF\+::\+Ray\+Tracer\+::double3}}
-\item 
-class \mbox{\hyperlink{a01449}{nano\+RT\+\_\+\+Data}}
-\item 
-class \mbox{\hyperlink{a01453}{HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer}}
-\end{DoxyCompactItemize}
-\doxysubsection*{Namespaces}
-\begin{DoxyCompactItemize}
-\item 
-namespace \mbox{\hyperlink{a00396}{HF}}
-\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
-namespace \mbox{\hyperlink{a00403}{HF\+::\+Geometry}}
-\begin{DoxyCompactList}\small\item\em Manipulate and load geometry from disk. \end{DoxyCompactList}\item 
-namespace \mbox{\hyperlink{a00404}{HF\+::nano\+Geom}}
-\item 
-namespace \mbox{\hyperlink{a00398}{HF\+::\+Ray\+Tracer}}
-\begin{DoxyCompactList}\small\item\em Cast rays to determine if and where they intersect geometry. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Macros}
-\begin{DoxyCompactItemize}
-\item 
-\#define \mbox{\hyperlink{a00173_a441fa2508d213da8cf510e90af3762e3}{NANORT\+\_\+\+USE\+\_\+\+CPP11\+\_\+\+FEATURE}}
-\end{DoxyCompactItemize}
-\doxysubsection*{Functions}
-\begin{DoxyCompactItemize}
-\item 
-bool \mbox{\hyperlink{a00404_ae4ab3809e1f437e93ae1ad78c2792025}{HF\+::nano\+Geom\+::nano\+RT\+\_\+\+Ray\+Cast}} (\mbox{\hyperlink{a01417}{nanort\+::\+BVHAccel}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ \&accel, \mbox{\hyperlink{a01433}{nanort\+::\+Triangle\+Intersector}}$<$ \mbox{\hyperlink{a00001_a02073}{double}}, \mbox{\hyperlink{a00408_a01429}{nanort\+::\+Triangle\+Intersection}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ $>$ \&triangle\+\_\+intersector, \mbox{\hyperlink{a01381}{nanort\+::\+Ray}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ \&ray, \mbox{\hyperlink{a00408_a01429}{nanort\+::\+Triangle\+Intersection}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ \&isect)
-\item 
-{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{a01417}{nanort\+::\+BVHAccel}}$<$ T $>$ \mbox{\hyperlink{a00404_af0076b21d9b4daea635c98a24737da94}{HF\+::nano\+Geom\+::nano\+RT\+\_\+\+BVH}} (unsigned int $\ast$indices, T $\ast$vertices, int num\+\_\+vertices, int num\+\_\+indices)
-\item 
-\mbox{\hyperlink{a01417}{nanort\+::\+BVHAccel}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ \mbox{\hyperlink{a00404_a6291ce624c796ab1fe2a45a92eb0c6b0}{HF\+::nano\+Geom\+::nano\+RT\+\_\+\+BVH}} (Mesh mesh)
-\item 
-bool \mbox{\hyperlink{a00404_ab842b43dc319eba17876627bae3286f6}{HF\+::nano\+Geom\+::nano\+RT\+\_\+\+Intersect}} (Mesh \&mesh, \mbox{\hyperlink{a01417}{nanort\+::\+BVHAccel}}$<$ \mbox{\hyperlink{a00001_a02073}{double}} $>$ \&accel, \mbox{\hyperlink{a01449}{nano\+RT\+\_\+\+Data}} \&intersector)
-\end{DoxyCompactItemize}
 
 
-\doxysubsection{Macro Definition Documentation}
-\mbox{\Hypertarget{a00173_a441fa2508d213da8cf510e90af3762e3}\label{a00173_a441fa2508d213da8cf510e90af3762e3}} 
-\index{ray\_data.h@{ray\_data.h}!NANORT\_USE\_CPP11\_FEATURE@{NANORT\_USE\_CPP11\_FEATURE}}
-\index{NANORT\_USE\_CPP11\_FEATURE@{NANORT\_USE\_CPP11\_FEATURE}!ray\_data.h@{ray\_data.h}}
-\doxysubsubsection{\texorpdfstring{NANORT\_USE\_CPP11\_FEATURE}{NANORT\_USE\_CPP11\_FEATURE}}
-{\footnotesize\ttfamily \#define NANORT\+\_\+\+USE\+\_\+\+CPP11\+\_\+\+FEATURE}
+\doxysubsection{Detailed Description}
+Contains implementation for the \mbox{\hyperlink{a00468}{Exceptions}} namespace. 
+
+\begin{DoxyAuthor}{Author}
+TBA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+26 Jun 2020 
+\end{DoxyDate}
 
 
-
-Definition at line \mbox{\hyperlink{a00173_source_l00002}{2}} of file \mbox{\hyperlink{a00173_source}{ray\+\_\+data.\+h}}.
+Definition in file \mbox{\hyperlink{a00173_source}{HFExceptions.\+cpp}}.
 

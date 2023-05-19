@@ -1,0 +1,81 @@
+\hypertarget{a00425}{}\doxysection{Cinterface/pathfinder\+\_\+C.h File Reference}
+\label{a00425}\index{Cinterface/pathfinder\_C.h@{Cinterface/pathfinder\_C.h}}
+
+
+Header file for C Interface pathfinding functionality.  
+
+
+{\ttfamily \#include $<$cinterface\+\_\+utils.\+h$>$}\newline
+Include dependency graph for pathfinder\+\_\+\+C.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{a00426}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{a00427}
+\end{center}
+\end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{a00462}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{a00465}{HF\+::\+Spatial\+Structures}}
+\begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout DHARTAPI. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{a00472}{HF\+::\+Pathfinding}}
+\begin{DoxyCompactList}\small\item\em Algorithms to find the shortest path between nodes in a \mbox{\hyperlink{a01551}{HF\+::\+Spatial\+Structures\+::\+Graph}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a00425_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}}~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00456_ga3dc85450e989a996a3c3fcfad0a5944e}{Create\+Path}} (const \mbox{\hyperlink{a01551}{HF\+::\+Spatial\+Structures\+::\+Graph}} $\ast$g, int start, int end, const char $\ast$cost\+\_\+type, int $\ast$out\+\_\+size, \mbox{\hyperlink{a02083}{HF\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$out\+\_\+path, \mbox{\hyperlink{a02079}{HF\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Find the shortest path from start to end. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00456_gae1ac2805c3b86883bb88269ed3868367}{Create\+Paths}} (const \mbox{\hyperlink{a01551}{HF\+::\+Spatial\+Structures\+::\+Graph}} $\ast$g, const int $\ast$start, const int $\ast$end, const char $\ast$cost\+\_\+type, \mbox{\hyperlink{a02083}{HF\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$out\+\_\+path\+\_\+ptr\+\_\+holder, \mbox{\hyperlink{a02079}{HF\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+path\+\_\+member\+\_\+ptr\+\_\+holder, int $\ast$out\+\_\+sizes, int num\+\_\+paths)
+\begin{DoxyCompactList}\small\item\em Find multiple shortest paths in paralllel. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00456_gaac725d282f4fecd3aba1b3273c26e7e1}{Get\+Path\+Info}} (\mbox{\hyperlink{a02083}{HF\+::\+Spatial\+Structures\+::\+Path}} $\ast$p, \mbox{\hyperlink{a02079}{HF\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+member\+\_\+ptr, int $\ast$out\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Get the size of a path and a pointer to its path members. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00456_ga884a3374d971261a01ccfd3b21e288e5}{Destroy\+Path}} (\mbox{\hyperlink{a02083}{HF\+::\+Spatial\+Structures\+::\+Path}} $\ast$path\+\_\+to\+\_\+destroy)
+\begin{DoxyCompactList}\small\item\em Delete a path. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00456_gaba6ec6ce84974dd6a311d7d65dd34221}{Create\+All\+To\+All\+Paths}} (const \mbox{\hyperlink{a01551}{HF\+::\+Spatial\+Structures\+::\+Graph}} $\ast$g, const char $\ast$cost\+\_\+type, \mbox{\hyperlink{a02083}{HF\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$out\+\_\+path\+\_\+ptr\+\_\+holder, \mbox{\hyperlink{a02079}{HF\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+path\+\_\+member\+\_\+ptr\+\_\+holder, int $\ast$out\+\_\+sizes, int num\+\_\+paths)
+\begin{DoxyCompactList}\small\item\em Find a path from every node in a graph to every other node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00456_ga27b1f45019ccbda909301520d1c738ca}{Calculate\+Distance\+And\+Predecessor}} (const \mbox{\hyperlink{a01551}{HF\+::\+Spatial\+Structures\+::\+Graph}} $\ast$g, const char $\ast$cost\+\_\+name, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+dist\+\_\+vector, float $\ast$$\ast$out\+\_\+dist\+\_\+data, std\+::vector$<$ int $>$ $\ast$$\ast$out\+\_\+pred\+\_\+vector, int $\ast$$\ast$out\+\_\+pred\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Calculate the distance and predecessor matricies for a graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file for C Interface pathfinding functionality. 
+
+\begin{DoxyAuthor}{Author}
+TBA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+12 Aug 2020 
+\end{DoxyDate}
+
+
+Definition in file \mbox{\hyperlink{a00425_source}{pathfinder\+\_\+\+C.\+h}}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a00425_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}\label{a00425_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}} 
+\index{pathfinder\_C.h@{pathfinder\_C.h}!C\_INTERFACE@{C\_INTERFACE}}
+\index{C\_INTERFACE@{C\_INTERFACE}!pathfinder\_C.h@{pathfinder\_C.h}}
+\doxysubsubsection{\texorpdfstring{C\_INTERFACE}{C\_INTERFACE}}
+{\footnotesize\ttfamily \#define C\+\_\+\+INTERFACE~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int}
+
+
+
+Definition at line \mbox{\hyperlink{a00425_source_l00014}{14}} of file \mbox{\hyperlink{a00425_source}{pathfinder\+\_\+\+C.\+h}}.
+

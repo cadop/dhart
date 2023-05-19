@@ -1,0 +1,213 @@
+\hypertarget{a01395}{}\doxysection{HF\+::Pathfinding\+::Distance\+And\+Predecessor Struct Reference}
+\label{a01395}\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
+
+
+Holds and maintains a distance and predecessor matrix.  
+
+
+
+
+{\ttfamily \#include $<$path\+\_\+finder.\+h$>$}
+
+
+
+Collaboration diagram for HF\+::Pathfinding\+::Distance\+And\+Predecessor\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{a01393}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01395_a9d9e98ea5eedd5b876cb0da9c17eedf4}{Distance\+And\+Predecessor}} (int \mbox{\hyperlink{a01395_afae801900e74d0d1389988e8163f293a}{size}})
+\begin{DoxyCompactList}\small\item\em Create and allocate a pair of distance and predecessor arrays. \end{DoxyCompactList}\item 
+float $\ast$ \mbox{\hyperlink{a01395_a7237256578bb77a912babbc2f777756c}{Get\+Row\+Of\+Dist}} (int i)
+\begin{DoxyCompactList}\small\item\em Get a pointer to the beginning of the ith row of the distance array. \end{DoxyCompactList}\item 
+int $\ast$ \mbox{\hyperlink{a01395_a4ab3579abd7bd4f18456e8e5022b51ca}{Get\+Row\+Of\+Pred}} (int i)
+\begin{DoxyCompactList}\small\item\em Get a pointer to the beginning of the ith row of the predecessor array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ float $>$ $\ast$ \mbox{\hyperlink{a01395_ad9494246039332f91b21d77a70cb7318}{dist}}
+\item 
+std\+::vector$<$ int $>$ $\ast$ \mbox{\hyperlink{a01395_a2c8df39d6c2778163d32e53d803baf56}{pred}}
+\item 
+int \mbox{\hyperlink{a01395_afae801900e74d0d1389988e8163f293a}{size}} = 0
+\begin{DoxyCompactList}\small\item\em Number of rows and colums. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Holds and maintains a distance and predecessor matrix. 
+
+\begin{DoxyRemark}{Remarks}
+This is mostly used for the implementation of Generate\+Distance\+And\+Predecessor.
+\end{DoxyRemark}
+\begin{DoxyWarning}{Warning}
+This object does NOT delete it\textquotesingle{}s internal arrays upon destruction. It\textquotesingle{}s the owner\textquotesingle{}s responsibility to do this! 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l00409}{409}} of file \mbox{\hyperlink{a00206_source}{path\+\_\+finder.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01395_a9d9e98ea5eedd5b876cb0da9c17eedf4}\label{a01395_a9d9e98ea5eedd5b876cb0da9c17eedf4}} 
+\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}!DistanceAndPredecessor@{DistanceAndPredecessor}}
+\index{DistanceAndPredecessor@{DistanceAndPredecessor}!HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
+\doxysubsubsection{\texorpdfstring{DistanceAndPredecessor()}{DistanceAndPredecessor()}}
+{\footnotesize\ttfamily HF\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::\+Distance\+And\+Predecessor (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create and allocate a pair of distance and predecessor arrays. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & Number of rows and columns. Size of each array will be this to the power of 2\\
+\hline
+\end{DoxyParams}
+All arrays will be initialized with NAN as their default values 
+
+Definition at line \mbox{\hyperlink{a00206_source_l00423}{423}} of file \mbox{\hyperlink{a00206_source}{path\+\_\+finder.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00206_source_l00410}{dist}}, \mbox{\hyperlink{a00206_source_l00411}{pred}}, and \mbox{\hyperlink{a00206_source_l00413}{size}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01395_a7237256578bb77a912babbc2f777756c}\label{a01395_a7237256578bb77a912babbc2f777756c}} 
+\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}!GetRowOfDist@{GetRowOfDist}}
+\index{GetRowOfDist@{GetRowOfDist}!HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
+\doxysubsubsection{\texorpdfstring{GetRowOfDist()}{GetRowOfDist()}}
+{\footnotesize\ttfamily float $\ast$ HF\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::\+Get\+Row\+Of\+Dist (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get a pointer to the beginning of the ith row of the distance array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Index of the row to get.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the beginning of row i. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l00439}{439}} of file \mbox{\hyperlink{a00206_source}{path\+\_\+finder.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00206_source_l00410}{dist}}, and \mbox{\hyperlink{a00206_source_l00413}{size}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00203_source_l00267}{HF\+::\+Pathfinding\+::\+Generate\+Distance\+And\+Pred()}}, and \mbox{\hyperlink{a00206_source_l00621}{operator$<$$<$()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01395_a7237256578bb77a912babbc2f777756c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01395_a4ab3579abd7bd4f18456e8e5022b51ca}\label{a01395_a4ab3579abd7bd4f18456e8e5022b51ca}} 
+\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}!GetRowOfPred@{GetRowOfPred}}
+\index{GetRowOfPred@{GetRowOfPred}!HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
+\doxysubsubsection{\texorpdfstring{GetRowOfPred()}{GetRowOfPred()}}
+{\footnotesize\ttfamily int $\ast$ HF\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::\+Get\+Row\+Of\+Pred (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get a pointer to the beginning of the ith row of the predecessor array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Index of the row to get.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the beginning of row i. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l00453}{453}} of file \mbox{\hyperlink{a00206_source}{path\+\_\+finder.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00206_source_l00411}{pred}}, and \mbox{\hyperlink{a00206_source_l00413}{size}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00203_source_l00267}{HF\+::\+Pathfinding\+::\+Generate\+Distance\+And\+Pred()}}, and \mbox{\hyperlink{a00206_source_l00621}{operator$<$$<$()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01395_a4ab3579abd7bd4f18456e8e5022b51ca_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01395_ad9494246039332f91b21d77a70cb7318}\label{a01395_ad9494246039332f91b21d77a70cb7318}} 
+\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}!dist@{dist}}
+\index{dist@{dist}!HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
+\doxysubsubsection{\texorpdfstring{dist}{dist}}
+{\footnotesize\ttfamily std\+::vector$<$float$>$$\ast$ HF\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::dist}
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l00410}{410}} of file \mbox{\hyperlink{a00206_source}{path\+\_\+finder.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00206_source_l00423}{Distance\+And\+Predecessor()}}, \mbox{\hyperlink{a00422_source_l00171}{Calculate\+Distance\+And\+Predecessor()}}, and \mbox{\hyperlink{a00206_source_l00439}{Get\+Row\+Of\+Dist()}}.
+
+\mbox{\Hypertarget{a01395_a2c8df39d6c2778163d32e53d803baf56}\label{a01395_a2c8df39d6c2778163d32e53d803baf56}} 
+\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}!pred@{pred}}
+\index{pred@{pred}!HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
+\doxysubsubsection{\texorpdfstring{pred}{pred}}
+{\footnotesize\ttfamily std\+::vector$<$int$>$$\ast$ HF\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::pred}
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l00411}{411}} of file \mbox{\hyperlink{a00206_source}{path\+\_\+finder.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00206_source_l00423}{Distance\+And\+Predecessor()}}, \mbox{\hyperlink{a00422_source_l00171}{Calculate\+Distance\+And\+Predecessor()}}, and \mbox{\hyperlink{a00206_source_l00453}{Get\+Row\+Of\+Pred()}}.
+
+\mbox{\Hypertarget{a01395_afae801900e74d0d1389988e8163f293a}\label{a01395_afae801900e74d0d1389988e8163f293a}} 
+\index{HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}!size@{size}}
+\index{size@{size}!HF::Pathfinding::DistanceAndPredecessor@{HF::Pathfinding::DistanceAndPredecessor}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily int HF\+::\+Pathfinding\+::\+Distance\+And\+Predecessor\+::size = 0}
+
+
+
+Number of rows and colums. 
+
+
+
+Definition at line \mbox{\hyperlink{a00206_source_l00413}{413}} of file \mbox{\hyperlink{a00206_source}{path\+\_\+finder.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00206_source_l00423}{Distance\+And\+Predecessor()}}, \mbox{\hyperlink{a00206_source_l00439}{Get\+Row\+Of\+Dist()}}, \mbox{\hyperlink{a00206_source_l00453}{Get\+Row\+Of\+Pred()}}, and \mbox{\hyperlink{a00206_source_l00621}{operator$<$$<$()}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/pathfinding/src/\mbox{\hyperlink{a00206}{path\+\_\+finder.\+h}}\end{DoxyCompactItemize}

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>DHART: Cpp/spatialstructures/src/path.cpp File Reference</title>
+<title>DHART: Cpp/raytracer/src/embree_raytracer.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -91,47 +91,121 @@ $(document).ready(function(){initNavTree('a00212.html',''); initResizable(); });
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a>  </div>
-  <div class="headertitle"><div class="title">path.cpp File Reference</div></div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">embree_raytracer.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Contains implementation for the <a class="el" href="a02017.html">Path</a> structure.  
+<p>Contains definitions for the <a class="el" href="a01411.html">EmbreeRayTracer</a>  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="a00215_source.html">path.h</a>&gt;</code><br />
-<code>#include &lt;algorithm&gt;</code><br />
+<div class="textblock"><code>#include &lt;rpc.h&gt;</code><br />
+<code>#include &lt;rtcore.h&gt;</code><br />
+<code>#include &lt;corecrt_math_defines.h&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;array&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00218_source.html">HitStruct.h</a>&gt;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for path.cpp:</div>
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for embree_raytracer.h:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00213.svg" width="278" height="278"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00213.svg" width="591" height="128"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00214.svg" width="1576" height="144"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
 <p><a href="a00212_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01407.html">HF::RayTracer::Vector3D</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01411.html">HF::RayTracer::EmbreeRayTracer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A wrapper for Intel's Embree Library.   <a href="a01411.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00396"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00396.html">HF</a></td></tr>
-<tr class="memdesc:a00396"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform human scale analysis on 3D environments. <br /></td></tr>
+<tr class="memitem:a00462"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00462.html">HF</a></td></tr>
+<tr class="memdesc:a00462"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform human scale analysis on 3D environments. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00399"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00399.html">HF::SpatialStructures</a></td></tr>
-<tr class="memdesc:a00399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains standard fundamental data structures for representing space used throughout DHARTAPI. <br /></td></tr>
+<tr class="memitem:a00469"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00469.html">HF::Geometry</a></td></tr>
+<tr class="memdesc:a00469"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manipulate and load geometry from disk. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00464"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00464.html">HF::RayTracer</a></td></tr>
+<tr class="memdesc:a00464"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast rays to determine if and where they intersect geometry. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a06bf78213fa612762b01a2b1959bd131"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00212.html#a06bf78213fa612762b01a2b1959bd131">EMBREE_RAY_TRACER</a></td></tr>
+<tr class="separator:a06bf78213fa612762b01a2b1959bd131"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a525335710b53cb064ca56b936120431e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00212.html#a525335710b53cb064ca56b936120431e">_USE_MATH_DEFINES</a></td></tr>
+<tr class="separator:a525335710b53cb064ca56b936120431e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a2630761a64fac02a4ee33abaf5c885a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00464.html#a2630761a64fac02a4ee33abaf5c885a1">HF::RayTracer::DidIntersect</a> (int mesh_id)</td></tr>
+<tr class="separator:a2630761a64fac02a4ee33abaf5c885a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9498ae7ffabd8c5bca4026374ac862e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00001.html#a02139">double</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00464.html#a9498ae7ffabd8c5bca4026374ac862e9">HF::RayTracer::RayTriangleIntersection</a> (const Vector3D &amp;origin, const Vector3D &amp;direction, const Vector3D &amp;v1, const Vector3D &amp;v2, const Vector3D &amp;v3)</td></tr>
+<tr class="memdesc:a9498ae7ffabd8c5bca4026374ac862e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine the distance between a ray's origin and it's point of intersection with a triangle.  <a href="a00464.html#a9498ae7ffabd8c5bca4026374ac862e9">More...</a><br /></td></tr>
+<tr class="separator:a9498ae7ffabd8c5bca4026374ac862e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Contains implementation for the <a class="el" href="a02017.html">Path</a> structure. </p>
+<div class="textblock"><p >Contains definitions for the <a class="el" href="a01411.html">EmbreeRayTracer</a> </p>
 <dl class="section author"><dt>Author</dt><dd>TBA </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>06 Jun 2020 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>26 Jun 2020 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="a00212_source.html">path.cpp</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition in file <a class="el" href="a00212_source.html">embree_raytracer.h</a>.</p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a525335710b53cb064ca56b936120431e" name="a525335710b53cb064ca56b936120431e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a525335710b53cb064ca56b936120431e">&#9670;&#160;</a></span>_USE_MATH_DEFINES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _USE_MATH_DEFINES</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00212_source.html#l00019">19</a> of file <a class="el" href="a00212_source.html">embree_raytracer.h</a>.</p>
+
+</div>
+</div>
+<a id="a06bf78213fa612762b01a2b1959bd131" name="a06bf78213fa612762b01a2b1959bd131"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06bf78213fa612762b01a2b1959bd131">&#9670;&#160;</a></span>EMBREE_RAY_TRACER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EMBREE_RAY_TRACER</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00212_source.html#l00010">10</a> of file <a class="el" href="a00212_source.html">embree_raytracer.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_66731bdf74d76a38b2c500ac62cfdf48.html">spatialstructures</a></li><li class="navelem"><a class="el" href="dir_7fdf8b1285a3d76ae7bf3420b7ffebee.html">src</a></li><li class="navelem"><a class="el" href="a00212.html">path.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_1061d284018fbd45bbbfc991ca095c8e.html">raytracer</a></li><li class="navelem"><a class="el" href="dir_198e8c151f4aa06153c41e30091296f4.html">src</a></li><li class="navelem"><a class="el" href="a00212.html">embree_raytracer.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
   </ul>
 </div>

@@ -1,0 +1,51 @@
+\hypertarget{a00449_source}{}\doxysection{visibility\+\_\+graph\+\_\+\+C.\+h}
+\label{a00449_source}\index{Cinterface/visibility\_graph\_C.h@{Cinterface/visibility\_graph\_C.h}}
+\mbox{\hyperlink{a00449}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{a00449_source_l00009}00009 \textcolor{preprocessor}{\#ifndef VISIBILITY\_GRAPH\_C\_H}}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00010}00010 \textcolor{preprocessor}{\#define VISIBILITY\_GRAPH\_C\_H}}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00011}00011 }
+\DoxyCodeLine{\Hypertarget{a00449_source_l00012}00012 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00413}{cinterface\_utils.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00013}00013 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00431}{raytracer\_c.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00014}00014 }
+\DoxyCodeLine{\Hypertarget{a00449_source_l00015}00015 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00462}{HF}} \{}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00016}00016     \textcolor{keyword}{namespace }\mbox{\hyperlink{a00463_aef833458d20e4569c73f409b52d03bee}{RayTracer}} \{}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00017}00017         \textcolor{keyword}{class }EmbreeRayTracer;}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00018}00018     \}}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00019}00019     \textcolor{keyword}{namespace }SpatialStructures \{}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00020}00020         \textcolor{keyword}{struct }Node;}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00021}00021         \textcolor{keyword}{class }Graph;}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00022}00022     \}}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00023}00023 \}}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00024}00024 }
+\DoxyCodeLine{\Hypertarget{a00449_source_l00085}00085 \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00460_ga0255e6c4811298e61110adc64c0f8acd}{CreateVisibilityGraphAllToAll}}(}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00086}00086     \mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}}* ert,}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00087}00087     \textcolor{keyword}{const} \textcolor{keywordtype}{float}* nodes,}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00088}00088     \textcolor{keywordtype}{int} num\_nodes,}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00089}00089     \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}** out\_graph,}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00090}00090     \textcolor{keywordtype}{float} height}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00091}00091 );}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00092}00092 }
+\DoxyCodeLine{\Hypertarget{a00449_source_l00147}00147 \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00460_ga9b0664a60bcdf276b0fe0a2023b3d9b8}{CreateVisibilityGraphAllToAllUndirected}}(}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00148}00148     \mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}}* ert,}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00149}00149     \textcolor{keyword}{const} \textcolor{keywordtype}{float}* nodes,}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00150}00150     \textcolor{keywordtype}{int} num\_nodes,}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00151}00151     \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}** out\_graph,}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00152}00152     \textcolor{keywordtype}{float} height,}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00153}00153     \textcolor{keyword}{const} \textcolor{keywordtype}{int} cores}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00154}00154 );}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00155}00155 }
+\DoxyCodeLine{\Hypertarget{a00449_source_l00219}00219 \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00460_gaf2e404cb696aee3473cac0d1507576d8}{CreateVisibilityGraphGroupToGroup}}(}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00220}00220     \mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}}* ert,}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00221}00221     \textcolor{keyword}{const} \textcolor{keywordtype}{float}* group\_a,}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00222}00222     \textcolor{keyword}{const} \textcolor{keywordtype}{int} size\_a,}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00223}00223     \textcolor{keyword}{const} \textcolor{keywordtype}{float}* group\_b,}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00224}00224     \textcolor{keyword}{const} \textcolor{keywordtype}{int} size\_b,}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00225}00225     \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}** out\_graph,}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00226}00226     \textcolor{keywordtype}{float} height}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00227}00227 );}
+\DoxyCodeLine{\Hypertarget{a00449_source_l00228}00228 }
+\DoxyCodeLine{\Hypertarget{a00449_source_l00231}00231 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* VISIBILITY\_GRAPH\_C\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

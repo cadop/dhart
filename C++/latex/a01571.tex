@@ -1,0 +1,156 @@
+\hypertarget{a01571}{}\doxysection{nlohmann\+::detail\+::type\+\_\+error Class Reference}
+\label{a01571}\index{nlohmann::detail::type\_error@{nlohmann::detail::type\_error}}
+
+
+exception indicating executing a member function with a wrong type  
+
+
+
+
+{\ttfamily \#include $<$json.\+hpp$>$}
+
+
+
+Inheritance diagram for nlohmann\+::detail\+::type\+\_\+error\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=215pt]{a01570}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for nlohmann\+::detail\+::type\+\_\+error\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=274pt]{a01569}
+\end{center}
+\end{figure}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{a01571}{type\+\_\+error}} \mbox{\hyperlink{a01571_aecc083aea4b698c33d042670ba50c10f}{create}} (int id\+\_\+, const std\+::string \&what\+\_\+arg)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01571_aa01edaa0bf18b853368f0b900e485cd7}{type\+\_\+error}} (int id\+\_\+, const char $\ast$what\+\_\+arg)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+exception indicating executing a member function with a wrong type 
+
+This exception is thrown in case of a type error; that is, a library function is executed on a JSON value whose type does not match the expected semantics.
+
+Exceptions have ids 3xx.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ name / id   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ example message   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ description    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ name / id   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ example message   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ description    }\\\cline{1-3}
+\endhead
+json.\+exception.\+type\+\_\+error.\+301   &cannot create object from initializer list   &To create an object from an initializer list, the initializer list must consist only of a list of pairs whose first element is a string. When this constraint is violated, an array is created instead.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+302   &type must be object, but is array   &During implicit or explicit value conversion, the JSON type must be compatible to the target type. For instance, a JSON string can only be converted into string types, but not into numbers or boolean types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+303   &incompatible Reference\+Type for get\+\_\+ref, actual type is object   &To retrieve a reference to a value stored in a \mbox{\hyperlink{a01659}{basic\+\_\+json}} object with get\+\_\+ref, the type of the reference must match the value type. For instance, for a JSON array, the {\itshape Reference\+Type} must be array\+\_\+t \&.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+304   &cannot use at() with string   &The at() member functions can only be executed for certain JSON types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+305   &cannot use operator\mbox{[}\mbox{]} with string   &The operator\mbox{[}\mbox{]} member functions can only be executed for certain JSON types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+306   &cannot use \mbox{\hyperlink{a00477_a2fb6dae6578e06ae73ca0d7cc8512b1aa2063c1608d6e0baf80249c42e2be5804}{value()}} with string   &The \mbox{\hyperlink{a00477_a2fb6dae6578e06ae73ca0d7cc8512b1aa2063c1608d6e0baf80249c42e2be5804}{value()}} member functions can only be executed for certain JSON types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+307   &cannot use erase() with string   &The erase() member functions can only be executed for certain JSON types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+308   &cannot use push\+\_\+back() with string   &The push\+\_\+back() and operator+= member functions can only be executed for certain JSON types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+309   &cannot use insert() with   &The insert() member functions can only be executed for certain JSON types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+310   &cannot use swap() with number   &The swap() member functions can only be executed for certain JSON types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+311   &cannot use emplace\+\_\+back() with string   &The emplace\+\_\+back() member function can only be executed for certain JSON types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+312   &cannot use update() with string   &The update() member functions can only be executed for certain JSON types.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+313   &invalid value to unflatten   &The unflatten function converts an object whose keys are JSON Pointers back into an arbitrary nested JSON value. The JSON Pointers must not overlap, because then the resulting value would not be well defined.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+314   &only objects can be unflattened   &The unflatten function only works for an object whose keys are JSON Pointers.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+315   &values in object must be primitive   &The unflatten function only works for an object whose keys are JSON Pointers and whose values are primitive.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+316   &invalid UTF-\/8 byte at index 10\+: 0x7E   &The dump function only works with UTF-\/8 encoded strings; that is, if you assign a {\ttfamily std\+::string} to a JSON value, make sure it is UTF-\/8 encoded.    \\\cline{1-3}
+json.\+exception.\+type\+\_\+error.\+317   &JSON value cannot be serialized to requested format   &The dynamic type of the object cannot be represented in the requested serialization format (e.\+g. a raw {\ttfamily true} or {\ttfamily null} JSON object cannot be serialized to BSON)   \\\cline{1-3}
+\end{longtabu}
+
+
+@liveexample\{The following code shows how a {\ttfamily \mbox{\hyperlink{a01571}{type\+\_\+error}}} exception can be caught.,\mbox{\hyperlink{a01571}{type\+\_\+error}}\}
+
+\begin{DoxySeeAlso}{See also}
+-\/ \mbox{\hyperlink{a01559}{exception}} for the base class of the library exceptions 
+
+-\/ \mbox{\hyperlink{a01563}{parse\+\_\+error}} for exceptions indicating a parse \mbox{\hyperlink{a00477_a58bb1ef1a9ad287a9cfaf1855784d9acacb5e100e5a9a3e7f6d1fd97512215282}{error}} 
+
+-\/ \mbox{\hyperlink{a01567}{invalid\+\_\+iterator}} for exceptions indicating errors with iterators 
+
+-\/ \mbox{\hyperlink{a01575}{out\+\_\+of\+\_\+range}} for exceptions indicating access out of the defined range 
+
+-\/ \mbox{\hyperlink{a01579}{other\+\_\+error}} for exceptions indicating other library errors
+\end{DoxySeeAlso}
+\begin{DoxySince}{Since}
+version 3.\+0.\+0 
+\end{DoxySince}
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l02564}{2564}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01571_aa01edaa0bf18b853368f0b900e485cd7}\label{a01571_aa01edaa0bf18b853368f0b900e485cd7}} 
+\index{nlohmann::detail::type\_error@{nlohmann::detail::type\_error}!type\_error@{type\_error}}
+\index{type\_error@{type\_error}!nlohmann::detail::type\_error@{nlohmann::detail::type\_error}}
+\doxysubsubsection{\texorpdfstring{type\_error()}{type\_error()}}
+{\footnotesize\ttfamily nlohmann\+::detail\+::type\+\_\+error\+::type\+\_\+error (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+,  }\item[{const char $\ast$}]{what\+\_\+arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l02575}{2575}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01571_aecc083aea4b698c33d042670ba50c10f}\label{a01571_aecc083aea4b698c33d042670ba50c10f}} 
+\index{nlohmann::detail::type\_error@{nlohmann::detail::type\_error}!create@{create}}
+\index{create@{create}!nlohmann::detail::type\_error@{nlohmann::detail::type\_error}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{a01571}{type\+\_\+error}} nlohmann\+::detail\+::type\+\_\+error\+::create (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+,  }\item[{const std\+::string \&}]{what\+\_\+arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l02567}{2567}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l02369}{nlohmann\+::detail\+::exception\+::name()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00272_source_l18087}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::basic\+\_\+json()}}, \mbox{\hyperlink{a00272_source_l19793}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::at()}}, \mbox{\hyperlink{a00272_source_l15817}{nlohmann\+::detail\+::serializer$<$ Basic\+Json\+Type $>$\+::dump\+\_\+escaped()}}, \mbox{\hyperlink{a00272_source_l21954}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::emplace()}}, \mbox{\hyperlink{a00272_source_l21901}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::emplace\+\_\+back()}}, \mbox{\hyperlink{a00272_source_l20516}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::erase()}}, \mbox{\hyperlink{a00272_source_l03426}{nlohmann\+::detail\+::from\+\_\+json()}}, \mbox{\hyperlink{a00272_source_l11934}{nlohmann\+::json\+\_\+pointer$<$ Basic\+Json\+Type $>$\+::get\+\_\+and\+\_\+create()}}, \mbox{\hyperlink{a00272_source_l03440}{nlohmann\+::detail\+::get\+\_\+arithmetic\+\_\+value()}}, \mbox{\hyperlink{a00272_source_l19735}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::get\+\_\+binary()}}, \mbox{\hyperlink{a00272_source_l19183}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::get\+\_\+impl()}}, \mbox{\hyperlink{a00272_source_l19301}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::get\+\_\+ref\+\_\+impl()}}, \mbox{\hyperlink{a00272_source_l22022}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::insert()}}, \mbox{\hyperlink{a00272_source_l19988}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::operator\mbox{[}$\,$\mbox{]}()}}, \mbox{\hyperlink{a00272_source_l21713}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::push\+\_\+back()}}, \mbox{\hyperlink{a00272_source_l22419}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::swap()}}, \mbox{\hyperlink{a00272_source_l12447}{nlohmann\+::json\+\_\+pointer$<$ Basic\+Json\+Type $>$\+::unflatten()}}, \mbox{\hyperlink{a00272_source_l22257}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::update()}}, \mbox{\hyperlink{a00272_source_l20279}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::value()}}, and \mbox{\hyperlink{a00272_source_l12773}{nlohmann\+::detail\+::binary\+\_\+writer$<$ Basic\+Json\+Type, Char\+Type $>$\+::write\+\_\+bson()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01571_aecc083aea4b698c33d042670ba50c10f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01571_aecc083aea4b698c33d042670ba50c10f_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00272}{json.\+hpp}}\end{DoxyCompactItemize}

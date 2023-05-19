@@ -1,0 +1,783 @@
+\hypertarget{a00465}{}\doxysection{HF\+::Spatial\+Structures Namespace Reference}
+\label{a00465}\index{HF::SpatialStructures@{HF::SpatialStructures}}
+
+
+Contains standard fundamental data structures for representing space used throughout DHARTAPI.  
+
+
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{a00475}{Cost\+Algorithms}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a01539}{CSRPtrs}}
+\begin{DoxyCompactList}\small\item\em A struct to hold all necessary information for a CSR. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01527}{Edge}}
+\begin{DoxyCompactList}\small\item\em A connection to a child node.  \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01547}{Edge\+Cost\+Set}}
+\begin{DoxyCompactList}\small\item\em A set of edge costs for a graph. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01535}{Edge\+Set}}
+\begin{DoxyCompactList}\small\item\em A collection of edges and a parent.  \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01551}{Graph}}
+\begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{a01551}{Graph}} of nodes connected by edges that supports both integers and \mbox{\hyperlink{a02071}{HF\+::\+Spatial\+Structures\+::\+Node}}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01531}{Int\+Edge}}
+\begin{DoxyCompactList}\small\item\em A lighter version of \mbox{\hyperlink{a01527}{Edge}} that contains an ID instead of a full node object..  \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a02071}{Node}}
+\begin{DoxyCompactList}\small\item\em A point in space with an ID.  \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a02083}{Path}}
+\begin{DoxyCompactList}\small\item\em A collection of nodes that form a path.  \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a02079}{Path\+Member}}
+\begin{DoxyCompactList}\small\item\em The ID of a node, and the cost cost to the node after it. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00465_a01543}{Subgraph}}
+\begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{a00465_a01543}{Subgraph}} consists of a parent \mbox{\hyperlink{a02071}{Node}} m\+\_\+parent and a container of \mbox{\hyperlink{a01527}{Edge}} m\+\_\+edges such that all \mbox{\hyperlink{a01527}{Edge}} in m\+\_\+edges extend from m\+\_\+parent.  \mbox{\hyperlink{a00465_a01543}{More...}}\end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{a00465_a40b235356dfcdd3f2e1adc0f3c342007}{Edge\+Matrix}} = Eigen\+::\+Sparse\+Matrix$<$ float, 1 $>$
+\begin{DoxyCompactList}\small\item\em The type of matrix the graph uses internally. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{a00465_aaf74b9079d1b97124b8d1e4dae2cc13c}{Temp\+Matrix}} = Eigen\+::\+Map$<$ const \mbox{\hyperlink{a00465_a40b235356dfcdd3f2e1adc0f3c342007}{Edge\+Matrix}} $>$
+\begin{DoxyCompactList}\small\item\em A mapped matrix of Edge\+Matrix. Only owns pointers to memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{a00465_af0378d900074d484ba791d4317e5935e}{STEP}} \{ \newline
+\mbox{\hyperlink{a00465_af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9}{NOT\+\_\+\+CONNECTED}} = 0
+, \mbox{\hyperlink{a00465_af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a}{NONE}} = 1
+, \mbox{\hyperlink{a00465_af0378d900074d484ba791d4317e5935ea599bf51c4226a80ada6f743f6e9acd5c}{UP}} = 2
+, \mbox{\hyperlink{a00465_af0378d900074d484ba791d4317e5935ea023b84d27813ed1b354da97011695e98}{DOWN}} = 3
+, \newline
+\mbox{\hyperlink{a00465_af0378d900074d484ba791d4317e5935eaa734acd80348ed3c2f2df367e7ab1bac}{OVER}} = 4
+ \}
+\begin{DoxyCompactList}\small\item\em Describes the type of step an edge connects to.  \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{a00465_a6b23c0b2531c78f6d5049873c184f4f9}{COST\+\_\+\+AGGREGATE}} \+: int \{ \mbox{\hyperlink{a00465_a6b23c0b2531c78f6d5049873c184f4f9a6970bdc2201030b9c03fbdcf3973858a}{SUM}} = 0
+, \mbox{\hyperlink{a00465_a6b23c0b2531c78f6d5049873c184f4f9a16de38737a9f8366e9b2042b4e9b6290}{AVERAGE}} = 1
+, \mbox{\hyperlink{a00465_a6b23c0b2531c78f6d5049873c184f4f9a4905ac9d6a22bdfc1ae096094ce6248d}{COUNT}} = 2
+ \}
+\begin{DoxyCompactList}\small\item\em Methods of aggregating the costs for edges for each node in the graph. \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{a00465_afac7c4ef1cb1104941f4d5a27973b47e}{Direction}} \+: int \{ \mbox{\hyperlink{a00465_afac7c4ef1cb1104941f4d5a27973b47eafb4081bff9f77d65456ceb00b153e4d4}{INCOMING}} = 0
+, \mbox{\hyperlink{a00465_afac7c4ef1cb1104941f4d5a27973b47ea1741b869c82993c62163223d8fefbba4}{OUTGOING}} = 1
+, \mbox{\hyperlink{a00465_afac7c4ef1cb1104941f4d5a27973b47ea6328e5e3186c227a021ef2ff77e40197}{BOTH}} = 2
+ \}
+\begin{DoxyCompactList}\small\item\em Node to use for calculating the cost of an edge when converting node attributes to edge costs. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{a00465_aa8ecd83cd353318532d791fc819343cc}{NODE\+\_\+\+TYPE}} \{ \mbox{\hyperlink{a00465_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}{GRAPH}} = 0
+, \mbox{\hyperlink{a00465_aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad}{POI}} = 1
+, \mbox{\hyperlink{a00465_aa8ecd83cd353318532d791fc819343cca996f30fa669937983b628671c4493b8e}{OTHER}} = 2
+ \}
+\begin{DoxyCompactList}\small\item\em The type of node this is. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename desired\+\_\+type , typename numeric\+\_\+type $>$ }\\constexpr desired\+\_\+type \mbox{\hyperlink{a00465_a0e25afd4cd04c2b85f5283b27e8acdef}{Divide\+By1}} (numeric\+\_\+type n)
+\begin{DoxyCompactList}\small\item\em Cast a value to the specific type and divide 1 by it. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{a00465_a7055938c4b6cc98ac7d1e4409e1f63e9}{roundhf}} (float f, float p=\mbox{\hyperlink{a00465_a8e1deca302502a6ab0e0943c292f33b6}{FLOAT\+\_\+\+PRECISION}}, float r=\mbox{\hyperlink{a00465_a0140105869479399be75147c8f77e724}{ROUNDING\+\_\+\+PRECISION}})
+\begin{DoxyCompactList}\small\item\em Round a float to the nearest precision defined globally. The global values can be overridden with optional parameters p and r. If r is 0.\+01, p must be 100.\+0, meaning there should be one more 0 between the decimal.  \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{a00465_a7819d69862372eb198ca0e74d2ecf5f0}{trunchf}} (float f, float p=1000.\+0, float r=0.\+001)
+\begin{DoxyCompactList}\small\item\em Truncate a float to the nearest precision defined globally. The global values can be overridden with optional parameters p and r. If r is 0.\+01, p must be 100.\+0, meaning there should be one more 0 between the decimal.  \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename numeric\+\_\+type $>$ }\\numeric\+\_\+type \mbox{\hyperlink{a00465_a0e6690272fb70b92279b9ab082a24302}{roundhf\+\_\+tail}} (numeric\+\_\+type f, int precision)
+\begin{DoxyCompactList}\small\item\em round a number twice, once at the precision+1, and again at the precision This method is to fix cases in which the precision to round to is 4, and the following number is 9. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename numeric\+\_\+type $>$ }\\constexpr numeric\+\_\+type \mbox{\hyperlink{a00465_a5db5f0307882796fcf7cdad83cb20c65}{roundhf\+\_\+tmp}} (numeric\+\_\+type f, numeric\+\_\+type p, numeric\+\_\+type r)
+\begin{DoxyCompactList}\small\item\em round a number to the nearest precision defined globally. The global values can be overridden with optional parameters p and r. If r is 0.\+01, p must be 100.\+0, meaning there should be one more 0 between the decimal. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename desired\+\_\+type , typename numeric\+\_\+type $>$ }\\constexpr desired\+\_\+type \mbox{\hyperlink{a00465_a34027bdf606bd5f03f7a473c61a3a4de}{roundhf\+\_\+tmp}} (numeric\+\_\+type f, numeric\+\_\+type p)
+\begin{DoxyCompactList}\small\item\em Round a number to the nearest value to itself at a specific precision. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename desired\+\_\+type , typename numeric\+\_\+type $>$ }\\constexpr desired\+\_\+type \mbox{\hyperlink{a00465_a863bb6ac51410385569635e0b0e08ee2}{roundhf\+\_\+tmp}} (numeric\+\_\+type f)
+\begin{DoxyCompactList}\small\item\em Round a number to the global rounding precision. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename numeric\+\_\+type $>$ }\\constexpr numeric\+\_\+type \mbox{\hyperlink{a00465_ab374c207312422f0543df4ea73f8bc85}{trunchf\+\_\+tmp}} (numeric\+\_\+type f, numeric\+\_\+type p, numeric\+\_\+type r)
+\begin{DoxyCompactList}\small\item\em truncate a number to the nearest precision defined globally. The global values can be overridden with optional parameters p and r. If r is 0.\+01, p must be 100.\+0, meaning there should be one more 0 between the decimal. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename desired\+\_\+type , typename numeric\+\_\+type $>$ }\\constexpr desired\+\_\+type \mbox{\hyperlink{a00465_ad37544fd332717ce6a1d310c71e06a3d}{trunchf\+\_\+tmp}} (numeric\+\_\+type f, numeric\+\_\+type p)
+\begin{DoxyCompactList}\small\item\em Truncate a number to the nearest value not greater than itself at a specific precision. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename desired\+\_\+type , typename numeric\+\_\+type $>$ }\\constexpr desired\+\_\+type \mbox{\hyperlink{a00465_a4f738c546072f01f11a3b9f11f949291}{trunchf\+\_\+tmp}} (numeric\+\_\+type f)
+\begin{DoxyCompactList}\small\item\em Truncate a number to the nearest value not greater than itself at a specific precision. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00465_ad9a8f0f70b3f60ac5cb7889885d851d1}{Normalize}} (std\+::array$<$ float, 3 $>$ \&vector)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr float \mbox{\hyperlink{a00465_a0140105869479399be75147c8f77e724}{ROUNDING\+\_\+\+PRECISION}} = 0.\+0001f
+\begin{DoxyCompactList}\small\item\em Minimum value that can be represented in DHART\+\_\+\+API. \end{DoxyCompactList}\item 
+constexpr float \mbox{\hyperlink{a00465_a8e1deca302502a6ab0e0943c292f33b6}{FLOAT\+\_\+\+PRECISION}} = 10000.\+0f
+\begin{DoxyCompactList}\small\item\em Used to convert to a given precision (avoids division) \end{DoxyCompactList}\item 
+constexpr float \mbox{\hyperlink{a00465_a78ab286d1837e1db2b8b4ce90bc9fffa}{GROUND\+\_\+\+OFFSET}} = 0.\+001f
+\begin{DoxyCompactList}\small\item\em Offset to be used for offsetting from a polygon when performing checks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains standard fundamental data structures for representing space used throughout DHARTAPI. 
+
+\begin{DoxyRemark}{Remarks}
+The datatypes in the \mbox{\hyperlink{a00465}{Spatial\+Structures}} Namespace are used throughout the DHARTAPI library. For example, the \mbox{\hyperlink{a00463}{HF\+::\+Graph\+Generator}} and \mbox{\hyperlink{a00467}{HF\+::\+Visibility\+Graph}} both produce a \mbox{\hyperlink{a01551}{Graph}} as output, allowing for the code to manage the \mbox{\hyperlink{a01551}{Graph}}\textquotesingle{}s internal CSR to be centralized in a single location. 
+\end{DoxyRemark}
+
+
+\doxysubsection{Class Documentation}
+\index{HF::SpatialStructures::Subgraph@{HF::SpatialStructures::Subgraph}}\label{a01543}
+\Hypertarget{a00465_a01543}
+\doxysubsubsection{struct HF\+::Spatial\+Structures\+::Subgraph}
+A \mbox{\hyperlink{a00465_a01543}{Subgraph}} consists of a parent \mbox{\hyperlink{a02071}{Node}} m\+\_\+parent and a container of \mbox{\hyperlink{a01527}{Edge}} m\+\_\+edges such that all \mbox{\hyperlink{a01527}{Edge}} in m\+\_\+edges extend from m\+\_\+parent. 
+
+Definition at line \mbox{\hyperlink{a00269_source_l00364}{364}} of file \mbox{\hyperlink{a00269_source}{graph.\+h}}.
+
+
+
+Collaboration diagram for HF\+::Spatial\+Structures\+::Subgraph\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=307pt]{a01541}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00465_ac1403ade5ddeb5410a523871f96e1e64}\label{a00465_ac1403ade5ddeb5410a523871f96e1e64}} 
+vector$<$ \mbox{\hyperlink{a01527}{Edge}} $>$&
+m\_edges&
+The edges that extend from m\+\_\+parent. \\
+\hline
+
+\mbox{\Hypertarget{a00465_a2f8de99f10387d075d7d69336e4d5dd7}\label{a00465_a2f8de99f10387d075d7d69336e4d5dd7}} 
+\mbox{\hyperlink{a02071}{Node}}&
+m\_parent&
+The parent node from which all \mbox{\hyperlink{a01527}{Edge}} in m\+\_\+edges extend. \\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{a00465_a40b235356dfcdd3f2e1adc0f3c342007}\label{a00465_a40b235356dfcdd3f2e1adc0f3c342007}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!EdgeMatrix@{EdgeMatrix}}
+\index{EdgeMatrix@{EdgeMatrix}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{EdgeMatrix}{EdgeMatrix}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a00465_a40b235356dfcdd3f2e1adc0f3c342007}{HF\+::\+Spatial\+Structures\+::\+Edge\+Matrix}} = typedef Eigen\+::\+Sparse\+Matrix$<$float, 1$>$}
+
+
+
+The type of matrix the graph uses internally. 
+
+
+
+Definition at line \mbox{\hyperlink{a00269_source_l00021}{21}} of file \mbox{\hyperlink{a00269_source}{graph.\+h}}.
+
+\mbox{\Hypertarget{a00465_aaf74b9079d1b97124b8d1e4dae2cc13c}\label{a00465_aaf74b9079d1b97124b8d1e4dae2cc13c}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!TempMatrix@{TempMatrix}}
+\index{TempMatrix@{TempMatrix}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{TempMatrix}{TempMatrix}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a00465_aaf74b9079d1b97124b8d1e4dae2cc13c}{HF\+::\+Spatial\+Structures\+::\+Temp\+Matrix}} = typedef Eigen\+::\+Map$<$const \mbox{\hyperlink{a00465_a40b235356dfcdd3f2e1adc0f3c342007}{Edge\+Matrix}}$>$}
+
+
+
+A mapped matrix of Edge\+Matrix. Only owns pointers to memory. 
+
+
+
+Definition at line \mbox{\hyperlink{a00269_source_l00022}{22}} of file \mbox{\hyperlink{a00269_source}{graph.\+h}}.
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{a00465_a6b23c0b2531c78f6d5049873c184f4f9}\label{a00465_a6b23c0b2531c78f6d5049873c184f4f9}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!COST\_AGGREGATE@{COST\_AGGREGATE}}
+\index{COST\_AGGREGATE@{COST\_AGGREGATE}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{COST\_AGGREGATE}{COST\_AGGREGATE}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{a00465_a6b23c0b2531c78f6d5049873c184f4f9}{HF\+::\+Spatial\+Structures\+::\+COST\+\_\+\+AGGREGATE}} \+: int\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Methods of aggregating the costs for edges for each node in the graph. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01551_a487b0b29dc7c554089e0255779218567}{Graph.\+Aggregate\+Graph()}} for details on how to use this enum. 
+\end{DoxySeeAlso}
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SUM@{SUM}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!SUM@{SUM}}}\mbox{\Hypertarget{a00465_a6b23c0b2531c78f6d5049873c184f4f9a6970bdc2201030b9c03fbdcf3973858a}\label{a00465_a6b23c0b2531c78f6d5049873c184f4f9a6970bdc2201030b9c03fbdcf3973858a}} 
+SUM&Add the cost of all edges. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AVERAGE@{AVERAGE}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!AVERAGE@{AVERAGE}}}\mbox{\Hypertarget{a00465_a6b23c0b2531c78f6d5049873c184f4f9a16de38737a9f8366e9b2042b4e9b6290}\label{a00465_a6b23c0b2531c78f6d5049873c184f4f9a16de38737a9f8366e9b2042b4e9b6290}} 
+AVERAGE&Average the cost of all edges. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COUNT@{COUNT}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!COUNT@{COUNT}}}\mbox{\Hypertarget{a00465_a6b23c0b2531c78f6d5049873c184f4f9a4905ac9d6a22bdfc1ae096094ce6248d}\label{a00465_a6b23c0b2531c78f6d5049873c184f4f9a4905ac9d6a22bdfc1ae096094ce6248d}} 
+COUNT&Count how many edges this node has. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{a00269_source_l00028}{28}} of file \mbox{\hyperlink{a00269_source}{graph.\+h}}.
+
+\mbox{\Hypertarget{a00465_afac7c4ef1cb1104941f4d5a27973b47e}\label{a00465_afac7c4ef1cb1104941f4d5a27973b47e}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!Direction@{Direction}}
+\index{Direction@{Direction}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{Direction}{Direction}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{a00465_afac7c4ef1cb1104941f4d5a27973b47e}{HF\+::\+Spatial\+Structures\+::\+Direction}} \+: int\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+\mbox{\hyperlink{a02071}{Node}} to use for calculating the cost of an edge when converting node attributes to edge costs. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INCOMING@{INCOMING}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!INCOMING@{INCOMING}}}\mbox{\Hypertarget{a00465_afac7c4ef1cb1104941f4d5a27973b47eafb4081bff9f77d65456ceb00b153e4d4}\label{a00465_afac7c4ef1cb1104941f4d5a27973b47eafb4081bff9f77d65456ceb00b153e4d4}} 
+INCOMING&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OUTGOING@{OUTGOING}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!OUTGOING@{OUTGOING}}}\mbox{\Hypertarget{a00465_afac7c4ef1cb1104941f4d5a27973b47ea1741b869c82993c62163223d8fefbba4}\label{a00465_afac7c4ef1cb1104941f4d5a27973b47ea1741b869c82993c62163223d8fefbba4}} 
+OUTGOING&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BOTH@{BOTH}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!BOTH@{BOTH}}}\mbox{\Hypertarget{a00465_afac7c4ef1cb1104941f4d5a27973b47ea6328e5e3186c227a021ef2ff77e40197}\label{a00465_afac7c4ef1cb1104941f4d5a27973b47ea6328e5e3186c227a021ef2ff77e40197}} 
+BOTH&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{a00269_source_l00039}{39}} of file \mbox{\hyperlink{a00269_source}{graph.\+h}}.
+
+\mbox{\Hypertarget{a00465_aa8ecd83cd353318532d791fc819343cc}\label{a00465_aa8ecd83cd353318532d791fc819343cc}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!NODE\_TYPE@{NODE\_TYPE}}
+\index{NODE\_TYPE@{NODE\_TYPE}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{NODE\_TYPE}{NODE\_TYPE}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{a00465_aa8ecd83cd353318532d791fc819343cc}{HF\+::\+Spatial\+Structures\+::\+NODE\+\_\+\+TYPE}}}
+
+
+
+The type of node this is. 
+
+\begin{DoxyRemark}{Remarks}
+
+\end{DoxyRemark}
+This was primarially used in the previous codebase to differentiate the different types of nodes in the database. Since the database is not implemented here, this goes entirely unused. May be useful in the future. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GRAPH@{GRAPH}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!GRAPH@{GRAPH}}}\mbox{\Hypertarget{a00465_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}\label{a00465_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}} 
+GRAPH&This node is a graph node. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{POI@{POI}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!POI@{POI}}}\mbox{\Hypertarget{a00465_aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad}\label{a00465_aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad}} 
+POI&POI is \textquotesingle{}point of interest\textquotesingle{}. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OTHER@{OTHER}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!OTHER@{OTHER}}}\mbox{\Hypertarget{a00465_aa8ecd83cd353318532d791fc819343cca996f30fa669937983b628671c4493b8e}\label{a00465_aa8ecd83cd353318532d791fc819343cca996f30fa669937983b628671c4493b8e}} 
+OTHER&This node doesn\textquotesingle{}t belong in any other category. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{a00275_source_l00029}{29}} of file \mbox{\hyperlink{a00275_source}{node.\+h}}.
+
+\mbox{\Hypertarget{a00465_af0378d900074d484ba791d4317e5935e}\label{a00465_af0378d900074d484ba791d4317e5935e}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!STEP@{STEP}}
+\index{STEP@{STEP}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{STEP}{STEP}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{a00465_af0378d900074d484ba791d4317e5935e}{HF\+::\+Spatial\+Structures\+::\+STEP}}}
+
+
+
+Describes the type of step an edge connects to.  
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NOT\_CONNECTED@{NOT\_CONNECTED}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!NOT\_CONNECTED@{NOT\_CONNECTED}}}\mbox{\Hypertarget{a00465_af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9}\label{a00465_af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9}} 
+NOT\+\_\+\+CONNECTED&No connection between parent and child. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NONE@{NONE}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!NONE@{NONE}}}\mbox{\Hypertarget{a00465_af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a}\label{a00465_af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a}} 
+NONE&Parent and child are on the same plane and no step is required. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UP@{UP}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!UP@{UP}}}\mbox{\Hypertarget{a00465_af0378d900074d484ba791d4317e5935ea599bf51c4226a80ada6f743f6e9acd5c}\label{a00465_af0378d900074d484ba791d4317e5935ea599bf51c4226a80ada6f743f6e9acd5c}} 
+UP&A step up is required to get from parent to child. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DOWN@{DOWN}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!DOWN@{DOWN}}}\mbox{\Hypertarget{a00465_af0378d900074d484ba791d4317e5935ea023b84d27813ed1b354da97011695e98}\label{a00465_af0378d900074d484ba791d4317e5935ea023b84d27813ed1b354da97011695e98}} 
+DOWN&A step down is required to get from parent to child. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OVER@{OVER}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!OVER@{OVER}}}\mbox{\Hypertarget{a00465_af0378d900074d484ba791d4317e5935eaa734acd80348ed3c2f2df367e7ab1bac}\label{a00465_af0378d900074d484ba791d4317e5935eaa734acd80348ed3c2f2df367e7ab1bac}} 
+OVER&A step over something is required to get from parent to child. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{a00263_source_l00015}{15}} of file \mbox{\hyperlink{a00263_source}{Edge.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00465_a0e25afd4cd04c2b85f5283b27e8acdef}\label{a00465_a0e25afd4cd04c2b85f5283b27e8acdef}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!DivideBy1@{DivideBy1}}
+\index{DivideBy1@{DivideBy1}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{DivideBy1()}{DivideBy1()}}
+{\footnotesize\ttfamily template$<$typename desired\+\_\+type , typename numeric\+\_\+type $>$ \\
+constexpr desired\+\_\+type HF\+::\+Spatial\+Structures\+::\+Divide\+By1 (\begin{DoxyParamCaption}\item[{numeric\+\_\+type}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Cast a value to the specific type and divide 1 by it. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em numeric\+\_\+type} & Type of number to divide 1 by \\
+\hline
+{\em desired\+\_\+type} & Type to cast to and return.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Number to divide 1 by.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1/n 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00251_source_l00044}{44}} of file \mbox{\hyperlink{a00251_source}{Constants.\+h}}.
+
+\mbox{\Hypertarget{a00465_ad9a8f0f70b3f60ac5cb7889885d851d1}\label{a00465_ad9a8f0f70b3f60ac5cb7889885d851d1}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!Normalize@{Normalize}}
+\index{Normalize@{Normalize}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{Normalize()}{Normalize()}}
+{\footnotesize\ttfamily void HF\+::\+Spatial\+Structures\+::\+Normalize (\begin{DoxyParamCaption}\item[{std\+::array$<$ float, 3 $>$ \&}]{vector }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{a03554_source_l00123}{123}} of file \mbox{\hyperlink{a03554_source}{node.\+cpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a03554_source_l00131}{HF\+::\+Spatial\+Structures\+::\+Node\+::direction\+To()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00465_ad9a8f0f70b3f60ac5cb7889885d851d1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00465_a7055938c4b6cc98ac7d1e4409e1f63e9}\label{a00465_a7055938c4b6cc98ac7d1e4409e1f63e9}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!roundhf@{roundhf}}
+\index{roundhf@{roundhf}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{roundhf()}{roundhf()}}
+{\footnotesize\ttfamily float HF\+::\+Spatial\+Structures\+::roundhf (\begin{DoxyParamCaption}\item[{float}]{f,  }\item[{float}]{p = {\ttfamily \mbox{\hyperlink{a00465_a8e1deca302502a6ab0e0943c292f33b6}{FLOAT\+\_\+\+PRECISION}}},  }\item[{float}]{r = {\ttfamily \mbox{\hyperlink{a00465_a0140105869479399be75147c8f77e724}{ROUNDING\+\_\+\+PRECISION}}} }\end{DoxyParamCaption})}
+
+
+
+Round a float to the nearest precision defined globally. The global values can be overridden with optional parameters p and r. If r is 0.\+01, p must be 100.\+0, meaning there should be one more 0 between the decimal.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & The desired float to round. \\
+\hline
+{\em p} & The override of FLOAT\+\_\+\+PRECISION (e.\+g., 10000.\+0f) \\
+\hline
+{\em r} & The override of ROUNDING\+\_\+\+PRECISION (e.\+g., 0.\+0001f) \begin{DoxyReturn}{Returns}
+f rounded to the nearest rounding\+\_\+precision. 
+\end{DoxyReturn}
+\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}Constants.h"{} std::round from the cmath library is used in}}
+\DoxyCodeLine{\textcolor{comment}{// roundhf. Precision is to the nearest ten-\/thousandth}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} my\_pi = 3.141592653589793238462643383279502884197169399375105820974944592307816406286;}
+\DoxyCodeLine{\textcolor{keywordtype}{float} rounded = \mbox{\hyperlink{a00465_a7055938c4b6cc98ac7d1e4409e1f63e9}{HF::SpatialStructures::roundhf}}(my\_pi);  \textcolor{comment}{//  rounded == 3.1416}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00248_source_l00014}{14}} of file \mbox{\hyperlink{a00248_source}{Constants.\+cpp}}.
+
+\mbox{\Hypertarget{a00465_a0e6690272fb70b92279b9ab082a24302}\label{a00465_a0e6690272fb70b92279b9ab082a24302}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!roundhf\_tail@{roundhf\_tail}}
+\index{roundhf\_tail@{roundhf\_tail}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{roundhf\_tail()}{roundhf\_tail()}}
+{\footnotesize\ttfamily template$<$typename numeric\+\_\+type $>$ \\
+numeric\+\_\+type HF\+::\+Spatial\+Structures\+::roundhf\+\_\+tail (\begin{DoxyParamCaption}\item[{numeric\+\_\+type}]{f,  }\item[{int}]{precision }\end{DoxyParamCaption})}
+
+
+
+round a number twice, once at the precision+1, and again at the precision This method is to fix cases in which the precision to round to is 4, and the following number is 9. 
+
+\textbackslash{}notes It may also be more simply solved by adding some small epsilon before rounding
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em return\+\_\+type} & Type of number to round. Can be float, double, or long double.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em f} & Value to round. \\
+\hline
+{\em precision} & Number of digits to round to \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{a00251_source_l00089}{89}} of file \mbox{\hyperlink{a00251_source}{Constants.\+h}}.
+
+\mbox{\Hypertarget{a00465_a863bb6ac51410385569635e0b0e08ee2}\label{a00465_a863bb6ac51410385569635e0b0e08ee2}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!roundhf\_tmp@{roundhf\_tmp}}
+\index{roundhf\_tmp@{roundhf\_tmp}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{roundhf\_tmp()}{roundhf\_tmp()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename desired\+\_\+type , typename numeric\+\_\+type $>$ \\
+constexpr desired\+\_\+type HF\+::\+Spatial\+Structures\+::roundhf\+\_\+tmp (\begin{DoxyParamCaption}\item[{numeric\+\_\+type}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Round a number to the global rounding precision. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em desired\+\_\+type} & Type to use and be returned by this calculation .All values will be converted to this type before any operations are performed. \\
+\hline
+{\em numeric\+\_\+type} & Type of number to truncate. Can be float, double, or long double.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em f} & The number to round.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily f} rounded at ROUNDING\+\_\+\+PRECISION. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00251_source_l00148}{148}} of file \mbox{\hyperlink{a00251_source}{Constants.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00251_source_l00114}{roundhf\+\_\+tmp()}}, and \mbox{\hyperlink{a00251_source_l00030}{ROUNDING\+\_\+\+PRECISION}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{a00465_a863bb6ac51410385569635e0b0e08ee2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00465_a34027bdf606bd5f03f7a473c61a3a4de}\label{a00465_a34027bdf606bd5f03f7a473c61a3a4de}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!roundhf\_tmp@{roundhf\_tmp}}
+\index{roundhf\_tmp@{roundhf\_tmp}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{roundhf\_tmp()}{roundhf\_tmp()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename desired\+\_\+type , typename numeric\+\_\+type $>$ \\
+constexpr desired\+\_\+type HF\+::\+Spatial\+Structures\+::roundhf\+\_\+tmp (\begin{DoxyParamCaption}\item[{numeric\+\_\+type}]{f,  }\item[{numeric\+\_\+type}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Round a number to the nearest value to itself at a specific precision. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em desired\+\_\+type} & Type to use and be returned by this calculation. All values will be converted to this type before any operations are performed. \\
+\hline
+{\em numeric\+\_\+type} & Type of number to round. Can be float, double, or long double.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em f} & The number to round. \\
+\hline
+{\em r} & Precision to round to I.\+E. 0.\+0001 will round up to the 4th decimal place\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily f} rounded to the nearest point specified in r. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00251_source_l00133}{133}} of file \mbox{\hyperlink{a00251_source}{Constants.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00251_source_l00114}{roundhf\+\_\+tmp()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{a00465_a34027bdf606bd5f03f7a473c61a3a4de_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00465_a5db5f0307882796fcf7cdad83cb20c65}\label{a00465_a5db5f0307882796fcf7cdad83cb20c65}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!roundhf\_tmp@{roundhf\_tmp}}
+\index{roundhf\_tmp@{roundhf\_tmp}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{roundhf\_tmp()}{roundhf\_tmp()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename numeric\+\_\+type $>$ \\
+constexpr numeric\+\_\+type HF\+::\+Spatial\+Structures\+::roundhf\+\_\+tmp (\begin{DoxyParamCaption}\item[{numeric\+\_\+type}]{f,  }\item[{numeric\+\_\+type}]{p,  }\item[{numeric\+\_\+type}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+round a number to the nearest precision defined globally. The global values can be overridden with optional parameters p and r. If r is 0.\+01, p must be 100.\+0, meaning there should be one more 0 between the decimal. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em numeric\+\_\+type} & Type of number to round. Can be float, double, or long double.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em f} & The desired value to round. \\
+\hline
+{\em p} & The unit precision to round (e.\+g, 1000.\+0f) \\
+\hline
+{\em r} & The override of the conversion back (e.\+g., 0.\+001f)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+F rounded to the specified precision. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00251_source_l00114}{114}} of file \mbox{\hyperlink{a00251_source}{Constants.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00251_source_l00114}{roundhf\+\_\+tmp()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00251_source_l00114}{roundhf\+\_\+tmp()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{a00465_a5db5f0307882796fcf7cdad83cb20c65_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{a00465_a5db5f0307882796fcf7cdad83cb20c65_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00465_a7819d69862372eb198ca0e74d2ecf5f0}\label{a00465_a7819d69862372eb198ca0e74d2ecf5f0}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!trunchf@{trunchf}}
+\index{trunchf@{trunchf}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{trunchf()}{trunchf()}}
+{\footnotesize\ttfamily float HF\+::\+Spatial\+Structures\+::trunchf (\begin{DoxyParamCaption}\item[{float}]{f,  }\item[{float}]{p = {\ttfamily 1000.0},  }\item[{float}]{r = {\ttfamily 0.001} }\end{DoxyParamCaption})}
+
+
+
+Truncate a float to the nearest precision defined globally. The global values can be overridden with optional parameters p and r. If r is 0.\+01, p must be 100.\+0, meaning there should be one more 0 between the decimal.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & The desired float to truncate. \\
+\hline
+{\em p} & The unit precision to truncate (Default, 1000.\+0f) \\
+\hline
+{\em r} & The override of the conversion back (e.\+g., 0.\+001f) \begin{DoxyReturn}{Returns}
+f rounded to the nearest rounding\+\_\+precision. 
+\end{DoxyReturn}
+\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{a00248_source_l00020}{20}} of file \mbox{\hyperlink{a00248_source}{Constants.\+cpp}}.
+
+\mbox{\Hypertarget{a00465_a4f738c546072f01f11a3b9f11f949291}\label{a00465_a4f738c546072f01f11a3b9f11f949291}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!trunchf\_tmp@{trunchf\_tmp}}
+\index{trunchf\_tmp@{trunchf\_tmp}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{trunchf\_tmp()}{trunchf\_tmp()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename desired\+\_\+type , typename numeric\+\_\+type $>$ \\
+constexpr desired\+\_\+type HF\+::\+Spatial\+Structures\+::trunchf\+\_\+tmp (\begin{DoxyParamCaption}\item[{numeric\+\_\+type}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Truncate a number to the nearest value not greater than itself at a specific precision. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em desired\+\_\+type} & Type to useand be returned by this calculation.\+All values will be converted to this type before any operations are performed. \\
+\hline
+{\em numeric\+\_\+type} & Type of number to truncate.\+Can be float, double, or long double.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em f} & The number to truncate.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily f} truncated at ROUNDING\+\_\+\+PRECISION. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00251_source_l00204}{204}} of file \mbox{\hyperlink{a00251_source}{Constants.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00251_source_l00030}{ROUNDING\+\_\+\+PRECISION}}, and \mbox{\hyperlink{a00251_source_l00170}{trunchf\+\_\+tmp()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{a00465_a4f738c546072f01f11a3b9f11f949291_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00465_ad37544fd332717ce6a1d310c71e06a3d}\label{a00465_ad37544fd332717ce6a1d310c71e06a3d}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!trunchf\_tmp@{trunchf\_tmp}}
+\index{trunchf\_tmp@{trunchf\_tmp}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{trunchf\_tmp()}{trunchf\_tmp()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename desired\+\_\+type , typename numeric\+\_\+type $>$ \\
+constexpr desired\+\_\+type HF\+::\+Spatial\+Structures\+::trunchf\+\_\+tmp (\begin{DoxyParamCaption}\item[{numeric\+\_\+type}]{f,  }\item[{numeric\+\_\+type}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Truncate a number to the nearest value not greater than itself at a specific precision. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em desired\+\_\+type} & Type to useand be returned by this calculation.\+All values will be converted to this type before any operations are performed. \\
+\hline
+{\em numeric\+\_\+type} & Type of number to truncate. Can be float, double, or long double.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em f} & The number to truncate. \\
+\hline
+{\em r} & Precision to truncate at I.\+E. 0.\+0001 will discard all values past the 4th decimal place\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily f} truncated at the point specified in r. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00251_source_l00189}{189}} of file \mbox{\hyperlink{a00251_source}{Constants.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00251_source_l00170}{trunchf\+\_\+tmp()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{a00465_ad37544fd332717ce6a1d310c71e06a3d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00465_ab374c207312422f0543df4ea73f8bc85}\label{a00465_ab374c207312422f0543df4ea73f8bc85}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!trunchf\_tmp@{trunchf\_tmp}}
+\index{trunchf\_tmp@{trunchf\_tmp}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{trunchf\_tmp()}{trunchf\_tmp()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename numeric\+\_\+type $>$ \\
+constexpr numeric\+\_\+type HF\+::\+Spatial\+Structures\+::trunchf\+\_\+tmp (\begin{DoxyParamCaption}\item[{numeric\+\_\+type}]{f,  }\item[{numeric\+\_\+type}]{p,  }\item[{numeric\+\_\+type}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+truncate a number to the nearest precision defined globally. The global values can be overridden with optional parameters p and r. If r is 0.\+01, p must be 100.\+0, meaning there should be one more 0 between the decimal. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em numeric\+\_\+type} & Type of number to truncate. Can be float, double, or long double.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em f} & The desired float to truncate. \\
+\hline
+{\em p} & The unit precision to truncate (Default, 1000.\+0f) \\
+\hline
+{\em r} & The override of the conversion back (e.\+g., 0.\+001f)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+f truncated to the nearest rounding\+\_\+precision. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00251_source_l00170}{170}} of file \mbox{\hyperlink{a00251_source}{Constants.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00251_source_l00170}{trunchf\+\_\+tmp()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00251_source_l00170}{trunchf\+\_\+tmp()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{a00465_ab374c207312422f0543df4ea73f8bc85_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{a00465_ab374c207312422f0543df4ea73f8bc85_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{a00465_a8e1deca302502a6ab0e0943c292f33b6}\label{a00465_a8e1deca302502a6ab0e0943c292f33b6}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!FLOAT\_PRECISION@{FLOAT\_PRECISION}}
+\index{FLOAT\_PRECISION@{FLOAT\_PRECISION}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{FLOAT\_PRECISION}{FLOAT\_PRECISION}}
+{\footnotesize\ttfamily constexpr float HF\+::\+Spatial\+Structures\+::\+FLOAT\+\_\+\+PRECISION = 10000.\+0f\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+Used to convert to a given precision (avoids division) 
+
+
+
+Definition at line \mbox{\hyperlink{a00251_source_l00031}{31}} of file \mbox{\hyperlink{a00251_source}{Constants.\+h}}.
+
+\mbox{\Hypertarget{a00465_a78ab286d1837e1db2b8b4ce90bc9fffa}\label{a00465_a78ab286d1837e1db2b8b4ce90bc9fffa}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!GROUND\_OFFSET@{GROUND\_OFFSET}}
+\index{GROUND\_OFFSET@{GROUND\_OFFSET}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{GROUND\_OFFSET}{GROUND\_OFFSET}}
+{\footnotesize\ttfamily constexpr float HF\+::\+Spatial\+Structures\+::\+GROUND\+\_\+\+OFFSET = 0.\+001f\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+Offset to be used for offsetting from a polygon when performing checks. 
+
+
+
+Definition at line \mbox{\hyperlink{a00251_source_l00032}{32}} of file \mbox{\hyperlink{a00251_source}{Constants.\+h}}.
+
+\mbox{\Hypertarget{a00465_a0140105869479399be75147c8f77e724}\label{a00465_a0140105869479399be75147c8f77e724}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!ROUNDING\_PRECISION@{ROUNDING\_PRECISION}}
+\index{ROUNDING\_PRECISION@{ROUNDING\_PRECISION}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{ROUNDING\_PRECISION}{ROUNDING\_PRECISION}}
+{\footnotesize\ttfamily constexpr float HF\+::\+Spatial\+Structures\+::\+ROUNDING\+\_\+\+PRECISION = 0.\+0001f\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+Minimum value that can be represented in DHART\+\_\+\+API. 
+
+All rounding operations in \mbox{\hyperlink{a00465}{HF\+::\+Spatial\+Structures}} will use this constant in rounding operations. 
+
+Definition at line \mbox{\hyperlink{a00251_source_l00030}{30}} of file \mbox{\hyperlink{a00251_source}{Constants.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00026_source_l00047}{HF\+::\+Visibility\+Graph\+::\+Height\+Check()}}, \mbox{\hyperlink{a00257_source_l00169}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::is\+\_\+perpendicular()}}, \mbox{\hyperlink{a03554_source_l00083}{HF\+::\+Spatial\+Structures\+::\+Node\+::operator==()}}, \mbox{\hyperlink{a00281_source_l00041}{HF\+::\+Spatial\+Structures\+::\+Path\+Member\+::operator==()}}, \mbox{\hyperlink{a00251_source_l00148}{roundhf\+\_\+tmp()}}, and \mbox{\hyperlink{a00251_source_l00204}{trunchf\+\_\+tmp()}}.
+

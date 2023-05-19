@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>DHART: Cpp/spatialstructures/src/Edge.h File Reference</title>
+<title>DHART: Cpp/pathfinding/src/boost_graph.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -91,83 +91,50 @@ $(document).ready(function(){initNavTree('a00197.html',''); initResizable(); });
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
-  <div class="headertitle"><div class="title">Edge.h File Reference</div></div>
+<a href="#namespaces">Namespaces</a>  </div>
+  <div class="headertitle"><div class="title">boost_graph.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Contains definitions for the <a class="el" href="a01461.html">Edge</a> structure.  
+<p>Contains implementation for the <a class="el" href="a01383.html">BoostGraph</a> class.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="a00209_source.html">node.h</a>&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="a00200_source.html">boost_graph.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00269_source.html">graph.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00275_source.html">node.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00263_source.html">Edge.h</a>&gt;</code><br />
+<code>#include &lt;assert.h&gt;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for Edge.h:</div>
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for boost_graph.cpp:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00198.svg" width="190" height="203"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-</div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00199.svg" width="1899" height="235"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00198.svg" width="1526" height="368"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
 <p><a href="a00197_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01461.html">HF::SpatialStructures::Edge</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A connection to a child node.   <a href="a01461.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01465.html">HF::SpatialStructures::IntEdge</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A lighter version of <a class="el" href="a01461.html" title="A connection to a child node.">Edge</a> that contains an ID instead of a full node object..   <a href="a01465.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01469.html">HF::SpatialStructures::EdgeSet</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A collection of edges and a parent.   <a href="a01469.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00396"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00396.html">HF</a></td></tr>
-<tr class="memdesc:a00396"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform human scale analysis on 3D environments. <br /></td></tr>
+<tr class="memitem:a00462"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00462.html">HF</a></td></tr>
+<tr class="memdesc:a00462"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform human scale analysis on 3D environments. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00399"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00399.html">HF::SpatialStructures</a></td></tr>
-<tr class="memdesc:a00399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains standard fundamental data structures for representing space used throughout DHARTAPI. <br /></td></tr>
+<tr class="memitem:a00472"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00472.html">HF::Pathfinding</a></td></tr>
+<tr class="memdesc:a00472"><td class="mdescLeft">&#160;</td><td class="mdescRight">Algorithms to find the shortest path between nodes in a <a class="el" href="a01551.html" title="A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.">HF::SpatialStructures::Graph</a>. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:af0378d900074d484ba791d4317e5935e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00399.html#af0378d900074d484ba791d4317e5935e">HF::SpatialStructures::STEP</a> { <br />
-&#160;&#160;<a class="el" href="a00399.html#af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9">HF::SpatialStructures::NOT_CONNECTED</a> = 0
-, <a class="el" href="a00399.html#af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a">HF::SpatialStructures::NONE</a> = 1
-, <a class="el" href="a00399.html#af0378d900074d484ba791d4317e5935ea599bf51c4226a80ada6f743f6e9acd5c">HF::SpatialStructures::UP</a> = 2
-, <a class="el" href="a00399.html#af0378d900074d484ba791d4317e5935ea023b84d27813ed1b354da97011695e98">HF::SpatialStructures::DOWN</a> = 3
-, <br />
-&#160;&#160;<a class="el" href="a00399.html#af0378d900074d484ba791d4317e5935eaa734acd80348ed3c2f2df367e7ab1bac">HF::SpatialStructures::OVER</a> = 4
-<br />
- }</td></tr>
-<tr class="memdesc:af0378d900074d484ba791d4317e5935e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes the type of step an edge connects to.   <a href="a00399.html#af0378d900074d484ba791d4317e5935e">More...</a><br /></td></tr>
-<tr class="separator:af0378d900074d484ba791d4317e5935e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Contains definitions for the <a class="el" href="a01461.html">Edge</a> structure. </p>
+<div class="textblock"><p >Contains implementation for the <a class="el" href="a01383.html">BoostGraph</a> class. </p>
 <dl class="section author"><dt>Author</dt><dd>TBA </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>26 Jun 2020 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>17 Jun 2020 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="a00197_source.html">Edge.h</a>.</p>
+<p class="definition">Definition in file <a class="el" href="a00197_source.html">boost_graph.cpp</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_66731bdf74d76a38b2c500ac62cfdf48.html">spatialstructures</a></li><li class="navelem"><a class="el" href="dir_7fdf8b1285a3d76ae7bf3420b7ffebee.html">src</a></li><li class="navelem"><a class="el" href="a00197.html">Edge.h</a></li>
+    <li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_0e02576f053bf9c676481922c38373d1.html">pathfinding</a></li><li class="navelem"><a class="el" href="dir_d9dda2ac126eb26464c89893175cb5d7.html">src</a></li><li class="navelem"><a class="el" href="a00197.html">boost_graph.cpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
   </ul>
 </div>

@@ -4,39 +4,39 @@
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00001}00001 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00008}{graph\_generator.h}}>}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00002}00002 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00003}00003 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00152}{HitStruct.h}}>}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00004}00004 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00185}{Constants.h}}>}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00005}00005 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00197}{Edge.h}}>}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00006}00006 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00146}{embree\_raytracer.h}}>}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00007}00007 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00173}{ray\_data.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00003}00003 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00218}{HitStruct.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00004}00004 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00251}{Constants.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00005}00005 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00263}{Edge.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00006}00006 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00212}{embree\_raytracer.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00007}00007 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00239}{ray\_data.h}}>}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00008}00008 \textcolor{preprocessor}{\#include <cassert>}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00009}00009 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00010}00010 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00397}{HF::GraphGenerator}} \{}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00010}00010 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00463}{HF::GraphGenerator}} \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00011}00011 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00013}\mbox{\hyperlink{a00397_a986887183de94b00a1b8b05572da8767}{00013}}     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \mbox{\hyperlink{a00397_a986887183de94b00a1b8b05572da8767}{down}} = \{ 0,0,-\/1 \};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00013}\mbox{\hyperlink{a00463_a986887183de94b00a1b8b05572da8767}{00013}}     \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \mbox{\hyperlink{a00463_a986887183de94b00a1b8b05572da8767}{down}} = \{ 0,0,-\/1 \};}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00014}00014 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00015}00015     \textcolor{keyword}{using }\mbox{\hyperlink{a00399_a5db5f0307882796fcf7cdad83cb20c65}{HF::SpatialStructures::roundhf\_tmp}};}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00016}00016     \textcolor{keyword}{using }\mbox{\hyperlink{a00399_ab374c207312422f0543df4ea73f8bc85}{HF::SpatialStructures::trunchf\_tmp}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00015}00015     \textcolor{keyword}{using }\mbox{\hyperlink{a00465_a5db5f0307882796fcf7cdad83cb20c65}{HF::SpatialStructures::roundhf\_tmp}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00016}00016     \textcolor{keyword}{using }\mbox{\hyperlink{a00465_ab374c207312422f0543df4ea73f8bc85}{HF::SpatialStructures::trunchf\_tmp}};}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00017}00017 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00018}00018     \textcolor{keyword}{using }\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}};}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00019}00019     \textcolor{keyword}{using }\mbox{\hyperlink{a01461}{HF::SpatialStructures::Edge}};}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00020}00020     \textcolor{keyword}{using }\mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935e}{HF::SpatialStructures::STEP}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00018}00018     \textcolor{keyword}{using }\mbox{\hyperlink{a02071}{HF::SpatialStructures::Node}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00019}00019     \textcolor{keyword}{using }\mbox{\hyperlink{a01527}{HF::SpatialStructures::Edge}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00020}00020     \textcolor{keyword}{using }\mbox{\hyperlink{a00465_af0378d900074d484ba791d4317e5935e}{HF::SpatialStructures::STEP}};}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00021}00021 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00022}00022     \textcolor{keyword}{using }std::vector;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00023}00023 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00024}00024     \textcolor{keyword}{using }\mbox{\hyperlink{a01349}{HF::RayTracer::HitStruct}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00024}00024     \textcolor{keyword}{using }\mbox{\hyperlink{a01415}{HF::RayTracer::HitStruct}};}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00035}00035     \textcolor{keyword}{template}<\textcolor{keyword}{typename} po\textcolor{keywordtype}{int}\_type>}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00036}\mbox{\hyperlink{a00397_abf1a3ae7dc89b3cf430e059a87fcd477}{00036}}     \textcolor{keyword}{inline} \mbox{\hyperlink{a02005}{Node}} \mbox{\hyperlink{a00397_abf1a3ae7dc89b3cf430e059a87fcd477}{ToNode}}(\textcolor{keyword}{const} point\_type\& ct) \{}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00037}00037         \textcolor{keywordflow}{return} \mbox{\hyperlink{a02005}{Node}}(ct[0], ct[1], ct[2]);}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00036}\mbox{\hyperlink{a00463_abf1a3ae7dc89b3cf430e059a87fcd477}{00036}}     \textcolor{keyword}{inline} \mbox{\hyperlink{a02071}{Node}} \mbox{\hyperlink{a00463_abf1a3ae7dc89b3cf430e059a87fcd477}{ToNode}}(\textcolor{keyword}{const} point\_type\& ct) \{}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00037}00037         \textcolor{keywordflow}{return} \mbox{\hyperlink{a02071}{Node}}(ct[0], ct[1], ct[2]);}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00038}00038     \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00039}00039 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00053}00053     \textcolor{keyword}{template}<\textcolor{keyword}{typename} n1\_type, \textcolor{keyword}{typename} n2\_type>}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00054}\mbox{\hyperlink{a00397_a7f96186b8f24f878404d1feccf2f64db}{00054}}     \textcolor{keyword}{inline} \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} \mbox{\hyperlink{a00397_a7f96186b8f24f878404d1feccf2f64db}{DistanceTo}}(\textcolor{keyword}{const} n1\_type\& n1, \textcolor{keyword}{const} n2\_type\& n2) \{}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00054}\mbox{\hyperlink{a00463_a7f96186b8f24f878404d1feccf2f64db}{00054}}     \textcolor{keyword}{inline} \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} \mbox{\hyperlink{a00463_a7f96186b8f24f878404d1feccf2f64db}{DistanceTo}}(\textcolor{keyword}{const} n1\_type\& n1, \textcolor{keyword}{const} n2\_type\& n2) \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00055}00055         \textcolor{keywordflow}{return} sqrt(pow((n1[0] -\/ n2[0]), 2) + pow((n1[1] -\/ n2[1]), 2) + pow((n1[2] -\/ n2[2]), 2));}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00056}00056     \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00057}00057 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00067}00067     \textcolor{keyword}{template}<\textcolor{keyword}{typename} vector\_type>}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00068}\mbox{\hyperlink{a00397_ad2e09e0825a1db4fc511907179eddf00}{00068}}     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a00397_ad2e09e0825a1db4fc511907179eddf00}{Normalize}}(vector\_type\& v) \{}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00068}\mbox{\hyperlink{a00463_ad2e09e0825a1db4fc511907179eddf00}{00068}}     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a00463_ad2e09e0825a1db4fc511907179eddf00}{Normalize}}(vector\_type\& v) \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00069}00069         \textcolor{keyword}{auto} magnitude = sqrt(pow(v[0], 2) + pow(v[1], 2) + pow(v[2], 2));}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00070}00070         v[0] = v[0] / magnitude;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00071}00071         v[1] = v[1] / magnitude;}
@@ -44,7 +44,7 @@
 \DoxyCodeLine{\Hypertarget{a00011_source_l00073}00073     \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00074}00074 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00087}00087     \textcolor{keyword}{template}<\textcolor{keyword}{typename} vector\_type>}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00088}\mbox{\hyperlink{a00397_a750afc15c798c79a8b6a0784ed092f3c}{00088}}     \textcolor{keyword}{inline} vector\_type \mbox{\hyperlink{a00397_a750afc15c798c79a8b6a0784ed092f3c}{DirectionTo}}(\textcolor{keyword}{const} vector\_type\& n1, \textcolor{keyword}{const} vector\_type\& n2) \{}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00088}\mbox{\hyperlink{a00463_a750afc15c798c79a8b6a0784ed092f3c}{00088}}     \textcolor{keyword}{inline} vector\_type \mbox{\hyperlink{a00463_a750afc15c798c79a8b6a0784ed092f3c}{DirectionTo}}(\textcolor{keyword}{const} vector\_type\& n1, \textcolor{keyword}{const} vector\_type\& n2) \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00089}00089         vector\_type direction\_vector;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00090}00090 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00091}00091         direction\_vector[0] = n2[0] -\/ n1[0];}
@@ -52,65 +52,65 @@
 \DoxyCodeLine{\Hypertarget{a00011_source_l00093}00093         direction\_vector[2] = n2[2] -\/ n1[2];}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00094}00094 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00095}00095         \textcolor{comment}{// Normalize the vector}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00096}00096         \mbox{\hyperlink{a00397_ad2e09e0825a1db4fc511907179eddf00}{Normalize}}(direction\_vector);}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00096}00096         \mbox{\hyperlink{a00463_ad2e09e0825a1db4fc511907179eddf00}{Normalize}}(direction\_vector);}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00097}00097         \textcolor{keywordflow}{return} direction\_vector;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00098}00098     \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00099}00099 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00101}\mbox{\hyperlink{a00397_ad69a24044327f56034e251c25499a910}{00101}}     \textcolor{keyword}{static} \textcolor{keyword}{const} vector<pair> \mbox{\hyperlink{a00397_ad69a24044327f56034e251c25499a910}{init\_directs}} = \{}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00102}00102         \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(-\/1, -\/1), \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(-\/1, 0), \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(-\/1, 1),}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00103}00103         \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(0, -\/1), \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(0, 1), \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(1, -\/1),}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00104}00104         \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(1, 0), \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(1, 1)}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00101}\mbox{\hyperlink{a00463_ad69a24044327f56034e251c25499a910}{00101}}     \textcolor{keyword}{static} \textcolor{keyword}{const} vector<pair> \mbox{\hyperlink{a00463_ad69a24044327f56034e251c25499a910}{init\_directs}} = \{}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00102}00102         \mbox{\hyperlink{a00463_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(-\/1, -\/1), \mbox{\hyperlink{a00463_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(-\/1, 0), \mbox{\hyperlink{a00463_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(-\/1, 1),}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00103}00103         \mbox{\hyperlink{a00463_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(0, -\/1), \mbox{\hyperlink{a00463_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(0, 1), \mbox{\hyperlink{a00463_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(1, -\/1),}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00104}00104         \mbox{\hyperlink{a00463_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(1, 0), \mbox{\hyperlink{a00463_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(1, 1)}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00105}00105     \};}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00106}00106 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00107}\mbox{\hyperlink{a00397_a9ddffecb75b34434d7157b49d3c67b60}{00107}}     \mbox{\hyperlink{a01241}{optional\_real3}} \mbox{\hyperlink{a00397_a9ddffecb75b34434d7157b49d3c67b60}{ValidateStartPoint}}(\mbox{\hyperlink{a01353}{RayTracer}}\& RT, \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& start\_point, \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a01237}{GraphParams}}\& Params)}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00107}\mbox{\hyperlink{a00463_a9ddffecb75b34434d7157b49d3c67b60}{00107}}     \mbox{\hyperlink{a01307}{optional\_real3}} \mbox{\hyperlink{a00463_a9ddffecb75b34434d7157b49d3c67b60}{ValidateStartPoint}}(\mbox{\hyperlink{a01419}{RayTracer}}\& RT, \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& start\_point, \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a01303}{GraphParams}}\& Params)}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00108}00108     \{}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00109}00109         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00397_a74be560268a713fc9e9b8b4a453afa2f}{CheckRay}}(RT, start\_point, \mbox{\hyperlink{a00397_a986887183de94b00a1b8b05572da8767}{down}}, Params.\mbox{\hyperlink{a00397_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00397_a6ec86cb69c1cc0e0dc8ea229310939b6}{node\_z}}, \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598aaf146b316ade4ca80d23d9d22b0539cc}{HIT\_FLAG::FLOORS}}, Params.\mbox{\hyperlink{a00397_a5dc55aa5861e9bb2f2675146b11812af}{geom\_ids}});}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00109}00109         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00463_a74be560268a713fc9e9b8b4a453afa2f}{CheckRay}}(RT, start\_point, \mbox{\hyperlink{a00463_a986887183de94b00a1b8b05572da8767}{down}}, Params.\mbox{\hyperlink{a00463_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00463_a6ec86cb69c1cc0e0dc8ea229310939b6}{node\_z}}, \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598aaf146b316ade4ca80d23d9d22b0539cc}{HIT\_FLAG::FLOORS}}, Params.\mbox{\hyperlink{a00463_a5dc55aa5861e9bb2f2675146b11812af}{geom\_ids}});}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00110}00110     \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00111}00111 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00126}\mbox{\hyperlink{a00397_ab731d597ee2a843f7b7cb1ccbae67782}{00126}}     \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00397_ab731d597ee2a843f7b7cb1ccbae67782}{CheckGeometryID}}(\mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{HIT\_FLAG}} goal, \textcolor{keywordtype}{int} \textcolor{keywordtype}{id}, \textcolor{keyword}{const} \mbox{\hyperlink{a01233}{GeometryFlagMap}} \& geom\_dict) \{}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00126}\mbox{\hyperlink{a00463_ab731d597ee2a843f7b7cb1ccbae67782}{00126}}     \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00463_ab731d597ee2a843f7b7cb1ccbae67782}{CheckGeometryID}}(\mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598}{HIT\_FLAG}} goal, \textcolor{keywordtype}{int} \textcolor{keywordtype}{id}, \textcolor{keyword}{const} \mbox{\hyperlink{a01299}{GeometryFlagMap}} \& geom\_dict) \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00127}00127         }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00128}00128         \textcolor{comment}{// If the target is both or the geometry rules are set to NO\_FLAG, all hits are counted as}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00129}00129         \textcolor{comment}{// being on walkable geometry}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00130}00130         \textcolor{keywordflow}{if} (geom\_dict.\mbox{\hyperlink{a01233_a8284a2c40aa9b0a5db59916d32b75659}{Mode}} == \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207abd38aa552d58d6dee7dc932c374f0e04}{GeometryFilterMode::ALL\_INTERSECTIONS}} || goal == \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a9d20e9f6abc3d3630c75432b0dac052c}{HIT\_FLAG::BOTH}})}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00130}00130         \textcolor{keywordflow}{if} (geom\_dict.\mbox{\hyperlink{a01299_a8284a2c40aa9b0a5db59916d32b75659}{Mode}} == \mbox{\hyperlink{a00463_af86d7be7ec8351dfc26ab5c11f727207abd38aa552d58d6dee7dc932c374f0e04}{GeometryFilterMode::ALL\_INTERSECTIONS}} || goal == \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598a9d20e9f6abc3d3630c75432b0dac052c}{HIT\_FLAG::BOTH}})}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00131}00131             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00132}00132         }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00133}00133         \textcolor{comment}{// Otherwise do different checks based on the ruleset}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00134}00134         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (geom\_dict.\mbox{\hyperlink{a01233_a8284a2c40aa9b0a5db59916d32b75659}{Mode}} == \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207ac78656cbac82f2af0177cfe76dd1aa12}{GeometryFilterMode::OBSTACLES\_ONLY}})}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00134}00134         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (geom\_dict.\mbox{\hyperlink{a01299_a8284a2c40aa9b0a5db59916d32b75659}{Mode}} == \mbox{\hyperlink{a00463_af86d7be7ec8351dfc26ab5c11f727207ac78656cbac82f2af0177cfe76dd1aa12}{GeometryFilterMode::OBSTACLES\_ONLY}})}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00135}00135             \textcolor{comment}{// If only obstacles are specified, this works like a blacklist/whitelist}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00136}00136             \textcolor{keywordflow}{if} (goal == \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a9118a6ea0d5aaa017a735193ac79d08d}{OBSTACLES}})}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00137}00137                 \textcolor{keywordflow}{return} geom\_dict[id] == \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a9118a6ea0d5aaa017a735193ac79d08d}{HIT\_FLAG::OBSTACLES}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00136}00136             \textcolor{keywordflow}{if} (goal == \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598a9118a6ea0d5aaa017a735193ac79d08d}{OBSTACLES}})}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00137}00137                 \textcolor{keywordflow}{return} geom\_dict[id] == \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598a9118a6ea0d5aaa017a735193ac79d08d}{HIT\_FLAG::OBSTACLES}};}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00138}00138             \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00139}00139                 \textcolor{keywordflow}{return} geom\_dict[id] != \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a9118a6ea0d5aaa017a735193ac79d08d}{HIT\_FLAG::OBSTACLES}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00139}00139                 \textcolor{keywordflow}{return} geom\_dict[id] != \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598a9118a6ea0d5aaa017a735193ac79d08d}{HIT\_FLAG::OBSTACLES}};}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00140}00140 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00141}00141         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (geom\_dict.\mbox{\hyperlink{a01233_a8284a2c40aa9b0a5db59916d32b75659}{Mode}} == \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207adb49be99500731a1909db6bcf395d27f}{GeometryFilterMode::OBSTACLES\_AND\_FLOORS}})}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00141}00141         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (geom\_dict.\mbox{\hyperlink{a01299_a8284a2c40aa9b0a5db59916d32b75659}{Mode}} == \mbox{\hyperlink{a00463_af86d7be7ec8351dfc26ab5c11f727207adb49be99500731a1909db6bcf395d27f}{GeometryFilterMode::OBSTACLES\_AND\_FLOORS}})}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00142}00142             \textcolor{comment}{// In OBSTACLES\_AND\_FLOORS mode, the id's type must exactly match the goal}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00143}00143             \textcolor{keywordflow}{return} (goal == geom\_dict[\textcolor{keywordtype}{id}]);}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00144}00144     \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00145}00145 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00146}\mbox{\hyperlink{a00397_a74be560268a713fc9e9b8b4a453afa2f}{00146}}     \mbox{\hyperlink{a01241}{optional\_real3}} \mbox{\hyperlink{a00397_a74be560268a713fc9e9b8b4a453afa2f}{CheckRay}}(}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00147}00147         \mbox{\hyperlink{a01353}{RayTracer}}\& ray\_tracer,}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00148}00148         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& origin,}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00149}00149         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& direction,}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00150}00150         \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} node\_z\_tolerance,}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00151}00151         \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{HIT\_FLAG}} flag,}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00152}00152         \textcolor{keyword}{const} \mbox{\hyperlink{a01233}{GeometryFlagMap}} \& geometry\_dict)}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00146}\mbox{\hyperlink{a00463_a74be560268a713fc9e9b8b4a453afa2f}{00146}}     \mbox{\hyperlink{a01307}{optional\_real3}} \mbox{\hyperlink{a00463_a74be560268a713fc9e9b8b4a453afa2f}{CheckRay}}(}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00147}00147         \mbox{\hyperlink{a01419}{RayTracer}}\& ray\_tracer,}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00148}00148         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& origin,}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00149}00149         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& direction,}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00150}00150         \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} node\_z\_tolerance,}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00151}00151         \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598}{HIT\_FLAG}} flag,}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00152}00152         \textcolor{keyword}{const} \mbox{\hyperlink{a01299}{GeometryFlagMap}} \& geometry\_dict)}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00153}00153     \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00154}00154         \textcolor{comment}{// Setup default params}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00155}00155         \mbox{\hyperlink{a01349}{HitStruct<real\_t>}} res;}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00155}00155         \mbox{\hyperlink{a01415}{HitStruct<real\_t>}} res;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00156}00156 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00157}00157         \textcolor{comment}{// Cast the ray. On success, this returns the ID and distance to intersection.}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00158}00158         res = ray\_tracer.\mbox{\hyperlink{a01353_a7ee672618f7fe9ce6938978d93d18514}{Intersect}}(origin, direction);}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00158}00158         res = ray\_tracer.\mbox{\hyperlink{a01419_a7ee672618f7fe9ce6938978d93d18514}{Intersect}}(origin, direction);}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00159}00159 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00160}00160         \textcolor{comment}{// Check if it hit and the ID of the geometry matches what we were looking for. }}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00161}00161         \textcolor{keywordflow}{if} (res.\mbox{\hyperlink{a01349_a3d86c2c8d8e0ec6bf63a653ec89807a8}{DidHit}}() \&\& \mbox{\hyperlink{a00397_ab731d597ee2a843f7b7cb1ccbae67782}{CheckGeometryID}}(flag, res.\mbox{\hyperlink{a01349_a7c49a19e480ba9797c9da3d2acd2221d}{meshid}}, geometry\_dict)) \{}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00161}00161         \textcolor{keywordflow}{if} (res.\mbox{\hyperlink{a01415_a3d86c2c8d8e0ec6bf63a653ec89807a8}{DidHit}}() \&\& \mbox{\hyperlink{a00463_ab731d597ee2a843f7b7cb1ccbae67782}{CheckGeometryID}}(flag, res.\mbox{\hyperlink{a01415_a7c49a19e480ba9797c9da3d2acd2221d}{meshid}}, geometry\_dict)) \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00162}00162             \textcolor{comment}{// Create a new optional point with a copy of the origin}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00163}00163             \mbox{\hyperlink{a01241}{optional\_real3}} return\_pt(origin);}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00163}00163             \mbox{\hyperlink{a01307}{optional\_real3}} return\_pt(origin);}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00164}00164 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00165}00165             \textcolor{comment}{// Move it in direction}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00166}00166             \mbox{\hyperlink{a00397_a5ad3e8fac4a21eee744f3633f7a3692f}{MoveNode}}(res.\mbox{\hyperlink{a01349_a6fbe94ce3a7514a37415d28ff0500b64}{distance}}, direction, *return\_pt);}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00166}00166             \mbox{\hyperlink{a00463_a5ad3e8fac4a21eee744f3633f7a3692f}{MoveNode}}(res.\mbox{\hyperlink{a01415_a6fbe94ce3a7514a37415d28ff0500b64}{distance}}, direction, *return\_pt);}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00167}00167             \textcolor{comment}{//double temp\_diff = (origin[2]) -\/ dist; // Sanity check for direction -\/1 to see influence of movenode arithmetic }}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00168}00168             \textcolor{comment}{// Round the position to the z value tolerance}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00169}00169             return\_pt.\mbox{\hyperlink{a01241_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}}[2] = HF::SpatialStructures::roundhf\_tail<real\_t>(return\_pt.\mbox{\hyperlink{a01241_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}}[2], 1/node\_z\_tolerance);}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00169}00169             return\_pt.\mbox{\hyperlink{a01307_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}}[2] = HF::SpatialStructures::roundhf\_tail<real\_t>(return\_pt.\mbox{\hyperlink{a01307_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}}[2], 1/node\_z\_tolerance);}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00170}00170 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00171}00171             \textcolor{comment}{// Return the optional point}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00172}00172             \textcolor{keywordflow}{return} return\_pt;}
@@ -118,10 +118,10 @@
 \DoxyCodeLine{\Hypertarget{a00011_source_l00174}00174 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00175}00175         \textcolor{comment}{// Otherwise, return an empty optional\_real3 to signal that}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00176}00176         \textcolor{comment}{// the point didn't intersect}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00177}00177         \textcolor{keywordflow}{return} \mbox{\hyperlink{a01241}{optional\_real3}}();}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00177}00177         \textcolor{keywordflow}{return} \mbox{\hyperlink{a01307}{optional\_real3}}();}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00178}00178     \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00179}00179 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00180}\mbox{\hyperlink{a00397_afe5670b4cb780fd3ccf2a0d72a2e3c2e}{00180}}     std::set<std::pair<int, int>> \mbox{\hyperlink{a00397_afe5670b4cb780fd3ccf2a0d72a2e3c2e}{permutations}}(\textcolor{keywordtype}{int} limit) \{}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00180}\mbox{\hyperlink{a00463_afe5670b4cb780fd3ccf2a0d72a2e3c2e}{00180}}     std::set<std::pair<int, int>> \mbox{\hyperlink{a00463_afe5670b4cb780fd3ccf2a0d72a2e3c2e}{permutations}}(\textcolor{keywordtype}{int} limit) \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00181}00181         \textcolor{comment}{// Create a vector of all numbers between 1 and limit + 1, as well as their inverses}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00182}00182         vector<int> steps;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00183}00183         steps.reserve(2 * limit);}
@@ -137,63 +137,63 @@
 \DoxyCodeLine{\Hypertarget{a00011_source_l00193}00193         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j : steps)}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00194}00194             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k : steps)}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00195}00195                 \textcolor{keywordflow}{if} (abs(j) != abs(k))}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00196}00196                     perms.emplace(\mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(j, k));}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00196}00196                     perms.emplace(\mbox{\hyperlink{a00463_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(j, k));}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00197}00197 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00198}00198         \textcolor{keywordflow}{return} perms;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00199}00199     \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00200}00200 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00201}\mbox{\hyperlink{a00397_aefd344ebb2faadc64a56a16dc8582026}{00201}}     vector<pair> \mbox{\hyperlink{a00397_aefd344ebb2faadc64a56a16dc8582026}{CreateDirecs}}(\textcolor{keywordtype}{int} max\_step\_connections) \{}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00201}\mbox{\hyperlink{a00463_aefd344ebb2faadc64a56a16dc8582026}{00201}}     vector<pair> \mbox{\hyperlink{a00463_aefd344ebb2faadc64a56a16dc8582026}{CreateDirecs}}(\textcolor{keywordtype}{int} max\_step\_connections) \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00202}00202         \textcolor{comment}{// A max\_step\_connections of 1 is just init\_directs}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00203}00203         \textcolor{keywordflow}{if} (max\_step\_connections == 1) \textcolor{keywordflow}{return} \mbox{\hyperlink{a00397_ad69a24044327f56034e251c25499a910}{init\_directs}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00203}00203         \textcolor{keywordflow}{if} (max\_step\_connections == 1) \textcolor{keywordflow}{return} \mbox{\hyperlink{a00463_ad69a24044327f56034e251c25499a910}{init\_directs}};}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00204}00204 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00205}00205         \textcolor{comment}{// Otherwise generate extra directions}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00206}00206         \textcolor{keyword}{auto} perms = \mbox{\hyperlink{a00397_afe5670b4cb780fd3ccf2a0d72a2e3c2e}{permutations}}(max\_step\_connections);}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00206}00206         \textcolor{keyword}{auto} perms = \mbox{\hyperlink{a00463_afe5670b4cb780fd3ccf2a0d72a2e3c2e}{permutations}}(max\_step\_connections);}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00207}00207 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00208}00208         \textcolor{comment}{// Copy init\_directs into our output array}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00209}00209         vector<pair> out\_directions = \mbox{\hyperlink{a00397_ad69a24044327f56034e251c25499a910}{init\_directs}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00209}00209         vector<pair> out\_directions = \mbox{\hyperlink{a00463_ad69a24044327f56034e251c25499a910}{init\_directs}};}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00210}00210 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00211}00211         \textcolor{comment}{// Resize our output array to fit the new permutations, then fill it}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00212}00212         out\_directions.resize(out\_directions.size() + perms.size());}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00213}00213         std::move(perms.begin(), perms.end(), out\_directions.begin() + \mbox{\hyperlink{a00397_ad69a24044327f56034e251c25499a910}{init\_directs}}.size());}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00213}00213         std::move(perms.begin(), perms.end(), out\_directions.begin() + \mbox{\hyperlink{a00463_ad69a24044327f56034e251c25499a910}{init\_directs}}.size());}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00214}00214 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00215}00215         \textcolor{keywordflow}{return} out\_directions;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00216}00216     \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00217}00217 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00218}\mbox{\hyperlink{a00397_ab7ffcc7d6657ce276c06deed24c546a4}{00218}}     vector<graph\_edge> \mbox{\hyperlink{a00397_ab7ffcc7d6657ce276c06deed24c546a4}{GetChildren}}(}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00219}00219         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& parent,}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00218}\mbox{\hyperlink{a00463_ab7ffcc7d6657ce276c06deed24c546a4}{00218}}     vector<graph\_edge> \mbox{\hyperlink{a00463_ab7ffcc7d6657ce276c06deed24c546a4}{GetChildren}}(}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00219}00219         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& parent,}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00220}00220         \textcolor{keyword}{const} vector<real3>\& possible\_children,}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00221}00221         \mbox{\hyperlink{a01353}{RayTracer}}\& rt,}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00222}00222         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a01237}{GraphParams}}\& GP}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00221}00221         \mbox{\hyperlink{a01419}{RayTracer}}\& rt,}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00222}00222         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a01303}{GraphParams}}\& GP}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00223}00223         )}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00224}00224     \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00225}00225         std::vector<graph\_edge> valid\_edges;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00226}00226 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00227}00227         \textcolor{comment}{// Call CheckChildren to get rid of all children that aren't over valid ground or don't meet our upstep}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00228}00228         \textcolor{comment}{// and downstep requirements. This array of children will also be moved directly ontop of the ground their over.}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00229}00229         \textcolor{keyword}{const} \textcolor{keyword}{auto} checked\_children = \mbox{\hyperlink{a00397_a4b7cc0ad0002975404acef5064f4f546}{CheckChildren}}(parent, possible\_children, rt, GP);}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00229}00229         \textcolor{keyword}{const} \textcolor{keyword}{auto} checked\_children = \mbox{\hyperlink{a00463_a4b7cc0ad0002975404acef5064f4f546}{CheckChildren}}(parent, possible\_children, rt, GP);}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00230}00230 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00231}00231         \textcolor{comment}{// Iterate through every child in the checked children}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00232}00232         \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& child : checked\_children)}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00233}00233         \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00234}00234             \textcolor{comment}{// Determine the type of connection between the parent and child}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00235}00235             \textcolor{comment}{//  including if it is a step, slope, or not connected}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00236}00236             \textcolor{keyword}{const} STEP connection\_type = \mbox{\hyperlink{a00397_aeab1db37b5aa614235f109d5dd9711a9}{CheckConnection}}(parent, child, rt, GP);}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00236}00236             \textcolor{keyword}{const} STEP connection\_type = \mbox{\hyperlink{a00463_aeab1db37b5aa614235f109d5dd9711a9}{CheckConnection}}(parent, child, rt, GP);}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00237}00237 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00238}00238             \textcolor{comment}{// If the node is connected Add it to out list of valid children}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00239}00239             \textcolor{keywordflow}{if} (connection\_type != STEP::NOT\_CONNECTED)}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00240}00240             \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00241}00241                 \textcolor{comment}{// Add the edge to the array of children, storing the distance and connection type}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00242}00242                 valid\_edges.emplace\_back(\mbox{\hyperlink{a00397_a2472e370aa77f9486bb1c46a1ff704c5}{graph\_edge}}(\mbox{\hyperlink{a00397_abf1a3ae7dc89b3cf430e059a87fcd477}{ToNode}}(child), \mbox{\hyperlink{a00397_a7f96186b8f24f878404d1feccf2f64db}{DistanceTo}}(parent, child), connection\_type));}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00242}00242                 valid\_edges.emplace\_back(\mbox{\hyperlink{a00463_a2472e370aa77f9486bb1c46a1ff704c5}{graph\_edge}}(\mbox{\hyperlink{a00463_abf1a3ae7dc89b3cf430e059a87fcd477}{ToNode}}(child), \mbox{\hyperlink{a00463_a7f96186b8f24f878404d1feccf2f64db}{DistanceTo}}(parent, child), connection\_type));}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00243}00243             \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00244}00244         \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00245}00245         \textcolor{keywordflow}{return} valid\_edges;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00246}00246     \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00247}00247 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00248}\mbox{\hyperlink{a00397_a4b7cc0ad0002975404acef5064f4f546}{00248}}     std::vector<real3> \mbox{\hyperlink{a00397_a4b7cc0ad0002975404acef5064f4f546}{CheckChildren}}(}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00249}00249         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& parent,}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00248}\mbox{\hyperlink{a00463_a4b7cc0ad0002975404acef5064f4f546}{00248}}     std::vector<real3> \mbox{\hyperlink{a00463_a4b7cc0ad0002975404acef5064f4f546}{CheckChildren}}(}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00249}00249         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& parent,}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00250}00250         \textcolor{keyword}{const} std::vector<real3>\& possible\_children,}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00251}00251         \mbox{\hyperlink{a01353}{RayTracer}}\& rt,}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00252}00252         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a01237}{GraphParams}}\& GP)}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00251}00251         \mbox{\hyperlink{a01419}{RayTracer}}\& rt,}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00252}00252         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a01303}{GraphParams}}\& GP)}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00253}00253     \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00254}00254         vector<real3> valid\_children;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00255}00255 }
@@ -202,56 +202,56 @@
 \DoxyCodeLine{\Hypertarget{a00011_source_l00258}00258         \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00259}00259 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00260}00260             \textcolor{comment}{// Check if a ray intersects a mesh}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00261}00261             \mbox{\hyperlink{a01241}{optional\_real3}} potential\_child = \mbox{\hyperlink{a00397_a74be560268a713fc9e9b8b4a453afa2f}{CheckRay}}(rt, child, \mbox{\hyperlink{a00397_a986887183de94b00a1b8b05572da8767}{down}}, GP.\mbox{\hyperlink{a00397_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00397_a6ec86cb69c1cc0e0dc8ea229310939b6}{node\_z}}, \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598aaf146b316ade4ca80d23d9d22b0539cc}{HIT\_FLAG::FLOORS}}, GP.\mbox{\hyperlink{a00397_a5dc55aa5861e9bb2f2675146b11812af}{geom\_ids}});}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00261}00261             \mbox{\hyperlink{a01307}{optional\_real3}} potential\_child = \mbox{\hyperlink{a00463_a74be560268a713fc9e9b8b4a453afa2f}{CheckRay}}(rt, child, \mbox{\hyperlink{a00463_a986887183de94b00a1b8b05572da8767}{down}}, GP.\mbox{\hyperlink{a00463_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00463_a6ec86cb69c1cc0e0dc8ea229310939b6}{node\_z}}, \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598aaf146b316ade4ca80d23d9d22b0539cc}{HIT\_FLAG::FLOORS}}, GP.\mbox{\hyperlink{a00463_a5dc55aa5861e9bb2f2675146b11812af}{geom\_ids}});}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00262}00262             }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00263}00263             \textcolor{keywordflow}{if} (potential\_child)}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00264}00264             \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00265}00265                 \textcolor{comment}{// Get a reference to the child in the return value now that we know it's over valid ground}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00266}00266                 \textcolor{keyword}{auto}\& confirmed\_child = potential\_child.\mbox{\hyperlink{a01241_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00266}00266                 \textcolor{keyword}{auto}\& confirmed\_child = potential\_child.\mbox{\hyperlink{a01307_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}};}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00267}00267 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00268}00268                 \textcolor{comment}{// TODO: this is a premature check and should be moved to the original calling function}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00269}00269                 \textcolor{comment}{//      after the step type check since upstep and downstep are parameters for stepping and not slope}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00270}00270 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00271}00271                 \textcolor{comment}{// Check to see if the new position will satisfy up and downstep restrictions}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00272}00272                 \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} dstep = parent[2] -\/ confirmed\_child[2];}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00273}00273                 \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} ustep = confirmed\_child[2] -\/ parent[2];}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00272}00272                 \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} dstep = parent[2] -\/ confirmed\_child[2];}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00273}00273                 \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} ustep = confirmed\_child[2] -\/ parent[2];}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00274}00274 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00275}00275 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00276}00276                 \textcolor{keywordflow}{if} (dstep < GP.\mbox{\hyperlink{a00397_add2b6fa6bf77a8c4626a1e6d0559970f}{down\_step}} \&\& ustep < GP.\mbox{\hyperlink{a00397_a0b8afc5f531e3286ce2434b1bc2b1f50}{up\_step}})}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00276}00276                 \textcolor{keywordflow}{if} (dstep < GP.\mbox{\hyperlink{a00463_add2b6fa6bf77a8c4626a1e6d0559970f}{down\_step}} \&\& ustep < GP.\mbox{\hyperlink{a00463_a0b8afc5f531e3286ce2434b1bc2b1f50}{up\_step}})}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00277}00277                     valid\_children.push\_back(confirmed\_child);}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00278}00278             \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00279}00279         \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00280}00280         \textcolor{keywordflow}{return} valid\_children;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00281}00281     \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00282}00282 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00283}\mbox{\hyperlink{a00397_ace66c1b60785c32433402f012019ab81}{00283}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00397_ace66c1b60785c32433402f012019ab81}{OcclusionCheck}}(\textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& parent, \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& child, \mbox{\hyperlink{a01353}{RayTracer}}\& RT)}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00283}\mbox{\hyperlink{a00463_ace66c1b60785c32433402f012019ab81}{00283}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00463_ace66c1b60785c32433402f012019ab81}{OcclusionCheck}}(\textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& parent, \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& child, \mbox{\hyperlink{a01419}{RayTracer}}\& RT)}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00284}00284     \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00285}00285         \textcolor{comment}{// Use the distance between parent and child}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00286}00286         \textcolor{comment}{// as the maximum distance for the occlusion check}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00287}00287         \textcolor{keywordflow}{return} RT.\mbox{\hyperlink{a01353_a22ebf97e859ef651e81deb40b74f668f}{Occluded}}(parent, \mbox{\hyperlink{a00397_a750afc15c798c79a8b6a0784ed092f3c}{DirectionTo}}(parent, child), \mbox{\hyperlink{a00397_a7f96186b8f24f878404d1feccf2f64db}{DistanceTo}}(parent, child));}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00287}00287         \textcolor{keywordflow}{return} RT.\mbox{\hyperlink{a01419_a22ebf97e859ef651e81deb40b74f668f}{Occluded}}(parent, \mbox{\hyperlink{a00463_a750afc15c798c79a8b6a0784ed092f3c}{DirectionTo}}(parent, child), \mbox{\hyperlink{a00463_a7f96186b8f24f878404d1feccf2f64db}{DistanceTo}}(parent, child));}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00288}00288     \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00289}00289 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00290}\mbox{\hyperlink{a00397_a9daa85cb56a1b18d44f46aa9c420afde}{00290}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00397_a9daa85cb56a1b18d44f46aa9c420afde}{CheckSlope}}(\textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& parent, \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& child, \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a01237}{GraphParams}}\& gp)}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00290}\mbox{\hyperlink{a00463_a9daa85cb56a1b18d44f46aa9c420afde}{00290}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00463_a9daa85cb56a1b18d44f46aa9c420afde}{CheckSlope}}(\textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& parent, \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& child, \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a01303}{GraphParams}}\& gp)}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00291}00291     \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00292}00292         \textcolor{comment}{// Slope is rise/run}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00293}00293         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} run = sqrt(pow((parent[0] -\/ child[0]), 2) + pow((parent[1] -\/ child[1]), 2));}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00294}00294         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} rise = child[2] -\/ parent[2];}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00293}00293         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} run = sqrt(pow((parent[0] -\/ child[0]), 2) + pow((parent[1] -\/ child[1]), 2));}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00294}00294         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} rise = child[2] -\/ parent[2];}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00295}00295 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00296}00296         \textcolor{comment}{// Calculate the angle between rise and run.}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00297}00297         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} calc\_slope = atan2(rise, run) * (\textcolor{keyword}{static\_cast<}\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}}\textcolor{keyword}{>}(180.00) / \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}}\textcolor{keyword}{>}(M\_PI));}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00297}00297         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} calc\_slope = atan2(rise, run) * (\textcolor{keyword}{static\_cast<}\mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}}\textcolor{keyword}{>}(180.00) / \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}}\textcolor{keyword}{>}(M\_PI));}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00298}00298 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00299}00299         \textcolor{comment}{// Check against downslope and upslope.}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00300}00300         \textcolor{keywordflow}{return} calc\_slope > -\/1.0 * gp.\mbox{\hyperlink{a00397_a7c141d33285a77c81fc1b9ce0b210d72}{down\_slope}} \&\& calc\_slope < gp.\mbox{\hyperlink{a00397_add7f080950668f5dfa8d857e9c66b89d}{up\_slope}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00300}00300         \textcolor{keywordflow}{return} calc\_slope > -\/1.0 * gp.\mbox{\hyperlink{a00463_a7c141d33285a77c81fc1b9ce0b210d72}{down\_slope}} \&\& calc\_slope < gp.\mbox{\hyperlink{a00463_add7f080950668f5dfa8d857e9c66b89d}{up\_slope}};}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00301}00301     \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00302}00302 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00303}\mbox{\hyperlink{a00397_aeab1db37b5aa614235f109d5dd9711a9}{00303}}     \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935e}{HF::SpatialStructures::STEP}} \mbox{\hyperlink{a00397_aeab1db37b5aa614235f109d5dd9711a9}{CheckConnection}}(}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00304}00304         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& parent,}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00305}00305         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& child,}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00306}00306         \mbox{\hyperlink{a01353}{RayTracer}}\& rt,}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00307}00307         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a01237}{GraphParams}}\& params)}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00303}\mbox{\hyperlink{a00463_aeab1db37b5aa614235f109d5dd9711a9}{00303}}     \mbox{\hyperlink{a00465_af0378d900074d484ba791d4317e5935e}{HF::SpatialStructures::STEP}} \mbox{\hyperlink{a00463_aeab1db37b5aa614235f109d5dd9711a9}{CheckConnection}}(}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00304}00304         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& parent,}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00305}00305         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& child,}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00306}00306         \mbox{\hyperlink{a01419}{RayTracer}}\& rt,}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00307}00307         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a01303}{GraphParams}}\& params)}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00308}00308     \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00309}00309         \textcolor{comment}{// Get groundoffset from graph parameters}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00310}00310         \textcolor{keyword}{const} \textcolor{keyword}{auto} GROUND\_OFFSET = params.\mbox{\hyperlink{a00397_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00397_a4fa4f096863296469711e52da4b36b9c}{ground\_offset}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00310}00310         \textcolor{keyword}{const} \textcolor{keyword}{auto} GROUND\_OFFSET = params.\mbox{\hyperlink{a00463_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00463_a4fa4f096863296469711e52da4b36b9c}{ground\_offset}};}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00311}00311 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00312}00312         \textcolor{comment}{// Create a copy of parent and child that can be modified}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00313}00313         \textcolor{keyword}{auto} node1 = parent;}
@@ -262,13 +262,13 @@
 \DoxyCodeLine{\Hypertarget{a00011_source_l00318}00318         node2[2] += GROUND\_OFFSET;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00319}00319 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00320}00320         \textcolor{comment}{// See if there's a direct line of sight between parent and child}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00321}00321         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{a00397_ace66c1b60785c32433402f012019ab81}{OcclusionCheck}}(node1, node2, rt)) \{}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00321}00321         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{a00463_ace66c1b60785c32433402f012019ab81}{OcclusionCheck}}(node1, node2, rt)) \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00322}00322             \textcolor{comment}{// If there is a direct line of sight, and they're on the same plane}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00323}00323             \textcolor{comment}{// then there is no step.}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00324}00324             \textcolor{keywordflow}{if} (abs(node1[2] -\/ node2[2]) < GROUND\_OFFSET) \textcolor{keywordflow}{return} STEP::NONE;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00325}00325 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00326}00326             \textcolor{comment}{// If they are not on the same plane, it means this is a slope. Check if the slope is within the threshold.         }}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00327}00327             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{a00397_a9daa85cb56a1b18d44f46aa9c420afde}{CheckSlope}}(parent, child, params)) \textcolor{keywordflow}{return} STEP::NONE;}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00327}00327             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{a00463_a9daa85cb56a1b18d44f46aa9c420afde}{CheckSlope}}(parent, child, params)) \textcolor{keywordflow}{return} STEP::NONE;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00328}00328 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00329}00329             \textcolor{keywordflow}{return} STEP::NOT\_CONNECTED;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00330}00330         \}}
@@ -283,7 +283,7 @@
 \DoxyCodeLine{\Hypertarget{a00011_source_l00339}00339             \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00340}00340                 node1 = child;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00341}00341                 node2 = parent;}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00342}00342                 node1[2] = node1[2] + params.\mbox{\hyperlink{a00397_add2b6fa6bf77a8c4626a1e6d0559970f}{down\_step}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00342}00342                 node1[2] = node1[2] + params.\mbox{\hyperlink{a00463_add2b6fa6bf77a8c4626a1e6d0559970f}{down\_step}};}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00343}00343                 node2[2] = node2[2] + GROUND\_OFFSET;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00344}00344                 s = STEP::DOWN;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00345}00345             \}}
@@ -295,7 +295,7 @@
 \DoxyCodeLine{\Hypertarget{a00011_source_l00351}00351             \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00352}00352                 node1 = parent;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00353}00353                 node2 = child;}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00354}00354                 node1[2] = node1[2] + params.\mbox{\hyperlink{a00397_a0b8afc5f531e3286ce2434b1bc2b1f50}{up\_step}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00354}00354                 node1[2] = node1[2] + params.\mbox{\hyperlink{a00463_a0b8afc5f531e3286ce2434b1bc2b1f50}{up\_step}};}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00355}00355                 node2[2] = node2[2] + GROUND\_OFFSET;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00356}00356                 s = STEP::UP;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00357}00357             \}}
@@ -306,14 +306,14 @@
 \DoxyCodeLine{\Hypertarget{a00011_source_l00362}00362             \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00363}00363                 node1 = parent;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00364}00364                 node2 = child;}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00365}00365                 node1[2] = node1[2] + params.\mbox{\hyperlink{a00397_a0b8afc5f531e3286ce2434b1bc2b1f50}{up\_step}};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00365}00365                 node1[2] = node1[2] + params.\mbox{\hyperlink{a00463_a0b8afc5f531e3286ce2434b1bc2b1f50}{up\_step}};}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00366}00366                 node2[2] = node2[2] + GROUND\_OFFSET;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00367}00367                 s = STEP::OVER;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00368}00368             \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00369}00369 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00370}00370             \textcolor{comment}{// If there is a line of sight then the nodes are connected}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00371}00371             \textcolor{comment}{// with the step type we calculated}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00372}00372             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{a00397_ace66c1b60785c32433402f012019ab81}{OcclusionCheck}}(node1, node2, rt))}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00372}00372             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{a00463_ace66c1b60785c32433402f012019ab81}{OcclusionCheck}}(node1, node2, rt))}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00373}00373                 \textcolor{keywordflow}{return} s;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00374}00374         \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00375}00375 }
@@ -322,11 +322,11 @@
 \DoxyCodeLine{\Hypertarget{a00011_source_l00378}00378         \textcolor{keywordflow}{return} STEP::NOT\_CONNECTED;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00379}00379     \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00380}00380 }
-\DoxyCodeLine{\Hypertarget{a00011_source_l00381}\mbox{\hyperlink{a00397_a41e03f9bab54e4e0d1314c6a4bdf2ec1}{00381}}     std::vector<real3> \mbox{\hyperlink{a00397_a41e03f9bab54e4e0d1314c6a4bdf2ec1}{GeneratePotentialChildren}}(}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00382}00382         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& parent,}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00381}\mbox{\hyperlink{a00463_a41e03f9bab54e4e0d1314c6a4bdf2ec1}{00381}}     std::vector<real3> \mbox{\hyperlink{a00463_a41e03f9bab54e4e0d1314c6a4bdf2ec1}{GeneratePotentialChildren}}(}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00382}00382         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& parent,}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00383}00383         \textcolor{keyword}{const} std::vector<pair>\& directions,}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00384}00384         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& spacing,}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00385}00385         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a01237}{GraphParams}}\& GP) }
+\DoxyCodeLine{\Hypertarget{a00011_source_l00384}00384         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& spacing,}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00385}00385         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a01303}{GraphParams}}\& GP) }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00386}00386     \{}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00387}00387         \textcolor{comment}{// Create a vector of out\_children to hold results}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00388}00388         vector<real3> out\_children(directions.size());}
@@ -337,18 +337,18 @@
 \DoxyCodeLine{\Hypertarget{a00011_source_l00393}00393             \textcolor{keyword}{const} \textcolor{keyword}{auto}\& dir = directions[i];}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00394}00394 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00395}00395             \textcolor{comment}{// Extract the x and y directions}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00396}00396             \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} x\_offset = dir.first;}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00397}00397             \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} y\_offset = dir.second;}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00396}00396             \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} x\_offset = dir.first;}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00397}00397             \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} y\_offset = dir.second;}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00398}00398 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00399}00399             \textcolor{comment}{// Add the user-\/defined spacing to the x and y components of the parent.}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00400}00400             \textcolor{comment}{// Then round the result.}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00401}00401             \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} x = roundhf\_tmp<real\_t>(std::fma(x\_offset,spacing[0], parent[0]), GP.\mbox{\hyperlink{a00397_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00397_ac982230f7d151df6018c19d712cd3436}{node\_spacing}});}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00402}00402             \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} y = roundhf\_tmp<real\_t>(std::fma(y\_offset,spacing[1], parent[1]), GP.\mbox{\hyperlink{a00397_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00397_ac982230f7d151df6018c19d712cd3436}{node\_spacing}});}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00401}00401             \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} x = roundhf\_tmp<real\_t>(std::fma(x\_offset,spacing[0], parent[0]), GP.\mbox{\hyperlink{a00463_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00463_ac982230f7d151df6018c19d712cd3436}{node\_spacing}});}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00402}00402             \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} y = roundhf\_tmp<real\_t>(std::fma(y\_offset,spacing[1], parent[1]), GP.\mbox{\hyperlink{a00463_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00463_ac982230f7d151df6018c19d712cd3436}{node\_spacing}});}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00403}00403             \textcolor{comment}{// Round the z value to a lower precision assuming it helps embree}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00404}00404             \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} z = roundhf\_tmp<real\_t>(parent[2] + spacing[2], GP.\mbox{\hyperlink{a00397_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00397_a6ec86cb69c1cc0e0dc8ea229310939b6}{node\_z}});}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00404}00404             \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} z = roundhf\_tmp<real\_t>(parent[2] + spacing[2], GP.\mbox{\hyperlink{a00463_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}.\mbox{\hyperlink{a00463_a6ec86cb69c1cc0e0dc8ea229310939b6}{node\_z}});}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00405}00405 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00406}00406             \textcolor{comment}{// Add these new values as a node in the out\_children list}}
-\DoxyCodeLine{\Hypertarget{a00011_source_l00407}00407             out\_children[i] = \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\{ x, y, z \};}
+\DoxyCodeLine{\Hypertarget{a00011_source_l00407}00407             out\_children[i] = \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\{ x, y, z \};}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00408}00408         \}}
 \DoxyCodeLine{\Hypertarget{a00011_source_l00409}00409 }
 \DoxyCodeLine{\Hypertarget{a00011_source_l00410}00410         \textcolor{keywordflow}{return} out\_children;}

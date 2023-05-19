@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>DHART: Cpp/spatialstructures/src/Constants.cpp File Reference</title>
+<title>DHART: Cpp/objloader/src/meshinfo.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,39 +90,88 @@ $(document).ready(function(){initNavTree('a00182.html',''); initResizable(); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Constants.cpp File Reference</div></div>
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">meshinfo.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Contains implementation for the <a class="el" href="a00399.html">HF::SpatialStructures</a> namespace.  
+<p>Contains implementation for the <a class="el" href="a01351.html">MeshInfo</a> class.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="a00185_source.html">Constants.h</a>&gt;</code><br />
-<code>#include &lt;numeric&gt;</code><br />
-<code>#include &lt;cstdlib&gt;</code><br />
-<code>#include &lt;cmath&gt;</code><br />
-<code>#include &lt;cassert&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="a00185_source.html">meshinfo.h</a>&gt;</code><br />
+<code>#include &lt;Geometry&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00176_source.html">HFExceptions.h</a>&gt;</code><br />
+<code>#include &lt;math.h&gt;</code><br />
+<code>#include &lt;corecrt_math_defines.h&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;robin_hood.h&gt;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for Constants.cpp:</div>
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for meshinfo.cpp:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00183.svg" width="415" height="203"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00183.svg" width="860" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
 <p><a href="a00182_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00462"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00462.html">HF</a></td></tr>
+<tr class="memdesc:a00462"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform human scale analysis on 3D environments. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00469"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00469.html">HF::Geometry</a></td></tr>
+<tr class="memdesc:a00469"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manipulate and load geometry from disk. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a525335710b53cb064ca56b936120431e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00182.html#a525335710b53cb064ca56b936120431e">_USE_MATH_DEFINES</a></td></tr>
+<tr class="separator:a525335710b53cb064ca56b936120431e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aca0d05b15d2503073b9f668f330f7871"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aca0d05b15d2503073b9f668f330f7871"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00469.html#aca0d05b15d2503073b9f668f330f7871">HF::Geometry::IndexRawVertices</a> (const vector&lt; array&lt; T, 3 &gt; &gt; &amp;vertices, vector&lt; int &gt; &amp;mapped_indexes, vector&lt; T &gt; &amp;mapped_vertices)</td></tr>
+<tr class="memdesc:aca0d05b15d2503073b9f668f330f7871"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index an array of vertices.  <a href="a00469.html#aca0d05b15d2503073b9f668f330f7871">More...</a><br /></td></tr>
+<tr class="separator:aca0d05b15d2503073b9f668f330f7871"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa99106d1e4908e4385773774fb482b4f"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aa99106d1e4908e4385773774fb482b4f"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00469.html#aa99106d1e4908e4385773774fb482b4f">HF::Geometry::arrayDist</a> (const array&lt; T, 3 &gt; from, const array&lt; T, 3 &gt; &amp;to)</td></tr>
+<tr class="memdesc:aa99106d1e4908e4385773774fb482b4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the distance between from and to.  <a href="a00469.html#aa99106d1e4908e4385773774fb482b4f">More...</a><br /></td></tr>
+<tr class="separator:aa99106d1e4908e4385773774fb482b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Contains implementation for the <a class="el" href="a00399.html">HF::SpatialStructures</a> namespace. </p>
+<div class="textblock"><p >Contains implementation for the <a class="el" href="a01351.html">MeshInfo</a> class. </p>
 <dl class="section author"><dt>Author</dt><dd>TBA </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>06 Jun 2020 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16 Jun 2020 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="a00182_source.html">Constants.cpp</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition in file <a class="el" href="a00182_source.html">meshinfo.cpp</a>.</p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a525335710b53cb064ca56b936120431e" name="a525335710b53cb064ca56b936120431e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a525335710b53cb064ca56b936120431e">&#9670;&#160;</a></span>_USE_MATH_DEFINES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _USE_MATH_DEFINES</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00017">17</a> of file <a class="el" href="a00182_source.html">meshinfo.cpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_66731bdf74d76a38b2c500ac62cfdf48.html">spatialstructures</a></li><li class="navelem"><a class="el" href="dir_7fdf8b1285a3d76ae7bf3420b7ffebee.html">src</a></li><li class="navelem"><a class="el" href="a00182.html">Constants.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_46f038d98c29b85ae873c4d3a30697d6.html">objloader</a></li><li class="navelem"><a class="el" href="dir_e8729f7e450b4a44d154406cba6833f7.html">src</a></li><li class="navelem"><a class="el" href="a00182.html">meshinfo.cpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
   </ul>
 </div>

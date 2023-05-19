@@ -1,0 +1,67 @@
+\hypertarget{a00425_source}{}\doxysection{pathfinder\+\_\+\+C.\+h}
+\label{a00425_source}\index{Cinterface/pathfinder\_C.h@{Cinterface/pathfinder\_C.h}}
+\mbox{\hyperlink{a00425}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{a00425_source_l00009}00009 \textcolor{preprocessor}{\#ifndef PATHFINDER\_C\_H}}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00010}00010 \textcolor{preprocessor}{\#define PATHFINDER\_C\_H}}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00011}00011 }
+\DoxyCodeLine{\Hypertarget{a00425_source_l00012}00012 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00413}{cinterface\_utils.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00013}00013 }
+\DoxyCodeLine{\Hypertarget{a00425_source_l00014}\mbox{\hyperlink{a00425_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{00014}} \textcolor{preprocessor}{\#define C\_INTERFACE extern "{}C"{}} \_\_declspec(dllexport) int}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00015}00015 }
+\DoxyCodeLine{\Hypertarget{a00425_source_l00016}00016 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00462}{HF}} \{}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00017}00017     \textcolor{keyword}{namespace }SpatialStructures \{ \textcolor{keyword}{class }Graph; \textcolor{keyword}{class }Path; \textcolor{keyword}{class }PathMember; \}}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00018}00018     \textcolor{keyword}{namespace }Pathfinding \{ \textcolor{keyword}{class }BoostGraph; \}}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00019}00019 \}}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00020}00020 }
+\DoxyCodeLine{\Hypertarget{a00425_source_l00255}00255 \mbox{\hyperlink{a00425_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00456_ga3dc85450e989a996a3c3fcfad0a5944e}{CreatePath}}(}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00256}00256     \textcolor{keyword}{const} \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* g,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00257}00257     \textcolor{keywordtype}{int} start,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00258}00258     \textcolor{keywordtype}{int} end,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00259}00259     \textcolor{keyword}{const} \textcolor{keywordtype}{char} * cost\_type,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00260}00260     \textcolor{keywordtype}{int}* out\_size,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00261}00261     \mbox{\hyperlink{a02083}{HF::SpatialStructures::Path}}** out\_path,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00262}00262     \mbox{\hyperlink{a02079}{HF::SpatialStructures::PathMember}}** out\_data}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00263}00263 );}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00264}00264 }
+\DoxyCodeLine{\Hypertarget{a00425_source_l00330}00330 \mbox{\hyperlink{a00425_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00456_gae1ac2805c3b86883bb88269ed3868367}{CreatePaths}}(}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00331}00331     \textcolor{keyword}{const} \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* g,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00332}00332     \textcolor{keyword}{const} \textcolor{keywordtype}{int}* start,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00333}00333     \textcolor{keyword}{const} \textcolor{keywordtype}{int}* end,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00334}00334     \textcolor{keyword}{const} \textcolor{keywordtype}{char} * cost\_type,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00335}00335     \mbox{\hyperlink{a02083}{HF::SpatialStructures::Path}}** out\_path\_ptr\_holder,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00336}00336     \mbox{\hyperlink{a02079}{HF::SpatialStructures::PathMember}}** out\_path\_member\_ptr\_holder,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00337}00337     \textcolor{keywordtype}{int}* out\_sizes,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00338}00338     \textcolor{keywordtype}{int} num\_paths}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00339}00339 );}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00340}00340 }
+\DoxyCodeLine{\Hypertarget{a00425_source_l00365}00365 \mbox{\hyperlink{a00425_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00456_gaac725d282f4fecd3aba1b3273c26e7e1}{GetPathInfo}}(}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00366}00366     \mbox{\hyperlink{a02083}{HF::SpatialStructures::Path}}* p,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00367}00367     \mbox{\hyperlink{a02079}{HF::SpatialStructures::PathMember}}** out\_member\_ptr,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00368}00368     \textcolor{keywordtype}{int}* out\_size}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00369}00369 );}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00370}00370 }
+\DoxyCodeLine{\Hypertarget{a00425_source_l00392}00392 \mbox{\hyperlink{a00425_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00456_ga884a3374d971261a01ccfd3b21e288e5}{DestroyPath}}(\mbox{\hyperlink{a02083}{HF::SpatialStructures::Path}}* path\_to\_destroy);}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00393}00393 }
+\DoxyCodeLine{\Hypertarget{a00425_source_l00446}00446 \mbox{\hyperlink{a00425_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00456_gaba6ec6ce84974dd6a311d7d65dd34221}{CreateAllToAllPaths}}(}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00447}00447     \textcolor{keyword}{const} \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* g,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00448}00448     \textcolor{keyword}{const} \textcolor{keywordtype}{char} * cost\_type,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00449}00449     \mbox{\hyperlink{a02083}{HF::SpatialStructures::Path}}** out\_path\_ptr\_holder,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00450}00450     \mbox{\hyperlink{a02079}{HF::SpatialStructures::PathMember}}** out\_path\_member\_ptr\_holder,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00451}00451     \textcolor{keywordtype}{int}* out\_sizes,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00452}00452     \textcolor{keywordtype}{int} num\_paths}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00453}00453 );}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00454}00454 }
+\DoxyCodeLine{\Hypertarget{a00425_source_l00502}00502 \mbox{\hyperlink{a00425_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\_INTERFACE}} \mbox{\hyperlink{a00456_ga27b1f45019ccbda909301520d1c738ca}{CalculateDistanceAndPredecessor}}(}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00503}00503     \textcolor{keyword}{const} \mbox{\hyperlink{a01551}{HF::SpatialStructures::Graph}}* g,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00504}00504     \textcolor{keyword}{const} \textcolor{keywordtype}{char} * cost\_name,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00505}00505     std::vector<float>** out\_dist\_vector,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00506}00506     \textcolor{keywordtype}{float}** out\_dist\_data,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00507}00507     std::vector<int>** out\_pred\_vector,}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00508}00508     \textcolor{keywordtype}{int}** out\_pred\_data}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00509}00509 );}
+\DoxyCodeLine{\Hypertarget{a00425_source_l00510}00510     }
+\DoxyCodeLine{\Hypertarget{a00425_source_l00513}00513 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PATHFINDER\_C\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,546 @@
+\hypertarget{a00455}{}\doxysection{Geometry}
+\label{a00455}\index{Geometry@{Geometry}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga0805e80d13b29aeddc35f0bcf3f16a1a}{Load\+OBJ}} (const char $\ast$obj\+\_\+path, \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5}{HF\+::\+Geometry\+::\+GROUP\+\_\+\+METHOD}} gm, float xrot, float yrot, float zrot, \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$$\ast$$\ast$out\+\_\+data\+\_\+array, int $\ast$num\+\_\+meshes)
+\begin{DoxyCompactList}\small\item\em Load an obj from the given path then rotate it by x,y, and z. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga6ac447e5805d3d7e65c9083ffa603cfe}{Store\+Mesh}} (\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$$\ast$out\+\_\+info, const int $\ast$indices, int num\+\_\+indices, const float $\ast$vertices, int num\+\_\+vertices, const char $\ast$name, int id)
+\begin{DoxyCompactList}\small\item\em Store a mesh in a format usable with DHARTAPI. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga907c8e39b159c8bad22645448bc97f57}{Rotate\+Mesh}} (\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$mesh\+\_\+to\+\_\+rotate, float xrot, float yrot, float zrot)
+\begin{DoxyCompactList}\small\item\em Rotate an existing mesh (\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga89fc0803b894e7fa218ae271c46fb434}{Get\+Verts\+And\+Tris}} (const \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$MI, int $\ast$$\ast$index\+\_\+out, int $\ast$num\+\_\+triangles, float $\ast$$\ast$vertex\+\_\+out, int $\ast$num\+\_\+vertices)
+\begin{DoxyCompactList}\small\item\em Get a pointer to and the size of a mesh\textquotesingle{}s triangle and vertex arrays. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga2a86bca57b3efdafeeb001a8ba36a212}{Get\+Mesh\+Name}} (const \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$MI, char $\ast$$\ast$out\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Get the name of a mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_gaa07792b399e76e6101388bb6bbb96047}{Get\+Mesh\+ID}} (const \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$MI, int $\ast$out\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Get the ID of a mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga0ef9f7e63f067546b527947d4678dcd5}{Destroy\+Mesh\+Info}} (\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$mesh\+\_\+to\+\_\+destroy)
+\begin{DoxyCompactList}\small\item\em Free the memory addressed by mesh\+\_\+to\+\_\+destroy, which was allocated by either \mbox{\hyperlink{a00455_ga0805e80d13b29aeddc35f0bcf3f16a1a}{Load\+OBJ}} or \mbox{\hyperlink{a00455_ga6ac447e5805d3d7e65c9083ffa603cfe}{Store\+Mesh}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga9cb2dc8227bf88a06014493979b2b3e6}{Destroy\+Mesh\+Info\+Ptr\+Array}} (\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$$\ast$data\+\_\+array)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Read and manipulate meshes\hypertarget{a00455_mesh_setup}{}\doxysubsection{Mesh setup}\label{a00455_mesh_setup}
+First, we prepare the relative path to the {\bfseries{mesh}}. (.obj file)
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Status code variable, value returned by C Interface functions}}
+\DoxyCodeLine{\textcolor{comment}{// See documentation for HF::Exceptions::HF\_STATUS for error code definitions.}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} status = 0;}
+\DoxyCodeLine{\textcolor{comment}{// Get model path}}
+\DoxyCodeLine{\textcolor{comment}{// This is a relative path to your obj file.}}
+\DoxyCodeLine{\textcolor{keyword}{const} std::string obj\_path\_str = \textcolor{stringliteral}{"{}plane.obj"{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Size of obj file string (character count)}}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} obj\_length = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(obj\_path\_str.size());}
+
+\end{DoxyCode}
+
+
+Then, we prepare a pointer to a vector\texorpdfstring{$<$}{<}\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}\texorpdfstring{$>$}{>}.~\newline
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// This will point to memory on free store.}}
+\DoxyCodeLine{\textcolor{comment}{// The memory will be allocated inside the LoadOBJ function,}}
+\DoxyCodeLine{\textcolor{comment}{// and it must be freed using DestroyMeshInfo.}}
+\DoxyCodeLine{std::vector<HF::Geometry::MeshInfo>* loaded\_obj = \textcolor{keyword}{nullptr};}
+
+\end{DoxyCode}
+
+
+We pass the address of this pointer to \mbox{\hyperlink{a00455_ga0805e80d13b29aeddc35f0bcf3f16a1a}{Load\+OBJ}} .
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Load mesh}}
+\DoxyCodeLine{\textcolor{comment}{// The array rot will rotate the mesh 90 degrees with respect to the x-\/axis,}}
+\DoxyCodeLine{\textcolor{comment}{// i.e. makes the mesh 'z-\/up'.}}
+\DoxyCodeLine{\textcolor{comment}{//}}
+\DoxyCodeLine{\textcolor{comment}{// Notice that we pass the address of the loaded\_obj pointer}}
+\DoxyCodeLine{\textcolor{comment}{// to LoadOBJ. We do not want to pass loaded\_obj by value, but by address -\/-\/}}
+\DoxyCodeLine{\textcolor{comment}{// so that we can dereference it and assign it to the address of (pointer to)}}
+\DoxyCodeLine{\textcolor{comment}{// the free store memory allocated within LoadOBJ.}}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} rot[] = \{ 90.0f, 0.0f, 0.0f \};  \textcolor{comment}{// Y up to Z up}}
+\DoxyCodeLine{status = \mbox{\hyperlink{a00455_ga0805e80d13b29aeddc35f0bcf3f16a1a}{LoadOBJ}}(obj\_path\_str.c\_str(), obj\_length, rot[0], rot[1], rot[2], \&loaded\_obj);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (status != 1) \{}
+\DoxyCodeLine{    \textcolor{comment}{// All C Interface functions return a status code.}}
+\DoxyCodeLine{    \textcolor{comment}{// Error!}}
+\DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"{}Error at LoadOBJ, code: "{}} << status << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//}}
+\DoxyCodeLine{\textcolor{comment}{// loaded\_obj contains the mesh.}}
+\DoxyCodeLine{\textcolor{comment}{//}}
+
+\end{DoxyCode}
+
+
+{\bfseries{loaded\+\_\+obj}} points to the loaded mesh.\hypertarget{a00455_mesh_teardown}{}\doxysubsection{Mesh teardown}\label{a00455_mesh_teardown}
+When you are finished with the {\bfseries{mesh}}, you must then {\bfseries{relinquish}} its memory resources\+:~\newline
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// destroy vector<MeshInfo>}}
+\DoxyCodeLine{status = \mbox{\hyperlink{a00455_ga0ef9f7e63f067546b527947d4678dcd5}{DestroyMeshInfo}}(loaded\_obj);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (status != 1) \{}
+\DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"{}Error at DestroyMeshInfo, code: "{}} << status << std::endl;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} Load\+OBJ loaded mesh successfully into loaded\+\_\+obj at address 000001DBFADFAF50, code\+: 1}~\newline
+ ~\newline
+ {\bfseries{The client is responsible for releasing the memory for~\newline
+ the {\bfseries{mesh}} (vector\texorpdfstring{$<$}{<}\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}\texorpdfstring{$>$}{>} $\ast$).}}~\newline
+ Every example for each function should be followed up by the \textquotesingle{}teardown\textquotesingle{} code described above.\hypertarget{a00455_notes_perform_rotation}{}\doxysubsection{Notes on Mesh\+Info\+::\+Perform\+Rotation}\label{a00455_notes_perform_rotation}
+\mbox{\hyperlink{a00455_ga0805e80d13b29aeddc35f0bcf3f16a1a}{Load\+OBJ}} and \mbox{\hyperlink{a00455_ga907c8e39b159c8bad22645448bc97f57}{Rotate\+Mesh}} both call~\newline
+ \mbox{\hyperlink{a01351_a235d49e5a5a4d20d78db7adb854fb9e1}{HF\+::\+Geometry\+::\+Mesh\+Info\+::\+Perform\+Rotation}}, which contains the following\+:~\newline
+
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Assert that we didn't create any NANS or infinite values}}
+\DoxyCodeLine{        assert(rotation\_matrix.allFinite());}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Apply the rotation matrix to verts}}
+\DoxyCodeLine{        verts = (rotation\_matrix * verts);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Once again assert that we didn't create any nans or infinite numbers.}}
+\DoxyCodeLine{        assert(verts.allFinite());}
+
+\end{DoxyCodeInclude}
+
+
+{\bfseries{rotation\+\_\+matrix}} is a local variable in \mbox{\hyperlink{}{Perform\+Rotation}},~\newline
+ and {\bfseries{verts}} is a private field within \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}.~\newline
+ ~\newline
+ These assertion statements may evaluate {\bfseries{false}} ({\bfseries{which will halt execution}})~\newline
+ if NANs (not-\/a-\/number) or infinity values were created~\newline
+ from the {\bfseries{xrot}}, {\bfseries{yrot}}, or {\bfseries{zrot}} values passed to \mbox{\hyperlink{a00455_ga0805e80d13b29aeddc35f0bcf3f16a1a}{Load\+OBJ}} or \mbox{\hyperlink{a00455_ga907c8e39b159c8bad22645448bc97f57}{Rotate\+Mesh}}. ~\newline
+ 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00455_ga0ef9f7e63f067546b527947d4678dcd5}\label{a00455_ga0ef9f7e63f067546b527947d4678dcd5}} 
+\index{Geometry@{Geometry}!DestroyMeshInfo@{DestroyMeshInfo}}
+\index{DestroyMeshInfo@{DestroyMeshInfo}!Geometry@{Geometry}}
+\doxysubsubsection{\texorpdfstring{DestroyMeshInfo()}{DestroyMeshInfo()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Destroy\+Mesh\+Info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$}]{mesh\+\_\+to\+\_\+destroy }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00419}{Cinterface/objloader\+\_\+\+C.\+h}}$>$}
+
+
+
+Free the memory addressed by mesh\+\_\+to\+\_\+destroy, which was allocated by either \mbox{\hyperlink{a00455_ga0805e80d13b29aeddc35f0bcf3f16a1a}{Load\+OBJ}} or \mbox{\hyperlink{a00455_ga6ac447e5805d3d7e65c9083ffa603cfe}{Store\+Mesh}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh\+\_\+to\+\_\+destroy} & The \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}} $\ast$ whose memory will be released\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+HF\+\_\+\+STATUS\+::\+OK
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00455_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00455_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{a00416_source_l00126}{126}} of file \mbox{\hyperlink{a00416_source}{objloader\+\_\+\+C.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00413_source_l00112}{Delete\+Raw\+Ptr()}}, and \mbox{\hyperlink{a00176_source_l00032}{HF\+::\+Exceptions\+::\+OK}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=280pt]{a00455_ga0ef9f7e63f067546b527947d4678dcd5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00455_ga9cb2dc8227bf88a06014493979b2b3e6}\label{a00455_ga9cb2dc8227bf88a06014493979b2b3e6}} 
+\index{Geometry@{Geometry}!DestroyMeshInfoPtrArray@{DestroyMeshInfoPtrArray}}
+\index{DestroyMeshInfoPtrArray@{DestroyMeshInfoPtrArray}!Geometry@{Geometry}}
+\doxysubsubsection{\texorpdfstring{DestroyMeshInfoPtrArray()}{DestroyMeshInfoPtrArray()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Destroy\+Mesh\+Info\+Ptr\+Array (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$$\ast$}]{data\+\_\+array }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00419}{Cinterface/objloader\+\_\+\+C.\+h}}$>$}
+
+
+
+Definition at line \mbox{\hyperlink{a00416_source_l00132}{132}} of file \mbox{\hyperlink{a00416_source}{objloader\+\_\+\+C.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00176_source_l00032}{HF\+::\+Exceptions\+::\+OK}}.
+
+\mbox{\Hypertarget{a00455_gaa07792b399e76e6101388bb6bbb96047}\label{a00455_gaa07792b399e76e6101388bb6bbb96047}} 
+\index{Geometry@{Geometry}!GetMeshID@{GetMeshID}}
+\index{GetMeshID@{GetMeshID}!Geometry@{Geometry}}
+\doxysubsubsection{\texorpdfstring{GetMeshID()}{GetMeshID()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Get\+Mesh\+ID (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$}]{MI,  }\item[{int $\ast$}]{out\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00419}{Cinterface/objloader\+\_\+\+C.\+h}}$>$}
+
+
+
+Get the ID of a mesh. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em MI} & Instance of Mesh\+Info to get the name of \\
+\hline
+{\em out\+\_\+name} & Pointer to the integer to write output to. This must be a valid pointer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily HF\+\_\+\+STATUS\+::\+OK} 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00416_source_l00119}{119}} of file \mbox{\hyperlink{a00416_source}{objloader\+\_\+\+C.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00185_source_l00126}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::meshid}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00416_source_l00013}{Load\+OBJ()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{a00455_gaa07792b399e76e6101388bb6bbb96047_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00455_ga2a86bca57b3efdafeeb001a8ba36a212}\label{a00455_ga2a86bca57b3efdafeeb001a8ba36a212}} 
+\index{Geometry@{Geometry}!GetMeshName@{GetMeshName}}
+\index{GetMeshName@{GetMeshName}!Geometry@{Geometry}}
+\doxysubsubsection{\texorpdfstring{GetMeshName()}{GetMeshName()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Get\+Mesh\+Name (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$}]{MI,  }\item[{char $\ast$$\ast$}]{out\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00419}{Cinterface/objloader\+\_\+\+C.\+h}}$>$}
+
+
+
+Get the name of a mesh. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em MI} & Instance of Mesh\+Info to get the name of \\
+\hline
+{\em out\+\_\+name} & Pointer to the char array to write output to. This must be a valid pointer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily HF\+\_\+\+STATUS\+::\+OK} 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00416_source_l00108}{108}} of file \mbox{\hyperlink{a00416_source}{objloader\+\_\+\+C.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00185_source_l00127}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::name}}.
+
+\mbox{\Hypertarget{a00455_ga89fc0803b894e7fa218ae271c46fb434}\label{a00455_ga89fc0803b894e7fa218ae271c46fb434}} 
+\index{Geometry@{Geometry}!GetVertsAndTris@{GetVertsAndTris}}
+\index{GetVertsAndTris@{GetVertsAndTris}!Geometry@{Geometry}}
+\doxysubsubsection{\texorpdfstring{GetVertsAndTris()}{GetVertsAndTris()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Get\+Verts\+And\+Tris (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$}]{MI,  }\item[{int $\ast$$\ast$}]{index\+\_\+out,  }\item[{int $\ast$}]{num\+\_\+triangles,  }\item[{float $\ast$$\ast$}]{vertex\+\_\+out,  }\item[{int $\ast$}]{num\+\_\+vertices }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00419}{Cinterface/objloader\+\_\+\+C.\+h}}$>$}
+
+
+
+Get a pointer to and the size of a mesh\textquotesingle{}s triangle and vertex arrays. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index\+\_\+out} & Output parameter for a pointer to the mesh\textquotesingle{}s vertex array \\
+\hline
+{\em num\+\_\+triangles} & Number of triangles in the index array. Every 3 indices is a new triangle, so this is equal to the length of {\ttfamily index\+\_\+out} divided by 3. \\
+\hline
+{\em vertex\+\_\+out} & Output parameter for a pointer to the mesh\textquotesingle{}s index array. \\
+\hline
+{\em num\+\_\+vertices} & Number of vertices in the vertex array. Every 3 floats is a new vertex, so this is equal to the length of {\ttfamily vertex\+\_\+out} divided by 3.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+HF\+\_\+\+STATUS\+::\+OK 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00416_source_l00094}{94}} of file \mbox{\hyperlink{a00416_source}{objloader\+\_\+\+C.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00182_source_l00326}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Index\+Pointer()}}, and \mbox{\hyperlink{a00182_source_l00336}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Vertex\+Pointer()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{a00455_ga89fc0803b894e7fa218ae271c46fb434_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00455_ga0805e80d13b29aeddc35f0bcf3f16a1a}\label{a00455_ga0805e80d13b29aeddc35f0bcf3f16a1a}} 
+\index{Geometry@{Geometry}!LoadOBJ@{LoadOBJ}}
+\index{LoadOBJ@{LoadOBJ}!Geometry@{Geometry}}
+\doxysubsubsection{\texorpdfstring{LoadOBJ()}{LoadOBJ()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Load\+OBJ (\begin{DoxyParamCaption}\item[{const char $\ast$}]{obj\+\_\+path,  }\item[{\mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5}{HF\+::\+Geometry\+::\+GROUP\+\_\+\+METHOD}}}]{gm,  }\item[{float}]{xrot,  }\item[{float}]{yrot,  }\item[{float}]{zrot,  }\item[{\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$$\ast$$\ast$}]{out\+\_\+data\+\_\+array,  }\item[{int $\ast$}]{num\+\_\+meshes }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00419}{Cinterface/objloader\+\_\+\+C.\+h}}$>$}
+
+
+
+Load an obj from the given path then rotate it by x,y, and z. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj\+\_\+path} & Filepath to the obj file to load. \\
+\hline
+{\em gm} & Method to use for dividing a single obj file into multiple meshes. \\
+\hline
+{\em xrot} & Degrees to rotate the mesh on the x axis. \\
+\hline
+{\em yrot} & Degrees to rotate the mesh on the y axis. \\
+\hline
+{\em zrot} & Degrees to rotate the mesh on the z axis. \\
+\hline
+{\em out\+\_\+data\+\_\+array} & Output parameter for the new array of meshinfo \\
+\hline
+{\em num\+\_\+meshes} & Output parameter for size of {\ttfamily out\+\_\+data\+\_\+array}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily HF\+\_\+\+STATUS\+::\+OK} If the input was a valid mesh and the function completed successfully 
+
+{\ttfamily HF\+\_\+\+STATUS\+::\+GENERIC\+\_\+\+ERROR} If the input was empty. 
+
+{\ttfamily HF\+\_\+\+STATUS\+::\+INVALID\+\_\+\+OBJ} if the path didn\textquotesingle{}t lead to a valid OBJ file 
+
+{\ttfamily HF\+\_\+\+STATUS\+::\+NOT\+\_\+\+FOUND} if the file at the given path couldn\textquotesingle{}t be found.
+\end{DoxyReturn}
+\begin{DoxyAttention}{Attention}
+Call Destroy\+Mesh\+Info\+Ptr\+Array to deallocate out\+\_\+data\+\_\+array, and call Destroy\+Mesh\+Info on each instance of Mesh\+Info to deallocate them individually. Failure to do any of this will result in memory leaks. In the case that {\ttfamily HF\+\_\+\+STATUS\+::\+OK} is not called, no memory is allocated, and as such no memory must be deallocated.
+\end{DoxyAttention}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00455_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00455_notes_perform_rotation}{Notes on Mesh\+Info\+::\+Perform\+Rotation}} (assertion statement) 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{a00416_source_l00013}{13}} of file \mbox{\hyperlink{a00416_source}{objloader\+\_\+\+C.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00416_source_l00119}{Get\+Mesh\+ID()}}, and \mbox{\hyperlink{a00188_source_l00195}{HF\+::\+Geometry\+::\+Load\+Mesh\+Objects()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{a00455_ga0805e80d13b29aeddc35f0bcf3f16a1a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00455_ga907c8e39b159c8bad22645448bc97f57}\label{a00455_ga907c8e39b159c8bad22645448bc97f57}} 
+\index{Geometry@{Geometry}!RotateMesh@{RotateMesh}}
+\index{RotateMesh@{RotateMesh}!Geometry@{Geometry}}
+\doxysubsubsection{\texorpdfstring{RotateMesh()}{RotateMesh()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Rotate\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$}]{mesh\+\_\+to\+\_\+rotate,  }\item[{float}]{xrot,  }\item[{float}]{yrot,  }\item[{float}]{zrot }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00419}{Cinterface/objloader\+\_\+\+C.\+h}}$>$}
+
+
+
+Rotate an existing mesh (\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh\+\_\+to\+\_\+rotate} & An operand vector\texorpdfstring{$<$}{<}\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}\texorpdfstring{$>$}{>} $\ast$ that addresses memory allocated by \mbox{\hyperlink{a00455_ga0805e80d13b29aeddc35f0bcf3f16a1a}{Load\+OBJ}} or \mbox{\hyperlink{a00455_ga6ac447e5805d3d7e65c9083ffa603cfe}{Store\+Mesh}} \\
+\hline
+{\em xrot} & Degrees to rotate the mesh about the x axis. 0.\+0f would mean no rotation about the x axis. \\
+\hline
+{\em yrot} & Degrees to rotate the mesh about the y axis. 0.\+0f would mean no rotation about the y axis. \\
+\hline
+{\em zrot} & Degrees to rotate the mesh about the z axis. 0.\+0f would mean no rotation about the z axis.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+HF\+\_\+\+STATUS\+::\+OK on return
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00455_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00455_ga6ac447e5805d3d7e65c9083ffa603cfe}{Store\+Mesh}} (creating a mesh from arrays), \mbox{\hyperlink{a00455_mesh_teardown}{Mesh teardown}} (how to destroy a mesh), \mbox{\hyperlink{a00455_notes_perform_rotation}{Notes on Mesh\+Info\+::\+Perform\+Rotation}} (assertion statement)
+\end{DoxySeeAlso}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Prepare the desired rotation values.}}
+\DoxyCodeLine{        \textcolor{comment}{// A value of 0.0f means no rotation about the given axis.}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{float} x\_rot = 90.0f;}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{float} y\_rot = 0.0f;}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{float} z\_rot = 0.0f;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Rotate the mesh. Here, we are rotating the mesh so that it is 'z-\/up'.}}
+\DoxyCodeLine{        status = \mbox{\hyperlink{a00455_ga907c8e39b159c8bad22645448bc97f57}{RotateMesh}}(info, x\_rot, y\_rot, z\_rot);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (status != 1) \{}
+\DoxyCodeLine{            std::cerr << \textcolor{stringliteral}{"{}Error at RotateMesh, code: "{}} << status << std::endl;}
+\DoxyCodeLine{        \}}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{a00416_source_l00084}{84}} of file \mbox{\hyperlink{a00416_source}{objloader\+\_\+\+C.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00185_source_l00126}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::meshid}}, and \mbox{\hyperlink{a00182_source_l00209}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Perform\+Rotation()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=307pt]{a00455_ga907c8e39b159c8bad22645448bc97f57_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00455_ga6ac447e5805d3d7e65c9083ffa603cfe}\label{a00455_ga6ac447e5805d3d7e65c9083ffa603cfe}} 
+\index{Geometry@{Geometry}!StoreMesh@{StoreMesh}}
+\index{StoreMesh@{StoreMesh}!Geometry@{Geometry}}
+\doxysubsubsection{\texorpdfstring{StoreMesh()}{StoreMesh()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} Store\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$$\ast$}]{out\+\_\+info,  }\item[{const int $\ast$}]{indices,  }\item[{int}]{num\+\_\+indices,  }\item[{const float $\ast$}]{vertices,  }\item[{int}]{num\+\_\+vertices,  }\item[{const char $\ast$}]{name,  }\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00419}{Cinterface/objloader\+\_\+\+C.\+h}}$>$}
+
+
+
+Store a mesh in a format usable with DHARTAPI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em out\+\_\+info} & Output parameter to contain the new instance of meshinfo\\
+\hline
+{\em indices} & An array of indices for the triangles within the mesh. Each member in this array is an integer that corresponds to a set of 3 vertex coordinates, \{ x, y, z \}. indices\mbox{[}0\mbox{]} represents \{ vertices\mbox{[}0\mbox{]}, vertices\mbox{[}1\mbox{]}, vertices\mbox{[}2\mbox{]} \} indices\mbox{[}1\mbox{]} represents \{ vertices\mbox{[}3\mbox{]}, vertices\mbox{[}4\mbox{]}, vertices\mbox{[}5\mbox{]} \}, etc. Every 3 array members in indices represents a complete triangle for the mesh.\\
+\hline
+{\em num\+\_\+indices} & Member count (size) of the indices array. This value should be (size of vertices / 3) \&\& (num\+\_\+indices \% 3 == 0)\\
+\hline
+{\em vertices} & An array of vertex coordinates, which represents the location of a mesh. Starting at i = 0, \{ vertices\mbox{[}i\mbox{]}, vertices\mbox{[}i + 1\mbox{]}, vertices\mbox{[}i + 2\mbox{]} \} represents a point in space.\\
+\hline
+{\em num\+\_\+vertices} & Member count (size) of the vertices array. This value should be (size of indices $\ast$ 3) \&\& (num\+\_\+vertices \% 3 == 0) \\
+\hline
+{\em name} & The desired name for the mesh (a human-\/readable identifier) \\
+\hline
+{\em id} & The desired ID for the mesh (an integral value)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+HF\+\_\+\+STATUS\+::\+OK, if the mesh was loaded successfully HF\+\_\+\+STATUS\+::\+INVALID\+\_\+\+OBJ if the values in indices and/or vertices did not create a valid mesh
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00455_mesh_teardown}{Mesh teardown}} (how to destroy a mesh)
+\end{DoxySeeAlso}
+First, we must prepare the values for the mesh to store. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// Status code variable, value returned by C Interface functions}}
+\DoxyCodeLine{        \textcolor{comment}{// See documentation for HF::Exceptions::HF\_STATUS for error code definitions.}}
+\DoxyCodeLine{        \textcolor{keywordtype}{int} status = 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Prepare the mesh parameters}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Each member in this array represents a set of 3 vertex coordinates, \{ x, y, z \}.}}
+\DoxyCodeLine{        \textcolor{comment}{// mesh\_indices should begin at 0, be monotonically increasing,}}
+\DoxyCodeLine{        \textcolor{comment}{// and size of mesh\_indices \% 3 == 0, that is to say -\/-\/}}
+\DoxyCodeLine{        \textcolor{comment}{// the member count of mesh\_indices should be a multiple of 3.}}
+\DoxyCodeLine{        \textcolor{comment}{// Every three members in mesh\_indices constitutes a complete triangle for the mesh.}}
+\DoxyCodeLine{        \textcolor{keyword}{const} std::array<int, 3> mesh\_indices \{ 0, 1, 2 \};  \textcolor{comment}{// v\_0, v\_1, v\_2}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{int} size\_indices = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(mesh\_indices.size());}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// This is an array of vertex coordinates. }}
+\DoxyCodeLine{        \textcolor{comment}{// Every three members in mesh\_vertices constitutes a vertex.}}
+\DoxyCodeLine{        \textcolor{comment}{// Every nine members constitutes a complete triangle for the mesh.}}
+\DoxyCodeLine{        \textcolor{comment}{// Size of mesh\_vertices \% 3 == 0, that is to say -\/-\/}}
+\DoxyCodeLine{        \textcolor{comment}{// the member count of mesh\_vertices should be a multiple of 3.}}
+\DoxyCodeLine{        \textcolor{keyword}{const} std::array<float, 9> mesh\_vertices \{ 34.1f, 63.9f, 16.5f, 23.5f, 85.7f, 45.2f, 12.0f, 24.6f, 99.4f \};}
+\DoxyCodeLine{                                              \textcolor{comment}{// \{  v\_0x,  v\_0y,  v\_0z,  v\_1x,  v\_1y,  v\_1z,  v\_2x,  v\_2y,  v\_2z \};}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{int} size\_vertices = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(mesh\_vertices.size());}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Give the mesh a name, and an ID.}}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keyword}{auto} mesh\_name = \textcolor{stringliteral}{"{}This mesh"{}};}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keywordtype}{int} mesh\_id = 0;}
+
+\end{DoxyCodeInclude}
+
+
+We are now ready to call {\bfseries{Store\+Mesh}}. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{comment}{// This will point to memory on free store.}}
+\DoxyCodeLine{        \textcolor{comment}{// The memory will be allocated inside the StoreMesh function,}}
+\DoxyCodeLine{        \textcolor{comment}{// and it must be freed using DestroyMeshInfo.}}
+\DoxyCodeLine{        std::vector<HF::Geometry::MeshInfo>* info = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{comment}{// Call StoreMesh}}
+\DoxyCodeLine{        \textcolor{comment}{// If the values in mesh\_indices and/or mesh\_vertices did not create a valid mesh,}}
+\DoxyCodeLine{        \textcolor{comment}{// or the values size\_indices and/or size\_vertices are not in alignment with the arrays they represent}}
+\DoxyCodeLine{        \textcolor{comment}{// (or not multiples of 3) -\/-\/ an error will occur.}}
+\DoxyCodeLine{        status = \mbox{\hyperlink{a00455_ga6ac447e5805d3d7e65c9083ffa603cfe}{StoreMesh}}(\&info, mesh\_indices.data(), size\_indices, mesh\_vertices.data(), size\_vertices, mesh\_name, mesh\_id);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (status != 1) \{}
+\DoxyCodeLine{            std::cerr << \textcolor{stringliteral}{"{}Error at StoreMesh, code: "{}} << status << std::endl;}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{        }
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{comment}{// Verify that the mesh, at info (vector<MeshInfo> *),}}
+\DoxyCodeLine{        \textcolor{comment}{// was stored properly by StoreMesh.}}
+\DoxyCodeLine{        \textcolor{comment}{//}}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (info == \textcolor{keyword}{nullptr}) \{}
+\DoxyCodeLine{            std::cerr << \textcolor{stringliteral}{"{}Mesh was not stored properly."{}} << std::endl;}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{        \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{            std::cout << \textcolor{stringliteral}{"{}The mesh was stored properly at address "{}} << info << \textcolor{stringliteral}{"{}."{}} << std::endl;}
+\DoxyCodeLine{        \}}
+
+\end{DoxyCodeInclude}
+
+
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} The mesh was stored properly at address 0000029C6317\+BEB0.}~\newline
+
+
+Definition at line \mbox{\hyperlink{a00416_source_l00059}{59}} of file \mbox{\hyperlink{a00416_source}{objloader\+\_\+\+C.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00176_source_l00040}{HF\+::\+Exceptions\+::\+INVALID\+\_\+\+OBJ}}, and \mbox{\hyperlink{a00176_source_l00032}{HF\+::\+Exceptions\+::\+OK}}.
+

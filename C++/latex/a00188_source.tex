@@ -1,309 +1,432 @@
-\hypertarget{a00188_source}{}\doxysection{cost\+\_\+algorithms.\+cpp}
-\label{a00188_source}\index{Cpp/spatialstructures/src/cost\_algorithms.cpp@{Cpp/spatialstructures/src/cost\_algorithms.cpp}}
+\hypertarget{a00188_source}{}\doxysection{objloader.\+cpp}
+\label{a00188_source}\index{Cpp/objloader/src/objloader.cpp@{Cpp/objloader/src/objloader.cpp}}
 \mbox{\hyperlink{a00188}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\Hypertarget{a00188_source_l00001}00001 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00008}00008 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00009}\mbox{\hyperlink{a00188_a525335710b53cb064ca56b936120431e}{00009}} \textcolor{preprocessor}{\#define \_USE\_MATH\_DEFINES}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00010}00010 \textcolor{preprocessor}{\#include <cmath>}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00011}00011 \textcolor{preprocessor}{\#include <algorithm>}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00012}00012 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00013}00013 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00191}{cost\_algorithms.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00014}00014 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00203}{graph.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00015}00015 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{a00185}{Constants.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00016}00016 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00017}00017 \textcolor{preprocessor}{\#include <iostream>}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00018}00018 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00019}00019 \textcolor{keyword}{using }\mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}};}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00020}00020 \textcolor{keyword}{using }\mbox{\hyperlink{a01465}{HF::SpatialStructures::IntEdge}};}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00021}00021 \textcolor{keyword}{using }\mbox{\hyperlink{a01485}{HF::SpatialStructures::Graph}};}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00022}00022 \textcolor{keyword}{using }\mbox{\hyperlink{a00399_a01477}{HF::SpatialStructures::Subgraph}};}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00023}00023 \textcolor{keyword}{using }\mbox{\hyperlink{a01469}{HF::SpatialStructures::EdgeSet}};}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00024}00024 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00025}\mbox{\hyperlink{a00409}{00025}} \textcolor{keyword}{namespace }\mbox{\hyperlink{a00409}{HF::SpatialStructures::CostAlgorithms}} \{}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00026}\mbox{\hyperlink{a00409_ae7b446fefe0b9994859f47b85de79039}{00026}}     \textcolor{keywordtype}{double} \mbox{\hyperlink{a00409_ae7b446fefe0b9994859f47b85de79039}{to\_radians}}(\textcolor{keywordtype}{double} degrees) \{}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00027}00027         \textcolor{keywordflow}{return} degrees * (M\_PI / 180);}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00028}00028     \}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00029}00029 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00030}\mbox{\hyperlink{a00409_adee2fb2573f4dbc2e5c7db153dff2694}{00030}}     \textcolor{keywordtype}{double} \mbox{\hyperlink{a00409_adee2fb2573f4dbc2e5c7db153dff2694}{to\_degrees}}(\textcolor{keywordtype}{double} radians) \{}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00031}00031         \textcolor{keywordflow}{return} radians * (180 / M\_PI);}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00032}00032     \}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00033}00033 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00034}\mbox{\hyperlink{a00409_ae06eb693d0d7858d7a863fae3a6eee2c}{00034}}     \textcolor{keywordtype}{double} \mbox{\hyperlink{a00409_ae06eb693d0d7858d7a863fae3a6eee2c}{CalculateSlope}}(\mbox{\hyperlink{a02005}{Node}}\& parent, \mbox{\hyperlink{a02005}{Node}}\& child)}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00035}00035     \{}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00036}00036         \textcolor{comment}{// Calculates the Slope between two nodes as an angle in degrees.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00037}00037         \textcolor{comment}{// This could be split into two functions later since the first commented part is simply rise/run}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00038}00038         \textcolor{comment}{// The second part is a generic cosine angle between vectors }}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00039}00039 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00040}00040         \textcolor{comment}{// Calculate slope with Rise over Run using atan2}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00041}00041         \textcolor{comment}{/*}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00042}00042 \textcolor{comment}{        double run = std::sqrt( std::pow(parent[0]-\/child[0],2) + std::pow(parent[1]-\/child[1],2) );}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00043}00043 \textcolor{comment}{        double rise = parent[2] -\/ child[2];}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00044}00044 \textcolor{comment}{        double slope = to\_degrees(std::atan2(rise, run));}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00045}00045 \textcolor{comment}{        */}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00046}00046 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00047}00047         \textcolor{comment}{// Calculate slope with cosine of two vectors}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00008}00008 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00191}{objloader.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00009}00009 \textcolor{preprocessor}{\#include <Dense>}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00010}00010 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00185}{meshinfo.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00011}\mbox{\hyperlink{a00188_af14fac7fbc250522a78849d58d5b0811}{00011}} \textcolor{preprocessor}{\#define TINYOBJLOADER\_IMPLEMENTATION }}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00012}\mbox{\hyperlink{a00188_ad1ceae03a73fd42494508a2d57eaf1fe}{00012}} \textcolor{preprocessor}{\#define TINYOBJLOADER\_USE\_DOUBLE}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00013}00013 \textcolor{preprocessor}{\#include <tiny\_obj\_loader.h>}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00014}00014 \textcolor{preprocessor}{\#include <robin\_hood.h>}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00015}00015 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00176}{HFExceptions.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00016}00016 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00017}00017 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00018}00018 \textcolor{preprocessor}{\#include <filesystem>}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00019}00019 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00020}00020 \textcolor{keyword}{using }std::vector;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00021}00021 \textcolor{keyword}{using }std::array;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00022}00022 \textcolor{keyword}{using }std::string;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00024}00024 \textcolor{keyword}{using }tinyobj::ObjReader;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00025}00025 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00026}00026 \textcolor{comment}{// [nanoRT]}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00027}00027 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00470}{HF::nanoGeom}} \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00029}\mbox{\hyperlink{a00470_ad8e91aefa202de3abee6fd9914299e46}{00029}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00470_ad8e91aefa202de3abee6fd9914299e46}{LoadObj}}(\mbox{\hyperlink{a00470_a01339}{Mesh}}\& mesh, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* filename) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00030}00030         \textcolor{comment}{// Need to have mesh.vertices, mesh.faces, mesh.num\_faces}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00031}00031 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00032}00032         tinyobj::attrib\_t attrib;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00033}00033         std::vector<tinyobj::shape\_t> shapes;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00034}00034         std::vector<tinyobj::material\_t> materials;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00035}00035 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00036}00036         std::string warn;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00037}00037         std::string err;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00038}00038 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00039}00039         \textcolor{keywordtype}{bool} ret = tinyobj::LoadObj(\&attrib, \&shapes, \&materials, \&warn, \&err, filename);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00040}00040 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00041}00041         \textcolor{comment}{// Check for errors in the loading}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00042}00042         \textcolor{keywordflow}{if} (!err.empty()) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00043}00043             std::cerr << \textcolor{stringliteral}{"{} Loading: "{}} << err << std::endl;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00044}00044         \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00045}00045         \textcolor{keywordflow}{if} (!ret) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00046}00046             exit(1);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00047}00047         \}}
 \DoxyCodeLine{\Hypertarget{a00188_source_l00048}00048 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00049}00049         \textcolor{comment}{// Get the vector between the points for the first vector}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00050}00050         \textcolor{keywordtype}{double} n1 = child[0] -\/ parent[0];}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00051}00051         \textcolor{keywordtype}{double} n2 = child[1] -\/ parent[1];}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00052}00052         \textcolor{keywordtype}{double} n3 = child[2] -\/ parent[2];}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00053}00053 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00054}00054         \textcolor{comment}{// Second vector is the z unit vector}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00055}00055         \textcolor{keywordtype}{double} u1 = 0;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00056}00056         \textcolor{keywordtype}{double} u2 = 0;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00057}00057         \textcolor{keywordtype}{double} u3 = 1;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00049}00049         \textcolor{comment}{// Get the number of faces (likely number of triangles)}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00050}00050         \textcolor{keywordtype}{size\_t} num\_faces = 0;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00051}00051         \textcolor{comment}{// Loop over shapes}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00052}00052         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} s = 0; s < shapes.size(); s++)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00053}00053         \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00054}00054             \textcolor{comment}{// Increment the number of faces by getting the size of the indices and dividing by 3 (number of verts per face)}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00055}00055             \textcolor{comment}{// Must be triangles for this calculation to make sense (I think)}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00056}00056             num\_faces += shapes[s].mesh.indices.size() / 3;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00057}00057         \}}
 \DoxyCodeLine{\Hypertarget{a00188_source_l00058}00058 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00059}00059         \textcolor{comment}{// double numerator = std::abs((n1 * u1) + (n2 * u2) + (n3 * u3));}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00060}00060         \textcolor{comment}{// Which reduces to:}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00061}00061         \textcolor{keywordtype}{double} numerator = std::abs(n3);}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00062}00062 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00063}00063         \textcolor{comment}{// Distance of first vector }}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00064}00064         \textcolor{keywordtype}{double} denom = std::sqrt(std::pow(n1, 2) + std::pow(n2, 2) + std::pow(n3, 2));}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00065}00065 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00066}00066         \textcolor{comment}{// Distance of second vector }}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00067}00067         \textcolor{comment}{// double denom\_2 = std::abs(std::sqrt(std::pow(u1, 2) + std::pow(u2, 2) + std::pow(u3, 2)));}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00068}00068         \textcolor{comment}{// Which reduces to:}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00069}00069         \textcolor{comment}{//  double denom\_2 = std::sqrt(std::pow(u3, 2));}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00070}00070         \textcolor{comment}{//  and then}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00071}00071         \textcolor{comment}{//  double denom\_2 = u3;}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00072}00072         \textcolor{comment}{// Which is 1}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00073}00073 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00074}00074         \textcolor{keywordtype}{double} res = std::asin(numerator/denom);}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00075}00075 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00076}00076         \textcolor{keywordtype}{int} direc;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00077}00077         \textcolor{keywordflow}{if} (child[2] > parent[2])\{}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00078}00078             direc = 1;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00079}00079         \}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00080}00080 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00081}00081         \textcolor{keywordflow}{else}\{}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00082}00082             direc = -\/1;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00083}00083         \}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00084}00084 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00085}00085         \textcolor{keywordtype}{double} slope = \mbox{\hyperlink{a00409_adee2fb2573f4dbc2e5c7db153dff2694}{to\_degrees}}(res) * direc;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00086}00086 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00087}00087         \textcolor{comment}{// This will catch nan, infinity, and negative infinity.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00088}00088         \textcolor{comment}{// All of these values would break the calculation.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00089}00089         \textcolor{keywordflow}{if} (!std::isfinite(slope))}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00090}00090             slope = 0;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00091}00091 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00092}00092         \textcolor{keywordflow}{return} slope;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00093}00093         }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00094}00094     \}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00095}00095 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00096}\mbox{\hyperlink{a00409_ac51f2e76c00356f8a6145bee865cd922}{00096}}     \mbox{\hyperlink{a01469}{EdgeSet}} \mbox{\hyperlink{a00409_ac51f2e76c00356f8a6145bee865cd922}{CalculateEnergyExpenditure}}(\textcolor{keyword}{const} \mbox{\hyperlink{a00399_a01477}{Subgraph}}\& sg) \{}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00097}00097         \textcolor{comment}{// Energy expenditure data will be stored here and returned from this function.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00098}00098         std::vector<EdgeSet> edge\_set;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00099}00099 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00100}00100         \textcolor{comment}{// From Subgraph sg}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00101}00101         \mbox{\hyperlink{a02005}{Node}} parent\_node = sg.\mbox{\hyperlink{a00399_a2f8de99f10387d075d7d69336e4d5dd7}{m\_parent}};}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00102}00102         std::vector<Edge> edge\_list = sg.\mbox{\hyperlink{a00399_ac1403ade5ddeb5410a523871f96e1e64}{m\_edges}};}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00103}00103 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00104}00104         \textcolor{comment}{// We can preallocate this container to have edge\_list.size()}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00105}00105         \textcolor{comment}{// blocks since we know exactly how many children make up the subgraph.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00106}00106         std::vector<IntEdge> children(edge\_list.size());}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00107}00107         \textcolor{keyword}{auto} it\_children = children.begin();}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00108}00108 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00109}00109         \textcolor{keywordflow}{for} (\mbox{\hyperlink{a01461}{Edge}} link\_a : edge\_list) \{}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00110}00110             \textcolor{comment}{// Retrieve vector components of the vector formed by}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00111}00111             \textcolor{comment}{// parent\_node and link\_a}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00112}00112 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00113}00113             \textcolor{keyword}{const} \textcolor{keyword}{auto} dir = parent\_node.\mbox{\hyperlink{a02005_ad3f7898ef3178eef0c3579869a7f5c67}{directionTo}}(link\_a.child);}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00114}00114             \textcolor{keyword}{const} \textcolor{keyword}{auto} magnitude = parent\_node.\mbox{\hyperlink{a02005_abbd66b566460f9557a373b5fbcc30bb1}{distanceTo}}(link\_a.child);}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00115}00115 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00116}00116             \textcolor{comment}{//}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00117}00117             \textcolor{comment}{//  Angle formula in R3 is:}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00118}00118             \textcolor{comment}{//  acos(dot\_product(vector\_U, vector\_V) / magnitude(vector\_U) * magnitude(vector\_V));}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00119}00119             \textcolor{comment}{//}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00120}00120             \textcolor{comment}{//  vector\_V will be a unit vector i, j, or k for x, y, and z axes respectively.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00121}00121             \textcolor{comment}{//  Therefore, we simplify these angle formulas to:}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00122}00122             \textcolor{comment}{//  acos(component\_value / magnitude(vector\_U))}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00123}00123             \textcolor{comment}{//  component\_value will be dir[0], dir[1], or dir[2] for x, y, or z components respectively.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00124}00124             \textcolor{comment}{//}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00125}00125             \textcolor{comment}{//auto angle\_x\_axis = to\_degrees(std::acos(dir[0] / magnitude));}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00126}00126             \textcolor{comment}{//auto angle\_y\_axis = to\_degrees(std::acos(dir[1] / magnitude));}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00127}00127             \textcolor{comment}{//auto angle\_z\_axis = to\_degrees(std::acos(dir[2] / magnitude));}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00128}00128 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00129}00129             \textcolor{comment}{//auto angle = angle\_y\_axis;}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00130}00130             \textcolor{comment}{//auto slope = std::clamp(std::tanf(angle), -\/0.4f, -\/0.4f);}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00131}00131 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00132}00132             \textcolor{keyword}{const} \textcolor{keywordtype}{double} slope = \mbox{\hyperlink{a00409_ae06eb693d0d7858d7a863fae3a6eee2c}{CalculateSlope}}(parent\_node, link\_a.child);}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00133}00133             }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00134}00134             \textcolor{keyword}{const} \textcolor{keywordtype}{double} g = std::clamp(std::tan(\mbox{\hyperlink{a00409_ae7b446fefe0b9994859f47b85de79039}{to\_radians}}(slope)), -\/0.4, 0.4);}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00135}00135 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00136}00136             \textcolor{keyword}{auto} e = 280.5}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00137}00137                 * (std::pow(g, 5)) -\/ 58.7}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00138}00138                 * (std::pow(g, 4)) -\/ 76.8}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00139}00139                 * (std::pow(g, 3)) + 51.9}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00140}00140                 * (std::pow(g, 2)) + 19.6}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00141}00141                 * (g) + 2.5;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00142}00142 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00143}00143             \textcolor{comment}{// You cannot gain energy. This indicates a programmer error. }}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00144}00144             assert(e >= 0);}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00145}00145 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00146}00146             \textcolor{comment}{// Calculate the new score/distance for the IntEdge}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00147}00147             \textcolor{keywordtype}{double} expenditure = e * magnitude;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00148}00148 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00149}00149             \textcolor{comment}{// Create the resulting IntEdge from the current child ID and calculation}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00150}00150             \mbox{\hyperlink{a01465}{IntEdge}} ie = \{ link\_a.\mbox{\hyperlink{a01465_a7662d9deb8c69743b37c0c8da3f51610}{child}}.id, \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(expenditure) \}; }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00151}00151 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00152}00152             \textcolor{comment}{// Dereference the vector<IntEdge> iterator, assign it to the IntEdge created,}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00153}00153             \textcolor{comment}{// then advance the iterator.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00154}00154             *(it\_children++) = ie;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00155}00155         \}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00156}00156         }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00157}00157         \mbox{\hyperlink{a01469}{EdgeSet}} es = \{ parent\_node.\mbox{\hyperlink{a02005_a8212d00e6913abf0ca6fec1f2624b677}{id}}, children \};}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00158}00158 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00159}00159         \textcolor{keywordflow}{return} es;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00160}00160     \}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00161}00161 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00162}\mbox{\hyperlink{a00409_adbe5e58355a884494d6e99bf17fc5f7b}{00162}}     std::vector<EdgeSet> \mbox{\hyperlink{a00409_ac51f2e76c00356f8a6145bee865cd922}{CalculateEnergyExpenditure}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01485}{Graph}}\& g) \{}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00163}00163         \textcolor{comment}{// Retrieve all nodes from g so we can obtain subgraphs.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00164}00164         std::vector<Node> nodes = g.\mbox{\hyperlink{a01485_aa70347b8a33b57c6f0a72d6eca4248d7}{Nodes}}();}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00165}00165 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00166}00166         \textcolor{comment}{// The result container will always be, at most, the node count of g.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00167}00167         \textcolor{comment}{// We can preallocate this memory so we do not have to resize during the loop below.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00168}00168         std::vector<EdgeSet> result(nodes.size());}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00169}00169         \textcolor{keyword}{auto} it\_result = result.begin();}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00170}00170 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00171}00171         \textcolor{keywordflow}{for} (\mbox{\hyperlink{a02005}{Node}} parent\_node : nodes) \{}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00172}00172             \textcolor{comment}{// For all Node in g...}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00173}00173 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00174}00174             \textcolor{comment}{// Get the Subgraph via parent\_node}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00175}00175             \mbox{\hyperlink{a00399_a01477}{Subgraph}} sg = g.\mbox{\hyperlink{a01485_a89250c619a726fd0adbd71778d166887}{GetSubgraph}}(parent\_node);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00059}00059         \textcolor{comment}{// Set the number of vertices by finding the total size of the vertex array and dividing by 3 (number of axis in point: x,y,z)}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00060}00060         \textcolor{keywordtype}{size\_t} num\_vertices = attrib.vertices.size() / 3;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00061}00061         mesh.\mbox{\hyperlink{a00470_a23f10e5b6d63da186e7bd477ba8b34d8}{num\_faces}} = num\_faces;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00062}00062         mesh.\mbox{\hyperlink{a00470_a623bb7021165e4caf385245729f1c2f1}{num\_vertices}} = num\_vertices;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00063}00063         \textcolor{comment}{// Set a new array of doubles to the size of the number of vertices times 3 (number of axis in point)}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00064}00064         mesh.\mbox{\hyperlink{a00470_a9ba8fa062d05f24f9a4a30ed35ac6754}{vertices}} = \textcolor{keyword}{new} \textcolor{keywordtype}{double}[num\_vertices * 3];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00065}00065         \textcolor{comment}{// Set a new array of doubles to the size of the number of faces times 3 (number of verts per face)}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00066}00066         \textcolor{comment}{// While this is called faces, its really the indices}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00067}00067         mesh.\mbox{\hyperlink{a00470_a0f21ead8835aeab4258b117d9aa66793}{faces}} = \textcolor{keyword}{new} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}[num\_faces * 3];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00068}00068 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00069}00069         \textcolor{comment}{// Loop over shapes}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00070}00070         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} s = 0; s < shapes.size(); s++)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00071}00071         \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00072}00072             \textcolor{comment}{// Loop over faces(polygon)}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00073}00073             \textcolor{keywordtype}{size\_t} index\_offset = 0;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00074}00074             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} f = 0; f < shapes[s].mesh.num\_face\_vertices.size(); f++)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00075}00075             \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00076}00076                 \textcolor{keywordtype}{int} fv = shapes[s].mesh.num\_face\_vertices[f];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00077}00077 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00078}00078                 \textcolor{comment}{// Loop over vertices in the face.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00079}00079                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} v = 0; v < fv; v++)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00080}00080                 \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00081}00081                     \textcolor{comment}{// extract the index of the start of the mesh indices}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00082}00082                     tinyobj::index\_t idx = shapes[s].mesh.indices[index\_offset + v];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00083}00083                     \textcolor{comment}{// Assign the xyz values from the flat array}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00084}00084                     tinyobj::real\_t vx = attrib.vertices[3 * idx.vertex\_index + 0];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00085}00085                     tinyobj::real\_t vy = attrib.vertices[3 * idx.vertex\_index + 1];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00086}00086                     tinyobj::real\_t vz = attrib.vertices[3 * idx.vertex\_index + 2];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00087}00087 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00088}00088                     \textcolor{comment}{// set vertices to the mesh data object}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00089}00089                     \textcolor{comment}{// This could probably all be done in one step with the above 3 lines}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00090}00090                     mesh.\mbox{\hyperlink{a00470_a9ba8fa062d05f24f9a4a30ed35ac6754}{vertices}}[3 * idx.vertex\_index + 0] = vx;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00091}00091                     mesh.\mbox{\hyperlink{a00470_a9ba8fa062d05f24f9a4a30ed35ac6754}{vertices}}[3 * idx.vertex\_index + 1] = vy;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00092}00092                     mesh.\mbox{\hyperlink{a00470_a9ba8fa062d05f24f9a4a30ed35ac6754}{vertices}}[3 * idx.vertex\_index + 2] = vz;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00093}00093                 \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00094}00094                 index\_offset += fv;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00095}00095             \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00096}00096 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00097}00097             \textcolor{comment}{// Loop through the mesh indices and assign each vertices index to the face index}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00098}00098             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} vi = 0; vi < shapes[s].mesh.indices.size(); vi++)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00099}00099             \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00100}00100                 \textcolor{comment}{// This should make it clearer that this really is the mesh indices despite the name "{}faces"{}}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00101}00101                 mesh.\mbox{\hyperlink{a00470_a0f21ead8835aeab4258b117d9aa66793}{faces}}[vi] = shapes[s].mesh.indices[vi].vertex\_index;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00102}00102             \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00103}00103         \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00104}00104         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00105}00105     \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00106}00106 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00107}00107 \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00108}00108 \textcolor{comment}{// end [nanoRT]}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00109}00109 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00110}00110 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00469}{HF::Geometry}} \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00111}00111 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00112}\mbox{\hyperlink{a00469_a13874b607886c8f427b2a8f332148553}{00112}}     \textcolor{keyword}{static} robin\_hood::unordered\_map<string, string> \mbox{\hyperlink{a00469_a13874b607886c8f427b2a8f332148553}{test\_model\_paths}}\{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00113}00113         \{\textcolor{stringliteral}{"{}teapot"{}}, \textcolor{stringliteral}{"{}teapot.obj"{}}\},}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00114}00114         \{\textcolor{stringliteral}{"{}plane"{}}, \textcolor{stringliteral}{"{}plane.obj"{}} \},}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00115}00115         \{\textcolor{stringliteral}{"{}big teapot"{}}, \textcolor{stringliteral}{"{}big\_teapot.obj"{}} \},}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00116}00116         \{\textcolor{stringliteral}{"{}energy blob"{}}, \textcolor{stringliteral}{"{}energy\_blob.obj"{}} \},}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00117}00117         \{\textcolor{stringliteral}{"{}sibenik"{}}, \textcolor{stringliteral}{"{}sibenik.obj"{}} \},}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00118}00118     \};}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00119}00119 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00120}\mbox{\hyperlink{a00469_aece9b1559429cfcd59fc5c60bc3dc5b1}{00120}}     tinyobj::ObjReader \mbox{\hyperlink{a00469_aece9b1559429cfcd59fc5c60bc3dc5b1}{CreateReader}}(\textcolor{keyword}{const} std::string \& path) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00121}00121         \textcolor{comment}{// First, attempt to load the obj}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00122}00122         tinyobj::ObjReader objloader;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00123}00123 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00124}00124         \textcolor{comment}{// See if the filepath exists at all}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00125}00125         \textcolor{keywordflow}{if} (!std::filesystem::exists(path)) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00126}00126             std::cerr << \textcolor{stringliteral}{"{} No file exists at "{}} << path << std::endl;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00127}00127             \textcolor{keywordflow}{throw} \mbox{\hyperlink{a01319}{HF::Exceptions::FileNotFound}}();}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00128}00128         \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00129}00129 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00130}00130         tinyobj::ObjReaderConfig config;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00131}00131         config.triangulate = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00132}00132         \textcolor{comment}{// Load the OBJ using tinyobj.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00133}00133         objloader.ParseFromFile(path, config);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00134}00134 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00135}00135         \textcolor{comment}{// Throw if the OBJ isn't valid}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00136}00136         \textcolor{keywordflow}{if} (!objloader.Valid() || objloader.GetShapes().size() == 0)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00137}00137         \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00138}00138             std::cerr << \textcolor{stringliteral}{"{} The given file did not produce a valid mesh "{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00139}00139             \textcolor{keywordflow}{throw} \mbox{\hyperlink{a01323}{HF::Exceptions::InvalidOBJ}}();}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00140}00140         \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00141}00141 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00142}00142         \textcolor{keywordflow}{return} objloader;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00143}00143     \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00144}00144 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00145}00145     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00146}\mbox{\hyperlink{a00469_a1d0272a1cc56fb0cb8fa5a0b968797ed}{00146}}     \mbox{\hyperlink{a00469_a01359}{tinyobj\_shape<T>}} \mbox{\hyperlink{a00469_a1d0272a1cc56fb0cb8fa5a0b968797ed}{MakeShape}}(\textcolor{keyword}{const} tinyobj::shape\_t \& shape) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00147}00147         \mbox{\hyperlink{a00469_a01359}{tinyobj\_shape<T>}} out\_shape;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00148}00148         }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00149}00149         \textcolor{keyword}{const} \textcolor{keywordtype}{int} num\_indices = shape.mesh.\mbox{\hyperlink{a00469_ac9a66a69cf7f1688351a54806afe25ce}{indices}}.size();}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00150}00150         out\_shape.\mbox{\hyperlink{a00469_ac9a66a69cf7f1688351a54806afe25ce}{indices}}.resize(num\_indices);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00151}00151         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < num\_indices; i++)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00152}00152             out\_shape.\mbox{\hyperlink{a00469_ac9a66a69cf7f1688351a54806afe25ce}{indices}}[i] = shape.mesh.indices[i].vertex\_index;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00153}00153 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00154}00154         out\_shape.\mbox{\hyperlink{a00469_a1326b7839d7fe477f6bc7d0d699eadfb}{mat\_ids}} = shape.mesh.material\_ids;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00155}00155         \textcolor{keywordflow}{return} out\_shape;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00156}00156     \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00157}00157 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00158}00158     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00159}\mbox{\hyperlink{a00469_a02e98028a7e54dc32b0f148f0b6d1ba5}{00159}}     vector<tinyobj\_shape<T>> \mbox{\hyperlink{a00469_a02e98028a7e54dc32b0f148f0b6d1ba5}{MakeShapes}}(\textcolor{keyword}{const} vector<tinyobj::shape\_t>\& shapes) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00160}00160         vector<tinyobj\_shape<T>> out\_shapes(shapes.size());}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00161}00161         }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00162}00162         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < shapes.size(); i++)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00163}00163             out\_shapes[i] = MakeShape<T>(shapes[i]);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00164}00164         }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00165}00165         \textcolor{keywordflow}{return} out\_shapes;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00166}00166     \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00167}00167 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00168}\mbox{\hyperlink{a00469_abc6b7e5052eb1564d1bb3c67d9f93031}{00168}}     vector<tinyobj\_material> \mbox{\hyperlink{a00469_abc6b7e5052eb1564d1bb3c67d9f93031}{MakeMaterials}}(\textcolor{keyword}{const} vector<tinyobj::material\_t> \& materials) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00169}00169         vector<tinyobj\_material> out\_mats(materials.size());}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00170}00170         }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00171}00171         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < materials.size(); i++)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00172}00172             out\_mats[i].name = materials[i].name;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00173}00173         }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00174}00174         \textcolor{keywordflow}{return} out\_mats;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00175}00175     \}}
 \DoxyCodeLine{\Hypertarget{a00188_source_l00176}00176 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00177}00177             \textcolor{comment}{// Call CalculateEnergyExpenditure using the returned Subgraph,}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00178}00178             \textcolor{comment}{// get a vector<EdgeSet> back}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00179}00179             \mbox{\hyperlink{a01469}{EdgeSet}} energy\_expenditures = \mbox{\hyperlink{a00409_ac51f2e76c00356f8a6145bee865cd922}{CalculateEnergyExpenditure}}(sg);}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00180}00180 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00181}00181             \textcolor{comment}{// Dereference it\_result, assign it to the energy\_expenditures container,}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00182}00182             \textcolor{comment}{// then advance it\_result (std::vector<std::vector<EdgeSet>>::iterator)}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00183}00183             *(it\_result++) = energy\_expenditures;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00184}00184         \}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00185}00185 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00186}00186         \textcolor{keywordflow}{return} result;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00187}00187     \}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00188}00188 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00189}\mbox{\hyperlink{a00409_a51b88e596c3b5f68b7abbcbc91e30bdf}{00189}}     std::vector<IntEdge> \mbox{\hyperlink{a00409_a51b88e596c3b5f68b7abbcbc91e30bdf}{CalculateCrossSlope}}(\textcolor{keyword}{const} \mbox{\hyperlink{a00399_a01477}{Subgraph}}\& sg) \{}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00190}00190         \textcolor{comment}{// All cross slope data for Subgraph sg will be stored here }}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00191}00191         \textcolor{comment}{// and returned from this function.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00192}00192         std::vector<IntEdge> result;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00193}00193 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00194}00194         \mbox{\hyperlink{a02005}{Node}} parent\_node = sg.\mbox{\hyperlink{a00399_a2f8de99f10387d075d7d69336e4d5dd7}{m\_parent}};}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00195}00195         std::vector<Edge> edges = sg.\mbox{\hyperlink{a00399_ac1403ade5ddeb5410a523871f96e1e64}{m\_edges}};}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00196}00196 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00197}00197         \textcolor{keywordflow}{for} (\mbox{\hyperlink{a01461}{Edge}} edge\_a : edges) \{}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00198}00198             \textcolor{comment}{// We iterate over all edges that extend from parent\_node. }}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00199}00199             \mbox{\hyperlink{a02005}{Node}} child\_node\_a = edge\_a.child;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00200}00200             \textcolor{keywordtype}{float} edge\_data\_a = edge\_a.score;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00201}00201 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00202}00202             \textcolor{comment}{//}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00203}00203             \textcolor{comment}{//  Here -\/-\/ we should assess the step\_type field for edge\_a.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00204}00204             \textcolor{comment}{//}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00205}00205             \textcolor{comment}{//  /// <summary> Describes the type of step an edge connects to. </summary>}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00206}00206             \textcolor{comment}{//  enum STEP \{}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00207}00207             \textcolor{comment}{//      NOT\_CONNECTED = 0, ///< No connection between parent and child.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00208}00208             \textcolor{comment}{//      NONE = 1,        ///< Parent and child are on the same plane and no step is required.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00209}00209             \textcolor{comment}{//      UP = 2,         ///< A step up is required to get from parent to child.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00210}00210             \textcolor{comment}{//      DOWN = 3,       ///< A step down is required to get from parent to child.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00211}00211             \textcolor{comment}{//      OVER = 4        ///< A step over something is required to get from parent to child.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00212}00212             \textcolor{comment}{//  \};}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00213}00213             \textcolor{comment}{//}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00214}00214 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00215}00215             \textcolor{comment}{// We must have a container to store all perpendicular edges found.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00216}00216             \textcolor{comment}{// This container will have all edges that are perpendicular to edge\_a -\/-\/}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00217}00217             \textcolor{comment}{// or rather, the vector formed by parent\_node and child\_node\_a.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00218}00218 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00219}00219             \textcolor{comment}{// Note that we are checking for perpendicularity in 2D space only.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00220}00220             std::vector<Edge> perpendicular\_edges = GetPerpendicularEdges<2>(sg, child\_node\_a);}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00221}00221 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00222}00222             \textcolor{keywordtype}{float} weight = 0.0;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00223}00223             \textcolor{keywordtype}{float} cross\_slope = 0.0;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00224}00224             \textcolor{keywordtype}{float} a\_z = 0.0;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00225}00225             \textcolor{keywordtype}{float} b\_z = 0.0;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00226}00226             \textcolor{keywordtype}{float} c\_z = 0.0;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00227}00227 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00228}00228             \textcolor{keywordflow}{switch} (perpendicular\_edges.size()) \{}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00229}00229             \textcolor{keywordflow}{case} 0:}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00230}00230                 \textcolor{comment}{// No edges were found to be perpendicular to the edge}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00231}00231                 \textcolor{comment}{// formed by node parent\_node and node child\_node\_a.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00232}00232                 \textcolor{comment}{// The IntEdge to be created will use the existing edge data}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00233}00233                 \textcolor{comment}{// of parent\_node and child\_node\_a (edge\_data\_a).}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00234}00234                 weight = edge\_data\_a;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00235}00235                 \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00236}00236             \textcolor{keywordflow}{case} 1:}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00237}00237                 \textcolor{comment}{// One edge formed by node parent\_node and another child\_node}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00238}00238                 \textcolor{comment}{// was found to be perpendicular to the edge formed by}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00239}00239                 \textcolor{comment}{// node parent\_node and node child\_node\_a.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00240}00240 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00241}00241                 a\_z = child\_node\_a.\mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}};}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00177}\mbox{\hyperlink{a00469_a9bbdc23c626ed431d5a084722c22f99f}{00177}}     \mbox{\hyperlink{a00469_a01367}{tinyobj\_geometry<double>}} \mbox{\hyperlink{a00469_a9bbdc23c626ed431d5a084722c22f99f}{LoadMeshesFromTinyOBJ}}(std::string path)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00178}00178     \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00179}00179         \mbox{\hyperlink{a00469_a01367}{tinyobj\_geometry<double>}} out\_obj;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00180}00180         ObjReader reader = \mbox{\hyperlink{a00469_aece9b1559429cfcd59fc5c60bc3dc5b1}{CreateReader}}(path);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00181}00181 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00182}00182         \textcolor{comment}{// get information from the reader.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00183}00183         \textcolor{keyword}{auto} mats = reader.GetMaterials(); \textcolor{comment}{// Materials of the mesh at path}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00184}00184         tinyobj::attrib\_t attributes = reader.GetAttrib(); \textcolor{comment}{// Attributes of the mesh at path}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00185}00185         vector<tinyobj::shape\_t> shapes = reader.GetShapes(); \textcolor{comment}{// Submeshes of the mesh at path}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00186}00186 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00187}00187         \textcolor{comment}{// Get the info about shapes for this mesh}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00188}00188         out\_obj.\mbox{\hyperlink{a00469_a54c1f870295e1d35ec13f5aab4d4c3b9}{attributes}}.vertices = attributes.vertices;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00189}00189         out\_obj.\mbox{\hyperlink{a00469_a93f2dc0a104bbd96931921e366b7ddb2}{shapes}} = MakeShapes<double>(shapes);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00190}00190         out\_obj.\mbox{\hyperlink{a00469_a4a3ee4a16a711ab365e1f073633fda57}{materials}} = \mbox{\hyperlink{a00469_abc6b7e5052eb1564d1bb3c67d9f93031}{MakeMaterials}}(mats);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00191}00191 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00192}00192         \textcolor{keywordflow}{return} out\_obj;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00193}00193     \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00194}00194 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00195}\mbox{\hyperlink{a00469_a06c0c11adb62f8b204e42f75ac1990ac}{00195}}     vector<MeshInfo<float>> \mbox{\hyperlink{a00469_a06c0c11adb62f8b204e42f75ac1990ac}{LoadMeshObjects}}(std::string path, \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5}{GROUP\_METHOD}} gm, \textcolor{keywordtype}{bool} change\_coords, \textcolor{keywordtype}{int} scale)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00196}00196     \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00197}00197         \textcolor{comment}{// First, attempt to load the obj}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00198}00198         tinyobj::ObjReader objloader;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00199}00199 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00200}00200         \textcolor{comment}{// See if the filepath exists at all}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00201}00201         \textcolor{keywordflow}{if} (!std::filesystem::exists(path)) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00202}00202             std::cerr << \textcolor{stringliteral}{"{} No file exists at "{}} << path << std::endl;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00203}00203             \textcolor{keywordflow}{throw} \mbox{\hyperlink{a01319}{HF::Exceptions::FileNotFound}}();}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00204}00204         \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00205}00205 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00206}00206         \textcolor{comment}{// Load the OBJ using tinyobj.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00207}00207         objloader.ParseFromFile(path);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00208}00208 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00209}00209         \textcolor{comment}{// Throw if the OBJ isn't valid}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00210}00210         \textcolor{keywordflow}{if} (!objloader.Valid() || objloader.GetShapes().size() == 0)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00211}00211         \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00212}00212             std::cerr << \textcolor{stringliteral}{"{} The given file did not produce a valid mesh "{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00213}00213             \textcolor{keywordflow}{throw} \mbox{\hyperlink{a01323}{HF::Exceptions::InvalidOBJ}}();}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00214}00214         \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00215}00215 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00216}00216         \textcolor{comment}{// get the materials, attributes, and shapes}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00217}00217         vector<MeshInfo<float>> MI; \textcolor{comment}{// Vector of meshinf}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00218}00218         \textcolor{keyword}{auto} mats = objloader.GetMaterials(); \textcolor{comment}{// Materials of the mesh at path}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00219}00219         tinyobj::attrib\_t attributes = objloader.GetAttrib(); \textcolor{comment}{// Attributes of the mesh at path}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00220}00220         vector<tinyobj::shape\_t> shapes = objloader.GetShapes(); \textcolor{comment}{// Submeshes of the mesh at path}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00221}00221         \textcolor{keyword}{const} vector<tinyobj::real\_t>\& verts = attributes.vertices; \textcolor{comment}{// Vertices of the mesh at path.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00222}00222 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00223}00223         \textcolor{comment}{// This will behave differently depending on the group\_type being used.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00224}00224         \textcolor{keywordflow}{switch} (gm) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00225}00225         \textcolor{keywordflow}{case} \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e}{GROUP\_METHOD::ONLY\_FILE}}: \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00226}00226             \textcolor{comment}{// A single mesh will just need to have its index arrays combined}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00227}00227             \textcolor{keywordtype}{int} \textcolor{keywordtype}{id} = 0;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00228}00228             std::string name = \textcolor{stringliteral}{"{}EntireFile"{}};}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00229}00229             }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00230}00230             \textcolor{comment}{// Must be included in the other method types. It's not clear why the float conversion }}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00231}00231             \textcolor{comment}{// wasn't done above with the attributes.vertices}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00232}00232             \textcolor{keyword}{auto} vert\_array = \textcolor{keyword}{static\_cast<}vector<double>\textcolor{keyword}{>}(verts);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00233}00233             \textcolor{keyword}{auto} vert\_scaled = vert\_array;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00234}00234             \textcolor{comment}{// Multiply each element of array by the user defined scale value (default of 1 which does not change vertex)}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00235}00235             std::transform(vert\_array.begin(), vert\_array.end(), vert\_scaled.begin(),[\&](\textcolor{keywordtype}{float} i) \{ return i * scale; \});}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00236}00236             \textcolor{comment}{// assign the float vector to the scaled method}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00237}00237 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00238}00238             \textcolor{comment}{// Cast to float}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00239}00239             vector<float> vertexes(vert\_array.size());}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00240}00240             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < vert\_array.size(); i++)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00241}00241                 vertexes[i] = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(vert\_array[i]);}
 \DoxyCodeLine{\Hypertarget{a00188_source_l00242}00242 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00243}00243                 \textcolor{comment}{// z value of other child\_node}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00244}00244                 b\_z = perpendicular\_edges[0].child.z;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00245}00245 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00246}00246                 cross\_slope = std::abs(a\_z -\/ b\_z);}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00247}00247 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00248}00248                 \textcolor{comment}{// add the existing weight value}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00249}00249                 weight = cross\_slope + perpendicular\_edges[0].score;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00250}00250                 \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00251}00251             \textcolor{keywordflow}{case} 2:}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00252}00252                 \textcolor{comment}{// Two edges -\/-\/ each formed by node parent\_node and two separate child node}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00253}00253                 \textcolor{comment}{// were found to be perpendicular to the edge formed by}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00254}00254                 \textcolor{comment}{// node parent\_node and node child\_node\_a.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00255}00255 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00256}00256                 a\_z = child\_node\_a.\mbox{\hyperlink{a02005_a495b47689917e0395ce96ee01d3f5ed3}{z}};}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00257}00257 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00258}00258                 \textcolor{comment}{// z value of the first other child\_node}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00259}00259                 b\_z = perpendicular\_edges[0].child.z;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00260}00260 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00261}00261                 \textcolor{comment}{// z value of the second other child node}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00262}00262                 c\_z = perpendicular\_edges[1].child.z;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00263}00263 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00264}00264                 cross\_slope = std::abs(b\_z -\/ c\_z);}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00265}00265 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00266}00266                 \textcolor{comment}{// add the existing weight value}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00267}00267                 weight = std::abs(b\_z -\/ c\_z) + perpendicular\_edges[0].score;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00268}00268                 \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00269}00269             \textcolor{keywordflow}{default}:}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00270}00270                 \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00271}00271             \}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00272}00272 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00273}00273             \textcolor{comment}{// Create the IntEdge using child\_node\_a.id}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00274}00274             \textcolor{comment}{// and the (cross slope value + existing edge score)}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00275}00275             \textcolor{comment}{// -\/-\/ then add it to our result container.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00276}00276             \mbox{\hyperlink{a01465}{IntEdge}} ie = \{ child\_node\_a.\mbox{\hyperlink{a02005_a8212d00e6913abf0ca6fec1f2624b677}{id}}, weight \};}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00277}00277             result.push\_back(ie);}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00278}00278         \}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00279}00279     }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00280}00280         \textcolor{keywordflow}{return} result;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00281}00281     \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00243}00243             vector<int> indices;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00244}00244 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00245}00245             \textcolor{comment}{// Count total indexes}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00246}00246             \textcolor{keywordtype}{int} index\_count = 0;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00247}00247             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& shape : shapes)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00248}00248                 index\_count += shape.mesh.indices.size();}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00249}00249 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00250}00250             \textcolor{comment}{// Create a giant vector based on those indices}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00251}00251             vector<int> index\_array(index\_count);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00252}00252 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00253}00253             \textcolor{comment}{// Copy index arrays from every shape in shapes into the single index array we defined previously.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00254}00254             \textcolor{keywordtype}{int} last\_index = 0;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00255}00255             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& shape : shapes)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00256}00256                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& this\_shape\_index : shape.mesh.indices)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00257}00257                     index\_array[last\_index++] = this\_shape\_index.vertex\_index;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00258}00258 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00259}00259             \textcolor{comment}{// Add this mesh to the output\_array}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00260}00260             MI.emplace\_back(\mbox{\hyperlink{a01351}{MeshInfo}}(vertexes, index\_array, 0, name));}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00261}00261 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00262}00262             \textcolor{comment}{// Change from Y-\/up to Z-\/up if specified.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00263}00263             \textcolor{keywordflow}{if} (change\_coords) MI[0].ConvertToRhinoCoordinates();}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00264}00264             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00265}00265         \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00266}00266 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00267}00267         \textcolor{keywordflow}{case} \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5afeacc3d8dc97902c6bf9332bdcda9912}{GROUP\_METHOD::BY\_GROUP}}: \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00268}00268             \textcolor{comment}{// Each group represents a different mesh.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00269}00269 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00270}00270             \textcolor{comment}{// Allocate a space for every shape in shapes.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00271}00271             \textcolor{comment}{// Note: Shapes are OBJ groups.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00272}00272             MI.resize(shapes.size());}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00273}00273             vector<array<float, 3>> current\_vertices;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00274}00274 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00275}00275             \textcolor{comment}{// Iterate through every shape in shapes.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00276}00276             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < shapes.size(); k++) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00277}00277                 \textcolor{keyword}{auto}\& shape = shapes[k];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00278}00278                 \textcolor{comment}{// Set MeshInfo parameters for shape}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00279}00279                 std::string name = shape.name;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00280}00280                 \textcolor{keywordtype}{int} \textcolor{keywordtype}{id} = k;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00281}00281                 \textcolor{keyword}{auto}\& indicies = shape.mesh.indices;}
 \DoxyCodeLine{\Hypertarget{a00188_source_l00282}00282 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00283}\mbox{\hyperlink{a00409_a6d12a3af69887cb335b490304138afc6}{00283}}     std::vector<std::vector<IntEdge>> \mbox{\hyperlink{a00409_a51b88e596c3b5f68b7abbcbc91e30bdf}{CalculateCrossSlope}}(\textcolor{keyword}{const} \mbox{\hyperlink{a01485}{Graph}}\& g) \{}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00284}00284         \textcolor{comment}{// Retrieve all nodes from g so we can obtain subgraphs.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00285}00285         std::vector<Node> nodes = g.\mbox{\hyperlink{a01485_aa70347b8a33b57c6f0a72d6eca4248d7}{Nodes}}();}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00283}00283                 \textcolor{comment}{// Add vertices to shape's list of vertices.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00284}00284                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < indicies.size(); i++) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00285}00285                     tinyobj::index\_t idx = indicies[i];}
 \DoxyCodeLine{\Hypertarget{a00188_source_l00286}00286 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00287}00287         \textcolor{comment}{// The result container will always be, at most, the node count of g.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00288}00288         \textcolor{comment}{// We can preallocate this memory so we do not have to resize during the loop below.}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00289}00289         std::vector<std::vector<IntEdge>> result(nodes.size());}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00290}00290         \textcolor{keyword}{auto} it\_result = result.begin();}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00287}00287                     \textcolor{keywordtype}{int} vertex\_index = 3 * idx.vertex\_index;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00288}00288                     \textcolor{keywordtype}{float} x = verts[vertex\_index];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00289}00289                     \textcolor{keywordtype}{float} y = verts[1 + vertex\_index];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00290}00290                     \textcolor{keywordtype}{float} z = verts[2 + vertex\_index];}
 \DoxyCodeLine{\Hypertarget{a00188_source_l00291}00291 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00292}00292         \textcolor{keywordflow}{for} (\mbox{\hyperlink{a02005}{Node}} parent\_node : nodes) \{}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00293}00293             \textcolor{comment}{// For all Node in g...}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00292}00292                     current\_vertices.emplace\_back(array<float, 3>\{x, y, z\});}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00293}00293                 \}}
 \DoxyCodeLine{\Hypertarget{a00188_source_l00294}00294 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00295}00295             \textcolor{comment}{// Get the Subgraph via parent\_node}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00296}00296             \mbox{\hyperlink{a00399_a01477}{Subgraph}} sg = g.\mbox{\hyperlink{a01485_a89250c619a726fd0adbd71778d166887}{GetSubgraph}}(parent\_node);}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00297}00297 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00298}00298             \textcolor{comment}{// Call CalculateCrossSlope using the returned Subgraph,}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00299}00299             \textcolor{comment}{// get a vector<IntEdge> back}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00300}00300             std::vector<IntEdge> cross\_slopes = \mbox{\hyperlink{a00409_a51b88e596c3b5f68b7abbcbc91e30bdf}{CalculateCrossSlope}}(sg);}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00301}00301 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00302}00302             \textcolor{comment}{// Dereference it\_result, assign it to the cross\_slopes container,}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00303}00303             \textcolor{comment}{// then advance it\_result (std::vector<std::vector<IntEdge>>::iterator)}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00304}00304             *(it\_result++) = cross\_slopes;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00305}00305         \}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00306}00306 }
-\DoxyCodeLine{\Hypertarget{a00188_source_l00307}00307         \textcolor{keywordflow}{return} result;}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00308}00308     \}}
-\DoxyCodeLine{\Hypertarget{a00188_source_l00309}00309 \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00295}00295                 \textcolor{comment}{// Finally add this mesh to the list of meshes, then rotate it to Z-\/up if specified.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00296}00296                 MI[k] = \mbox{\hyperlink{a01351}{MeshInfo}}(current\_vertices, \textcolor{keywordtype}{id}, name);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00297}00297                 \textcolor{keywordflow}{if} (change\_coords) MI[k].ConvertToRhinoCoordinates();}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00298}00298             \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00299}00299             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00300}00300         \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00301}00301         \textcolor{keywordflow}{case} \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5ac47c481b667efc6c2689d46cd456237c}{GROUP\_METHOD::BY\_MATERIAL}}: \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00302}00302             \textcolor{comment}{// If there are no materials, just put every vert into the same mesh}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00303}00303             \textcolor{keywordflow}{if} (mats.empty()) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00304}00304                 std::cerr << \textcolor{stringliteral}{"{}[C++] No materials found in model "{}} << path << \textcolor{stringliteral}{"{}. Grouping by obj group"{}};}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00305}00305                 \textcolor{keywordflow}{return} \mbox{\hyperlink{a00469_a06c0c11adb62f8b204e42f75ac1990ac}{LoadMeshObjects}}(path, \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5afeacc3d8dc97902c6bf9332bdcda9912}{BY\_GROUP}});}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00306}00306             \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00307}00307 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00308}00308             \textcolor{comment}{// Create a vector of [mesh\_id:"{}material"{}] for every unique material}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00309}00309             MI.resize(mats.size());}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00310}00310             vector<vector< array<float, 3 >>> verts\_by\_mat\_id(mats.size());}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00311}00311 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00312}00312             \textcolor{comment}{// Create and fill a vector of names for each material.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00313}00313             vector<std::string> names;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00314}00314             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < mats.size(); i++)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00315}00315                 names.emplace\_back(path + \textcolor{stringliteral}{"{}/"{}} + mats[i].name);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00316}00316 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00317}00317             \textcolor{comment}{// Loop through every shape to fill the vector}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00318}00318             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < shapes.size(); k++) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00319}00319                 \textcolor{keyword}{auto}\& shape = shapes[k];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00320}00320                 vector<int>\& mat\_ids = shape.mesh.material\_ids;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00321}00321                 vector<tinyobj::index\_t>\& indicies = shape.mesh.indices;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00322}00322 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00323}00323                 \textcolor{comment}{// Iterate through every index in indices.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00324}00324                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < indicies.size(); i++) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00325}00325                     tinyobj::index\_t idx = indicies[i];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00326}00326 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00327}00327                     \textcolor{keywordtype}{int} vertex\_index = 3 * idx.vertex\_index;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00328}00328 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00329}00329                     \textcolor{keywordtype}{float} x = verts[vertex\_index];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00330}00330                     \textcolor{keywordtype}{float} y = verts[1 + vertex\_index];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00331}00331                     \textcolor{keywordtype}{float} z = verts[2 + vertex\_index];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00332}00332 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00333}00333                     \textcolor{comment}{// Get the index of this face (equal to i/3) since every 3 indices is a face}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00334}00334                     \textcolor{keywordtype}{int} face = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(floor(i / 3));}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00335}00335 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00336}00336                     \textcolor{comment}{// Get the material index of face.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00337}00337                     \textcolor{keywordflow}{if} (mats.size() > 0 \&\& mat\_ids.size() > face) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00338}00338                         \textcolor{keywordtype}{int} mat\_index = mat\_ids[face];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00339}00339 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00340}00340                         verts\_by\_mat\_id[mat\_index].emplace\_back(array<float, 3>\{x, y, z\});}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00341}00341                     \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00342}00342                 \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00343}00343             \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00344}00344 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00345}00345             \textcolor{comment}{// Reassign meshids and cull materials with no geometry.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00346}00346             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < names.size(); i++) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00347}00347                 \textcolor{keyword}{auto}\& mesh = verts\_by\_mat\_id[i];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00348}00348                 \textcolor{keywordflow}{if} (mesh.empty()) \textcolor{keywordflow}{continue}; \textcolor{comment}{// Ignore unused materials}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00349}00349 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00350}00350                 \textcolor{comment}{// add to list;}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00351}00351                 MI.push\_back(\mbox{\hyperlink{a01351}{MeshInfo}}(mesh, i, names[i]));}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00352}00352                 \textcolor{keywordflow}{if} (change\_coords) MI[i].ConvertToRhinoCoordinates();}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00353}00353             \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00354}00354             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00355}00355         \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00356}00356 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00357}00357         \textcolor{comment}{// Throw because we were given an invalid group mode.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00358}00358         \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00359}00359             std::cerr << \textcolor{stringliteral}{"{}Mesh group mode"{}} << gm << \textcolor{stringliteral}{"{} doesn't exist!"{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00360}00360             \textcolor{keywordflow}{throw} std::exception();}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00361}00361             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00362}00362         \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00363}00363 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00364}00364         \textcolor{comment}{// Throw if the obj file didn't contain any geometry.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00365}00365         \textcolor{keywordflow}{if} (MI.size() == 0) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00366}00366             \textcolor{keywordflow}{throw} \mbox{\hyperlink{a01323}{HF::Exceptions::InvalidOBJ}}();}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00367}00367         \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00368}00368         \textcolor{keywordflow}{return} MI;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00369}00369     \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00370}00370 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00371}\mbox{\hyperlink{a00469_aec1df746155d224838048d3a43c2fe96}{00371}}     vector<array<float, 3>> \mbox{\hyperlink{a00469_aec1df746155d224838048d3a43c2fe96}{LoadRawVertices}}(std::string path)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00372}00372     \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00373}00373         \textcolor{comment}{// First, attempt to load the obj}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00374}00374         tinyobj::ObjReader objloader;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00375}00375         objloader.ParseFromFile(path);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00376}00376         \textcolor{keywordflow}{if} (!objloader.Valid()) \textcolor{keywordflow}{throw} \mbox{\hyperlink{a01323}{HF::Exceptions::InvalidOBJ}}();}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00377}00377 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00378}00378         \textcolor{comment}{// get the materials, attributes, and shapes}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00379}00379         \textcolor{keyword}{auto} mats = objloader.GetMaterials();}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00380}00380         tinyobj::attrib\_t attributes = objloader.GetAttrib();}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00381}00381         vector<tinyobj::shape\_t> shapes = objloader.GetShapes();}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00382}00382         vector<tinyobj::real\_t>\& verts = attributes.vertices;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00383}00383 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00384}00384         \textcolor{comment}{// Create out\_verts array}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00385}00385         vector<array<float, 3>> out\_verts;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00386}00386 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00387}00387         \textcolor{comment}{// iterate through every shape in shapes}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00388}00388         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& shape : shapes) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00389}00389             \textcolor{keyword}{auto}\& indicies = shape.mesh.indices;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00390}00390 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00391}00391             \textcolor{comment}{// Copy into a new array.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00392}00392             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < indicies.size(); i++) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00393}00393                 tinyobj::index\_t idx = indicies[i];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00394}00394 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00395}00395                 \textcolor{keywordtype}{int} vertex\_index = 3 * idx.vertex\_index;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00396}00396 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00397}00397                 \textcolor{keywordtype}{float} x = verts[vertex\_index];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00398}00398                 \textcolor{keywordtype}{float} y = verts[1 + vertex\_index];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00399}00399                 \textcolor{keywordtype}{float} z = verts[2 + vertex\_index];}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00400}00400                 out\_verts.emplace\_back(array<float, 3>\{x, y, z\});}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00401}00401             \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00402}00402         \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00403}00403 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00404}00404         \textcolor{keywordflow}{return} out\_verts;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00405}00405     \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00406}00406 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00407}\mbox{\hyperlink{a00469_adec2459f5c4ee10fd9d2154114d751de}{00407}}     std::string \mbox{\hyperlink{a00469_adec2459f5c4ee10fd9d2154114d751de}{GetTestOBJPath}}(std::string key)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00408}00408     \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00409}00409         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00469_a13874b607886c8f427b2a8f332148553}{test\_model\_paths}}.at(key);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00410}00410     \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00411}00411 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00412}\mbox{\hyperlink{a00469_a5e3b85fb47ef06f7693802f3fe90e996}{00412}}     vector<MeshInfo<float>> \mbox{\hyperlink{a00469_a06c0c11adb62f8b204e42f75ac1990ac}{LoadMeshObjects}}(vector<std::string>\& path, \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5}{GROUP\_METHOD}} gm, \textcolor{keywordtype}{bool} change\_coords, \textcolor{keywordtype}{int} scale)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00413}00413     \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00414}00414         \textcolor{comment}{// Create a vector of vectors and gather all individual results}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00415}00415         vector<vector<MeshInfo<float>>> MeshObjects(path.size());}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00416}00416         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < path.size(); i++)}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00417}00417             MeshObjects[i] = \mbox{\hyperlink{a00469_a06c0c11adb62f8b204e42f75ac1990ac}{LoadMeshObjects}}(path[i], gm, change\_coords, scale);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00418}00418 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00419}00419         \textcolor{comment}{// Compress all vectors into a single mesh and reassign meshid.}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00420}00420         vector<MeshInfo<float>> MI;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00421}00421         \textcolor{keywordtype}{int} lid = 0;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00422}00422         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < MeshObjects.size(); i++) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00423}00423             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& mi : MeshObjects[i]) \{}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00424}00424                 MI.push\_back(mi);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00425}00425                 MI.back().SetMeshID(lid++);}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00426}00426             \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00427}00427         \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00428}00428 }
+\DoxyCodeLine{\Hypertarget{a00188_source_l00429}00429         \textcolor{keywordflow}{return} MI;}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00430}00430     \}}
+\DoxyCodeLine{\Hypertarget{a00188_source_l00431}00431 \}}
 
 \end{DoxyCode}

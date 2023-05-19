@@ -170,8 +170,8 @@ var NAVTREEINDEX =
 [
 "_common_rotations_8cs.html",
 "class_d_h_a_r_t_a_p_i_1_1_native_utils_1_1_common_native_arrays_1_1_managed_float_array.html#a45c1638b5c4ab1d925d0857f5da5c7cb",
-"class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_graph.html#a7b281dadea26c2d963a5c2b80b42b1e6",
-"namespace_d_h_a_r_t_a_p_i_1_1_graph_generator.html"
+"class_d_h_a_r_t_a_p_i_1_1_spatial_structures_1_1_cost_algorithms.html#a69659bf4bc3b2a19afbd697b58d0a15d",
+"functions_m.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

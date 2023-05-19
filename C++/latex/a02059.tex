@@ -1,0 +1,683 @@
+\hypertarget{a02059}{}\doxysection{nlohmann\+::basic\+\_\+json\texorpdfstring{$<$}{<} Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type \texorpdfstring{$>$}{>}\+::json\+\_\+value Union Reference}
+\label{a02059}\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+
+
+a JSON value  
+
+
+
+
+Collaboration diagram for nlohmann\+::basic\+\_\+json\texorpdfstring{$<$}{<} Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type \texorpdfstring{$>$}{>}\+::json\+\_\+value\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02057}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a02059_acc3b7bd59c194e42e752c21932991b49}{json\+\_\+value}} ()=default
+\begin{DoxyCompactList}\small\item\em default constructor (for null values) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02059_a72039d333214b9a2b85412fa354754cd}{json\+\_\+value}} (\mbox{\hyperlink{a01659_a44fd1a12c9c54623c942b430e7a72937}{boolean\+\_\+t}} v) noexcept
+\begin{DoxyCompactList}\small\item\em constructor for booleans \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02059_a1ab26057f0da9ecc1915c0ca525aad46}{json\+\_\+value}} (\mbox{\hyperlink{a01659_a11e390944da90db83089eb2426a749d3}{number\+\_\+integer\+\_\+t}} v) noexcept
+\begin{DoxyCompactList}\small\item\em constructor for numbers (integer) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02059_afd70d0ec13e7bed0ce6f664aa602ce12}{json\+\_\+value}} (\mbox{\hyperlink{a01659_ae09af9c23351b7245d9be4d1b2035fef}{number\+\_\+unsigned\+\_\+t}} v) noexcept
+\begin{DoxyCompactList}\small\item\em constructor for numbers (unsigned) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02059_adb58f85308c92333d1431ebe6267c0c0}{json\+\_\+value}} (\mbox{\hyperlink{a01659_a5b8abaebd922d82d69756327c0c347e6}{number\+\_\+float\+\_\+t}} v) noexcept
+\begin{DoxyCompactList}\small\item\em constructor for numbers (floating-\/point) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02059_a619786222f276a63f1e5283e89d36bd5}{json\+\_\+value}} (\mbox{\hyperlink{a00477_a1ed8fc6239da25abcaf681d30ace4985}{value\+\_\+t}} t)
+\begin{DoxyCompactList}\small\item\em constructor for empty values of a given type \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02059_ad7f122fa9bfc5aa4d9b65a3059892146}{json\+\_\+value}} (const \mbox{\hyperlink{a01659_a33593865ffb1860323dcbd52425b90c8}{string\+\_\+t}} \&\mbox{\hyperlink{a01659_a11641b35219676b225d9bd15c7677659}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for strings \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02059_a4a804bc5a54dbd6cde1f9be7346d6084}{json\+\_\+value}} (\mbox{\hyperlink{a01659_a33593865ffb1860323dcbd52425b90c8}{string\+\_\+t}} \&\&\mbox{\hyperlink{a01659_a11641b35219676b225d9bd15c7677659}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for rvalue strings \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02059_a573ee1a8ec9775467437b6a304881f51}{json\+\_\+value}} (const \mbox{\hyperlink{a01659_aef3ff5a73597850597d1d40db9edd376}{object\+\_\+t}} \&\mbox{\hyperlink{a01659_a11641b35219676b225d9bd15c7677659}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for objects \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02059_aaf3be449b8b264f9be39cd9c8a567efe}{json\+\_\+value}} (\mbox{\hyperlink{a01659_aef3ff5a73597850597d1d40db9edd376}{object\+\_\+t}} \&\&\mbox{\hyperlink{a01659_a11641b35219676b225d9bd15c7677659}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for rvalue objects \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02059_a2235f8909b2ff9c45ac82d065e7eecf4}{json\+\_\+value}} (const \mbox{\hyperlink{a01659_a858c1cf8407bc06494e3a1114a3b73e7}{array\+\_\+t}} \&\mbox{\hyperlink{a01659_a11641b35219676b225d9bd15c7677659}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for arrays \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02059_a0b728be76b45ae96eec6fdac84c01fa9}{json\+\_\+value}} (\mbox{\hyperlink{a01659_a858c1cf8407bc06494e3a1114a3b73e7}{array\+\_\+t}} \&\&\mbox{\hyperlink{a01659_a11641b35219676b225d9bd15c7677659}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for rvalue arrays \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02059_a6102b87cd0936f5372cc096f924e2c7a}{json\+\_\+value}} (const typename \mbox{\hyperlink{a01915_a4d27e8633c5a5e3b49dd4ccb06515713}{binary\+\_\+t\+::container\+\_\+type}} \&\mbox{\hyperlink{a01659_a11641b35219676b225d9bd15c7677659}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for binary arrays \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02059_ad1b0f30d625f5141c023c558564b0e98}{json\+\_\+value}} (typename \mbox{\hyperlink{a01915_a4d27e8633c5a5e3b49dd4ccb06515713}{binary\+\_\+t\+::container\+\_\+type}} \&\&\mbox{\hyperlink{a01659_a11641b35219676b225d9bd15c7677659}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for rvalue binary arrays \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02059_aa1a2c05412c30a09cf4266cd8bb73ed1}{json\+\_\+value}} (const \mbox{\hyperlink{a01659_ad6c955145bebde84d93991ffed7cd389}{binary\+\_\+t}} \&\mbox{\hyperlink{a01659_a11641b35219676b225d9bd15c7677659}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for binary arrays (internal type) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02059_a3efd3403d9fe80a96a68a9a39e5793d2}{json\+\_\+value}} (\mbox{\hyperlink{a01659_ad6c955145bebde84d93991ffed7cd389}{binary\+\_\+t}} \&\&\mbox{\hyperlink{a01659_a11641b35219676b225d9bd15c7677659}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for rvalue binary arrays (internal type) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a02059_a34d4ecf420c2752268b9b24829cdd393}{destroy}} (\mbox{\hyperlink{a00477_a1ed8fc6239da25abcaf681d30ace4985}{value\+\_\+t}} t) noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01659_aef3ff5a73597850597d1d40db9edd376}{object\+\_\+t}} $\ast$ \mbox{\hyperlink{a02059_a3753c9469a342263e148ef4a62eb2543}{object}}
+\begin{DoxyCompactList}\small\item\em object (stored with pointer to save storage) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01659_a858c1cf8407bc06494e3a1114a3b73e7}{array\+\_\+t}} $\ast$ \mbox{\hyperlink{a02059_a8ce7315fa16a4a621a19fbd4de23ff78}{array}}
+\begin{DoxyCompactList}\small\item\em array (stored with pointer to save storage) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01659_a33593865ffb1860323dcbd52425b90c8}{string\+\_\+t}} $\ast$ \mbox{\hyperlink{a02059_a9b7dd06f6ddae7548cfd80439e22248c}{string}}
+\begin{DoxyCompactList}\small\item\em string (stored with pointer to save storage) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01659_ad6c955145bebde84d93991ffed7cd389}{binary\+\_\+t}} $\ast$ \mbox{\hyperlink{a02059_a192965a4d80027ffc779ef32b87dbde2}{binary}}
+\begin{DoxyCompactList}\small\item\em binary (stored with pointer to save storage) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01659_a44fd1a12c9c54623c942b430e7a72937}{boolean\+\_\+t}} \mbox{\hyperlink{a02059_a0d4d33dc02ceae4e64fb15fa973c5f70}{boolean}}
+\begin{DoxyCompactList}\small\item\em boolean \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01659_a11e390944da90db83089eb2426a749d3}{number\+\_\+integer\+\_\+t}} \mbox{\hyperlink{a02059_a189cb890a621e8e15319eeeb470cf3d6}{number\+\_\+integer}}
+\begin{DoxyCompactList}\small\item\em number (integer) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01659_ae09af9c23351b7245d9be4d1b2035fef}{number\+\_\+unsigned\+\_\+t}} \mbox{\hyperlink{a02059_a55452fd61dbcf53cfc4dd269d7a18cc9}{number\+\_\+unsigned}}
+\begin{DoxyCompactList}\small\item\em number (unsigned integer) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01659_a5b8abaebd922d82d69756327c0c347e6}{number\+\_\+float\+\_\+t}} \mbox{\hyperlink{a02059_a425d2a5bf4d747296e9c768693075cc1}{number\+\_\+float}}
+\begin{DoxyCompactList}\small\item\em number (floating-\/point) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type = std\+::string, class Boolean\+Type = bool, class Number\+Integer\+Type = std\+::int64\+\_\+t, class Number\+Unsigned\+Type = std\+::uint64\+\_\+t, class Number\+Float\+Type = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}} = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$\newline
+union nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value}
+a JSON value 
+
+The actual storage for a JSON value of the \mbox{\hyperlink{a01659}{basic\+\_\+json}} class. This union combines the different storage types for the JSON value types defined in \mbox{\hyperlink{a01659_ac68cb65a7f3517f0c5b1d3a4967406ad}{value\+\_\+t}}.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ JSON type   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ value\+\_\+t type   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ used type    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ JSON type   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ value\+\_\+t type   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ used type    }\\\cline{1-3}
+\endhead
+object   &object   &pointer to \mbox{\hyperlink{a01659_aef3ff5a73597850597d1d40db9edd376}{object\+\_\+t}}    \\\cline{1-3}
+array   &array   &pointer to \mbox{\hyperlink{a01659_a858c1cf8407bc06494e3a1114a3b73e7}{array\+\_\+t}}    \\\cline{1-3}
+string   &string   &pointer to \mbox{\hyperlink{a01659_a33593865ffb1860323dcbd52425b90c8}{string\+\_\+t}}    \\\cline{1-3}
+boolean   &boolean   &\mbox{\hyperlink{a01659_a44fd1a12c9c54623c942b430e7a72937}{boolean\+\_\+t}}    \\\cline{1-3}
+number   &number\+\_\+integer   &\mbox{\hyperlink{a01659_a11e390944da90db83089eb2426a749d3}{number\+\_\+integer\+\_\+t}}    \\\cline{1-3}
+number   &number\+\_\+unsigned   &\mbox{\hyperlink{a01659_ae09af9c23351b7245d9be4d1b2035fef}{number\+\_\+unsigned\+\_\+t}}    \\\cline{1-3}
+number   &number\+\_\+float   &\mbox{\hyperlink{a01659_a5b8abaebd922d82d69756327c0c347e6}{number\+\_\+float\+\_\+t}}    \\\cline{1-3}
+binary   &binary   &pointer to \mbox{\hyperlink{a01659_ad6c955145bebde84d93991ffed7cd389}{binary\+\_\+t}}    \\\cline{1-3}
+null   &null   &{\itshape no value is stored}   \\\cline{1-3}
+\end{longtabu}
+
+
+\begin{DoxyNote}{Note}
+Variable-\/length types (objects, arrays, and strings) are stored as pointers. The size of the union should not exceed 64 bits if the default value types are used.
+\end{DoxyNote}
+\begin{DoxySince}{Since}
+version 1.\+0.\+0 
+\end{DoxySince}
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17450}{17450}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a02059_acc3b7bd59c194e42e752c21932991b49}\label{a02059_acc3b7bd59c194e42e752c21932991b49}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/16]}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+default constructor (for null values) 
+
+\mbox{\Hypertarget{a02059_a72039d333214b9a2b85412fa354754cd}\label{a02059_a72039d333214b9a2b85412fa354754cd}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/16]}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01659_a44fd1a12c9c54623c942b430e7a72937}{boolean\+\_\+t}}}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+constructor for booleans 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17472}{17472}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+\mbox{\Hypertarget{a02059_a1ab26057f0da9ecc1915c0ca525aad46}\label{a02059_a1ab26057f0da9ecc1915c0ca525aad46}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [3/16]}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01659_a11e390944da90db83089eb2426a749d3}{number\+\_\+integer\+\_\+t}}}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+constructor for numbers (integer) 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17474}{17474}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+\mbox{\Hypertarget{a02059_afd70d0ec13e7bed0ce6f664aa602ce12}\label{a02059_afd70d0ec13e7bed0ce6f664aa602ce12}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [4/16]}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01659_ae09af9c23351b7245d9be4d1b2035fef}{number\+\_\+unsigned\+\_\+t}}}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+constructor for numbers (unsigned) 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17476}{17476}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+\mbox{\Hypertarget{a02059_adb58f85308c92333d1431ebe6267c0c0}\label{a02059_adb58f85308c92333d1431ebe6267c0c0}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [5/16]}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01659_a5b8abaebd922d82d69756327c0c347e6}{number\+\_\+float\+\_\+t}}}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+constructor for numbers (floating-\/point) 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17478}{17478}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+\mbox{\Hypertarget{a02059_a619786222f276a63f1e5283e89d36bd5}\label{a02059_a619786222f276a63f1e5283e89d36bd5}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [6/16]}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00477_a1ed8fc6239da25abcaf681d30ace4985}{value\+\_\+t}}}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for empty values of a given type 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17480}{17480}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l17455}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::array}}, \mbox{\hyperlink{a00272_source_l17459}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::binary}}, \mbox{\hyperlink{a00272_source_l02652}{nlohmann\+::detail\+::other\+\_\+error\+::create()}}, \mbox{\hyperlink{a00272_source_l01401}{JSON\+\_\+\+HEDLEY\+\_\+\+UNLIKELY}}, \mbox{\hyperlink{a00272_source_l02071}{JSON\+\_\+\+THROW}}, \mbox{\hyperlink{a00272_source_l17467}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::number\+\_\+float}}, \mbox{\hyperlink{a00272_source_l17463}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::number\+\_\+integer}}, and \mbox{\hyperlink{a00272_source_l17465}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::number\+\_\+unsigned}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02059_a619786222f276a63f1e5283e89d36bd5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02059_ad7f122fa9bfc5aa4d9b65a3059892146}\label{a02059_ad7f122fa9bfc5aa4d9b65a3059892146}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [7/16]}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01659_a33593865ffb1860323dcbd52425b90c8}{string\+\_\+t}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for strings 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17551}{17551}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l20279}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::value()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02059_ad7f122fa9bfc5aa4d9b65a3059892146_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02059_a4a804bc5a54dbd6cde1f9be7346d6084}\label{a02059_a4a804bc5a54dbd6cde1f9be7346d6084}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [8/16]}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01659_a33593865ffb1860323dcbd52425b90c8}{string\+\_\+t}} \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for rvalue strings 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17557}{17557}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l20279}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::value()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02059_a4a804bc5a54dbd6cde1f9be7346d6084_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02059_a573ee1a8ec9775467437b6a304881f51}\label{a02059_a573ee1a8ec9775467437b6a304881f51}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [9/16]}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01659_aef3ff5a73597850597d1d40db9edd376}{object\+\_\+t}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for objects 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17563}{17563}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l20279}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::value()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02059_a573ee1a8ec9775467437b6a304881f51_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02059_aaf3be449b8b264f9be39cd9c8a567efe}\label{a02059_aaf3be449b8b264f9be39cd9c8a567efe}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [10/16]}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01659_aef3ff5a73597850597d1d40db9edd376}{object\+\_\+t}} \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for rvalue objects 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17569}{17569}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l20279}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::value()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02059_aaf3be449b8b264f9be39cd9c8a567efe_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02059_a2235f8909b2ff9c45ac82d065e7eecf4}\label{a02059_a2235f8909b2ff9c45ac82d065e7eecf4}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [11/16]}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01659_a858c1cf8407bc06494e3a1114a3b73e7}{array\+\_\+t}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for arrays 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17575}{17575}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l17455}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::array}}, and \mbox{\hyperlink{a00272_source_l20279}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::value()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02059_a2235f8909b2ff9c45ac82d065e7eecf4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02059_a0b728be76b45ae96eec6fdac84c01fa9}\label{a02059_a0b728be76b45ae96eec6fdac84c01fa9}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [12/16]}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01659_a858c1cf8407bc06494e3a1114a3b73e7}{array\+\_\+t}} \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for rvalue arrays 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17581}{17581}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l17455}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::array}}, and \mbox{\hyperlink{a00272_source_l20279}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::value()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02059_a0b728be76b45ae96eec6fdac84c01fa9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02059_a6102b87cd0936f5372cc096f924e2c7a}\label{a02059_a6102b87cd0936f5372cc096f924e2c7a}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [13/16]}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{const typename \mbox{\hyperlink{a01915_a4d27e8633c5a5e3b49dd4ccb06515713}{binary\+\_\+t\+::container\+\_\+type}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for binary arrays 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17587}{17587}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l17459}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::binary}}, and \mbox{\hyperlink{a00272_source_l20279}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::value()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02059_a6102b87cd0936f5372cc096f924e2c7a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02059_ad1b0f30d625f5141c023c558564b0e98}\label{a02059_ad1b0f30d625f5141c023c558564b0e98}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [14/16]}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{typename \mbox{\hyperlink{a01915_a4d27e8633c5a5e3b49dd4ccb06515713}{binary\+\_\+t\+::container\+\_\+type}} \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for rvalue binary arrays 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17593}{17593}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l17459}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::binary}}, and \mbox{\hyperlink{a00272_source_l20279}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::value()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02059_ad1b0f30d625f5141c023c558564b0e98_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02059_aa1a2c05412c30a09cf4266cd8bb73ed1}\label{a02059_aa1a2c05412c30a09cf4266cd8bb73ed1}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [15/16]}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01659_ad6c955145bebde84d93991ffed7cd389}{binary\+\_\+t}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for binary arrays (internal type) 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17599}{17599}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l17459}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::binary}}, and \mbox{\hyperlink{a00272_source_l20279}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::value()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02059_aa1a2c05412c30a09cf4266cd8bb73ed1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02059_a3efd3403d9fe80a96a68a9a39e5793d2}\label{a02059_a3efd3403d9fe80a96a68a9a39e5793d2}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [16/16]}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01659_ad6c955145bebde84d93991ffed7cd389}{binary\+\_\+t}} \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for rvalue binary arrays (internal type) 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17605}{17605}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l17459}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::binary}}, and \mbox{\hyperlink{a00272_source_l20279}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::value()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02059_a3efd3403d9fe80a96a68a9a39e5793d2_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a02059_a34d4ecf420c2752268b9b24829cdd393}\label{a02059_a34d4ecf420c2752268b9b24829cdd393}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!destroy@{destroy}}
+\index{destroy@{destroy}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{destroy()}{destroy()}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+void \mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00477_a1ed8fc6239da25abcaf681d30ace4985}{value\+\_\+t}}}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17610}{17610}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l17455}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::array}}, \mbox{\hyperlink{a00272_source_l17459}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::binary}}, \mbox{\hyperlink{a00272_source_l17610}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::destroy()}}, \mbox{\hyperlink{a00272_source_l19073}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::is\+\_\+array()}}, \mbox{\hyperlink{a00272_source_l19051}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::is\+\_\+object()}}, \mbox{\hyperlink{a00272_source_l23447}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::m\+\_\+value}}, and \mbox{\hyperlink{a00272_source_l17453}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::object}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00272_source_l18695}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::$\sim$basic\+\_\+json()}}, and \mbox{\hyperlink{a00272_source_l17610}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::destroy()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{a02059_a34d4ecf420c2752268b9b24829cdd393_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{a02059_a34d4ecf420c2752268b9b24829cdd393_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02059_a8ce7315fa16a4a621a19fbd4de23ff78}\label{a02059_a8ce7315fa16a4a621a19fbd4de23ff78}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!array@{array}}
+\index{array@{array}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{array}{array}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659_a858c1cf8407bc06494e3a1114a3b73e7}{array\+\_\+t}}$\ast$ \mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::array}
+
+
+
+array (stored with pointer to save storage) 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17455}{17455}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00272_source_l18087}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::basic\+\_\+json()}}, \mbox{\hyperlink{a00272_source_l17480}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::json\+\_\+value()}}, \mbox{\hyperlink{a00272_source_l17710}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::assert\+\_\+invariant()}}, \mbox{\hyperlink{a00272_source_l19793}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::at()}}, \mbox{\hyperlink{a00272_source_l21636}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::clear()}}, \mbox{\hyperlink{a00272_source_l17610}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::destroy()}}, \mbox{\hyperlink{a00272_source_l21901}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::emplace\+\_\+back()}}, \mbox{\hyperlink{a00272_source_l21421}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::empty()}}, \mbox{\hyperlink{a00272_source_l20516}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::erase()}}, \mbox{\hyperlink{a00272_source_l19206}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::get\+\_\+impl\+\_\+ptr()}}, \mbox{\hyperlink{a00272_source_l21984}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::insert\+\_\+iterator()}}, \mbox{\hyperlink{a00272_source_l21565}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::max\+\_\+size()}}, \mbox{\hyperlink{a00272_source_l19988}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::operator\mbox{[}$\,$\mbox{]}()}}, \mbox{\hyperlink{a00272_source_l21713}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::push\+\_\+back()}}, \mbox{\hyperlink{a00272_source_l21494}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::size()}}, and \mbox{\hyperlink{a00272_source_l22419}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::swap()}}.
+
+\mbox{\Hypertarget{a02059_a192965a4d80027ffc779ef32b87dbde2}\label{a02059_a192965a4d80027ffc779ef32b87dbde2}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!binary@{binary}}
+\index{binary@{binary}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{binary}{binary}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659_ad6c955145bebde84d93991ffed7cd389}{binary\+\_\+t}}$\ast$ \mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::binary}
+
+
+
+binary (stored with pointer to save storage) 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17459}{17459}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00272_source_l18406}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::basic\+\_\+json()}}, \mbox{\hyperlink{a00272_source_l17480}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::json\+\_\+value()}}, \mbox{\hyperlink{a00272_source_l17710}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::assert\+\_\+invariant()}}, \mbox{\hyperlink{a00272_source_l21636}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::clear()}}, \mbox{\hyperlink{a00272_source_l17610}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::destroy()}}, \mbox{\hyperlink{a00272_source_l20516}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::erase()}}, \mbox{\hyperlink{a00272_source_l19278}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::get\+\_\+impl\+\_\+ptr()}}, and \mbox{\hyperlink{a00272_source_l22518}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::swap()}}.
+
+\mbox{\Hypertarget{a02059_a0d4d33dc02ceae4e64fb15fa973c5f70}\label{a02059_a0d4d33dc02ceae4e64fb15fa973c5f70}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!boolean@{boolean}}
+\index{boolean@{boolean}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{boolean}{boolean}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659_a44fd1a12c9c54623c942b430e7a72937}{boolean\+\_\+t}} \mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::boolean}
+
+
+
+boolean 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17461}{17461}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00272_source_l18406}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::basic\+\_\+json()}}, \mbox{\hyperlink{a00272_source_l21636}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::clear()}}, \mbox{\hyperlink{a00272_source_l19183}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::get\+\_\+impl()}}, and \mbox{\hyperlink{a00272_source_l19230}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::get\+\_\+impl\+\_\+ptr()}}.
+
+\mbox{\Hypertarget{a02059_a425d2a5bf4d747296e9c768693075cc1}\label{a02059_a425d2a5bf4d747296e9c768693075cc1}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!number\_float@{number\_float}}
+\index{number\_float@{number\_float}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{number\_float}{number\_float}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659_a5b8abaebd922d82d69756327c0c347e6}{number\+\_\+float\+\_\+t}} \mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::number\+\_\+float}
+
+
+
+number (floating-\/point) 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17467}{17467}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00272_source_l18406}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::basic\+\_\+json()}}, \mbox{\hyperlink{a00272_source_l17480}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::json\+\_\+value()}}, \mbox{\hyperlink{a00272_source_l21636}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::clear()}}, and \mbox{\hyperlink{a00272_source_l19266}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::get\+\_\+impl\+\_\+ptr()}}.
+
+\mbox{\Hypertarget{a02059_a189cb890a621e8e15319eeeb470cf3d6}\label{a02059_a189cb890a621e8e15319eeeb470cf3d6}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!number\_integer@{number\_integer}}
+\index{number\_integer@{number\_integer}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{number\_integer}{number\_integer}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659_a11e390944da90db83089eb2426a749d3}{number\+\_\+integer\+\_\+t}} \mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::number\+\_\+integer}
+
+
+
+number (integer) 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17463}{17463}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00272_source_l18406}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::basic\+\_\+json()}}, \mbox{\hyperlink{a00272_source_l17480}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::json\+\_\+value()}}, \mbox{\hyperlink{a00272_source_l21636}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::clear()}}, and \mbox{\hyperlink{a00272_source_l19242}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::get\+\_\+impl\+\_\+ptr()}}.
+
+\mbox{\Hypertarget{a02059_a55452fd61dbcf53cfc4dd269d7a18cc9}\label{a02059_a55452fd61dbcf53cfc4dd269d7a18cc9}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!number\_unsigned@{number\_unsigned}}
+\index{number\_unsigned@{number\_unsigned}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{number\_unsigned}{number\_unsigned}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659_ae09af9c23351b7245d9be4d1b2035fef}{number\+\_\+unsigned\+\_\+t}} \mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::number\+\_\+unsigned}
+
+
+
+number (unsigned integer) 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17465}{17465}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00272_source_l18406}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::basic\+\_\+json()}}, \mbox{\hyperlink{a00272_source_l17480}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::json\+\_\+value()}}, \mbox{\hyperlink{a00272_source_l21636}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::clear()}}, and \mbox{\hyperlink{a00272_source_l19254}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::get\+\_\+impl\+\_\+ptr()}}.
+
+\mbox{\Hypertarget{a02059_a3753c9469a342263e148ef4a62eb2543}\label{a02059_a3753c9469a342263e148ef4a62eb2543}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!object@{object}}
+\index{object@{object}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{object}{object}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659_aef3ff5a73597850597d1d40db9edd376}{object\+\_\+t}}$\ast$ \mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::object}
+
+
+
+object (stored with pointer to save storage) 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17453}{17453}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00272_source_l18406}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::basic\+\_\+json()}}, \mbox{\hyperlink{a00272_source_l17710}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::assert\+\_\+invariant()}}, \mbox{\hyperlink{a00272_source_l19891}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::at()}}, \mbox{\hyperlink{a00272_source_l21636}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::clear()}}, \mbox{\hyperlink{a00272_source_l20896}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::contains()}}, \mbox{\hyperlink{a00272_source_l20863}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::count()}}, \mbox{\hyperlink{a00272_source_l17610}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::destroy()}}, \mbox{\hyperlink{a00272_source_l21954}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::emplace()}}, \mbox{\hyperlink{a00272_source_l21421}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::empty()}}, \mbox{\hyperlink{a00272_source_l20516}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::erase()}}, \mbox{\hyperlink{a00272_source_l20812}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::find()}}, \mbox{\hyperlink{a00272_source_l19194}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::get\+\_\+impl\+\_\+ptr()}}, \mbox{\hyperlink{a00272_source_l22215}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::insert()}}, \mbox{\hyperlink{a00272_source_l21565}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::max\+\_\+size()}}, \mbox{\hyperlink{a00272_source_l20072}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::operator\mbox{[}$\,$\mbox{]}()}}, \mbox{\hyperlink{a00272_source_l24662}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::patch()}}, \mbox{\hyperlink{a00272_source_l21798}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::push\+\_\+back()}}, \mbox{\hyperlink{a00272_source_l21494}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::size()}}, \mbox{\hyperlink{a00272_source_l22452}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::swap()}}, and \mbox{\hyperlink{a00272_source_l22257}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::update()}}.
+
+\mbox{\Hypertarget{a02059_a9b7dd06f6ddae7548cfd80439e22248c}\label{a02059_a9b7dd06f6ddae7548cfd80439e22248c}} 
+\index{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}!string@{string}}
+\index{string@{string}!nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value@{nlohmann::basic\_json$<$ ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer, BinaryType $>$::json\_value}}
+\doxysubsubsection{\texorpdfstring{string}{string}}
+{\footnotesize\ttfamily template$<$template$<$ typename U, typename V, typename... Args $>$ class Object\+Type = std\+::map, template$<$ typename U, typename... Args $>$ class Array\+Type = std\+::vector, class String\+Type  = std\+::string, class Boolean\+Type  = bool, class Number\+Integer\+Type  = std\+::int64\+\_\+t, class Number\+Unsigned\+Type  = std\+::uint64\+\_\+t, class Number\+Float\+Type  = double, template$<$ typename U $>$ class Allocator\+Type = std\+::allocator, template$<$ typename T, typename SFINAE=void $>$ class JSONSerializer = adl\+\_\+serializer, class \mbox{\hyperlink{a03503}{Binary\+Type}}  = std\+::vector$<$std\+::uint8\+\_\+t$>$$>$ \\
+\mbox{\hyperlink{a01659_a33593865ffb1860323dcbd52425b90c8}{string\+\_\+t}}$\ast$ \mbox{\hyperlink{a01659}{nlohmann\+::basic\+\_\+json}}$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, \mbox{\hyperlink{a03503}{Binary\+Type}} $>$\+::json\+\_\+value\+::string}
+
+
+
+string (stored with pointer to save storage) 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l17457}{17457}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00272_source_l18406}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::basic\+\_\+json()}}, \mbox{\hyperlink{a00272_source_l17710}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::assert\+\_\+invariant()}}, \mbox{\hyperlink{a00272_source_l21636}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::clear()}}, \mbox{\hyperlink{a00272_source_l20516}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::erase()}}, \mbox{\hyperlink{a00272_source_l19218}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::get\+\_\+impl\+\_\+ptr()}}, and \mbox{\hyperlink{a00272_source_l22485}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::swap()}}.
+
+
+
+The documentation for this union was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00272}{json.\+hpp}}\end{DoxyCompactItemize}

@@ -6,72 +6,72 @@
 \DoxyCodeLine{\Hypertarget{a00014_source_l00007}00007 }
 \DoxyCodeLine{\Hypertarget{a00014_source_l00008}00008 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00017}{unique\_queue.h}}>}}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00009}00009 }
-\DoxyCodeLine{\Hypertarget{a00014_source_l00010}00010 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00397}{HF::GraphGenerator}}\{}
-\DoxyCodeLine{\Hypertarget{a00014_source_l00011}\mbox{\hyperlink{a01249_ae0dc637a2d7c3aae32d8f035ac6b8016}{00011}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01249_ae0dc637a2d7c3aae32d8f035ac6b8016}{UniqueQueue::push}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}}\& p)}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00010}00010 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00463}{HF::GraphGenerator}}\{}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00011}\mbox{\hyperlink{a01315_ae0dc637a2d7c3aae32d8f035ac6b8016}{00011}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01315_ae0dc637a2d7c3aae32d8f035ac6b8016}{UniqueQueue::push}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02071}{HF::SpatialStructures::Node}}\& p)}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00012}00012     \{}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00013}00013         \textcolor{comment}{// Only insert if it's not set to 1}}
-\DoxyCodeLine{\Hypertarget{a00014_source_l00014}00014         \textcolor{keywordflow}{if} (\mbox{\hyperlink{a00397_adacfd76227db1d19cad7c15a8dde7330}{hashmap}}[p])}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00014}00014         \textcolor{keywordflow}{if} (\mbox{\hyperlink{a00463_adacfd76227db1d19cad7c15a8dde7330}{hashmap}}[p])}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00015}00015             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00016}00016 }
 \DoxyCodeLine{\Hypertarget{a00014_source_l00017}00017         \textcolor{comment}{// Push it to the end of the queue, then }}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00018}00018         \textcolor{comment}{// mark it in the hashmap.}}
-\DoxyCodeLine{\Hypertarget{a00014_source_l00019}00019         \mbox{\hyperlink{a01249_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.push(p);}
-\DoxyCodeLine{\Hypertarget{a00014_source_l00020}00020         \mbox{\hyperlink{a00397_adacfd76227db1d19cad7c15a8dde7330}{hashmap}}[p] = 1;}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00019}00019         \mbox{\hyperlink{a01315_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.push(p);}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00020}00020         \mbox{\hyperlink{a00463_adacfd76227db1d19cad7c15a8dde7330}{hashmap}}[p] = 1;}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00021}00021         }
 \DoxyCodeLine{\Hypertarget{a00014_source_l00022}00022         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00023}00023     \}}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00024}00024 }
-\DoxyCodeLine{\Hypertarget{a00014_source_l00025}\mbox{\hyperlink{a01249_a4aab642bf2c86a04f6890711ab7f2437}{00025}}     \mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} \mbox{\hyperlink{a01249_a4aab642bf2c86a04f6890711ab7f2437}{UniqueQueue::pop}}()}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00025}\mbox{\hyperlink{a01315_a4aab642bf2c86a04f6890711ab7f2437}{00025}}     \mbox{\hyperlink{a02071}{HF::SpatialStructures::Node}} \mbox{\hyperlink{a01315_a4aab642bf2c86a04f6890711ab7f2437}{UniqueQueue::pop}}()}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00026}00026     \{}
-\DoxyCodeLine{\Hypertarget{a00014_source_l00027}00027         \textcolor{keyword}{auto} r = \mbox{\hyperlink{a01249_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.front();}
-\DoxyCodeLine{\Hypertarget{a00014_source_l00028}00028         \mbox{\hyperlink{a01249_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.pop();}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00027}00027         \textcolor{keyword}{auto} r = \mbox{\hyperlink{a01315_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.front();}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00028}00028         \mbox{\hyperlink{a01315_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.pop();}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00029}00029         \textcolor{keywordflow}{return} r;}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00030}00030     \}}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00031}00031 }
-\DoxyCodeLine{\Hypertarget{a00014_source_l00032}\mbox{\hyperlink{a01249_a6d38edb96130bda3eb8126cc7501065f}{00032}}     \textcolor{keywordtype}{int} \mbox{\hyperlink{a01249_a6d38edb96130bda3eb8126cc7501065f}{UniqueQueue::size}}()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} \mbox{\hyperlink{a01249_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.size();\}}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00032}\mbox{\hyperlink{a01315_a6d38edb96130bda3eb8126cc7501065f}{00032}}     \textcolor{keywordtype}{int} \mbox{\hyperlink{a01315_a6d38edb96130bda3eb8126cc7501065f}{UniqueQueue::size}}()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} \mbox{\hyperlink{a01315_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.size();\}}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00033}00033 }
-\DoxyCodeLine{\Hypertarget{a00014_source_l00034}\mbox{\hyperlink{a01249_ad0b5106014e798684efc0d3bdc4939da}{00034}}     \mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}} \mbox{\hyperlink{a01249_ad0b5106014e798684efc0d3bdc4939da}{UniqueQueue::popFromDict}}() \{}
-\DoxyCodeLine{\Hypertarget{a00014_source_l00035}00035         \textcolor{keyword}{auto} r = \mbox{\hyperlink{a01249_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.front();}
-\DoxyCodeLine{\Hypertarget{a00014_source_l00036}00036         \mbox{\hyperlink{a01249_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.pop();}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00034}\mbox{\hyperlink{a01315_ad0b5106014e798684efc0d3bdc4939da}{00034}}     \mbox{\hyperlink{a02071}{HF::SpatialStructures::Node}} \mbox{\hyperlink{a01315_ad0b5106014e798684efc0d3bdc4939da}{UniqueQueue::popFromDict}}() \{}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00035}00035         \textcolor{keyword}{auto} r = \mbox{\hyperlink{a01315_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.front();}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00036}00036         \mbox{\hyperlink{a01315_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.pop();}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00037}00037 }
 \DoxyCodeLine{\Hypertarget{a00014_source_l00038}00038         \textcolor{comment}{// Erase r from the hashmap to "{}forget"{} about it}}
-\DoxyCodeLine{\Hypertarget{a00014_source_l00039}00039         \mbox{\hyperlink{a00397_adacfd76227db1d19cad7c15a8dde7330}{hashmap}}.erase(r);}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00039}00039         \mbox{\hyperlink{a00463_adacfd76227db1d19cad7c15a8dde7330}{hashmap}}.erase(r);}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00040}00040         \textcolor{keywordflow}{return} r;}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00041}00041     \}}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00042}00042 }
-\DoxyCodeLine{\Hypertarget{a00014_source_l00043}\mbox{\hyperlink{a01249_ae990ff15bb41d6da5b477f0c91550116}{00043}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01249_ae990ff15bb41d6da5b477f0c91550116}{UniqueQueue::hasNode}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}}\& p)\textcolor{keyword}{ const }\{}
-\DoxyCodeLine{\Hypertarget{a00014_source_l00044}00044         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00397_adacfd76227db1d19cad7c15a8dde7330}{hashmap}}.count(p) > 0;}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00043}\mbox{\hyperlink{a01315_ae990ff15bb41d6da5b477f0c91550116}{00043}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01315_ae990ff15bb41d6da5b477f0c91550116}{UniqueQueue::hasNode}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02071}{HF::SpatialStructures::Node}}\& p)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00044}00044         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00463_adacfd76227db1d19cad7c15a8dde7330}{hashmap}}.count(p) > 0;}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00045}00045     \}}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00046}00046 }
-\DoxyCodeLine{\Hypertarget{a00014_source_l00047}\mbox{\hyperlink{a01249_a6708d5114e7fbc588ec4d17919d2ad8e}{00047}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01249_a6708d5114e7fbc588ec4d17919d2ad8e}{UniqueQueue::forcePush}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02005}{HF::SpatialStructures::Node}}\& p) \{}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00047}\mbox{\hyperlink{a01315_a6708d5114e7fbc588ec4d17919d2ad8e}{00047}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01315_a6708d5114e7fbc588ec4d17919d2ad8e}{UniqueQueue::forcePush}}(\textcolor{keyword}{const} \mbox{\hyperlink{a02071}{HF::SpatialStructures::Node}}\& p) \{}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00048}00048         \textcolor{comment}{// Forcibly set this to 1. Will have no effect}}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00049}00049         \textcolor{comment}{// if we've already seen this node.}}
-\DoxyCodeLine{\Hypertarget{a00014_source_l00050}00050         \mbox{\hyperlink{a00397_adacfd76227db1d19cad7c15a8dde7330}{hashmap}}[p] = 1;}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00050}00050         \mbox{\hyperlink{a00463_adacfd76227db1d19cad7c15a8dde7330}{hashmap}}[p] = 1;}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00051}00051 }
-\DoxyCodeLine{\Hypertarget{a00014_source_l00052}00052         \mbox{\hyperlink{a01249_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.push(p);}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00052}00052         \mbox{\hyperlink{a01315_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.push(p);}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00053}00053         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00054}00054     \}}
-\DoxyCodeLine{\Hypertarget{a00014_source_l00055}\mbox{\hyperlink{a01249_ab659349de3391b0e2327f3736135752f}{00055}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01249_ab659349de3391b0e2327f3736135752f}{UniqueQueue::empty}}()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} \mbox{\hyperlink{a01249_a6d38edb96130bda3eb8126cc7501065f}{size}}() == 0;\}}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00055}\mbox{\hyperlink{a01315_ab659349de3391b0e2327f3736135752f}{00055}}     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01315_ab659349de3391b0e2327f3736135752f}{UniqueQueue::empty}}()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} \mbox{\hyperlink{a01315_a6d38edb96130bda3eb8126cc7501065f}{size}}() == 0;\}}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00056}00056     }
-\DoxyCodeLine{\Hypertarget{a00014_source_l00057}\mbox{\hyperlink{a01249_a8b1e179e1aa3d8d585c5708ae08ef3cc}{00057}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{a01249_a8b1e179e1aa3d8d585c5708ae08ef3cc}{UniqueQueue::clearQueue}}()}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00057}\mbox{\hyperlink{a01315_a8b1e179e1aa3d8d585c5708ae08ef3cc}{00057}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{a01315_a8b1e179e1aa3d8d585c5708ae08ef3cc}{UniqueQueue::clearQueue}}()}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00058}00058     \{}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00059}00059         \textcolor{comment}{// Queue has no clear function. We can however potentially use a swap idiom}}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00060}00060         \textcolor{comment}{// to speed this up. }}
-\DoxyCodeLine{\Hypertarget{a00014_source_l00061}00061         \textcolor{keywordflow}{while} (!\mbox{\hyperlink{a01249_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.empty()) \mbox{\hyperlink{a01249_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.pop();}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00061}00061         \textcolor{keywordflow}{while} (!\mbox{\hyperlink{a01315_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.empty()) \mbox{\hyperlink{a01315_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.pop();}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00062}00062     \}}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00063}00063 }
-\DoxyCodeLine{\Hypertarget{a00014_source_l00064}\mbox{\hyperlink{a01249_ae941f357ddbefc3b670c43ce2d90b589}{00064}}     std::vector<SpatialStructures::Node> \mbox{\hyperlink{a01249_ae941f357ddbefc3b670c43ce2d90b589}{UniqueQueue::popMany}}(\textcolor{keywordtype}{int} max)}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00064}\mbox{\hyperlink{a01315_ae941f357ddbefc3b670c43ce2d90b589}{00064}}     std::vector<SpatialStructures::Node> \mbox{\hyperlink{a01315_ae941f357ddbefc3b670c43ce2d90b589}{UniqueQueue::popMany}}(\textcolor{keywordtype}{int} max)}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00065}00065     \{}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00066}00066         \textcolor{comment}{// Create a new vector of nodes}}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00067}00067         std::vector<SpatialStructures::Node> out\_nodes;}
-\DoxyCodeLine{\Hypertarget{a00014_source_l00068}00068         out\_nodes.reserve(\mbox{\hyperlink{a01249_a6d38edb96130bda3eb8126cc7501065f}{size}}());}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00068}00068         out\_nodes.reserve(\mbox{\hyperlink{a01315_a6d38edb96130bda3eb8126cc7501065f}{size}}());}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00069}00069         }
 \DoxyCodeLine{\Hypertarget{a00014_source_l00070}00070         \textcolor{comment}{// Pop a node until the queue is empty, we hit max,}}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00071}00071         \textcolor{comment}{// or max is never set. }}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00072}00072         \textcolor{keywordtype}{int} num\_popped = 0;}
-\DoxyCodeLine{\Hypertarget{a00014_source_l00073}00073         \textcolor{keywordflow}{while} (!\mbox{\hyperlink{a01249_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.empty() \&\& num\_popped < max)}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00073}00073         \textcolor{keywordflow}{while} (!\mbox{\hyperlink{a01315_a042595ba3856fb6912dbf5c6692daa75}{node\_queue}}.empty() \&\& num\_popped < max)}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00074}00074         \{}
-\DoxyCodeLine{\Hypertarget{a00014_source_l00075}00075             out\_nodes.push\_back(\mbox{\hyperlink{a01249_a4aab642bf2c86a04f6890711ab7f2437}{pop}}());}
+\DoxyCodeLine{\Hypertarget{a00014_source_l00075}00075             out\_nodes.push\_back(\mbox{\hyperlink{a01315_a4aab642bf2c86a04f6890711ab7f2437}{pop}}());}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00076}00076             ++num\_popped;}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00077}00077         \}}
 \DoxyCodeLine{\Hypertarget{a00014_source_l00078}00078         \textcolor{keywordflow}{return} out\_nodes;}

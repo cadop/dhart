@@ -101,10 +101,10 @@ $(document).ready(function(){initNavTree('a00005.html',''); initResizable(); });
 <p>Contains implementation for the functions in the GraphGenerator class.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;<a class="el" href="a00008_source.html">graph_generator.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00185_source.html">Constants.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00209_source.html">node.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00197_source.html">Edge.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00203_source.html">graph.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00251_source.html">Constants.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00275_source.html">node.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00263_source.html">Edge.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00269_source.html">graph.h</a>&gt;</code><br />
 <code>#include &lt;robin_hood.h&gt;</code><br />
 <code>#include &lt;omp.h&gt;</code><br />
 <code>#include &lt;<a class="el" href="a00017_source.html">unique_queue.h</a>&gt;</code><br />
@@ -123,11 +123,11 @@ $(document).ready(function(){initNavTree('a00005.html',''); initResizable(); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00396"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00396.html">HF</a></td></tr>
-<tr class="memdesc:a00396"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform human scale analysis on 3D environments. <br /></td></tr>
+<tr class="memitem:a00462"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00462.html">HF</a></td></tr>
+<tr class="memdesc:a00462"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform human scale analysis on 3D environments. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00397"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00397.html">HF::GraphGenerator</a></td></tr>
-<tr class="memdesc:a00397"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a graph of accessible space from a given start point. <br /></td></tr>
+<tr class="memitem:a00463"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00463.html">HF::GraphGenerator</a></td></tr>
+<tr class="memdesc:a00463"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a graph of accessible space from a given start point. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
@@ -137,12 +137,12 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af8cc1a7a794699308cf5c46d3ae59491"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00397.html#af8cc1a7a794699308cf5c46d3ae59491">HF::GraphGenerator::SetupCoreCount</a> (int cores=-1)</td></tr>
-<tr class="memdesc:af8cc1a7a794699308cf5c46d3ae59491"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the core count of OpenMP.  <a href="a00397.html#af8cc1a7a794699308cf5c46d3ae59491">More...</a><br /></td></tr>
+<tr class="memitem:af8cc1a7a794699308cf5c46d3ae59491"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00463.html#af8cc1a7a794699308cf5c46d3ae59491">HF::GraphGenerator::SetupCoreCount</a> (int cores=-1)</td></tr>
+<tr class="memdesc:af8cc1a7a794699308cf5c46d3ae59491"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the core count of OpenMP.  <a href="a00463.html#af8cc1a7a794699308cf5c46d3ae59491">More...</a><br /></td></tr>
 <tr class="separator:af8cc1a7a794699308cf5c46d3ae59491"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a124a96c53ed2021db9d819369fe6b7ad"><td class="memTemplParams" colspan="2">template&lt;typename raytracer_type &gt; </td></tr>
-<tr class="memitem:a124a96c53ed2021db9d819369fe6b7ad"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00397.html#a124a96c53ed2021db9d819369fe6b7ad">HF::GraphGenerator::setupRT</a> (GraphGenerator *gg, raytracer_type &amp;rt, const std::vector&lt; int &gt; &amp;obs_ids, const std::vector&lt; int &gt; &amp;walk_ids)</td></tr>
-<tr class="memdesc:a124a96c53ed2021db9d819369fe6b7ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the raytracer to a multiRT if required, then map geometry ids to hitflags.  <a href="a00397.html#a124a96c53ed2021db9d819369fe6b7ad">More...</a><br /></td></tr>
+<tr class="memitem:a124a96c53ed2021db9d819369fe6b7ad"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00463.html#a124a96c53ed2021db9d819369fe6b7ad">HF::GraphGenerator::setupRT</a> (GraphGenerator *gg, raytracer_type &amp;rt, const std::vector&lt; int &gt; &amp;obs_ids, const std::vector&lt; int &gt; &amp;walk_ids)</td></tr>
+<tr class="memdesc:a124a96c53ed2021db9d819369fe6b7ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the raytracer to a multiRT if required, then map geometry ids to hitflags.  <a href="a00463.html#a124a96c53ed2021db9d819369fe6b7ad">More...</a><br /></td></tr>
 <tr class="separator:a124a96c53ed2021db9d819369fe6b7ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>

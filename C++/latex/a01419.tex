@@ -1,0 +1,254 @@
+\hypertarget{a01419}{}\doxysection{HF\+::Ray\+Tracer\+::Multi\+RT Struct Reference}
+\label{a01419}\index{HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}}
+
+
+{\ttfamily \#include $<$Multi\+RT.\+h$>$}
+
+
+
+Collaboration diagram for HF\+::Ray\+Tracer\+::Multi\+RT\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=201pt]{a01417}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{a01419_ab55089d50434891b9fc5dcc523eb1425}{RT\+\_\+\+Type}} \{ \mbox{\hyperlink{a01419_ab55089d50434891b9fc5dcc523eb1425a18f598cc5a38f3e5052c84e5192ce952}{NONE}}
+, \mbox{\hyperlink{a01419_ab55089d50434891b9fc5dcc523eb1425a0145c318ca132587feb44b0a8805a73a}{EMBREE}}
+, \mbox{\hyperlink{a01419_ab55089d50434891b9fc5dcc523eb1425a15aa1720fdd46c882b9537585c915c09}{NANO\+\_\+\+RT}}
+ \}
+\item 
+using \mbox{\hyperlink{a01419_a07a089a34007343268b4254589324038}{real\+\_\+t}} = \mbox{\hyperlink{a00001_a02139}{double}}
+\item 
+using \mbox{\hyperlink{a01419_aee0e06ba774d2d3f873f9bb0d5786005}{real3}} = std\+::array$<$ \mbox{\hyperlink{a01419_a07a089a34007343268b4254589324038}{real\+\_\+t}}, 3 $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01419_a5d72ecc4fff7d596a1f40aad769088d7}{Multi\+RT}} ()
+\item 
+\mbox{\hyperlink{a01419_a25f435b8af1aa14b0743037bc526d5c8}{Multi\+RT}} (\mbox{\hyperlink{a01411}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert)
+\item 
+\mbox{\hyperlink{a01419_aa9abd55125e62d535c2c7d3af6dc7471}{Multi\+RT}} (\mbox{\hyperlink{a01519}{HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer}} $\ast$nrt)
+\item 
+bool \mbox{\hyperlink{a01419_a22ebf97e859ef651e81deb40b74f668f}{Occluded}} (const \mbox{\hyperlink{a01419_aee0e06ba774d2d3f873f9bb0d5786005}{real3}} \&origin, const \mbox{\hyperlink{a01419_aee0e06ba774d2d3f873f9bb0d5786005}{real3}} \&direction, \mbox{\hyperlink{a01419_a07a089a34007343268b4254589324038}{real\+\_\+t}} distance)
+\item 
+\mbox{\hyperlink{a01415}{Hit\+Struct}}$<$ \mbox{\hyperlink{a01419_a07a089a34007343268b4254589324038}{real\+\_\+t}} $>$ \mbox{\hyperlink{a01419_a7ee672618f7fe9ce6938978d93d18514}{Intersect}} (const \mbox{\hyperlink{a01419_aee0e06ba774d2d3f873f9bb0d5786005}{real3}} \&origin, const \mbox{\hyperlink{a01419_aee0e06ba774d2d3f873f9bb0d5786005}{real3}} \&direction)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \mbox{\hyperlink{a01419_a1c2eb4f79eceffdc4e3d93f17c34e7c9}{Ray\+Tracer}}
+\item 
+\mbox{\hyperlink{a01419_ab55089d50434891b9fc5dcc523eb1425}{RT\+\_\+\+Type}} \mbox{\hyperlink{a01419_acec8c7c5be5c43af1dcae2f271433ac9}{type}} = \mbox{\hyperlink{a01419_ab55089d50434891b9fc5dcc523eb1425a18f598cc5a38f3e5052c84e5192ce952}{RT\+\_\+\+Type\+::\+NONE}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{a00224_source_l00010}{10}} of file \mbox{\hyperlink{a00224_source}{Multi\+RT.\+h}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{a01419_aee0e06ba774d2d3f873f9bb0d5786005}\label{a01419_aee0e06ba774d2d3f873f9bb0d5786005}} 
+\index{HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}!real3@{real3}}
+\index{real3@{real3}!HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}}
+\doxysubsubsection{\texorpdfstring{real3}{real3}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a01419_aee0e06ba774d2d3f873f9bb0d5786005}{HF\+::\+Ray\+Tracer\+::\+Multi\+RT\+::real3}} =  std\+::array$<$\mbox{\hyperlink{a01419_a07a089a34007343268b4254589324038}{real\+\_\+t}}, 3$>$}
+
+
+
+Definition at line \mbox{\hyperlink{a00224_source_l00012}{12}} of file \mbox{\hyperlink{a00224_source}{Multi\+RT.\+h}}.
+
+\mbox{\Hypertarget{a01419_a07a089a34007343268b4254589324038}\label{a01419_a07a089a34007343268b4254589324038}} 
+\index{HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}!real\_t@{real\_t}}
+\index{real\_t@{real\_t}!HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}}
+\doxysubsubsection{\texorpdfstring{real\_t}{real\_t}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a01419_a07a089a34007343268b4254589324038}{HF\+::\+Ray\+Tracer\+::\+Multi\+RT\+::real\+\_\+t}} =  \mbox{\hyperlink{a00001_a02139}{double}}}
+
+
+
+Definition at line \mbox{\hyperlink{a00224_source_l00011}{11}} of file \mbox{\hyperlink{a00224_source}{Multi\+RT.\+h}}.
+
+
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{a01419_ab55089d50434891b9fc5dcc523eb1425}\label{a01419_ab55089d50434891b9fc5dcc523eb1425}} 
+\index{HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}!RT\_Type@{RT\_Type}}
+\index{RT\_Type@{RT\_Type}!HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}}
+\doxysubsubsection{\texorpdfstring{RT\_Type}{RT\_Type}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{a01419_ab55089d50434891b9fc5dcc523eb1425}{HF\+::\+Ray\+Tracer\+::\+Multi\+RT\+::\+RT\+\_\+\+Type}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NONE@{NONE}!HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}}\index{HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}!NONE@{NONE}}}\mbox{\Hypertarget{a01419_ab55089d50434891b9fc5dcc523eb1425a18f598cc5a38f3e5052c84e5192ce952}\label{a01419_ab55089d50434891b9fc5dcc523eb1425a18f598cc5a38f3e5052c84e5192ce952}} 
+NONE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EMBREE@{EMBREE}!HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}}\index{HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}!EMBREE@{EMBREE}}}\mbox{\Hypertarget{a01419_ab55089d50434891b9fc5dcc523eb1425a0145c318ca132587feb44b0a8805a73a}\label{a01419_ab55089d50434891b9fc5dcc523eb1425a0145c318ca132587feb44b0a8805a73a}} 
+EMBREE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NANO\_RT@{NANO\_RT}!HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}}\index{HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}!NANO\_RT@{NANO\_RT}}}\mbox{\Hypertarget{a01419_ab55089d50434891b9fc5dcc523eb1425a15aa1720fdd46c882b9537585c915c09}\label{a01419_ab55089d50434891b9fc5dcc523eb1425a15aa1720fdd46c882b9537585c915c09}} 
+NANO\+\_\+\+RT&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{a00224_source_l00014}{14}} of file \mbox{\hyperlink{a00224_source}{Multi\+RT.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01419_a5d72ecc4fff7d596a1f40aad769088d7}\label{a01419_a5d72ecc4fff7d596a1f40aad769088d7}} 
+\index{HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}!MultiRT@{MultiRT}}
+\index{MultiRT@{MultiRT}!HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}}
+\doxysubsubsection{\texorpdfstring{MultiRT()}{MultiRT()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily HF\+::\+Ray\+Tracer\+::\+Multi\+RT\+::\+Multi\+RT (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00224_source_l00023}{23}} of file \mbox{\hyperlink{a00224_source}{Multi\+RT.\+h}}.
+
+\mbox{\Hypertarget{a01419_a25f435b8af1aa14b0743037bc526d5c8}\label{a01419_a25f435b8af1aa14b0743037bc526d5c8}} 
+\index{HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}!MultiRT@{MultiRT}}
+\index{MultiRT@{MultiRT}!HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}}
+\doxysubsubsection{\texorpdfstring{MultiRT()}{MultiRT()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily HF\+::\+Ray\+Tracer\+::\+Multi\+RT\+::\+Multi\+RT (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01411}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ert }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{a00221_source_l00028}{28}} of file \mbox{\hyperlink{a00221_source}{Multi\+RT.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00224_source_l00016}{EMBREE}}, \mbox{\hyperlink{a00224_source_l00020}{Ray\+Tracer}}, and \mbox{\hyperlink{a00224_source_l00021}{type}}.
+
+\mbox{\Hypertarget{a01419_aa9abd55125e62d535c2c7d3af6dc7471}\label{a01419_aa9abd55125e62d535c2c7d3af6dc7471}} 
+\index{HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}!MultiRT@{MultiRT}}
+\index{MultiRT@{MultiRT}!HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}}
+\doxysubsubsection{\texorpdfstring{MultiRT()}{MultiRT()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily HF\+::\+Ray\+Tracer\+::\+Multi\+RT\+::\+Multi\+RT (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01519}{HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer}} $\ast$}]{nrt }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{a00221_source_l00034}{34}} of file \mbox{\hyperlink{a00221_source}{Multi\+RT.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00224_source_l00017}{NANO\+\_\+\+RT}}, \mbox{\hyperlink{a00224_source_l00020}{Ray\+Tracer}}, and \mbox{\hyperlink{a00224_source_l00021}{type}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01419_a7ee672618f7fe9ce6938978d93d18514}\label{a01419_a7ee672618f7fe9ce6938978d93d18514}} 
+\index{HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}!Intersect@{Intersect}}
+\index{Intersect@{Intersect}!HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}}
+\doxysubsubsection{\texorpdfstring{Intersect()}{Intersect()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01415}{Hit\+Struct}}$<$ \mbox{\hyperlink{a01419_a07a089a34007343268b4254589324038}{Multi\+RT\+::real\+\_\+t}} $>$ HF\+::\+Ray\+Tracer\+::\+Multi\+RT\+::\+Intersect (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01419_aee0e06ba774d2d3f873f9bb0d5786005}{real3}} \&}]{origin,  }\item[{const \mbox{\hyperlink{a01419_aee0e06ba774d2d3f873f9bb0d5786005}{real3}} \&}]{direction }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{a00221_source_l00040}{40}} of file \mbox{\hyperlink{a00221_source}{Multi\+RT.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00224_source_l00016}{EMBREE}}, \mbox{\hyperlink{a00221_source_l00040}{Intersect()}}, \mbox{\hyperlink{a00224_source_l00017}{NANO\+\_\+\+RT}}, \mbox{\hyperlink{a00224_source_l00020}{Ray\+Tracer}}, and \mbox{\hyperlink{a00224_source_l00021}{type}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00011_source_l00146}{HF\+::\+Graph\+Generator\+::\+Check\+Ray()}}, and \mbox{\hyperlink{a00221_source_l00040}{Intersect()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=198pt]{a01419_a7ee672618f7fe9ce6938978d93d18514_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01419_a7ee672618f7fe9ce6938978d93d18514_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01419_a22ebf97e859ef651e81deb40b74f668f}\label{a01419_a22ebf97e859ef651e81deb40b74f668f}} 
+\index{HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}!Occluded@{Occluded}}
+\index{Occluded@{Occluded}!HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}}
+\doxysubsubsection{\texorpdfstring{Occluded()}{Occluded()}}
+{\footnotesize\ttfamily bool HF\+::\+Ray\+Tracer\+::\+Multi\+RT\+::\+Occluded (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01419_aee0e06ba774d2d3f873f9bb0d5786005}{real3}} \&}]{origin,  }\item[{const \mbox{\hyperlink{a01419_aee0e06ba774d2d3f873f9bb0d5786005}{real3}} \&}]{direction,  }\item[{\mbox{\hyperlink{a01419_a07a089a34007343268b4254589324038}{Multi\+RT\+::real\+\_\+t}}}]{distance }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{a00221_source_l00049}{49}} of file \mbox{\hyperlink{a00221_source}{Multi\+RT.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00224_source_l00016}{EMBREE}}, \mbox{\hyperlink{a00224_source_l00017}{NANO\+\_\+\+RT}}, \mbox{\hyperlink{a00221_source_l00049}{Occluded()}}, \mbox{\hyperlink{a00224_source_l00020}{Ray\+Tracer}}, and \mbox{\hyperlink{a00224_source_l00021}{type}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00221_source_l00049}{Occluded()}}, and \mbox{\hyperlink{a00011_source_l00283}{HF\+::\+Graph\+Generator\+::\+Occlusion\+Check()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=198pt]{a01419_a22ebf97e859ef651e81deb40b74f668f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01419_a22ebf97e859ef651e81deb40b74f668f_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01419_a1c2eb4f79eceffdc4e3d93f17c34e7c9}\label{a01419_a1c2eb4f79eceffdc4e3d93f17c34e7c9}} 
+\index{HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}!RayTracer@{RayTracer}}
+\index{RayTracer@{RayTracer}!HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}}
+\doxysubsubsection{\texorpdfstring{RayTracer}{RayTracer}}
+{\footnotesize\ttfamily void$\ast$ HF\+::\+Ray\+Tracer\+::\+Multi\+RT\+::\+Ray\+Tracer}
+
+
+
+Definition at line \mbox{\hyperlink{a00224_source_l00020}{20}} of file \mbox{\hyperlink{a00224_source}{Multi\+RT.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00221_source_l00028}{Multi\+RT()}}, \mbox{\hyperlink{a00221_source_l00040}{Intersect()}}, and \mbox{\hyperlink{a00221_source_l00049}{Occluded()}}.
+
+\mbox{\Hypertarget{a01419_acec8c7c5be5c43af1dcae2f271433ac9}\label{a01419_acec8c7c5be5c43af1dcae2f271433ac9}} 
+\index{HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}!type@{type}}
+\index{type@{type}!HF::RayTracer::MultiRT@{HF::RayTracer::MultiRT}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01419_ab55089d50434891b9fc5dcc523eb1425}{RT\+\_\+\+Type}} HF\+::\+Ray\+Tracer\+::\+Multi\+RT\+::type = \mbox{\hyperlink{a01419_ab55089d50434891b9fc5dcc523eb1425a18f598cc5a38f3e5052c84e5192ce952}{RT\+\_\+\+Type\+::\+NONE}}}
+
+
+
+Definition at line \mbox{\hyperlink{a00224_source_l00021}{21}} of file \mbox{\hyperlink{a00224_source}{Multi\+RT.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00221_source_l00028}{Multi\+RT()}}, \mbox{\hyperlink{a00221_source_l00040}{Intersect()}}, and \mbox{\hyperlink{a00221_source_l00049}{Occluded()}}.
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/raytracer/src/\mbox{\hyperlink{a00224}{Multi\+RT.\+h}}\item 
+Cpp/raytracer/src/\mbox{\hyperlink{a00221}{Multi\+RT.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,91 @@
+\hypertarget{a00275}{}\doxysection{Cpp/spatialstructures/src/node.h File Reference}
+\label{a00275}\index{Cpp/spatialstructures/src/node.h@{Cpp/spatialstructures/src/node.h}}
+
+
+Contains definitions for the \mbox{\hyperlink{a02071}{Node}} structure.  
+
+
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$ostream$>$}\newline
+Include dependency graph for node.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{a00276}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00277}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a02071}{HF\+::\+Spatial\+Structures\+::\+Node}}
+\begin{DoxyCompactList}\small\item\em A point in space with an ID.  \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a02075}{std\+::hash$<$ HF\+::\+Spatial\+Structures\+::\+Node $>$}}
+\begin{DoxyCompactList}\small\item\em Hash this node by combining the hashes of all of it\textquotesingle{}s position elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{a00462}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{a00465}{HF\+::\+Spatial\+Structures}}
+\begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout DHARTAPI. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{a00461}{std}}
+\begin{DoxyCompactList}\small\item\em STL namespace. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a00275_ae4ffe42f069a68102473a4f7c8328437}{HF\+\_\+\+NODE}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{a00465_aa8ecd83cd353318532d791fc819343cc}{HF\+::\+Spatial\+Structures\+::\+NODE\+\_\+\+TYPE}} \{ \mbox{\hyperlink{a00465_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}{HF\+::\+Spatial\+Structures\+::\+GRAPH}} = 0
+, \mbox{\hyperlink{a00465_aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad}{HF\+::\+Spatial\+Structures\+::\+POI}} = 1
+, \mbox{\hyperlink{a00465_aa8ecd83cd353318532d791fc819343cca996f30fa669937983b628671c4493b8e}{HF\+::\+Spatial\+Structures\+::\+OTHER}} = 2
+ \}
+\begin{DoxyCompactList}\small\item\em The type of node this is. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename SizeT $>$ }\\void \mbox{\hyperlink{a00461_a3340e7ae931e28e5c83e07f1d48d3ea2}{std\+::hash\+\_\+combine\+\_\+impl}} (SizeT \&seed, SizeT value) noexcept
+\begin{DoxyCompactList}\small\item\em combine value into the hash value of seed \end{DoxyCompactList}\item 
+ostream \& \mbox{\hyperlink{a00461_a8f937593ac78b8c8c74c0a02b8a22124}{std\+::operator$<$$<$}} (ostream \&os, const \mbox{\hyperlink{a02071}{HF\+::\+Spatial\+Structures\+::\+Node}} n)
+\begin{DoxyCompactList}\small\item\em Create a string containing the x,y,z position of this node. \end{DoxyCompactList}\item 
+ostream \& \mbox{\hyperlink{a00461_a355c64f937cab181506eb61a8dde2006}{std\+::operator$<$$<$}} (ostream \&os, const std\+::array$<$ float, 3 $>$ n)
+\begin{DoxyCompactList}\small\item\em Create a string containing the x,y,z positions of this array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains definitions for the \mbox{\hyperlink{a02071}{Node}} structure. 
+
+\begin{DoxyAuthor}{Author}
+TBA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+06 Jun 2020 
+\end{DoxyDate}
+
+
+Definition in file \mbox{\hyperlink{a00275_source}{node.\+h}}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a00275_ae4ffe42f069a68102473a4f7c8328437}\label{a00275_ae4ffe42f069a68102473a4f7c8328437}} 
+\index{node.h@{node.h}!HF\_NODE@{HF\_NODE}}
+\index{HF\_NODE@{HF\_NODE}!node.h@{node.h}}
+\doxysubsubsection{\texorpdfstring{HF\_NODE}{HF\_NODE}}
+{\footnotesize\ttfamily \#define HF\+\_\+\+NODE}
+
+
+
+Definition at line \mbox{\hyperlink{a00275_source_l00011}{11}} of file \mbox{\hyperlink{a00275_source}{node.\+h}}.
+

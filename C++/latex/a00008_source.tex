@@ -11,24 +11,24 @@
 \DoxyCodeLine{\Hypertarget{a00008_source_l00011}00011 \textcolor{preprocessor}{\#include <set>}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00012}00012 \textcolor{preprocessor}{\#include <vector>}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00013}00013 \textcolor{preprocessor}{\#include <array>}}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00014}00014 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00209}{Node.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00014}00014 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00275}{Node.h}}>}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00015}00015 \textcolor{preprocessor}{\#include <cassert>}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00016}00016 \textcolor{preprocessor}{\#include <variant>}}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00017}00017 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00158}{MultiRT.h}}>}}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00017}00017 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{a00224}{MultiRT.h}}>}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00018}00018 \textcolor{preprocessor}{\#include <unordered\_map>}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00019}00019 }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00020}00020 \textcolor{comment}{// Forward declares for embree raytracer.}}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00021}\mbox{\hyperlink{a00398}{00021}} \textcolor{keyword}{namespace }\mbox{\hyperlink{a00398}{HF::RayTracer}} \{}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00022}00022     \textcolor{keyword}{class }\mbox{\hyperlink{a01345}{EmbreeRayTracer}};}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00023}00023     \textcolor{keyword}{class }\mbox{\hyperlink{a01453}{NanoRTRayTracer}};}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00021}\mbox{\hyperlink{a00464}{00021}} \textcolor{keyword}{namespace }\mbox{\hyperlink{a00464}{HF::RayTracer}} \{}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00022}00022     \textcolor{keyword}{class }\mbox{\hyperlink{a01411}{EmbreeRayTracer}};}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00023}00023     \textcolor{keyword}{class }\mbox{\hyperlink{a01519}{NanoRTRayTracer}};}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00024}00024 \}}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00025}\mbox{\hyperlink{a00399}{00025}} \textcolor{keyword}{namespace }\mbox{\hyperlink{a00399}{HF::SpatialStructures}} \{}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00026}00026     \textcolor{keyword}{class }\mbox{\hyperlink{a01485}{Graph}};}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00027}00027     \textcolor{keyword}{struct }\mbox{\hyperlink{a01461}{Edge}};}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00028}00028     \textcolor{keyword}{enum} \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935e}{STEP}};}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00025}\mbox{\hyperlink{a00465}{00025}} \textcolor{keyword}{namespace }\mbox{\hyperlink{a00465}{HF::SpatialStructures}} \{}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00026}00026     \textcolor{keyword}{class }\mbox{\hyperlink{a01551}{Graph}};}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00027}00027     \textcolor{keyword}{struct }\mbox{\hyperlink{a01527}{Edge}};}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00028}00028     \textcolor{keyword}{enum} \mbox{\hyperlink{a00465_af0378d900074d484ba791d4317e5935e}{STEP}};}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00029}00029 \}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00030}00030 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00059}00059 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00397}{HF::GraphGenerator}} \{}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00059}00059 \textcolor{keyword}{namespace }\mbox{\hyperlink{a00463}{HF::GraphGenerator}} \{}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00060}00060 }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00061}00061     \textcolor{comment}{/* For C++ 2020.}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00062}00062 \textcolor{comment}{    template <typename T>}}
@@ -42,142 +42,142 @@
 \DoxyCodeLine{\Hypertarget{a00008_source_l00070}00070     \textcolor{keyword}{class }UniqueQueue;}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00071}00071     \textcolor{keyword}{struct }optional\_real3;}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00072}00072 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00073}\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{00073}}     \textcolor{keyword}{using }\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} = \mbox{\hyperlink{a00001_a02073}{double}};                            }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00074}\mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{00074}}     \textcolor{keyword}{using }\mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} = std::array<real\_t, 3>;             }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00075}\mbox{\hyperlink{a00397_a2472e370aa77f9486bb1c46a1ff704c5}{00075}}     \textcolor{keyword}{using }\mbox{\hyperlink{a01461}{graph\_edge}} = \mbox{\hyperlink{a01461}{HF::SpatialStructures::Edge}};   }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00073}\mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{00073}}     \textcolor{keyword}{using }\mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} = \mbox{\hyperlink{a00001_a02139}{double}};                            }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00074}\mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{00074}}     \textcolor{keyword}{using }\mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}} = std::array<real\_t, 3>;             }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00075}\mbox{\hyperlink{a00463_a2472e370aa77f9486bb1c46a1ff704c5}{00075}}     \textcolor{keyword}{using }\mbox{\hyperlink{a01527}{graph\_edge}} = \mbox{\hyperlink{a01527}{HF::SpatialStructures::Edge}};   }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00076}00076 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00077}\mbox{\hyperlink{a00397_ad1ee2b33ac4982f6f4c4263946bf9e6b}{00077}}     \textcolor{keyword}{constexpr} \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} \mbox{\hyperlink{a00397_ad1ee2b33ac4982f6f4c4263946bf9e6b}{default\_z\_precision}} = 0.0001;}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00078}\mbox{\hyperlink{a00397_ad1cd92591557c21198238c7d06ef2252}{00078}}     \textcolor{keyword}{constexpr} \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} \mbox{\hyperlink{a00397_ad1cd92591557c21198238c7d06ef2252}{default\_ground\_offset}} = 0.01;}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00079}\mbox{\hyperlink{a00397_a361fb70f3e88bb239a59900c9e21b5ac}{00079}}     \textcolor{keyword}{constexpr} \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} \mbox{\hyperlink{a00397_a361fb70f3e88bb239a59900c9e21b5ac}{default\_spacing\_precision}} = 0.00001;}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00077}\mbox{\hyperlink{a00463_ad1ee2b33ac4982f6f4c4263946bf9e6b}{00077}}     \textcolor{keyword}{constexpr} \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} \mbox{\hyperlink{a00463_ad1ee2b33ac4982f6f4c4263946bf9e6b}{default\_z\_precision}} = 0.0001;}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00078}\mbox{\hyperlink{a00463_ad1cd92591557c21198238c7d06ef2252}{00078}}     \textcolor{keyword}{constexpr} \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} \mbox{\hyperlink{a00463_ad1cd92591557c21198238c7d06ef2252}{default\_ground\_offset}} = 0.01;}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00079}\mbox{\hyperlink{a00463_a361fb70f3e88bb239a59900c9e21b5ac}{00079}}     \textcolor{keyword}{constexpr} \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} \mbox{\hyperlink{a00463_a361fb70f3e88bb239a59900c9e21b5ac}{default\_spacing\_precision}} = 0.00001;}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00080}00080 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00081}\mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{00081}}     \textcolor{keyword}{using }\mbox{\hyperlink{a01353}{RayTracer}} = \mbox{\hyperlink{a01353}{HF::RayTracer::MultiRT}}; }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00082}\mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{00082}}     \textcolor{keyword}{using }\mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}} = std::pair<int, int>; }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00081}\mbox{\hyperlink{a00463_aef833458d20e4569c73f409b52d03bee}{00081}}     \textcolor{keyword}{using }\mbox{\hyperlink{a01419}{RayTracer}} = \mbox{\hyperlink{a01419}{HF::RayTracer::MultiRT}}; }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00082}\mbox{\hyperlink{a00463_ab618c832ef23d48d9f4ea9d9e46116dc}{00082}}     \textcolor{keyword}{using }\mbox{\hyperlink{a00463_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}} = std::pair<int, int>; }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00083}00083 }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00090}00090     \textcolor{keyword}{template}<\textcolor{keyword}{typename} real\_type>}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00091}\mbox{\hyperlink{a00397_a73b53db067a504d36e9481dfe3326b60}{00091}}     \textcolor{keyword}{inline} \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} \mbox{\hyperlink{a00397_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(real\_type t) \{ \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}}\textcolor{keyword}{>}(t); \}}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00091}\mbox{\hyperlink{a00463_a73b53db067a504d36e9481dfe3326b60}{00091}}     \textcolor{keyword}{inline} \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} \mbox{\hyperlink{a00463_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(real\_type t) \{ \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}}\textcolor{keyword}{>}(t); \}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00092}00092     }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00103}00103     \textcolor{keyword}{template}<\textcolor{keyword}{typename} real\_3\_type>}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00104}\mbox{\hyperlink{a00397_a58892abe1152c28d26d3ca749c99ea4d}{00104}}     \textcolor{keyword}{inline} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \mbox{\hyperlink{a00397_a58892abe1152c28d26d3ca749c99ea4d}{CastToReal3}}(real\_3\_type t) \{}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00105}00105         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\{}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00106}00106             \mbox{\hyperlink{a00397_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(t[0]), \mbox{\hyperlink{a00397_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(t[1]), \mbox{\hyperlink{a00397_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(t[2])}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00104}\mbox{\hyperlink{a00463_a58892abe1152c28d26d3ca749c99ea4d}{00104}}     \textcolor{keyword}{inline} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \mbox{\hyperlink{a00463_a58892abe1152c28d26d3ca749c99ea4d}{CastToReal3}}(real\_3\_type t) \{}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00105}00105         \textcolor{keywordflow}{return} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\{}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00106}00106             \mbox{\hyperlink{a00463_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(t[0]), \mbox{\hyperlink{a00463_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(t[1]), \mbox{\hyperlink{a00463_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(t[2])}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00107}00107         \};}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00108}00108     \};}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00109}00109 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00111}\mbox{\hyperlink{a00397}{00111}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a00397_a01229}{Precision}} \{}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00112}\mbox{\hyperlink{a00397_a6ec86cb69c1cc0e0dc8ea229310939b6}{00112}}         \mbox{\hyperlink{a00001_a02073}{real\_t}} \mbox{\hyperlink{a00397_a6ec86cb69c1cc0e0dc8ea229310939b6}{node\_z}};              }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00113}\mbox{\hyperlink{a00397_ac982230f7d151df6018c19d712cd3436}{00113}}         \mbox{\hyperlink{a00001_a02073}{real\_t}} \mbox{\hyperlink{a00397_ac982230f7d151df6018c19d712cd3436}{node\_spacing}};      }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00114}\mbox{\hyperlink{a00397_a4fa4f096863296469711e52da4b36b9c}{00114}}         \mbox{\hyperlink{a00001_a02073}{real\_t}} \mbox{\hyperlink{a00397_a4fa4f096863296469711e52da4b36b9c}{ground\_offset}};        }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00111}\mbox{\hyperlink{a00463}{00111}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a00463_a01295}{Precision}} \{}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00112}\mbox{\hyperlink{a00463_a6ec86cb69c1cc0e0dc8ea229310939b6}{00112}}         \mbox{\hyperlink{a00001_a02139}{real\_t}} \mbox{\hyperlink{a00463_a6ec86cb69c1cc0e0dc8ea229310939b6}{node\_z}};              }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00113}\mbox{\hyperlink{a00463_ac982230f7d151df6018c19d712cd3436}{00113}}         \mbox{\hyperlink{a00001_a02139}{real\_t}} \mbox{\hyperlink{a00463_ac982230f7d151df6018c19d712cd3436}{node\_spacing}};      }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00114}\mbox{\hyperlink{a00463_a4fa4f096863296469711e52da4b36b9c}{00114}}         \mbox{\hyperlink{a00001_a02139}{real\_t}} \mbox{\hyperlink{a00463_a4fa4f096863296469711e52da4b36b9c}{ground\_offset}};        }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00115}00115     \};}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00123}\mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{00123}}     \textcolor{keyword}{enum} \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{HIT\_FLAG}} \{}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00125}\mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a213316326ca943ae8582c8778a28a5f0}{00125}}         \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a213316326ca943ae8582c8778a28a5f0}{NO\_FLAG}} = 0,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00127}\mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598aaf146b316ade4ca80d23d9d22b0539cc}{00127}}         \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598aaf146b316ade4ca80d23d9d22b0539cc}{FLOORS}} = 1,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00129}\mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a9118a6ea0d5aaa017a735193ac79d08d}{00129}}         \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a9118a6ea0d5aaa017a735193ac79d08d}{OBSTACLES}} = 2,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00131}00131         \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a9d20e9f6abc3d3630c75432b0dac052c}{BOTH}} = 3}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00132}\mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a9d20e9f6abc3d3630c75432b0dac052c}{00132}}     \};}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00123}\mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598}{00123}}     \textcolor{keyword}{enum} \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598}{HIT\_FLAG}} \{}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00125}\mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598a213316326ca943ae8582c8778a28a5f0}{00125}}         \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598a213316326ca943ae8582c8778a28a5f0}{NO\_FLAG}} = 0,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00127}\mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598aaf146b316ade4ca80d23d9d22b0539cc}{00127}}         \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598aaf146b316ade4ca80d23d9d22b0539cc}{FLOORS}} = 1,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00129}\mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598a9118a6ea0d5aaa017a735193ac79d08d}{00129}}         \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598a9118a6ea0d5aaa017a735193ac79d08d}{OBSTACLES}} = 2,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00131}00131         \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598a9d20e9f6abc3d3630c75432b0dac052c}{BOTH}} = 3}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00132}\mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598a9d20e9f6abc3d3630c75432b0dac052c}{00132}}     \};}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00133}00133 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00134}\mbox{\hyperlink{a00397_adacfd76227db1d19cad7c15a8dde7330}{00134}}     \textcolor{keyword}{using }\mbox{\hyperlink{a00397_adacfd76227db1d19cad7c15a8dde7330}{hashmap}} = std::unordered\_map<int, HIT\_FLAG>; }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00134}\mbox{\hyperlink{a00463_adacfd76227db1d19cad7c15a8dde7330}{00134}}     \textcolor{keyword}{using }\mbox{\hyperlink{a00463_adacfd76227db1d19cad7c15a8dde7330}{hashmap}} = std::unordered\_map<int, HIT\_FLAG>; }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00135}00135     }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00144}\mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207}{00144}}     \textcolor{keyword}{enum class} \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207}{GeometryFilterMode}} \{}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00145}00145         \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207abd38aa552d58d6dee7dc932c374f0e04}{ALL\_INTERSECTIONS}} = 0, }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00146}00146         \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207ac78656cbac82f2af0177cfe76dd1aa12}{OBSTACLES\_ONLY}} = 1, }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00147}00147         \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207adb49be99500731a1909db6bcf395d27f}{OBSTACLES\_AND\_FLOORS}} }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00144}\mbox{\hyperlink{a00463_af86d7be7ec8351dfc26ab5c11f727207}{00144}}     \textcolor{keyword}{enum class} \mbox{\hyperlink{a00463_af86d7be7ec8351dfc26ab5c11f727207}{GeometryFilterMode}} \{}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00145}00145         \mbox{\hyperlink{a00463_af86d7be7ec8351dfc26ab5c11f727207abd38aa552d58d6dee7dc932c374f0e04}{ALL\_INTERSECTIONS}} = 0, }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00146}00146         \mbox{\hyperlink{a00463_af86d7be7ec8351dfc26ab5c11f727207ac78656cbac82f2af0177cfe76dd1aa12}{OBSTACLES\_ONLY}} = 1, }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00147}00147         \mbox{\hyperlink{a00463_af86d7be7ec8351dfc26ab5c11f727207adb49be99500731a1909db6bcf395d27f}{OBSTACLES\_AND\_FLOORS}} }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00148}00148     \};}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00149}00149 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00157}\mbox{\hyperlink{a01233}{00157}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a01233}{GeometryFlagMap}} \{}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00157}\mbox{\hyperlink{a01299}{00157}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a01299}{GeometryFlagMap}} \{}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00158}00158 }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00159}00159     \textcolor{keyword}{private}:}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00160}\mbox{\hyperlink{a01233_acd66c73f6b20a2e06f48a31e24f6e4c3}{00160}}         \mbox{\hyperlink{a00397_adacfd76227db1d19cad7c15a8dde7330}{hashmap}} \mbox{\hyperlink{a01233_acd66c73f6b20a2e06f48a31e24f6e4c3}{internal\_dictionary}};}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00160}\mbox{\hyperlink{a01299_acd66c73f6b20a2e06f48a31e24f6e4c3}{00160}}         \mbox{\hyperlink{a00463_adacfd76227db1d19cad7c15a8dde7330}{hashmap}} \mbox{\hyperlink{a01299_acd66c73f6b20a2e06f48a31e24f6e4c3}{internal\_dictionary}};}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00161}00161 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00176}\mbox{\hyperlink{a01233_aa6023b7a8de09fb747bd049938f1e5b8}{00176}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01233_aa6023b7a8de09fb747bd049938f1e5b8}{DetermineFilterMode}}(}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00176}\mbox{\hyperlink{a01299_aa6023b7a8de09fb747bd049938f1e5b8}{00176}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01299_aa6023b7a8de09fb747bd049938f1e5b8}{DetermineFilterMode}}(}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00177}00177             \textcolor{keyword}{const} std::vector<int>\& walkable,}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00178}00178             \textcolor{keyword}{const} std::vector<int>\& obstacle)}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00179}00179         \{}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00180}00180             \textcolor{keywordtype}{bool} has\_walkable = !(walkable.empty());}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00181}00181             \textcolor{keywordtype}{bool} has\_obstacle = !(obstacle.empty());}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00182}00182 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00183}00183             \textcolor{keywordflow}{if} (has\_walkable \&\& has\_obstacle) this-\/>\mbox{\hyperlink{a01233_a8284a2c40aa9b0a5db59916d32b75659}{Mode}} = \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207adb49be99500731a1909db6bcf395d27f}{GeometryFilterMode::OBSTACLES\_AND\_FLOORS}};}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00184}00184             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (has\_obstacle \&\& !has\_walkable) this-\/>\mbox{\hyperlink{a01233_a8284a2c40aa9b0a5db59916d32b75659}{Mode}} = \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207ac78656cbac82f2af0177cfe76dd1aa12}{GeometryFilterMode::OBSTACLES\_ONLY}};}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00185}00185             \textcolor{keywordflow}{else} this-\/>\mbox{\hyperlink{a01233_a8284a2c40aa9b0a5db59916d32b75659}{Mode}} = \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207abd38aa552d58d6dee7dc932c374f0e04}{GeometryFilterMode::ALL\_INTERSECTIONS}};}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00183}00183             \textcolor{keywordflow}{if} (has\_walkable \&\& has\_obstacle) this-\/>\mbox{\hyperlink{a01299_a8284a2c40aa9b0a5db59916d32b75659}{Mode}} = \mbox{\hyperlink{a00463_af86d7be7ec8351dfc26ab5c11f727207adb49be99500731a1909db6bcf395d27f}{GeometryFilterMode::OBSTACLES\_AND\_FLOORS}};}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00184}00184             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (has\_obstacle \&\& !has\_walkable) this-\/>\mbox{\hyperlink{a01299_a8284a2c40aa9b0a5db59916d32b75659}{Mode}} = \mbox{\hyperlink{a00463_af86d7be7ec8351dfc26ab5c11f727207ac78656cbac82f2af0177cfe76dd1aa12}{GeometryFilterMode::OBSTACLES\_ONLY}};}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00185}00185             \textcolor{keywordflow}{else} this-\/>\mbox{\hyperlink{a01299_a8284a2c40aa9b0a5db59916d32b75659}{Mode}} = \mbox{\hyperlink{a00463_af86d7be7ec8351dfc26ab5c11f727207abd38aa552d58d6dee7dc932c374f0e04}{GeometryFilterMode::ALL\_INTERSECTIONS}};}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00186}00186         \}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00187}00187 }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00188}00188     \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00189}\mbox{\hyperlink{a01233_a8284a2c40aa9b0a5db59916d32b75659}{00189}}         \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207}{GeometryFilterMode}} \mbox{\hyperlink{a01233_a8284a2c40aa9b0a5db59916d32b75659}{Mode}} = \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207abd38aa552d58d6dee7dc932c374f0e04}{GeometryFilterMode::ALL\_INTERSECTIONS}}; }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00189}\mbox{\hyperlink{a01299_a8284a2c40aa9b0a5db59916d32b75659}{00189}}         \mbox{\hyperlink{a00463_af86d7be7ec8351dfc26ab5c11f727207}{GeometryFilterMode}} \mbox{\hyperlink{a01299_a8284a2c40aa9b0a5db59916d32b75659}{Mode}} = \mbox{\hyperlink{a00463_af86d7be7ec8351dfc26ab5c11f727207abd38aa552d58d6dee7dc932c374f0e04}{GeometryFilterMode::ALL\_INTERSECTIONS}}; }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00190}00190 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00200}\mbox{\hyperlink{a01233_a5f5b32d65d3d43143915633c8411acaf}{00200}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01233_a5f5b32d65d3d43143915633c8411acaf}{SetGeometryIds}}(}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00200}\mbox{\hyperlink{a01299_a5f5b32d65d3d43143915633c8411acaf}{00200}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01299_a5f5b32d65d3d43143915633c8411acaf}{SetGeometryIds}}(}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00201}00201             \textcolor{keyword}{const} std::vector<int> \& obstacle\_geometry, }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00202}00202             \textcolor{keyword}{const} std::vector<int> \& walkable\_geometry)}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00203}00203         \{}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00204}00204             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keywordtype}{id} : obstacle\_geometry)}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00205}00205                 this-\/>\mbox{\hyperlink{a01233_ac9dab2d023f758ccf718d1e7c8f98e31}{Set}}(\textcolor{keywordtype}{id}, \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a9118a6ea0d5aaa017a735193ac79d08d}{HIT\_FLAG::OBSTACLES}});}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00205}00205                 this-\/>\mbox{\hyperlink{a01299_ac9dab2d023f758ccf718d1e7c8f98e31}{Set}}(\textcolor{keywordtype}{id}, \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598a9118a6ea0d5aaa017a735193ac79d08d}{HIT\_FLAG::OBSTACLES}});}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00206}00206             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keywordtype}{id} : walkable\_geometry)}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00207}00207                 this-\/>\mbox{\hyperlink{a01233_ac9dab2d023f758ccf718d1e7c8f98e31}{Set}}(\textcolor{keywordtype}{id}, \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598aaf146b316ade4ca80d23d9d22b0539cc}{HIT\_FLAG::FLOORS}});}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00207}00207                 this-\/>\mbox{\hyperlink{a01299_ac9dab2d023f758ccf718d1e7c8f98e31}{Set}}(\textcolor{keywordtype}{id}, \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598aaf146b316ade4ca80d23d9d22b0539cc}{HIT\_FLAG::FLOORS}});}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00208}00208 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00209}00209             \mbox{\hyperlink{a01233_aa6023b7a8de09fb747bd049938f1e5b8}{DetermineFilterMode}}(walkable\_geometry, obstacle\_geometry);}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00209}00209             \mbox{\hyperlink{a01299_aa6023b7a8de09fb747bd049938f1e5b8}{DetermineFilterMode}}(walkable\_geometry, obstacle\_geometry);}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00210}00210         \}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00211}00211 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00219}\mbox{\hyperlink{a01233_a48c10aea7aea3c6ba9723a6d47c0b989}{00219}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01233_a48c10aea7aea3c6ba9723a6d47c0b989}{HasKey}}(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id})\textcolor{keyword}{ const }\{}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00220}00220             \textcolor{keywordflow}{return} \mbox{\hyperlink{a01233_acd66c73f6b20a2e06f48a31e24f6e4c3}{internal\_dictionary}}.count(\textcolor{keywordtype}{id}) >= 1;}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00219}\mbox{\hyperlink{a01299_a48c10aea7aea3c6ba9723a6d47c0b989}{00219}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{a01299_a48c10aea7aea3c6ba9723a6d47c0b989}{HasKey}}(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id})\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00220}00220             \textcolor{keywordflow}{return} \mbox{\hyperlink{a01299_acd66c73f6b20a2e06f48a31e24f6e4c3}{internal\_dictionary}}.count(\textcolor{keywordtype}{id}) >= 1;}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00221}00221         \}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00222}00222 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00236}\mbox{\hyperlink{a01233_ae62d356ebdf806113eed7cbe701b3eaa}{00236}}         \textcolor{keyword}{inline} \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{HIT\_FLAG}} \mbox{\hyperlink{a01233_ae62d356ebdf806113eed7cbe701b3eaa}{operator[]}}(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id})\textcolor{keyword}{ const }\{}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00237}00237             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{a01233_a48c10aea7aea3c6ba9723a6d47c0b989}{HasKey}}(\textcolor{keywordtype}{id})) \textcolor{keywordflow}{return} \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a213316326ca943ae8582c8778a28a5f0}{HIT\_FLAG::NO\_FLAG}};}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00238}00238             \textcolor{keywordflow}{return} \mbox{\hyperlink{a01233_acd66c73f6b20a2e06f48a31e24f6e4c3}{internal\_dictionary}}.at(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00236}\mbox{\hyperlink{a01299_ae62d356ebdf806113eed7cbe701b3eaa}{00236}}         \textcolor{keyword}{inline} \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598}{HIT\_FLAG}} \mbox{\hyperlink{a01299_ae62d356ebdf806113eed7cbe701b3eaa}{operator[]}}(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id})\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00237}00237             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{a01299_a48c10aea7aea3c6ba9723a6d47c0b989}{HasKey}}(\textcolor{keywordtype}{id})) \textcolor{keywordflow}{return} \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598a213316326ca943ae8582c8778a28a5f0}{HIT\_FLAG::NO\_FLAG}};}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00238}00238             \textcolor{keywordflow}{return} \mbox{\hyperlink{a01299_acd66c73f6b20a2e06f48a31e24f6e4c3}{internal\_dictionary}}.at(\textcolor{keywordtype}{id});}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00239}00239         \}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00240}00240 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00249}\mbox{\hyperlink{a01233_ac9dab2d023f758ccf718d1e7c8f98e31}{00249}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01233_ac9dab2d023f758ccf718d1e7c8f98e31}{Set}}(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id}, \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{HIT\_FLAG}} flag) \{}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00250}00250             \mbox{\hyperlink{a01233_acd66c73f6b20a2e06f48a31e24f6e4c3}{internal\_dictionary}}[id] = flag;}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00249}\mbox{\hyperlink{a01299_ac9dab2d023f758ccf718d1e7c8f98e31}{00249}}         \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a01299_ac9dab2d023f758ccf718d1e7c8f98e31}{Set}}(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id}, \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598}{HIT\_FLAG}} flag) \{}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00250}00250             \mbox{\hyperlink{a01299_acd66c73f6b20a2e06f48a31e24f6e4c3}{internal\_dictionary}}[id] = flag;}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00251}00251         \}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00252}00252     \};}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00253}00253 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00255}\mbox{\hyperlink{a00397}{00255}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a00397_a01237}{GraphParams}} \{}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00256}\mbox{\hyperlink{a00397_a0b8afc5f531e3286ce2434b1bc2b1f50}{00256}}         \mbox{\hyperlink{a00001_a02073}{real\_t}} \mbox{\hyperlink{a00397_a0b8afc5f531e3286ce2434b1bc2b1f50}{up\_step}};     }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00257}\mbox{\hyperlink{a00397_add7f080950668f5dfa8d857e9c66b89d}{00257}}         \mbox{\hyperlink{a00001_a02073}{real\_t}} \mbox{\hyperlink{a00397_add7f080950668f5dfa8d857e9c66b89d}{up\_slope}}; }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00258}\mbox{\hyperlink{a00397_add2b6fa6bf77a8c4626a1e6d0559970f}{00258}}         \mbox{\hyperlink{a00001_a02073}{real\_t}} \mbox{\hyperlink{a00397_add2b6fa6bf77a8c4626a1e6d0559970f}{down\_step}}; }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00259}\mbox{\hyperlink{a00397_a7c141d33285a77c81fc1b9ce0b210d72}{00259}}         \mbox{\hyperlink{a00001_a02073}{real\_t}} \mbox{\hyperlink{a00397_a7c141d33285a77c81fc1b9ce0b210d72}{down\_slope}}; }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00260}\mbox{\hyperlink{a00397_af7a57e8e6b17f86ac29a8df2685e56c1}{00260}}         \mbox{\hyperlink{a00397_a01229}{Precision}} \mbox{\hyperlink{a00397_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}; }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00261}\mbox{\hyperlink{a00397_a5dc55aa5861e9bb2f2675146b11812af}{00261}}         \mbox{\hyperlink{a01233}{GeometryFlagMap}} \mbox{\hyperlink{a00397_a5dc55aa5861e9bb2f2675146b11812af}{geom\_ids}}; }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00255}\mbox{\hyperlink{a00463}{00255}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a00463_a01303}{GraphParams}} \{}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00256}\mbox{\hyperlink{a00463_a0b8afc5f531e3286ce2434b1bc2b1f50}{00256}}         \mbox{\hyperlink{a00001_a02139}{real\_t}} \mbox{\hyperlink{a00463_a0b8afc5f531e3286ce2434b1bc2b1f50}{up\_step}};     }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00257}\mbox{\hyperlink{a00463_add7f080950668f5dfa8d857e9c66b89d}{00257}}         \mbox{\hyperlink{a00001_a02139}{real\_t}} \mbox{\hyperlink{a00463_add7f080950668f5dfa8d857e9c66b89d}{up\_slope}}; }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00258}\mbox{\hyperlink{a00463_add2b6fa6bf77a8c4626a1e6d0559970f}{00258}}         \mbox{\hyperlink{a00001_a02139}{real\_t}} \mbox{\hyperlink{a00463_add2b6fa6bf77a8c4626a1e6d0559970f}{down\_step}}; }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00259}\mbox{\hyperlink{a00463_a7c141d33285a77c81fc1b9ce0b210d72}{00259}}         \mbox{\hyperlink{a00001_a02139}{real\_t}} \mbox{\hyperlink{a00463_a7c141d33285a77c81fc1b9ce0b210d72}{down\_slope}}; }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00260}\mbox{\hyperlink{a00463_af7a57e8e6b17f86ac29a8df2685e56c1}{00260}}         \mbox{\hyperlink{a00463_a01295}{Precision}} \mbox{\hyperlink{a00463_af7a57e8e6b17f86ac29a8df2685e56c1}{precision}}; }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00261}\mbox{\hyperlink{a00463_a5dc55aa5861e9bb2f2675146b11812af}{00261}}         \mbox{\hyperlink{a01299}{GeometryFlagMap}} \mbox{\hyperlink{a00463_a5dc55aa5861e9bb2f2675146b11812af}{geom\_ids}}; }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00262}00262     \};}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00263}00263 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00281}\mbox{\hyperlink{a01241}{00281}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a01241}{optional\_real3}} \{}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00282}\mbox{\hyperlink{a01241_a1c21b3590d2f9d2327cfc4d7c1a11521}{00282}}         \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \mbox{\hyperlink{a01241_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}}\{ NAN, NAN, NAN \}; }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00281}\mbox{\hyperlink{a01307}{00281}}     \textcolor{keyword}{struct }\mbox{\hyperlink{a01307}{optional\_real3}} \{}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00282}\mbox{\hyperlink{a01307_a1c21b3590d2f9d2327cfc4d7c1a11521}{00282}}         \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \mbox{\hyperlink{a01307_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}}\{ NAN, NAN, NAN \}; }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00283}00283 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00285}\mbox{\hyperlink{a01241_a59234d3c39c9a9034f8e551d656ee467}{00285}}         \textcolor{keyword}{inline} \mbox{\hyperlink{a01241_a59234d3c39c9a9034f8e551d656ee467}{optional\_real3}}() \{\};}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00285}\mbox{\hyperlink{a01307_a59234d3c39c9a9034f8e551d656ee467}{00285}}         \textcolor{keyword}{inline} \mbox{\hyperlink{a01307_a59234d3c39c9a9034f8e551d656ee467}{optional\_real3}}() \{\};}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00286}00286 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00293}\mbox{\hyperlink{a01241_a6c7e313fe147a3d0f8912bf61a7b19ae}{00293}}         \textcolor{keyword}{inline} \mbox{\hyperlink{a01241_a6c7e313fe147a3d0f8912bf61a7b19ae}{optional\_real3}}(\mbox{\hyperlink{a00001_a02073}{real\_t}} x, \mbox{\hyperlink{a00001_a02073}{real\_t}} y, \mbox{\hyperlink{a00001_a02073}{real\_t}} z) : \mbox{\hyperlink{a01241_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}}(\mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\{ x,y,z \}) \{\};}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00293}\mbox{\hyperlink{a01307_a6c7e313fe147a3d0f8912bf61a7b19ae}{00293}}         \textcolor{keyword}{inline} \mbox{\hyperlink{a01307_a6c7e313fe147a3d0f8912bf61a7b19ae}{optional\_real3}}(\mbox{\hyperlink{a00001_a02139}{real\_t}} x, \mbox{\hyperlink{a00001_a02139}{real\_t}} y, \mbox{\hyperlink{a00001_a02139}{real\_t}} z) : \mbox{\hyperlink{a01307_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}}(\mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\{ x,y,z \}) \{\};}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00294}00294     }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00299}\mbox{\hyperlink{a01241_a8c605afc6d2d8357904a33c3c76bf9fe}{00299}}         \textcolor{keyword}{inline} \mbox{\hyperlink{a01241_a8c605afc6d2d8357904a33c3c76bf9fe}{optional\_real3}}(\textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& in\_real3) : \mbox{\hyperlink{a01241_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}}(in\_real3) \{\};}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00299}\mbox{\hyperlink{a01307_a8c605afc6d2d8357904a33c3c76bf9fe}{00299}}         \textcolor{keyword}{inline} \mbox{\hyperlink{a01307_a8c605afc6d2d8357904a33c3c76bf9fe}{optional\_real3}}(\textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& in\_real3) : \mbox{\hyperlink{a01307_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}}(in\_real3) \{\};}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00300}00300 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00305}\mbox{\hyperlink{a01241_a6333995f2f4dddbff30ca8e9709b10dc}{00305}}         \textcolor{keyword}{inline} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& \mbox{\hyperlink{a01241_a6333995f2f4dddbff30ca8e9709b10dc}{operator *}}() \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{a01241_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}}; \}}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00305}\mbox{\hyperlink{a01307_a6333995f2f4dddbff30ca8e9709b10dc}{00305}}         \textcolor{keyword}{inline} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& \mbox{\hyperlink{a01307_a6333995f2f4dddbff30ca8e9709b10dc}{operator *}}() \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{a01307_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}}; \}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00306}00306         }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00312}\mbox{\hyperlink{a01241_ad506f7821a34dd38f42c579d36a809f0}{00312}}         \textcolor{keyword}{inline} \textcolor{keyword}{explicit} \textcolor{keyword}{operator} bool()\textcolor{keyword}{ const }\{}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00313}00313             \textcolor{keywordflow}{return} !(std::isnan(\mbox{\hyperlink{a01241_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}}[0]) \&\& std::isnan(\mbox{\hyperlink{a01241_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}}[1]) \&\& std::isnan(\mbox{\hyperlink{a01241_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}}[2]));}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00312}\mbox{\hyperlink{a01307_ad506f7821a34dd38f42c579d36a809f0}{00312}}         \textcolor{keyword}{inline} \textcolor{keyword}{explicit} \textcolor{keyword}{operator} bool()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00313}00313             \textcolor{keywordflow}{return} !(std::isnan(\mbox{\hyperlink{a01307_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}}[0]) \&\& std::isnan(\mbox{\hyperlink{a01307_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}}[1]) \&\& std::isnan(\mbox{\hyperlink{a01307_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}}[2]));}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00314}00314         \}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00315}00315     \};}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00316}00316 }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00317}00317 }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00318}00318 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00326}00326     std::set<std::pair<int, int>> \mbox{\hyperlink{a00397_afe5670b4cb780fd3ccf2a0d72a2e3c2e}{permutations}}(\textcolor{keywordtype}{int} limit);}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00326}00326     std::set<std::pair<int, int>> \mbox{\hyperlink{a00463_afe5670b4cb780fd3ccf2a0d72a2e3c2e}{permutations}}(\textcolor{keywordtype}{int} limit);}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00327}00327 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00344}\mbox{\hyperlink{a01245}{00344}}     \textcolor{keyword}{class }\mbox{\hyperlink{a01245}{GraphGenerator}}}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00344}\mbox{\hyperlink{a01311}{00344}}     \textcolor{keyword}{class }\mbox{\hyperlink{a01311}{GraphGenerator}}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00345}00345     \{}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00346}00346     \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00347}\mbox{\hyperlink{a01245_a6afac9c527d8483943ef61e9e9a1ca15}{00347}}         \textcolor{keywordtype}{int} \mbox{\hyperlink{a01245_a6afac9c527d8483943ef61e9e9a1ca15}{max\_nodes}};         }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00348}\mbox{\hyperlink{a01245_a16da7abe348f7af1d232867f2d719db1}{00348}}         \textcolor{keywordtype}{int} \mbox{\hyperlink{a01245_a16da7abe348f7af1d232867f2d719db1}{core\_count}};           }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00347}\mbox{\hyperlink{a01311_a6afac9c527d8483943ef61e9e9a1ca15}{00347}}         \textcolor{keywordtype}{int} \mbox{\hyperlink{a01311_a6afac9c527d8483943ef61e9e9a1ca15}{max\_nodes}};         }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00348}\mbox{\hyperlink{a01311_a16da7abe348f7af1d232867f2d719db1}{00348}}         \textcolor{keywordtype}{int} \mbox{\hyperlink{a01311_a16da7abe348f7af1d232867f2d719db1}{core\_count}};           }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00349}00349 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00350}\mbox{\hyperlink{a01245_aa04d1ae908956afc43e540b0cc6849f7}{00350}}         \textcolor{keywordtype}{int} \mbox{\hyperlink{a01245_aa04d1ae908956afc43e540b0cc6849f7}{min\_connections}};  }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00351}\mbox{\hyperlink{a01245_a73847391cae1bc6c5a0ed5416844ab68}{00351}}         \textcolor{keywordtype}{int} \mbox{\hyperlink{a01245_a73847391cae1bc6c5a0ed5416844ab68}{max\_step\_connection}}; }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00352}\mbox{\hyperlink{a01245_a9aba1df499733b653dff3ec59bf3871f}{00352}}         \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \mbox{\hyperlink{a01245_a9aba1df499733b653dff3ec59bf3871f}{spacing}};          }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00350}\mbox{\hyperlink{a01311_aa04d1ae908956afc43e540b0cc6849f7}{00350}}         \textcolor{keywordtype}{int} \mbox{\hyperlink{a01311_aa04d1ae908956afc43e540b0cc6849f7}{min\_connections}};  }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00351}\mbox{\hyperlink{a01311_a73847391cae1bc6c5a0ed5416844ab68}{00351}}         \textcolor{keywordtype}{int} \mbox{\hyperlink{a01311_a73847391cae1bc6c5a0ed5416844ab68}{max\_step\_connection}}; }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00352}\mbox{\hyperlink{a01311_a9aba1df499733b653dff3ec59bf3871f}{00352}}         \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \mbox{\hyperlink{a01311_a9aba1df499733b653dff3ec59bf3871f}{spacing}};          }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00353}00353 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00354}\mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{00354}}         \mbox{\hyperlink{a00397_a01237}{GraphParams}} \mbox{\hyperlink{a01245_a6c85bb69456393934b602a242d8f0bed}{params}}; }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00354}\mbox{\hyperlink{a01311_a6c85bb69456393934b602a242d8f0bed}{00354}}         \mbox{\hyperlink{a00463_a01303}{GraphParams}} \mbox{\hyperlink{a01311_a6c85bb69456393934b602a242d8f0bed}{params}}; }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00355}00355 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00356}\mbox{\hyperlink{a01245_a5801e0e8dbaaa13ccab14ff0cae69de0}{00356}}         \mbox{\hyperlink{a01353}{RayTracer}} \mbox{\hyperlink{a01245_a5801e0e8dbaaa13ccab14ff0cae69de0}{ray\_tracer}}; }
+\DoxyCodeLine{\Hypertarget{a00008_source_l00356}\mbox{\hyperlink{a01311_a5801e0e8dbaaa13ccab14ff0cae69de0}{00356}}         \mbox{\hyperlink{a01419}{RayTracer}} \mbox{\hyperlink{a01311_a5801e0e8dbaaa13ccab14ff0cae69de0}{ray\_tracer}}; }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00357}00357     \textcolor{keyword}{public}:}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00358}00358         }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00371}00371         \mbox{\hyperlink{a01245}{GraphGenerator}}(\mbox{\hyperlink{a01345}{HF::RayTracer::EmbreeRayTracer}}\& \mbox{\hyperlink{a01245_a5801e0e8dbaaa13ccab14ff0cae69de0}{ray\_tracer}}, \textcolor{keyword}{const} std::vector<int> \& obstacle\_ids = std::vector<int>(0), \textcolor{keyword}{const} std::vector<int> \& walkable\_ids = std::vector<int>(0));}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00371}00371         \mbox{\hyperlink{a01311}{GraphGenerator}}(\mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}}\& \mbox{\hyperlink{a01311_a5801e0e8dbaaa13ccab14ff0cae69de0}{ray\_tracer}}, \textcolor{keyword}{const} std::vector<int> \& obstacle\_ids = std::vector<int>(0), \textcolor{keyword}{const} std::vector<int> \& walkable\_ids = std::vector<int>(0));}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00372}00372     }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00385}00385         \mbox{\hyperlink{a01245}{GraphGenerator}}(\mbox{\hyperlink{a01453}{HF::RayTracer::NanoRTRayTracer}}\& \mbox{\hyperlink{a01245_a5801e0e8dbaaa13ccab14ff0cae69de0}{ray\_tracer}}, \textcolor{keyword}{const} std::vector<int> \& obstacle\_ids = std::vector<int>(0), \textcolor{keyword}{const} std::vector<int>\& walkable\_ids = std::vector<int>(0));}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00385}00385         \mbox{\hyperlink{a01311}{GraphGenerator}}(\mbox{\hyperlink{a01519}{HF::RayTracer::NanoRTRayTracer}}\& \mbox{\hyperlink{a01311_a5801e0e8dbaaa13ccab14ff0cae69de0}{ray\_tracer}}, \textcolor{keyword}{const} std::vector<int> \& obstacle\_ids = std::vector<int>(0), \textcolor{keyword}{const} std::vector<int>\& walkable\_ids = std::vector<int>(0));}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00386}00386         }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00399}00399         \mbox{\hyperlink{a01245}{GraphGenerator}}(\mbox{\hyperlink{a01353}{HF::RayTracer::MultiRT}}\& \mbox{\hyperlink{a01245_a5801e0e8dbaaa13ccab14ff0cae69de0}{ray\_tracer}}, \textcolor{keyword}{const} std::vector<int> \& obstacle\_ids = std::vector<int>(0), \textcolor{keyword}{const} std::vector<int>\& walkable\_ids = std::vector<int>(0));}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00399}00399         \mbox{\hyperlink{a01311}{GraphGenerator}}(\mbox{\hyperlink{a01419}{HF::RayTracer::MultiRT}}\& \mbox{\hyperlink{a01311_a5801e0e8dbaaa13ccab14ff0cae69de0}{ray\_tracer}}, \textcolor{keyword}{const} std::vector<int> \& obstacle\_ids = std::vector<int>(0), \textcolor{keyword}{const} std::vector<int>\& walkable\_ids = std::vector<int>(0));}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00400}00400 }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00401}00401 }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00453}00453         \textcolor{keyword}{template} <}
@@ -187,11 +187,11 @@
 \DoxyCodeLine{\Hypertarget{a00008_source_l00457}00457             \textcolor{keyword}{typename} up\_slope\_type,}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00458}00458             \textcolor{keyword}{typename} down\_step\_type,}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00459}00459             \textcolor{keyword}{typename} down\_slope\_type,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00460}00460             \textcolor{keyword}{typename} z\_precision\_type =  \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}},}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00461}00461             \textcolor{keyword}{typename} connect\_offset\_type = \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}},}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00462}00462             \textcolor{keyword}{typename} spacing\_precision\_type = \mbox{\hyperlink{a00001_a02073}{real\_t}}}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00460}00460             \textcolor{keyword}{typename} z\_precision\_type =  \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}},}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00461}00461             \textcolor{keyword}{typename} connect\_offset\_type = \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}},}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00462}00462             \textcolor{keyword}{typename} spacing\_precision\_type = \mbox{\hyperlink{a00001_a02139}{real\_t}}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00463}00463         >}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00464}\mbox{\hyperlink{a01245_a0c12341433bbec41cc12cc1dbb41a976}{00464}}         \textcolor{keyword}{inline} \mbox{\hyperlink{a01485}{SpatialStructures::Graph}} \mbox{\hyperlink{a01245_a0c12341433bbec41cc12cc1dbb41a976}{BuildNetwork}}(}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00464}\mbox{\hyperlink{a01311_a0c12341433bbec41cc12cc1dbb41a976}{00464}}         \textcolor{keyword}{inline} \mbox{\hyperlink{a01551}{SpatialStructures::Graph}} \mbox{\hyperlink{a01311_a0c12341433bbec41cc12cc1dbb41a976}{BuildNetwork}}(}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00465}00465             \textcolor{keyword}{const} node\_type\& start\_point,}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00466}00466             \textcolor{keyword}{const} node2\_type\& Spacing,}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00467}00467             \textcolor{keywordtype}{int} MaxNodes,}
@@ -200,107 +200,107 @@
 \DoxyCodeLine{\Hypertarget{a00008_source_l00470}00470             down\_step\_type DownStep,}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00471}00471             down\_slope\_type DownSlope,}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00472}00472             \textcolor{keywordtype}{int} max\_step\_connections,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00473}00473             \textcolor{keywordtype}{int} \mbox{\hyperlink{a01245_aa04d1ae908956afc43e540b0cc6849f7}{min\_connections}} = 1,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00473}00473             \textcolor{keywordtype}{int} \mbox{\hyperlink{a01311_aa04d1ae908956afc43e540b0cc6849f7}{min\_connections}} = 1,}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00474}00474             \textcolor{keywordtype}{int} cores = -\/1,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00475}00475             z\_precision\_type node\_z\_precision = \mbox{\hyperlink{a00397_ad1ee2b33ac4982f6f4c4263946bf9e6b}{default\_z\_precision}},}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00476}00476             connect\_offset\_type  node\_spacing\_precision = \mbox{\hyperlink{a00397_a361fb70f3e88bb239a59900c9e21b5ac}{default\_spacing\_precision}},}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00477}00477             spacing\_precision\_type ground\_offset = \mbox{\hyperlink{a00397_ad1cd92591557c21198238c7d06ef2252}{default\_ground\_offset}}}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00475}00475             z\_precision\_type node\_z\_precision = \mbox{\hyperlink{a00463_ad1ee2b33ac4982f6f4c4263946bf9e6b}{default\_z\_precision}},}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00476}00476             connect\_offset\_type  node\_spacing\_precision = \mbox{\hyperlink{a00463_a361fb70f3e88bb239a59900c9e21b5ac}{default\_spacing\_precision}},}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00477}00477             spacing\_precision\_type ground\_offset = \mbox{\hyperlink{a00463_ad1cd92591557c21198238c7d06ef2252}{default\_ground\_offset}}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00478}00478         ) \{}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00479}00479             assert(node\_z\_precision != 0);}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00480}00480             \textcolor{keywordflow}{return} \mbox{\hyperlink{a01245_a5788e421d921ec0ff27defc139c45106}{IMPL\_BuildNetwork}}(}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00481}00481                 \mbox{\hyperlink{a00397_a58892abe1152c28d26d3ca749c99ea4d}{CastToReal3}}(start\_point),}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00482}00482                 \mbox{\hyperlink{a00397_a58892abe1152c28d26d3ca749c99ea4d}{CastToReal3}}(Spacing),}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00480}00480             \textcolor{keywordflow}{return} \mbox{\hyperlink{a01311_a5788e421d921ec0ff27defc139c45106}{IMPL\_BuildNetwork}}(}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00481}00481                 \mbox{\hyperlink{a00463_a58892abe1152c28d26d3ca749c99ea4d}{CastToReal3}}(start\_point),}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00482}00482                 \mbox{\hyperlink{a00463_a58892abe1152c28d26d3ca749c99ea4d}{CastToReal3}}(Spacing),}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00483}00483                 MaxNodes,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00484}00484                 \mbox{\hyperlink{a00397_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(UpStep),}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00485}00485                 \mbox{\hyperlink{a00397_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(UpSlope),}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00486}00486                 \mbox{\hyperlink{a00397_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(DownStep),}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00487}00487                 \mbox{\hyperlink{a00397_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(DownSlope),}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00484}00484                 \mbox{\hyperlink{a00463_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(UpStep),}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00485}00485                 \mbox{\hyperlink{a00463_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(UpSlope),}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00486}00486                 \mbox{\hyperlink{a00463_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(DownStep),}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00487}00487                 \mbox{\hyperlink{a00463_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(DownSlope),}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00488}00488                 max\_step\_connections,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00489}00489                 \mbox{\hyperlink{a01245_aa04d1ae908956afc43e540b0cc6849f7}{min\_connections}},}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00489}00489                 \mbox{\hyperlink{a01311_aa04d1ae908956afc43e540b0cc6849f7}{min\_connections}},}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00490}00490                 cores,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00491}00491                 \mbox{\hyperlink{a00397_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(node\_z\_precision),}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00492}00492                 \mbox{\hyperlink{a00397_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(node\_spacing\_precision),}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00493}00493                 \mbox{\hyperlink{a00397_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(ground\_offset)}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00491}00491                 \mbox{\hyperlink{a00463_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(node\_z\_precision),}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00492}00492                 \mbox{\hyperlink{a00463_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(node\_spacing\_precision),}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00493}00493                 \mbox{\hyperlink{a00463_a73b53db067a504d36e9481dfe3326b60}{CastToReal}}(ground\_offset)}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00494}00494             );}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00495}00495         \}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00496}00496 }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00497}00497 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00536}00536         \mbox{\hyperlink{a01485}{SpatialStructures::Graph}} \mbox{\hyperlink{a01245_a5788e421d921ec0ff27defc139c45106}{IMPL\_BuildNetwork}}(}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00537}00537             \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& start\_point,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00538}00538             \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& Spacing,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00536}00536         \mbox{\hyperlink{a01551}{SpatialStructures::Graph}} \mbox{\hyperlink{a01311_a5788e421d921ec0ff27defc139c45106}{IMPL\_BuildNetwork}}(}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00537}00537             \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& start\_point,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00538}00538             \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& Spacing,}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00539}00539             \textcolor{keywordtype}{int} MaxNodes,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00540}00540             \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} UpStep,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00541}00541             \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} UpSlope,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00542}00542             \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} DownStep,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00543}00543             \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} DownSlope,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00540}00540             \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} UpStep,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00541}00541             \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} UpSlope,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00542}00542             \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} DownStep,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00543}00543             \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} DownSlope,}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00544}00544             \textcolor{keywordtype}{int} max\_step\_connections,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00545}00545             \textcolor{keywordtype}{int} \mbox{\hyperlink{a01245_aa04d1ae908956afc43e540b0cc6849f7}{min\_connections}},}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00545}00545             \textcolor{keywordtype}{int} \mbox{\hyperlink{a01311_aa04d1ae908956afc43e540b0cc6849f7}{min\_connections}},}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00546}00546             \textcolor{keywordtype}{int} cores = -\/1,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00547}00547             \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} node\_z\_precision = \mbox{\hyperlink{a00397_ad1ee2b33ac4982f6f4c4263946bf9e6b}{default\_z\_precision}},}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00548}00548             \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} node\_spacing\_precision = \mbox{\hyperlink{a00397_a361fb70f3e88bb239a59900c9e21b5ac}{default\_spacing\_precision}},}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00549}00549             \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} ground\_offset = \mbox{\hyperlink{a00397_ad1cd92591557c21198238c7d06ef2252}{default\_ground\_offset}}}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00547}00547             \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} node\_z\_precision = \mbox{\hyperlink{a00463_ad1ee2b33ac4982f6f4c4263946bf9e6b}{default\_z\_precision}},}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00548}00548             \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} node\_spacing\_precision = \mbox{\hyperlink{a00463_a361fb70f3e88bb239a59900c9e21b5ac}{default\_spacing\_precision}},}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00549}00549             \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} ground\_offset = \mbox{\hyperlink{a00463_ad1cd92591557c21198238c7d06ef2252}{default\_ground\_offset}}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00550}00550         );}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00551}00551 }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00552}00552 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00572}00572         \mbox{\hyperlink{a01485}{SpatialStructures::Graph}} \mbox{\hyperlink{a01245_ac7052d4b625fb96f29c5bfc091a86f7e}{CrawlGeom}}(\mbox{\hyperlink{a01249}{UniqueQueue}}\& todo);}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00572}00572         \mbox{\hyperlink{a01551}{SpatialStructures::Graph}} \mbox{\hyperlink{a01311_ac7052d4b625fb96f29c5bfc091a86f7e}{CrawlGeom}}(\mbox{\hyperlink{a01315}{UniqueQueue}}\& todo);}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00573}00573         }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00591}00591         \mbox{\hyperlink{a01485}{SpatialStructures::Graph}} \mbox{\hyperlink{a01245_a843cc6b5b69b5d013930b3685789fa15}{CrawlGeomParallel}}(\mbox{\hyperlink{a01249}{UniqueQueue}}\& todo);}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00591}00591         \mbox{\hyperlink{a01551}{SpatialStructures::Graph}} \mbox{\hyperlink{a01311_a843cc6b5b69b5d013930b3685789fa15}{CrawlGeomParallel}}(\mbox{\hyperlink{a01315}{UniqueQueue}}\& todo);}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00592}00592     \};}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00593}00593 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00611}00611     optional\_real3 \mbox{\hyperlink{a00397_a9ddffecb75b34434d7157b49d3c67b60}{ValidateStartPoint}}(\mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{RayTracer}}\& RT, \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& start\_point, \textcolor{keyword}{const} GraphParams \& Params);}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00611}00611     optional\_real3 \mbox{\hyperlink{a00463_a9ddffecb75b34434d7157b49d3c67b60}{ValidateStartPoint}}(\mbox{\hyperlink{a00463_aef833458d20e4569c73f409b52d03bee}{RayTracer}}\& RT, \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& start\_point, \textcolor{keyword}{const} GraphParams \& Params);}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00612}00612     }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00635}00635     optional\_real3 \mbox{\hyperlink{a00397_a74be560268a713fc9e9b8b4a453afa2f}{CheckRay}}(}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00636}00636         \mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{RayTracer}}\& RT,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00637}00637         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& origin,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00638}00638         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& direction,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00639}00639         \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} node\_z\_tolerance,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00640}00640         \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{HIT\_FLAG}} flag = \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a9d20e9f6abc3d3630c75432b0dac052c}{BOTH}},}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00635}00635     optional\_real3 \mbox{\hyperlink{a00463_a74be560268a713fc9e9b8b4a453afa2f}{CheckRay}}(}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00636}00636         \mbox{\hyperlink{a00463_aef833458d20e4569c73f409b52d03bee}{RayTracer}}\& RT,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00637}00637         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& origin,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00638}00638         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& direction,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00639}00639         \mbox{\hyperlink{a00463_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}} node\_z\_tolerance,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00640}00640         \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598}{HIT\_FLAG}} flag = \mbox{\hyperlink{a00463_a6180d5bc4bbfa9a5a426089e1f1ad598a9d20e9f6abc3d3630c75432b0dac052c}{BOTH}},}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00641}00641         \textcolor{keyword}{const} GeometryFlagMap\& geometry\_dict = GeometryFlagMap()}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00642}00642     );}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00643}00643 }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00644}00644 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00659}00659     std::vector<pair> \mbox{\hyperlink{a00397_aefd344ebb2faadc64a56a16dc8582026}{CreateDirecs}}(\textcolor{keywordtype}{int} max\_step\_connections);}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00659}00659     std::vector<pair> \mbox{\hyperlink{a00463_aefd344ebb2faadc64a56a16dc8582026}{CreateDirecs}}(\textcolor{keywordtype}{int} max\_step\_connections);}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00660}00660 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00686}00686     std::vector<graph\_edge> \mbox{\hyperlink{a00397_ab7ffcc7d6657ce276c06deed24c546a4}{GetChildren}}(}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00687}00687         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& parent,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00686}00686     std::vector<graph\_edge> \mbox{\hyperlink{a00463_ab7ffcc7d6657ce276c06deed24c546a4}{GetChildren}}(}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00687}00687         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& parent,}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00688}00688         \textcolor{keyword}{const} std::vector<real3>\& possible\_children,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00689}00689         \mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{RayTracer}}  \& rt,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00689}00689         \mbox{\hyperlink{a00463_aef833458d20e4569c73f409b52d03bee}{RayTracer}}  \& rt,}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00690}00690         \textcolor{keyword}{const} GraphParams \& GP}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00691}00691     );}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00692}00692 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00711}00711     std::vector<real3> \mbox{\hyperlink{a00397_a41e03f9bab54e4e0d1314c6a4bdf2ec1}{GeneratePotentialChildren}}(}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00712}00712         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& parent,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00711}00711     std::vector<real3> \mbox{\hyperlink{a00463_a41e03f9bab54e4e0d1314c6a4bdf2ec1}{GeneratePotentialChildren}}(}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00712}00712         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& parent,}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00713}00713         \textcolor{keyword}{const} std::vector<pair>\& direcs,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00714}00714         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& spacing,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00714}00714         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& spacing,}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00715}00715         \textcolor{keyword}{const} GraphParams \& gp}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00716}00716     );}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00717}00717 }
 \DoxyCodeLine{\Hypertarget{a00008_source_l00730}00730     \textcolor{keyword}{template}<\textcolor{keyword}{typename} A, \textcolor{keyword}{typename} D, \textcolor{keyword}{typename} N>}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00731}\mbox{\hyperlink{a00397_a5ad3e8fac4a21eee744f3633f7a3692f}{00731}}     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a00397_a5ad3e8fac4a21eee744f3633f7a3692f}{MoveNode}}(\textcolor{keyword}{const} A\& dist, \textcolor{keyword}{const} D\& direction, N\& node) \{}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00731}\mbox{\hyperlink{a00463_a5ad3e8fac4a21eee744f3633f7a3692f}{00731}}     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{a00463_a5ad3e8fac4a21eee744f3633f7a3692f}{MoveNode}}(\textcolor{keyword}{const} A\& dist, \textcolor{keyword}{const} D\& direction, N\& node) \{}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00732}00732         node[0] = std::fma(direction[0], dist, node[0]);}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00733}00733         node[1] = std::fma(direction[1], dist, node[1]);}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00734}00734         node[2] = std::fma(direction[2], dist, node[2]);}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00735}00735     \}}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00736}00736 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00755}00755     std::vector<real3> \mbox{\hyperlink{a00397_a4b7cc0ad0002975404acef5064f4f546}{CheckChildren}}(}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00756}00756         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& parent,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00755}00755     std::vector<real3> \mbox{\hyperlink{a00463_a4b7cc0ad0002975404acef5064f4f546}{CheckChildren}}(}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00756}00756         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& parent,}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00757}00757         \textcolor{keyword}{const} std::vector<real3>\& possible\_children,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00758}00758         \mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{RayTracer}}\& rt,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00758}00758         \mbox{\hyperlink{a00463_aef833458d20e4569c73f409b52d03bee}{RayTracer}}\& rt,}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00759}00759         \textcolor{keyword}{const} GraphParams \& params}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00760}00760     );}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00761}00761 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00778}00778     \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935e}{HF::SpatialStructures::STEP}} \mbox{\hyperlink{a00397_aeab1db37b5aa614235f109d5dd9711a9}{CheckConnection}}(}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00779}00779         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& parent,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00780}00780         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& child,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00781}00781         \mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{RayTracer}}\& rt,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00778}00778     \mbox{\hyperlink{a00465_af0378d900074d484ba791d4317e5935e}{HF::SpatialStructures::STEP}} \mbox{\hyperlink{a00463_aeab1db37b5aa614235f109d5dd9711a9}{CheckConnection}}(}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00779}00779         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& parent,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00780}00780         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& child,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00781}00781         \mbox{\hyperlink{a00463_aef833458d20e4569c73f409b52d03bee}{RayTracer}}\& rt,}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00782}00782         \textcolor{keyword}{const} GraphParams \& params}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00783}00783     );}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00784}00784 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00802}00802     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00397_ace66c1b60785c32433402f012019ab81}{OcclusionCheck}}(\textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& parent, \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& child, \mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{RayTracer}}\& RT);}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00802}00802     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00463_ace66c1b60785c32433402f012019ab81}{OcclusionCheck}}(\textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& parent, \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& child, \mbox{\hyperlink{a00463_aef833458d20e4569c73f409b52d03bee}{RayTracer}}\& RT);}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00803}00803 }
-\DoxyCodeLine{\Hypertarget{a00008_source_l00819}00819     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00397_a9daa85cb56a1b18d44f46aa9c420afde}{CheckSlope}}(}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00820}00820         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& parent,}
-\DoxyCodeLine{\Hypertarget{a00008_source_l00821}00821         \textcolor{keyword}{const} \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& child,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00819}00819     \textcolor{keywordtype}{bool} \mbox{\hyperlink{a00463_a9daa85cb56a1b18d44f46aa9c420afde}{CheckSlope}}(}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00820}00820         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& parent,}
+\DoxyCodeLine{\Hypertarget{a00008_source_l00821}00821         \textcolor{keyword}{const} \mbox{\hyperlink{a00463_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& child,}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00822}00822         \textcolor{keyword}{const} GraphParams \& gp}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00823}00823     );}
 \DoxyCodeLine{\Hypertarget{a00008_source_l00824}00824 }

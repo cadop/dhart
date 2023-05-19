@@ -1,200 +1,36 @@
-\hypertarget{a00416}{}\doxysection{C\+\_\+\+Interface Namespace Reference}
-\label{a00416}\index{C\_Interface@{C\_Interface}}
+\hypertarget{a00416}{}\doxysection{Cinterface/objloader\+\_\+C.cpp File Reference}
+\label{a00416}\index{Cinterface/objloader\_C.cpp@{Cinterface/objloader\_C.cpp}}
+{\ttfamily \#include $<$objloader\+\_\+\+C.\+h$>$}\newline
+{\ttfamily \#include $<$objloader.\+h$>$}\newline
+{\ttfamily \#include $<$meshinfo.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$HFExceptions.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$cinterface\+\_\+utils.\+h$>$}\newline
+Include dependency graph for objloader\+\_\+\+C.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00417}
+\end{center}
+\end{figure}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a01297}{Mesh\+Info}}$<$ float $>$ $\ast$ \mbox{\hyperlink{a00416_a62a0b0af38f3ea2ac8b1919033df5c75}{Construct\+Example\+Plane}} ()
-\item 
-\mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} $\ast$ \mbox{\hyperlink{a00416_a1436297bd9d52cd225da8671e20252f3}{Construct\+Test\+Raytracer}} ()
-\item 
-\mbox{\hyperlink{a00416_ab5b50e884ef382c46bffdea00b41cc23}{T\+E\+ST}} (C\+\_\+\+Embree\+Ray\+Tracer, Create\+Ray\+Tracer)
-\item 
-\mbox{\hyperlink{a00416_a62ffaa28d4bf2697ae669e95cc0e7971}{T\+E\+ST}} (C\+\_\+\+Embree\+Ray\+Tracer, \mbox{\hyperlink{a00391_ga7f80c3aff3b2a8a28794830913ef2a36}{Add\+Mesh}})
-\item 
-\mbox{\hyperlink{a00416_a75a69a5828e9048e18cd8174f762aa1c}{T\+E\+ST}} (C\+\_\+\+Embree\+Ray\+Tracer, New\+Meshes\+Can\+Be\+Intersected)
-\item 
-\mbox{\hyperlink{a00416_a493636385f041004568ceaf4ae02d208}{T\+E\+ST}} (C\+\_\+\+Embree\+Ray\+Tracer, Construction\+With\+Multiple\+Meshes)
-\item 
-\mbox{\hyperlink{a00416_a845333eb861cbeb8f8d18e4d1ea6bd66}{T\+E\+ST}} (C\+\_\+\+Embree\+Ray\+Tracer, Addition\+With\+Multiple\+Meshes)
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga0805e80d13b29aeddc35f0bcf3f16a1a}{Load\+OBJ}} (const char $\ast$obj\+\_\+path, \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5}{HF\+::\+Geometry\+::\+GROUP\+\_\+\+METHOD}} gm, float xrot, float yrot, float zrot, \mbox{\hyperlink{a01351}{Mesh\+Info}}$<$ float $>$ $\ast$$\ast$$\ast$out\+\_\+data\+\_\+array, int $\ast$num\+\_\+meshes)
+\begin{DoxyCompactList}\small\item\em Load an obj from the given path then rotate it by x,y, and z. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga6ac447e5805d3d7e65c9083ffa603cfe}{Store\+Mesh}} (\mbox{\hyperlink{a01351}{Mesh\+Info}}$<$ float $>$ $\ast$$\ast$out\+\_\+info, const int $\ast$indices, int num\+\_\+indices, const float $\ast$vertices, int num\+\_\+vertices, const char $\ast$name, int id)
+\begin{DoxyCompactList}\small\item\em Store a mesh in a format usable with DHARTAPI. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga907c8e39b159c8bad22645448bc97f57}{Rotate\+Mesh}} (\mbox{\hyperlink{a01351}{Mesh\+Info}}$<$ float $>$ $\ast$mesh\+\_\+to\+\_\+rotate, float xrot, float yrot, float zrot)
+\begin{DoxyCompactList}\small\item\em Rotate an existing mesh (\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga89fc0803b894e7fa218ae271c46fb434}{Get\+Verts\+And\+Tris}} (const \mbox{\hyperlink{a01351}{Mesh\+Info}}$<$ float $>$ $\ast$MI, int $\ast$$\ast$index\+\_\+out, int $\ast$num\+\_\+triangles, float $\ast$$\ast$vertex\+\_\+out, int $\ast$num\+\_\+vertices)
+\begin{DoxyCompactList}\small\item\em Get a pointer to and the size of a mesh\textquotesingle{}s triangle and vertex arrays. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga2a86bca57b3efdafeeb001a8ba36a212}{Get\+Mesh\+Name}} (const \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$MI, char $\ast$$\ast$out\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Get the name of a mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_gaa07792b399e76e6101388bb6bbb96047}{Get\+Mesh\+ID}} (const \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $\ast$MI, int $\ast$out\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Get the ID of a mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga0ef9f7e63f067546b527947d4678dcd5}{Destroy\+Mesh\+Info}} (\mbox{\hyperlink{a01351}{Mesh\+Info}}$<$ float $>$ $\ast$mesh\+\_\+to\+\_\+destroy)
+\begin{DoxyCompactList}\small\item\em Free the memory addressed by mesh\+\_\+to\+\_\+destroy, which was allocated by either \mbox{\hyperlink{a00455_ga0805e80d13b29aeddc35f0bcf3f16a1a}{Load\+OBJ}} or \mbox{\hyperlink{a00455_ga6ac447e5805d3d7e65c9083ffa603cfe}{Store\+Mesh}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00407_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+INTERFACE}} \mbox{\hyperlink{a00455_ga9cb2dc8227bf88a06014493979b2b3e6}{Destroy\+Mesh\+Info\+Ptr\+Array}} (\mbox{\hyperlink{a01351}{Mesh\+Info}}$<$ float $>$ $\ast$$\ast$data\+\_\+array)
 \end{DoxyCompactItemize}
-
-
-\doxysubsection{Function Documentation}
-\mbox{\Hypertarget{a00416_a62a0b0af38f3ea2ac8b1919033df5c75}\label{a00416_a62a0b0af38f3ea2ac8b1919033df5c75}} 
-\index{C\_Interface@{C\_Interface}!ConstructExamplePlane@{ConstructExamplePlane}}
-\index{ConstructExamplePlane@{ConstructExamplePlane}!C\_Interface@{C\_Interface}}
-\doxysubsubsection{\texorpdfstring{ConstructExamplePlane()}{ConstructExamplePlane()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01297}{Mesh\+Info}}$<$float$>$$\ast$ C\+\_\+\+Interface\+::\+Construct\+Example\+Plane (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 961 of file embree\+\_\+raytracer.\+cpp.
-
-
-
-References H\+F\+::\+Exceptions\+::\+OK, and Store\+Mesh().
-
-
-
-Referenced by Construct\+Test\+Raytracer(), and T\+E\+S\+T().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00416_a62a0b0af38f3ea2ac8b1919033df5c75_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00416_a62a0b0af38f3ea2ac8b1919033df5c75_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00416_a1436297bd9d52cd225da8671e20252f3}\label{a00416_a1436297bd9d52cd225da8671e20252f3}} 
-\index{C\_Interface@{C\_Interface}!ConstructTestRaytracer@{ConstructTestRaytracer}}
-\index{ConstructTestRaytracer@{ConstructTestRaytracer}!C\_Interface@{C\_Interface}}
-\doxysubsubsection{\texorpdfstring{ConstructTestRaytracer()}{ConstructTestRaytracer()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}}$\ast$ C\+\_\+\+Interface\+::\+Construct\+Test\+Raytracer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 988 of file embree\+\_\+raytracer.\+cpp.
-
-
-
-References Construct\+Example\+Plane(), Create\+Raytracer(), Destroy\+Mesh\+Info(), and H\+F\+::\+Exceptions\+::\+OK.
-
-
-
-Referenced by T\+E\+S\+T().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00416_a1436297bd9d52cd225da8671e20252f3_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00416_a1436297bd9d52cd225da8671e20252f3_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00416_a845333eb861cbeb8f8d18e4d1ea6bd66}\label{a00416_a845333eb861cbeb8f8d18e4d1ea6bd66}} 
-\index{C\_Interface@{C\_Interface}!TEST@{TEST}}
-\index{TEST@{TEST}!C\_Interface@{C\_Interface}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
-{\footnotesize\ttfamily C\+\_\+\+Interface\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{C\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Addition\+With\+Multiple\+Meshes}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 1088 of file embree\+\_\+raytracer.\+cpp.
-
-
-
-References Add\+Meshes(), H\+F\+::\+Geometry\+::\+B\+Y\+\_\+\+G\+R\+O\+UP, Cast\+Ray(), Construct\+Test\+Raytracer(), Destroy\+Mesh\+Info(), Destroy\+Ray\+Tracer(), and Load\+O\+B\+J().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00416_a845333eb861cbeb8f8d18e4d1ea6bd66_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00416_a62ffaa28d4bf2697ae669e95cc0e7971}\label{a00416_a62ffaa28d4bf2697ae669e95cc0e7971}} 
-\index{C\_Interface@{C\_Interface}!TEST@{TEST}}
-\index{TEST@{TEST}!C\_Interface@{C\_Interface}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
-{\footnotesize\ttfamily C\+\_\+\+Interface\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{C\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{\mbox{\hyperlink{a00391_ga7f80c3aff3b2a8a28794830913ef2a36}{Add\+Mesh}}}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 1012 of file embree\+\_\+raytracer.\+cpp.
-
-
-
-References Add\+Mesh(), Construct\+Example\+Plane(), Construct\+Test\+Raytracer(), Destroy\+Mesh\+Info(), Destroy\+Ray\+Tracer(), and H\+F\+::\+Exceptions\+::\+OK.
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00416_a62ffaa28d4bf2697ae669e95cc0e7971_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00416_a493636385f041004568ceaf4ae02d208}\label{a00416_a493636385f041004568ceaf4ae02d208}} 
-\index{C\_Interface@{C\_Interface}!TEST@{TEST}}
-\index{TEST@{TEST}!C\_Interface@{C\_Interface}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
-{\footnotesize\ttfamily C\+\_\+\+Interface\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{C\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Construction\+With\+Multiple\+Meshes}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 1063 of file embree\+\_\+raytracer.\+cpp.
-
-
-
-References H\+F\+::\+Geometry\+::\+B\+Y\+\_\+\+G\+R\+O\+UP, Cast\+Ray(), Create\+Raytracer\+Multi\+Mesh(), Destroy\+Mesh\+Info(), Destroy\+Ray\+Tracer(), and Load\+O\+B\+J().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00416_a493636385f041004568ceaf4ae02d208_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00416_ab5b50e884ef382c46bffdea00b41cc23}\label{a00416_ab5b50e884ef382c46bffdea00b41cc23}} 
-\index{C\_Interface@{C\_Interface}!TEST@{TEST}}
-\index{TEST@{TEST}!C\_Interface@{C\_Interface}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
-{\footnotesize\ttfamily C\+\_\+\+Interface\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{C\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Create\+Ray\+Tracer}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 1003 of file embree\+\_\+raytracer.\+cpp.
-
-
-
-References Construct\+Test\+Raytracer(), and Destroy\+Ray\+Tracer().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00416_ab5b50e884ef382c46bffdea00b41cc23_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00416_a75a69a5828e9048e18cd8174f762aa1c}\label{a00416_a75a69a5828e9048e18cd8174f762aa1c}} 
-\index{C\_Interface@{C\_Interface}!TEST@{TEST}}
-\index{TEST@{TEST}!C\_Interface@{C\_Interface}}
-\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
-{\footnotesize\ttfamily C\+\_\+\+Interface\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{C\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{New\+Meshes\+Can\+Be\+Intersected}]{ }\end{DoxyParamCaption})}
-
-
-
-Definition at line 1034 of file embree\+\_\+raytracer.\+cpp.
-
-
-
-References Add\+Mesh(), Cast\+Occlusion\+Rays(), Construct\+Example\+Plane(), Construct\+Test\+Raytracer(), Destroy\+Mesh\+Info(), and Destroy\+Ray\+Tracer().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00416_a75a69a5828e9048e18cd8174f762aa1c_cgraph}
-\end{center}
-\end{figure}

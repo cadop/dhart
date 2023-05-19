@@ -1,0 +1,2229 @@
+\hypertarget{a01411}{}\doxysection{HF\+::Ray\+Tracer\+::Embree\+Ray\+Tracer Class Reference}
+\label{a01411}\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+
+
+A wrapper for Intel\textquotesingle{}s Embree Library.   
+
+
+
+
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}
+
+
+
+Collaboration diagram for HF\+::Ray\+Tracer\+::Embree\+Ray\+Tracer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01409}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01411_aec975d50cd4a80c595e611db321713b8}{Embree\+Ray\+Tracer}} (bool \mbox{\hyperlink{a01411_a10fe757b08ab77289cfd945b29d14b89}{use\+\_\+precise}}=false)
+\begin{DoxyCompactList}\small\item\em Construct an empty \mbox{\hyperlink{a01411}{Embree\+Ray\+Tracer}};. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01411_a0a3fa22a253ce3a7738f01286c11f589}{Embree\+Ray\+Tracer}} (std\+::vector$<$ \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $>$ \&MI, bool use\+\_\+precise\+\_\+intersection=false)
+\begin{DoxyCompactList}\small\item\em Create a new \mbox{\hyperlink{a01411}{Embree\+Ray\+Tracer}} and add a single mesh to the scene.  \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01411_a06d9f03f0a10fb1f185bfa8a3a4bc056}{Embree\+Ray\+Tracer}} (\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ \&MI, bool \mbox{\hyperlink{a01411_a10fe757b08ab77289cfd945b29d14b89}{use\+\_\+precise}}=false)
+\begin{DoxyCompactList}\small\item\em Construct the raytracer using only a single mesh. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01411_abb8661ead02def167ed72228eccd4705}{Embree\+Ray\+Tracer}} (const \mbox{\hyperlink{a01411}{Embree\+Ray\+Tracer}} \&ERT2)
+\begin{DoxyCompactList}\small\item\em Construct a raytracer using another raytracer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01411_a99f9cf2231668b40902c19d6b886865a}{Embree\+Ray\+Tracer}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&\mbox{\hyperlink{a01411_a3a243ef02c74fc6df958a4fd2506e7cc}{geometry}})
+\begin{DoxyCompactList}\small\item\em Create a new Raytracer and generate its BVH from a flat array of vertices.  \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01411_a6425a0f8f4a3ef8073e734ceb745cd1e}{Add\+Mesh}} (std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&Mesh, int ID, bool Commit=false)
+\begin{DoxyCompactList}\small\item\em Add a new mesh to this raytracer\textquotesingle{}s BVH with the specified ID.  \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01411_ad5389e05e451a8d8820c4deea886db3f}{Add\+Mesh}} (\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ \&Mesh, bool Commit)
+\begin{DoxyCompactList}\small\item\em Add a new mesh to the BVH with the specified ID. If False, then the addition failed, or the ID was already taken.  \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01411_a3d478f577e30d1b437421224134b5a38}{Add\+Mesh}} (std\+::vector$<$ \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $>$ \&Meshes, bool Commit=true)
+\begin{DoxyCompactList}\small\item\em Add several new meshes to the BVH.  \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01411_aa8424b274c7c5d0598ff13b49ac8c8d2}{Point\+Intersection}} (std\+::array$<$ float, 3 $>$ \&origin, const std\+::array$<$ float, 3 $>$ \&dir, float distance=-\/1, int mesh\+\_\+id=-\/1)
+\begin{DoxyCompactList}\small\item\em Cast a ray and overwrite the origin with the hitpoint if it intersects any geometry.  \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01411_a8de15e23054b0b579087acc48616149f}{Point\+Intersection}} (float \&x, float \&y, float \&z, float dx, float dy, float dz, float distance=-\/1, int mesh\+\_\+id=-\/1)
+\begin{DoxyCompactList}\small\item\em Cast a single ray and get the hitpoint. {\itshape x} , {\itshape y} ,and {\itshape z}  are overridden with the hitpoint on a successful hit.  \end{DoxyCompactList}\item 
+std\+::vector$<$ char $>$ \mbox{\hyperlink{a01411_a0c4abe0d3160c1a59231e0ae492fe537}{Point\+Intersections}} (std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&origins, std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&directions, bool use\+\_\+parallel=true, float max\+\_\+distance=-\/1, int mesh\+\_\+id=-\/1)
+\begin{DoxyCompactList}\small\item\em Cast multiple rays and recieve hitpoints in return.  \end{DoxyCompactList}\item 
+std\+::vector$<$ char $>$ \mbox{\hyperlink{a01411_af718d171387e217f3c2172f795abfb90}{Occlusions}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&origins, const std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&directions, float max\+\_\+distance=-\/1, bool use\+\_\+parallel=true)
+\begin{DoxyCompactList}\small\item\em Cast multiple occlusion rays in parallel.  \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename return\+\_\+type  = double, class N , class V $>$ }\\\mbox{\hyperlink{a01415}{Hit\+Struct}}$<$ return\+\_\+type $>$ \mbox{\hyperlink{a01411_aefb986188c0520e407fa3a39c89a0017}{Intersect}} (const N \&node, const V \&direction, float max\+\_\+distance=-\/1.\+0f, int mesh\+\_\+id=-\/0.\+1f)
+\begin{DoxyCompactList}\small\item\em Cast a ray from origin in direction. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename return\+\_\+type  = double, typename numeric1  = double, typename numeric2  = double$>$ }\\\mbox{\hyperlink{a01415}{Hit\+Struct}}$<$ return\+\_\+type $>$ \mbox{\hyperlink{a01411_af37604ed6d68c27bb9224afd795cab18}{Intersect}} (numeric1 x, numeric1 y, numeric1 z, numeric2 dx, numeric2 dy, numeric2 dz, float distance=-\/1.\+0f, int mesh\+\_\+id=-\/1)
+\begin{DoxyCompactList}\small\item\em Cast a ray from origin in direction. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename N , typename V , typename return\+\_\+type $>$ }\\bool \mbox{\hyperlink{a01411_a7f8ab81033bdefaea0eea729aa9125ae}{Intersect\+Output\+Arguments}} (const N \&node, const V \&direction, return\+\_\+type \&out\+\_\+distance, int \&out\+\_\+meshid, float max\+\_\+distance=-\/1.\+0f)
+\begin{DoxyCompactList}\small\item\em Cast a ray from origin in direction and update the parameters instead of returning a hitstruct. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename return\+\_\+type , typename N , typename V $>$ }\\std\+::vector$<$ \mbox{\hyperlink{a01415}{Hit\+Struct}}$<$ return\+\_\+type $>$ $>$ \mbox{\hyperlink{a01411_afd4816ed296a73ccb7fe61e17cd75165}{Intersections}} (const N \&nodes, const V \&directions, float max\+\_\+distance=-\/1.\+0f, const bool use\+\_\+parallel=false)
+\begin{DoxyCompactList}\small\item\em Cast multiple rays in parallel. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename N , typename V $>$ }\\bool \mbox{\hyperlink{a01411_a3a7488f8e41c8a9e3dc9c334047c6457}{Occluded}} (const N \&origin, const V \&direction, float max\+\_\+distance=-\/1.\+0f, int mesh\+\_\+id=-\/1)
+\begin{DoxyCompactList}\small\item\em Determine if there is an intersection with any geometry. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename numeric1 , typename numeric2 , typename dist\+\_\+type  = float$>$ }\\bool \mbox{\hyperlink{a01411_ae6b86b94ab1c45e137e384b8955064ad}{Occluded}} (numeric1 x, numeric1 y, numeric1 z, numeric2 dx, numeric2 dy, numeric2 dz, dist\+\_\+type max\+\_\+distance=-\/1.\+0, int mesh\+\_\+id=-\/1)
+\begin{DoxyCompactList}\small\item\em Determine if there is an intersection with any geometry. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01411_a70b9c1baf8390d8114c541d6a2ccb4f4}{operator=}} (const \mbox{\hyperlink{a01411}{Embree\+Ray\+Tracer}} \&ERT2)
+\begin{DoxyCompactList}\small\item\em Increment reference counters to prevent destruction when a copy is made. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01411_a2948458e764f0294996c91b00356073e}{$\sim$\+Embree\+Ray\+Tracer}} ()
+\begin{DoxyCompactList}\small\item\em Custom destructor to ensure cleanup of embree resources.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{a01411_a19527943d1afe002c1105cb3b3691ca7}{Setup\+Scene}} ()
+\begin{DoxyCompactList}\small\item\em Performs all the necessary operations to set up the scene. \end{DoxyCompactList}\item 
+std\+::array$<$ \mbox{\hyperlink{a01407}{Vector3D}}, 3 $>$ \mbox{\hyperlink{a01411_a619072a17db71253fc9ce3bdf1ba1920}{Get\+Triangle}} (unsigned int geom\+ID, unsigned int prim\+ID) const
+\begin{DoxyCompactList}\small\item\em Get the vertices for a specific triangle in a mesh. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01411_a6ee1e15bc515878b156bc6a3778f8033}{Insert\+Geom}} (RTCGeometry \&geom, int id=-\/1)
+\begin{DoxyCompactList}\small\item\em Attach geometry to the current scene. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00001_a02139}{double}} \mbox{\hyperlink{a01411_a28032c693ac330c5b11bc2a877b04c75}{Calculate\+Precise\+Distance}} (unsigned int geom\+\_\+id, unsigned int prim\+\_\+id, const \mbox{\hyperlink{a01407}{Vector3D}} \&origin, const \mbox{\hyperlink{a01407}{Vector3D}} \&direction) const
+\begin{DoxyCompactList}\small\item\em Calculate the distance from origin to the point of intersection using an algorithm with higher precision. \end{DoxyCompactList}\item 
+RTCRay\+Hit \mbox{\hyperlink{a01411_ae3341adf12ae91e33f1188a434d8e28d}{Intersect\+\_\+\+IMPL}} (float x, float y, float z, float dx, float dy, float dz, float max\+\_\+distance=-\/1, int mesh\+\_\+id=-\/1)
+\begin{DoxyCompactList}\small\item\em Implementation for fundamental ray intersection.  \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01411_ade19fda460dadd98769b347840bd305a}{Occluded\+\_\+\+IMPL}} (float x, float y, float z, float dx, float dy, float dz, float distance=-\/1, int mesh\+\_\+id=-\/1)
+\begin{DoxyCompactList}\small\item\em Implementation for fundamental occlusion ray intersection.  \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01411_a7b06460e537c22386fa5a9af2701591a}{Occluded\+\_\+\+IMPL}} (const std\+::array$<$ float, 3 $>$ \&origin, const std\+::array$<$ float, 3 $>$ \&direction, float max\+\_\+dist=-\/1)
+\begin{DoxyCompactList}\small\item\em Cast an occlusion ray using arrays as input.  \end{DoxyCompactList}\item 
+RTCGeometry \mbox{\hyperlink{a01411_aa602f6c44fa5230477642942ebc3216e}{Construct\+Geometry\+From\+Buffers}} (std\+::vector$<$ \mbox{\hyperlink{a00464_a01403}{Triangle}} $>$ \&tris, std\+::vector$<$ \mbox{\hyperlink{a00464_a01399}{Vertex}} $>$ \&verts)
+\begin{DoxyCompactList}\small\item\em Create a new instance of RTCGeometry from a triangle and vertex buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+RTCDevice \mbox{\hyperlink{a01411_a5608742889ff45a0294fdf21e5a85b2e}{device}}
+\begin{DoxyCompactList}\small\item\em All objects in Embree are created from this. \href{https://www.embree.org/api.html\#device-object}{\texttt{ https\+://www.\+embree.\+org/api.\+html\#device-\/object}}. \end{DoxyCompactList}\item 
+RTCScene \mbox{\hyperlink{a01411_a7c66f28f5b889021767745d198661da0}{scene}}
+\begin{DoxyCompactList}\small\item\em Container for a set of geometries, and the BVH. \href{https://www.embree.org/api.html\#scene-object}{\texttt{ https\+://www.\+embree.\+org/api.\+html\#scene-\/object}}. \end{DoxyCompactList}\item 
+RTCIntersect\+Context \mbox{\hyperlink{a01411_a01968c52807e6930909b7f9c31f45e80}{context}}
+\begin{DoxyCompactList}\small\item\em Context to cast rays within. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00464_a01403}{Triangle}} $\ast$ \mbox{\hyperlink{a01411_a6eced6bbe321079476603f7e7ef97ed8}{triangles}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a00464_a01403}{Triangle}} buffer. Is used in multiple places, but contents are dumped. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00464_a01399}{Vertex}} $\ast$ \mbox{\hyperlink{a01411_a62b06bf58c3b134de8f271fbc778e412}{Vertices}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a00464_a01399}{Vertex}} buffer. Is used in multiple places but contents are dumped. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01411_a10fe757b08ab77289cfd945b29d14b89}{use\+\_\+precise}} = false
+\begin{DoxyCompactList}\small\item\em If true, use custom triangle intersection intersection instead of embree\textquotesingle{}s. \end{DoxyCompactList}\item 
+std\+::vector$<$ RTCGeometry $>$ \mbox{\hyperlink{a01411_a3a243ef02c74fc6df958a4fd2506e7cc}{geometry}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A wrapper for Intel\textquotesingle{}s Embree Library.  
+
+Provides several functions to quickly and simply perform ray intersections using Embree. This class will automatically dispose of Embree buffers when destroyed, incrementing Embree\textquotesingle{}s reference counters on copy, and decrementing them on deletion. This class also provides methods for adding geometry to Embree\textquotesingle{}s geometry buffers. 
+
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00452__todo000022}{Todo}}]Many functions support Mesh\+ID but don\textquotesingle{}t actually check for it. \end{DoxyRefDesc}
+
+
+Definition at line \mbox{\hyperlink{a00212_source_l00080}{80}} of file \mbox{\hyperlink{a00212_source}{embree\+\_\+raytracer.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01411_aec975d50cd4a80c595e611db321713b8}\label{a01411_aec975d50cd4a80c595e611db321713b8}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!EmbreeRayTracer@{EmbreeRayTracer}}
+\index{EmbreeRayTracer@{EmbreeRayTracer}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{EmbreeRayTracer()}{EmbreeRayTracer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer (\begin{DoxyParamCaption}\item[{bool}]{use\+\_\+precise = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Construct an empty \mbox{\hyperlink{a01411}{Embree\+Ray\+Tracer}};. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em use\+\_\+precise} & If set to true, use a more precise intesection algorithm to determine the distance between rays origin points and their points of intesection 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}embree\_raytracer.h"{}, \#include "{}objloader.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// For brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the EmbreeRayTracer, no arguments}}
+\DoxyCodeLine{\mbox{\hyperlink{a01411_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer}} ert;}
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00166}{166}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00190}{Setup\+Scene()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_aec975d50cd4a80c595e611db321713b8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_a0a3fa22a253ce3a7738f01286c11f589}\label{a01411_a0a3fa22a253ce3a7738f01286c11f589}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!EmbreeRayTracer@{EmbreeRayTracer}}
+\index{EmbreeRayTracer@{EmbreeRayTracer}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{EmbreeRayTracer()}{EmbreeRayTracer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $>$ \&}]{MI,  }\item[{bool}]{use\+\_\+precise\+\_\+intersection = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Create a new \mbox{\hyperlink{a01411}{Embree\+Ray\+Tracer}} and add a single mesh to the scene.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em MI} & The mesh to use for scene construction. \\
+\hline
+{\em use\+\_\+precise} & If set to true, use a more precise intesection algorithm to determine the distance between rays origin pointsand their points of intesection \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & Thrown if MI contains no vertices. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00452__todo000023}{Todo}}]This function calls {\ttfamily  throw; } \href{https://en.cppreference.com/w/cpp/language/throw}{\texttt{ }} which is meant to only be used to rethrow previously thrown exceptions. This should be throwing \mbox{\hyperlink{a01323}{HF\+::\+Exceptions\+::\+Invalid\+OBJ}} \end{DoxyRefDesc}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}embree\_raytracer.h"{}, \#include "{}objloader.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// For brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}}<\textcolor{keywordtype}{float}>;}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the obj file path}}
+\DoxyCodeLine{std::string teapot\_path = \textcolor{stringliteral}{"{}teapot.obj"{}};}
+\DoxyCodeLine{std::vector<MeshInfo<float>> geom = \mbox{\hyperlink{a00469_a06c0c11adb62f8b204e42f75ac1990ac}{HF::Geometry::LoadMeshObjects}}(teapot\_path, \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e}{HF::Geometry::ONLY\_FILE}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the EmbreeRayTracer}}
+\DoxyCodeLine{\textcolor{keyword}{auto} ert = \mbox{\hyperlink{a01411_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer}}(geom);}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00209_source_l00172}{172}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00316}{Add\+Mesh()}}, and \mbox{\hyperlink{a00209_source_l00190}{Setup\+Scene()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a0a3fa22a253ce3a7738f01286c11f589_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_a06d9f03f0a10fb1f185bfa8a3a4bc056}\label{a01411_a06d9f03f0a10fb1f185bfa8a3a4bc056}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!EmbreeRayTracer@{EmbreeRayTracer}}
+\index{EmbreeRayTracer@{EmbreeRayTracer}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{EmbreeRayTracer()}{EmbreeRayTracer()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ \&}]{MI,  }\item[{bool}]{use\+\_\+precise = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Construct the raytracer using only a single mesh. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em MI} & Mesh\+Info$<$float$>$ instance to create the BVH with. \\
+\hline
+{\em use\+\_\+precise} & If set to true, use a more precise intesection algorithm to determine the distance between rays origin points and their points of intesection \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00184}{184}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00316}{Add\+Mesh()}}, \mbox{\hyperlink{a00209_source_l00190}{Setup\+Scene()}}, and \mbox{\hyperlink{a00212_source_l00092}{use\+\_\+precise}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a06d9f03f0a10fb1f185bfa8a3a4bc056_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_abb8661ead02def167ed72228eccd4705}\label{a01411_abb8661ead02def167ed72228eccd4705}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!EmbreeRayTracer@{EmbreeRayTracer}}
+\index{EmbreeRayTracer@{EmbreeRayTracer}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{EmbreeRayTracer()}{EmbreeRayTracer()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01411}{Embree\+Ray\+Tracer}} \&}]{ERT2 }\end{DoxyParamCaption})}
+
+
+
+Construct a raytracer using another raytracer. 
+
+Increments Embree\textquotesingle{}s internal garbage collector to retain the scene and context. 
+
+Definition at line \mbox{\hyperlink{a00209_source_l00199}{199}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00212_source_l00086}{context}}, \mbox{\hyperlink{a00212_source_l00082}{device}}, \mbox{\hyperlink{a00212_source_l00094}{geometry}}, and \mbox{\hyperlink{a00212_source_l00084}{scene}}.
+
+\mbox{\Hypertarget{a01411_a99f9cf2231668b40902c19d6b886865a}\label{a01411_a99f9cf2231668b40902c19d6b886865a}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!EmbreeRayTracer@{EmbreeRayTracer}}
+\index{EmbreeRayTracer@{EmbreeRayTracer}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{EmbreeRayTracer()}{EmbreeRayTracer()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&}]{geometry }\end{DoxyParamCaption})}
+
+
+
+Create a new Raytracer and generate its BVH from a flat array of vertices.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em geometry} & A vector of float arrays representing geometry. Every 3 arrays should form a single triangle of the mesh \\
+\hline
+\end{DoxyParams}
+
+
+Use of this function is discouraged since it is slower and less memory efficent than building from an array of triangle indices and an array of vertices. Internally a hashmap is used to assign an ID to every vertex in order to generate the index array. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::exception} & Embree\textquotesingle{}s geometry buffers could not be initialized. \\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}embree\_raytracer.h"{}, \#include "{}objloader.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container of coordinates}}
+\DoxyCodeLine{std::vector<std::array<float, 3>> directions = \{}
+\DoxyCodeLine{    \{0, 0, 1\},}
+\DoxyCodeLine{    \{0, 1, 0\},}
+\DoxyCodeLine{    \{1, 0, 0\},}
+\DoxyCodeLine{    \{-\/1, 0, 0\},}
+\DoxyCodeLine{    \{0, -\/1, 0\},}
+\DoxyCodeLine{    \{0, 0, -\/1\},}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the EmbreeRayTracer}}
+\DoxyCodeLine{\textcolor{keyword}{auto} ert = \mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}}(directions);}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00209_source_l00301}{301}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00336}{Construct\+Geometry\+From\+Buffers()}}, \mbox{\hyperlink{a00212_source_l00094}{geometry}}, \mbox{\hyperlink{a00209_source_l00212}{Insert\+Geom()}}, \mbox{\hyperlink{a00212_source_l00084}{scene}}, \mbox{\hyperlink{a00209_source_l00190}{Setup\+Scene()}}, and \mbox{\hyperlink{a00209_source_l00092}{HF\+::\+Ray\+Tracer\+::vectors\+To\+Buffers()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a99f9cf2231668b40902c19d6b886865a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_a2948458e764f0294996c91b00356073e}\label{a01411_a2948458e764f0294996c91b00356073e}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!````~EmbreeRayTracer@{$\sim$EmbreeRayTracer}}
+\index{````~EmbreeRayTracer@{$\sim$EmbreeRayTracer}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{$\sim$EmbreeRayTracer()}{~EmbreeRayTracer()}}
+{\footnotesize\ttfamily HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::$\sim$\+Embree\+Ray\+Tracer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Custom destructor to ensure cleanup of embree resources.  
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}embree\_raytracer.h"{}, \#include "{}objloader.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// For brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}}<\textcolor{keywordtype}{float}>;}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the obj file path}}
+\DoxyCodeLine{std::string teapot\_path = \textcolor{stringliteral}{"{}teapot.obj"{}};}
+\DoxyCodeLine{std::vector<MeshInfo<float>> geom = \mbox{\hyperlink{a00469_a06c0c11adb62f8b204e42f75ac1990ac}{HF::Geometry::LoadMeshObjects}}(teapot\_path, \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e}{HF::Geometry::ONLY\_FILE}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Begin scope}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{comment}{// Create the EmbreeRayTracer}}
+\DoxyCodeLine{    \textcolor{keyword}{auto} ert = \mbox{\hyperlink{a01411_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer}}(geom);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Use ert within this scope}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{comment}{// end scope -\/ destructor called at end of scope}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00209_source_l00644}{644}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00212_source_l00082}{device}}, and \mbox{\hyperlink{a00212_source_l00084}{scene}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01411_ad5389e05e451a8d8820c4deea886db3f}\label{a01411_ad5389e05e451a8d8820c4deea886db3f}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!AddMesh@{AddMesh}}
+\index{AddMesh@{AddMesh}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{AddMesh()}{AddMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily bool HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Add\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ \&}]{Mesh,  }\item[{bool}]{Commit }\end{DoxyParamCaption})}
+
+
+
+Add a new mesh to the BVH with the specified ID. If False, then the addition failed, or the ID was already taken.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em Mesh} & A vector of 3d points composing the mesh \\
+\hline
+{\em ID} & the id of the mesh \\
+\hline
+{\em Commit} & Whether or not to commit changes yet. This is slow, so only do this when you\textquotesingle{}re done adding meshes. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::exception} & RTC failed to allocate vertex and or index buffers. \\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}embree\_raytracer.h"{}, \#include "{}objloader.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container of coordinates}}
+\DoxyCodeLine{std::vector<std::array<float, 3>> directions = \{}
+\DoxyCodeLine{    \{0, 0, 1\},}
+\DoxyCodeLine{    \{0, 1, 0\},}
+\DoxyCodeLine{    \{1, 0, 0\}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the EmbreeRayTracer}}
+\DoxyCodeLine{\textcolor{keyword}{auto} ert = \mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}}(directions);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare coordinates to create a mesh}}
+\DoxyCodeLine{std::vector<std::array<float, 3>> mesh\_coords = \{}
+\DoxyCodeLine{    \{-\/1, 0, 0\},}
+\DoxyCodeLine{    \{0, -\/1, 0\},}
+\DoxyCodeLine{    \{0, 0, -\/1\}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a mesh}}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} \textcolor{keywordtype}{id} = 325;}
+\DoxyCodeLine{\textcolor{keyword}{const} std::string mesh\_name = \textcolor{stringliteral}{"{}my mesh"{}};}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo<float>}} mesh(mesh\_coords, \textcolor{keywordtype}{id}, mesh\_name);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Determine if mesh insertion successful}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (ert.AddMesh(mesh, \textcolor{keyword}{false})) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}Mesh insertion okay"{}} << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}Mesh insertion error"{}} << std::endl;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}Mesh insertion okay}~\newline
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00375}{375}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00141}{HF\+::\+Ray\+Tracer\+::buffers\+To\+Structs()}}, \mbox{\hyperlink{a00209_source_l00336}{Construct\+Geometry\+From\+Buffers()}}, \mbox{\hyperlink{a00182_source_l00244}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Indexed\+Vertices()}}, \mbox{\hyperlink{a00182_source_l00256}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::get\+Raw\+Indices()}}, \mbox{\hyperlink{a00209_source_l00212}{Insert\+Geom()}}, \mbox{\hyperlink{a00185_source_l00126}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::meshid}}, \mbox{\hyperlink{a00182_source_l00181}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Num\+Tris()}}, \mbox{\hyperlink{a00182_source_l00178}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Num\+Verts()}}, and \mbox{\hyperlink{a00212_source_l00084}{scene}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_ad5389e05e451a8d8820c4deea886db3f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_a3d478f577e30d1b437421224134b5a38}\label{a01411_a3d478f577e30d1b437421224134b5a38}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!AddMesh@{AddMesh}}
+\index{AddMesh@{AddMesh}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{AddMesh()}{AddMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily bool HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Add\+Mesh (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$ $>$ \&}]{Meshes,  }\item[{bool}]{Commit = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Add several new meshes to the BVH.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em Meshes} & A vector of meshinfo to each be added as a seperate mesh. \\
+\hline
+{\em Commit} & Whether or not to commit changes to the scene after all meshes in Meshes have been added. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True. 
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}embree\_raytracer.h"{}, \#include "{}objloader.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// For brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}}<\textcolor{keywordtype}{float}>;}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the obj file path}}
+\DoxyCodeLine{std::string teapot\_path = \textcolor{stringliteral}{"{}teapot.obj"{}};}
+\DoxyCodeLine{std::vector<MeshInfo<float>> geom = \mbox{\hyperlink{a00469_a06c0c11adb62f8b204e42f75ac1990ac}{HF::Geometry::LoadMeshObjects}}(teapot\_path, \mbox{\hyperlink{a00469_aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e}{HF::Geometry::ONLY\_FILE}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the EmbreeRayTracer}}
+\DoxyCodeLine{\textcolor{keyword}{auto} ert = \mbox{\hyperlink{a01411_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer}}(geom);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare coordinates to create a mesh}}
+\DoxyCodeLine{std::vector<std::array<float, 3>> mesh\_coords\_0 = \{}
+\DoxyCodeLine{    \{0, 0, 1\},}
+\DoxyCodeLine{    \{0, 1, 0\},}
+\DoxyCodeLine{    \{1, 0, 0\}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::vector<std::array<float, 3>> mesh\_coords\_1 = \{}
+\DoxyCodeLine{    \{-\/1, 0, 0\},}
+\DoxyCodeLine{    \{0, -\/1, 0\},}
+\DoxyCodeLine{    \{0, 0, -\/1\}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare mesh IDs and names}}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} mesh\_id\_0 = 241;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} mesh\_id\_1 = 363;}
+\DoxyCodeLine{\textcolor{keyword}{const} std::string mesh\_name\_0 = \textcolor{stringliteral}{"{}this mesh"{}};}
+\DoxyCodeLine{\textcolor{keyword}{const} std::string mesh\_name\_1 = \textcolor{stringliteral}{"{}that mesh"{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create each MeshInfo<float>}}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{MeshInfo<float>}} mesh\_0(mesh\_coords\_0, mesh\_id\_0, mesh\_name\_0);}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{MeshInfo<float>}} mesh\_1(mesh\_coords\_1, mesh\_id\_1, mesh\_name\_1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container of MeshInfo<float>}}
+\DoxyCodeLine{std::vector<MeshInfo<float>> mesh\_vec = \{ mesh\_0, mesh\_1 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Determine if mesh insertion successful}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (ert.AddMesh(mesh\_vec, \textcolor{keyword}{false})) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}Mesh insertion okay"{}} << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}Mesh insertion error"{}} << std::endl;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00209_source_l00398}{398}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00316}{Add\+Mesh()}}, and \mbox{\hyperlink{a00212_source_l00084}{scene}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a3d478f577e30d1b437421224134b5a38_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_a6425a0f8f4a3ef8073e734ceb745cd1e}\label{a01411_a6425a0f8f4a3ef8073e734ceb745cd1e}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!AddMesh@{AddMesh}}
+\index{AddMesh@{AddMesh}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{AddMesh()}{AddMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily bool HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Add\+Mesh (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&}]{Mesh,  }\item[{int}]{ID,  }\item[{bool}]{Commit = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Add a new mesh to this raytracer\textquotesingle{}s BVH with the specified ID.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em Mesh} & A vector of 3d points composing the mesh \\
+\hline
+{\em ID} & the id of the mesh \\
+\hline
+{\em Commit} & Whether or not to commit changes yet. This is slow, so only do this when you\textquotesingle{}re done adding meshes. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the mesh was added successfully, false if the addition failed or the ID was already taken. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::exception} & Embree failed to allocate vertex and or index buffers. \\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}embree\_raytracer.h"{}, \#include "{}objloader.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container of coordinates}}
+\DoxyCodeLine{std::vector<std::array<float, 3>> directions = \{}
+\DoxyCodeLine{    \{0, 0, 1\},}
+\DoxyCodeLine{    \{0, 1, 0\},}
+\DoxyCodeLine{    \{1, 0, 0\},}
+\DoxyCodeLine{    \{-\/1, 0, 0\},}
+\DoxyCodeLine{    \{0, -\/1, 0\},}
+\DoxyCodeLine{    \{0, 0, -\/1\},}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the EmbreeRayTracer}}
+\DoxyCodeLine{\textcolor{keyword}{auto} ert = \mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}}(directions);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the mesh ID}}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} \textcolor{keywordtype}{id} = 214;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Insert the mesh, Commit parameter defaults to false}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} status = ert.AddMesh(directions, \textcolor{keywordtype}{id});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Retrieve status}}
+\DoxyCodeLine{std::string result = status ? \textcolor{stringliteral}{"{}status okay"{}} : \textcolor{stringliteral}{"{}status not okay"{}};}
+\DoxyCodeLine{std::cout << result << std::endl;}
+
+\end{DoxyCode}
+
+
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}status okay}~\newline
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00316}{316}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00336}{Construct\+Geometry\+From\+Buffers()}}, \mbox{\hyperlink{a00209_source_l00212}{Insert\+Geom()}}, \mbox{\hyperlink{a00212_source_l00084}{scene}}, and \mbox{\hyperlink{a00209_source_l00092}{HF\+::\+Ray\+Tracer\+::vectors\+To\+Buffers()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00172}{Embree\+Ray\+Tracer()}}, \mbox{\hyperlink{a00428_source_l00084}{Add\+Mesh()}}, \mbox{\hyperlink{a00209_source_l00398}{Add\+Mesh()}}, and \mbox{\hyperlink{a00428_source_l00071}{Add\+Meshes()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a6425a0f8f4a3ef8073e734ceb745cd1e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a6425a0f8f4a3ef8073e734ceb745cd1e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_a28032c693ac330c5b11bc2a877b04c75}\label{a01411_a28032c693ac330c5b11bc2a877b04c75}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!CalculatePreciseDistance@{CalculatePreciseDistance}}
+\index{CalculatePreciseDistance@{CalculatePreciseDistance}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{CalculatePreciseDistance()}{CalculatePreciseDistance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00001_a02139}{double}} HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Calculate\+Precise\+Distance (\begin{DoxyParamCaption}\item[{unsigned int}]{geom\+\_\+id,  }\item[{unsigned int}]{prim\+\_\+id,  }\item[{const \mbox{\hyperlink{a01407}{Vector3D}} \&}]{origin,  }\item[{const \mbox{\hyperlink{a01407}{Vector3D}} \&}]{direction }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculate the distance from origin to the point of intersection using an algorithm with higher precision. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em geom\+\_\+id} & ID of the geometry the ray intersected \\
+\hline
+{\em prim\+\_\+id} & ID of the primitive in geometry the ray intersected \\
+\hline
+{\em origin} & The origin point of the ray \\
+\hline
+{\em direction} & the direction the ray was casted in\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The distance between origin and the triangle it intersected
+\end{DoxyReturn}
+Uses {\ttfamily geom\+\_\+id} to get the buffers of the intersected geometry, then uses {\ttfamily prim\+\_\+id} to get the 3 vertices comprising the intersected triangle. Once these are obtained, this function calls Ray\+Triangle\+Intersection to calculate the precise point of intersection and returns the result. When use\+\_\+precise is set to true, Intersect will call this function to calculate its distance value instead of returning the distance calculated by embree.
+
+\begin{DoxyRemark}{Remarks}
+This algorithm was implemented due to the relatively low precision of the distances returned from Embree which causes issues with certain analysis methods.
+\end{DoxyRemark}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01411_a619072a17db71253fc9ce3bdf1ba1920}{Get\+Triangle}} for details on getting the \mbox{\hyperlink{a01411_a3a243ef02c74fc6df958a4fd2506e7cc}{geometry}} and triangle from embree 
+
+\mbox{\hyperlink{a00464_a9498ae7ffabd8c5bca4026374ac862e9}{Ray\+Triangle\+Intersection}} for details on the intersection algorithm itself 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00282}{282}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00450}{Get\+Triangle()}}, and \mbox{\hyperlink{a00209_source_l00246}{HF\+::\+Ray\+Tracer\+::\+Ray\+Triangle\+Intersection()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00212_source_l01041}{Intersect()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a28032c693ac330c5b11bc2a877b04c75_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a28032c693ac330c5b11bc2a877b04c75_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_aa602f6c44fa5230477642942ebc3216e}\label{a01411_aa602f6c44fa5230477642942ebc3216e}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!ConstructGeometryFromBuffers@{ConstructGeometryFromBuffers}}
+\index{ConstructGeometryFromBuffers@{ConstructGeometryFromBuffers}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{ConstructGeometryFromBuffers()}{ConstructGeometryFromBuffers()}}
+{\footnotesize\ttfamily RTCGeometry HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Construct\+Geometry\+From\+Buffers (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{a00464_a01403}{Triangle}} $>$ \&}]{tris,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a00464_a01399}{Vertex}} $>$ \&}]{verts }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create a new instance of RTCGeometry from a triangle and vertex buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tris} & \mbox{\hyperlink{a00464_a01403}{Triangle}} buffer to construct new geometry with \\
+\hline
+{\em verts} & \mbox{\hyperlink{a00464_a01399}{Vertex}} buffer to construct geometry with\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Committed \mbox{\hyperlink{a00469}{Geometry}} containing the specified triangles and vertices. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00336}{336}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00212_source_l00082}{device}}, \mbox{\hyperlink{a00212_source_l00094}{geometry}}, \mbox{\hyperlink{a00212_source_l00088}{triangles}}, and \mbox{\hyperlink{a00212_source_l00090}{Vertices}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00301}{Embree\+Ray\+Tracer()}}, and \mbox{\hyperlink{a00209_source_l00316}{Add\+Mesh()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_aa602f6c44fa5230477642942ebc3216e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_a619072a17db71253fc9ce3bdf1ba1920}\label{a01411_a619072a17db71253fc9ce3bdf1ba1920}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!GetTriangle@{GetTriangle}}
+\index{GetTriangle@{GetTriangle}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{GetTriangle()}{GetTriangle()}}
+{\footnotesize\ttfamily std\+::array$<$ \mbox{\hyperlink{a01407}{Vector3D}}, 3 $>$ HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Get\+Triangle (\begin{DoxyParamCaption}\item[{unsigned int}]{geom\+ID,  }\item[{unsigned int}]{prim\+ID }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Get the vertices for a specific triangle in a mesh. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em geom\+ID} & ID of the geometry the triangle belongs to \\
+\hline
+{\em prim\+ID} & Id of the triangle to retrieve\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 3 vertices that comprise the triangle with ID {\ttfamily prim\+ID} in the geometry with id {\ttfamily geom\+ID}
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+1) {\ttfamily geom\+ID} must be the ID of geometry that already exists within this raytracer\textquotesingle{}s BVH 
+
+2) {\ttfamily prim\+ID} must be the ID of a triangle within the bounds of the geometry at {\ttfamily geom\+ID}\textquotesingle{}s buffers 
+\end{DoxyPrecond}
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00450}{450}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00446}{HF\+::\+Ray\+Tracer\+::\+Get\+Point\+From\+Buffer()}}, \mbox{\hyperlink{a00212_source_l00084}{scene}}, \mbox{\hyperlink{a00209_source_l00082}{HF\+::\+Ray\+Tracer\+::\+Triangle\+::v0}}, \mbox{\hyperlink{a00209_source_l00082}{HF\+::\+Ray\+Tracer\+::\+Triangle\+::v1}}, and \mbox{\hyperlink{a00209_source_l00082}{HF\+::\+Ray\+Tracer\+::\+Triangle\+::v2}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00282}{Calculate\+Precise\+Distance()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a619072a17db71253fc9ce3bdf1ba1920_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a619072a17db71253fc9ce3bdf1ba1920_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_a6ee1e15bc515878b156bc6a3778f8033}\label{a01411_a6ee1e15bc515878b156bc6a3778f8033}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!InsertGeom@{InsertGeom}}
+\index{InsertGeom@{InsertGeom}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{InsertGeom()}{InsertGeom()}}
+{\footnotesize\ttfamily int HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Insert\+Geom (\begin{DoxyParamCaption}\item[{RTCGeometry \&}]{geom,  }\item[{int}]{id = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Attach geometry to the current scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em geom} & \mbox{\hyperlink{a00469}{Geometry}} to attach \\
+\hline
+{\em id} & Id to attempt to attach with. If this ID is already taken, the next available ID will be assigned, and the new ID will be returned\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the New ID if a new ID needed to be given to the mesh or the ID given by ID. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00212}{212}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00069}{HF\+::\+Ray\+Tracer\+::\+Check\+State()}}, \mbox{\hyperlink{a00212_source_l00082}{device}}, \mbox{\hyperlink{a00209_source_l00212}{Insert\+Geom()}}, and \mbox{\hyperlink{a00212_source_l00084}{scene}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00301}{Embree\+Ray\+Tracer()}}, \mbox{\hyperlink{a00209_source_l00316}{Add\+Mesh()}}, and \mbox{\hyperlink{a00209_source_l00212}{Insert\+Geom()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a6ee1e15bc515878b156bc6a3778f8033_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a6ee1e15bc515878b156bc6a3778f8033_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_aefb986188c0520e407fa3a39c89a0017}\label{a01411_aefb986188c0520e407fa3a39c89a0017}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!Intersect@{Intersect}}
+\index{Intersect@{Intersect}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{Intersect()}{Intersect()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename return\+\_\+type  = double, class N , class V $>$ \\
+\mbox{\hyperlink{a01415}{Hit\+Struct}}$<$ return\+\_\+type $>$ HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Intersect (\begin{DoxyParamCaption}\item[{const N \&}]{node,  }\item[{const V \&}]{direction,  }\item[{float}]{max\+\_\+distance = {\ttfamily -\/1.0f},  }\item[{int}]{mesh\+\_\+id = {\ttfamily -\/0.1f} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Cast a ray from origin in direction. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em return\+\_\+type} & Numeric type for the returned distance value i.\+e. double, long double, float, etc. \\
+\hline
+{\em N} & X,Y,Z coordinates representing a point in space \\
+\hline
+{\em V} & X,Y,Z Coordinates representing direction vector\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em node} & A point in space. Must atleast have \mbox{[}0\mbox{]}, \mbox{[}1\mbox{]}, and \mbox{[}2\mbox{]} defined. \\
+\hline
+{\em direction} & Direction to cast the ray in. Same constraints as node, but can be a different type. \\
+\hline
+{\em max\+\_\+distance} & Maximum distance a ray can travel before intersections are ignored. Set to -\/1 for infinite distance. \\
+\hline
+{\em mesh\+\_\+id} & Only consider intersections with the mesh at this ID. Set to -\/1 to consider intersections with all meshes.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The distance from origin to the ray\textquotesingle{}s point of intersection. If no intersection was found the returned hitstruct\textquotesingle{}s mesh\+ID will be -\/1. This is checkable with the hitstruct\textquotesingle{}s Did\+Hit() function.
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+If {\ttfamily use\+\_\+precise} is set to true then this will use a more precise algorithm to calculate returned distance value. This is one of the most basic forms of intersection for the raytracer and many other functions will call this internally.
+\end{DoxyRemark}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01411_afd4816ed296a73ccb7fe61e17cd75165}{Intersections}} for a parallel version of this function 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{a00212_source_l01001}{1001}} of file \mbox{\hyperlink{a00212_source}{embree\+\_\+raytracer.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00428_source_l00286}{Precise\+Intersection()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_aefb986188c0520e407fa3a39c89a0017_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_af37604ed6d68c27bb9224afd795cab18}\label{a01411_af37604ed6d68c27bb9224afd795cab18}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!Intersect@{Intersect}}
+\index{Intersect@{Intersect}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{Intersect()}{Intersect()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename return\+\_\+type  = double, typename numeric1  = double, typename numeric2  = double$>$ \\
+\mbox{\hyperlink{a01415}{Hit\+Struct}}$<$ return\+\_\+type $>$ HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Intersect (\begin{DoxyParamCaption}\item[{numeric1}]{x,  }\item[{numeric1}]{y,  }\item[{numeric1}]{z,  }\item[{numeric2}]{dx,  }\item[{numeric2}]{dy,  }\item[{numeric2}]{dz,  }\item[{float}]{distance = {\ttfamily -\/1.0f},  }\item[{int}]{mesh\+\_\+id = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Cast a ray from origin in direction. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em return\+\_\+type} & Numeric type used for the output distance value. \\
+\hline
+{\em numeric1} & Numeric type used for the x,y,z components of the origin \\
+\hline
+{\em numeric2} & Numeric type used for the x,y,z components of the direction\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X component of the ray\textquotesingle{}s origin. \\
+\hline
+{\em y} & Y component of the ray\textquotesingle{}s origin. \\
+\hline
+{\em z} & Z component of the ray\textquotesingle{}s origin. \\
+\hline
+{\em dx} & X component of the ray\textquotesingle{}s direction. \\
+\hline
+{\em dy} & Y component of the ray\textquotesingle{}s direction. \\
+\hline
+{\em dz} & Z component of the ray\textquotesingle{}s direction. \\
+\hline
+{\em max\+\_\+distance} & Maximum distance a ray can travel before intersections are ignored. Set to -\/1 for infinite distance. \\
+\hline
+{\em mesh\+\_\+id} & Ignore intersections with any mesh other than the mesh with this ID. set to -\/1 to consider intersections with any geometry\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The distance from origin to the ray\textquotesingle{}s point of intersection. If no intersection was found the returned hitstruct\textquotesingle{}s mesh\+ID will be -\/1. This is checkable with the hitstruct\textquotesingle{}s Did\+Hit() function.
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+If {\ttfamily use\+\_\+precise} is set to true then this will use a more precise algorithm to calculate returned distance value.\+This is one of the most basic forms of intersection for the raytracerand many other functions will call this internally.
+\end{DoxyRemark}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01411_afd4816ed296a73ccb7fe61e17cd75165}{Intersections}} for a parallel version of this function
+\end{DoxySeeAlso}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{comment}{// Create Plane}}
+\DoxyCodeLine{    \textcolor{keyword}{const} vector<float> plane\_vertices\{}
+\DoxyCodeLine{        -\/10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{        -\/10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{        10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{        10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{    \};}
+\DoxyCodeLine{    \textcolor{keyword}{const} vector<int> plane\_indices\{ 3, 1, 0, 2, 3, 0 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Create RayTracer}}
+\DoxyCodeLine{    \mbox{\hyperlink{a01411_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer}} ert(vector<\mbox{\hyperlink{a01351}{MeshInfo<float>}}>\{\mbox{\hyperlink{a01351}{MeshInfo<float>}}(plane\_vertices, plane\_indices, 0, \textcolor{stringliteral}{"{} "{}})\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Cast a ray straight down}}
+\DoxyCodeLine{    \textcolor{keyword}{auto} straight\_down = ert.Intersect(0, 0, 1, 0, 0, -\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Print distance if it connected}}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (straight\_down.DidHit()) std::cerr << straight\_down.distance << std::endl;}
+\DoxyCodeLine{    \textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"{}Miss"{}} << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Cast a ray straight up and ensure it misses}}
+\DoxyCodeLine{    \textcolor{keyword}{auto} straight\_up = ert.Intersect(0, 0, 1, 0, 0, 1);}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (straight\_up.DidHit()) std::cerr << straight\_up.distance << std::endl;}
+\DoxyCodeLine{    \textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"{}Miss"{}} << std::endl;}
+\DoxyCodeLine{}
+
+\end{DoxyCodeInclude}
+ 
+\end{DoxyParagraph}
+
+
+Definition at line \mbox{\hyperlink{a00212_source_l01041}{1041}} of file \mbox{\hyperlink{a00212_source}{embree\+\_\+raytracer.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00282}{Calculate\+Precise\+Distance()}}, \mbox{\hyperlink{a00218_source_l00023}{HF\+::\+Ray\+Tracer\+::\+Did\+Intersect()}}, \mbox{\hyperlink{a00218_source_l00008}{HF\+::\+Ray\+Tracer\+::\+Hit\+Struct$<$ numeric\+\_\+type $>$\+::distance}}, \mbox{\hyperlink{a00209_source_l00543}{Intersect\+\_\+\+IMPL()}}, and \mbox{\hyperlink{a00218_source_l00009}{HF\+::\+Ray\+Tracer\+::\+Hit\+Struct$<$ numeric\+\_\+type $>$\+::meshid}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_af37604ed6d68c27bb9224afd795cab18_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_ae3341adf12ae91e33f1188a434d8e28d}\label{a01411_ae3341adf12ae91e33f1188a434d8e28d}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!Intersect\_IMPL@{Intersect\_IMPL}}
+\index{Intersect\_IMPL@{Intersect\_IMPL}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{Intersect\_IMPL()}{Intersect\_IMPL()}}
+{\footnotesize\ttfamily RTCRay\+Hit HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Intersect\+\_\+\+IMPL (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{float}]{z,  }\item[{float}]{dx,  }\item[{float}]{dy,  }\item[{float}]{dz,  }\item[{float}]{max\+\_\+distance = {\ttfamily -\/1},  }\item[{int}]{mesh\+\_\+id = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Implementation for fundamental ray intersection.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & x component of the ray\textquotesingle{}s origin. \\
+\hline
+{\em y} & y component of the ray\textquotesingle{}s origin. \\
+\hline
+{\em z} & z component of the ray\textquotesingle{}s origin. \\
+\hline
+{\em dx} & x component of the ray\textquotesingle{}s direction. \\
+\hline
+{\em dy} & y component of the ray\textquotesingle{}s direction. \\
+\hline
+{\em dz} & z component of the ray\textquotesingle{}s direction. \\
+\hline
+{\em max\+\_\+distance} & Maximum distance the ray can travel. Any intersections beyond this distance will be ignored. If set to -\/1, all intersections will be counted regardless of distance. \\
+\hline
+{\em mesh\+\_\+id} & (UNIMPLEMENTED) the id of the only mesh for this ray to collide with. Any geometry wihtout this ID is ignored. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \mbox{\hyperlink{a01415}{Hit\+Struct}} containing information about the intersection if any occurred. 
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}embree\_raytracer.h"{}, \#include "{}meshinfo.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// for brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}};}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}}<\textcolor{keywordtype}{float}>;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create Plane}}
+\DoxyCodeLine{\textcolor{keyword}{const} std::vector<float> plane\_vertices\{}
+\DoxyCodeLine{    -\/10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{    -\/10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{    10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{    10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} std::vector<int> plane\_indices\{ 3, 1, 0, 2, 3, 0 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create RayTracer}}
+\DoxyCodeLine{\mbox{\hyperlink{a01411_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer}} ert(std::vector<\mbox{\hyperlink{a01351}{MeshInfo<float>}}>\{\mbox{\hyperlink{a01351}{MeshInfo<float>}}(plane\_vertices, plane\_indices, 0, \textcolor{stringliteral}{"{} "{}})\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{HitStruct res;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight down}}
+\DoxyCodeLine{res = ert.Intersect\_IMPL(0, 0, 1, 0, 0, -\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Print distance if it connected}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (res.DidHit()) std::cerr << res.distance << std::endl;}
+\DoxyCodeLine{\textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"{}Miss"{}} << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight up}}
+\DoxyCodeLine{res = ert.Intersect\_IMPL(0, 0, 1, 0, 0, 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//Print distance if it connected}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (res.DidHit()) std::cerr << res.distance << std::endl;}
+\DoxyCodeLine{\textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"{}Miss"{}} << std::endl;}
+
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}1}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}Miss} 
+
+Definition at line \mbox{\hyperlink{a00209_source_l00543}{543}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00024}{HF\+::\+Ray\+Tracer\+::\+Construct\+Hit()}}, \mbox{\hyperlink{a00212_source_l00086}{context}}, and \mbox{\hyperlink{a00212_source_l00084}{scene}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00212_source_l01041}{Intersect()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_ae3341adf12ae91e33f1188a434d8e28d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_ae3341adf12ae91e33f1188a434d8e28d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_afd4816ed296a73ccb7fe61e17cd75165}\label{a01411_afd4816ed296a73ccb7fe61e17cd75165}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!Intersections@{Intersections}}
+\index{Intersections@{Intersections}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{Intersections()}{Intersections()}}
+{\footnotesize\ttfamily template$<$typename return\+\_\+type , typename N , typename V $>$ \\
+std\+::vector$<$ \mbox{\hyperlink{a01415}{Hit\+Struct}}$<$ return\+\_\+type $>$ $>$ HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Intersections (\begin{DoxyParamCaption}\item[{const N \&}]{nodes,  }\item[{const V \&}]{directions,  }\item[{float}]{max\+\_\+distance = {\ttfamily -\/1.0f},  }\item[{const bool}]{use\+\_\+parallel = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Cast multiple rays in parallel. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em return\+\_\+type} & Numeric type for the returned distance value i.\+e. double, long double, float, etc. \\
+\hline
+{\em N} & X,Y,Z A container of objects holding x,y,z coordinates for the origin points of every ray \\
+\hline
+{\em V} & X,Y,Z A container of objects holding x,y,z coordinates for the direction points of every ray\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Origin points to cast rays from. \\
+\hline
+{\em direction} & Directions to cast rays in. \\
+\hline
+{\em max\+\_\+distance} & Maximum distance a ray can travel before intersections are ignored. Set to -\/1 for infinite distance. \\
+\hline
+{\em mesh\+\_\+id} & Only consider intersections with the mesh at this ID. Set to -\/1 to consider intersections with all meshes.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An ordered array of results from casting a ray for every origin in origins in the direciton in directions with a matching index. Rays that do not result in an intersection will have hitstructs with meshids of -\/1. This can be checked by calling the \mbox{\hyperlink{a01415}{Hit\+Struct}}\textquotesingle{}s .Did\+Hit function. ~\newline
+
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+If {\ttfamily use\+\_\+precise} is set to true then this will use a more precise algorithm to calculate returned distance value. This is one of the most basic forms of intersection for the raytracer and many other functions will call this internally.
+\end{DoxyRemark}
+\begin{DoxyPrecond}{Precondition}
+The length of nodes must match the length of directions. 
+\end{DoxyPrecond}
+
+
+Definition at line \mbox{\hyperlink{a00212_source_l01141}{1141}} of file \mbox{\hyperlink{a00212_source}{embree\+\_\+raytracer.\+h}}.
+
+\mbox{\Hypertarget{a01411_a7f8ab81033bdefaea0eea729aa9125ae}\label{a01411_a7f8ab81033bdefaea0eea729aa9125ae}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!IntersectOutputArguments@{IntersectOutputArguments}}
+\index{IntersectOutputArguments@{IntersectOutputArguments}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{IntersectOutputArguments()}{IntersectOutputArguments()}}
+{\footnotesize\ttfamily template$<$typename N , typename V , typename return\+\_\+type $>$ \\
+bool HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Intersect\+Output\+Arguments (\begin{DoxyParamCaption}\item[{const N \&}]{node,  }\item[{const V \&}]{direction,  }\item[{return\+\_\+type \&}]{out\+\_\+distance,  }\item[{int \&}]{out\+\_\+meshid,  }\item[{float}]{max\+\_\+distance = {\ttfamily -\/1.0f} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Cast a ray from origin in direction and update the parameters instead of returning a hitstruct. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em return\+\_\+type} & Numeric type for the returned distance value i.\+e. double, long double, float, etc. \\
+\hline
+{\em N} & X,Y,Z coordinates representing a point in space \\
+\hline
+{\em V} & X,Y,Z Coordinates representing direction vector\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Origin point of the ray. \\
+\hline
+{\em direction} & Direction to cast the ray in. \\
+\hline
+{\em max\+\_\+distance} & Maximum distance a ray can travel before intersections are ignored. Set to -\/1 for infinite distance. \\
+\hline
+{\em out\+\_\+distance} & On intersection will be updated to contain the distance from origin to the point of intersection.\\
+\hline
+{\em out\+\_\+meshid} & updated to contain the ID of the intersected mesh.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the ray did intersect any geometry and the outputs were updated, false otherwise. ~\newline
+
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+It\textquotesingle{}s suggested to use Intersect instead of this function.
+\end{DoxyRemark}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01411_afd4816ed296a73ccb7fe61e17cd75165}{Intersections}} for a parallel version of this function 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{a00212_source_l01098}{1098}} of file \mbox{\hyperlink{a00212_source}{embree\+\_\+raytracer.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00218_source_l00017}{HF\+::\+Ray\+Tracer\+::\+Hit\+Struct$<$ numeric\+\_\+type $>$\+::\+Did\+Hit()}}, \mbox{\hyperlink{a00218_source_l00008}{HF\+::\+Ray\+Tracer\+::\+Hit\+Struct$<$ numeric\+\_\+type $>$\+::distance}}, and \mbox{\hyperlink{a00218_source_l00009}{HF\+::\+Ray\+Tracer\+::\+Hit\+Struct$<$ numeric\+\_\+type $>$\+::meshid}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00428_source_l00111}{Cast\+Rays\+Distance()}}, and \mbox{\hyperlink{a00428_source_l00098}{Cast\+Single\+Ray\+Distance()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a7f8ab81033bdefaea0eea729aa9125ae_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a7f8ab81033bdefaea0eea729aa9125ae_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_a3a7488f8e41c8a9e3dc9c334047c6457}\label{a01411_a3a7488f8e41c8a9e3dc9c334047c6457}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!Occluded@{Occluded}}
+\index{Occluded@{Occluded}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{Occluded()}{Occluded()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename N , typename V $>$ \\
+bool HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Occluded (\begin{DoxyParamCaption}\item[{const N \&}]{origin,  }\item[{const V \&}]{direction,  }\item[{float}]{max\+\_\+distance = {\ttfamily -\/1.0f},  }\item[{int}]{mesh\+\_\+id = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Determine if there is an intersection with any geometry. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em N} & X,Y,Z coordinates representing a point in space \\
+\hline
+{\em V} & X,Y,Z Coordinates representing direction vector\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em node} & A point in space. Must atleast have \mbox{[}0\mbox{]}, \mbox{[}1\mbox{]}, and \mbox{[}2\mbox{]} defined. \\
+\hline
+{\em direction} & Direction to cast the ray in. Same constraints as node, but can be a different type. \\
+\hline
+{\em max\+\_\+distance} & Maximum distance a ray can travel before intersections are ignored. Set to -\/1 for infinite distance.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the ray intersected with any geometry within max\+\_\+distance, {\ttfamily false} otherwise
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+Occlusion rays are much faster than other intersection functions however they are only able tell whether they intersected with anything or not. These rays are very useful for quick line of sight checks utilizing the {\ttfamily max\+\_\+distance} parameter.
+\end{DoxyRemark}
+\begin{DoxyParagraph}{Example}
+
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{    \textcolor{comment}{// Create Plane}}
+\DoxyCodeLine{    \textcolor{keyword}{const} vector<float> plane\_vertices\{}
+\DoxyCodeLine{        -\/10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{        -\/10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{        10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{        10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{    \};}
+\DoxyCodeLine{    \textcolor{keyword}{const} vector<int> plane\_indices\{ 3, 1, 0, 2, 3, 0 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Create RayTracer}}
+\DoxyCodeLine{    \mbox{\hyperlink{a01411_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer}} ert(vector<\mbox{\hyperlink{a01351}{MeshInfo<float>}}>\{\mbox{\hyperlink{a01351}{MeshInfo<float>}}(plane\_vertices, plane\_indices, 0, \textcolor{stringliteral}{"{} "{}})\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Cast a ray straight down}}
+\DoxyCodeLine{    \textcolor{keywordtype}{bool} straight\_down = ert.Occluded(}
+\DoxyCodeLine{        std::array<float, 3>\{0, 0, 1\},}
+\DoxyCodeLine{        std::array<float, 3>\{0, 0, -\/1\}}
+\DoxyCodeLine{    );}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (straight\_down) std::cerr << \textcolor{stringliteral}{"{}True"{}} << std::endl;}
+\DoxyCodeLine{    \textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"{}False"{}} << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Cast a ray straight up}}
+\DoxyCodeLine{    \textcolor{keywordtype}{bool} straight\_up = ert.Occluded(}
+\DoxyCodeLine{        std::array<float, 3>\{0, 0, 1\},}
+\DoxyCodeLine{        std::array<float, 3>\{0, 0, 1\}}
+\DoxyCodeLine{    );}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (straight\_up) std::cerr << \textcolor{stringliteral}{"{}True"{}} << std::endl;}
+\DoxyCodeLine{    \textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"{}False"{}} << std::endl;}
+\DoxyCodeLine{}
+
+\end{DoxyCodeInclude}
+
+
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} True}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} False} 
+
+Definition at line \mbox{\hyperlink{a00212_source_l01186}{1186}} of file \mbox{\hyperlink{a00212_source}{embree\+\_\+raytracer.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00624}{Occluded\+\_\+\+IMPL()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00026_source_l00047}{HF\+::\+Visibility\+Graph\+::\+Height\+Check()}}, and \mbox{\hyperlink{a00026_source_l00103}{HF\+::\+Visibility\+Graph\+::\+Is\+Occlusion\+Between()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a3a7488f8e41c8a9e3dc9c334047c6457_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a3a7488f8e41c8a9e3dc9c334047c6457_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_ae6b86b94ab1c45e137e384b8955064ad}\label{a01411_ae6b86b94ab1c45e137e384b8955064ad}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!Occluded@{Occluded}}
+\index{Occluded@{Occluded}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{Occluded()}{Occluded()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename numeric1 , typename numeric2 , typename dist\+\_\+type  = float$>$ \\
+bool HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Occluded (\begin{DoxyParamCaption}\item[{numeric1}]{x,  }\item[{numeric1}]{y,  }\item[{numeric1}]{z,  }\item[{numeric2}]{dx,  }\item[{numeric2}]{dy,  }\item[{numeric2}]{dz,  }\item[{dist\+\_\+type}]{max\+\_\+distance = {\ttfamily -\/1.0},  }\item[{int}]{mesh\+\_\+id = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Determine if there is an intersection with any geometry. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em numeric1} & Numeric type used for the x,y,z components of the origin \\
+\hline
+{\em numeric2} & Numeric type used for the x,y,z components of the direction \\
+\hline
+{\em dist\+\_\+type} & Numeric type used for the distance parameter.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X component of the ray\textquotesingle{}s origin. \\
+\hline
+{\em y} & Y component of the ray\textquotesingle{}s origin. \\
+\hline
+{\em z} & Z component of the ray\textquotesingle{}s origin. \\
+\hline
+{\em dx} & X component of the ray\textquotesingle{}s direction. \\
+\hline
+{\em dy} & Y component of the ray\textquotesingle{}s direction. \\
+\hline
+{\em dz} & Z component of the ray\textquotesingle{}s direction. \\
+\hline
+{\em max\+\_\+distance} & Maximum distance a ray can travel before intersections are ignored. Set to -\/1 for infinite distance. \\
+\hline
+{\em mesh\+\_\+id} & Ignore intersections with any mesh other than the mesh with this ID. set to -\/1 to consider intersections with any geometry\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the ray intersected with any geometry within max\+\_\+distance, {\ttfamily false} otherwise
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+Occlusion rays are much faster than other intersection functions however they are only able tell whether they intersected with anything or not. These rays are very useful for quick line of sight checks utilizing the {\ttfamily max\+\_\+distance} parameter.
+\end{DoxyRemark}
+\begin{DoxyParagraph}{Example}
+
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{    \textcolor{comment}{// Create Plane}}
+\DoxyCodeLine{    \textcolor{keyword}{const} vector<float> plane\_vertices\{}
+\DoxyCodeLine{        -\/10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{        -\/10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{        10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{        10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{    \};}
+\DoxyCodeLine{    \textcolor{keyword}{const} vector<int> plane\_indices\{ 3, 1, 0, 2, 3, 0 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Create RayTracer}}
+\DoxyCodeLine{    \mbox{\hyperlink{a01411_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer}} ert(vector<\mbox{\hyperlink{a01351}{MeshInfo<float>}}>\{\mbox{\hyperlink{a01351}{MeshInfo<float>}}(plane\_vertices, plane\_indices, 0, \textcolor{stringliteral}{"{} "{}})\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Cast a ray straight down}}
+\DoxyCodeLine{    \textcolor{keywordtype}{bool} straight\_down = ert.Occluded(0, 0, 1, 0, 0, -\/1);}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (straight\_down) std::cerr << \textcolor{stringliteral}{"{}True"{}} << std::endl;}
+\DoxyCodeLine{    \textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"{}False"{}} << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Cast a ray straight up}}
+\DoxyCodeLine{    \textcolor{keywordtype}{bool} straight\_up = ert.Occluded(0, 0, 1, 0, 0, 1);}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (straight\_up) std::cerr << \textcolor{stringliteral}{"{}True"{}} << std::endl;}
+\DoxyCodeLine{    \textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"{}False"{}} << std::endl;}
+\DoxyCodeLine{    }
+
+\end{DoxyCodeInclude}
+
+
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} True}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} False} 
+
+Definition at line \mbox{\hyperlink{a00212_source_l01233}{1233}} of file \mbox{\hyperlink{a00212_source}{embree\+\_\+raytracer.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00624}{Occluded\+\_\+\+IMPL()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_ae6b86b94ab1c45e137e384b8955064ad_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_a7b06460e537c22386fa5a9af2701591a}\label{a01411_a7b06460e537c22386fa5a9af2701591a}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!Occluded\_IMPL@{Occluded\_IMPL}}
+\index{Occluded\_IMPL@{Occluded\_IMPL}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{Occluded\_IMPL()}{Occluded\_IMPL()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Occluded\+\_\+\+IMPL (\begin{DoxyParamCaption}\item[{const std\+::array$<$ float, 3 $>$ \&}]{origin,  }\item[{const std\+::array$<$ float, 3 $>$ \&}]{direction,  }\item[{float}]{max\+\_\+dist = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Cast an occlusion ray using arrays as input.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & Start point of the ray. \\
+\hline
+{\em direction} & Direction of the ray. \\
+\hline
+{\em max\+\_\+dist} & Maximum distance of the ray. Any hits beyond this distance will not be counted. If negative, count all hits regardless of distance. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if The ray intersected any geometry, False otherwise. 
+\end{DoxyReturn}
+
+
+Occulsion rays are faster than the other ray functions, but can only tell if a ray intersected any geometry or it didn\textquotesingle{}t. use the other functions for information such as distance, hitpoint, or meshid. 
+
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}embree\_raytracer.h"{}, \#include "{}meshinfo.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// for brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}};}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}}<\textcolor{keywordtype}{float}>;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create Plane}}
+\DoxyCodeLine{\textcolor{keyword}{const} std::vector<float> plane\_vertices\{}
+\DoxyCodeLine{    -\/10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{    -\/10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{    10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{    10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} std::vector<int> plane\_indices\{ 3, 1, 0, 2, 3, 0 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create RayTracer}}
+\DoxyCodeLine{\mbox{\hyperlink{a01411_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer}} ert(std::vector<\mbox{\hyperlink{a01351}{MeshInfo<float>}}>\{\mbox{\hyperlink{a01351}{MeshInfo<float>}}(plane\_vertices, plane\_indices, 0, \textcolor{stringliteral}{"{} "{}})\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight down}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} res = ert.Occluded\_IMPL(}
+\DoxyCodeLine{    std::array<float, 3>\{ 0, 0, 1 \},}
+\DoxyCodeLine{    std::array<float, 3>\{ 0, 0, -\/1 \}}
+\DoxyCodeLine{);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Print Result}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (res) std::cerr << \textcolor{stringliteral}{"{}True"{}} << std::endl;}
+\DoxyCodeLine{\textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"{}False"{}} << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight up}}
+\DoxyCodeLine{res = ert.Occluded\_IMPL(}
+\DoxyCodeLine{    std::array<float, 3>\{ 0, 0, 1 \},}
+\DoxyCodeLine{    std::array<float, 3>\{ 0, 0, 1 \}}
+\DoxyCodeLine{);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Print Result.}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (res) std::cerr << \textcolor{stringliteral}{"{}True"{}} << std::endl;}
+\DoxyCodeLine{\textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"{}False"{}} << std::endl;}
+
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} True}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} False} 
+
+Definition at line \mbox{\hyperlink{a00209_source_l00555}{555}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00624}{Occluded\+\_\+\+IMPL()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a7b06460e537c22386fa5a9af2701591a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_ade19fda460dadd98769b347840bd305a}\label{a01411_ade19fda460dadd98769b347840bd305a}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!Occluded\_IMPL@{Occluded\_IMPL}}
+\index{Occluded\_IMPL@{Occluded\_IMPL}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{Occluded\_IMPL()}{Occluded\_IMPL()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Occluded\+\_\+\+IMPL (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{float}]{z,  }\item[{float}]{dx,  }\item[{float}]{dy,  }\item[{float}]{dz,  }\item[{float}]{distance = {\ttfamily -\/1},  }\item[{int}]{mesh\+\_\+id = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Implementation for fundamental occlusion ray intersection.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & x component of the ray\textquotesingle{}s origin. \\
+\hline
+{\em y} & y component of the ray\textquotesingle{}s origin. \\
+\hline
+{\em z} & z component of the ray\textquotesingle{}s origin. \\
+\hline
+{\em dx} & x component of the ray\textquotesingle{}s direction. \\
+\hline
+{\em dy} & y component of the ray\textquotesingle{}s direction. \\
+\hline
+{\em dz} & z component of the ray\textquotesingle{}s direction. \\
+\hline
+{\em distance} & Maximum distance of the ray. Any hits beyond this distance will not be counted. If negative, count all hits regardless of distance. \\
+\hline
+{\em mesh\+\_\+id} & (NOT IMPLEMENTED) The id of the only mesh for this ray to collide with. -\/1 for all. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the ray intersected any geometry. False otherwise. 
+\end{DoxyReturn}
+
+
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}embree\_raytracer.h"{}, \#include "{}meshinfo.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// for brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}};}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}}<\textcolor{keywordtype}{float}>;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create Plane}}
+\DoxyCodeLine{\textcolor{keyword}{const} std::vector<float> plane\_vertices\{}
+\DoxyCodeLine{    -\/10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{    -\/10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{    10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{    10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} std::vector<int> plane\_indices\{ 3, 1, 0, 2, 3, 0 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create RayTracer}}
+\DoxyCodeLine{\mbox{\hyperlink{a01411_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer}} ert(std::vector<\mbox{\hyperlink{a01351}{MeshInfo<float>}}>\{\mbox{\hyperlink{a01351}{MeshInfo<float>}}(plane\_vertices, plane\_indices, 0, \textcolor{stringliteral}{"{} "{}})\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight down}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} res = ert.Occluded\_IMPL(0, 0, 1, 0, 0, -\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Print Results}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (res) std::cerr << \textcolor{stringliteral}{"{}True"{}} << std::endl;}
+\DoxyCodeLine{\textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"{}False"{}} << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight up}}
+\DoxyCodeLine{res = ert.Occluded\_IMPL(0, 0, 1, 0, 0, 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Print results}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (res) std::cerr << \textcolor{stringliteral}{"{}True"{}} << std::endl;}
+\DoxyCodeLine{\textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"{}False"{}} << std::endl;}
+
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} True}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} False} 
+
+Definition at line \mbox{\hyperlink{a00209_source_l00624}{624}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00048}{HF\+::\+Ray\+Tracer\+::\+Construct\+Ray()}}, \mbox{\hyperlink{a00212_source_l00086}{context}}, and \mbox{\hyperlink{a00212_source_l00084}{scene}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00212_source_l01186}{Occluded()}}, \mbox{\hyperlink{a00209_source_l00555}{Occluded\+\_\+\+IMPL()}}, and \mbox{\hyperlink{a00209_source_l00563}{Occlusions()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_ade19fda460dadd98769b347840bd305a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_ade19fda460dadd98769b347840bd305a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_af718d171387e217f3c2172f795abfb90}\label{a01411_af718d171387e217f3c2172f795abfb90}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!Occlusions@{Occlusions}}
+\index{Occlusions@{Occlusions}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{Occlusions()}{Occlusions()}}
+{\footnotesize\ttfamily std\+::vector$<$ char $>$ HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Occlusions (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&}]{origins,  }\item[{const std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&}]{directions,  }\item[{float}]{max\+\_\+distance = {\ttfamily -\/1},  }\item[{bool}]{use\+\_\+parallel = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Cast multiple occlusion rays in parallel.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em origins} & A list of origins. If only one is supplied then it will be cast for every direction in directions. \\
+\hline
+{\em directions} & A list of directions. If only one is supplied then it will be cast for every origin in origins \\
+\hline
+{\em max\+\_\+distance} & Maximum distance the ray can travel \\
+\hline
+{\em parallel} & Whether or not to cast the rays in parallel. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An ordered array of bools where every true indicates a hit and every false indicates a miss. 
+\end{DoxyReturn}
+
+
+Can be cast in 3 configurations\+: 
+
+
+\begin{DoxyItemize}
+\item Equal amount of directions/origins\+: Cast a ray for every pair of origin/direction in order. i.\+e. (origin\mbox{[}0\mbox{]}, direction\mbox{[}0\mbox{]}), (origin\mbox{[}1\mbox{]}, direction\mbox{[}1\mbox{]})  
+\item One direction, multiple origins\+: Cast a ray in the given direction from each origin point in origins.  
+\item One origin, multiple directions\+: Cast a ray from the origin point in each direction in directions.  
+\end{DoxyItemize}
+
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}embree\_raytracer.h"{}, \#include "{}meshinfo.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// for brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}};}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}}<\textcolor{keywordtype}{float}>;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create Plane}}
+\DoxyCodeLine{\textcolor{keyword}{const} std::vector<float> plane\_vertices\{}
+\DoxyCodeLine{    -\/10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{    -\/10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{    10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{    10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} std::vector<int> plane\_indices\{ 3, 1, 0, 2, 3, 0 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create RayTracer}}
+\DoxyCodeLine{\mbox{\hyperlink{a01411_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer}} ert(std::vector<\mbox{\hyperlink{a01351}{MeshInfo<float>}}>\{\mbox{\hyperlink{a01351}{MeshInfo<float>}}(plane\_vertices, plane\_indices, 0, \textcolor{stringliteral}{"{} "{}})\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create an array of directions all containing \{0,0,-\/1\}}}
+\DoxyCodeLine{std::vector<std::array<float, 3>> directions(10, std::array<float, 3>\{0, 0, -\/1\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create an array of origins with the first 5 values being above the plane and}}
+\DoxyCodeLine{\textcolor{comment}{// the last five values being under it.}}
+\DoxyCodeLine{std::vector<std::array<float, 3>> origins(10);}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 5; i++) origins[i] = std::array<float, 3>\{ 0.0f, 0.0f, 1.0f \};}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 5; i < 10; i++) origins[i] = std::array<float, 3>\{ 0.0f, 0.0f, -\/1.0f \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Cast every occlusion ray}}
+\DoxyCodeLine{std::vector<char> results = ert.Occlusions(origins, directions);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Iterate through all results to print them}}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"{}["{}};}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 10; i++) \{}
+\DoxyCodeLine{    \textcolor{comment}{// Print true if the ray intersected, false otherwise}}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (results[i]) std::cout << \textcolor{stringliteral}{"{}True"{}};}
+\DoxyCodeLine{    \textcolor{keywordflow}{else} std::cout << \textcolor{stringliteral}{"{}False"{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Add a comma if it's not the last member}}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (i != 9) std::cout << \textcolor{stringliteral}{"{}, "{}};}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"{}]"{}} << std::endl;}
+
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} \mbox{[}True, True, True, True, True, False, False, False, False, False\mbox{]}} 
+
+Definition at line \mbox{\hyperlink{a00209_source_l00563}{563}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00624}{Occluded\+\_\+\+IMPL()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00428_source_l00271}{Cast\+Occlusion\+Rays()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_af718d171387e217f3c2172f795abfb90_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_af718d171387e217f3c2172f795abfb90_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_a70b9c1baf8390d8114c541d6a2ccb4f4}\label{a01411_a70b9c1baf8390d8114c541d6a2ccb4f4}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!operator=@{operator=}}
+\index{operator=@{operator=}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01411}{Embree\+Ray\+Tracer}} \&}]{ERT2 }\end{DoxyParamCaption})}
+
+
+
+Increment reference counters to prevent destruction when a copy is made. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ERT2} & Reference to \mbox{\hyperlink{a01411}{Embree\+Ray\+Tracer}}, the right-\/hand side of the = statement\\
+\hline
+\end{DoxyParams}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}embree\_raytracer.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container of coordinates}}
+\DoxyCodeLine{std::vector<std::array<float, 3>> directions = \{}
+\DoxyCodeLine{    \{0, 0, 1\},}
+\DoxyCodeLine{    \{0, 1, 0\},}
+\DoxyCodeLine{    \{1, 0, 0\},}
+\DoxyCodeLine{    \{-\/1, 0, 0\},}
+\DoxyCodeLine{    \{0, -\/1, 0\},}
+\DoxyCodeLine{    \{0, 0, -\/1\},}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the EmbreeRayTracer}}
+\DoxyCodeLine{\mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}} ert\_0(directions);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create an EmbreeRayTracer, no arguments}}
+\DoxyCodeLine{\mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}} ert\_1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// If and when ert\_0 goes out of scope,}}
+\DoxyCodeLine{\textcolor{comment}{// data within ert\_0 will be retained inside of ert\_1.}}
+\DoxyCodeLine{ert\_1 = ert\_0;}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00209_source_l00632}{632}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00212_source_l00086}{context}}, \mbox{\hyperlink{a00212_source_l00082}{device}}, \mbox{\hyperlink{a00212_source_l00094}{geometry}}, \mbox{\hyperlink{a00212_source_l00084}{scene}}, and \mbox{\hyperlink{a00212_source_l00092}{use\+\_\+precise}}.
+
+\mbox{\Hypertarget{a01411_a8de15e23054b0b579087acc48616149f}\label{a01411_a8de15e23054b0b579087acc48616149f}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!PointIntersection@{PointIntersection}}
+\index{PointIntersection@{PointIntersection}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{PointIntersection()}{PointIntersection()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Point\+Intersection (\begin{DoxyParamCaption}\item[{float \&}]{x,  }\item[{float \&}]{y,  }\item[{float \&}]{z,  }\item[{float}]{dx,  }\item[{float}]{dy,  }\item[{float}]{dz,  }\item[{float}]{distance = {\ttfamily -\/1},  }\item[{int}]{mesh\+\_\+id = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+Cast a single ray and get the hitpoint. {\itshape x} , {\itshape y} ,and {\itshape z}  are overridden with the hitpoint on a successful hit.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & x component of the ray\textquotesingle{}s origin. \\
+\hline
+{\em y} & y component of the ray\textquotesingle{}s origin. \\
+\hline
+{\em z} & z component of the ray\textquotesingle{}s origin. \\
+\hline
+{\em dx} & x component of the ray\textquotesingle{}s direction. \\
+\hline
+{\em dy} & y component of the ray\textquotesingle{}s direction. \\
+\hline
+{\em dz} & z component of the ray\textquotesingle{}s direction. \\
+\hline
+{\em distance} & Any intersections beyond this distance are ignored. Set to -\/1 count any hit regardless of distance. \\
+\hline
+{\em mesh\+\_\+id} & (UNUSED) The id of the only mesh for this ray to collide with. Any geometry wihtout this ID is ignored \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+The ray direction must be a unit vector. \begin{DoxyReturn}{Returns}
+true if the ray hit, false otherwise 
+\end{DoxyReturn}
+
+\end{DoxyWarning}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}embree\_raytracer.h"{}, \#include "{}meshinfo.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// for brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}};}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}}<\textcolor{keywordtype}{float}>;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create Plane}}
+\DoxyCodeLine{\textcolor{keyword}{const} std::vector<float> plane\_vertices\{}
+\DoxyCodeLine{    -\/10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{    -\/10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{    10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{    10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} std::vector<int> plane\_indices\{ 3, 1, 0, 2, 3, 0 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create RayTracer}}
+\DoxyCodeLine{\mbox{\hyperlink{a01411_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer}} ert(std::vector<\mbox{\hyperlink{a01351}{MeshInfo<float>}}>\{\mbox{\hyperlink{a01351}{MeshInfo<float>}}(plane\_vertices, plane\_indices, 0, \textcolor{stringliteral}{"{} "{}})\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} res;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight down directly at the plane}}
+\DoxyCodeLine{\textcolor{keywordtype}{float} x = 0; \textcolor{keywordtype}{float} y = 0; \textcolor{keywordtype}{float} z = 1;}
+\DoxyCodeLine{res = ert.PointIntersection(x, y, z, 0, 0, -\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Print output}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (res) std::cerr << \textcolor{stringliteral}{"{}("{}} << x << \textcolor{stringliteral}{"{}, "{}} << y << \textcolor{stringliteral}{"{}, "{}} << z << \textcolor{stringliteral}{"{})"{}} << std::endl;}
+\DoxyCodeLine{\textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"{}Miss"{}} << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight up}}
+\DoxyCodeLine{x = 0; y = 0; z = 1;}
+\DoxyCodeLine{res = ert.PointIntersection(x, y, z, 0, 0, 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Print output}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (res) std::cerr << \textcolor{stringliteral}{"{}("{}} << x << \textcolor{stringliteral}{"{}, "{}} << y << \textcolor{stringliteral}{"{}, "{}} << z << \textcolor{stringliteral}{"{})"{}} << std::endl;}
+\DoxyCodeLine{\textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"{}Miss"{}} << std::endl;}
+
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}(0, 0, 0)}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}Miss} 
+
+Definition at line \mbox{\hyperlink{a00209_source_l00420}{420}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00218_source_l00017}{HF\+::\+Ray\+Tracer\+::\+Hit\+Struct$<$ numeric\+\_\+type $>$\+::\+Did\+Hit()}}, and \mbox{\hyperlink{a00218_source_l00008}{HF\+::\+Ray\+Tracer\+::\+Hit\+Struct$<$ numeric\+\_\+type $>$\+::distance}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a8de15e23054b0b579087acc48616149f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_aa8424b274c7c5d0598ff13b49ac8c8d2}\label{a01411_aa8424b274c7c5d0598ff13b49ac8c8d2}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!PointIntersection@{PointIntersection}}
+\index{PointIntersection@{PointIntersection}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{PointIntersection()}{PointIntersection()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Point\+Intersection (\begin{DoxyParamCaption}\item[{std\+::array$<$ float, 3 $>$ \&}]{origin,  }\item[{const std\+::array$<$ float, 3 $>$ \&}]{dir,  }\item[{float}]{distance = {\ttfamily -\/1},  }\item[{int}]{mesh\+\_\+id = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+Cast a ray and overwrite the origin with the hitpoint if it intersects any geometry.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em dir} & Direction to cast the ray in. \\
+\hline
+{\em origin} & Start point of the ray. Updated to contain the hitpoint if successful. \\
+\hline
+{\em distance} & Any hits beyond this distance are ignored. Set to -\/1 to count all intersections regardless of distance. \\
+\hline
+{\em mesh\+\_\+id} & (UNUSED) The id of the only mesh for this ray to collide with. -\/1 for all \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the ray intersected some geometry and the origin is updated with the hit point. False otherwise. 
+\end{DoxyReturn}
+
+
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}embree\_raytracer.h"{}, \#include "{}meshinfo.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// for brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}};}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}}<\textcolor{keywordtype}{float}>;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create Plane}}
+\DoxyCodeLine{\textcolor{keyword}{const} std::vector<float> plane\_vertices\{}
+\DoxyCodeLine{            -\/10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{            -\/10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{            10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{            10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} std::vector<int> plane\_indices\{ 3, 1, 0, 2, 3, 0 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create RayTracer}}
+\DoxyCodeLine{\mbox{\hyperlink{a01411_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer}} ert(std::vector<\mbox{\hyperlink{a01351}{MeshInfo<float>}}>\{\mbox{\hyperlink{a01351}{MeshInfo<float>}}(plane\_vertices, plane\_indices, 0, \textcolor{stringliteral}{"{} "{}})\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight down}}
+\DoxyCodeLine{std::array<float, 3> origin\{ 0,0,1 \};}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} res = ert.PointIntersection(}
+\DoxyCodeLine{    origin,}
+\DoxyCodeLine{    std::array<float, 3>\{0, 0, -\/1\}}
+\DoxyCodeLine{);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Print Results}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (res) std::cerr << \textcolor{stringliteral}{"{}("{}} << origin[0] << \textcolor{stringliteral}{"{}, "{}} << origin[1] << \textcolor{stringliteral}{"{}, "{}} << origin[2] << \textcolor{stringliteral}{"{})"{}} << std::endl;}
+\DoxyCodeLine{\textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"{}Miss"{}} << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight up}}
+\DoxyCodeLine{origin = std::array<float, 3>\{ 0, 0, 1 \};}
+\DoxyCodeLine{res = ert.PointIntersection(}
+\DoxyCodeLine{    origin,}
+\DoxyCodeLine{    std::array<float, 3>\{0, 0, 1\}}
+\DoxyCodeLine{);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Print Results}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (res) std::cerr << \textcolor{stringliteral}{"{}("{}} << origin[0] << \textcolor{stringliteral}{"{}, "{}} << origin[1] << \textcolor{stringliteral}{"{}, "{}} << origin[2] << \textcolor{stringliteral}{"{})"{}} << std::endl;}
+\DoxyCodeLine{\textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"{}Miss"{}} << std::endl;}
+
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}(0,0,0)}~\newline
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}Miss} 
+
+Definition at line \mbox{\hyperlink{a00209_source_l00411}{411}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00411}{Point\+Intersection()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00428_source_l00193}{Cast\+Ray()}}, \mbox{\hyperlink{a00209_source_l00411}{Point\+Intersection()}}, and \mbox{\hyperlink{a00209_source_l00480}{Point\+Intersections()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{a01411_aa8424b274c7c5d0598ff13b49ac8c8d2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_aa8424b274c7c5d0598ff13b49ac8c8d2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_a0c4abe0d3160c1a59231e0ae492fe537}\label{a01411_a0c4abe0d3160c1a59231e0ae492fe537}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!PointIntersections@{PointIntersections}}
+\index{PointIntersections@{PointIntersections}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{PointIntersections()}{PointIntersections()}}
+{\footnotesize\ttfamily std\+::vector$<$ char $>$ HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Point\+Intersections (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&}]{origins,  }\item[{std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&}]{directions,  }\item[{bool}]{use\+\_\+parallel = {\ttfamily true},  }\item[{float}]{max\+\_\+distance = {\ttfamily -\/1},  }\item[{int}]{mesh\+\_\+id = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+Cast multiple rays and recieve hitpoints in return.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em origins} & An array of x,y,z coordinates to cast rays from. \\
+\hline
+{\em directions} & An array of x,y,z directions to cast in. \\
+\hline
+{\em use\+\_\+parallel} & Cast rays in parallel if true, if not cast in serial. All available cores will be used. \\
+\hline
+{\em max\+\_\+distance} & Maximum distance the ray can travel. Any intersections beyond this distance will be ignored. If set to 1, all intersections will be counted regardless of distance. \\
+\hline
+{\em mesh\+\_\+id} & (UNUSED) Only intersect with the mesh of this ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of \mbox{\hyperlink{a01407}{Vector3D}} for the hitpoint of each ray cast. If a ray didn\textquotesingle{}t hit, its point will be invalid, checkable using Vector3\+D.\+Is\+Valid(). 
+\end{DoxyReturn}
+
+
+Can be cast in 3 configurations\+: 
+
+
+\begin{DoxyItemize}
+\item Equal amount of directions/origins\+: Cast a ray for every pair of origin/direction in order. i.\+e. (origin\mbox{[}0\mbox{]}, direction\mbox{[}0\mbox{]}), (origin\mbox{[}1\mbox{]}, direction\mbox{[}1\mbox{]})  
+\item One direction, multiple origins\+: Cast a ray in the given direction from each origin point in origins.  
+\item One origin, multiple directions\+: Cast a ray from the origin point in each direction in directions.  
+\end{DoxyItemize}
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em System.\+Argument\+Exception} & Length of {\itshape directions}  and {\itshape origins}  did not match any of the valid cases. \\
+\hline
+\end{DoxyExceptions}
+
+
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "{}embree\_raytracer.h"{}, \#include "{}meshinfo.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// for brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01411}{HF::RayTracer::EmbreeRayTracer}};}
+\DoxyCodeLine{\textcolor{keyword}{using }\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}}<\textcolor{keywordtype}{float}>;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create plane}}
+\DoxyCodeLine{\textcolor{keyword}{const} std::vector<float> plane\_vertices\{}
+\DoxyCodeLine{    -\/10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{    -\/10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{    10.0f, 10.0f, 0.0f,}
+\DoxyCodeLine{    10.0f, -\/10.0f, 0.0f,}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} std::vector<int> plane\_indices\{ 3, 1, 0, 2, 3, 0 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create RayTracer}}
+\DoxyCodeLine{\mbox{\hyperlink{a01411_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer}} ert(std::vector<\mbox{\hyperlink{a01351}{MeshInfo<float>}}>\{\mbox{\hyperlink{a01351}{MeshInfo<float>}}(plane\_vertices, plane\_indices, 0, \textcolor{stringliteral}{"{} "{}})\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create an array of directions all containing \{0,0,-\/1\}}}
+\DoxyCodeLine{std::vector<std::array<float, 3>> directions(10, std::array<float, 3>\{ 0, 0, -\/1 \});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create an array of origin points moving further to the left with each point}}
+\DoxyCodeLine{std::vector<std::array<float, 3>> origins(10);}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 10; i++) origins[i] = std::array<float, 3>\{\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(2 * i), 0, 1\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Cast every ray.}}
+\DoxyCodeLine{\textcolor{keyword}{auto} results = ert.PointIntersections(origins, directions);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Print results}}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"{}["{}};}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 10; i++) \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (results[i])}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"{}("{}} << origins[i][0] << \textcolor{stringliteral}{"{}, "{}} << origins[i][1] << \textcolor{stringliteral}{"{}, "{}} << origins[i][2] << \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{    \textcolor{keywordflow}{else}}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"{}Miss"{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (i != 9) std::cout << \textcolor{stringliteral}{"{}, "{}};}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"{}]"{}} << std::endl;}
+
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+{\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} \mbox{[}(0, 0, 0), (1.\+99, 0, 0), (3.\+98, 0, 0), (5.\+97, 0, 0), (7.\+96, 0, 0), (9.\+95, 0, 0), Miss, Miss, Miss, Miss\mbox{]}} 
+
+Definition at line \mbox{\hyperlink{a00209_source_l00480}{480}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00411}{Point\+Intersection()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00428_source_l00249}{Cast\+Multiple\+Directions\+One\+Origin()}}, \mbox{\hyperlink{a00428_source_l00227}{Cast\+Multiple\+Origins\+One\+Direction()}}, and \mbox{\hyperlink{a00428_source_l00199}{Cast\+Multiple\+Rays()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a0c4abe0d3160c1a59231e0ae492fe537_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a0c4abe0d3160c1a59231e0ae492fe537_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01411_a19527943d1afe002c1105cb3b3691ca7}\label{a01411_a19527943d1afe002c1105cb3b3691ca7}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!SetupScene@{SetupScene}}
+\index{SetupScene@{SetupScene}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{SetupScene()}{SetupScene()}}
+{\footnotesize\ttfamily void HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Setup\+Scene (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Performs all the necessary operations to set up the scene. 
+
+1) Creates device 2) Creates the scene using device 3) Sets the build quality of the scene 4) Sets scene flags 5) Inits Intersect\+\_\+\+IMPL context
+
+\begin{DoxyRemark}{Remarks}
+Any changes to the internal settings of embree should be handled here. I.\+E. Enforcing That all bvh\textquotesingle{}s used be of robust quality, assigning a custom context, etc. 
+\end{DoxyRemark}
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00190}{190}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00212_source_l00086}{context}}, \mbox{\hyperlink{a00212_source_l00082}{device}}, and \mbox{\hyperlink{a00212_source_l00084}{scene}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00166}{Embree\+Ray\+Tracer()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01411_a19527943d1afe002c1105cb3b3691ca7_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01411_a01968c52807e6930909b7f9c31f45e80}\label{a01411_a01968c52807e6930909b7f9c31f45e80}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!context@{context}}
+\index{context@{context}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{context}{context}}
+{\footnotesize\ttfamily RTCIntersect\+Context HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::context\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Context to cast rays within. 
+
+
+
+Definition at line \mbox{\hyperlink{a00212_source_l00086}{86}} of file \mbox{\hyperlink{a00212_source}{embree\+\_\+raytracer.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00199}{Embree\+Ray\+Tracer()}}, \mbox{\hyperlink{a00209_source_l00543}{Intersect\+\_\+\+IMPL()}}, \mbox{\hyperlink{a00209_source_l00624}{Occluded\+\_\+\+IMPL()}}, \mbox{\hyperlink{a00209_source_l00632}{operator=()}}, and \mbox{\hyperlink{a00209_source_l00190}{Setup\+Scene()}}.
+
+\mbox{\Hypertarget{a01411_a5608742889ff45a0294fdf21e5a85b2e}\label{a01411_a5608742889ff45a0294fdf21e5a85b2e}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!device@{device}}
+\index{device@{device}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{device}{device}}
+{\footnotesize\ttfamily RTCDevice HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::device\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+All objects in Embree are created from this. \href{https://www.embree.org/api.html\#device-object}{\texttt{ https\+://www.\+embree.\+org/api.\+html\#device-\/object}}. 
+
+
+
+Definition at line \mbox{\hyperlink{a00212_source_l00082}{82}} of file \mbox{\hyperlink{a00212_source}{embree\+\_\+raytracer.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00199}{Embree\+Ray\+Tracer()}}, \mbox{\hyperlink{a00209_source_l00644}{$\sim$\+Embree\+Ray\+Tracer()}}, \mbox{\hyperlink{a00209_source_l00336}{Construct\+Geometry\+From\+Buffers()}}, \mbox{\hyperlink{a00209_source_l00212}{Insert\+Geom()}}, \mbox{\hyperlink{a00209_source_l00632}{operator=()}}, and \mbox{\hyperlink{a00209_source_l00190}{Setup\+Scene()}}.
+
+\mbox{\Hypertarget{a01411_a3a243ef02c74fc6df958a4fd2506e7cc}\label{a01411_a3a243ef02c74fc6df958a4fd2506e7cc}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!geometry@{geometry}}
+\index{geometry@{geometry}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{geometry}{geometry}}
+{\footnotesize\ttfamily std\+::vector$<$RTCGeometry$>$ HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::geometry\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00212_source_l00094}{94}} of file \mbox{\hyperlink{a00212_source}{embree\+\_\+raytracer.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00199}{Embree\+Ray\+Tracer()}}, \mbox{\hyperlink{a00209_source_l00336}{Construct\+Geometry\+From\+Buffers()}}, and \mbox{\hyperlink{a00209_source_l00632}{operator=()}}.
+
+\mbox{\Hypertarget{a01411_a7c66f28f5b889021767745d198661da0}\label{a01411_a7c66f28f5b889021767745d198661da0}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!scene@{scene}}
+\index{scene@{scene}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{scene}{scene}}
+{\footnotesize\ttfamily RTCScene HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::scene\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Container for a set of geometries, and the BVH. \href{https://www.embree.org/api.html\#scene-object}{\texttt{ https\+://www.\+embree.\+org/api.\+html\#scene-\/object}}. 
+
+
+
+Definition at line \mbox{\hyperlink{a00212_source_l00084}{84}} of file \mbox{\hyperlink{a00212_source}{embree\+\_\+raytracer.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00199}{Embree\+Ray\+Tracer()}}, \mbox{\hyperlink{a00209_source_l00644}{$\sim$\+Embree\+Ray\+Tracer()}}, \mbox{\hyperlink{a00209_source_l00316}{Add\+Mesh()}}, \mbox{\hyperlink{a00209_source_l00450}{Get\+Triangle()}}, \mbox{\hyperlink{a00209_source_l00212}{Insert\+Geom()}}, \mbox{\hyperlink{a00209_source_l00543}{Intersect\+\_\+\+IMPL()}}, \mbox{\hyperlink{a00209_source_l00624}{Occluded\+\_\+\+IMPL()}}, \mbox{\hyperlink{a00209_source_l00632}{operator=()}}, and \mbox{\hyperlink{a00209_source_l00190}{Setup\+Scene()}}.
+
+\mbox{\Hypertarget{a01411_a6eced6bbe321079476603f7e7ef97ed8}\label{a01411_a6eced6bbe321079476603f7e7ef97ed8}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!triangles@{triangles}}
+\index{triangles@{triangles}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{triangles}{triangles}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00464_a01403}{Triangle}}$\ast$ HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::triangles\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{a00464_a01403}{Triangle}} buffer. Is used in multiple places, but contents are dumped. 
+
+
+
+Definition at line \mbox{\hyperlink{a00212_source_l00088}{88}} of file \mbox{\hyperlink{a00212_source}{embree\+\_\+raytracer.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00336}{Construct\+Geometry\+From\+Buffers()}}.
+
+\mbox{\Hypertarget{a01411_a10fe757b08ab77289cfd945b29d14b89}\label{a01411_a10fe757b08ab77289cfd945b29d14b89}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!use\_precise@{use\_precise}}
+\index{use\_precise@{use\_precise}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{use\_precise}{use\_precise}}
+{\footnotesize\ttfamily bool HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::use\+\_\+precise = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+If true, use custom triangle intersection intersection instead of embree\textquotesingle{}s. 
+
+
+
+Definition at line \mbox{\hyperlink{a00212_source_l00092}{92}} of file \mbox{\hyperlink{a00212_source}{embree\+\_\+raytracer.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00184}{Embree\+Ray\+Tracer()}}, and \mbox{\hyperlink{a00209_source_l00632}{operator=()}}.
+
+\mbox{\Hypertarget{a01411_a62b06bf58c3b134de8f271fbc778e412}\label{a01411_a62b06bf58c3b134de8f271fbc778e412}} 
+\index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!Vertices@{Vertices}}
+\index{Vertices@{Vertices}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
+\doxysubsubsection{\texorpdfstring{Vertices}{Vertices}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00464_a01399}{Vertex}}$\ast$ HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Vertices\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{a00464_a01399}{Vertex}} buffer. Is used in multiple places but contents are dumped. 
+
+
+
+Definition at line \mbox{\hyperlink{a00212_source_l00090}{90}} of file \mbox{\hyperlink{a00212_source}{embree\+\_\+raytracer.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00336}{Construct\+Geometry\+From\+Buffers()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/raytracer/src/\mbox{\hyperlink{a00212}{embree\+\_\+raytracer.\+h}}\item 
+Cpp/raytracer/src/\mbox{\hyperlink{a00209}{embree\+\_\+raytracer.\+cpp}}\end{DoxyCompactItemize}

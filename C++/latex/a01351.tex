@@ -1,0 +1,1274 @@
+\hypertarget{a01351}{}\doxysection{HF\+::Geometry\+::Mesh\+Info\texorpdfstring{$<$}{<} numeric\+\_\+type \texorpdfstring{$>$}{>} Class Template Reference}
+\label{a01351}\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+
+
+A collection of vertices and indices representing geometry.  
+
+
+
+
+{\ttfamily \#include $<$meshinfo.\+h$>$}
+
+
+
+Collaboration diagram for HF\+::Geometry\+::Mesh\+Info\texorpdfstring{$<$}{<} numeric\+\_\+type \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01349}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01351_a88794dcefee25f12c1b8dd3e7a6455d1}{Mesh\+Info}} ()
+\begin{DoxyCompactList}\small\item\em Construct an empty instance of \mbox{\hyperlink{a01351}{Mesh\+Info}}.  \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01351_a1487a083b0dc49eea88d7a0f04b270d0}{Mesh\+Info}} (const std\+::vector$<$ std\+::array$<$ numeric\+\_\+type, 3 $>$ $>$ \&vertices, int id, std\+::string \mbox{\hyperlink{a01351_a60ed62b543ca522c4a84f3c5a73e1600}{name}}=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{a01351}{Mesh\+Info}} object from an unindexed vector of vertices, an ID, and a name.  \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01351_a4101d96517b9e0800725286876e679dc}{Mesh\+Info}} (const std\+::vector$<$ numeric\+\_\+type $>$ \&in\+\_\+vertices, const std\+::vector$<$ int $>$ \&in\+\_\+indexes, int id, std\+::string \mbox{\hyperlink{a01351_a60ed62b543ca522c4a84f3c5a73e1600}{name}}=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{a01351}{Mesh\+Info}} object from an indexed vector of vertices.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01351_a05d1a3ebca83e841e8902baaecc59930}{Add\+Verts}} (const std\+::vector$<$ std\+::array$<$ numeric\+\_\+type, 3 $>$ $>$ \&\mbox{\hyperlink{a01351_ab0fdc0ed4e1b5509412477131966ffd3}{verts}})
+\begin{DoxyCompactList}\small\item\em Add more vertices to this mesh. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01351_a70a6f6b9270d47e0b8428cdc15b707d3}{Num\+Verts}} () const
+\begin{DoxyCompactList}\small\item\em Determine how many vertices are in this mesh.  \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01351_a5fa8cc590a7bd0764a7903ed521e2fc4}{Num\+Tris}} () const
+\begin{DoxyCompactList}\small\item\em Calculate the total number of triangles in this mesh. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01351_af1152233ddbd8fac736f761347e6d3b8}{Convert\+To\+Rhino\+Coordinates}} ()
+\begin{DoxyCompactList}\small\item\em Convert a mesh from Y-\/\+Up to Z-\/\+Up. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01351_a5f067dbc661b07c1762b402da03f2041}{Convert\+To\+OBJCoordinates}} ()
+\begin{DoxyCompactList}\small\item\em Convert a mesh from Z-\/\+Up to Y-\/\+Up. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01351_a235d49e5a5a4d20d78db7adb854fb9e1}{Perform\+Rotation}} (numeric\+\_\+type rx, numeric\+\_\+type ry, numeric\+\_\+type rz)
+\begin{DoxyCompactList}\small\item\em Rotate this mesh by x, y, z rotations in degrees (pitch, yaw, roll).  \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01351_a1d69139377d33e748903a33f6f1b760c}{Get\+Mesh\+ID}} () const
+\begin{DoxyCompactList}\small\item\em Get the ID of this mesh.  \end{DoxyCompactList}\item 
+std\+::vector$<$ numeric\+\_\+type $>$ \mbox{\hyperlink{a01351_af2d1b696c55aa036cff585d2e7eba50b}{Get\+Indexed\+Vertices}} () const
+\begin{DoxyCompactList}\small\item\em \begin{DoxyReturn}{Returns}
+A copy of every vertex in this array. 
+\end{DoxyReturn}
+\end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \mbox{\hyperlink{a01351_afddea10734ba213b2bb5cc148c24c942}{get\+Raw\+Indices}} () const
+\begin{DoxyCompactList}\small\item\em Retrieve a copy of this mesh\textquotesingle{}s index buffer as a 1D array.  \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::array$<$ numeric\+\_\+type, 3 $>$ $>$ \mbox{\hyperlink{a01351_a2fb2b5e7e5815794cb37c9b1e95260e8}{Get\+Unindexed\+Vertices}} () const
+\begin{DoxyCompactList}\small\item\em Retrieve an unindexed array of this mesh\textquotesingle{}s vertices.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01351_a2d0621b715f7e4dd8d8e236ac3d5e6c0}{Set\+Mesh\+ID}} (int new\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Change the ID of this mesh. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01351_a1f8f4ab434e4e32ea48656a9345fa9f3}{operator==}} (const \mbox{\hyperlink{a01351}{Mesh\+Info}} \&M2) const
+\begin{DoxyCompactList}\small\item\em Compare the vertices of two \mbox{\hyperlink{a01351}{Mesh\+Info}} objects.  \end{DoxyCompactList}\item 
+std\+::array$<$ numeric\+\_\+type, 3 $>$ \mbox{\hyperlink{a01351_a275ccfb3fa910f416463c3c97c8699c1}{operator\mbox{[}$\,$\mbox{]}}} (int i) const
+\begin{DoxyCompactList}\small\item\em Get vertex at a specific index in the mesh.  \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{a01347}{array\+\_\+and\+\_\+size}}$<$ numeric\+\_\+type $>$ \mbox{\hyperlink{a01351_aa88fe8bcfc24db635994e529fac008da}{Get\+Vertex\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em Get a pointer to the vertex array of this mesh. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{a01347}{array\+\_\+and\+\_\+size}}$<$ int $>$ \mbox{\hyperlink{a01351_a9ca41370061bec524b5c84d689114e41}{Get\+Index\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em Get a pointer to the index array of this mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{a01351_a5259d58812a4a21b93703a27732f684e}{meshid}}
+\begin{DoxyCompactList}\small\item\em Identifier for this mesh. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{a01351_a60ed62b543ca522c4a84f3c5a73e1600}{name}} = \char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em A human-\/readable title. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{a01351_ae4a350a3188171cfc0291b57fd8e339d}{Vert\+Matrix}} = Eigen\+::\+Matrix3X$<$ numeric\+\_\+type $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{a01351_a4b96bdff36d61d0a16b09872736b7d16}{Set\+Vert}} (int index, numeric\+\_\+type x, numeric\+\_\+type y, numeric\+\_\+type z)
+\begin{DoxyCompactList}\small\item\em Change the position of the vertex at index.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01351_a94f1d056602f383463d151d528f54436}{Vectors\+To\+Buffers}} (const std\+::vector$<$ std\+::array$<$ numeric\+\_\+type, 3 $>$ $>$ \&vertices)
+\begin{DoxyCompactList}\small\item\em Index vertices then insert them into verts and indices.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01351_ae4a350a3188171cfc0291b57fd8e339d}{Vert\+Matrix}} \mbox{\hyperlink{a01351_ab0fdc0ed4e1b5509412477131966ffd3}{verts}}
+\begin{DoxyCompactList}\small\item\em 3 by X matrix of vertices \end{DoxyCompactList}\item 
+Eigen\+::\+Matrix3X$<$ int $>$ \mbox{\hyperlink{a01351_a1aeec44da0cef696067418085b0ea015}{indices}}
+\begin{DoxyCompactList}\small\item\em 3 by X matrix of indices for triangles. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename numeric\+\_\+type = float$>$\newline
+class HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$}
+A collection of vertices and indices representing geometry. 
+
+Internally stored as a 3 by X matrix of vertices and a 3 by X matrix for indices. \mbox{\hyperlink{a00471}{Eigen}} is used to manage all matricies and perform quick transformations such as Rotate\+Mesh. More details on \mbox{\hyperlink{a00471}{Eigen}} are available here\+: \href{https://eigen.tuxfamily.org/dox/group__Geometry__Module.html}{\texttt{ https\+://eigen.\+tuxfamily.\+org/dox/group\+\_\+\+\_\+\+Geometry\+\_\+\+\_\+\+Module.\+html}}
+
+\begin{DoxyInvariant}{Invariant}
+Will always hold a valid mesh with finite members.
+\end{DoxyInvariant}
+ 
+
+Definition at line \mbox{\hyperlink{a00185_source_l00124}{124}} of file \mbox{\hyperlink{a00185_source}{meshinfo.\+h}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{a01351_ae4a350a3188171cfc0291b57fd8e339d}\label{a01351_ae4a350a3188171cfc0291b57fd8e339d}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!VertMatrix@{VertMatrix}}
+\index{VertMatrix@{VertMatrix}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{VertMatrix}{VertMatrix}}
+{\footnotesize\ttfamily template$<$typename numeric\+\_\+type  = float$>$ \\
+using \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ numeric\+\_\+type $>$\+::\+Vert\+Matrix =  Eigen\+::\+Matrix3X$<$numeric\+\_\+type$>$\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00185_source_l00130}{130}} of file \mbox{\hyperlink{a00185_source}{meshinfo.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01351_a88794dcefee25f12c1b8dd3e7a6455d1}\label{a01351_a88794dcefee25f12c1b8dd3e7a6455d1}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!MeshInfo@{MeshInfo}}
+\index{MeshInfo@{MeshInfo}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{MeshInfo()}{MeshInfo()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename numeric\+\_\+type  = float$>$ \\
+\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ numeric\+\_\+type $>$\mbox{\hyperlink{a00428_acea841c68a73d07ad9d772ec2e94a683}{\+::\+Mesh\+Info}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct an empty instance of \mbox{\hyperlink{a01351}{Mesh\+Info}}.  
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}meshinfo.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}} mesh;    \textcolor{comment}{// meshid == 0; verts is given 3 rows, 0 cols; name == "{}INVALID"{}}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00185_source_l00177}{177}} of file \mbox{\hyperlink{a00185_source}{meshinfo.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00185_source_l00126}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::meshid}}, \mbox{\hyperlink{a00185_source_l00127}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::name}}, and \mbox{\hyperlink{a00185_source_l00131}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::verts}}.
+
+\mbox{\Hypertarget{a01351_a1487a083b0dc49eea88d7a0f04b270d0}\label{a01351_a1487a083b0dc49eea88d7a0f04b270d0}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!MeshInfo@{MeshInfo}}
+\index{MeshInfo@{MeshInfo}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{MeshInfo()}{MeshInfo()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename numeric\+\_\+type  = float$>$ \\
+\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ numeric\+\_\+type $>$\mbox{\hyperlink{a00428_acea841c68a73d07ad9d772ec2e94a683}{\+::\+Mesh\+Info}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::array$<$ numeric\+\_\+type, 3 $>$ $>$ \&}]{vertices,  }\item[{int}]{id,  }\item[{std\+::string}]{name = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{a01351}{Mesh\+Info}} object from an unindexed vector of vertices, an ID, and a name.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & An ordered list of vertices where every 3 vertices comprise single a triangle in the mesh. \\
+\hline
+{\em id} & A unique identifier. \\
+\hline
+{\em name} & A human-\/readable title. \\
+\hline
+\end{DoxyParams}
+
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{a01323}{HF\+::\+Exceptions\+::\+Invalid\+OBJ}}} & the input vertices don\textquotesingle{}t represent a valid mesh. \\
+\hline
+{\em std\+::exception} & the input array had one or more NAN values.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00452__todo000008}{Todo}}]Change the std\+::exception to also be an Invalid\+OBJ exception. 
+
+Check for a number of vertices that aren\textquotesingle{}t a multiple of 3 like the other functions. \end{DoxyRefDesc}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}meshinfo.h"{}, and \#include <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the vertices}}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_0 = \{ 34.1, 63.9, 16.5 \};}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_1 = \{ 23.5, 85.7, 45.2 \};}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_2 = \{ 12.0, 24.6, 99.4 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create an array of vertices}}
+\DoxyCodeLine{std::vector<std::array<numeric\_type, 3>> vertices\{ vertex\_0, vertex\_1, vertex\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// This mesh contains a triangle (due to having 3 vertices), id == 3451, name ==}}
+\DoxyCodeLine{\textcolor{comment}{// "{}My Mesh"{} Note that vertices is passed by reference. Also, passing a}}
+\DoxyCodeLine{\textcolor{comment}{// std::vector<std::array<numeric\_type, 3>> with (size < 1) will cause}}
+\DoxyCodeLine{\textcolor{comment}{// HF::Exceptions::InvalidOBJ to be thrown.}}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}} mesh(vertices, 3451, \textcolor{stringliteral}{"{}My Mesh"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Display the vertices for mesh}}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"{}Vertices in mesh with ID "{}} << mesh.GetMeshID() << \textcolor{stringliteral}{"{}: "{}} << std::endl;}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keyword}{auto} vertex : mesh.GetVertsAsArrays()) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}("{}} << vertex[0] << \textcolor{stringliteral}{"{}, "{}} << vertex[1] << \textcolor{stringliteral}{"{}, "{}} << vertex[2] << \textcolor{stringliteral}{"{})"{}} << std::endl;}
+\DoxyCodeLine{\}               }
+
+\end{DoxyCode}
+ \mbox{\Hypertarget{a01351_a4101d96517b9e0800725286876e679dc}\label{a01351_a4101d96517b9e0800725286876e679dc}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!MeshInfo@{MeshInfo}}
+\index{MeshInfo@{MeshInfo}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{MeshInfo()}{MeshInfo()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename numeric\+\_\+type  = float$>$ \\
+\mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ numeric\+\_\+type $>$\mbox{\hyperlink{a00428_acea841c68a73d07ad9d772ec2e94a683}{\+::\+Mesh\+Info}} (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ numeric\+\_\+type $>$ \&}]{in\+\_\+vertices,  }\item[{const std\+::vector$<$ int $>$ \&}]{in\+\_\+indexes,  }\item[{int}]{id,  }\item[{std\+::string}]{name = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{a01351}{Mesh\+Info}} object from an indexed vector of vertices.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & An ordered list of numeric\+\_\+types with every 3 numeric\+\_\+types representing the x,y, and z coordinates for a single vertex. \\
+\hline
+{\em indexes} & A vector of indices with each index matching up with a vertex in vertices. \\
+\hline
+{\em id} & A unique identifier. \\
+\hline
+{\em name} & A human readable title. \\
+\hline
+\end{DoxyParams}
+
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{a01323}{HF\+::\+Exceptions\+::\+Invalid\+OBJ}}} & input indices and vertices don\textquotesingle{}t represent a valid mesh.\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}meshinfo.h"{}, and \#include <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the vertices. Every three numeric\_types represents one vertex.}}
+\DoxyCodeLine{std::vector<numeric\_type> vertices = \{ 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 \};}
+\DoxyCodeLine{                            \textcolor{comment}{// 0 1 2}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// If indices.size() == 3, this means that vertices.size() == 9, and each member}}
+\DoxyCodeLine{\textcolor{comment}{// of indices represents a std::array<numeric\_type, 3> i.e. indices[0] represents the}}
+\DoxyCodeLine{\textcolor{comment}{// 0th set of (x, y, z) coordinates, \{34.1, 63.9, 16.5\} indices[1] represents}}
+\DoxyCodeLine{\textcolor{comment}{// the 1st set of (x, y, z) coordinates, \{23.5, 85.7, 45.2\} indices[2]}}
+\DoxyCodeLine{\textcolor{comment}{// represents the 2nd set of (x, y, z) coordinates, \{12.0, 24.6, 99.4\}}}
+\DoxyCodeLine{std::vector<int> \mbox{\hyperlink{a01351_a1aeec44da0cef696067418085b0ea015}{indices}} = \{ 0, 1, 2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Note that vertices and indices are passed by reference. Also, passing a}}
+\DoxyCodeLine{\textcolor{comment}{// std::vector<numeric\_type> with a size that is not a multiple of 3, or passing a}}
+\DoxyCodeLine{\textcolor{comment}{// std::vector<int> with a size that is not a multiple of 3 -\/-\/ will cause}}
+\DoxyCodeLine{\textcolor{comment}{// HF::Exceptions::InvalidOBJ to be thrown. Also, indices.size() ==}}
+\DoxyCodeLine{\textcolor{comment}{// (vertices.size() / 3), because all members of indices must correspond to the}}
+\DoxyCodeLine{\textcolor{comment}{// index of the first member representing the initial coordinate within a vertex.}}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}} mesh(vertices, \mbox{\hyperlink{a01351_a1aeec44da0cef696067418085b0ea015}{indices}}, 5901, \textcolor{stringliteral}{"{}This Mesh"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Display the vertices for mesh}}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"{}Vertices in mesh with ID "{}} << mesh.GetMeshID() << \textcolor{stringliteral}{"{}: "{}} << std::endl;}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keyword}{auto} vertex : mesh.GetVertsAsArrays()) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}("{}} << vertex[0] << \textcolor{stringliteral}{"{}, "{}} << vertex[1] << \textcolor{stringliteral}{"{}, "{}} << vertex[2] << \textcolor{stringliteral}{"{})"{}} << std::endl;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01351_a05d1a3ebca83e841e8902baaecc59930}\label{a01351_a05d1a3ebca83e841e8902baaecc59930}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!AddVerts@{AddVerts}}
+\index{AddVerts@{AddVerts}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{AddVerts()}{AddVerts()}}
+{\footnotesize\ttfamily template$<$typename numeric\+\_\+type  = float$>$ \\
+void \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$\+::\+Add\+Verts (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::array$<$ numeric\+\_\+type, 3 $>$ $>$ \&}]{verts }\end{DoxyParamCaption})}
+
+
+
+Add more vertices to this mesh. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em verts} & Vertices to add to this mesh, with each 3 belonging to a new triangle.\\
+\hline
+\end{DoxyParams}
+Index the vertices in verts, then insert the new indices and vertices into their respective arrays.
+
+\begin{DoxyRemark}{Remarks}
+This function can effectively be used to \char`\"{}\+Merge\char`\"{} another mesh into this one.
+\end{DoxyRemark}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{a01323}{HF\+::\+Exceptions\+::\+Invalid\+OBJ}}} & in\+\_\+vertices did not contain a valid set of triangles.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00452__todo000009}{Todo}}]Change std\+::exception to DHARTAPI\+::\+Invalid\+OBJ. \end{DoxyRefDesc}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}meshinfo.h"{}, and \#include <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the vertices}}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_0 = \{ 34.1, 63.9, 16.5 \};}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_1 = \{ 23.5, 85.7, 45.2 \};}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_2 = \{ 12.0, 24.6, 99.4 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a vector of vertices}}
+\DoxyCodeLine{std::vector<std::array<numeric\_type, 3>> vertices\{ vertex\_0, vertex\_1, vertex\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the MeshInfo instance -\/ this example uses the no-\/arg constructor}}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}} mesh;    \textcolor{comment}{// meshid == 0; verts is given 3 rows, 0 cols; name == "{}INVALID"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Append the vertices to the mesh}}
+\DoxyCodeLine{mesh.\mbox{\hyperlink{a01351_a05d1a3ebca83e841e8902baaecc59930}{AddVerts}}(vertices);}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"{}size: "{}} << mesh.getRawVertices().size() << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Display the vertices for mesh}}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"{}Vertices in mesh with ID "{}} << mesh.\mbox{\hyperlink{a01351_a1d69139377d33e748903a33f6f1b760c}{GetMeshID}}() << \textcolor{stringliteral}{"{}: "{}} << std::endl;}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keyword}{auto} vertex : mesh.GetVertsAsArrays()) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}("{}} << vertex[0] << \textcolor{stringliteral}{"{}, "{}} << vertex[1] << \textcolor{stringliteral}{"{}, "{}} << vertex[2] << \textcolor{stringliteral}{"{})"{}} << std::endl;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00182_source_l00162}{162}} of file \mbox{\hyperlink{a00182_source}{meshinfo.\+cpp}}.
+
+\mbox{\Hypertarget{a01351_a5f067dbc661b07c1762b402da03f2041}\label{a01351_a5f067dbc661b07c1762b402da03f2041}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!ConvertToOBJCoordinates@{ConvertToOBJCoordinates}}
+\index{ConvertToOBJCoordinates@{ConvertToOBJCoordinates}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{ConvertToOBJCoordinates()}{ConvertToOBJCoordinates()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$\+::\+Convert\+To\+OBJCoordinates}
+
+
+
+Convert a mesh from Z-\/\+Up to Y-\/\+Up. 
+
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00452__todo000011}{Todo}}]Rename this to Convert\+To\+Yup. 
+
+Just use the Rotate\+Mesh function.\end{DoxyRefDesc}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01351_af1152233ddbd8fac736f761347e6d3b8}{Convert\+To\+Rhino\+Coordinates}} for the inverse operation.
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}meshinfo.h"{}, and \#include <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the vertices}}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_0 = \{ 34.1, 63.9, 16.5 \};}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_1 = \{ 23.5, 85.7, 45.2 \};}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_2 = \{ 12.0, 24.6, 99.4 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create an array of vertices}}
+\DoxyCodeLine{std::vector<std::array<numeric\_type, 3>> vertices\{ vertex\_0, vertex\_1, vertex\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the MeshInfo}}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}} mesh(vertices, 3451, \textcolor{stringliteral}{"{}My Mesh"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Convert the coordinates}}
+\DoxyCodeLine{mesh.ConvertToOBJCoordinates();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Note: Program will abort if any coordinate is NaN}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Display the vertices for mesh}}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"{}Vertices in mesh with ID "{}} << mesh.GetMeshID() << \textcolor{stringliteral}{"{}: "{}} << std::endl;}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keyword}{auto} vertex : mesh.GetVertsAsArrays()) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}("{}} << vertex[0] << \textcolor{stringliteral}{"{}, "{}} << vertex[1] << \textcolor{stringliteral}{"{}, "{}} << vertex[2] << \textcolor{stringliteral}{"{})"{}} << std::endl;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00182_source_l00196}{196}} of file \mbox{\hyperlink{a00182_source}{meshinfo.\+cpp}}.
+
+\mbox{\Hypertarget{a01351_af1152233ddbd8fac736f761347e6d3b8}\label{a01351_af1152233ddbd8fac736f761347e6d3b8}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!ConvertToRhinoCoordinates@{ConvertToRhinoCoordinates}}
+\index{ConvertToRhinoCoordinates@{ConvertToRhinoCoordinates}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{ConvertToRhinoCoordinates()}{ConvertToRhinoCoordinates()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$\+::\+Convert\+To\+Rhino\+Coordinates}
+
+
+
+Convert a mesh from Y-\/\+Up to Z-\/\+Up. 
+
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00452__todo000010}{Todo}}]Rename this to Convert\+To\+ZUp. 
+
+Just use the Rotate\+Mesh function. 
+
+Change exception to an assertion since it shouldn\textquotesingle{}t happen in production code. \end{DoxyRefDesc}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01351_a5f067dbc661b07c1762b402da03f2041}{Convert\+To\+OBJCoordinates}} for the inverse operation. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}meshinfo.h"{}, and \#include <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the vertices}}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_0 = \{ 34.1, 63.9, 16.5 \};}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_1 = \{ 23.5, 85.7, 45.2 \};}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_2 = \{ 12.0, 24.6, 99.4 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create an array of vertices}}
+\DoxyCodeLine{std::vector<std::array<numeric\_type, 3>> vertices\{ vertex\_0, vertex\_1, vertex\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the MeshInfo}}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}} mesh(vertices, 3451, \textcolor{stringliteral}{"{}My Mesh"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Convert the coordinates}}
+\DoxyCodeLine{mesh.ConvertToRhinoCoordinates();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Note: If vertices contain NaN or +/-\/ infinity values, std::exception is thrown}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Display the vertices for mesh}}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"{}Vertices in mesh with ID "{}} << mesh.GetMeshID() << \textcolor{stringliteral}{"{}: "{}} << std::endl;}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keyword}{auto} vertex : mesh.GetVertsAsArrays()) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}("{}} << vertex[0] << \textcolor{stringliteral}{"{}, "{}} << vertex[1] << \textcolor{stringliteral}{"{}, "{}} << vertex[2] << \textcolor{stringliteral}{"{})"{}} << std::endl;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{a00182_source_l00184}{184}} of file \mbox{\hyperlink{a00182_source}{meshinfo.\+cpp}}.
+
+\mbox{\Hypertarget{a01351_af2d1b696c55aa036cff585d2e7eba50b}\label{a01351_af2d1b696c55aa036cff585d2e7eba50b}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!GetIndexedVertices@{GetIndexedVertices}}
+\index{GetIndexedVertices@{GetIndexedVertices}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{GetIndexedVertices()}{GetIndexedVertices()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+vector$<$ T $>$ \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$\+::\+Get\+Indexed\+Vertices}
+
+
+
+\begin{DoxyReturn}{Returns}
+A copy of every vertex in this array. 
+\end{DoxyReturn}
+
+
+Copy this mesh\textquotesingle{}s vertices as a 1D array.
+
+The vertices are copied directly from this mesh\textquotesingle{}s underlying eigen matrix. The index of each vertex matches the index used for this mesh\textquotesingle{}s index array. For Example the first element is the vertex at index 0, the second is the vertex for index 1, etc.
+
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00452__todo000012}{Todo}}]Make a version of this function that just returns a const reference or pointer to the data. There\textquotesingle{}s not much reason to do a copy here. \end{DoxyRefDesc}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}meshinfo.h"{}, and \#include <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the vertices. Every three numeric\_types represents one vertex.}}
+\DoxyCodeLine{std::vector<numeric\_type> vertices = \{ 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 \};}
+\DoxyCodeLine{                            \textcolor{comment}{// 0 1 2}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// If indices.size() == 3, this means that vertices.size() == 9, and each member}}
+\DoxyCodeLine{\textcolor{comment}{// of indices represents a std::array<numeric\_type, 3> i.e. indices[0] represents the}}
+\DoxyCodeLine{\textcolor{comment}{// 0th set of (x, y, z) coordinates, \{34.1, 63.9, 16.5\} indices[1] represents}}
+\DoxyCodeLine{\textcolor{comment}{// the 1st set of (x, y, z) coordinates, \{23.5, 85.7, 45.2\} indices[2]}}
+\DoxyCodeLine{\textcolor{comment}{// represents the 2nd set of (x, y, z) coordinates, \{12.0, 24.6, 99.4\}}}
+\DoxyCodeLine{std::vector<int> \mbox{\hyperlink{a01351_a1aeec44da0cef696067418085b0ea015}{indices}} = \{ 0, 1, 2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the mesh.}}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}} mesh(vertices, \mbox{\hyperlink{a01351_a1aeec44da0cef696067418085b0ea015}{indices}}, 5901, \textcolor{stringliteral}{"{}This Mesh"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Retrieve copies of mesh's vertices.}}
+\DoxyCodeLine{std::vector<numeric\_type> vertices\_copy\_0 = mesh.getRawVertices();}
+\DoxyCodeLine{std::vector<numeric\_type> vertices\_copy\_1 = mesh.getRawVertices();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Uses std::vector<numeric\_type>'s operator== to determine member equality}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (vertices\_copy\_0 == vertices\_copy\_1) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}vertices\_copy\_0 and vertices\_copy\_1 share the same elements/permutation."{}} << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// This will demonstrate that vertices\_copy\_0 and vertices\_copy\_1 are different}}
+\DoxyCodeLine{\textcolor{comment}{// container instances}}
+\DoxyCodeLine{\textcolor{comment}{// Output:  vertices\_copy\_0 and vertices\_copy\_1 share the same elements/permutation.}}
+\DoxyCodeLine{\textcolor{comment}{// vertices\_copy\_0 and vertices\_copy\_1 are different container instances.}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (\&vertices\_copy\_0 != \&vertices\_copy\_1) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}vertices\_copy\_0 and vertices\_copy\_1 are different container instances."{}} << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Output all coordinates}}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} total = mesh.NumTris() * 3;}
+\DoxyCodeLine{\textcolor{keywordtype}{int} offset = 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < total; i++) \{}
+\DoxyCodeLine{    \textcolor{keyword}{auto} y\_offset = \textcolor{keyword}{static\_cast<}int64\_t\textcolor{keyword}{>}(offset) + 1;}
+\DoxyCodeLine{    \textcolor{keyword}{auto} z\_offset = \textcolor{keyword}{static\_cast<}int64\_t\textcolor{keyword}{>}(offset) + 2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}("{}} << vertices\_copy\_0[offset] << \textcolor{stringliteral}{"{}, "{}}}
+\DoxyCodeLine{        << vertices\_copy\_0[y\_offset] << \textcolor{stringliteral}{"{}, "{}}}
+\DoxyCodeLine{        << vertices\_copy\_0[z\_offset] << \textcolor{stringliteral}{"{})"{}} << std::endl;}
+\DoxyCodeLine{        offset += 3;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00182_source_l00244}{244}} of file \mbox{\hyperlink{a00182_source}{meshinfo.\+cpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00375}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Add\+Mesh()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01351_af2d1b696c55aa036cff585d2e7eba50b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01351_a9ca41370061bec524b5c84d689114e41}\label{a01351_a9ca41370061bec524b5c84d689114e41}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!GetIndexPointer@{GetIndexPointer}}
+\index{GetIndexPointer@{GetIndexPointer}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{GetIndexPointer()}{GetIndexPointer()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+const \mbox{\hyperlink{a01347}{array\+\_\+and\+\_\+size}}$<$ int $>$ \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$\+::\+Get\+Index\+Pointer}
+
+
+
+Get a pointer to the index array of this mesh. 
+
+\begin{DoxyReturn}{Returns}
+A pointer to the index array of this mesh, and the number of elements it contains 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00182_source_l00326}{326}} of file \mbox{\hyperlink{a00182_source}{meshinfo.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00185_source_l00100}{HF\+::\+Geometry\+::array\+\_\+and\+\_\+size$<$ ptr\+\_\+type $>$\+::data}}, and \mbox{\hyperlink{a00185_source_l00099}{HF\+::\+Geometry\+::array\+\_\+and\+\_\+size$<$ ptr\+\_\+type $>$\+::size}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00230_source_l00122}{HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::\+Nano\+RTRay\+Tracer()}}, and \mbox{\hyperlink{a00416_source_l00094}{Get\+Verts\+And\+Tris()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01351_a9ca41370061bec524b5c84d689114e41_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01351_a1d69139377d33e748903a33f6f1b760c}\label{a01351_a1d69139377d33e748903a33f6f1b760c}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!GetMeshID@{GetMeshID}}
+\index{GetMeshID@{GetMeshID}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{GetMeshID()}{GetMeshID()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+int \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$\+::\+Get\+Mesh\+ID}
+
+
+
+Get the ID of this mesh.  
+
+\begin{DoxyReturn}{Returns}
+The member field meshid, by value. 
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}meshinfo.h"{}, and \#include <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the vertices}}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_0 = \{ 34.1, 63.9, 16.5 \};}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_1 = \{ 23.5, 85.7, 45.2 \};}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_2 = \{ 12.0, 24.6, 99.4 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create an array of vertices}}
+\DoxyCodeLine{std::vector<std::array<numeric\_type, 3>> vertices(vertex\_0, vertex\_1, vertex\_2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the MeshInfo}}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}} mesh(vertices, 3451, \textcolor{stringliteral}{"{}My Mesh"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Use GetMeshID to do an ID match}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} mesh\_id = -\/1;}
+\DoxyCodeLine{\textcolor{keywordflow}{if} ((mesh\_id = mesh.GetMeshID()) == 3451) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}Retrieved 'My Mesh'"{}} << std::endl;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00182_source_l00241}{241}} of file \mbox{\hyperlink{a00182_source}{meshinfo.\+cpp}}.
+
+\mbox{\Hypertarget{a01351_afddea10734ba213b2bb5cc148c24c942}\label{a01351_afddea10734ba213b2bb5cc148c24c942}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!getRawIndices@{getRawIndices}}
+\index{getRawIndices@{getRawIndices}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{getRawIndices()}{getRawIndices()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+vector$<$ int $>$ \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$\+::get\+Raw\+Indices}
+
+
+
+Retrieve a copy of this mesh\textquotesingle{}s index buffer as a 1D array.  
+
+\begin{DoxyReturn}{Returns}
+A copy of this mesh\textquotesingle{}s index buffer containing every index in this mesh. 
+\end{DoxyReturn}
+
+
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00452__todo000013}{Todo}}]Version of this function that just returns a const reference to the data. There\textquotesingle{}s not much reason to do a copy here.\end{DoxyRefDesc}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}meshinfo.h"{}, and \#include <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the vertices. Every three numeric\_types represents one vertex.}}
+\DoxyCodeLine{std::vector<numeric\_type> vertices = \{ 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 \};}
+\DoxyCodeLine{                          \textcolor{comment}{// 0 1 2}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// If indices.size() == 3, this means that vertices.size() == 9, and each member}}
+\DoxyCodeLine{\textcolor{comment}{// of indices represents a std::array<numeric\_type, 3> i.e. indices[0] represents the}}
+\DoxyCodeLine{\textcolor{comment}{// 0th set of (x, y, z) coordinates, \{34.1, 63.9, 16.5\} indices[1] represents}}
+\DoxyCodeLine{\textcolor{comment}{// the 1st set of (x, y, z) coordinates, \{23.5, 85.7, 45.2\} indices[2]}}
+\DoxyCodeLine{\textcolor{comment}{// represents the 2nd set of (x, y, z) coordinates, \{12.0, 24.6, 99.4\}}}
+\DoxyCodeLine{std::vector<int> \mbox{\hyperlink{a01351_a1aeec44da0cef696067418085b0ea015}{indices}} = \{ 0, 1, 2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the mesh.}}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}} mesh(vertices, \mbox{\hyperlink{a01351_a1aeec44da0cef696067418085b0ea015}{indices}}, 5901, \textcolor{stringliteral}{"{}This Mesh"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Retrieve a copy of mesh's index vector}}
+\DoxyCodeLine{std::vector<int> indices\_copy\_0 = mesh.getRawIndices();}
+\DoxyCodeLine{std::vector<int> indices\_copy\_1 = mesh.getRawIndices();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Uses std::vector<int>'s operator== to determine member equality}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (indices\_copy\_0 == indices\_copy\_1) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}indices\_copy\_0 and indices\_copy\_1 share the same elements/permutation."{}} << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// This will demonstrate that indices\_copy\_0 and indices\_copy\_1 are different}}
+\DoxyCodeLine{\textcolor{comment}{// container instances}}
+\DoxyCodeLine{\textcolor{comment}{// Output:  indices\_copy\_0 and indices\_copy\_1 share the same elements/permutation.}}
+\DoxyCodeLine{\textcolor{comment}{// indices\_copy\_0 and indices\_copy\_1 are different container instances.}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (\&indices\_copy\_0 != \&indices\_copy\_1) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}indices\_copy\_0 and indices\_copy\_1 are different container instances."{}} << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Output the indices}}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keyword}{auto} i : indices\_copy\_0) \{}
+\DoxyCodeLine{    std::cout << i << std::endl;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00182_source_l00256}{256}} of file \mbox{\hyperlink{a00182_source}{meshinfo.\+cpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00375}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Add\+Mesh()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01351_afddea10734ba213b2bb5cc148c24c942_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01351_a2fb2b5e7e5815794cb37c9b1e95260e8}\label{a01351_a2fb2b5e7e5815794cb37c9b1e95260e8}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!GetUnindexedVertices@{GetUnindexedVertices}}
+\index{GetUnindexedVertices@{GetUnindexedVertices}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{GetUnindexedVertices()}{GetUnindexedVertices()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+vector$<$ std\+::array$<$ T, 3 $>$ $>$ \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$\+::\+Get\+Unindexed\+Vertices}
+
+
+
+Retrieve an unindexed array of this mesh\textquotesingle{}s vertices.  
+
+\begin{DoxyReturn}{Returns}
+An array of vertices to match this mesh\textquotesingle{}s array of indices.
+\end{DoxyReturn}
+For every index in this mesh\textquotesingle{}s indices array, copy the matching vertex into the return array. This will result in vertexes being repeated multiple times. For example, the first element is the vertex pointed to by the first index in indices, the second element is the vertex pointed to by the second index in indices etc.
+
+\begin{DoxyRemark}{Remarks}
+The output of this function should match the input for \mbox{\hyperlink{a01351_a88794dcefee25f12c1b8dd3e7a6455d1}{Mesh\+Info()}} to create this mesh. This function is not really useful outside of testing, since it\textquotesingle{}s essentially uncompressing the mesh and repeating a lot of data.
+\end{DoxyRemark}
+\begin{DoxySeeAlso}{See also}
+get\+Raw\+Vertices() for a more efficent way of reading this mesh\textquotesingle{}s vertices. 
+
+\mbox{\hyperlink{a01351_afddea10734ba213b2bb5cc148c24c942}{get\+Raw\+Indices()}} for an ordered list of \mbox{\hyperlink{a01351_a1aeec44da0cef696067418085b0ea015}{indices}} for each vertex in the return array.
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}meshinfo.h"{}, and \#include <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the vertices. Every three numeric\_types represents one vertex.}}
+\DoxyCodeLine{std::vector<numeric\_type> vertices = \{ 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 \};}
+\DoxyCodeLine{                          \textcolor{comment}{// 0 1 2}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// If indices.size() == 3, this means that vertices.size() == 9, and each member}}
+\DoxyCodeLine{\textcolor{comment}{// of indices represents a std::array<numeric\_type, 3> i.e. indices[0] represents the}}
+\DoxyCodeLine{\textcolor{comment}{// 0th set of (x, y, z) coordinates, \{34.1, 63.9, 16.5\} indices[1] represents}}
+\DoxyCodeLine{\textcolor{comment}{// the 1st set of (x, y, z) coordinates, \{23.5, 85.7, 45.2\} indices[2]}}
+\DoxyCodeLine{\textcolor{comment}{// represents the 2nd set of (x, y, z) coordinates, \{12.0, 24.6, 99.4\}}}
+\DoxyCodeLine{std::vector<int> \mbox{\hyperlink{a01351_a1aeec44da0cef696067418085b0ea015}{indices}} = \{ 0, 1, 2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the mesh.}}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}} mesh(vertices, \mbox{\hyperlink{a01351_a1aeec44da0cef696067418085b0ea015}{indices}}, 5901, \textcolor{stringliteral}{"{}This Mesh"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Retrieve vertices as a vector of coordinates (x, y, z) Useful if your}}
+\DoxyCodeLine{\textcolor{comment}{// vertices were prepared from a one-\/dimensional container c, of numeric\_type (such}}
+\DoxyCodeLine{\textcolor{comment}{// that c.size() \% 3 == 0)}}
+\DoxyCodeLine{std::vector<std::array<numeric\_type, 3>> vert\_container = mesh.GetVertsAsArrays();}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00182_source_l00264}{264}} of file \mbox{\hyperlink{a00182_source}{meshinfo.\+cpp}}.
+
+\mbox{\Hypertarget{a01351_aa88fe8bcfc24db635994e529fac008da}\label{a01351_aa88fe8bcfc24db635994e529fac008da}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!GetVertexPointer@{GetVertexPointer}}
+\index{GetVertexPointer@{GetVertexPointer}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{GetVertexPointer()}{GetVertexPointer()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+const \mbox{\hyperlink{a01347}{array\+\_\+and\+\_\+size}}$<$ T $>$ \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$\+::\+Get\+Vertex\+Pointer}
+
+
+
+Get a pointer to the vertex array of this mesh. 
+
+\begin{DoxyReturn}{Returns}
+A pointer to the vertex array of this mesh, and the number of elements it contains 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{a00182_source_l00336}{336}} of file \mbox{\hyperlink{a00182_source}{meshinfo.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00185_source_l00100}{HF\+::\+Geometry\+::array\+\_\+and\+\_\+size$<$ ptr\+\_\+type $>$\+::data}}, and \mbox{\hyperlink{a00185_source_l00099}{HF\+::\+Geometry\+::array\+\_\+and\+\_\+size$<$ ptr\+\_\+type $>$\+::size}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00230_source_l00122}{HF\+::\+Ray\+Tracer\+::\+Nano\+RTRay\+Tracer\+::\+Nano\+RTRay\+Tracer()}}, and \mbox{\hyperlink{a00416_source_l00094}{Get\+Verts\+And\+Tris()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01351_aa88fe8bcfc24db635994e529fac008da_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01351_a5fa8cc590a7bd0764a7903ed521e2fc4}\label{a01351_a5fa8cc590a7bd0764a7903ed521e2fc4}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!NumTris@{NumTris}}
+\index{NumTris@{NumTris}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{NumTris()}{NumTris()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+int \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$\+::\+Num\+Tris}
+
+
+
+Calculate the total number of triangles in this mesh. 
+
+\begin{DoxyReturn}{Returns}
+The number of triangles in this mesh. 
+\end{DoxyReturn}
+
+
+The number of triangles in the mesh is equal to the number of columns in the indices matrix.
+
+\begin{DoxyRemark}{Remarks}
+Used to equal num\+\_\+verts/3, but now that does not since indexed buffers are used.
+\end{DoxyRemark}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}meshinfo.h"{}, and \#include <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the vertices}}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_0 = \{ 34.1, 63.9, 16.5 \};}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_1 = \{ 23.5, 85.7, 45.2 \};}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_2 = \{ 12.0, 24.6, 99.4 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create an array of vertices}}
+\DoxyCodeLine{std::vector<std::array<numeric\_type, 3>> vertices(vertex\_0, vertex\_1, vertex\_2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the MeshInfo}}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}} mesh(vertices, 3451, \textcolor{stringliteral}{"{}My Mesh"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} tri\_count = 0;}
+\DoxyCodeLine{\textcolor{keywordflow}{if} ((tri\_count = mesh.NumTris()) == 0) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}This mesh has no triangles."{}} << std::endl;}
+\DoxyCodeLine{\} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}Triangle count: "{}} << tri\_count << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Output is: 'Triangle count: 1' Note that (mesh.NumVerts() / 3 \&\&}}
+\DoxyCodeLine{\textcolor{comment}{// mesh.NumTris()) will always be true, since three vertices compose a single triangle.}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00182_source_l00181}{181}} of file \mbox{\hyperlink{a00182_source}{meshinfo.\+cpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00375}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Add\+Mesh()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01351_a5fa8cc590a7bd0764a7903ed521e2fc4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01351_a70a6f6b9270d47e0b8428cdc15b707d3}\label{a01351_a70a6f6b9270d47e0b8428cdc15b707d3}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!NumVerts@{NumVerts}}
+\index{NumVerts@{NumVerts}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{NumVerts()}{NumVerts()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+int \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$\+::\+Num\+Verts}
+
+
+
+Determine how many vertices are in this mesh.  
+
+\begin{DoxyReturn}{Returns}
+Total number of vertices for this mesh. 
+\end{DoxyReturn}
+
+
+The number of vertices in the mesh is equal to the number of columns in the verts matrix.
+
+\begin{DoxyRemark}{Remarks}
+Useful for testing correctness.
+\end{DoxyRemark}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}meshinfo.h"{}, and \#include <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the vertices}}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_0 = \{ 34.1, 63.9, 16.5 \};}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_1 = \{ 23.5, 85.7, 45.2 \};}
+\DoxyCodeLine{std::array<numeric\_type, 3> vertex\_2 = \{ 12.0, 24.6, 99.4 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create an array of vertices}}
+\DoxyCodeLine{std::vector<std::array<numeric\_type, 3>> vertices\{ vertex\_0, vertex\_1, vertex\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the MeshInfo}}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}} mesh(vertices, 3451, \textcolor{stringliteral}{"{}My Mesh"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} vert\_count = 0;}
+\DoxyCodeLine{\textcolor{keywordflow}{if} ((vert\_count = mesh.NumVerts()) == 0) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}This mesh has no vertices."{}} << std::endl;}
+\DoxyCodeLine{\} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}Vertex count: "{}} << vert\_count << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Output is: 'Vertex count: 3'}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00182_source_l00178}{178}} of file \mbox{\hyperlink{a00182_source}{meshinfo.\+cpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00375}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Add\+Mesh()}}, and \mbox{\hyperlink{a00182_source_l00310}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::operator==()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01351_a70a6f6b9270d47e0b8428cdc15b707d3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01351_a1f8f4ab434e4e32ea48656a9345fa9f3}\label{a01351_a1f8f4ab434e4e32ea48656a9345fa9f3}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!operator==@{operator==}}
+\index{operator==@{operator==}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01351}{Mesh\+Info}}$<$ numeric\+\_\+type $>$ \&}]{M2 }\end{DoxyParamCaption}) const}
+
+
+
+Compare the vertices of two \mbox{\hyperlink{a01351}{Mesh\+Info}} objects.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em M2} & The desired \mbox{\hyperlink{a01351}{Mesh\+Info}} to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if all vertices are equal within a certain tolerance, false otherwise. 
+\end{DoxyReturn}
+
+
+First check that the size of both mesh\textquotesingle{}s vertex arrays are the same size, then compare the distance between every vertex one by one.
+
+\begin{DoxyWarning}{Warning}
+This does not compare indices at all and will return false if both meshes contain the same vertices but in a different order.
+\end{DoxyWarning}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}meshinfo.h"{}, and \#include <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the vertices. Every three numeric\_types represents one vertex.}}
+\DoxyCodeLine{std::vector<numeric\_type> vertices\_0 = \{ 11.0, 22.0, 33.0, 44.0, 55.0, 66.0, 77.0, 88.0, 99.0 \};}
+\DoxyCodeLine{                            \textcolor{comment}{// 0 1 2}}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::vector<numeric\_type> vertices\_1 = \{ 11.0, 22.0, 33.0, 44.0, 55.0, 66.0, 77.0, 88.0, 99.0 \};}
+\DoxyCodeLine{                            \textcolor{comment}{// 0 1 2}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// If indices\_0.size() == 3, this means that vertices\_0.size() == 9, and each}}
+\DoxyCodeLine{\textcolor{comment}{// member of indices represents a std::array<numeric\_type, 3> i.e. indices[0]}}
+\DoxyCodeLine{\textcolor{comment}{// represents the 0th set of (x, y, z) coordinates, \{34.1, 63.9, 16.5\}}}
+\DoxyCodeLine{\textcolor{comment}{// indices[1] represents the 1st set of (x, y, z) coordinates, \{23.5, 85.7,}}
+\DoxyCodeLine{\textcolor{comment}{// 45.2\} indices[2] represents the 2nd set of (x, y, z) coordinates, \{12.0,}}
+\DoxyCodeLine{\textcolor{comment}{// 24.6, 99.4\}}}
+\DoxyCodeLine{\textcolor{comment}{//}}
+\DoxyCodeLine{\textcolor{comment}{// The same is true for vertices\_1 and indices\_1.}}
+\DoxyCodeLine{std::vector<int> indices\_0 = \{ 0, 1, 2 \};}
+\DoxyCodeLine{std::vector<int> indices\_1 = \{ 0, 1, 2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}} mesh\_0(vertices\_0, indices\_0, 5901, \textcolor{stringliteral}{"{}This Mesh"{}});}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}} mesh\_1(vertices\_1, indices\_0, 4790, \textcolor{stringliteral}{"{}That Mesh"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} equivalent = mesh\_0 == mesh\_1;     \textcolor{comment}{// returns true}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// operator== will determine if two MeshInfo are equal if the Euclidean distance}}
+\DoxyCodeLine{\textcolor{comment}{// between each matching element in mesh\_0 and mesh\_1 is within 0.001. This}}
+\DoxyCodeLine{\textcolor{comment}{// means that for all i between vertices\_0 and vertices\_1 -\/-\/ each x, y, z within}}
+\DoxyCodeLine{\textcolor{comment}{// vertices\_0[i] and vertices\_1[i] must be within 0.001 to be considered equivalent.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Of course, this also means that if mesh\_0.NumVerts() != mesh\_1.NumVerts(),}}
+\DoxyCodeLine{\textcolor{comment}{// mesh\_0 and mesh\_1 are not equivalent at all.}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00182_source_l00310}{310}} of file \mbox{\hyperlink{a00182_source}{meshinfo.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00182_source_l00306}{HF\+::\+Geometry\+::array\+Dist()}}, and \mbox{\hyperlink{a00182_source_l00178}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Num\+Verts()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01351_a1f8f4ab434e4e32ea48656a9345fa9f3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01351_a275ccfb3fa910f416463c3c97c8699c1}\label{a01351_a275ccfb3fa910f416463c3c97c8699c1}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+array$<$ T, 3 $>$ \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption}) const}
+
+
+
+Get vertex at a specific index in the mesh.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Index of the vertex to retrieve. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The x, y, and z coordinates for the vertex at index i. 
+\end{DoxyReturn}
+
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::exception} & i is out of the bounds of the vertex array.\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}meshinfo.h"{}, and \#include <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the vertices. Every three numeric\_types represents one vertex.}}
+\DoxyCodeLine{std::vector<numeric\_type> vertices = \{ 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 \};}
+\DoxyCodeLine{                         \textcolor{comment}{// 0 1 2}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// If indices.size() == 3, this means that vertices.size() == 9, and each member}}
+\DoxyCodeLine{\textcolor{comment}{// of indices represents a std::array<numeric\_type, 3> i.e. indices[0] represents the}}
+\DoxyCodeLine{\textcolor{comment}{// 0th set of (x, y, z) coordinates, \{34.1, 63.9, 16.5\} indices[1] represents}}
+\DoxyCodeLine{\textcolor{comment}{// the 1st set of (x, y, z) coordinates, \{23.5, 85.7, 45.2\} indices[2]}}
+\DoxyCodeLine{\textcolor{comment}{// represents the 2nd set of (x, y, z) coordinates, \{12.0, 24.6, 99.4\}}}
+\DoxyCodeLine{std::vector<int> \mbox{\hyperlink{a01351_a1aeec44da0cef696067418085b0ea015}{indices}} = \{ 0, 1, 2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the mesh}}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}} mesh(vertices, \mbox{\hyperlink{a01351_a1aeec44da0cef696067418085b0ea015}{indices}}, 5901, \textcolor{stringliteral}{"{}This Mesh"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Retrieve the desired vertex}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} index = 1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// vertex consists of \{ 44.0, 55.0, 66.0 \}, which is the second triplet of}}
+\DoxyCodeLine{\textcolor{comment}{// coordinates within vertices\_0.}}
+\DoxyCodeLine{\textcolor{keyword}{auto} vertex = mesh[index];}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"{}Retrieved at index << "{}} << index << \textcolor{stringliteral}{"{}: ("{}} << vertex[0] << \textcolor{stringliteral}{"{}, "{}} }
+\DoxyCodeLine{<< vertex[1] << \textcolor{stringliteral}{"{}, "{}} }
+\DoxyCodeLine{<< vertex[2] << \textcolor{stringliteral}{"{})"{}} << std::endl;}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00182_source_l00285}{285}} of file \mbox{\hyperlink{a00182_source}{meshinfo.\+cpp}}.
+
+\mbox{\Hypertarget{a01351_a235d49e5a5a4d20d78db7adb854fb9e1}\label{a01351_a235d49e5a5a4d20d78db7adb854fb9e1}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!PerformRotation@{PerformRotation}}
+\index{PerformRotation@{PerformRotation}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{PerformRotation()}{PerformRotation()}}
+{\footnotesize\ttfamily template$<$typename numeric\+\_\+type  = float$>$ \\
+void \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$\+::\+Perform\+Rotation (\begin{DoxyParamCaption}\item[{numeric\+\_\+type}]{rx,  }\item[{numeric\+\_\+type}]{ry,  }\item[{numeric\+\_\+type}]{rz }\end{DoxyParamCaption})}
+
+
+
+Rotate this mesh by x, y, z rotations in degrees (pitch, yaw, roll).  
+
+
+\begin{DoxyParams}{Parameters}
+{\em rx} & Pitch to rotate by in degrees. \\
+\hline
+{\em ry} & Yaw to rotate by in degrees. \\
+\hline
+{\em rz} & Roll to rotate by in degrees. \\
+\hline
+\end{DoxyParams}
+\mbox{[}snippet\+\_\+objloader\+\_\+assert\mbox{]}
+
+\mbox{[}snippet\+\_\+objloader\+\_\+assert\mbox{]}
+
+Definition at line \mbox{\hyperlink{a00182_source_l00209}{209}} of file \mbox{\hyperlink{a00182_source}{meshinfo.\+cpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00416_source_l00084}{Rotate\+Mesh()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=307pt]{a01351_a235d49e5a5a4d20d78db7adb854fb9e1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01351_a2d0621b715f7e4dd8d8e236ac3d5e6c0}\label{a01351_a2d0621b715f7e4dd8d8e236ac3d5e6c0}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!SetMeshID@{SetMeshID}}
+\index{SetMeshID@{SetMeshID}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{SetMeshID()}{SetMeshID()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$\+::\+Set\+Mesh\+ID (\begin{DoxyParamCaption}\item[{int}]{new\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Change the ID of this mesh. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+id} & New ID to assign to this mesh. \\
+\hline
+\end{DoxyParams}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "{}meshinfo.h"{}, and \#include <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the vertices. Every three numeric\_types represents one vertex.}}
+\DoxyCodeLine{std::vector<numeric\_type> vertices = \{ 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 \};}
+\DoxyCodeLine{                         \textcolor{comment}{// 0 1 2}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// If indices.size() == 3, this means that vertices.size() == 9, and each member}}
+\DoxyCodeLine{\textcolor{comment}{// of indices represents a std::array<numeric\_type, 3> i.e. indices[0] represents the}}
+\DoxyCodeLine{\textcolor{comment}{// 0th set of (x, y, z) coordinates, \{34.1, 63.9, 16.5\} indices[1] represents}}
+\DoxyCodeLine{\textcolor{comment}{// the 1st set of (x, y, z) coordinates, \{23.5, 85.7, 45.2\} indices[2]}}
+\DoxyCodeLine{\textcolor{comment}{// represents the 2nd set of (x, y, z) coordinates, \{12.0, 24.6, 99.4\}}}
+\DoxyCodeLine{std::vector<int> \mbox{\hyperlink{a01351_a1aeec44da0cef696067418085b0ea015}{indices}} = \{ 0, 1, 2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the mesh.}}
+\DoxyCodeLine{\mbox{\hyperlink{a01351}{HF::Geometry::MeshInfo}} mesh(vertices, \mbox{\hyperlink{a01351_a1aeec44da0cef696067418085b0ea015}{indices}}, 5901, \textcolor{stringliteral}{"{}This Mesh"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare a new mesh ID.}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} new\_mesh\_id = 9999;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Assign new\_mesh\_id to mesh.}}
+\DoxyCodeLine{mesh.SetMeshID(new\_mesh\_id);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Test for value equality. Will return true.}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (new\_mesh\_id == mesh.GetMeshID()) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"{}ID assignment successful."{}} << std::endl;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00182_source_l00282}{282}} of file \mbox{\hyperlink{a00182_source}{meshinfo.\+cpp}}.
+
+\mbox{\Hypertarget{a01351_a4b96bdff36d61d0a16b09872736b7d16}\label{a01351_a4b96bdff36d61d0a16b09872736b7d16}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!SetVert@{SetVert}}
+\index{SetVert@{SetVert}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{SetVert()}{SetVert()}}
+{\footnotesize\ttfamily template$<$typename numeric\+\_\+type  = float$>$ \\
+void \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$\+::\+Set\+Vert (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{numeric\+\_\+type}]{x,  }\item[{numeric\+\_\+type}]{y,  }\item[{numeric\+\_\+type}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Change the position of the vertex at index.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Index of the vertex to change, \\
+\hline
+{\em x} & X coordinate \\
+\hline
+{\em y} & Y coordinate \\
+\hline
+{\em z} & Z coordinate \\
+\hline
+\end{DoxyParams}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// TODO: this is a private member function of MeshInfo, but it is not used by any other member function within MeshInfo}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00182_source_l00040}{40}} of file \mbox{\hyperlink{a00182_source}{meshinfo.\+cpp}}.
+
+\mbox{\Hypertarget{a01351_a94f1d056602f383463d151d528f54436}\label{a01351_a94f1d056602f383463d151d528f54436}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!VectorsToBuffers@{VectorsToBuffers}}
+\index{VectorsToBuffers@{VectorsToBuffers}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{VectorsToBuffers()}{VectorsToBuffers()}}
+{\footnotesize\ttfamily template$<$typename numeric\+\_\+type  = float$>$ \\
+void \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$\+::\+Vectors\+To\+Buffers (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::array$<$ numeric\+\_\+type, 3 $>$ $>$ \&}]{vertices }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Index vertices then insert them into verts and indices.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & An ordered list of vertices; every 3 vertices form a triangle in the mesh. \\
+\hline
+\end{DoxyParams}
+
+
+Calls Index\+Raw\+Vertices to index the input vertices then fill verts and indices.
+
+\begin{DoxyPostcond}{Postcondition}
+This class\textquotesingle{}s verts and indices are filled with the indexed vertices from vertices.
+\end{DoxyPostcond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{a01323}{HF\+::\+Exceptions\+::\+Invalid\+OBJ}}} & vertices did not contain the vertices of a valid mesh.\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// TODO: this is a private member function of MeshInfo, but it is not used by any other member function with MeshInfo.}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{a00182_source_l00122}{122}} of file \mbox{\hyperlink{a00182_source}{meshinfo.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00182_source_l00073}{HF\+::\+Geometry\+::\+Index\+Raw\+Vertices()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01351_a94f1d056602f383463d151d528f54436_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01351_a1aeec44da0cef696067418085b0ea015}\label{a01351_a1aeec44da0cef696067418085b0ea015}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!indices@{indices}}
+\index{indices@{indices}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{indices}{indices}}
+{\footnotesize\ttfamily template$<$typename numeric\+\_\+type  = float$>$ \\
+Eigen\+::\+Matrix3X$<$int$>$ \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ numeric\+\_\+type $>$\+::indices\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+3 by X matrix of indices for triangles. 
+
+
+
+Definition at line \mbox{\hyperlink{a00185_source_l00132}{132}} of file \mbox{\hyperlink{a00185_source}{meshinfo.\+h}}.
+
+\mbox{\Hypertarget{a01351_a5259d58812a4a21b93703a27732f684e}\label{a01351_a5259d58812a4a21b93703a27732f684e}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!meshid@{meshid}}
+\index{meshid@{meshid}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{meshid}{meshid}}
+{\footnotesize\ttfamily template$<$typename numeric\+\_\+type  = float$>$ \\
+int \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ numeric\+\_\+type $>$\+::meshid}
+
+
+
+Identifier for this mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{a00185_source_l00126}{126}} of file \mbox{\hyperlink{a00185_source}{meshinfo.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00185_source_l00177}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Mesh\+Info()}}, \mbox{\hyperlink{a00209_source_l00375}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Add\+Mesh()}}, \mbox{\hyperlink{a00416_source_l00119}{Get\+Mesh\+ID()}}, and \mbox{\hyperlink{a00416_source_l00084}{Rotate\+Mesh()}}.
+
+\mbox{\Hypertarget{a01351_a60ed62b543ca522c4a84f3c5a73e1600}\label{a01351_a60ed62b543ca522c4a84f3c5a73e1600}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!name@{name}}
+\index{name@{name}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily template$<$typename numeric\+\_\+type  = float$>$ \\
+std\+::string \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ numeric\+\_\+type $>$\+::name = \char`\"{}\char`\"{}}
+
+
+
+A human-\/readable title. 
+
+
+
+Definition at line \mbox{\hyperlink{a00185_source_l00127}{127}} of file \mbox{\hyperlink{a00185_source}{meshinfo.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00185_source_l00177}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Mesh\+Info()}}, and \mbox{\hyperlink{a00416_source_l00108}{Get\+Mesh\+Name()}}.
+
+\mbox{\Hypertarget{a01351_ab0fdc0ed4e1b5509412477131966ffd3}\label{a01351_ab0fdc0ed4e1b5509412477131966ffd3}} 
+\index{HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}!verts@{verts}}
+\index{verts@{verts}!HF::Geometry::MeshInfo$<$ numeric\_type $>$@{HF::Geometry::MeshInfo$<$ numeric\_type $>$}}
+\doxysubsubsection{\texorpdfstring{verts}{verts}}
+{\footnotesize\ttfamily template$<$typename numeric\+\_\+type  = float$>$ \\
+\mbox{\hyperlink{a01351_ae4a350a3188171cfc0291b57fd8e339d}{Vert\+Matrix}} \mbox{\hyperlink{a01351}{HF\+::\+Geometry\+::\+Mesh\+Info}}$<$ numeric\+\_\+type $>$\+::verts\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+3 by X matrix of vertices 
+
+
+
+Definition at line \mbox{\hyperlink{a00185_source_l00131}{131}} of file \mbox{\hyperlink{a00185_source}{meshinfo.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00185_source_l00177}{HF\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Mesh\+Info()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/objloader/src/\mbox{\hyperlink{a00185}{meshinfo.\+h}}\item 
+Cpp/objloader/src/\mbox{\hyperlink{a00182}{meshinfo.\+cpp}}\end{DoxyCompactItemize}

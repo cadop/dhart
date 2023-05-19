@@ -1,0 +1,141 @@
+\hypertarget{a01919}{}\doxysection{nlohmann\+::detail\+::file\+\_\+input\+\_\+adapter Class Reference}
+\label{a01919}\index{nlohmann::detail::file\_input\_adapter@{nlohmann::detail::file\_input\_adapter}}
+
+
+{\ttfamily \#include $<$json.\+hpp$>$}
+
+
+
+Collaboration diagram for nlohmann\+::detail\+::file\+\_\+input\+\_\+adapter\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=185pt]{a01917}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{a01919_ac853c96c60f93dc97433dacd98179f35}{char\+\_\+type}} = char
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01919_aeade050f2793280503be93feff2ece5b}{file\+\_\+input\+\_\+adapter}} (std\+::\+FILE $\ast$f) noexcept
+\item 
+\mbox{\hyperlink{a01919_a308099b496a0cba2123a06fe99a95d02}{file\+\_\+input\+\_\+adapter}} (const \mbox{\hyperlink{a01919}{file\+\_\+input\+\_\+adapter}} \&)=delete
+\item 
+\mbox{\hyperlink{a01919_a10b4dec4e8751a4f8a110fa917f0d5a8}{file\+\_\+input\+\_\+adapter}} (\mbox{\hyperlink{a01919}{file\+\_\+input\+\_\+adapter}} \&\&)=default
+\item 
+\mbox{\hyperlink{a01919}{file\+\_\+input\+\_\+adapter}} \& \mbox{\hyperlink{a01919_a8e2293f81491dabe5dc74b2d4910d400}{operator=}} (const \mbox{\hyperlink{a01919}{file\+\_\+input\+\_\+adapter}} \&)=delete
+\item 
+\mbox{\hyperlink{a01919}{file\+\_\+input\+\_\+adapter}} \& \mbox{\hyperlink{a01919_a54d43cbc6f5677d8f7b4a3123692e541}{operator=}} (\mbox{\hyperlink{a01919}{file\+\_\+input\+\_\+adapter}} \&\&)=delete
+\item 
+std\+::char\+\_\+traits$<$ char $>$\+::int\+\_\+type \mbox{\hyperlink{a01919_acd3cff5e0b14fef206c40aa6b96a3ef2}{get\+\_\+character}} () noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::\+FILE $\ast$ \mbox{\hyperlink{a01919_a164fbe2739ac97e517e22bc1fff1c174}{m\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em the file pointer to read from \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Input adapter for stdio file access. This adapter read only 1 byte and do not use any buffer. This adapter is a very low level adapter. 
+
+Definition at line \mbox{\hyperlink{a00272_source_l04754}{4754}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{a01919_ac853c96c60f93dc97433dacd98179f35}\label{a01919_ac853c96c60f93dc97433dacd98179f35}} 
+\index{nlohmann::detail::file\_input\_adapter@{nlohmann::detail::file\_input\_adapter}!char\_type@{char\_type}}
+\index{char\_type@{char\_type}!nlohmann::detail::file\_input\_adapter@{nlohmann::detail::file\_input\_adapter}}
+\doxysubsubsection{\texorpdfstring{char\_type}{char\_type}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a01919_ac853c96c60f93dc97433dacd98179f35}{nlohmann\+::detail\+::file\+\_\+input\+\_\+adapter\+::char\+\_\+type}} =  char}
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l04757}{4757}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01919_aeade050f2793280503be93feff2ece5b}\label{a01919_aeade050f2793280503be93feff2ece5b}} 
+\index{nlohmann::detail::file\_input\_adapter@{nlohmann::detail::file\_input\_adapter}!file\_input\_adapter@{file\_input\_adapter}}
+\index{file\_input\_adapter@{file\_input\_adapter}!nlohmann::detail::file\_input\_adapter@{nlohmann::detail::file\_input\_adapter}}
+\doxysubsubsection{\texorpdfstring{file\_input\_adapter()}{file\_input\_adapter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily nlohmann\+::detail\+::file\+\_\+input\+\_\+adapter\+::file\+\_\+input\+\_\+adapter (\begin{DoxyParamCaption}\item[{std\+::\+FILE $\ast$}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l04760}{4760}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+\mbox{\Hypertarget{a01919_a308099b496a0cba2123a06fe99a95d02}\label{a01919_a308099b496a0cba2123a06fe99a95d02}} 
+\index{nlohmann::detail::file\_input\_adapter@{nlohmann::detail::file\_input\_adapter}!file\_input\_adapter@{file\_input\_adapter}}
+\index{file\_input\_adapter@{file\_input\_adapter}!nlohmann::detail::file\_input\_adapter@{nlohmann::detail::file\_input\_adapter}}
+\doxysubsubsection{\texorpdfstring{file\_input\_adapter()}{file\_input\_adapter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily nlohmann\+::detail\+::file\+\_\+input\+\_\+adapter\+::file\+\_\+input\+\_\+adapter (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01919}{file\+\_\+input\+\_\+adapter}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{a01919_a10b4dec4e8751a4f8a110fa917f0d5a8}\label{a01919_a10b4dec4e8751a4f8a110fa917f0d5a8}} 
+\index{nlohmann::detail::file\_input\_adapter@{nlohmann::detail::file\_input\_adapter}!file\_input\_adapter@{file\_input\_adapter}}
+\index{file\_input\_adapter@{file\_input\_adapter}!nlohmann::detail::file\_input\_adapter@{nlohmann::detail::file\_input\_adapter}}
+\doxysubsubsection{\texorpdfstring{file\_input\_adapter()}{file\_input\_adapter()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily nlohmann\+::detail\+::file\+\_\+input\+\_\+adapter\+::file\+\_\+input\+\_\+adapter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01919}{file\+\_\+input\+\_\+adapter}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01919_acd3cff5e0b14fef206c40aa6b96a3ef2}\label{a01919_acd3cff5e0b14fef206c40aa6b96a3ef2}} 
+\index{nlohmann::detail::file\_input\_adapter@{nlohmann::detail::file\_input\_adapter}!get\_character@{get\_character}}
+\index{get\_character@{get\_character}!nlohmann::detail::file\_input\_adapter@{nlohmann::detail::file\_input\_adapter}}
+\doxysubsubsection{\texorpdfstring{get\_character()}{get\_character()}}
+{\footnotesize\ttfamily std\+::char\+\_\+traits$<$ char $>$\+::int\+\_\+type nlohmann\+::detail\+::file\+\_\+input\+\_\+adapter\+::get\+\_\+character (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l04770}{4770}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l04777}{m\+\_\+file}}.
+
+\mbox{\Hypertarget{a01919_a8e2293f81491dabe5dc74b2d4910d400}\label{a01919_a8e2293f81491dabe5dc74b2d4910d400}} 
+\index{nlohmann::detail::file\_input\_adapter@{nlohmann::detail::file\_input\_adapter}!operator=@{operator=}}
+\index{operator=@{operator=}!nlohmann::detail::file\_input\_adapter@{nlohmann::detail::file\_input\_adapter}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01919}{file\+\_\+input\+\_\+adapter}} \& nlohmann\+::detail\+::file\+\_\+input\+\_\+adapter\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01919}{file\+\_\+input\+\_\+adapter}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{a01919_a54d43cbc6f5677d8f7b4a3123692e541}\label{a01919_a54d43cbc6f5677d8f7b4a3123692e541}} 
+\index{nlohmann::detail::file\_input\_adapter@{nlohmann::detail::file\_input\_adapter}!operator=@{operator=}}
+\index{operator=@{operator=}!nlohmann::detail::file\_input\_adapter@{nlohmann::detail::file\_input\_adapter}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01919}{file\+\_\+input\+\_\+adapter}} \& nlohmann\+::detail\+::file\+\_\+input\+\_\+adapter\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01919}{file\+\_\+input\+\_\+adapter}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01919_a164fbe2739ac97e517e22bc1fff1c174}\label{a01919_a164fbe2739ac97e517e22bc1fff1c174}} 
+\index{nlohmann::detail::file\_input\_adapter@{nlohmann::detail::file\_input\_adapter}!m\_file@{m\_file}}
+\index{m\_file@{m\_file}!nlohmann::detail::file\_input\_adapter@{nlohmann::detail::file\_input\_adapter}}
+\doxysubsubsection{\texorpdfstring{m\_file}{m\_file}}
+{\footnotesize\ttfamily std\+::\+FILE$\ast$ nlohmann\+::detail\+::file\+\_\+input\+\_\+adapter\+::m\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+the file pointer to read from 
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l04777}{4777}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00272_source_l04770}{get\+\_\+character()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00272}{json.\+hpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,441 @@
+{\bfseries{Building Documentation}}
+
+The following steps utilize the Doxygen GUI Frontend.
+
+Load the Doxyfile from this repo into Doxygen, using the File menu. The Doxyfile is in {\ttfamily dhart\textbackslash{}src\textbackslash{}Doxyfile}
+
+{\bfseries{Step 3\+:}}~\newline
+
+\begin{DoxyItemize}
+\item Navigate to the Expert tab on the left hand side.
+\item Under topics, click \textquotesingle{}Input\textquotesingle{}.
+\item On the right side, scroll down until you see EXAMPLE\+\_\+\+PATH.
+\item In the EXAMPLE\+\_\+\+PATH section, click the folder button to reveal a file prompt.
+\item Within the file prompt, select the file path where the snippet resides. ({\ttfamily PATH\+\_\+\+TO\+\_\+\+FILE\textbackslash{}filename.\+cpp})
+\item Add any more directories/paths where your snippets will come from.
+\end{DoxyItemize}
+
+Snippets will now appear when you navigate to the Run tab, and click \textquotesingle{}Run Doxygen\textquotesingle{}.
+
+\doxysubsubsection*{The {\ttfamily \textbackslash{}code} tag should be used for code block examples under 10 lines.}
+
+\href{https://www.doxygen.nl/manual/commands.html\#cmdcode}{\texttt{ https\+://www.\+doxygen.\+nl/manual/commands.\+html\#cmdcode}}
+
+Here is an example for using the {\ttfamily \textbackslash{}code} tag\+:
+
+/$\ast$! 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{// Use the '//' comment style.}
+\DoxyCodeLine{std::cout << "{}Here is a test statement."{} << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{// You may indent your code sample as needed.}
+\DoxyCodeLine{struct my\_point \{}
+\DoxyCodeLine{    double m\_x;}
+\DoxyCodeLine{    double m\_y;}
+\DoxyCodeLine{\};}
+
+\end{DoxyCode}
+ $\ast$/
+
+Follow these steps to ensure consistency within the codebase\+: 0. Start an example block with {\ttfamily /$\ast$!}, then hit {\bfseries{ENTER}} to go to the next line.
+\begin{DoxyEnumerate}
+\item Hit {\bfseries{TAB}} once, then use the {\ttfamily \textbackslash{}code} tag. Then, hit {\bfseries{ENTER}}.
+\item Hit {\bfseries{TAB}} twice, then begin your code example. You may indent as necessary for your example.
+\item When your example is finished, hit {\bfseries{ENTER}}, then {\bfseries{BACKSPACE}} so that you are inline with the {\ttfamily \textbackslash{}code} tag.
+\item Use the {\ttfamily \textbackslash{}endcode} tag to end your example.~\newline
+ Then hit {\bfseries{ENTER}}, then hit {\bfseries{BACKSPACE}} as many times as necessary so that you are inline with {\ttfamily /$\ast$!}.
+\item Finally, end the example block with {\ttfamily $\ast$/}.
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item Note that any comments that occur within the sample must begin with {\ttfamily //}, followed by a whitespace.
+\end{DoxyItemize}
+
+This procedure strikes the best compromise between\+:
+\begin{DoxyItemize}
+\item Making sure that comments work within a code example
+\item Not having to remove {\ttfamily //} or {\ttfamily ///} per line of the example
+\end{DoxyItemize}
+
+~\newline
+This ensures ease of viewing~\newline
+ for anyone reading the source code -- ~\newline
+ and also assists Doxygen with the~\newline
+ formatting process for the HTML export.
+
+You may now use {\bfseries{\textquotesingle{}Run Doxygen\textquotesingle{}}} to export your documentation.~\newline
+ (There are no extra steps, unlike with the snippet section)
+
+\doxysubsection*{Adding images for headers/sources, and markdown files ({\ttfamily .md})}
+
+For {\bfseries{headers/sources}},~\newline
+ we will be using the {\ttfamily \textbackslash{}image} tag to add images.~\newline
+ \href{https://www.doxygen.nl/manual/commands.html\#cmdimage}{\texttt{ https\+://www.\+doxygen.\+nl/manual/commands.\+html\#cmdimage}}
+
+For {\bfseries{markdown files ({\ttfamily .md})}},~\newline
+ we will be using the markdown syntax for images.~\newline
+ \href{https://www.doxygen.nl/manual/markdown.html\#md_images}{\texttt{ https\+://www.\+doxygen.\+nl/manual/markdown.\+html\#md\+\_\+images}}
+
+In {\bfseries{dhart}},~\newline
+ we have a subdirectory named {\bfseries{docs}}.~\newline
+ ({\ttfamily dhart\textbackslash{}docs})~\newline
+
+
+The Doxyfile will already be configured to have it\textquotesingle{}s {\ttfamily IMAGE\+\_\+\+PATH}~\newline
+ configured such that its working directory for images begins at~\newline
+ {\ttfamily dhart\textbackslash{}docs}.~\newline
+ When we proceed to later steps, and we are to insert the path of an image file,~\newline
+ assume that the working directory for images begins at~\newline
+ {\ttfamily dhart\textbackslash{}docs.}
+
+For example, if a file is saved at\+:~\newline
+ {\ttfamily dhart\textbackslash{}docs\textbackslash{}C++\textbackslash{}images\textbackslash{}spatialstructures\textbackslash{}node\textbackslash{}test-\/image\+\_\+node-\/h.\+png},~\newline
+ you will specify the path\+:~\newline
+ {\ttfamily C++\textbackslash{}images\textbackslash{}spatialstructures\textbackslash{}node\textbackslash{}test-\/image\+\_\+node-\/h.\+png}.
+
+Notice that the {\bfseries{dhart/docs}} portion is omitted when specifying the image,~\newline
+ since our Doxyfile will already its {\ttfamily IMAGE\+\_\+\+PATH} configured to begin at {\bfseries{dhart/docs}}.
+
+{\bfseries{Step 0\+:}}~\newline
+ Begin by saving copy of {\bfseries{image\+\_\+file}},~\newline
+ which is the filename of the desired image,~\newline
+ into the following directory\+:~\newline
+
+
+{\ttfamily dhart\textbackslash{}docs\textbackslash{}language\textbackslash{}img\textbackslash{}enclosing\+\_\+folder\textbackslash{}module\+\_\+name}
+
+{\ttfamily \texorpdfstring{$<$}{<}b\texorpdfstring{$>$}{>}language\texorpdfstring{$<$}{<}/b\texorpdfstring{$>$}{>}},~\newline
+ {\ttfamily \texorpdfstring{$<$}{<}b\texorpdfstring{$>$}{>}enclosing\+\_\+folder\texorpdfstring{$<$}{<}/b\texorpdfstring{$>$}{>}},~\newline
+ and {\ttfamily \texorpdfstring{$<$}{<}b\texorpdfstring{$>$}{>}module\+\_\+name\texorpdfstring{$<$}{<}/b\texorpdfstring{$>$}{>}} are {\bfseries{placeholders}}.~\newline
+
+
+{\ttfamily images} will be a subdirectory within {\ttfamily \texorpdfstring{$<$}{<}b\texorpdfstring{$>$}{>}language\texorpdfstring{$<$}{<}/b\texorpdfstring{$>$}{>}}.
+
+{\bfseries{Note\+:}}~\newline
+ In the {\bfseries{dhart/docs}} directory,~\newline
+ there are {\bfseries{three}} subdirectories\+:~\newline
+ for which the {\ttfamily \texorpdfstring{$<$}{<}b\texorpdfstring{$>$}{>}language\texorpdfstring{$<$}{<}/b\texorpdfstring{$>$}{>}} placeholder applies\+:
+\begin{DoxyItemize}
+\item C\# Documentation
+\item C++
+\item Python Docs
+\end{DoxyItemize}
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{file_explorer_docs_subdirs.png}%Docs\+Subdirs
+\end{DoxyInlineImage}
+    {\bfseries{The contributing-\/guides subdirectory is for the images in {\itshape this} file.}}
+
+For {\ttfamily \texorpdfstring{$<$}{<}b\texorpdfstring{$>$}{>}language\texorpdfstring{$<$}{<}/b\texorpdfstring{$>$}{>}},~\newline
+ {\bfseries{be sure to choose the appropriate subdirectory}}~\newline
+ when saving your image file.
+
+Although this particular example deals with inserting an image~\newline
+ into documentation for a C++ header file,~\newline
+ the same steps will apply for C\# or Python sources.~\newline
+
+
+For instance, the full filepath of {\ttfamily \mbox{\hyperlink{a00275}{node.\+h}}} is~\newline
+ {\ttfamily \texorpdfstring{$<$}{<}b\texorpdfstring{$>$}{>}dhart\textbackslash{}src\textbackslash{}Cpp\textbackslash{}spatialstructures\textbackslash{}src\textbackslash{}\mbox{\hyperlink{a00275}{node.\+h}}\texorpdfstring{$<$}{<}/b\texorpdfstring{$>$}{>}}
+
+{\ttfamily \texorpdfstring{$<$}{<}b\texorpdfstring{$>$}{>}language\texorpdfstring{$<$}{<}/b\texorpdfstring{$>$}{>}} is {\bfseries{C++}}~\newline
+ {\ttfamily \texorpdfstring{$<$}{<}b\texorpdfstring{$>$}{>}enclosing\+\_\+folder\texorpdfstring{$<$}{<}/b\texorpdfstring{$>$}{>}} is {\bfseries{spatialstructures}}~\newline
+ {\ttfamily \texorpdfstring{$<$}{<}b\texorpdfstring{$>$}{>}module\+\_\+name\texorpdfstring{$<$}{<}/b\texorpdfstring{$>$}{>}} is {\bfseries{node}}~\newline
+
+
+So, if we wanted to insert an image for any documentation~\newline
+ for {\ttfamily \mbox{\hyperlink{a00275}{node.\+h}}} or {\ttfamily node.\+cpp},~\newline
+ the image would be saved into the following directory\+:~\newline
+
+
+{\ttfamily \texorpdfstring{$<$}{<}b\texorpdfstring{$>$}{>}dhart\textbackslash{}docs\textbackslash{}C++\textbackslash{}images\textbackslash{}spatialstructures\textbackslash{}node\texorpdfstring{$<$}{<}/b\texorpdfstring{$>$}{>}}
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{file_explorer_docs_img_node-h.png}
+\doxyfigcaption{Node\+Picture\+Sample}
+\end{DoxyImage}
+   
+
+If directories {\ttfamily \texorpdfstring{$<$}{<}b\texorpdfstring{$>$}{>}img\texorpdfstring{$<$}{<}/b\texorpdfstring{$>$}{>}}, {\ttfamily \texorpdfstring{$<$}{<}b\texorpdfstring{$>$}{>}enclosing\+\_\+folder\texorpdfstring{$<$}{<}/b\texorpdfstring{$>$}{>}},~\newline
+ or {\ttfamily \texorpdfstring{$<$}{<}b\texorpdfstring{$>$}{>}module\+\_\+name\texorpdfstring{$<$}{<}/b\texorpdfstring{$>$}{>}}~\newline
+ do not already exist, you may create them.~\newline
+
+
+We can now proceed to editing the file where we want to insert the desired image.~\newline
+ This could be a header/source file (step 1a), or a markdown file (step 1b).~\newline
+
+
+Scroll down to the instructions that apply to your use case.~\newline
+
+
+\doxysubsubsection*{Adding an image to a header/source file}
+
+{\bfseries{Step 1a\+:}}~\newline
+ In the header/source file where you want the image to appear,~\newline
+ navigate to the line of code where you want the image to appear.~\newline
+
+
+We will now utilize the {\ttfamily \textbackslash{}image} tag.
+
+At the line where you want the image to appear,~\newline
+ enter the following\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/// \(\backslash\)image html language\(\backslash\)images\(\backslash\)enclosing\_folder\(\backslash\)module\_name\(\backslash\)image\_file}
+
+\end{DoxyCode}
+
+
+Remember this example is using placeholders;~\newline
+ be sure that {\bfseries{language}}, {\bfseries{enclosing\+\_\+folder}}, {\bfseries{module\+\_\+name}},~\newline
+ and {\bfseries{image\+\_\+file}} correspond to where your image is saved.~\newline
+
+
+Also note that {\bfseries{images}} is a subdirectory within your chosen {\bfseries{language}} directory.~\newline
+
+
+An example use of the {\ttfamily \textbackslash{}image} tag would be\+:~\newline
+
+
+{\ttfamily /// \textbackslash{}image html C++\textbackslash{}images\textbackslash{}spatialstructures\textbackslash{}node\textbackslash{}test-\/image\+\_\+node-\/h.\+png}
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{vs_imagetag_node-h.png}%VSImage\+Node-\/h
+\end{DoxyInlineImage}
+    ~\newline
+ See line 42 -\/ example use of the {\ttfamily \textbackslash{}image} tag.
+
+We will now move on to the {\bfseries{Doxygen GUI frontend (Doxywizard)}} application.
+
+\doxysubsubsection*{Adding an image to a markdown file ({\ttfamily .md})}
+
+{\bfseries{Step 1b\+:}}~\newline
+ In the markdown file where you want the image to appear,~\newline
+ navigate to the line at which the image should be inserted.~\newline
+
+
+We will now utilize the markdown syntax for images.~\newline
+
+
+At the line where you want the image to appear,~\newline
+ enter the following\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{![image\_name](language\(\backslash\)images\(\backslash\)enclosing\_folder\(\backslash\)module\_name\(\backslash\)image\_file)}
+
+\end{DoxyCode}
+ Remember this example is using placeholders;~\newline
+ be sure that {\bfseries{language}}, {\bfseries{enclosing\+\_\+folder}}, {\bfseries{module\+\_\+name}},~\newline
+ and {\bfseries{image\+\_\+file}} correspond to where your image is saved.~\newline
+
+
+An example use of the syntax would be\+:~\newline
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{![TestImage](C++\(\backslash\)images\(\backslash\)spatialstructures\(\backslash\)node\(\backslash\)test.png)}
+
+\end{DoxyCode}
+ {\ttfamily \texorpdfstring{$<$}{<}b\texorpdfstring{$>$}{>}language\texorpdfstring{$<$}{<}/b\texorpdfstring{$>$}{>}} is {\bfseries{C++}}~\newline
+ {\ttfamily \texorpdfstring{$<$}{<}b\texorpdfstring{$>$}{>}enclosing\+\_\+folder\texorpdfstring{$<$}{<}/b\texorpdfstring{$>$}{>}} is {\bfseries{spatialstructures}}~\newline
+ {\ttfamily \texorpdfstring{$<$}{<}b\texorpdfstring{$>$}{>}module\+\_\+name\texorpdfstring{$<$}{<}/b\texorpdfstring{$>$}{>}} is {\bfseries{node}}~\newline
+ {\ttfamily \texorpdfstring{$<$}{<}b\texorpdfstring{$>$}{>}image\+\_\+file\texorpdfstring{$<$}{<}/b\texorpdfstring{$>$}{>}} is {\bfseries{test.\+png}}
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{vs_imagemd_mainpage.png}%VSImage\+MDMainpage
+\end{DoxyInlineImage}
+    {\bfseries{This particular example is of \mbox{\hyperlink{a00179}{mainpage.\+md}}, in dhart/src/\+Cpp}}
+
+We will now move on to the {\bfseries{Doxygen GUI frontend (Doxywizard)}} application.
+
+{\bfseries{Step 2\+:}}~\newline
+ Open Doxywizard.~\newline
+  
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{startmenu_doxygen.png}%Doxywizard\+Open
+\end{DoxyInlineImage}
+   
+
+In {\bfseries{Doxygen GUI frontend (Doxywizard)}} -- load the repository\textquotesingle{}s Doxyfile.~\newline
+
+
+Click {\bfseries{File \texorpdfstring{$>$}{>} Open...}}~\newline
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{doxygen_fileopen.png}
+\doxyfigcaption{Doxygen\+File\+Open}
+\end{DoxyImage}
+   
+
+The \textquotesingle{}Open configuration file\textquotesingle{} file explorer will appear.~\newline
+ Navigate to your local copy of the repository,~\newline
+ then click the {\bfseries{Doxyfile}} icon.~\newline
+
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{doxygen_open_doxyfile_0.png}%Doxygen\+Open\+Doxyfile0
+\end{DoxyInlineImage}
+    {\bfseries{Your path to the repository will differ, depending where it resides locally on your machine.}}
+
+Upon loading the Doxyfile, it will be preconfigured for {\bfseries{C++}}.
+
+Doxygen\textquotesingle{}s {\bfseries{working directory}} will be the location of the {\bfseries{Doxyfile}}, which is the root directory of the repository.
+
+The {\bfseries{Source code directory}} will be configured for {\ttfamily ./src/\+Cpp}~\newline
+ and the {\bfseries{Destination directory}} will be configured for {\ttfamily ./docs/\+C++}.~\newline
+
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{doxygen_wizard_cpp.png}%Doxygen\+Wizard\+Cpp
+\end{DoxyInlineImage}
+    {\bfseries{This is how the \textquotesingle{}Wizard\textquotesingle{} page for Doxywizard may look for a C++ documentation export.}}
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{doxygen_wizard_source.png}%Doxygen\+Wizard\+Source
+\end{DoxyInlineImage}
+    {\bfseries{Change the highlighted portion to Csharp for C\# sources, or Python for Python sources.}}
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{doxygen_wizard_dest.png}%Doxygen\+Wizard\+Dest
+\end{DoxyInlineImage}
+    {\bfseries{Change the highlighed portion to C\# Documentation for C\# exports, or Python for Python exports.}}
+
+Suggestion\+:~\newline
+ Before exporting documentation and pushing it to the repository,~\newline
+ change the {\bfseries{Destination directory}} to a test directory of your choice~\newline
+ (relative to your local copy of dhart on your machine)
+
+To do this,~\newline
+ create a directory on your Desktop, named {\bfseries{test\+\_\+docs}}.~\newline
+ Then, for {\bfseries{Destination directory}},~\newline
+ you will want to provide a {\bfseries{relative path}} to {\bfseries{test\+\_\+docs}},~\newline
+ from Doxywizard\textquotesingle{}s working directory.~\newline
+ (this will differ, depending on where your copy of dhart resides on your machine)
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{doxygen_wizard_dest_test.png}%Doxygen\+Wizard\+Dest\+Test
+\end{DoxyInlineImage}
+    {\bfseries{For this example, the destination directory is set to move up two parent directories, so that it can reach Desktop/test\+\_\+docs.}}
+
+{\bfseries{Step 3\+:}}~\newline
+ The Doxyfile will be preconfigured to search for images from~\newline
+ {\ttfamily dhart\textbackslash{}docs}, via the {\ttfamily IMAGE\+\_\+\+PATH} variable.~\newline
+
+
+The current {\ttfamily IMAGE\+\_\+\+PATH} value, {\ttfamily ./docs} {\bfseries{should not be removed}},~\newline
+ but you may {\bfseries{add to it}} by doing the following\+:
+
+Click the {\bfseries{Expert}} tab.~\newline
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{doxygen_expert_tab.png}
+\doxyfigcaption{Doxygen\+Expert\+Tab}
+\end{DoxyImage}
+   
+
+Underneath {\bfseries{Topics}} (on the left hand side of the window),~\newline
+ select {\bfseries{Input}},~\newline
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{doxygen_expert_tab_topics_input.png}
+\doxyfigcaption{Doxygen\+Expert\+Tab\+Topics\+Input}
+\end{DoxyImage}
+   
+
+then on the right side,~\newline
+ scroll down until you see the text field for {\bfseries{IMAGE\+\_\+\+PATH}}.~\newline
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{doxygen_expert_tab_image_path_0.png}
+\doxyfigcaption{Doxygen\+Expert\+Tab\+Image\+Path0}
+\end{DoxyImage}
+   
+
+Click the folder icon for {\bfseries{IMAGE\+\_\+\+PATH}}.~\newline
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{doxygen_expert_tab_image_path_1.png}
+\doxyfigcaption{Doxygen\+Expert\+Tab\+Image\+Path1}
+\end{DoxyImage}
+   
+
+In the file explorer window that appears,~\newline
+ navigate to {\bfseries{a directory of your choice.}}.~\newline
+ Then, click {\bfseries{Select Folder}}.~\newline
+
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{doxygen_expert_tab_image_path_2.png}%Doxygen\+Expert\+Tab\+Image\+Path2
+\end{DoxyInlineImage}
+    {\bfseries{You can add to the IMAGE\+\_\+\+PATH by selecting any directory of your choice.}}~\newline
+ {\bfseries{The result will be a filepath relative to Doxygen\textquotesingle{}s working directory.}}
+
+We have now configured another image path for Doxygen.~\newline
+
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{doxygen_expert_tab_image_path_3.png}%Doxygen\+Expert\+Tab\+Image\+Path3
+\end{DoxyInlineImage}
+    {\bfseries{When Doxygen inserts images into documentation, it will begin its search in the dhart/docs directory.}}~\newline
+ {\bfseries{If you have added another path to IMAGE\+\_\+\+PATH (not shown here), it will also search this path.}}
+
+{\bfseries{Step 4\+:}}~\newline
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{doxygen_run_0.png}
+\doxyfigcaption{Doxygen\+Run0}
+\end{DoxyImage}
+   
+
+If there is nothing else you would like to configure,~\newline
+ select the {\bfseries{Run}} tab, then click {\bfseries{Run doxygen}}.~\newline
+
+
+Your documentation will now be generated.
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{doxygen_run_1.png}
+\doxyfigcaption{Doxygen\+Run1}
+\end{DoxyImage}
+   
+
+Here are some examples for inserting an image into {\ttfamily \mbox{\hyperlink{a00275}{node.\+h}}},~\newline
+ and {\ttfamily \mbox{\hyperlink{a00179}{mainpage.\+md}}}.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{doxygen_preview_node-h.png}%Doxygen\+Preview\+NodeH
+\end{DoxyInlineImage}
+    {\bfseries{{\ttfamily \textbackslash{}image} tag was used within {\ttfamily \mbox{\hyperlink{a00275}{node.\+h}}}.}}
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{doxygen_preview_mainpage.png}%Doxygen\+Preview\+Mainpage
+\end{DoxyInlineImage}
+    {\bfseries{Markdown syntax for images was used for {\ttfamily \mbox{\hyperlink{a00179}{mainpage.\+md}}}.}} 

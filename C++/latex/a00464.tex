@@ -1,0 +1,518 @@
+\hypertarget{a00464}{}\doxysection{HF\+::Ray\+Tracer Namespace Reference}
+\label{a00464}\index{HF::RayTracer@{HF::RayTracer}}
+
+
+Cast rays to determine if and where they intersect geometry.  
+
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a01511}{double3}}
+\item 
+class \mbox{\hyperlink{a01411}{Embree\+Ray\+Tracer}}
+\begin{DoxyCompactList}\small\item\em A wrapper for Intel\textquotesingle{}s Embree Library.  \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01415}{Hit\+Struct}}
+\begin{DoxyCompactList}\small\item\em A simple hit struct to carry all relevant information about hits.  \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01419}{Multi\+RT}}
+\item 
+class \mbox{\hyperlink{a01519}{Nano\+RTRay\+Tracer}}
+\item 
+struct \mbox{\hyperlink{a01523}{Ray\+Request}}
+\item 
+struct \mbox{\hyperlink{a00464_a01403}{Triangle}}
+\begin{DoxyCompactList}\small\item\em A triangle. Used internally in Embree.   \mbox{\hyperlink{a00464_a01403}{More...}}\end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01407}{Vector3D}}
+\item 
+struct \mbox{\hyperlink{a00464_a01399}{Vertex}}
+\begin{DoxyCompactList}\small\item\em A vertex. Used internally in Embree.   \mbox{\hyperlink{a00464_a01399}{More...}}\end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename numeric1 , typename numeric2 , typename dist\+\_\+type  = float$>$ }\\RTCRay\+Hit \mbox{\hyperlink{a00464_a864ebcf0023de27e610ee897de5436c2}{Construct\+Hit}} (numeric1 x, numeric1 y, numeric1 z, numeric2 dx, numeric2 dy, numeric2 dz, dist\+\_\+type distance=-\/1.\+0f, int mesh\+\_\+id=-\/1)
+\item 
+{\footnotesize template$<$typename numeric1 , typename numeric2 , typename dist\+\_\+type  = float$>$ }\\RTCRay \mbox{\hyperlink{a00464_a76e5d26b5063f0e5b49b4ba835f1da93}{Construct\+Ray}} (numeric1 x, numeric1 y, numeric1 z, numeric2 dx, numeric2 dy, numeric2 dz, dist\+\_\+type distance=-\/1.\+0f, int mesh\+\_\+id=-\/1)
+\item 
+RTCError \mbox{\hyperlink{a00464_a19e11d13f73136d6819b8abee57b0fd9}{Check\+State}} (RTCDevice \&device)
+\begin{DoxyCompactList}\small\item\em Check an embree device for errors.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00464_a732eb910d06064bea04e6a959fd235f0}{vectors\+To\+Buffers}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&vertices, std\+::vector$<$ \mbox{\hyperlink{a00464_a01403}{Triangle}} $>$ \&Tribuffer, std\+::vector$<$ \mbox{\hyperlink{a00464_a01399}{Vertex}} $>$ \&Vbuffer)
+\begin{DoxyCompactList}\small\item\em Index a list of verticies and place them into a triangle and vertex buffer.  \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00464_aac8c0b245ea813969c50b6496cc67945}{buffers\+To\+Structs}} (std\+::vector$<$ float $>$ \&in\+\_\+vertices, std\+::vector$<$ int $>$ \&in\+\_\+indices, std\+::vector$<$ \mbox{\hyperlink{a00464_a01399}{Vertex}} $>$ \&out\+\_\+vertices, std\+::vector$<$ \mbox{\hyperlink{a00464_a01403}{Triangle}} $>$ \&out\+\_\+triangles)
+\begin{DoxyCompactList}\small\item\em Package raw arrays of floats and indices in buffers to the required Embree types.  \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01407}{Vector3D}} \mbox{\hyperlink{a00464_a16f9f26b0140f023ce820ec55e38c66b}{cross}} (const \mbox{\hyperlink{a01407}{Vector3D}} \&x, const \mbox{\hyperlink{a01407}{Vector3D}} \&y)
+\item 
+\mbox{\hyperlink{a00001_a02139}{double}} \mbox{\hyperlink{a00464_ae551c109488ce94d0a568712b50da689}{dot}} (const \mbox{\hyperlink{a01407}{Vector3D}} \&v1, const \mbox{\hyperlink{a01407}{Vector3D}} \&v2)
+\item 
+\mbox{\hyperlink{a01407}{Vector3D}} \mbox{\hyperlink{a00464_ac419170961bff9b1236fe017f6bc3289}{Invert\+Vector}} (const \mbox{\hyperlink{a01407}{Vector3D}} \&V)
+\item 
+\mbox{\hyperlink{a00001_a02139}{double}} \mbox{\hyperlink{a00464_a9498ae7ffabd8c5bca4026374ac862e9}{Ray\+Triangle\+Intersection}} (const \mbox{\hyperlink{a01407}{Vector3D}} \&origin, const \mbox{\hyperlink{a01407}{Vector3D}} \&direction, const \mbox{\hyperlink{a01407}{Vector3D}} \&v1, const \mbox{\hyperlink{a01407}{Vector3D}} \&v2, const \mbox{\hyperlink{a01407}{Vector3D}} \&v3)
+\begin{DoxyCompactList}\small\item\em Determine the distance between a ray\textquotesingle{}s origin and it\textquotesingle{}s point of intersection with a triangle. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01407}{Vector3D}} \mbox{\hyperlink{a00464_a6e20c473674ea46f649ef827818841d2}{Get\+Point\+From\+Buffer}} (int index, \mbox{\hyperlink{a00464_a01399}{Vertex}} $\ast$buffer)
+\item 
+bool \mbox{\hyperlink{a00464_a2630761a64fac02a4ee33abaf5c885a1}{Did\+Intersect}} (int mesh\+\_\+id)
+\item 
+void \mbox{\hyperlink{a00464_af9bee4ce1cb91abb96b9535ed11c912e}{Log}} (\mbox{\hyperlink{a01419_ab55089d50434891b9fc5dcc523eb1425}{Multi\+RT\+::\+RT\+\_\+\+Type}} type, std\+::string Message=\char`\"{}\char`\"{})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const int \mbox{\hyperlink{a00464_a23aa285a8007029dddf66e52b12e3115}{FAIL\+\_\+\+ID}} = ((unsigned int)-\/1)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Cast rays to determine if and where they intersect geometry. 
+
+The basics of raytracing entail casting a ray from an origin point in a specific direction and determining whether or not it intersects with a set of geometry. Certain functions can even determine where the intersection occured. Generally, every \mbox{\hyperlink{a00464}{Ray\+Tracer}} will contain a set of geometry and provide functions for casting rays from an origin point in a specific direciton. Some generate an accelerated structure from geometry called a Bounding Volume Hierarchy, or BVH. A BVH can drastically decrease the time it takes to calculate ray intersections, but can be more complicated to manage compared to standard buffers of geometry.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01411}{Embree\+Ray\+Tracer}} For an implementation of a raytracer using Intel\textquotesingle{}s Embree library as a backend. 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Class Documentation}
+\index{HF::RayTracer::Triangle@{HF::RayTracer::Triangle}}\label{a01403}
+\Hypertarget{a00464_a01403}
+\doxysubsubsection{struct HF\+::Ray\+Tracer\+::Triangle}
+A triangle. Used internally in Embree.  
+
+Definition at line \mbox{\hyperlink{a00209_source_l00082}{82}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+Collaboration diagram for HF\+::Ray\+Tracer\+::Triangle\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=199pt]{a01401}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00464_a504a02b108984ddfa3f521cf40b17e61}\label{a00464_a504a02b108984ddfa3f521cf40b17e61}} 
+int&
+v0&
+\\
+\hline
+
+\mbox{\Hypertarget{a00464_afc086ccfe3fc951af959d905056358c4}\label{a00464_afc086ccfe3fc951af959d905056358c4}} 
+int&
+v1&
+\\
+\hline
+
+\mbox{\Hypertarget{a00464_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}\label{a00464_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}} 
+int&
+v2&
+\\
+\hline
+
+\end{DoxyFields}
+\index{HF::RayTracer::Vertex@{HF::RayTracer::Vertex}}\label{a01399}
+\Hypertarget{a00464_a01399}
+\doxysubsubsection{struct HF\+::Ray\+Tracer\+::Vertex}
+A vertex. Used internally in Embree.  
+
+Definition at line \mbox{\hyperlink{a00209_source_l00077}{77}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+Collaboration diagram for HF\+::Ray\+Tracer\+::Vertex\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{a01397}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00464_aad8e270f026ac9dd20ee294b2b1a21de}\label{a00464_aad8e270f026ac9dd20ee294b2b1a21de}} 
+float&
+x&
+\\
+\hline
+
+\mbox{\Hypertarget{a00464_aa27c7b22316499f43093c2b7768c06ea}\label{a00464_aa27c7b22316499f43093c2b7768c06ea}} 
+float&
+y&
+\\
+\hline
+
+\mbox{\Hypertarget{a00464_ab8599cc6220e686dac319622f7d2f364}\label{a00464_ab8599cc6220e686dac319622f7d2f364}} 
+float&
+z&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00464_aac8c0b245ea813969c50b6496cc67945}\label{a00464_aac8c0b245ea813969c50b6496cc67945}} 
+\index{HF::RayTracer@{HF::RayTracer}!buffersToStructs@{buffersToStructs}}
+\index{buffersToStructs@{buffersToStructs}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{buffersToStructs()}{buffersToStructs()}}
+{\footnotesize\ttfamily void HF\+::\+Ray\+Tracer\+::buffers\+To\+Structs (\begin{DoxyParamCaption}\item[{std\+::vector$<$ float $>$ \&}]{in\+\_\+vertices,  }\item[{std\+::vector$<$ int $>$ \&}]{in\+\_\+indices,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a00464_a01399}{Vertex}} $>$ \&}]{out\+\_\+vertices,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a00464_a01403}{Triangle}} $>$ \&}]{out\+\_\+triangles }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Package raw arrays of floats and indices in buffers to the required Embree types.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em in\+\_\+vertices} & An array of floats in which every 3 floats represents a vertex. \\
+\hline
+{\em in\+\_\+indices} & An array of integers in which every 3 integers represents a triangle. \\
+\hline
+{\em out\+\_\+vertices} & Output array for vertexes.\\
+\hline
+{\em out\+\_\+triangles} & Output array for triangles.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00452__todo000021}{Todo}}]May be faster as a std\+::move or std\+::copy. \end{DoxyRefDesc}
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00141}{141}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00375}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Add\+Mesh()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00464_aac8c0b245ea813969c50b6496cc67945_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00464_a19e11d13f73136d6819b8abee57b0fd9}\label{a00464_a19e11d13f73136d6819b8abee57b0fd9}} 
+\index{HF::RayTracer@{HF::RayTracer}!CheckState@{CheckState}}
+\index{CheckState@{CheckState}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{CheckState()}{CheckState()}}
+{\footnotesize\ttfamily RTCError HF\+::\+Ray\+Tracer\+::\+Check\+State (\begin{DoxyParamCaption}\item[{RTCDevice \&}]{device }\end{DoxyParamCaption})}
+
+
+
+Check an embree device for errors.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em device} & Device to check for errors\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::exception} & Some error is found while casting rays.\\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00069}{69}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00212}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Insert\+Geom()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00464_a19e11d13f73136d6819b8abee57b0fd9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00464_a864ebcf0023de27e610ee897de5436c2}\label{a00464_a864ebcf0023de27e610ee897de5436c2}} 
+\index{HF::RayTracer@{HF::RayTracer}!ConstructHit@{ConstructHit}}
+\index{ConstructHit@{ConstructHit}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{ConstructHit()}{ConstructHit()}}
+{\footnotesize\ttfamily template$<$typename numeric1 , typename numeric2 , typename dist\+\_\+type  = float$>$ \\
+RTCRay\+Hit HF\+::\+Ray\+Tracer\+::\+Construct\+Hit (\begin{DoxyParamCaption}\item[{numeric1}]{x,  }\item[{numeric1}]{y,  }\item[{numeric1}]{z,  }\item[{numeric2}]{dx,  }\item[{numeric2}]{dy,  }\item[{numeric2}]{dz,  }\item[{dist\+\_\+type}]{distance = {\ttfamily -\/1.0f},  }\item[{int}]{mesh\+\_\+id = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00024}{24}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00543}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Intersect\+\_\+\+IMPL()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00464_a864ebcf0023de27e610ee897de5436c2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00464_a76e5d26b5063f0e5b49b4ba835f1da93}\label{a00464_a76e5d26b5063f0e5b49b4ba835f1da93}} 
+\index{HF::RayTracer@{HF::RayTracer}!ConstructRay@{ConstructRay}}
+\index{ConstructRay@{ConstructRay}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{ConstructRay()}{ConstructRay()}}
+{\footnotesize\ttfamily template$<$typename numeric1 , typename numeric2 , typename dist\+\_\+type  = float$>$ \\
+RTCRay HF\+::\+Ray\+Tracer\+::\+Construct\+Ray (\begin{DoxyParamCaption}\item[{numeric1}]{x,  }\item[{numeric1}]{y,  }\item[{numeric1}]{z,  }\item[{numeric2}]{dx,  }\item[{numeric2}]{dy,  }\item[{numeric2}]{dz,  }\item[{dist\+\_\+type}]{distance = {\ttfamily -\/1.0f},  }\item[{int}]{mesh\+\_\+id = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00048}{48}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00624}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Occluded\+\_\+\+IMPL()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00464_a76e5d26b5063f0e5b49b4ba835f1da93_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00464_a16f9f26b0140f023ce820ec55e38c66b}\label{a00464_a16f9f26b0140f023ce820ec55e38c66b}} 
+\index{HF::RayTracer@{HF::RayTracer}!cross@{cross}}
+\index{cross@{cross}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{cross()}{cross()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01407}{Vector3D}} HF\+::\+Ray\+Tracer\+::cross (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01407}{Vector3D}} \&}]{x,  }\item[{const \mbox{\hyperlink{a01407}{Vector3D}} \&}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00229}{229}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00212_source_l00040}{HF\+::\+Ray\+Tracer\+::\+Vector3\+D\+::x}}, \mbox{\hyperlink{a00212_source_l00040}{HF\+::\+Ray\+Tracer\+::\+Vector3\+D\+::y}}, and \mbox{\hyperlink{a00212_source_l00040}{HF\+::\+Ray\+Tracer\+::\+Vector3\+D\+::z}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00246}{Ray\+Triangle\+Intersection()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00464_a16f9f26b0140f023ce820ec55e38c66b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00464_a2630761a64fac02a4ee33abaf5c885a1}\label{a00464_a2630761a64fac02a4ee33abaf5c885a1}} 
+\index{HF::RayTracer@{HF::RayTracer}!DidIntersect@{DidIntersect}}
+\index{DidIntersect@{DidIntersect}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{DidIntersect()}{DidIntersect()}}
+{\footnotesize\ttfamily bool HF\+::\+Ray\+Tracer\+::\+Did\+Intersect (\begin{DoxyParamCaption}\item[{int}]{mesh\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00218_source_l00023}{23}} of file \mbox{\hyperlink{a00218_source}{Hit\+Struct.\+h}}.
+
+
+
+References \mbox{\hyperlink{a00218_source_l00022}{FAIL\+\_\+\+ID}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00218_source_l00017}{HF\+::\+Ray\+Tracer\+::\+Hit\+Struct$<$ numeric\+\_\+type $>$\+::\+Did\+Hit()}}, and \mbox{\hyperlink{a00212_source_l01041}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Intersect()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00464_a2630761a64fac02a4ee33abaf5c885a1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00464_ae551c109488ce94d0a568712b50da689}\label{a00464_ae551c109488ce94d0a568712b50da689}} 
+\index{HF::RayTracer@{HF::RayTracer}!dot@{dot}}
+\index{dot@{dot}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{dot()}{dot()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00001_a02139}{double}} HF\+::\+Ray\+Tracer\+::dot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01407}{Vector3D}} \&}]{v1,  }\item[{const \mbox{\hyperlink{a01407}{Vector3D}} \&}]{v2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00237}{237}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00212_source_l00040}{HF\+::\+Ray\+Tracer\+::\+Vector3\+D\+::x}}, \mbox{\hyperlink{a00212_source_l00040}{HF\+::\+Ray\+Tracer\+::\+Vector3\+D\+::y}}, and \mbox{\hyperlink{a00212_source_l00040}{HF\+::\+Ray\+Tracer\+::\+Vector3\+D\+::z}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00246}{Ray\+Triangle\+Intersection()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00464_ae551c109488ce94d0a568712b50da689_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00464_a6e20c473674ea46f649ef827818841d2}\label{a00464_a6e20c473674ea46f649ef827818841d2}} 
+\index{HF::RayTracer@{HF::RayTracer}!GetPointFromBuffer@{GetPointFromBuffer}}
+\index{GetPointFromBuffer@{GetPointFromBuffer}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{GetPointFromBuffer()}{GetPointFromBuffer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01407}{Vector3D}} HF\+::\+Ray\+Tracer\+::\+Get\+Point\+From\+Buffer (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{\mbox{\hyperlink{a00464_a01399}{Vertex}} $\ast$}]{buffer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00446}{446}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00077}{HF\+::\+Ray\+Tracer\+::\+Vertex\+::x}}, \mbox{\hyperlink{a00209_source_l00077}{HF\+::\+Ray\+Tracer\+::\+Vertex\+::y}}, and \mbox{\hyperlink{a00209_source_l00077}{HF\+::\+Ray\+Tracer\+::\+Vertex\+::z}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00450}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Get\+Triangle()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00464_a6e20c473674ea46f649ef827818841d2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00464_ac419170961bff9b1236fe017f6bc3289}\label{a00464_ac419170961bff9b1236fe017f6bc3289}} 
+\index{HF::RayTracer@{HF::RayTracer}!InvertVector@{InvertVector}}
+\index{InvertVector@{InvertVector}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{InvertVector()}{InvertVector()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01407}{Vector3D}} HF\+::\+Ray\+Tracer\+::\+Invert\+Vector (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01407}{Vector3D}} \&}]{V }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00241}{241}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00212_source_l00040}{HF\+::\+Ray\+Tracer\+::\+Vector3\+D\+::x}}, \mbox{\hyperlink{a00212_source_l00040}{HF\+::\+Ray\+Tracer\+::\+Vector3\+D\+::y}}, and \mbox{\hyperlink{a00212_source_l00040}{HF\+::\+Ray\+Tracer\+::\+Vector3\+D\+::z}}.
+
+\mbox{\Hypertarget{a00464_af9bee4ce1cb91abb96b9535ed11c912e}\label{a00464_af9bee4ce1cb91abb96b9535ed11c912e}} 
+\index{HF::RayTracer@{HF::RayTracer}!Log@{Log}}
+\index{Log@{Log}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{Log()}{Log()}}
+{\footnotesize\ttfamily void HF\+::\+Ray\+Tracer\+::\+Log (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01419_ab55089d50434891b9fc5dcc523eb1425}{Multi\+RT\+::\+RT\+\_\+\+Type}}}]{type,  }\item[{std\+::string}]{Message = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00221_source_l00009}{9}} of file \mbox{\hyperlink{a00221_source}{Multi\+RT.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00224_source_l00016}{HF\+::\+Ray\+Tracer\+::\+Multi\+RT\+::\+EMBREE}}, and \mbox{\hyperlink{a00224_source_l00017}{HF\+::\+Ray\+Tracer\+::\+Multi\+RT\+::\+NANO\+\_\+\+RT}}.
+
+\mbox{\Hypertarget{a00464_a9498ae7ffabd8c5bca4026374ac862e9}\label{a00464_a9498ae7ffabd8c5bca4026374ac862e9}} 
+\index{HF::RayTracer@{HF::RayTracer}!RayTriangleIntersection@{RayTriangleIntersection}}
+\index{RayTriangleIntersection@{RayTriangleIntersection}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{RayTriangleIntersection()}{RayTriangleIntersection()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00001_a02139}{double}} HF\+::\+Ray\+Tracer\+::\+Ray\+Triangle\+Intersection (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01407}{Vector3D}} \&}]{origin,  }\item[{const \mbox{\hyperlink{a01407}{Vector3D}} \&}]{direction,  }\item[{const \mbox{\hyperlink{a01407}{Vector3D}} \&}]{v1,  }\item[{const \mbox{\hyperlink{a01407}{Vector3D}} \&}]{v2,  }\item[{const \mbox{\hyperlink{a01407}{Vector3D}} \&}]{v3 }\end{DoxyParamCaption})}
+
+
+
+Determine the distance between a ray\textquotesingle{}s origin and it\textquotesingle{}s point of intersection with a triangle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & Origin point of the ray. \\
+\hline
+{\em direction} & Direction the ray was casted in \\
+\hline
+{\em v1} & First vertex of the triangle \\
+\hline
+{\em v2} & Second vertex of a triangle \\
+\hline
+{\em v3} & Third vertex of a triangle\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The distance between the ray\textquotesingle{}s origin point and the point of intersection with the triangle defined by v1, v2, and v3 OR -\/1 if there was no intersection between the ray and the triangle.
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+This algorithm is based on an implementation of the Möller–\+Trumbore intersection algorithm written on the wikipedia page \href{https://en.wikipedia.org/wiki/M\%C3\%B6ller\%E2\%80\%93Trumbore_intersection_algorithm}{\texttt{ https\+://en.\+wikipedia.\+org/wiki/\+M\%\+C3\%\+B6ller\%\+E2\%80\%93\+Trumbore\+\_\+intersection\+\_\+algorithm}}. 
+\end{DoxyRemark}
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00246}{246}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+References \mbox{\hyperlink{a00209_source_l00229}{cross()}}, and \mbox{\hyperlink{a00209_source_l00237}{dot()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00282}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Calculate\+Precise\+Distance()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00464_a9498ae7ffabd8c5bca4026374ac862e9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00464_a9498ae7ffabd8c5bca4026374ac862e9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00464_a732eb910d06064bea04e6a959fd235f0}\label{a00464_a732eb910d06064bea04e6a959fd235f0}} 
+\index{HF::RayTracer@{HF::RayTracer}!vectorsToBuffers@{vectorsToBuffers}}
+\index{vectorsToBuffers@{vectorsToBuffers}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{vectorsToBuffers()}{vectorsToBuffers()}}
+{\footnotesize\ttfamily void HF\+::\+Ray\+Tracer\+::vectors\+To\+Buffers (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \&}]{vertices,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a00464_a01403}{Triangle}} $>$ \&}]{Tribuffer,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a00464_a01399}{Vertex}} $>$ \&}]{Vbuffer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Index a list of verticies and place them into a triangle and vertex buffer.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & Mesh vertices.\\
+\hline
+{\em Tribuffer} & Output triangle buffer.\\
+\hline
+{\em Vbuffer} & Output \mbox{\hyperlink{a00464_a01399}{Vertex}} Buffer.\\
+\hline
+\end{DoxyParams}
+
+
+Internally, this uses a hashmap to create an index map of vertices.
+
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00452__todo000020}{Todo}}]Performance here can be improved by using indexing. \end{DoxyRefDesc}
+
+
+Definition at line \mbox{\hyperlink{a00209_source_l00092}{92}} of file \mbox{\hyperlink{a00209_source}{embree\+\_\+raytracer.\+cpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00209_source_l00301}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer()}}, and \mbox{\hyperlink{a00209_source_l00316}{HF\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Add\+Mesh()}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00464_a732eb910d06064bea04e6a959fd235f0_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{a00464_a23aa285a8007029dddf66e52b12e3115}\label{a00464_a23aa285a8007029dddf66e52b12e3115}} 
+\index{HF::RayTracer@{HF::RayTracer}!FAIL\_ID@{FAIL\_ID}}
+\index{FAIL\_ID@{FAIL\_ID}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{FAIL\_ID}{FAIL\_ID}}
+{\footnotesize\ttfamily const int HF\+::\+Ray\+Tracer\+::\+FAIL\+\_\+\+ID = ((unsigned int)-\/1)}
+
+
+
+Definition at line \mbox{\hyperlink{a00218_source_l00022}{22}} of file \mbox{\hyperlink{a00218_source}{Hit\+Struct.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00218_source_l00023}{Did\+Intersect()}}.
+

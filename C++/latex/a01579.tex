@@ -1,0 +1,140 @@
+\hypertarget{a01579}{}\doxysection{nlohmann\+::detail\+::other\+\_\+error Class Reference}
+\label{a01579}\index{nlohmann::detail::other\_error@{nlohmann::detail::other\_error}}
+
+
+exception indicating other library errors  
+
+
+
+
+{\ttfamily \#include $<$json.\+hpp$>$}
+
+
+
+Inheritance diagram for nlohmann\+::detail\+::other\+\_\+error\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=215pt]{a01578}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for nlohmann\+::detail\+::other\+\_\+error\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=274pt]{a01577}
+\end{center}
+\end{figure}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{a01579}{other\+\_\+error}} \mbox{\hyperlink{a01579_a87e8ab894e8c85c0d97a0919782d3683}{create}} (int id\+\_\+, const std\+::string \&what\+\_\+arg)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01579_adf9227d6ca5161508f6a598a0dc6e7cd}{other\+\_\+error}} (int id\+\_\+, const char $\ast$what\+\_\+arg)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+exception indicating other library errors 
+
+This exception is thrown in case of errors that cannot be classified with the other exception types.
+
+Exceptions have ids 5xx.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ name / id   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ example message   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ description    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ name / id   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ example message   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ description    }\\\cline{1-3}
+\endhead
+json.\+exception.\+other\+\_\+error.\+501   &unsuccessful\+: \{\char`\"{}op\char`\"{}\+:\char`\"{}test\char`\"{},\char`\"{}path\char`\"{}\+:\char`\"{}/baz\char`\"{}, \char`\"{}value\char`\"{}\+:\char`\"{}bar\char`\"{}\}   &A JSON Patch operation \textquotesingle{}test\textquotesingle{} failed. The unsuccessful operation is also printed.   \\\cline{1-3}
+\end{longtabu}
+
+
+\begin{DoxySeeAlso}{See also}
+-\/ \mbox{\hyperlink{a01559}{exception}} for the base class of the library exceptions 
+
+-\/ \mbox{\hyperlink{a01563}{parse\+\_\+error}} for exceptions indicating a parse \mbox{\hyperlink{a00477_a58bb1ef1a9ad287a9cfaf1855784d9acacb5e100e5a9a3e7f6d1fd97512215282}{error}} 
+
+-\/ \mbox{\hyperlink{a01567}{invalid\+\_\+iterator}} for exceptions indicating errors with iterators 
+
+-\/ \mbox{\hyperlink{a01571}{type\+\_\+error}} for exceptions indicating executing a member function with a wrong type 
+
+-\/ \mbox{\hyperlink{a01575}{out\+\_\+of\+\_\+range}} for exceptions indicating access out of the defined range
+\end{DoxySeeAlso}
+@liveexample\{The following code shows how an {\ttfamily \mbox{\hyperlink{a01579}{other\+\_\+error}}} exception can be caught.,\mbox{\hyperlink{a01579}{other\+\_\+error}}\}
+
+\begin{DoxySince}{Since}
+version 3.\+0.\+0 
+\end{DoxySince}
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l02649}{2649}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01579_adf9227d6ca5161508f6a598a0dc6e7cd}\label{a01579_adf9227d6ca5161508f6a598a0dc6e7cd}} 
+\index{nlohmann::detail::other\_error@{nlohmann::detail::other\_error}!other\_error@{other\_error}}
+\index{other\_error@{other\_error}!nlohmann::detail::other\_error@{nlohmann::detail::other\_error}}
+\doxysubsubsection{\texorpdfstring{other\_error()}{other\_error()}}
+{\footnotesize\ttfamily nlohmann\+::detail\+::other\+\_\+error\+::other\+\_\+error (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+,  }\item[{const char $\ast$}]{what\+\_\+arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l02660}{2660}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01579_a87e8ab894e8c85c0d97a0919782d3683}\label{a01579_a87e8ab894e8c85c0d97a0919782d3683}} 
+\index{nlohmann::detail::other\_error@{nlohmann::detail::other\_error}!create@{create}}
+\index{create@{create}!nlohmann::detail::other\_error@{nlohmann::detail::other\_error}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{a01579}{other\+\_\+error}} nlohmann\+::detail\+::other\+\_\+error\+::create (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+,  }\item[{const std\+::string \&}]{what\+\_\+arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{a00272_source_l02652}{2652}} of file \mbox{\hyperlink{a00272_source}{json.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{a00272_source_l02369}{nlohmann\+::detail\+::exception\+::name()}}.
+
+
+
+Referenced by \mbox{\hyperlink{a00272_source_l17480}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::json\+\_\+value\+::json\+\_\+value()}}, and \mbox{\hyperlink{a00272_source_l24662}{nlohmann\+::basic\+\_\+json$<$ Object\+Type, Array\+Type, String\+Type, Boolean\+Type, Number\+Integer\+Type, Number\+Unsigned\+Type, Number\+Float\+Type, Allocator\+Type, JSONSerializer, Binary\+Type $>$\+::patch()}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01579_a87e8ab894e8c85c0d97a0919782d3683_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{a01579_a87e8ab894e8c85c0d97a0919782d3683_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00272}{json.\+hpp}}\end{DoxyCompactItemize}

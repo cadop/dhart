@@ -1,12 +1,20 @@
-\hypertarget{a00188}{}\doxysection{Cpp/spatialstructures/src/cost\+\_\+algorithms.cpp File Reference}
-\label{a00188}\index{Cpp/spatialstructures/src/cost\_algorithms.cpp@{Cpp/spatialstructures/src/cost\_algorithms.cpp}}
-{\ttfamily \#include $<$cmath$>$}\newline
-{\ttfamily \#include $<$algorithm$>$}\newline
-{\ttfamily \#include \char`\"{}cost\+\_\+algorithms.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}graph.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}Constants.\+h\char`\"{}}\newline
+\hypertarget{a00188}{}\doxysection{Cpp/objloader/src/objloader.cpp File Reference}
+\label{a00188}\index{Cpp/objloader/src/objloader.cpp@{Cpp/objloader/src/objloader.cpp}}
+
+
+Contains implementation for the \mbox{\hyperlink{a00469}{Geometry}} namespace.  
+
+
+{\ttfamily \#include $<$objloader.\+h$>$}\newline
+{\ttfamily \#include $<$Dense$>$}\newline
+{\ttfamily \#include $<$meshinfo.\+h$>$}\newline
+{\ttfamily \#include $<$tiny\+\_\+obj\+\_\+loader.\+h$>$}\newline
+{\ttfamily \#include $<$robin\+\_\+hood.\+h$>$}\newline
+{\ttfamily \#include $<$HFExceptions.\+h$>$}\newline
 {\ttfamily \#include $<$iostream$>$}\newline
-Include dependency graph for cost\+\_\+algorithms.\+cpp\+:
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
+Include dependency graph for objloader.\+cpp\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -17,44 +25,86 @@ Include dependency graph for cost\+\_\+algorithms.\+cpp\+:
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
-namespace \mbox{\hyperlink{a00396}{HF}}
+namespace \mbox{\hyperlink{a00462}{HF}}
 \begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
-namespace \mbox{\hyperlink{a00399}{HF\+::\+Spatial\+Structures}}
-\begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout DHARTAPI. \end{DoxyCompactList}\item 
-namespace \mbox{\hyperlink{a00409}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms}}
-\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{a00470}{HF\+::nano\+Geom}}
+\item 
+namespace \mbox{\hyperlink{a00469}{HF\+::\+Geometry}}
+\begin{DoxyCompactList}\small\item\em Manipulate and load geometry from disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{a00188_a525335710b53cb064ca56b936120431e}{\+\_\+\+USE\+\_\+\+MATH\+\_\+\+DEFINES}}
+\#define \mbox{\hyperlink{a00188_af14fac7fbc250522a78849d58d5b0811}{TINYOBJLOADER\+\_\+\+IMPLEMENTATION}}
+\begin{DoxyCompactList}\small\item\em This MUST be defined before importing tiny\+\_\+obj\+\_\+loader.\+h. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{a00188_ad1ceae03a73fd42494508a2d57eaf1fe}{TINYOBJLOADER\+\_\+\+USE\+\_\+\+DOUBLE}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a00001_a02073}{double}} \mbox{\hyperlink{a00409_ae7b446fefe0b9994859f47b85de79039}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::to\+\_\+radians}} (\mbox{\hyperlink{a00001_a02073}{double}} degrees)
+bool \mbox{\hyperlink{a00470_ad8e91aefa202de3abee6fd9914299e46}{HF\+::nano\+Geom\+::\+Load\+Obj}} (Mesh \&mesh, const char $\ast$filename)
 \item 
-\mbox{\hyperlink{a00001_a02073}{double}} \mbox{\hyperlink{a00409_adee2fb2573f4dbc2e5c7db153dff2694}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::to\+\_\+degrees}} (\mbox{\hyperlink{a00001_a02073}{double}} radians)
+tinyobj\+::\+Obj\+Reader \mbox{\hyperlink{a00469_aece9b1559429cfcd59fc5c60bc3dc5b1}{HF\+::\+Geometry\+::\+Create\+Reader}} (const std\+::string \&path)
 \item 
-\mbox{\hyperlink{a00001_a02073}{double}} \mbox{\hyperlink{a00409_ae06eb693d0d7858d7a863fae3a6eee2c}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Slope}} (\mbox{\hyperlink{a02005}{Node}} \&parent, \mbox{\hyperlink{a02005}{Node}} \&child)
+{\footnotesize template$<$typename T $>$ }\\tinyobj\+\_\+shape$<$ T $>$ \mbox{\hyperlink{a00469_a1d0272a1cc56fb0cb8fa5a0b968797ed}{HF\+::\+Geometry\+::\+Make\+Shape}} (const tinyobj\+::shape\+\_\+t \&shape)
 \item 
-\mbox{\hyperlink{a01469}{Edge\+Set}} \mbox{\hyperlink{a00409_ac51f2e76c00356f8a6145bee865cd922}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Energy\+Expenditure}} (const \mbox{\hyperlink{a00399_a01477}{Subgraph}} \&sg)
+{\footnotesize template$<$typename T $>$ }\\vector$<$ tinyobj\+\_\+shape$<$ T $>$ $>$ \mbox{\hyperlink{a00469_a02e98028a7e54dc32b0f148f0b6d1ba5}{HF\+::\+Geometry\+::\+Make\+Shapes}} (const vector$<$ tinyobj\+::shape\+\_\+t $>$ \&shapes)
 \item 
-std\+::vector$<$ \mbox{\hyperlink{a01469}{Edge\+Set}} $>$ \mbox{\hyperlink{a00409_adbe5e58355a884494d6e99bf17fc5f7b}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Energy\+Expenditure}} (const \mbox{\hyperlink{a01485}{Graph}} \&g)
+vector$<$ tinyobj\+\_\+material $>$ \mbox{\hyperlink{a00469_abc6b7e5052eb1564d1bb3c67d9f93031}{HF\+::\+Geometry\+::\+Make\+Materials}} (const vector$<$ tinyobj\+::material\+\_\+t $>$ \&materials)
 \item 
-std\+::vector$<$ \mbox{\hyperlink{a01465}{Int\+Edge}} $>$ \mbox{\hyperlink{a00409_a51b88e596c3b5f68b7abbcbc91e30bdf}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Cross\+Slope}} (const \mbox{\hyperlink{a00399_a01477}{Subgraph}} \&sg)
+tinyobj\+\_\+geometry$<$ \mbox{\hyperlink{a00001_a02139}{double}} $>$ \mbox{\hyperlink{a00469_a9bbdc23c626ed431d5a084722c22f99f}{HF\+::\+Geometry\+::\+Load\+Meshes\+From\+Tiny\+OBJ}} (std\+::string path)
 \item 
-std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{a01465}{Int\+Edge}} $>$ $>$ \mbox{\hyperlink{a00409_a6d12a3af69887cb335b490304138afc6}{HF\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Cross\+Slope}} (const \mbox{\hyperlink{a01485}{Graph}} \&g)
+vector$<$ \mbox{\hyperlink{a00428_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}}$<$ float $>$ $>$ \mbox{\hyperlink{a00469_a06c0c11adb62f8b204e42f75ac1990ac}{HF\+::\+Geometry\+::\+Load\+Mesh\+Objects}} (std\+::string path, GROUP\+\_\+\+METHOD gm=ONLY\+\_\+\+FILE, bool change\+\_\+coords=false, int scale=1)
+\begin{DoxyCompactList}\small\item\em Create \mbox{\hyperlink{a01351}{Mesh\+Info}} instances from the OBJ at path.  \end{DoxyCompactList}\item 
+vector$<$ array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00469_aec1df746155d224838048d3a43c2fe96}{HF\+::\+Geometry\+::\+Load\+Raw\+Vertices}} (std\+::string path)
+\begin{DoxyCompactList}\small\item\em Load a list of vertices directly from an OBJ file. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{a00469_adec2459f5c4ee10fd9d2154114d751de}{HF\+::\+Geometry\+::\+Get\+Test\+OBJPath}} (std\+::string key)
+\begin{DoxyCompactList}\small\item\em Get the path to the OBJ with the given key. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{a00428_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}}$<$ float $>$ $>$ \mbox{\hyperlink{a00469_a5e3b85fb47ef06f7693802f3fe90e996}{HF\+::\+Geometry\+::\+Load\+Mesh\+Objects}} (std\+::vector$<$ std\+::string $>$ \&path, GROUP\+\_\+\+METHOD gm=ONLY\+\_\+\+FILE, bool change\+\_\+coords=false, int scale=1)
+\begin{DoxyCompactList}\small\item\em Create \mbox{\hyperlink{a01351}{Mesh\+Info}} instances from the OBJ files in path.  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static robin\+\_\+hood\+::unordered\+\_\+map$<$ string, string $>$ \mbox{\hyperlink{a00469_a13874b607886c8f427b2a8f332148553}{HF\+::\+Geometry\+::test\+\_\+model\+\_\+paths}}
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+Contains implementation for the \mbox{\hyperlink{a00469}{Geometry}} namespace. 
+
+\begin{DoxyAuthor}{Author}
+TBA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+16 Jun 2020 
+\end{DoxyDate}
+
+
+Definition in file \mbox{\hyperlink{a00188_source}{objloader.\+cpp}}.
+
+
+
 \doxysubsection{Macro Definition Documentation}
-\mbox{\Hypertarget{a00188_a525335710b53cb064ca56b936120431e}\label{a00188_a525335710b53cb064ca56b936120431e}} 
-\index{cost\_algorithms.cpp@{cost\_algorithms.cpp}!\_USE\_MATH\_DEFINES@{\_USE\_MATH\_DEFINES}}
-\index{\_USE\_MATH\_DEFINES@{\_USE\_MATH\_DEFINES}!cost\_algorithms.cpp@{cost\_algorithms.cpp}}
-\doxysubsubsection{\texorpdfstring{\_USE\_MATH\_DEFINES}{\_USE\_MATH\_DEFINES}}
-{\footnotesize\ttfamily \#define \+\_\+\+USE\+\_\+\+MATH\+\_\+\+DEFINES}
+\mbox{\Hypertarget{a00188_af14fac7fbc250522a78849d58d5b0811}\label{a00188_af14fac7fbc250522a78849d58d5b0811}} 
+\index{objloader.cpp@{objloader.cpp}!TINYOBJLOADER\_IMPLEMENTATION@{TINYOBJLOADER\_IMPLEMENTATION}}
+\index{TINYOBJLOADER\_IMPLEMENTATION@{TINYOBJLOADER\_IMPLEMENTATION}!objloader.cpp@{objloader.cpp}}
+\doxysubsubsection{\texorpdfstring{TINYOBJLOADER\_IMPLEMENTATION}{TINYOBJLOADER\_IMPLEMENTATION}}
+{\footnotesize\ttfamily \#define TINYOBJLOADER\+\_\+\+IMPLEMENTATION}
 
 
 
-Definition at line \mbox{\hyperlink{a00188_source_l00009}{9}} of file \mbox{\hyperlink{a00188_source}{cost\+\_\+algorithms.\+cpp}}.
+This MUST be defined before importing tiny\+\_\+obj\+\_\+loader.\+h. 
+
+
+
+Definition at line \mbox{\hyperlink{a00188_source_l00011}{11}} of file \mbox{\hyperlink{a00188_source}{objloader.\+cpp}}.
+
+\mbox{\Hypertarget{a00188_ad1ceae03a73fd42494508a2d57eaf1fe}\label{a00188_ad1ceae03a73fd42494508a2d57eaf1fe}} 
+\index{objloader.cpp@{objloader.cpp}!TINYOBJLOADER\_USE\_DOUBLE@{TINYOBJLOADER\_USE\_DOUBLE}}
+\index{TINYOBJLOADER\_USE\_DOUBLE@{TINYOBJLOADER\_USE\_DOUBLE}!objloader.cpp@{objloader.cpp}}
+\doxysubsubsection{\texorpdfstring{TINYOBJLOADER\_USE\_DOUBLE}{TINYOBJLOADER\_USE\_DOUBLE}}
+{\footnotesize\ttfamily \#define TINYOBJLOADER\+\_\+\+USE\+\_\+\+DOUBLE}
+
+
+
+Definition at line \mbox{\hyperlink{a00188_source_l00012}{12}} of file \mbox{\hyperlink{a00188_source}{objloader.\+cpp}}.
 
