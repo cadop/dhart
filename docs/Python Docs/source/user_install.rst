@@ -73,6 +73,8 @@ you are in the correct location by typing ``dir`` to see the ``setup.py`` file. 
 
 ``pip install .``
 
+If you are going to run examples and/or docs, use ``pip install .[dev]``.
+
 To do a basic check that the package installed in the correct location, navigate to a different directory. 
 For example:
 
