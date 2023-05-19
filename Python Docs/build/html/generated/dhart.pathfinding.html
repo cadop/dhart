@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 
+
+
 <html>
   <head>
     <meta charset="utf-8">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>dhart.pathfinding &mdash; DHART 0.0.1 documentation</title>
     
     <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
-    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
@@ -24,9 +27,6 @@
       };
     </script>
     <script type="text/javascript" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
@@ -87,50 +87,42 @@
         <div class="bodywrapper">
           <div class="body" id="spc-section-body">
             
-  <div class="section" id="dhart-pathfinding">
+  <section id="dhart-pathfinding">
 <h1>dhart.pathfinding<a class="headerlink" href="#dhart-pathfinding" title="Permalink to this heading">¶</a></h1>
 <p class="rubric">Description</p>
-<span class="target" id="module-dhart.pathfinding"></span><div class="section" id="find-paths-between-points-within-a-graph">
+<span class="target" id="module-dhart.pathfinding"></span><section id="find-paths-between-points-within-a-graph">
 <h2>Find paths between points within a graph<a class="headerlink" href="#find-paths-between-points-within-a-graph" title="Permalink to this heading">¶</a></h2>
 <p>All path algorithms are implemented using the Boost Graph Library.</p>
-</div>
+</section>
 <p class="rubric">Classes</p>
-<table border="1" class="autosummary longtable docutils align-default">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="dhart.pathfinding.Path.html#dhart.pathfinding.Path" title="dhart.pathfinding.Path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Path</span></code></a>(path_ptr,&nbsp;data_ptr,&nbsp;size)</td>
-<td>A list of path members from C++</td>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="dhart.pathfinding.Path.html#dhart.pathfinding.Path" title="dhart.pathfinding.Path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Path</span></code></a>(path_ptr, data_ptr, size)</p></td>
+<td><p>A list of path members from C++</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="dhart.pathfinding.PathMemberStruct.html#dhart.pathfinding.PathMemberStruct" title="dhart.pathfinding.PathMemberStruct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PathMemberStruct</span></code></a></td>
-<td>A node in a path.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="dhart.pathfinding.PathMemberStruct.html#dhart.pathfinding.PathMemberStruct" title="dhart.pathfinding.PathMemberStruct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PathMemberStruct</span></code></a></p></td>
+<td><p>A node in a path.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Functions</p>
-<table border="1" class="autosummary longtable docutils align-default">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="dhart.pathfinding.ConvertNodesToIds.html#dhart.pathfinding.ConvertNodesToIds" title="dhart.pathfinding.ConvertNodesToIds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConvertNodesToIds</span></code></a>(graph,&nbsp;nodes)</td>
-<td>Get ids for nodes in graph.</td>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="dhart.pathfinding.ConvertNodesToIds.html#dhart.pathfinding.ConvertNodesToIds" title="dhart.pathfinding.ConvertNodesToIds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConvertNodesToIds</span></code></a>(graph, nodes)</p></td>
+<td><p>Get ids for nodes in graph.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="dhart.pathfinding.DijkstraFindAllShortestPaths.html#dhart.pathfinding.DijkstraFindAllShortestPaths" title="dhart.pathfinding.DijkstraFindAllShortestPaths"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DijkstraFindAllShortestPaths</span></code></a>(graph[,&nbsp;cost_type])</td>
-<td>Find All Pairs Shortest Path</td>
+<tr class="row-even"><td><p><a class="reference internal" href="dhart.pathfinding.DijkstraFindAllShortestPaths.html#dhart.pathfinding.DijkstraFindAllShortestPaths" title="dhart.pathfinding.DijkstraFindAllShortestPaths"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DijkstraFindAllShortestPaths</span></code></a>(graph[, cost_type])</p></td>
+<td><p>Find All Pairs Shortest Path</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="dhart.pathfinding.DijkstraShortestPath.html#dhart.pathfinding.DijkstraShortestPath" title="dhart.pathfinding.DijkstraShortestPath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DijkstraShortestPath</span></code></a>(graph,&nbsp;start,&nbsp;end[,&nbsp;...])</td>
-<td>Find the shortest path from start to end using Dijkstra's shortest path algorithm</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="dhart.pathfinding.DijkstraShortestPath.html#dhart.pathfinding.DijkstraShortestPath" title="dhart.pathfinding.DijkstraShortestPath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DijkstraShortestPath</span></code></a>(graph, start, end[, ...])</p></td>
+<td><p>Find the shortest path from start to end using Dijkstra's shortest path algorithm</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="dhart.pathfinding.calculate_distance_and_predecessor.html#dhart.pathfinding.calculate_distance_and_predecessor" title="dhart.pathfinding.calculate_distance_and_predecessor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_distance_and_predecessor</span></code></a>(graph[,&nbsp;...])</td>
-<td>Calculate distance and predecessor matricies for a graph in C++</td>
+<tr class="row-even"><td><p><a class="reference internal" href="dhart.pathfinding.calculate_distance_and_predecessor.html#dhart.pathfinding.calculate_distance_and_predecessor" title="dhart.pathfinding.calculate_distance_and_predecessor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_distance_and_predecessor</span></code></a>(graph[, ...])</p></td>
+<td><p>Calculate distance and predecessor matricies for a graph in C++</p></td>
 </tr>
 </tbody>
 </table>
-</div>
+</section>
 
 
           </div>
@@ -178,7 +170,7 @@
         &copy; Copyright 2020.
       </li>
       <li>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.0.1.
       </li>
     </ul>
     </div>

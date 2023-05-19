@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 
+
+
 <html>
   <head>
     <meta charset="utf-8">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Basic Search on A Graph &mdash; DHART 0.0.1 documentation</title>
     
     <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
-    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
@@ -24,9 +27,6 @@
       };
     </script>
     <script type="text/javascript" src="../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/sphinx_highlight.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
@@ -88,11 +88,11 @@
         <div class="bodywrapper">
           <div class="body" id="spc-section-body">
             
-  <div class="section" id="module-dhart.Examples.PathPlanningBasic">
+  <section id="module-dhart.Examples.PathPlanningBasic">
 <span id="basic-search-on-a-graph"></span><h1>Basic Search on A Graph<a class="headerlink" href="#module-dhart.Examples.PathPlanningBasic" title="Permalink to this heading">¶</a></h1>
 <p>First import the required  packages</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">dhart</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.geometry</span> <span class="kn">import</span> <span class="n">LoadOBJ</span><span class="p">,</span> <span class="n">CommonRotations</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.graphgenerator</span> <span class="kn">import</span> <span class="n">GenerateGraph</span>
@@ -107,13 +107,13 @@ accessibility graph through the interface (explained in other examples but used 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">obj_path</span> <span class="o">=</span> <span class="n">dhart</span><span class="o">.</span><span class="n">get_sample_model</span><span class="p">(</span><span class="s2">&quot;plane.obj&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">loaded_obj</span> <span class="o">=</span> <span class="n">LoadOBJ</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="n">CommonRotations</span><span class="o">.</span><span class="n">Yup_to_Zup</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">embree_bvh</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">loaded_obj</span><span class="p">)</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set graph parameters</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">start_point</span><span class="p">,</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">max_nodes</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">100000</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Generate the graph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">GenerateGraph</span><span class="p">(</span><span class="n">embree_bvh</span><span class="p">,</span> <span class="n">start_point</span><span class="p">,</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">max_nodes</span><span class="p">)</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get Nodes</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">max_node</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
@@ -126,14 +126,14 @@ which defines the node as an array of [x,y,z,type,id].
 Since the nodes are stored in a numpy structured array with names we can
 extract just the x,y,z values by using the [] operator.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xyz_nodes</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">array</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">]]</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a start and end node to use for the path (from,to)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">start_id</span><span class="p">,</span> <span class="n">end_id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Extract the node from the set index</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">start_point</span> <span class="o">=</span> <span class="n">xyz_nodes</span><span class="p">[</span><span class="n">start_id</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">end_point</span>   <span class="o">=</span> <span class="n">xyz_nodes</span><span class="p">[</span><span class="n">end_id</span><span class="p">]</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Start: &#39;</span><span class="p">,</span><span class="n">start_point</span><span class="p">)</span>
 <span class="go">Start:  (0., 0., 0.)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;End:   &#39;</span><span class="p">,</span><span class="n">end_point</span><span class="p">)</span>
@@ -152,12 +152,12 @@ extract just the x,y,z values by using the [] operator.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">path_costs</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="s1">&#39;cost_to_next&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">path_costs</span><span class="p">)</span>
 <span class="go">[1.4142135 1.4142135 1.        1.4142134 1.4142137 0.       ]</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#extract id array</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">path_ids</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">path_ids</span><span class="p">)</span>
 <span class="go">[  0   3  15  36  64 100]</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># As the cost array is numpy, simple operations to sum the total cost can be calculated</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">path_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">path_costs</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total path cost: &#39;</span><span class="p">,</span> <span class="n">path_sum</span><span class="p">)</span>
@@ -181,7 +181,7 @@ value of the returned node ids from the shortest path.</p>
 <span class="go">Index:  100  , Node id:  (array([100], dtype=int64),) ,  is:  [(-4., 5., 0., 0, 100)]</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
           </div>
@@ -219,7 +219,7 @@ value of the returned node ids from the shortest path.</p>
         &copy; Copyright 2020.
       </li>
       <li>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.0.1.
       </li>
     </ul>
     </div>

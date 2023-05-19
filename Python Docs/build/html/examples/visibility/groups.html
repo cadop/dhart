@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 
+
+
 <html>
   <head>
     <meta charset="utf-8">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Visibility Graph Grouping &mdash; DHART 0.0.1 documentation</title>
     
     <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
-    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
@@ -24,9 +27,6 @@
       };
     </script>
     <script type="text/javascript" src="../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/sphinx_highlight.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
@@ -88,9 +88,14 @@
         <div class="bodywrapper">
           <div class="body" id="spc-section-body">
             
-  <div class="section" id="module-dhart.Examples.VisibilityGraphGroups">
-<span id="visibility-graph-grouping"></span><h1>Visibility Graph Grouping<a class="headerlink" href="#module-dhart.Examples.VisibilityGraphGroups" title="Permalink to this heading">¶</a></h1>
-<p>First we setup the graph generator as seen in other examples.</p>
+  <section id="visibility-graph-grouping">
+<h1>Visibility Graph Grouping<a class="headerlink" href="#visibility-graph-grouping" title="Permalink to this heading">¶</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<p>This example uses a simple obj file included in example models.
+For context of what the points are showing in the example, the model itself looks like the image displayed below.</p>
+<img alt="../../_images/visibility_ex_rendered.png" src="../../_images/visibility_ex_rendered.png" />
+<span class="target" id="module-dhart.Examples.VisibilityGraphGroups"></span><p>First we setup the graph generator as seen in other examples.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
 
@@ -124,7 +129,7 @@
                         <span class="n">max_step_connections</span><span class="p">,</span> <span class="n">cores</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href="../../examples/visibility/groups-1.py">Source code</a>)</p>
+<p>(<a class="reference download internal" download="" href="../../_downloads/fd0c7e4928e264762b4c9c6bfc3d3bd7/groups-1.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>)</p>
 <p>After the graph is generated, we pull out the nodes to use for visibility checks.
 First we claculate the AllToAll method that is compared later to the same groups.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the nodes of the graph as a list of x,y,z,type,id tuples</span>
@@ -142,10 +147,10 @@ First we claculate the AllToAll method that is compared later to the same groups
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href="../../examples/visibility/groups-2.py">Source code</a>)</p>
-<div class="figure align-default">
+<p>(<a class="reference download internal" download="" href="../../_downloads/36cc3553b9066de0444f53f7e6155768/groups-2.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>)</p>
+<figure class="align-default">
 <img alt="../../_images/groups-2.png" class="plot-directive" src="../../_images/groups-2.png" />
-</div>
+</figure>
 <p>In the above, we use the all to all method of the graph.
 This is equal to using two groups that are both the graph.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">VG</span> <span class="o">=</span> <span class="n">VisibilityGraphGroupToGroup</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span> <span class="c1"># Calculate the visibility graph</span>
@@ -158,10 +163,10 @@ This is equal to using two groups that are both the graph.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href="../../examples/visibility/groups-3.py">Source code</a>)</p>
-<div class="figure align-default">
+<p>(<a class="reference download internal" download="" href="../../_downloads/d52b05c0dc0ec38513dee44602e8fb34/groups-3.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>)</p>
+<figure class="align-default">
 <img alt="../../_images/groups-3.png" class="plot-directive" src="../../_images/groups-3.png" />
-</div>
+</figure>
 <p>Next we can check a single point and how it compares.
 In this case, we want to get the score for all of the nodes that connect TO a point.
 For clarity, we visualize this as just the number of edge connections, which when given
@@ -176,10 +181,10 @@ a single point, will be either 0 or 1.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href="../../examples/visibility/groups-4.py">Source code</a>)</p>
-<div class="figure align-default">
+<p>(<a class="reference download internal" download="" href="../../_downloads/9876d9a08a4bcbca5cec134977f8d0b7/groups-4.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>)</p>
+<figure class="align-default">
 <img alt="../../_images/groups-4.png" class="plot-directive" src="../../_images/groups-4.png" />
-</div>
+</figure>
 <p>We repeat this process, but now including the first 100 nodes.
 This is approx. the bottom left 10x10 square.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">VG</span> <span class="o">=</span> <span class="n">VisibilityGraphGroupToGroup</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">],</span> <span class="n">height</span><span class="p">)</span> <span class="c1"># Calculate the visibility graph</span>
@@ -192,11 +197,12 @@ This is approx. the bottom left 10x10 square.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href="../../examples/visibility/groups-5.py">Source code</a>)</p>
-<div class="figure align-default">
+<p>(<a class="reference download internal" download="" href="../../_downloads/d38a18d339e86fcecb2200a0a9beb1c1/groups-5.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>)</p>
+<figure class="align-default">
 <img alt="../../_images/groups-5.png" class="plot-directive" src="../../_images/groups-5.png" />
-</div>
-</div>
+</figure>
+</section>
+</section>
 
 
           </div>
@@ -204,6 +210,16 @@ This is approx. the bottom left 10x10 square.</p>
           </div>
       <div class="spc-rightsidebar span3">
         <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Visibility Graph Grouping</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
   <div>
     <h4>Previous topic</h4>
     <p class="topless"><a href="basic.html"
@@ -234,7 +250,7 @@ This is approx. the bottom left 10x10 square.</p>
         &copy; Copyright 2020.
       </li>
       <li>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.0.1.
       </li>
     </ul>
     </div>

@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 
+
+
 <html>
   <head>
     <meta charset="utf-8">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>dhart.raytracer.isValidBVH &mdash; DHART 0.0.1 documentation</title>
     
     <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
-    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
@@ -24,9 +27,6 @@
       };
     </script>
     <script type="text/javascript" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
@@ -88,26 +88,23 @@
         <div class="bodywrapper">
           <div class="body" id="spc-section-body">
             
-  <div class="section" id="dhart-raytracer-isvalidbvh">
+  <section id="dhart-raytracer-isvalidbvh">
 <h1>dhart.raytracer.isValidBVH<a class="headerlink" href="#dhart-raytracer-isvalidbvh" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="dhart.raytracer.isValidBVH">
-<code class="sig-prename descclassname"><span class="pre">dhart.raytracer.</span></code><code class="sig-name descname"><span class="pre">isValidBVH</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">bvh</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><span class="pre">object</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#dhart.raytracer.isValidBVH" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">dhart.raytracer.</span></span><span class="sig-name descname"><span class="pre">isValidBVH</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bvh</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><span class="pre">object</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#dhart.raytracer.isValidBVH" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the given object is actually a BVH before sending the pointer to C++</p>
 <p>If this check were not performed, the pointer from any object with the .pointer attribute
 could be sent to C++ with catastrophic results. This check must be performed to ensure that
 every pointer sent to C++ will lead to a valid and fully initialized Raytracer</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.11)"><strong>TypeError</strong></a> – The passed object was not a valid bvh</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.11)"><strong>TypeError</strong></a> – The passed object was not a valid bvh</p>
+</dd>
+</dl>
 </dd></dl>
 
-</div>
+</section>
 
 
           </div>
@@ -155,7 +152,7 @@ every pointer sent to C++ will lead to a valid and fully initialized Raytracer</
         &copy; Copyright 2020.
       </li>
       <li>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.0.1.
       </li>
     </ul>
     </div>

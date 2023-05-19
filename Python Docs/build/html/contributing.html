@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 
+
+
 <html>
   <head>
     <meta charset="utf-8">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Contributing and Testing &mdash; DHART 0.0.1 documentation</title>
     
     <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
     <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
-    <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
+    
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
@@ -24,9 +27,6 @@
       };
     </script>
     <script type="text/javascript" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/sphinx_highlight.js"></script>
     <script type="text/javascript" src="_static/js/copybutton.js"></script>
@@ -87,21 +87,25 @@
         <div class="bodywrapper">
           <div class="body" id="spc-section-body">
             
-  <div class="section" id="contributing-and-testing">
+  <section id="contributing-and-testing">
 <span id="contr-test"></span><h1>Contributing and Testing<a class="headerlink" href="#contributing-and-testing" title="Permalink to this heading">¶</a></h1>
-<div class="section" id="check-dependencies">
+<p>The process assumes the repo has been cloned and was built using visual studio (with cmake), then using the install. This generates a
+build folder with the python package in it. The following instructions rely on this build folder (not the src folder).</p>
+<section id="check-dependencies">
 <h2>Check dependencies<a class="headerlink" href="#check-dependencies" title="Permalink to this heading">¶</a></h2>
 <p>Currently tested on <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3.8+</span></code>.</p>
 <p>For the package: <code class="docutils literal notranslate"><span class="pre">numpy&gt;=1.18</span></code>, <code class="docutils literal notranslate"><span class="pre">scipy&gt;=1.4.1</span></code></p>
-<p>For building documentation: <code class="docutils literal notranslate"><span class="pre">sphinx&gt;=3.0.3</span></code>, <code class="docutils literal notranslate"><span class="pre">scipy</span></code> html_theme</p>
-</div>
-<div class="section" id="building-documentation">
+<p>For building documentation: <code class="docutils literal notranslate"><span class="pre">sphinx&gt;=3.0.3</span></code> (latest version uses <code class="docutils literal notranslate"><span class="pre">sphinx&gt;=7</span></code>), <code class="docutils literal notranslate"><span class="pre">scipy</span></code> html_theme, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.</p>
+<p>All packages should be automatically installed if using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">dhart[dev]</span></code> (or <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.[dev]</span></code> if cloning the repo).</p>
+</section>
+<section id="building-documentation">
 <h2>Building Documentation<a class="headerlink" href="#building-documentation" title="Permalink to this heading">¶</a></h2>
 <p>Documentation is built using sphinx with the scipy html_theme in the <em class="xref py py-obj">docs</em> folder.</p>
 <p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code></p>
-</div>
-<div class="section" id="testing">
+<p>For windows, you may have to use <code class="docutils literal notranslate"><span class="pre">.\make.bat</span> <span class="pre">html</span></code>.</p>
+</section>
+<section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading">¶</a></h2>
 <p>Docstring examples should be compliant with <code class="docutils literal notranslate"><span class="pre">doctest</span></code>.
 Navigate to the <em class="xref py py-obj">docs</em> folder and run:</p>
@@ -111,8 +115,8 @@ Navigate to the <em class="xref py py-obj">docs</em> folder and run:</p>
 <p>then run</p>
 <p><code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">--doctest-modules</span> <span class="pre">--ignore-glob=&quot;*/Rhino*.py&quot;</span></code></p>
 <p>to test all files except for the ones requiring Rhino.</p>
-</div>
-</div>
+</section>
+</section>
 
 
           </div>
@@ -162,7 +166,7 @@ Navigate to the <em class="xref py py-obj">docs</em> folder and run:</p>
         &copy; Copyright 2020.
       </li>
       <li>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.0.1.
       </li>
     </ul>
     </div>

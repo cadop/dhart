@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 
+
+
 <html>
   <head>
     <meta charset="utf-8">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>dhart.raytracer.RayResultList &mdash; DHART 0.0.1 documentation</title>
     
     <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
-    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
@@ -24,9 +27,6 @@
       };
     </script>
     <script type="text/javascript" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
@@ -88,50 +88,42 @@
         <div class="bodywrapper">
           <div class="body" id="spc-section-body">
             
-  <div class="section" id="dhart-raytracer-rayresultlist">
+  <section id="dhart-raytracer-rayresultlist">
 <h1>dhart.raytracer.RayResultList<a class="headerlink" href="#dhart-raytracer-rayresultlist" title="Permalink to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="dhart.raytracer.RayResultList">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><code class="sig-prename descclassname"><span class="pre">dhart.raytracer.</span></code><code class="sig-name descname"><span class="pre">RayResultList</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">vector_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.11)"><span class="pre">c_void_p</span></a></span></em>, <em><span class="n"><span class="pre">data_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.11)"><span class="pre">c_void_p</span></a></span></em>, <em><span class="n"><span class="pre">node_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em><span class="n"><span class="pre">ray_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.raytracer.RayResultList" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dhart.raytracer.</span></span><span class="sig-name descname"><span class="pre">RayResultList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vector_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.11)"><span class="pre">c_void_p</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.11)"><span class="pre">c_void_p</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ray_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.raytracer.RayResultList" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list of results from a set of ray queries. Includes distance/meshid</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="dhart.raytracer.RayResultList.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">vector_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.11)"><span class="pre">c_void_p</span></a></span></em>, <em><span class="n"><span class="pre">data_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.11)"><span class="pre">c_void_p</span></a></span></em>, <em><span class="n"><span class="pre">node_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em><span class="n"><span class="pre">ray_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.raytracer.RayResultList.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vector_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.11)"><span class="pre">c_void_p</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.11)"><span class="pre">c_void_p</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ray_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.raytracer.RayResultList.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new view analysis result from view analysis in C++</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>vector_ptr</strong> – a pointer to a vector of floats</li>
-<li><strong>data_ptr</strong> – a pointer to the underlying data of the node vector</li>
-<li><strong>node_count</strong> – The number of nodes for this result set</li>
-<li><strong>ray_count</strong> – the number of rays cast per node in this result set</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vector_ptr</strong> – a pointer to a vector of floats</p></li>
+<li><p><strong>data_ptr</strong> – a pointer to the underlying data of the node vector</p></li>
+<li><p><strong>node_count</strong> – The number of nodes for this result set</p></li>
+<li><p><strong>ray_count</strong> – the number of rays cast per node in this result set</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <p class="rubric">Methods</p>
-<table border="1" class="autosummary longtable docutils align-default">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="dhart.raytracer.RayResultList.GetPointers.html#dhart.raytracer.RayResultList.GetPointers" title="dhart.raytracer.RayResultList.GetPointers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetPointers</span></code></a>()</td>
-<td>Return the underlying vector and data pointers.</td>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="dhart.raytracer.RayResultList.GetPointers.html#dhart.raytracer.RayResultList.GetPointers" title="dhart.raytracer.RayResultList.GetPointers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetPointers</span></code></a>()</p></td>
+<td><p>Return the underlying vector and data pointers.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="dhart.raytracer.RayResultList.delete_fp.html#dhart.raytracer.RayResultList.delete_fp" title="dhart.raytracer.RayResultList.delete_fp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete_fp</span></code></a>()</td>
-<td></td>
+<tr class="row-even"><td><p><a class="reference internal" href="dhart.raytracer.RayResultList.delete_fp.html#dhart.raytracer.RayResultList.delete_fp" title="dhart.raytracer.RayResultList.delete_fp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete_fp</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
-</div>
+</section>
 
 
           </div>
@@ -182,7 +174,7 @@
         &copy; Copyright 2020.
       </li>
       <li>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.0.1.
       </li>
     </ul>
     </div>

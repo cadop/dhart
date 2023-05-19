@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 
+
+
 <html>
   <head>
     <meta charset="utf-8">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Visualize the Graph &mdash; DHART 0.0.1 documentation</title>
     
     <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
-    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
@@ -24,9 +27,6 @@
       };
     </script>
     <script type="text/javascript" src="../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/sphinx_highlight.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
@@ -88,9 +88,15 @@
         <div class="bodywrapper">
           <div class="body" id="spc-section-body">
             
-  <div class="section" id="visualize-the-graph">
+  <section id="visualize-the-graph">
 <h1>Visualize the Graph<a class="headerlink" href="#visualize-the-graph" title="Permalink to this heading">¶</a></h1>
-<div class="section" id="module-dhart.Examples.GraphGeneratorPlot">
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<p>This example uses a simple obj file included in example models.
+For context of what the top-down view is based on, see the figure below.</p>
+<img alt="../../_images/energy_hill.png" src="../../_images/energy_hill.png" />
+</section>
+<section id="module-dhart.Examples.GraphGeneratorPlot">
 <span id="basic-graph-visualization"></span><h2>Basic Graph Visualization<a class="headerlink" href="#module-dhart.Examples.GraphGeneratorPlot" title="Permalink to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
@@ -134,7 +140,7 @@
 <span class="n">z</span> <span class="o">=</span> <span class="p">[</span> <span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nodes</span> <span class="p">]</span> <span class="c1"># z coordinate</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href="../../examples/graph/visualize-1.py">Source code</a>)</p>
+<p>(<a class="reference download internal" download="" href="../../_downloads/576e9b00ff13dd82d9eca41ff91e9a4a/visualize-1.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>)</p>
 <p>The graph can be plotted in 3D for illustrative purposes (although it is better to load
 an obj or use a proper engine like OpenGL).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the graph in 3D</span>
@@ -146,22 +152,22 @@ an obj or use a proper engine like OpenGL).</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href="../../examples/graph/visualize-2.py">Source code</a>)</p>
-<div class="figure align-default">
+<p>(<a class="reference download internal" download="" href="../../_downloads/39df1a35f3e1fdfb52f9416ccd188c66/visualize-2.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>)</p>
+<figure class="align-default">
 <img alt="../../_images/visualize-2.png" class="plot-directive" src="../../_images/visualize-2.png" />
-</div>
+</figure>
 <p>From the top view, this can be plotted in x,y and color nodes by the z value</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the graph</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href="../../examples/graph/visualize-3.py">Source code</a>)</p>
-<div class="figure align-default">
+<p>(<a class="reference download internal" download="" href="../../_downloads/d36597e5c4b9b4cffd5543e7c79c0ff3/visualize-3.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>)</p>
+<figure class="align-default">
 <img alt="../../_images/visualize-3.png" class="plot-directive" src="../../_images/visualize-3.png" />
-</div>
-</div>
-<div class="section" id="module-dhart.Examples.GraphGeneratorSlope">
+</figure>
+</section>
+<section id="module-dhart.Examples.GraphGeneratorSlope">
 <span id="slope-settings"></span><h2>Slope Settings<a class="headerlink" href="#module-dhart.Examples.GraphGeneratorSlope" title="Permalink to this heading">¶</a></h2>
 <p>To illustrate the thresholds of this wavy hill, we can reduce the slope
 tolerances and plot a new graph which shows certain areas are not reachable.</p>
@@ -216,12 +222,12 @@ tolerances and plot a new graph which shows certain areas are not reachable.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href="../../examples/graph/visualize-4.py">Source code</a>)</p>
-<div class="figure align-default">
+<p>(<a class="reference download internal" download="" href="../../_downloads/69c10a47d659ce65ab1ff72ef4acb320/visualize-4.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>)</p>
+<figure class="align-default">
 <img alt="../../_images/visualize-4.png" class="plot-directive" src="../../_images/visualize-4.png" />
-</div>
-</div>
-<div class="section" id="module-dhart.Examples.GraphGeneratorConnections">
+</figure>
+</section>
+<section id="module-dhart.Examples.GraphGeneratorConnections">
 <span id="determining-minimum-connections"></span><h2>Determining Minimum Connections<a class="headerlink" href="#module-dhart.Examples.GraphGeneratorConnections" title="Permalink to this heading">¶</a></h2>
 <p>Using the min_connections parameter we can ensure nodes have a minimum number
 of out directions (out-degree), which can avoid walls/edges and prevent
@@ -278,12 +284,12 @@ of out directions (out-degree), which can avoid walls/edges and prevent
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href="../../examples/graph/visualize-5.py">Source code</a>)</p>
-<div class="figure align-default">
+<p>(<a class="reference download internal" download="" href="../../_downloads/57370ef42cc20f2ef836ebc6ed3c2484/visualize-5.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>)</p>
+<figure class="align-default">
 <img alt="../../_images/visualize-5.png" class="plot-directive" src="../../_images/visualize-5.png" />
-</div>
-</div>
-</div>
+</figure>
+</section>
+</section>
 
 
           </div>
@@ -295,6 +301,7 @@ of out directions (out-degree), which can avoid walls/edges and prevent
     <h3><a href="../../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Visualize the Graph</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
 <li><a class="reference internal" href="#module-dhart.Examples.GraphGeneratorPlot">Basic Graph Visualization</a></li>
 <li><a class="reference internal" href="#module-dhart.Examples.GraphGeneratorSlope">Slope Settings</a></li>
 <li><a class="reference internal" href="#module-dhart.Examples.GraphGeneratorConnections">Determining Minimum Connections</a></li>
@@ -333,7 +340,7 @@ of out directions (out-degree), which can avoid walls/edges and prevent
         &copy; Copyright 2020.
       </li>
       <li>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.0.1.
       </li>
     </ul>
     </div>

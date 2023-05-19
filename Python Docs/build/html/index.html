@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 
+
+
 <html>
   <head>
     <meta charset="utf-8">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>DHART: Automated analysis of the built environment &mdash; DHART 0.0.1 documentation</title>
     
     <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
     <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
-    <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
+    
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
@@ -24,9 +27,6 @@
       };
     </script>
     <script type="text/javascript" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/sphinx_highlight.js"></script>
     <script type="text/javascript" src="_static/js/copybutton.js"></script>
@@ -78,9 +78,9 @@
         <div class="bodywrapper">
           <div class="body" id="spc-section-body">
             
-  <div class="section" id="dhart-automated-analysis-of-the-built-environment">
+  <section id="dhart-automated-analysis-of-the-built-environment">
 <h1>DHART: Automated analysis of the built environment<a class="headerlink" href="#dhart-automated-analysis-of-the-built-environment" title="Permalink to this heading">¶</a></h1>
-<div class="section" id="contents">
+<section id="contents">
 <h2>Contents<a class="headerlink" href="#contents" title="Permalink to this heading">¶</a></h2>
 <p>To get started from the very beginning with this package, please follow the installation guide below.</p>
 <div class="toctree-wrapper compound">
@@ -109,6 +109,7 @@
 <li class="toctree-l3"><a class="reference internal" href="examples/graph/generating.html">Generate a Graph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="examples/graph/get_csr.html">Get a CSR of the Graph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="examples/graph/visualize.html">Visualize the Graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="examples/graph/visualize.html#overview">Overview</a></li>
 <li class="toctree-l4"><a class="reference internal" href="examples/graph/visualize.html#module-dhart.Examples.GraphGeneratorPlot">Basic Graph Visualization</a></li>
 <li class="toctree-l4"><a class="reference internal" href="examples/graph/visualize.html#module-dhart.Examples.GraphGeneratorSlope">Slope Settings</a></li>
 <li class="toctree-l4"><a class="reference internal" href="examples/graph/visualize.html#module-dhart.Examples.GraphGeneratorConnections">Determining Minimum Connections</a></li>
@@ -118,18 +119,41 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="examples/path_planning.html">Path Planning</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="examples/path/search.html">Basic Search on A Graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="examples/path/visualize.html">Visualize a Path</a></li>
-<li class="toctree-l3"><a class="reference internal" href="examples/path/limit.html">Limit a Path</a></li>
-<li class="toctree-l3"><a class="reference internal" href="examples/path/multi_cost.html">Path Plan with Different Costs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/path/visualize.html">Visualize a Path</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="examples/path/visualize.html#overview">Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="examples/path/limit.html">Limit a Path</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="examples/path/limit.html#overview">Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="examples/path/multi_cost.html">Path Plan with Different Costs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="examples/path/multi_cost.html#overview">Overview</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="examples/view_analysis.html">Spatial View Analysis</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="examples/view/basic.html">Visualize Spatial View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/view/basic.html">Visualize Spatial View</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="examples/view/basic.html#overview">Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="examples/view/spherical.html">Visualize Spatial View Points</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="examples/view/spherical.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/view/spherical.html#example">Example</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="examples/visibility_graph.html">Visibility Analysis</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="examples/visibility/basic.html">Visualize a Visbility Graph Connections</a></li>
-<li class="toctree-l3"><a class="reference internal" href="examples/visibility/groups.html">Visibility Graph Grouping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/visibility/basic.html">Visualize a Visbility Graph Connections</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="examples/visibility/basic.html#overview">Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="examples/visibility/groups.html">Visibility Graph Grouping</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="examples/visibility/groups.html#overview">Overview</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -463,16 +487,16 @@
 </li>
 </ul>
 </div>
-</div>
-<div class="section" id="indices-and-tables">
+</section>
+<section id="indices-and-tables">
 <h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
           </div>
@@ -516,7 +540,7 @@
         &copy; Copyright 2020.
       </li>
       <li>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.0.1.
       </li>
     </ul>
     </div>

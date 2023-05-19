@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 
+
+
 <html>
   <head>
     <meta charset="utf-8">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Visualize a Visbility Graph Connections &mdash; DHART 0.0.1 documentation</title>
     
     <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
-    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
@@ -24,9 +27,6 @@
       };
     </script>
     <script type="text/javascript" src="../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/sphinx_highlight.js"></script>
     <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
@@ -88,9 +88,14 @@
         <div class="bodywrapper">
           <div class="body" id="spc-section-body">
             
-  <div class="section" id="module-dhart.Examples.VisibilityGraphPlots">
-<span id="visualize-a-visbility-graph-connections"></span><h1>Visualize a Visbility Graph Connections<a class="headerlink" href="#module-dhart.Examples.VisibilityGraphPlots" title="Permalink to this heading">¶</a></h1>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+  <section id="visualize-a-visbility-graph-connections">
+<h1>Visualize a Visbility Graph Connections<a class="headerlink" href="#visualize-a-visbility-graph-connections" title="Permalink to this heading">¶</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<p>This example uses a simple obj file included in example models.
+For context of what the points are showing in the example, the model itself looks like the image displayed below.</p>
+<img alt="../../_images/visibility_ex_rendered.png" src="../../_images/visibility_ex_rendered.png" />
+<span class="target" id="module-dhart.Examples.VisibilityGraphPlots"></span><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
 
 <span class="kn">from</span> <span class="nn">dhart.geometry</span> <span class="kn">import</span> <span class="n">LoadOBJ</span>
@@ -141,10 +146,10 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href="../../examples/visibility/basic-1.py">Source code</a>)</p>
-<div class="figure align-default">
+<p>(<a class="reference download internal" download="" href="../../_downloads/ec5aba8c8dc58c11b54e4936c75f7426/basic-1.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>)</p>
+<figure class="align-default">
 <img alt="../../_images/basic-11.png" class="plot-directive" src="../../_images/basic-11.png" />
-</div>
+</figure>
 <p>We can see all of the example cases in the test file by regenerating the graph
 by our known model offset</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
@@ -176,23 +181,24 @@ by our known model offset</p>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href="../../examples/visibility/basic-2.py">Source code</a>)</p>
-<div class="figure align-default">
+<p>(<a class="reference download internal" download="" href="../../_downloads/dc679b1ab7ecaab9d666f2d26a033d4a/basic-2.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>)</p>
+<figure class="align-default">
 <img alt="../../_images/basic-2_001.png" class="plot-directive" src="../../_images/basic-2_001.png" />
-</div>
-<div class="figure align-default">
+</figure>
+<figure class="align-default">
 <img alt="../../_images/basic-2_011.png" class="plot-directive" src="../../_images/basic-2_011.png" />
-</div>
-<div class="figure align-default">
+</figure>
+<figure class="align-default">
 <img alt="../../_images/basic-2_021.png" class="plot-directive" src="../../_images/basic-2_021.png" />
-</div>
-<div class="figure align-default">
+</figure>
+<figure class="align-default">
 <img alt="../../_images/basic-2_031.png" class="plot-directive" src="../../_images/basic-2_031.png" />
-</div>
-<div class="figure align-default">
+</figure>
+<figure class="align-default">
 <img alt="../../_images/basic-2_041.png" class="plot-directive" src="../../_images/basic-2_041.png" />
-</div>
-</div>
+</figure>
+</section>
+</section>
 
 
           </div>
@@ -200,6 +206,16 @@ by our known model offset</p>
           </div>
       <div class="spc-rightsidebar span3">
         <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Visualize a Visbility Graph Connections</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
   <div>
     <h4>Previous topic</h4>
     <p class="topless"><a href="../visibility_graph.html"
@@ -230,7 +246,7 @@ by our known model offset</p>
         &copy; Copyright 2020.
       </li>
       <li>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.0.1.
       </li>
     </ul>
     </div>

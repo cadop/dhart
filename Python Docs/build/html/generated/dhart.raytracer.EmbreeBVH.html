@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 
+
+
 <html>
   <head>
     <meta charset="utf-8">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>dhart.raytracer.EmbreeBVH &mdash; DHART 0.0.1 documentation</title>
     
     <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
-    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
     <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
@@ -24,9 +27,6 @@
       };
     </script>
     <script type="text/javascript" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
     <script type="text/javascript" src="../_static/js/copybutton.js"></script>
@@ -88,34 +88,30 @@
         <div class="bodywrapper">
           <div class="body" id="spc-section-body">
             
-  <div class="section" id="dhart-raytracer-embreebvh">
+  <section id="dhart-raytracer-embreebvh">
 <h1>dhart.raytracer.EmbreeBVH<a class="headerlink" href="#dhart-raytracer-embreebvh" title="Permalink to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="dhart.raytracer.EmbreeBVH">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><code class="sig-prename descclassname"><span class="pre">dhart.raytracer.</span></code><code class="sig-name descname"><span class="pre">EmbreeBVH</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">geometry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dhart.geometry.MeshInfo.html#dhart.geometry.MeshInfo" title="dhart.geometry.mesh_info.MeshInfo"><span class="pre">MeshInfo</span></a></span></em>, <em><span class="n"><span class="pre">use_precise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.raytracer.EmbreeBVH" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dhart.raytracer.</span></span><span class="sig-name descname"><span class="pre">EmbreeBVH</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dhart.geometry.MeshInfo.html#dhart.geometry.MeshInfo" title="dhart.geometry.mesh_info.MeshInfo"><span class="pre">MeshInfo</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_precise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.raytracer.EmbreeBVH" title="Permalink to this definition">¶</a></dt>
 <dd><p>An acceelerated datastructure optimized for high performane ray intersections</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">A BVH is an accelerated data structure that’s used for high performance
+<p class="admonition-title">Note</p>
+<p>A BVH is an accelerated data structure that’s used for high performance
 ray intersections. All functions that ustilize the embree ray tracer
 require the mesh first to be converted to this format.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="dhart.raytracer.EmbreeBVH.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">geometry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dhart.geometry.MeshInfo.html#dhart.geometry.MeshInfo" title="dhart.geometry.mesh_info.MeshInfo"><span class="pre">MeshInfo</span></a></span></em>, <em><span class="n"><span class="pre">use_precise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.raytracer.EmbreeBVH.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dhart.geometry.MeshInfo.html#dhart.geometry.MeshInfo" title="dhart.geometry.mesh_info.MeshInfo"><span class="pre">MeshInfo</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_precise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.raytracer.EmbreeBVH.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new BVH from an existing mesh</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>geometry</strong> – The mesh or meshes to create the BVH from.</li>
-<li><strong>use_precise</strong> – Use a more precise, but slower ray intersection function</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>geometry</strong> – The mesh or meshes to create the BVH from.</p></li>
+<li><p><strong>use_precise</strong> – Use a more precise, but slower ray intersection function</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p class="rubric">Example</p>
 <p>Creating a BVH from a plane object</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.geometry</span> <span class="kn">import</span> <span class="n">ConstructPlane</span>
@@ -129,32 +125,24 @@ require the mesh first to be converted to this format.</p>
 </dd></dl>
 
 <p class="rubric">Methods</p>
-<table border="1" class="autosummary longtable docutils align-default">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="dhart.raytracer.EmbreeBVH.AddMesh.html#dhart.raytracer.EmbreeBVH.AddMesh" title="dhart.raytracer.EmbreeBVH.AddMesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AddMesh</span></code></a>(mesh)</td>
-<td>Add one or more new meshes to the BVH</td>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="dhart.raytracer.EmbreeBVH.AddMesh.html#dhart.raytracer.EmbreeBVH.AddMesh" title="dhart.raytracer.EmbreeBVH.AddMesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AddMesh</span></code></a>(mesh)</p></td>
+<td><p>Add one or more new meshes to the BVH</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes</p>
-<table border="1" class="autosummary longtable docutils align-default">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">pointer</span></code></td>
-<td></td>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pointer</span></code></p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
-</div>
+</section>
 
 
           </div>
@@ -205,7 +193,7 @@ require the mesh first to be converted to this format.</p>
         &copy; Copyright 2020.
       </li>
       <li>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.0.1.
       </li>
     </ul>
     </div>
