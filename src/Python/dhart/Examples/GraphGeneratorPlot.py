@@ -1,7 +1,7 @@
 """
 
 .. plot::
-    :context: reset
+    :context: reset 
 
     
     import matplotlib.pyplot as plt
