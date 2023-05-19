@@ -114,7 +114,7 @@ html_copy_source = False
 html_domain_indices = False
 html_file_suffix = '.html'
 
-# html4_writer = True
+html4_writer = True
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

@@ -5,6 +5,7 @@
 
     
     import matplotlib.pyplot as plt
+    from mpl_toolkits.mplot3d import Axes3D
 
     from dhart.geometry import LoadOBJ
     from dhart.raytracer import EmbreeBVH
@@ -53,7 +54,7 @@ an obj or use a proper engine like OpenGL).
 
     # Plot the graph in 3D
     fig = plt.figure()
-    ax = fig.add_subplot(projection='3d')
+    ax = Axes3D(fig)
     ax.view_init(azim=-123, elev=15)
 
     ax.scatter(x, y, z)
@@ -71,6 +72,7 @@ From the top view, this can be plotted in x,y and color nodes by the z value
 """
 
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 from dhart.geometry import LoadOBJ
 from dhart.raytracer import EmbreeBVH
@@ -114,7 +116,7 @@ z = [ n[2] for n in nodes ] # z coordinate
 
 # Plot the graph in 3D
 fig = plt.figure()
-ax = fig.add_subplot(projection='3d')
+ax = Axes3D(fig)
 ax.view_init(azim=-123, elev=15)
 
 ax.scatter(x, y, z)

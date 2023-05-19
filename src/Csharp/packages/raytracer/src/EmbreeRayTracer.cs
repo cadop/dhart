@@ -111,7 +111,7 @@ namespace DHARTAPI.RayTracing
 		public static Vector3D IntersectForPoint(EmbreeBVH bvh, Vector3D origin, Vector3D direction, float max_distance = -1)
 			=> IntersectForPoint(bvh, origin.x, origin.y, origin.z, direction.x, direction.y, direction.z, max_distance);
 
-        /*!
+		/*!
             \brief Cast multiple rays and recieve hitpoints in return.
 
             \param bvh  A valid BVH containing geometry to intersect with.
@@ -122,10 +122,6 @@ namespace DHARTAPI.RayTracing
             \returns
             An array of Vector3D for the hitpoint of each ray casted in order. If a ray didn't intersect any
             geometry, then its point will be invalid, checkable using Vector3D.IsValid()
-        
-            \details
-            There are three overloads on this function, one for passing a Vector3D array (instead of enumerable)
-            one for passing an IEnumerable, and one for passing a pre-flattened list of floats.
 
             \details
             Can be casted in 3 configurations: </para>
@@ -159,38 +155,20 @@ namespace DHARTAPI.RayTracing
             ```
         */
 
-        public static Vector3D[] IntersectForPoints(
-            EmbreeBVH bvh,
-            IEnumerable<Vector3D> origins,
-            IEnumerable<Vector3D> directions,
-            float max_distance = -1
-        ) => NativeMethods.C_IntersectPoints(bvh.Pointer, origins, directions, max_distance);
+		public static Vector3D[] IntersectForPoints(
+			EmbreeBVH bvh,
+			IEnumerable<Vector3D> origins,
+			IEnumerable<Vector3D> directions,
+			float max_distance = -1
+		) => NativeMethods.C_IntersectPoints(bvh.Pointer, origins, directions, max_distance);
 
-        public static Vector3D[] IntersectForPoints(
-            EmbreeBVH bvh,
-            float[] origins,
-            float[] directions,
-            float max_distance = -1
-        ) => NativeMethods.C_IntersectPoints(bvh.Pointer, origins, directions, max_distance);
-
-        public static Vector3D[] IntersectForPoints(
-            EmbreeBVH bvh,
-            Vector3D[] origins,
-            Vector3D[] directions,
-            float max_distance = -1
-        ) => NativeMethods.C_IntersectPoints(bvh.Pointer, origins, directions, max_distance);
-
-        /*!
+		/*!
             \brief Cast a single ray and get the distance to its hit and the meshID if it hit anything
 
             \param bvh A valid BVH containing the geometry to intersect with.
             \param origin x,y,z coordinates for the ray's origin point.
             \param direction x,y,z coordinates for the direction for the ray to be casted in.
             \param max_distance Maximum distance to consider for intersection. Set to -1 for infinite.
-
-            \details
-            There are two overloads on this function, one for passing a Vector3D 
-            and one for passing a pre-flattened list of floats.
 
             \remarks
             This can be faster than \link IntersectForPoints \endlink,  as the data returned is lighter. If you only need
@@ -205,21 +183,15 @@ namespace DHARTAPI.RayTracing
             \snippet raytracer\test_raytracer.cs EX_IntersectForDistance
             `[1,0]`
         */
-        public static RayResult IntersectForDistance(
-            EmbreeBVH bvh,
-            Vector3D origin,
-            Vector3D direction,
-            float max_distance = -1
-        ) => NativeMethods.C_IntersectRay(bvh.Pointer, origin, direction, max_distance);
 
-        public static RayResult IntersectForDistance(
-            EmbreeBVH bvh,
-            float[] origin,
-            float[] direction,
-            float max_distance = -1
-        ) => NativeMethods.C_IntersectRay(bvh.Pointer, origin, direction, max_distance);
+		public static RayResult IntersectForDistance(
+			EmbreeBVH bvh,
+			Vector3D origin,
+			Vector3D direction,
+			float max_distance = -1
+		) => NativeMethods.C_IntersectRay(bvh.Pointer, origin, direction, max_distance);
 
-        /*!
+		/*!
             \brief Cast multiple rays and recieve the distance and meshid of geometry intersected by each in return.
 
             \param bvh  A valid BVH containing geometry to intersect with.
@@ -262,28 +234,15 @@ namespace DHARTAPI.RayTracing
 			Origin: (0, 0, 5), Result: [5,0]
             ```
         */
-        public static RayResults IntersectForDistances(
-            EmbreeBVH bvh,
-            IEnumerable<Vector3D> origins,
-            IEnumerable<Vector3D> directions,
-            float max_distance = -1
-        ) => new RayResults(NativeMethods.C_IntersectRays(bvh.Pointer, origins, directions, max_distance));
 
-        public static RayResults IntersectForDistances(
-            EmbreeBVH bvh,
-            float[] origins,
-            float[] directions,
-            float max_distance = -1
-        ) => new RayResults(NativeMethods.C_IntersectRays(bvh.Pointer, origins, directions, max_distance));
+		public static RayResults IntersectForDistances(
+			EmbreeBVH bvh,
+			IEnumerable<Vector3D> origins,
+			IEnumerable<Vector3D> directions,
+			float max_distance = -1
+		) => new RayResults(NativeMethods.C_IntersectRays(bvh.Pointer, origins, directions, max_distance));
 
-        public static RayResults IntersectForDistances(
-            EmbreeBVH bvh,
-            Vector3D[] origins,
-            Vector3D[] directions,
-            float max_distance = -1
-        ) => new RayResults(NativeMethods.C_IntersectRays(bvh.Pointer, origins, directions, max_distance));
-
-        /*!
+		/*!
             \brief Determine if any geometry occludes a point from a direction.
 
             \param bvh A valid Embree BVH.
@@ -294,9 +253,6 @@ namespace DHARTAPI.RayTracing
             \returns An array of true or false values indicating hits or misses respectively.
 
             \details
-            There are three overloads on this function, one for passing a Vector3D array (instead of enumerable)
-             one for passing an IEnumerable, and one for passing a pre-flattened list of floats.
-
             Can be casted in 3 configurations:
             </para>
             <list type = "bullet" >
@@ -324,25 +280,12 @@ namespace DHARTAPI.RayTracing
             \snippet raytracer\test_raytracer.cs EX_Occlusion
             `Ray 1: True, Ray 2 : False`
         */
-        public static bool[] IntersectOccluded(
-            EmbreeBVH bvh,
-            IEnumerable<Vector3D> origin,
-            IEnumerable<Vector3D> direction,
-            float max_distance = -1
-        ) => NativeMethods.C_CastOcclusionRays(bvh.Pointer, origin, direction, max_distance);
 
-        public static bool[] IntersectOccluded(
-            EmbreeBVH bvh,
-            float[] origin,
-            float[] direction,
-            float max_distance = -1
-        ) => NativeMethods.C_CastOcclusionRays(bvh.Pointer, origin, direction, max_distance);
-        
-        public static bool[] IntersectOccluded(
-            EmbreeBVH bvh,
-            Vector3D[] origin,
-            Vector3D[] direction,
-            float max_distance = -1
-        ) => NativeMethods.C_CastOcclusionRays(bvh.Pointer, origin, direction, max_distance);
-    }
+		public static bool[] IntersectOccluded(
+			EmbreeBVH bvh,
+			IEnumerable<Vector3D> origin,
+			IEnumerable<Vector3D> direction,
+			float max_distance = -1
+		) => NativeMethods.C_CastOcclusionRays(bvh.Pointer, origin, direction, max_distance);
+	}
 }

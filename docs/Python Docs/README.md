@@ -14,8 +14,6 @@ Then cd to dhart\build\Python
 
 `pip install .`
 
-For extra requirements to build docs use `pip install .[dev]`.
-
 Then cd to dhart\docs\Python Docs
 
 `.\make clean`

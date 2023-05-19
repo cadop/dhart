@@ -121,8 +121,6 @@ For Python you can use
 
 `pip install dhart`
 
-In the latest release you can additionally use `pip install dhart[dev]` to install packages needed for visualization of examples and documentation. 
-
 - However, if you would like to use Python with Rhino Grasshopper, you will need to follow the install instructions in the Python Docs. 
 
 For C# you can download from the Releases page. 
