@@ -1,6 +1,6 @@
-=========================
-Visibility Graph Grouping
-=========================
+=============================
+Visualize Spatial View Points
+=============================
 
 Overview
 --------
@@ -10,7 +10,11 @@ For context of what the points are showing in the example, the model itself look
 
 .. image:: ../imgs/visibility_ex_rendered.png
 
+
+Example
+-------
+
 .. currentmodule:: dhart
   
-.. automodule:: dhart.Examples.VisibilityGraphGroups
+.. automodule:: dhart.Examples.ViewAnalysis3D
     :members:

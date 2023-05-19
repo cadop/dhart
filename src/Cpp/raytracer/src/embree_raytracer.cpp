@@ -488,7 +488,7 @@ namespace HF::RayTracer {
 
 		// Allow users to shoot multiple rays with a single direction or origin
 		if (origins.size() > 1 && directions.size() > 1) {
-#pragma omp parallel for if(use_parallel) schedule(dynamic)
+#pragma omp parallel for if(use_parallel) schedule(dynamic, 128)
 			for (int i = 0; i < origins.size(); i++) {
 				auto& org = origins[i];
 				auto& dir = directions[i];
@@ -502,7 +502,7 @@ namespace HF::RayTracer {
 
 		else if (origins.size() > 1 && directions.size() == 1) {
 			const auto& dir = directions[0];
-#pragma omp parallel for if(use_parallel) schedule(dynamic)
+#pragma omp parallel for if(use_parallel) schedule(dynamic, 128)
 			for (int i = 0; i < origins.size(); i++) {
 				auto& org = origins[i];
 				out_results[i] = PointIntersection(
@@ -515,7 +515,7 @@ namespace HF::RayTracer {
 
 		else if (origins.size() == 1 && directions.size() > 1) {
 			out_results.resize(directions.size());
-#pragma omp parallel for if(use_parallel) schedule(dynamic)
+#pragma omp parallel for if(use_parallel) schedule(dynamic, 128)
 			for (int i = 0; i < directions.size(); i++) {
 				auto org = origins[0];
 				auto& dir = directions[i];

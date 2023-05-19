@@ -6,6 +6,7 @@ Spatial View Analysis
    :maxdepth: 2
 
    view/basic.rst
+   view/spherical.rst
 
 .. seealso::
     These examples use methods found in the following modules:
