@@ -34,7 +34,7 @@
     <link rel="search" title="Search" href="../search.html" >
     <link rel="top" title="DHART 0.0.1 documentation" href="../index.html" >
     <link rel="up" title="dhart.spatialstructures" href="dhart.spatialstructures.html" >
-    <link rel="next" title="dhart.spatialstructures.Graph.AddEdgeToGraph" href="dhart.spatialstructures.Graph.AddEdgeToGraph.html" >
+    <link rel="next" title="dhart.spatialstructures.NodeList" href="dhart.spatialstructures.NodeList.html" >
     <link rel="prev" title="dhart.spatialstructures.EdgeSumArray.delete_fp" href="dhart.spatialstructures.EdgeSumArray.delete_fp.html" > 
   </head>
   <body>
@@ -68,7 +68,7 @@
            accesskey="I">index</a>
       </li>
       <li class="active">
-        <a href="dhart.spatialstructures.Graph.AddEdgeToGraph.html" title="dhart.spatialstructures.Graph.AddEdgeToGraph"
+        <a href="dhart.spatialstructures.NodeList.html" title="dhart.spatialstructures.NodeList"
            accesskey="N">next</a>
       </li>
       <li class="active">
@@ -90,117 +90,10 @@
             
   <section id="dhart-spatialstructures-graph">
 <h1>dhart.spatialstructures.Graph<a class="headerlink" href="#dhart-spatialstructures-graph" title="Permalink to this heading">¶</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="dhart.spatialstructures.Graph">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dhart.spatialstructures.</span></span><span class="sig-name descname"><span class="pre">Graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.11)"><span class="pre">c_void_p</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.spatialstructures.Graph" title="Permalink to this definition">¶</a></dt>
-<dd><p>A graph representing connections between points in space.</p>
-<p>Every Node in the graph contains a set of  X,Y,Z coordinates which can be
-used to represent a specific point in space. This graph internally is
-stored as a Sparse Matrix for space efficency. Nodes are stored in a
-hashmap containing X,Y, and Z coordinates, allowing for quick indexing
-of specific nodes by location alone. Access to this graph’s internal
-CSR is available through Graph.CompressToCSR().</p>
-<dl class="simple">
-<dt>Cost Types:</dt><dd><p>This Graph is capable of holding multiple cost types for any of it’s
-edges. Each cost type has a distinct key as it’s name, such as
-“CrossSlope” or “EnergyExpenditure”. Upon creation, the graph is
-assigned a default cost type, Distance which can be accessed explicitly
-by the key “Distance” or leaving the cost_type field blank. Alternate
-costs have corresponding edges in the default cost set, but different
-costs to traverse from the parent to the child node.</p>
-</dd>
-<dt>Node Attributes:</dt><dd><p>The graph is able to store an arbitrary amount of information about the
-nodes it contains as strings. Similar to alternate cost types, node
-attributes are each have a distinct key as their name, but instead of
-conatining information about edges in the graph, node attributes contain
-information about nodes. Unlike the cost algorithms in edgecosts, right
-now there is no functionality within DHARTAPI that populates the
-node attributes of the graph with any kind of metric, however the
-methods to add and clear node attributes are made available so you are
-free to add your own node attributes.</p>
-</dd>
-</dl>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="dhart.spatialstructures.Graph.csr">
-<span class="sig-name descname"><span class="pre">csr</span></span><a class="headerlink" href="#dhart.spatialstructures.Graph.csr" title="Permalink to this definition">¶</a></dt>
-<dd><p>csr pointing to the underlying graph in C++.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://scipy.github.io/devdocs/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.11.0.dev)">scipy.sparse._csr.csr_matrix</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="dhart.spatialstructures.Graph.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.11)"><span class="pre">c_void_p</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.spatialstructures.Graph.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a new graph wrapper object from a graph pointer</p>
-</dd></dl>
-
-<p class="rubric">Methods</p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="dhart.spatialstructures.Graph.AddEdgeToGraph.html#dhart.spatialstructures.Graph.AddEdgeToGraph" title="dhart.spatialstructures.Graph.AddEdgeToGraph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AddEdgeToGraph</span></code></a>(parent, child, cost[, cost_type])</p></td>
-<td><p>Add a new edge to the graph from parent to child with the given cost</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="dhart.spatialstructures.Graph.AggregateEdgeCosts.html#dhart.spatialstructures.Graph.AggregateEdgeCosts" title="dhart.spatialstructures.Graph.AggregateEdgeCosts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AggregateEdgeCosts</span></code></a>(ct, directed[, cost_type])</p></td>
-<td><p>Get an aggregated score for every node in the graph based on</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="dhart.spatialstructures.Graph.Clear.html#dhart.spatialstructures.Graph.Clear" title="dhart.spatialstructures.Graph.Clear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Clear</span></code></a>([cost_type])</p></td>
-<td><p>Clear all edges/nodes from the graph or a specific cost type</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="dhart.spatialstructures.Graph.CompressToCSR.html#dhart.spatialstructures.Graph.CompressToCSR" title="dhart.spatialstructures.Graph.CompressToCSR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CompressToCSR</span></code></a>([cost_type])</p></td>
-<td><p>Compress the graph if needed then return a reference as a CSR matrix</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="dhart.spatialstructures.Graph.ConvertToLists.html#dhart.spatialstructures.Graph.ConvertToLists" title="dhart.spatialstructures.Graph.ConvertToLists"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConvertToLists</span></code></a>([just_nodes])</p></td>
-<td><p>Convert the CSR to a list of nodes and tuples, useful for serialization</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="dhart.spatialstructures.Graph.GetEdgeCost.html#dhart.spatialstructures.Graph.GetEdgeCost" title="dhart.spatialstructures.Graph.GetEdgeCost"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetEdgeCost</span></code></a>(parent, child[, cost_type])</p></td>
-<td><p>Get the cost from parent to child for a specific cost type</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="dhart.spatialstructures.Graph.GetNodeID.html#dhart.spatialstructures.Graph.GetNodeID" title="dhart.spatialstructures.Graph.GetNodeID"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetNodeID</span></code></a>(node)</p></td>
-<td><p>Get the id of a node in the graph</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="dhart.spatialstructures.Graph.NumNodes.html#dhart.spatialstructures.Graph.NumNodes" title="dhart.spatialstructures.Graph.NumNodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NumNodes</span></code></a>()</p></td>
-<td><p>Get the number of nodes in the graph.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="dhart.spatialstructures.Graph.add_node_attributes.html#dhart.spatialstructures.Graph.add_node_attributes" title="dhart.spatialstructures.Graph.add_node_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_node_attributes</span></code></a>(attribute, ids, scores)</p></td>
-<td><p>Add attributes to one or more nodes</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="dhart.spatialstructures.Graph.attrs_to_costs.html#dhart.spatialstructures.Graph.attrs_to_costs" title="dhart.spatialstructures.Graph.attrs_to_costs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">attrs_to_costs</span></code></a>(attribute_string, ...)</p></td>
-<td><p>Generate a cost set based on a set of node parameters</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="dhart.spatialstructures.Graph.clear_node_attribute.html#dhart.spatialstructures.Graph.clear_node_attribute" title="dhart.spatialstructures.Graph.clear_node_attribute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear_node_attribute</span></code></a>(attribute)</p></td>
-<td><p>Clear a node attribute and all of its scores from the graph</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="dhart.spatialstructures.Graph.getNodes.html#dhart.spatialstructures.Graph.getNodes" title="dhart.spatialstructures.Graph.getNodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getNodes</span></code></a>()</p></td>
-<td><p>Get a list of nodes from the graph as a nodelist</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="dhart.spatialstructures.Graph.get_closest_nodes.html#dhart.spatialstructures.Graph.get_closest_nodes" title="dhart.spatialstructures.Graph.get_closest_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_closest_nodes</span></code></a>(p_desired[, x, y, z])</p></td>
-<td><p>Get the closet nodes to the input set of points</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="dhart.spatialstructures.Graph.get_closest_points.html#dhart.spatialstructures.Graph.get_closest_points" title="dhart.spatialstructures.Graph.get_closest_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_closest_points</span></code></a>()</p></td>
-<td><p>Get the closest point in the graph to the input set of points</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="dhart.spatialstructures.Graph.get_node_attributes.html#dhart.spatialstructures.Graph.get_node_attributes" title="dhart.spatialstructures.Graph.get_node_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_node_attributes</span></code></a>(attribute)</p></td>
-<td><p>Get scores of every node for a specific attribute</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="dhart.spatialstructures.Graph.get_node_points.html#dhart.spatialstructures.Graph.get_node_points" title="dhart.spatialstructures.Graph.get_node_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_node_points</span></code></a>([x, y, z])</p></td>
-<td><p>Get the nodes of the graph as xyz values in a numpy array by defining the array name view to be used as the x,y,z values.</p></td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Attributes</p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">graph_ptr</span></code></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dhart.spatialstructures.Graph.csr" title="dhart.spatialstructures.Graph.csr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">csr</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-</tbody>
-</table>
+<dt class="sig sig-object py" id="dhart.spatialstructures.Graph">
+<span class="sig-prename descclassname"><span class="pre">dhart.spatialstructures.</span></span><span class="sig-name descname"><span class="pre">Graph</span></span><a class="headerlink" href="#dhart.spatialstructures.Graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of &lt;module ‘dhart.spatialstructures.Graph’ from ‘G:\ProjectRepos\dhart\build\Python\dhart\spatialstructures\Graph.py’&gt;</p>
 </dd></dl>
 
 </section>
@@ -215,11 +108,7 @@ free to add your own node attributes.</p>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">dhart.spatialstructures.Graph</a><ul>
-<li><a class="reference internal" href="#dhart.spatialstructures.Graph"><code class="docutils literal notranslate"><span class="pre">Graph</span></code></a><ul>
-<li><a class="reference internal" href="#dhart.spatialstructures.Graph.csr"><code class="docutils literal notranslate"><span class="pre">Graph.csr</span></code></a></li>
-<li><a class="reference internal" href="#dhart.spatialstructures.Graph.__init__"><code class="docutils literal notranslate"><span class="pre">Graph.__init__()</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#dhart.spatialstructures.Graph"><code class="docutils literal notranslate"><span class="pre">Graph</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -232,8 +121,8 @@ free to add your own node attributes.</p>
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="dhart.spatialstructures.Graph.AddEdgeToGraph.html"
-                          title="next chapter">dhart.spatialstructures.Graph.AddEdgeToGraph</a></p>
+    <p class="topless"><a href="dhart.spatialstructures.NodeList.html"
+                          title="next chapter">dhart.spatialstructures.NodeList</a></p>
   </div>
 
         </div>
