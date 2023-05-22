@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>dhart.spatialstructures.Graph.get_closest_nodes &mdash; DHART 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="DHART 0.0.1 documentation" href="../index.html" >
+    <link rel="up" title="dhart.spatialstructures.Graph" href="dhart.spatialstructures.Graph.html" >
+    <link rel="next" title="dhart.spatialstructures.Graph.get_closest_points" href="dhart.spatialstructures.Graph.get_closest_points.html" >
+    <link rel="prev" title="dhart.spatialstructures.Graph.getNodes" href="dhart.spatialstructures.Graph.getNodes.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="http://">Git</a></li>
+	
+        <li class="active"><a href="../index.html">DHART 0.0.1 documentation</a></li>
+	
+          <li class="active"><a href="../code.html" >Code Reference</a></li>
+          <li class="active"><a href="dhart.spatialstructures.html" >dhart.spatialstructures</a></li>
+          <li class="active"><a href="dhart.spatialstructures.Graph.html" accesskey="U">dhart.spatialstructures.Graph</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="dhart.spatialstructures.Graph.get_closest_points.html" title="dhart.spatialstructures.Graph.get_closest_points"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="dhart.spatialstructures.Graph.getNodes.html" title="dhart.spatialstructures.Graph.getNodes"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <section id="dhart-spatialstructures-graph-get-closest-nodes">
+<h1>dhart.spatialstructures.Graph.get_closest_nodes<a class="headerlink" href="#dhart-spatialstructures-graph-get-closest-nodes" title="Permalink to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="dhart.spatialstructures.Graph.get_closest_nodes">
+<span class="sig-prename descclassname"><span class="pre">Graph.</span></span><span class="sig-name descname"><span class="pre">get_closest_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_desired</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.spatialstructures.Graph.get_closest_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the closet nodes to the input set of points</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_desired</strong> (<em>ndarray</em>) – n x m shape where n is the number of points an m is equal to the axis set to True</p></li>
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – Include x axis in the distance comparison, Default True</p></li>
+<li><p><strong>y</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – Include y axis in the distance comparison, Default True</p></li>
+<li><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – Include z axis in the distance comparison, Default True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>int if a single point is passed, ndarray if multiple points are passed,
+where ndarray is size of number of points passed in p_desired</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a> or ndarray[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a>]</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Size of points in <em class="xref py py-obj">p_desired</em> must be same as the number of x,y,z axis set to True</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In future this should be calling a method in C interface instead of implemented in Python</p>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">dhart</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.geometry</span> <span class="kn">import</span> <span class="n">LoadOBJ</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.graphgenerator</span> <span class="kn">import</span> <span class="n">GenerateGraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.raytracer</span> <span class="kn">import</span> <span class="n">EmbreeBVH</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Load BVH</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj_path</span> <span class="o">=</span> <span class="n">dhart</span><span class="o">.</span><span class="n">get_sample_model</span><span class="p">(</span><span class="s2">&quot;energy_blob_zup.obj&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">loaded_obj</span> <span class="o">=</span> <span class="n">LoadOBJ</span><span class="p">(</span><span class="n">obj_path</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embree_bvh</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">loaded_obj</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set graph parameters</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">start_point</span><span class="p">,</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">max_nodes</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="mi">100000</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Generate the graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">GenerateGraph</span><span class="p">(</span><span class="n">embree_bvh</span><span class="p">,</span> <span class="n">start_point</span><span class="p">,</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">max_nodes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Check closest nodes using single x,y point</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">closest_node</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_closest_nodes</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">]),</span> <span class="n">z</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Closest Node: &quot;</span><span class="p">,</span> <span class="n">closest_node</span><span class="p">)</span>
+<span class="go">Closest Node:  2421</span>
+</pre></div>
+</div>
+<p>Check closest nodes using multiple x,y points</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">closest_node</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_closest_nodes</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">]]),</span> <span class="n">z</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Closest Node: &quot;</span><span class="p">,</span> <span class="n">closest_node</span><span class="p">)</span>
+<span class="go">Closest Node:  [2421 2450]</span>
+</pre></div>
+</div>
+<p>Check closest nodes using single x,y,z point</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">closest_node</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_closest_nodes</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Closest Node: &quot;</span><span class="p">,</span> <span class="n">closest_node</span><span class="p">)</span>
+<span class="go">Closest Node:  2422</span>
+</pre></div>
+</div>
+<p>Check closest nodes using multiple x,y,z points</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">closest_node</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_closest_nodes</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">]]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Closest Node: &quot;</span><span class="p">,</span> <span class="n">closest_node</span><span class="p">)</span>
+<span class="go">Closest Node:  [2422 2450]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">dhart.spatialstructures.Graph.get_closest_nodes</a><ul>
+<li><a class="reference internal" href="#dhart.spatialstructures.Graph.get_closest_nodes"><code class="docutils literal notranslate"><span class="pre">Graph.get_closest_nodes()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="dhart.spatialstructures.Graph.getNodes.html"
+                          title="previous chapter">dhart.spatialstructures.Graph.getNodes</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="dhart.spatialstructures.Graph.get_closest_points.html"
+                          title="next chapter">dhart.spatialstructures.Graph.get_closest_points</a></p>
+  </div>
+
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

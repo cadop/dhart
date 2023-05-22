@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>dhart.spatialstructures.Graph.AggregateEdgeCosts &mdash; DHART 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="DHART 0.0.1 documentation" href="../index.html" >
+    <link rel="up" title="dhart.spatialstructures.Graph" href="dhart.spatialstructures.Graph.html" >
+    <link rel="next" title="dhart.spatialstructures.Graph.Clear" href="dhart.spatialstructures.Graph.Clear.html" >
+    <link rel="prev" title="dhart.spatialstructures.Graph.AddEdgeToGraph" href="dhart.spatialstructures.Graph.AddEdgeToGraph.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="http://">Git</a></li>
+	
+        <li class="active"><a href="../index.html">DHART 0.0.1 documentation</a></li>
+	
+          <li class="active"><a href="../code.html" >Code Reference</a></li>
+          <li class="active"><a href="dhart.spatialstructures.html" >dhart.spatialstructures</a></li>
+          <li class="active"><a href="dhart.spatialstructures.Graph.html" accesskey="U">dhart.spatialstructures.Graph</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="dhart.spatialstructures.Graph.Clear.html" title="dhart.spatialstructures.Graph.Clear"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="dhart.spatialstructures.Graph.AddEdgeToGraph.html" title="dhart.spatialstructures.Graph.AddEdgeToGraph"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <section id="dhart-spatialstructures-graph-aggregateedgecosts">
+<h1>dhart.spatialstructures.Graph.AggregateEdgeCosts<a class="headerlink" href="#dhart-spatialstructures-graph-aggregateedgecosts" title="Permalink to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="dhart.spatialstructures.Graph.AggregateEdgeCosts">
+<span class="sig-prename descclassname"><span class="pre">Graph.</span></span><span class="sig-name descname"><span class="pre">AggregateEdgeCosts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dhart.spatialstructures.CostAggregationType.html#dhart.spatialstructures.CostAggregationType" title="dhart.spatialstructures.graph.CostAggregationType"><span class="pre">CostAggregationType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">directed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="dhart.spatialstructures.EdgeSumArray.html#dhart.spatialstructures.EdgeSumArray" title="dhart.spatialstructures.graph.EdgeSumArray"><span class="pre">EdgeSumArray</span></a></span></span><a class="headerlink" href="#dhart.spatialstructures.Graph.AggregateEdgeCosts" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Get an aggregated score for every node in the graph based on</dt><dd><p>its edges.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ct</strong> – CostAggregationType
+Aggregation method to use for summarizing edge costs. See
+CostAggregationType for more information</p></li>
+<li><p><strong>directed</strong> – bool
+If false, only consider outgoing edges of each node. If true,
+consider outgoing and incoming edges.</p></li>
+<li><p><strong>cost_type</strong> – str
+Name of the cost set to use for aggregation. If left as blank,
+will use the default cost of the graph.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An array of floats containing  aggregated cost score for each node
+in the graph ordered by node ID.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.11)"><strong>KeyError</strong></a> – cost_type wasn’t set to an empty string or the key of any
+    cost type in the graph.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">dhart.spatialstructures.Graph.AggregateEdgeCosts</a><ul>
+<li><a class="reference internal" href="#dhart.spatialstructures.Graph.AggregateEdgeCosts"><code class="docutils literal notranslate"><span class="pre">Graph.AggregateEdgeCosts()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="dhart.spatialstructures.Graph.AddEdgeToGraph.html"
+                          title="previous chapter">dhart.spatialstructures.Graph.AddEdgeToGraph</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="dhart.spatialstructures.Graph.Clear.html"
+                          title="next chapter">dhart.spatialstructures.Graph.Clear</a></p>
+  </div>
+
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

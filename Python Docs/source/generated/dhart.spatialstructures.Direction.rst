@@ -9,18 +9,6 @@ dhart.spatialstructures.Direction
    .. automethod:: __init__
 
    
-   .. rubric:: Methods
-
-   .. autosummary::
-       :toctree: .
-       
-            ~Direction.as_integer_ratio
-            ~Direction.bit_count
-            ~Direction.bit_length
-            ~Direction.conjugate
-            ~Direction.from_bytes
-            ~Direction.to_bytes
-   
    
 
    
@@ -32,9 +20,5 @@ dhart.spatialstructures.Direction
           ~Direction.INCOMING
           ~Direction.OUTGOING
           ~Direction.BOTH
-          ~Direction.denominator
-          ~Direction.imag
-          ~Direction.numerator
-          ~Direction.real
    
    
