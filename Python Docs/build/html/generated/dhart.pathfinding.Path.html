@@ -34,7 +34,7 @@
     <link rel="search" title="Search" href="../search.html" >
     <link rel="top" title="DHART 0.0.1 documentation" href="../index.html" >
     <link rel="up" title="dhart.pathfinding" href="dhart.pathfinding.html" >
-    <link rel="next" title="dhart.pathfinding.PathMemberStruct" href="dhart.pathfinding.PathMemberStruct.html" >
+    <link rel="next" title="dhart.pathfinding.Path.GetPointers" href="dhart.pathfinding.Path.GetPointers.html" >
     <link rel="prev" title="dhart.pathfinding" href="dhart.pathfinding.html" > 
   </head>
   <body>
@@ -68,7 +68,7 @@
            accesskey="I">index</a>
       </li>
       <li class="active">
-        <a href="dhart.pathfinding.PathMemberStruct.html" title="dhart.pathfinding.PathMemberStruct"
+        <a href="dhart.pathfinding.Path.GetPointers.html" title="dhart.pathfinding.Path.GetPointers"
            accesskey="N">next</a>
       </li>
       <li class="active">
@@ -90,10 +90,36 @@
             
   <section id="dhart-pathfinding-path">
 <h1>dhart.pathfinding.Path<a class="headerlink" href="#dhart-pathfinding-path" title="Permalink to this heading">¶</a></h1>
-<dl class="py attribute">
+<dl class="py class">
 <dt class="sig sig-object py" id="dhart.pathfinding.Path">
-<span class="sig-prename descclassname"><span class="pre">dhart.pathfinding.</span></span><span class="sig-name descname"><span class="pre">Path</span></span><a class="headerlink" href="#dhart.pathfinding.Path" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of &lt;module ‘dhart.pathfinding.Path’ from ‘G:\ProjectRepos\dhart\build\Python\dhart\pathfinding\Path.py’&gt;</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dhart.pathfinding.</span></span><span class="sig-name descname"><span class="pre">Path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.11)"><span class="pre">c_void_p</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.11)"><span class="pre">c_void_p</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.pathfinding.Path" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of path members from C++</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dhart.pathfinding.Path.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.11)"><span class="pre">c_void_p</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.11)"><span class="pre">c_void_p</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.pathfinding.Path.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a path from a pointer to a path of nodes and its underlying path_members</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path_ptr</strong> – a pointer to a C++ path object</p></li>
+<li><p><strong>data_ptr</strong> – a pointer to the underlying data of that path object</p></li>
+<li><p><strong>size</strong> – the size of the given path</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="dhart.pathfinding.Path.GetPointers.html#dhart.pathfinding.Path.GetPointers" title="dhart.pathfinding.Path.GetPointers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetPointers</span></code></a>()</p></td>
+<td><p>Return the underlying vector and data pointers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="dhart.pathfinding.Path.delete_fp.html#dhart.pathfinding.Path.delete_fp" title="dhart.pathfinding.Path.delete_fp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete_fp</span></code></a>()</p></td>
+<td><p>Delete a path in C++</p></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </section>
@@ -108,7 +134,10 @@
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">dhart.pathfinding.Path</a><ul>
-<li><a class="reference internal" href="#dhart.pathfinding.Path"><code class="docutils literal notranslate"><span class="pre">Path</span></code></a></li>
+<li><a class="reference internal" href="#dhart.pathfinding.Path"><code class="docutils literal notranslate"><span class="pre">Path</span></code></a><ul>
+<li><a class="reference internal" href="#dhart.pathfinding.Path.__init__"><code class="docutils literal notranslate"><span class="pre">Path.__init__()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -121,8 +150,8 @@
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="dhart.pathfinding.PathMemberStruct.html"
-                          title="next chapter">dhart.pathfinding.PathMemberStruct</a></p>
+    <p class="topless"><a href="dhart.pathfinding.Path.GetPointers.html"
+                          title="next chapter">dhart.pathfinding.Path.GetPointers</a></p>
   </div>
 
         </div>
