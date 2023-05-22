@@ -10,6 +10,7 @@ Path Planning
    path/visualize.rst
    path/limit.rst
    path/multi_cost.rst
+   path/custom_cost.rst
    
 
 .. seealso::

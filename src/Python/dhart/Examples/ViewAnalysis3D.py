@@ -48,7 +48,19 @@
     # reshape to get the correct axis 
     hit_pos = hit_dirs_valid * hit_points.reshape(-1,1)
 
+
+We can find the percentage of rays that hit the object (bvh). 
+
+.. testcode::
+
+    print(f'Percent of clear view: {( len(hit_dirs_valid)/ len(hit_dirs) ) * 100}')
+
+
+.. testoutput:: 
+    :options: +NORMALIZE_WHITESPACE
     
+    64.737
+
 .. plot::
     :context: close-figs
 
@@ -151,6 +163,8 @@ hit_points = hit_points['distance'][hit_idx]
 # reshape to get the correct axis 
 hit_pos = hit_dirs_valid * hit_points.reshape(-1,1)
 
+print(f'Percent of clear view: {( len(hit_dirs_valid)/ len(hit_dirs) ) * 100}')
+
 # Plot the graph in 3D
 fig = plt.figure()
 ax = fig.add_subplot(projection='3d')
@@ -183,6 +197,7 @@ hit_dirs_valid = hit_dirs[hit_idx]
 
 # reshape to get the correct axis 
 hit_pos = hit_dirs_valid * hit_points.reshape(-1,1)
+
 
 # Plot the graph in 3D
 fig = plt.figure()
