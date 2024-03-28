@@ -18,6 +18,7 @@
 #include "pathfinder_C.h"
 #include "cost_algorithms.h"
 #include "spatialstructures_C.h"
+#include <numeric>
 
 using namespace HF::SpatialStructures;
 using namespace HF::Pathfinding;
@@ -537,6 +538,126 @@ TEST(_pathFinding, FindPaths) {
 		std::cout << p.node << std::endl;
 	}
 }
+
+TEST(_pathFinding, MakePathArray) {
+	// be sure to #include "path_finder.h", #include "boost_graph.h", and #include "graph.h"
+
+	// Create a Graph g, and compress it.
+	HF::SpatialStructures::Graph g;
+	g.addEdge(0, 1, 1);
+	g.addEdge(0, 2, 2);
+	g.addEdge(1, 3, 3);
+	g.addEdge(2, 4, 1);
+	g.addEdge(3, 4, 5);
+	g.Compress();
+
+	// Create a boostGraph from g
+	auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
+
+	// Prepare the parents and children vectors --
+
+	int nodeSize = boostGraph.get()->p.size();
+	std::vector<int> start_points(nodeSize * nodeSize);
+	std::vector<int> end_points(nodeSize * nodeSize);
+
+	for (int i = 0; i < nodeSize; ++i) {
+		std::fill_n(start_points.begin() + i * nodeSize, nodeSize, i);
+		std::iota(end_points.begin() + i * nodeSize, end_points.begin() + (i + 1) * nodeSize, 0);
+	}
+
+	std::vector<HF::SpatialStructures::Path> paths = HF::Pathfinding::FindPaths(boostGraph.get(), start_points, end_points);
+
+	// Create a vector of PathMember pointers for each path 
+	// 
+	std::vector<int> pathNodes;
+	std::vector<int> pathLengths;
+
+	for (auto p : paths) {
+		for (auto pm : p.members) {
+			// Append the nodes for this path
+			std::cout << "Node ID: " << pm.node << std::endl;
+			pathNodes.push_back(pm.node);
+		}
+		// Append the length of this path
+		pathLengths.push_back(p.members.size());
+	}
+
+	for (int i = 0; i < pathNodes.size(); i++) {
+		std::cout << "Node ID: " << pathNodes[i] << std::endl;
+	}
+
+}
+
+
+TEST(_pathFinding, C_CreateAllPredToPath) {
+	// be sure to #include "path_finder.h", #include "boost_graph.h", and #include "graph.h"
+
+	// Create a Graph g, and compress it.
+	HF::SpatialStructures::Graph g;
+	g.addEdge(0, 1, 1);
+	g.addEdge(0, 2, 2);
+	g.addEdge(1, 3, 3);
+	g.addEdge(2, 4, 1);
+	g.addEdge(3, 4, 5);
+	g.Compress();
+
+	// Create a boost graph with the cost type
+	auto bg = HF::Pathfinding::CreateBoostGraph(g);
+
+	// Prepare the parents and children vectors
+	int nodeSize = bg.get()->p.size();
+	std::vector<int> start_points(nodeSize * nodeSize);
+	std::vector<int> end_points(nodeSize * nodeSize);
+
+	for (int i = 0; i < nodeSize; ++i) {
+		std::fill_n(start_points.begin() + i * nodeSize, nodeSize, i);
+		std::iota(end_points.begin() + i * nodeSize, end_points.begin() + (i + 1) * nodeSize, 0);
+	}
+
+	// Generate paths
+	auto paths = HF::Pathfinding::FindPaths(bg.get(), start_points, end_points);
+	std::vector<int> pathNodes;
+	std::vector<int> pathLengths;
+
+	// Collect all nodes and path lengths
+	for (const auto& p : paths) {
+		for (const auto& pm : p.members) {
+			pathNodes.push_back(pm.node);
+		}
+		pathLengths.push_back(p.members.size());
+	}
+
+	int out_total_paths = static_cast<int>(paths.size());
+	int out_total_nodes = static_cast<int>(pathNodes.size());
+
+	// Allocate memory for output arrays
+	int* out_path_nodes = new int[out_total_nodes];
+	int* out_path_lengths = new int[out_total_paths];
+
+	// Copy data to output arrays
+	std::copy(pathNodes.begin(), pathNodes.end(), out_path_nodes);
+	std::copy(pathLengths.begin(), pathLengths.end(), out_path_lengths);
+
+	for (int i = 0; i < pathNodes.size(); i++) {
+		std::cout << "Node ID: " << pathNodes[i] << std::endl;
+	}
+	std::cout <<"         " <<std::endl;
+	for (int i = 0; i < pathLengths.size(); i++) {
+		std::cout << "Path Length: " << pathLengths[i] << std::endl;
+	}
+	/*
+	for (int i = 0; i < out_total_nodes; i++) {
+		std::cout << "Node ID: " << out_path_nodes[i] << std::endl;
+	}
+	*/
+
+	// After you're done using the allocated memory, don't forget to delete it to prevent memory leaks
+	delete[] out_path_nodes;
+	delete[] out_path_lengths;
+}
+
+
+
 TEST(_pathFinding, InsertAllToAllPathsIntoArray) {
 	HF::SpatialStructures::Graph g;
 
