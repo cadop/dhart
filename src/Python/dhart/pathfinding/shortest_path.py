@@ -7,7 +7,7 @@ from dhart.spatialstructures import Graph
 from dhart.native_collections import FloatArray2D, IntArray2D
 
 __all__ = ["ConvertNodesToIds", "DijkstraShortestPath", 
-           "DijkstraFindAllShortestPaths", "calculate_distance_and_predecessor"]
+           "DijkstraFindAllShortestPaths", "calculate_distance_and_predecessor","DijkstraFindAllShortestPathsArray"]
 
 
 def ConvertNodesToIds(graph: Graph, nodes: List[Union[Tuple, int]]) -> List[int]:
@@ -424,3 +424,25 @@ def calculate_distance_and_predecessor(graph: Graph, cost_type: str = ""
     pred_matrix = IntArray2D(pred_vector, pred_data, (num_nodes, num_nodes))
 
     return (dist_matrix, pred_matrix)
+
+
+
+def DijkstraFindAllShortestPathsArray(
+    graph: Graph,
+    cost_type: str = "",
+    ) -> List[Union[Path, None]]:
+    # Call out to native code and get results
+    (node_vector, node_data, length_vector, length_data) = pathfinder_native_functions.C_GetPredAsPaths(graph.graph_ptr,
+                                                             graph.NumNodes(),
+                                                             cost_type)
+
+    # Wrap values that weren't null in python paths
+    # Get the size of the graph
+    num_nodes = graph.NumNodes()
+
+    # Wrap in NativeNumpyLikes
+    dist_matrix = IntArray2D(node_vector, node_data, num_nodes * num_nodes)
+    pred_matrix = IntArray2D(length_vector, length_data, num_nodes * num_nodes)
+
+    return (dist_matrix, pred_matrix)
+

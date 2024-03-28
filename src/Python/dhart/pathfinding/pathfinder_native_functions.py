@@ -253,3 +253,49 @@ def C_DestroyPath(path_ptr: c_void_p) -> None:
         HFPython.DestroyPath(path_ptr)
     except ArgumentError:
         HFPython.DestroyPath(c_void_p(path_ptr))
+
+
+        
+def C_GetPredAsPaths(
+    graph_ptr: c_void_p,
+    num_nodes: int,
+    cost_type: str
+    ) -> List[Union[Tuple[c_void_p, c_void_p, int], None]]:
+    """ Find a path between every node in the graph
+
+    """
+    
+    # This will generate about num_nodes^2 paths
+    num_paths = num_nodes * num_nodes
+
+    # Cinterface function
+    path_sizes_type = c_int * num_paths
+    # c_path_num = c_int(num_paths)
+    cost_str = GetStringPtr(cost_type)
+    c_sizes = path_sizes_type()
+    
+    node_vector = c_void_p(0)
+    node_data = c_void_p(0)
+    length_vector = c_void_p(0)
+    length_data = c_void_p(0)
+
+
+    # Call into native code
+    res = HFPython.CreateAllPredToPath(
+        graph_ptr,
+        cost_str,
+        byref(node_vector),
+        byref(node_data),
+        byref(length_vector),
+        byref(length_data)
+    )
+
+    # If NO_COST is returned then we asked for a cost that
+    # that the graph didn't have
+    if res == HF_STATUS.NO_COST:
+        raise KeyError(f"Tried to generate a path with non-existant cost {cost_type}.")
+
+    # Read outputs. Replace paths that couldn't be generated
+    # with None in the output array
+
+    return (node_vector, node_data, length_vector, length_data)
