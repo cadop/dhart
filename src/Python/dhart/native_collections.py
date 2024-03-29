@@ -17,7 +17,7 @@ from typing import *
 from dhart.common_native_functions import getDLLHandle
 from dhart.native_numpy_like import NativeNumpyLike
 
-__all__ = ["FloatArray2D", "IntArray2D"]
+__all__ = ["FloatArray2D", "IntArray2D", "IntArray"]
 
 # Include the native functions here
 HFPython = getDLLHandle()
@@ -53,3 +53,13 @@ class IntArray2D(NativeNumpyLike):
         super().__init__(vector_ptr, data_ptr, size)
 
 
+
+class IntArray(NativeNumpyLike):
+    """ A generic instantiantion of a view of an int array in C++ """
+
+    native_type = c_int
+    delete_fp = DeleteIntArrayC
+
+    def __init__(self, vector_ptr: c_void_p,
+                 data_ptr: c_void_p, size:int):
+        super().__init__(vector_ptr, data_ptr, size)
