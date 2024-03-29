@@ -621,9 +621,12 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 
 	// Collect all nodes and path lengths
 	for (const auto& p : paths) {
+		std::cout << "Path Length: " << p.members.size() << std::endl;
 		for (const auto& pm : p.members) {
 			pathNodes.push_back(pm.node);
+			std::cout << "Node ID: " << pm.node << std::endl;
 		}
+		std::cout << "--------------------------" << std::endl;
 		pathLengths.push_back(p.members.size());
 	}
 
