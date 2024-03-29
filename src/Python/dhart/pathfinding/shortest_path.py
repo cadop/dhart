@@ -448,11 +448,6 @@ def AllShortestPathsCSR(
     num_nodes = int(path_lengths.array.sum())
     path_nodes = IntArray2D(node_vector, node_data, num_nodes)
 
-    print(f'Lengths: \n{path_lengths}\n')
-    print(f'Lengths: \n{path_lengths.array.reshape(-1, graph.NumNodes())}\n')
-    print(f'Nodes: \n{path_nodes}\n')
-
-
     # Build the CSR from matrix data
     path_sizes = path_lengths.array
     indices = path_nodes.array
@@ -463,8 +458,6 @@ def AllShortestPathsCSR(
     indptr[1:] = numpy.cumsum(path_sizes)
     # Create the CSR matrix
     csr = csr_matrix((data, indices, indptr), shape=(len(path_sizes), max(path_nodes) + 1))
-
-    print(f'CSR: \n{csr}\n')
 
     return csr
 
