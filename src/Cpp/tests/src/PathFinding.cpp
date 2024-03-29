@@ -594,15 +594,39 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 
 	// Create a Graph g, and compress it.
 	HF::SpatialStructures::Graph g;
+	///*
 	g.addEdge(0, 1, 1);
 	g.addEdge(0, 2, 2);
 	g.addEdge(1, 3, 3);
 	g.addEdge(2, 4, 1);
 	g.addEdge(3, 4, 5);
 	g.Compress();
+	//*/
+
+	/*
+	// Example usage
+	int nodeCount = 1000; // Total nodes
+	int edgeCount = 3000; // Total edges to generate
+	srand(static_cast<unsigned>(time(NULL))); // Seed the random number generator
+	for (int i = 0; i < edgeCount; ++i) {
+		int fromNode = rand() % nodeCount;
+		int toNode = rand() % nodeCount;
+		while (toNode == fromNode) { // Avoid self-loops
+			toNode = rand() % nodeCount;
+		}
+		int weight = 1 + rand() % 10; // Random weights between 1 and 10
+		g.addEdge(fromNode, toNode, weight);
+	}
+	
+
+	g.Compress();
+	*/
+
 
 	// Create a boost graph with the cost type
 	auto bg = HF::Pathfinding::CreateBoostGraph(g);
+	
+
 
 	// Prepare the parents and children vectors
 	int nodeSize = bg.get()->p.size();
@@ -621,12 +645,12 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 
 	// Collect all nodes and path lengths
 	for (const auto& p : paths) {
-		std::cout << "Path Length: " << p.members.size() << std::endl;
+		//std::cout << "Path Length: " << p.members.size() << std::endl;
 		for (const auto& pm : p.members) {
 			pathNodes.push_back(pm.node);
-			std::cout << "Node ID: " << pm.node << std::endl;
+			//std::cout << "Node ID: " << pm.node << std::endl;
 		}
-		std::cout << "--------------------------" << std::endl;
+		//std::cout << "--------------------------" << std::endl;
 		pathLengths.push_back(p.members.size());
 	}
 
@@ -641,11 +665,14 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 	std::copy(pathNodes.begin(), pathNodes.end(), out_path_nodes);
 	std::copy(pathLengths.begin(), pathLengths.end(), out_path_lengths);
 
-	for (int i = 0; i < pathNodes.size(); i++) {
+
+	for (int i = 0; i < 10; i++) {
+		//for (int i = 0; i < pathNodes.size(); i++) {
 		std::cout << "Node ID: " << pathNodes[i] << std::endl;
 	}
 	std::cout <<"         " <<std::endl;
-	for (int i = 0; i < pathLengths.size(); i++) {
+	for (int i = 0; i < 10; i++) {
+		//for (int i = 0; i < pathLengths.size(); i++) {
 		std::cout << "Path Length: " << pathLengths[i] << std::endl;
 	}
 	/*
@@ -657,6 +684,51 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 	// After you're done using the allocated memory, don't forget to delete it to prevent memory leaks
 	delete[] out_path_nodes;
 	delete[] out_path_lengths;
+
+
+
+	// **********************************************************************
+	// Now try with the apsp function:
+	// **********************************************************************
+
+	// Prepare the parents and children vectors
+
+	// Generate paths
+	auto new_paths = HF::Pathfinding::FindAPSP(bg.get());
+	std::vector<int> new_pathNodes;
+	std::vector<int> new_pathLengths;
+
+	int new_out_total_paths = static_cast<int>(new_paths.size());
+	int new_out_total_nodes = static_cast<int>(new_pathNodes.size());
+
+	// Allocate memory for output arrays
+	int* new_out_path_nodes = new int[new_out_total_nodes];
+	int* new_out_path_lengths = new int[new_out_total_paths];
+
+	// Copy data to output arrays
+	std::copy(new_pathNodes.begin(), new_pathNodes.end(), new_out_path_nodes);
+	std::copy(new_pathLengths.begin(), new_pathLengths.end(), new_out_path_lengths);
+
+
+	for (int i = 0; i < 10; i++) {
+		//for (int i = 0; i < pathNodes.size(); i++) {
+		std::cout << "Node ID: " << new_pathNodes[i] << std::endl;
+	}
+	std::cout << "         " << std::endl;
+	for (int i = 0; i < 10; i++) {
+		//for (int i = 0; i < pathLengths.size(); i++) {
+		std::cout << "Path Length: " << new_pathLengths[i] << std::endl;
+	}
+	/*
+	for (int i = 0; i < out_total_nodes; i++) {
+		std::cout << "Node ID: " << out_path_nodes[i] << std::endl;
+	}
+	*/
+
+	// After you're done using the allocated memory, don't forget to delete it to prevent memory leaks
+	delete[] new_out_path_nodes;
+	delete[] new_out_path_lengths;
+
 }
 
 

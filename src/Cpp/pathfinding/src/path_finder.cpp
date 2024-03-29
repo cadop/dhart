@@ -370,4 +370,87 @@ namespace HF::Pathfinding {
 		// Run InsertPathsIntoArray and mutate out_paths, out_path_members, and out_sizes
 		InsertPathsIntoArray(bg, start_points, end_points, out_paths, out_path_members, out_sizes);
 	}
+
+
+
+	// ****************************************************************************************
+	// Start of the new pathfinding functions
+	// *																						*
+
+	std::vector<std::vector<std::vector<int>>> FindAPSP(BoostGraph* bg)
+	{
+		//std::vector<std::vector<std::vector<int>>>
+		// 
+		// Get the graph from bg
+		const graph_t& graph = bg->g;
+
+		std::vector<int> paths();
+
+		DistanceAndPredecessor matricies = GenerateDistanceAndPred(*bg);
+
+		auto pred = matricies.pred;
+
+		int numNodes = bg->p.size();
+		std::vector<std::vector<std::vector<int>>> allPaths(numNodes, std::vector<std::vector<int>>(numNodes));
+
+		for (int i = 0; i < numNodes; i++) {
+			for (int j = 0; j < numNodes; j++) {
+				if (i == j) continue;
+
+				int* curRow = matricies.GetRowOfPred(i);
+				allPaths[i][j] = ConstructShortestPathNodesFromPred(i, j, curRow);
+
+			}
+		}
+
+		return allPaths;
+	}
+
+	/*!
+		\brief Construct the shortest path of node ids given predecessor and distance vectors.
+
+		\param start ID of the starting point.
+		\param end ID of the end point.
+		\param pred Predecessor matrix for the start node.
+		\param distances Distance matrix for pred
+
+		\todo Replace exception with an assert statment. It shouldn't be triggered unless
+		there's a problem with this algorithm?
+	*/
+	inline std::vector<int> ConstructShortestPathNodesFromPred(
+		int start,
+		int end,
+		int* pred
+	) {
+
+		// Create a new path and add the end point.
+		std::vector<int> path;
+		path.push_back(end);
+
+		// Return an empty path if there's no path from start to end indicated by the predecessor's
+		// value for the current node being the current node.
+		int current_node = end;
+		if (pred[current_node] == current_node) return std::vector<int>{};
+
+		// Follow the predecessor matrix from end to start
+		while (current_node != start) {
+
+			// If this is triggered, there's something wrong with this algorithm because the path
+			// suddenly has more nodes than there are in the entire graph.
+			//if (path.size() > pred.size())
+			//	throw std::exception("Path included more nodes than contaiend in the graph!");
+
+			// Get the next node from the predecessor matrix
+			int next_node = pred[current_node];
+			// Add this node to the list
+			path.push_back(next_node);
+			// Save this node and cost as the last node/cost
+			current_node = next_node;
+		}
+
+		// Flip the order of this since this algorithm generates it from end to start
+		std::reverse(path.begin(), path.end());
+		return path;
+	}
+
 }

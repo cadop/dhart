@@ -277,9 +277,6 @@ namespace HF {
 			const std::vector<int> & end_points
 		);
 
-		/// <summary> Find a path from every node to every node (NOTE: Not implemented yet.) </summary>
-		/// <param name="bg"> Graph to generate all paths for. traversal </param>
-		/// <returns> A list of every path that could be generated from this graph. </returns>
 		/*!
 			\details
 			Calculate a permutation for every combination of nodes in the graph,
@@ -614,6 +611,11 @@ namespace HF {
 			\endcode
 		*/
 		void InsertAllToAllPathsIntoArray(BoostGraph* bg, HF::SpatialStructures::Path** out_paths, HF::SpatialStructures::PathMember** out_path_members, int* out_sizes);
+	
+		std::vector<std::vector<std::vector<int>>> FindAPSP(BoostGraph* bg);
+
+		inline std::vector<int> ConstructShortestPathNodesFromPred(int start, int end, int* pred);
+		
 	}
 }
 

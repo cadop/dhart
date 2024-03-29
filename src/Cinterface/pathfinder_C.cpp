@@ -243,9 +243,11 @@ C_INTERFACE CreateAllPredToPath(
 		*out_nodes_vector = new vector<int>();
 		*out_lengths_vector = new vector<int>();
 
+		/*
 		auto& out_nodes = **out_nodes_vector;
 		auto& out_lengths = **out_lengths_vector;
 
+		
 		out_nodes.resize(pathNodes.size());
 		out_lengths.resize(pathLengths.size());
 
@@ -259,7 +261,13 @@ C_INTERFACE CreateAllPredToPath(
 
 		*out_nodes_data = out_nodes.data();
 		*out_lengths_data = out_lengths.data();
+		*/
 
+		*out_nodes_vector = new vector<int>(pathNodes.begin(), pathNodes.end());
+		*out_lengths_vector = new vector<int>(pathLengths.begin(), pathLengths.end());
+
+		*out_nodes_data = (*out_nodes_vector)->data();
+		*out_lengths_data = (*out_lengths_vector)->data();
 	}
 
 	catch (HF::Exceptions::NoCost) 
