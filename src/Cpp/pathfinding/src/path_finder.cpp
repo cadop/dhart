@@ -377,7 +377,7 @@ namespace HF::Pathfinding {
 	// Start of the new pathfinding functions
 	// *																						*
 
-	std::vector<std::vector<std::vector<int>>> FindAPSP(BoostGraph* bg)
+	std::vector<std::vector<int>> FindAPSP(BoostGraph* bg)
 	{
 		//std::vector<std::vector<std::vector<int>>>
 		// 
@@ -388,17 +388,25 @@ namespace HF::Pathfinding {
 
 		DistanceAndPredecessor matricies = GenerateDistanceAndPred(*bg);
 
-		auto pred = matricies.pred;
+		std::cout << "Generated Distance and Predecessor Matricies" << std::endl;
+		//auto pred = matricies.pred;
+		//std::vector<int> pathNodes();
+		//std::vector<int> pathLengths();
 
 		int numNodes = bg->p.size();
-		std::vector<std::vector<std::vector<int>>> allPaths(numNodes, std::vector<std::vector<int>>(numNodes));
+		std::vector<std::vector<int>> allPaths(numNodes*numNodes, std::vector<int>(numNodes));
 
 		for (int i = 0; i < numNodes; i++) {
 			for (int j = 0; j < numNodes; j++) {
-				if (i == j) continue;
-
-				int* curRow = matricies.GetRowOfPred(i);
-				allPaths[i][j] = ConstructShortestPathNodesFromPred(i, j, curRow);
+				std::vector<int> path = std::vector<int>{};
+				if (i!=j) {
+					int* curRow = matricies.GetRowOfPred(i);
+					path = ConstructShortestPathNodesFromPred(i, j, curRow);
+				}
+				int curIndx = (i * numNodes) + j; // basically the stride is being counted 
+				
+				// Add to the overall path
+				allPaths[curIndx] = path;
 
 			}
 		}
@@ -442,6 +450,7 @@ namespace HF::Pathfinding {
 
 			// Get the next node from the predecessor matrix
 			int next_node = pred[current_node];
+			if (next_node == -1) return std::vector<int>{};
 			// Add this node to the list
 			path.push_back(next_node);
 			// Save this node and cost as the last node/cost

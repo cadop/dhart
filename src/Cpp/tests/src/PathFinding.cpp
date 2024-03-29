@@ -594,16 +594,16 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 
 	// Create a Graph g, and compress it.
 	HF::SpatialStructures::Graph g;
-	///*
+	/*
 	g.addEdge(0, 1, 1);
 	g.addEdge(0, 2, 2);
 	g.addEdge(1, 3, 3);
 	g.addEdge(2, 4, 1);
 	g.addEdge(3, 4, 5);
 	g.Compress();
-	//*/
+	*/
 
-	/*
+	///*
 	// Example usage
 	int nodeCount = 1000; // Total nodes
 	int edgeCount = 3000; // Total edges to generate
@@ -620,7 +620,7 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 	
 
 	g.Compress();
-	*/
+	//*/
 
 
 	// Create a boost graph with the cost type
@@ -639,7 +639,17 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 	}
 
 	// Generate paths
+	// **********************************************************************
+	auto start = std::chrono::high_resolution_clock::now();
+
 	auto paths = HF::Pathfinding::FindPaths(bg.get(), start_points, end_points);
+
+	auto finish = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> elapsed = finish - start;
+	std::cout << "Iterative Elapsed time: " << elapsed.count() << " seconds\n";
+	// **********************************************************************
+
+
 	std::vector<int> pathNodes;
 	std::vector<int> pathLengths;
 
@@ -694,9 +704,26 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 	// Prepare the parents and children vectors
 
 	// Generate paths
+
+	// **********************************************************************
+	start = std::chrono::high_resolution_clock::now();
+
 	auto new_paths = HF::Pathfinding::FindAPSP(bg.get());
+
+	finish = std::chrono::high_resolution_clock::now();
+	elapsed = finish - start;
+	std::cout << "APSP Elapsed time: " << elapsed.count() << " seconds\n";
+	// **********************************************************************
+
 	std::vector<int> new_pathNodes;
 	std::vector<int> new_pathLengths;
+
+	for (const auto& p : new_paths) {
+		for (const auto& pn : p) {
+			new_pathNodes.push_back(pn);
+		}
+		new_pathLengths.push_back(p.size());
+	}
 
 	int new_out_total_paths = static_cast<int>(new_paths.size());
 	int new_out_total_nodes = static_cast<int>(new_pathNodes.size());
@@ -712,12 +739,12 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 
 	for (int i = 0; i < 10; i++) {
 		//for (int i = 0; i < pathNodes.size(); i++) {
-		std::cout << "Node ID: " << new_pathNodes[i] << std::endl;
+		std::cout << "NEW Node ID: " << new_pathNodes[i] << std::endl;
 	}
 	std::cout << "         " << std::endl;
 	for (int i = 0; i < 10; i++) {
 		//for (int i = 0; i < pathLengths.size(); i++) {
-		std::cout << "Path Length: " << new_pathLengths[i] << std::endl;
+		std::cout << "NEW Path Length: " << new_pathLengths[i] << std::endl;
 	}
 	/*
 	for (int i = 0; i < out_total_nodes; i++) {

@@ -612,7 +612,7 @@ namespace HF {
 		*/
 		void InsertAllToAllPathsIntoArray(BoostGraph* bg, HF::SpatialStructures::Path** out_paths, HF::SpatialStructures::PathMember** out_path_members, int* out_sizes);
 	
-		std::vector<std::vector<std::vector<int>>> FindAPSP(BoostGraph* bg);
+		std::vector<std::vector<int>> FindAPSP(BoostGraph* bg);
 
 		inline std::vector<int> ConstructShortestPathNodesFromPred(int start, int end, int* pred);
 		
