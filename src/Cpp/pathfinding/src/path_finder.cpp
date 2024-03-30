@@ -273,7 +273,7 @@ namespace HF::Pathfinding {
 		DistanceAndPredecessor out_distpred(num_nodes);
 		
 		// Iterate through every row in the array
-		#pragma omp parallel for schedule(dynamic)
+	#pragma omp parallel for schedule(dynamic)
 		for (int row = 0; row < num_nodes; row++) {
 	
 			// Get pointers to the beginning of the row for both matricies
@@ -300,15 +300,15 @@ namespace HF::Pathfinding {
 			// of std::numeric_limits<float>::max. This should be a NAN for the sake of readability. 
 			for (int i = 0; i < num_nodes; i++)
 			{
-				float & dist_element = dist_row_start[i];
-				int & pred_element = pred_row_start[i];
+				//float & dist_element = dist_row_start[i];
+				//int & pred_element = pred_row_start[i];
 
 				// If the predecessor element is not not in the range of nodes,
 				// this is boost trying to signal to us that there is no connection
 				// between these nodes, so put a NAN there. 
-				if (dist_element == std::numeric_limits<float>::max()) {
-					pred_element = -1; // Ints have no way of representing NaN
-					dist_element = -1;
+				if (dist_row_start[i] == std::numeric_limits<float>::max()) {
+					pred_row_start[i] = -1; // Ints have no way of representing NaN
+					dist_row_start[i] = -1;
 				}
 			}
 		}
@@ -377,42 +377,44 @@ namespace HF::Pathfinding {
 	// Start of the new pathfinding functions
 	// *																						*
 
-	std::vector<std::vector<int>> FindAPSP(BoostGraph* bg)
-	{
-		//std::vector<std::vector<std::vector<int>>>
-		// 
+	///*
+
+	inline std::vector<DistPred> BuildDistanceAndPredecessorFast(const BoostGraph& bg) {
+
 		// Get the graph from bg
-		const graph_t& graph = bg->g;
+		const graph_t& g = bg.g;
+		const int num_nodes = bg.p.size();
 
-		std::vector<int> paths();
+		// Generate predecessor matrices for every unique start point
+		//robin_hood::unordered_map<int, DistPred> dpm;
 
-		DistanceAndPredecessor matricies = GenerateDistanceAndPred(*bg);
+		std::vector<DistPred> pred(num_nodes);
 
-		std::cout << "Generated Distance and Predecessor Matricies" << std::endl;
-		//auto pred = matricies.pred;
-		//std::vector<int> pathNodes();
-		//std::vector<int> pathLengths();
+		for (int row = 0; row < num_nodes; row++)
+		{
+			//if (dpm.count(row) == 0)
+			//{
+			// Construct an isntance of DistPred that can hold every node in the graph
+			int n = num_vertices(g);
+			DistPred dist_pred(n);
 
-		int numNodes = bg->p.size();
-		std::vector<std::vector<int>> allPaths(numNodes*numNodes, std::vector<int>(numNodes));
+			// Give boost a reference to the array in distpred
+			auto pm = boost::predecessor_map(&dist_pred.predecessor[0]);
+			vertex_descriptor start_vertex = vertex(row, g);
 
-		for (int i = 0; i < numNodes; i++) {
-			for (int j = 0; j < numNodes; j++) {
-				std::vector<int> path = std::vector<int>{};
-				if (i!=j) {
-					int* curRow = matricies.GetRowOfPred(i);
-					path = ConstructShortestPathNodesFromPred(i, j, curRow);
-				}
-				int curIndx = (i * numNodes) + j; // basically the stride is being counted 
-				
-				// Add to the overall path
-				allPaths[curIndx] = path;
-
-			}
+			// Fill distpred's distance and predecssor arrays with info from the graph
+			dijkstra_shortest_paths_no_color_map(
+				g,
+				start_vertex,
+				pm.distance_map(&dist_pred.distance[0]).weight_map(boost::get(&Edge_Cost::weight, g))
+			);
+			//dpm[row] = dist_pred;
+			pred[row] = dist_pred;
+			//}
 		}
-
-		return allPaths;
+		return pred;
 	}
+	//*/
 
 	/*!
 		\brief Construct the shortest path of node ids given predecessor and distance vectors.
@@ -428,7 +430,7 @@ namespace HF::Pathfinding {
 	inline std::vector<int> ConstructShortestPathNodesFromPred(
 		int start,
 		int end,
-		int* pred
+		const std::vector<vertex_descriptor>& pred
 	) {
 
 		// Create a new path and add the end point.
@@ -442,12 +444,6 @@ namespace HF::Pathfinding {
 
 		// Follow the predecessor matrix from end to start
 		while (current_node != start) {
-
-			// If this is triggered, there's something wrong with this algorithm because the path
-			// suddenly has more nodes than there are in the entire graph.
-			//if (path.size() > pred.size())
-			//	throw std::exception("Path included more nodes than contaiend in the graph!");
-
 			// Get the next node from the predecessor matrix
 			int next_node = pred[current_node];
 			if (next_node == -1) return std::vector<int>{};
@@ -461,5 +457,82 @@ namespace HF::Pathfinding {
 		std::reverse(path.begin(), path.end());
 		return path;
 	}
+
+	std::vector<std::vector<int>> FindAPSP(BoostGraph* bg)
+	{
+		//std::vector<std::vector<std::vector<int>>>
+		// 
+		// Get the graph from bg
+		const graph_t& graph = bg->g;
+
+		std::vector<int> paths();
+
+		//DistanceAndPredecessor matricies = GenerateDistanceAndPredFast(*bg);
+		std::vector<DistPred> matricies = BuildDistanceAndPredecessorFast(*bg);
+
+		std::cout << "Generated Distance and Predecessor Matricies" << std::endl;
+		//auto pred = matricies.pred;
+		//std::vector<int> pathNodes();
+		//std::vector<int> pathLengths();
+
+		int numNodes = bg->p.size();
+		std::vector<std::vector<int>> allPaths(numNodes*numNodes, std::vector<int>(numNodes));
+
+	#pragma omp parallel for schedule(dynamic)
+		for (int i = 0; i < numNodes; i++) {
+			for (int j = 0; j < numNodes; j++) {
+				std::vector<int> path = std::vector<int>{};
+				if (i!=j) {
+					//int* curRow = matricies.GetRowOfPred(i);
+					const auto& curRow = matricies[i].predecessor;
+					path = ConstructShortestPathNodesFromPred(i, j, curRow);
+				}
+				int curIndx = (i * numNodes) + j; // basically the stride is being counted 
+				
+				// Add to the overall path
+				allPaths[curIndx] = path;
+
+			}
+		}
+
+		return allPaths;
+	}
+
+	inline DistanceAndPredecessor GenerateDistanceAndPredFast(const BoostGraph& bg)
+	{
+		const graph_t& g = bg.g;
+
+		// Generate distance and predecessor matricies
+		const int num_nodes = bg.p.size();
+		DistanceAndPredecessor out_distpred(num_nodes);
+
+		// Iterate through every row in the array
+    #pragma omp parallel for schedule(dynamic)
+		for (int row = 0; row < num_nodes; row++) {
+
+			// Get pointers to the beginning of the row for both matricies
+			float* dist_row_start = out_distpred.GetRowOfDist(row);
+			int* pred_row_start = out_distpred.GetRowOfPred(row);
+
+			// Give boost a reference to the array in distpred
+			auto pm = boost::predecessor_map(pred_row_start);
+
+			// Get the descriptor of the starting vertex
+			vertex_descriptor start_vertex = vertex(row, g);
+
+			// calculate the shortest path using the row of the distance and predecessor arrays.
+			// Boost should fill these when calculating the distance/predecessor matricies
+			dijkstra_shortest_paths_no_color_map(
+				g,
+				start_vertex,
+				pm.distance_map(dist_row_start).weight_map(boost::get(&Edge_Cost::weight, g))
+			);
+		}
+
+		return out_distpred;
+
+	}
+
+
 
 }

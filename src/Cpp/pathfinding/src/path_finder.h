@@ -475,6 +475,8 @@ namespace HF {
 		
 		*/
 		DistanceAndPredecessor GenerateDistanceAndPred(const BoostGraph& bg);
+
+		inline DistanceAndPredecessor GenerateDistanceAndPredFast(const BoostGraph& bg);
 			
 		/*!
 			\brief A special version of FindPaths optimized for the C_Interface, such that all paths possible
@@ -614,7 +616,7 @@ namespace HF {
 	
 		std::vector<std::vector<int>> FindAPSP(BoostGraph* bg);
 
-		inline std::vector<int> ConstructShortestPathNodesFromPred(int start, int end, int* pred);
+		//inline std::vector<int> ConstructShortestPathNodesFromPred(int start, int end, int* pred);
 		
 	}
 }
