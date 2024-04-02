@@ -385,6 +385,7 @@ namespace HF::Pathfinding {
 		const graph_t& g = bg.g;
 		const int num_nodes = bg.p.size();
 
+
 		// Generate predecessor matrices for every unique start point
 		//robin_hood::unordered_map<int, DistPred> dpm;
 
@@ -470,6 +471,17 @@ namespace HF::Pathfinding {
 		//DistanceAndPredecessor matricies = GenerateDistanceAndPredFast(*bg);
 		std::vector<DistPred> matricies = BuildDistanceAndPredecessorFast(*bg);
 
+		const int num_nodes = bg->p.size();
+		// This breaks down the full row of a predecessor 
+		// Generate predecessor matrices for every unique start point
+		robin_hood::unordered_map<int, DistPred> dpm;
+		for (int row = 0; row < num_nodes; row++) {
+			if (dpm.count(row) == 0)
+				dpm[row] = BuildDistanceAndPredecessor(graph, row);
+		}
+
+
+
 		std::cout << "Generated Distance and Predecessor Matricies" << std::endl;
 		//auto pred = matricies.pred;
 		//std::vector<int> pathNodes();
@@ -478,7 +490,7 @@ namespace HF::Pathfinding {
 		int numNodes = bg->p.size();
 		std::vector<std::vector<int>> allPaths(numNodes*numNodes, std::vector<int>(numNodes));
 
-	#pragma omp parallel for schedule(dynamic)
+	//#pragma omp parallel for schedule(dynamic)
 		for (int i = 0; i < numNodes; i++) {
 			for (int j = 0; j < numNodes; j++) {
 				std::vector<int> path = std::vector<int>{};
@@ -507,7 +519,7 @@ namespace HF::Pathfinding {
 		DistanceAndPredecessor out_distpred(num_nodes);
 
 		// Iterate through every row in the array
-    #pragma omp parallel for schedule(dynamic)
+    //#pragma omp parallel for schedule(dynamic)
 		for (int row = 0; row < num_nodes; row++) {
 
 			// Get pointers to the beginning of the row for both matricies
