@@ -605,8 +605,8 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 
 	///*
 	// Example usage
-	int nodeCount = 1000; // Total nodes
-	int edgeCount = 3000; // Total edges to generate
+	int nodeCount = 10000; // Total nodes
+	int edgeCount = 5000; // Total edges to generate
 	srand(static_cast<unsigned>(time(NULL))); // Seed the random number generator
 	for (int i = 0; i < edgeCount; ++i) {
 		int fromNode = rand() % nodeCount;
@@ -643,7 +643,7 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 
 	auto finish = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> elapsed = finish - start;
-	std::cout << "Iterative Elapsed time: " << elapsed.count() << " seconds\n";
+	std::cout << "FindPaths Elapsed time: " << elapsed.count() << " seconds\n";
 	// **********************************************************************
 
 
@@ -672,6 +672,7 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 	std::copy(pathNodes.begin(), pathNodes.end(), out_path_nodes);
 	std::copy(pathLengths.begin(), pathLengths.end(), out_path_lengths);
 
+	/*
 
 	for (int i = 0; i < 10; i++) {
 		//for (int i = 0; i < pathNodes.size(); i++) {
@@ -682,6 +683,8 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 		//for (int i = 0; i < pathLengths.size(); i++) {
 		std::cout << "Path Length: " << pathLengths[i] << std::endl;
 	}
+	*/
+
 	/*
 	for (int i = 0; i < out_total_nodes; i++) {
 		std::cout << "Node ID: " << out_path_nodes[i] << std::endl;
@@ -691,6 +694,38 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 	// After you're done using the allocated memory, don't forget to delete it to prevent memory leaks
 	delete[] out_path_nodes;
 	delete[] out_path_lengths;
+
+
+	// **********************************************************************
+	// **********************************************************************
+	// **********************************************************************
+		// **********************************************************************
+	auto start_new = std::chrono::high_resolution_clock::now();
+	auto paths_new = HF::Pathfinding::FindAPSP(bg.get());
+
+	auto finish_new = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> elapsed_new = finish_new - start_new;
+	std::cout << "FindAPSP Elapsed time: " << elapsed_new.count() << " seconds\n";
+	// **********************************************************************
+
+	std::vector<int> pathNodes_new;
+	std::vector<int> pathLengths_new;
+
+	for (const auto& p : paths_new) {
+		for (const auto& pn : p) {
+			pathNodes_new.push_back(pn);
+		}
+		pathLengths_new.push_back(p.size());
+	}
+
+	ASSERT_EQ(pathNodes.size(), pathNodes_new.size());
+
+	for (int i = 0; i < 10; i++) {
+		ASSERT_EQ(pathNodes[i], pathNodes_new[i]);
+		ASSERT_EQ(pathLengths[i], pathLengths_new[i]);
+	}
+	
+
 }
 
 TEST(_pathFinding, C_CreateAllPredToPathParallel) {
@@ -708,8 +743,8 @@ TEST(_pathFinding, C_CreateAllPredToPathParallel) {
 
 	///*
 	// Example usage
-	int nodeCount = 1000; // Total nodes
-	int edgeCount = 3000; // Total edges to generate
+	int nodeCount = 100; // Total nodes
+	int edgeCount = 300; // Total edges to generate
 	srand(static_cast<unsigned>(time(NULL))); // Seed the random number generator
 	for (int i = 0; i < edgeCount; ++i) {
 		int fromNode = rand() % nodeCount;
@@ -722,8 +757,8 @@ TEST(_pathFinding, C_CreateAllPredToPathParallel) {
 	}
 	g.Compress();
 
-	auto bg = HF::Pathfinding::CreateBoostGraph(g);
 
+	auto bg = HF::Pathfinding::CreateBoostGraph(g);
 	auto paths = HF::Pathfinding::FindAPSP(bg.get());
 	// **********************************************************************
 
@@ -737,16 +772,16 @@ TEST(_pathFinding, C_CreateAllPredToPathParallel) {
 		pathLengths.push_back(p.size());
 	}
 
-	int out_total_paths = static_cast<int>(paths.size());
-	int out_total_nodes = static_cast<int>(pathNodes.size());
+	//int out_total_paths = static_cast<int>(paths.size());
+	//int out_total_nodes = static_cast<int>(pathNodes.size());
 
 	// Allocate memory for output arrays
-	int* out_path_nodes = new int[out_total_nodes];
-	int* out_path_lengths = new int[out_total_paths];
+	//int* out_path_nodes = new int[out_total_nodes];
+	//int* out_path_lengths = new int[out_total_paths];
 
 	// Copy data to output arrays
-	std::copy(pathNodes.begin(), pathNodes.end(), out_path_nodes);
-	std::copy(pathLengths.begin(), pathLengths.end(), out_path_lengths);
+	//std::copy(pathNodes.begin(), pathNodes.end(), out_path_nodes);
+	//std::copy(pathLengths.begin(), pathLengths.end(), out_path_lengths);
 
 
 	for (int i = 0; i < 10; i++) {
@@ -758,15 +793,11 @@ TEST(_pathFinding, C_CreateAllPredToPathParallel) {
 		//for (int i = 0; i < pathLengths.size(); i++) {
 		std::cout << "NEW Path Length: " << pathLengths[i] << std::endl;
 	}
-	/*
-	for (int i = 0; i < out_total_nodes; i++) {
-		std::cout << "Node ID: " << out_path_nodes[i] << std::endl;
-	}
-	*/
+
 
 	// After you're done using the allocated memory, don't forget to delete it to prevent memory leaks
-	delete[] out_path_nodes;
-	delete[] out_path_lengths;
+	//delete[] out_path_nodes;
+	//delete[] out_path_lengths;
 
 }
 
