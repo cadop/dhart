@@ -423,11 +423,44 @@ namespace HF::Pathfinding {
 
 	}
 
-	std::vector<std::vector<int>> FindAPSP(BoostGraph* bg)
+	//std::vector<std::vector<int>> FindAPSP(BoostGraph& bg)
+	//{
+	//	// Get the graph from bg
+	//	const graph_t& graph = bg.g;
+	//	const int numNodes = bg.p.size();
+
+	//	// This breaks down the full row of a predecessor 
+	//	// Generate predecessor matrices for every unique start point
+	//	robin_hood::unordered_map<int, DistPred> dpm;
+	//	for (int row = 0; row < numNodes; row++) {
+	//		if (dpm.count(row) == 0)
+	//			dpm[row] = BuildDistanceAndPredecessor(graph, row);
+	//	}
+
+	//	// Preallocate memory. Might not make sense because of number of shorter paths
+	//	std::vector<std::vector<int>> allPaths;
+	//	allPaths.resize(numNodes * numNodes);
+
+	//#pragma omp parallel for schedule(dynamic)
+	//	for (int i = 0; i < numNodes; i++) {
+	//		for (int j = 0; j < numNodes; j++) {
+	//			std::vector<int> path = std::vector<int>{};
+	//			int curIndx = (i * numNodes) + j; // basically the stride is being counted 
+	//			if (i != j) {
+	//				path = ConstructShortestPathNodesFromPred(i, j, dpm[i].predecessor);
+	//			}
+	//			// Add to the overall path
+	//			allPaths[curIndx] = path;
+	//		}
+	//	}
+	//	return allPaths; // Return the final vector
+	//}
+
+	std::vector<std::vector<int>> FindAPSP(BoostGraph& bg)
 	{
 		// Get the graph from bg
-		const graph_t& graph = bg->g;
-		const int numNodes = bg->p.size();
+		const graph_t& graph = bg.g;
+		const int numNodes = bg.p.size();
 
 		// This breaks down the full row of a predecessor 
 		// Generate predecessor matrices for every unique start point
@@ -441,7 +474,7 @@ namespace HF::Pathfinding {
 		std::vector<std::vector<int>> allPaths;
 		allPaths.resize(numNodes * numNodes);
 
-	#pragma omp parallel for schedule(dynamic)
+#pragma omp parallel for schedule(dynamic)
 		for (int i = 0; i < numNodes; i++) {
 			for (int j = 0; j < numNodes; j++) {
 				std::vector<int> path = std::vector<int>{};
@@ -455,4 +488,5 @@ namespace HF::Pathfinding {
 		}
 		return allPaths; // Return the final vector
 	}
+
 }

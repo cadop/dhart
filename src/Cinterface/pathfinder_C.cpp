@@ -201,7 +201,7 @@ C_INTERFACE CalculateDistanceAndPredecessor(
 
 
 C_INTERFACE CreateAllPredToPath(
-	const HF::SpatialStructures::Graph* g,
+	const Graph* g,
 	const char* cost_name,
 	vector<int>** out_nodes_vector,
 	int** out_nodes_data, // Output: Flat array of all path nodes
@@ -214,11 +214,8 @@ C_INTERFACE CreateAllPredToPath(
 		// Create a boost graph with the cost type
 		auto bg = CreateBoostGraph(*g, string(cost_name));
 
-		// Prepare the parents and children vectors
-		int nodeSize = bg->p.size();
-
 		// Generate paths
-		auto paths = HF::Pathfinding::FindAPSP(bg.get());
+		auto paths = HF::Pathfinding::FindAPSP(*bg.get());
 		std::vector<int> pathNodes;
 		std::vector<int> pathLengths;
 

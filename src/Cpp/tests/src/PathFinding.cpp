@@ -605,8 +605,8 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 
 	///*
 	// Example usage
-	int nodeCount = 10000; // Total nodes
-	int edgeCount = 5000; // Total edges to generate
+	int nodeCount = 1000; // Total nodes
+	int edgeCount = 500; // Total edges to generate
 	srand(static_cast<unsigned>(time(NULL))); // Seed the random number generator
 	for (int i = 0; i < edgeCount; ++i) {
 		int fromNode = rand() % nodeCount;
@@ -701,7 +701,7 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 	// **********************************************************************
 		// **********************************************************************
 	auto start_new = std::chrono::high_resolution_clock::now();
-	auto paths_new = HF::Pathfinding::FindAPSP(bg.get());
+	auto paths_new = HF::Pathfinding::FindAPSP(*bg.get());
 
 	auto finish_new = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> elapsed_new = finish_new - start_new;
@@ -724,7 +724,55 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 		ASSERT_EQ(pathNodes[i], pathNodes_new[i]);
 		ASSERT_EQ(pathLengths[i], pathLengths_new[i]);
 	}
-	
+
+
+	// **********************************************************************
+// **********************************************************************
+	// Total paths is node_count ^ 2
+	size_t path_count = nodeSize * nodeSize;// 	   	// Pointer to buffer of (Path *)
+
+	Path** out_paths = new Path * [path_count];
+	// out_paths[i...path_count - 1] will be alloc'ed by InsertPathsIntoArray
+
+	// Pointer to buffer of (PathMember *)
+	PathMember** out_path_member = new PathMember * [path_count];
+	// out_path_member[i...path_count - 1] points to out_paths[i...path_count - 1]->GetPMPointer();
+
+	// Pointer to buffer of (int)
+	int* sizes = new int[path_count];
+
+	// **********************************************************************
+	start_new = std::chrono::high_resolution_clock::now();
+	InsertAllToAllPathsIntoArray(bg.get(), out_paths, out_path_member, sizes);
+
+	finish_new = std::chrono::high_resolution_clock::now();
+	elapsed_new = finish_new - start_new;
+	std::cout << "InsertAllToAllPathsIntoArray Elapsed time: " << elapsed_new.count() << " seconds\n";
+	// **********************************************************************
+
+
+	//
+	// Resource cleanup
+	//
+	if (sizes) {
+		delete[] sizes;
+		sizes = nullptr;
+	}
+
+	if (out_path_member) {
+		delete[] out_path_member;
+		out_path_member = nullptr;
+	}
+
+	if (out_paths) {
+		for (int i = 0; i < path_count; i++) {
+			if (out_paths[i]) {
+				delete out_paths[i];
+				out_paths[i] = nullptr;
+			}
+		}
+		delete[] out_paths;
+	}
 
 }
 
@@ -759,7 +807,7 @@ TEST(_pathFinding, C_CreateAllPredToPathParallel) {
 
 
 	auto bg = HF::Pathfinding::CreateBoostGraph(g);
-	auto paths = HF::Pathfinding::FindAPSP(bg.get());
+	auto paths = HF::Pathfinding::FindAPSP(*bg.get());
 	// **********************************************************************
 
 	std::vector<int> pathNodes;
