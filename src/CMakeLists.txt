@@ -50,14 +50,14 @@ set_property(
         Pathfinder
 )
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "/EHsc /MP")
+set(CMAKE_CXX_FLAGS "-fPIC -Wall")
 option(DHARTAPI_EnableTests "Install unit tests to the bin directory" ON)
 option(DHARTAPI_EnableCSharp "Include C# Interface" ON)
 option(DHARTAPI_EnablePython "Include Python Interface" ON)
 option(DHARTAPI_BuildCSharpTests "Enable to build C# test projects" OFF)
 set(DHARTAPI_InstallTitle "" CACHE STRING "Installed package will be written to release/<InstallTitle>/. An empty string will follow default behavior.")
 set(DHARTAPI_Config "GraphGenerator" CACHE STRING "What projects to build")
-set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}\\external")
+set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}/external")
 set (ENABLE_EXPORTS ON)
 
 if (NOT "${DHARTAPI_InstallTitle}" STREQUAL "")
@@ -88,10 +88,10 @@ add_subdirectory(external)
 
 # Set Compiler flags based on whether or not this is the release build
 if(CMAKE_BUILD_TYPE MATCHES Release)
-    set(CMAKE_CXX_FLAGS "/EHsc /openmp -O2")
+    set(CMAKE_CXX_FLAGS "-fPIC -O2")
     message([STATUS] "Using release optimizations")
 else()
-    set(CMAKE_CXX_FLAGS "/openmp /EHsc /MP")
+    set(CMAKE_CXX_FLAGS "-fPIC")
 endif()
 
 
