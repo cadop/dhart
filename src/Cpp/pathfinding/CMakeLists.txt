@@ -23,4 +23,5 @@ target_include_directories(
 		${CMAKE_CURRENT_LIST_DIR}/src
 		${EXTERNAL_DIR}/robin_hood
 		${EXTERNAL_DIR}/boost
+		${EXTERNAL_DIR}/Embree/include
 	)

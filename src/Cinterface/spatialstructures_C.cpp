@@ -2,7 +2,7 @@
 #include <spatialstructures_C.h>
 #include <HFExceptions.h>
 #include <graph.h>
-#include <edge.h>
+#include <Edge.h>
 #include <node.h>
 #include <robin_hood.h>
 #include <iostream>

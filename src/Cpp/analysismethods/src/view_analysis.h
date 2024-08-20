@@ -216,7 +216,7 @@ namespace HF::ViewAnalysis {
 				throw std::out_of_range("Unimplemented aggregation type");
 				break;
 		} // End Switch
-		assert(out_total == 0 || isnormal(out_total));
+		assert(out_total == 0 || std::isnormal(out_total));
 		return;
 	}
 

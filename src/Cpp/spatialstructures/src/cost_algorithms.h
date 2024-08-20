@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <string>
+#include "Edge.h"
 
 #include "Constants.h"
 

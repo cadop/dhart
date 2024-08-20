@@ -24,6 +24,9 @@ target_sources(
 if(WIN32)
 	set(Embree_DIR ${PROJECT_SOURCE_DIR}/external/Embree)
 	message([STATUS] "Setting embree dir to " ${Embree_DIR})
+else()
+	set(Embree_DIR ${PROJECT_SOURCE_DIR}/external/Embree)
+	message([STATUS] "Setting embree dir to " ${Embree_DIR})
 endif()
 
 find_package(Embree 3.0 REQUIRED)

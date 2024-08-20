@@ -13,7 +13,11 @@
 #include <vector>
 #include <raytracer_C.h>
 
-#define C_INTERFACE extern "C" __declspec(dllexport) int
+#ifdef _WIN32
+	#define C_INTERFACE extern "C" __declspec(dllexport) int
+#else
+    #define C_INTERFACE extern "C" __attribute__((visibility("default"))) int
+#endif
 
 namespace HF {
 	namespace SpatialStructures {

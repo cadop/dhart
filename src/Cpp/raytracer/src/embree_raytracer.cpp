@@ -6,7 +6,9 @@
 ///	\date		26 Jun 2020
 
 #include <embree_raytracer.h>
+#ifdef _WIN32
 #include <corecrt_math_defines.h>
+#endif
 #include <functional>
 #include <iostream>
 #include <thread>
@@ -534,7 +536,7 @@ namespace HF::RayTracer {
 			}
 		}
 		else {
-			throw std::exception("Incorrect usage of castrays");
+			throw std::runtime_error("Incorrect usage of castrays");
 		}
 
 		return out_results;
@@ -570,7 +572,7 @@ namespace HF::RayTracer {
 		if (origins.size() < cores || directions.size() < cores)
 			// Don't use more cores than there are rays. This caused a hard to find bug earlier.
 			// Doesn't seem to happen with the other ray types. (race condition?)
-			omp_set_num_threads(min(max(origins.size(), directions.size()), cores));
+			omp_set_num_threads(std::min(std::max(origins.size(), directions.size()), static_cast<size_t>(cores)));
 
 		if (directions.size() > 1 && origins.size() > 1) {
 			out_array.resize(origins.size());

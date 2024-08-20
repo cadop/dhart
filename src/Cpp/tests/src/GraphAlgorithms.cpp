@@ -6,7 +6,7 @@
 #include <objloader.h>
 #include <meshinfo.h>
 #include <graph.h>
-#include <edge.h>
+#include <Edge.h>
 #include <node.h>
 #include <Constants.h>
 #include<ray_data.h>
@@ -45,7 +45,7 @@ namespace HF {
 					// should be incremented
 					if (duplicates_this_node == 2)
 						if (insta_fail)
-							FAIL("Duplicate nodes detected");
+							FAIL();
 						else
 							duplicate_nodes++;
 					

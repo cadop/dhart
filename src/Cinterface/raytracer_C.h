@@ -21,8 +21,11 @@ namespace HF {
 	}
 }
 
-#define C_INTERFACE extern "C" __declspec(dllexport) int
-
+#ifdef _WIN32
+    #define C_INTERFACE extern "C" __declspec(dllexport) int
+#else
+    #define C_INTERFACE extern "C" __attribute__((visibility("default"))) int
+#endif
 /*!
 	\defgroup RayTracer
 	Perform efficient ray intersections using Intel's Embree Library.

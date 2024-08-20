@@ -3,11 +3,13 @@ from . import pathfinder_native_functions
 from dhart.Exceptions import OutOfRangeException
 from typing import *
 import numpy
+from scipy.sparse import csr_matrix
 from dhart.spatialstructures import Graph
 from dhart.native_collections import FloatArray2D, IntArray2D
 
 __all__ = ["ConvertNodesToIds", "DijkstraShortestPath", 
-           "DijkstraFindAllShortestPaths", "calculate_distance_and_predecessor"]
+           "DijkstraFindAllShortestPaths", "calculate_distance_and_predecessor",
+           "AllShortestPathsCSR", "get_path_from_csr"]
 
 
 def ConvertNodesToIds(graph: Graph, nodes: List[Union[Tuple, int]]) -> List[int]:
@@ -424,3 +426,53 @@ def calculate_distance_and_predecessor(graph: Graph, cost_type: str = ""
     pred_matrix = IntArray2D(pred_vector, pred_data, (num_nodes, num_nodes))
 
     return (dist_matrix, pred_matrix)
+
+
+def AllShortestPathsCSR(
+    graph: Graph,
+    cost_type: str = "",
+    ) -> List[Union[Path, None]]:
+    # Call out to native code and get results
+    (node_vector, node_data, length_vector, length_data) = pathfinder_native_functions.C_GetPredAsPaths(graph.graph_ptr,
+                                                             graph.NumNodes(),
+                                                             cost_type)
+
+    # Wrap values that weren't null in python paths
+    # Get the size of the graph
+    num_nodes = graph.NumNodes()
+
+    # Wrap in NativeNumpyLikes
+    path_lengths = IntArray2D(length_vector, length_data, num_nodes * num_nodes)
+    # Get total number of nodes based on the path lengths
+    num_nodes = int(path_lengths.array.sum())
+    path_nodes = IntArray2D(node_vector, node_data, num_nodes)
+
+    # Build the CSR from matrix data
+    path_sizes = path_lengths.array
+    indices = path_nodes.array
+    # Compute the 'data' array (assuming a weight of 1 for each connection)
+    data = numpy.ones(len(path_nodes), dtype=int)
+    # Compute the 'indptr' array from 'path_sizes'
+    indptr = numpy.zeros(len(path_sizes) + 1, dtype=int)
+    indptr[1:] = numpy.cumsum(path_sizes)
+    # Create the CSR matrix
+    csr = csr_matrix((data, indices, indptr), shape=(len(path_sizes), max(path_nodes) + 1))
+
+    return csr
+
+
+def get_path_from_csr(csr, node1, node2):
+    """
+    Get the column indices of non-zero entries for a given row in a CSR matrix.
+    
+    Parameters:
+    - csr: The CSR matrix.
+    - row_idx: Index of the row to query.
+    
+    Returns:
+    - A list of column indices where the row has non-zero entries.
+    """
+    node_idx = node1 * csr.shape[1] + node2
+    start_idx = csr.indptr[node_idx]
+    end_idx = csr.indptr[node_idx + 1]
+    return csr.indices[start_idx:end_idx]

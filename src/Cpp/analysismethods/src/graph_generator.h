@@ -11,7 +11,9 @@
 #include <set>
 #include <vector>
 #include <array>
-#include <Node.h>
+#include <node.h>
+#include <Edge.h>
+#include <graph.h>
 #include <cassert>
 #include <variant>
 #include <MultiRT.h>

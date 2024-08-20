@@ -15,8 +15,11 @@
 	\brief		Specifies C linkage for functions defined in the C Interface.
 				Used for exporting C Interface functions from the DHART DLL.
 */
-#define C_INTERFACE extern "C" __declspec(dllexport) int
-
+#ifdef _WIN32
+	#define C_INTERFACE extern "C" __declspec(dllexport) int
+#else
+    #define C_INTERFACE extern "C" __attribute__((visibility("default"))) int
+#endif
 namespace HF {
 	namespace SpatialStructures {
 		class Graph;
@@ -37,7 +40,7 @@ namespace HF {
 	\enum		COST_ALG_KEY
 	\brief		Indices of keys for costs returned from calling CalculateAndStore functions
 */
-const enum COST_ALG_KEY {
+enum COST_ALG_KEY {
 	CROSS_SLOPE,		///< Cost created by CalculateAndStoreCrossSlope.
 	ENERGY_EXPENDITURE	///< Cost created by CalculateAndStoreEnergyExpenditure.
 };

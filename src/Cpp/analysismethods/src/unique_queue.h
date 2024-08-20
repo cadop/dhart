@@ -116,7 +116,7 @@ namespace HF::GraphGenerator {
 		*/
 		template <typename arr_type>
 		inline bool PushAny(const arr_type& node) {
-			auto node_to_push = Node(
+			auto node_to_push = HF::SpatialStructures::Node(
 				static_cast<float>(node[0]),
 				static_cast<float>(node[1]),
 				static_cast<float>(node[2])
