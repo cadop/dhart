@@ -7,6 +7,8 @@
 #include <graph.h>
 #include <path_finder.h>
 #include <path.h>
+#include <numeric>
+#include <boost_graph.h>
 
 using std::unique_ptr;
 using std::make_unique;
@@ -195,4 +197,51 @@ C_INTERFACE CalculateDistanceAndPredecessor(
 	}
 
 	return HF_STATUS::OK;
+}
+
+
+C_INTERFACE CreateAllPredToPath(
+	const Graph* g,
+	const char* cost_name,
+	vector<int>** out_nodes_vector,
+	int** out_nodes_data, // Output: Flat array of all path nodes
+	vector<int>** out_lengths_vector,
+	int** out_lengths_data // Output: Array of path lengths
+) {
+
+	try {
+
+		// Create a boost graph with the cost type
+		auto bg = CreateBoostGraph(*g, string(cost_name));
+
+		// Generate paths
+		auto paths = HF::Pathfinding::FindAPSP(*bg.get());
+		std::vector<int> pathNodes;
+		std::vector<int> pathLengths;
+
+		// Collect all nodes and path lengths
+		for (const auto& p : paths) 
+		{
+			for (const auto& pm : p) {
+				pathNodes.push_back(pm);
+			}
+			pathLengths.push_back(p.size());
+		}
+
+		//*out_nodes_vector = new vector<int>();
+		//*out_lengths_vector = new vector<int>();
+
+		*out_nodes_vector = new vector<int>(pathNodes.begin(), pathNodes.end());
+		*out_lengths_vector = new vector<int>(pathLengths.begin(), pathLengths.end());
+
+		*out_nodes_data = (*out_nodes_vector)->data();
+		*out_lengths_data = (*out_lengths_vector)->data();
+	}
+
+	catch (HF::Exceptions::NoCost) 
+	{
+		return HF_STATUS::GENERIC_ERROR;
+	}
+	return HF_STATUS::OK;
+
 }

@@ -7,9 +7,9 @@ __all__ = ['get_sample_model']
 # This should be in a function
 directory = os.path.join(os.path.dirname(os.path.realpath(__file__)) ,"bin" )
 
-if sys.version_info >=(3,8):
+if os.name == 'nt' and sys.version_info >=(3,8): # Windows
     os.add_dll_directory(directory)
-else:
+else: # Linux
     os.environ['PATH'] = directory + os.pathsep + os.environ['PATH']
 
 def get_data_dir():

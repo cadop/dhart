@@ -99,7 +99,7 @@ namespace HF::Pathfinding {
 			// If this is triggered, there's something wrong with this algorithm because the path
 			// suddenly has more nodes than there are in the entire graph.
 			if (p.size() > pred.size())
-				throw std::exception("Path included more nodes than contaiend in the graph!");
+				throw std::runtime_error("Path included more nodes than contaiend in the graph!");
 
 			// Get the next node from the predecessor matrix
 			int next_node = pred[current_node];
@@ -300,15 +300,15 @@ namespace HF::Pathfinding {
 			// of std::numeric_limits<float>::max. This should be a NAN for the sake of readability. 
 			for (int i = 0; i < num_nodes; i++)
 			{
-				float & dist_element = dist_row_start[i];
-				int & pred_element = pred_row_start[i];
+				// float & dist_element = dist_row_start[i];
+				// int & pred_element = pred_row_start[i];
 
 				// If the predecessor element is not not in the range of nodes,
 				// this is boost trying to signal to us that there is no connection
 				// between these nodes, so put a NAN there. 
-				if (dist_element == std::numeric_limits<float>::max()) {
-					pred_element = -1; // Ints have no way of representing NaN
-					dist_element = -1;
+				if (dist_row_start[i] == std::numeric_limits<float>::max()) {
+					pred_row_start[i] = -1; // Ints have no way of representing NaN
+					dist_row_start[i] = -1;
 				}
 			}
 		}
@@ -369,5 +369,119 @@ namespace HF::Pathfinding {
 
 		// Run InsertPathsIntoArray and mutate out_paths, out_path_members, and out_sizes
 		InsertPathsIntoArray(bg, start_points, end_points, out_paths, out_path_members, out_sizes);
+	}
+	
+	// ****************************************************************************************
+	// Start of the new pathfinding functions
+	// *																						*
+
+
+	/*!
+		\brief Construct the shortest path of node ids given predecessor and distance vectors.
+		\param start ID of the starting point.
+		\param end ID of the end point.
+		\param pred Predecessor matrix for the start node.
+		\param distances Distance matrix for pred
+		\todo Replace exception with an assert statment. It shouldn't be triggered unless
+		there's a problem with this algorithm?
+	*/
+	inline std::vector<int> ConstructShortestPathNodesFromPred(
+		int start,
+		int end,
+		const std::vector<size_t>& pred
+	) {
+		// Create a new path and add the end point.
+		std::vector<int> path;
+		// reserve memory
+		path.reserve(pred.size());
+		//path.push_back(end);
+
+		// Return an empty path if there's no path from start to end indicated by the predecessor's
+		// value for the current node being the current node.
+		int current_node = end;
+		if (pred[current_node] == -1 || pred[current_node] == current_node) {
+			return {}; // Early exit if no path exists
+		}
+
+		while (current_node != -1 && current_node != start) {
+			path.push_back(current_node);
+			current_node = pred[current_node];
+		}
+
+		if (current_node == -1) {
+			return {}; // If we hit a -1, it means there's no path
+		}
+
+		path.push_back(start); // Don't forget to add the start node
+		// Flip the order of this since this algorithm generates it from end to start
+		std::reverse(path.begin(), path.end());
+		return path;
+
+	}
+
+	//std::vector<std::vector<int>> FindAPSP(BoostGraph& bg)
+	//{
+	//	// Get the graph from bg
+	//	const graph_t& graph = bg.g;
+	//	const int numNodes = bg.p.size();
+
+	//	// This breaks down the full row of a predecessor 
+	//	// Generate predecessor matrices for every unique start point
+	//	robin_hood::unordered_map<int, DistPred> dpm;
+	//	for (int row = 0; row < numNodes; row++) {
+	//		if (dpm.count(row) == 0)
+	//			dpm[row] = BuildDistanceAndPredecessor(graph, row);
+	//	}
+
+	//	// Preallocate memory. Might not make sense because of number of shorter paths
+	//	std::vector<std::vector<int>> allPaths;
+	//	allPaths.resize(numNodes * numNodes);
+
+	//#pragma omp parallel for schedule(dynamic)
+	//	for (int i = 0; i < numNodes; i++) {
+	//		for (int j = 0; j < numNodes; j++) {
+	//			std::vector<int> path = std::vector<int>{};
+	//			int curIndx = (i * numNodes) + j; // basically the stride is being counted 
+	//			if (i != j) {
+	//				path = ConstructShortestPathNodesFromPred(i, j, dpm[i].predecessor);
+	//			}
+	//			// Add to the overall path
+	//			allPaths[curIndx] = path;
+	//		}
+	//	}
+	//	return allPaths; // Return the final vector
+	//}
+
+	std::vector<std::vector<int>> FindAPSP(BoostGraph& bg)
+	{
+		// Get the graph from bg
+		const graph_t& graph = bg.g;
+		const int numNodes = bg.p.size();
+
+		// This breaks down the full row of a predecessor 
+		// Generate predecessor matrices for every unique start point
+		robin_hood::unordered_map<int, DistPred> dpm;
+		for (int row = 0; row < numNodes; row++) {
+			if (dpm.count(row) == 0)
+				dpm[row] = BuildDistanceAndPredecessor(graph, row);
+		}
+
+		// Preallocate memory. Might not make sense because of number of shorter paths
+		std::vector<std::vector<int>> allPaths;
+		allPaths.resize(numNodes * numNodes);
+
+#pragma omp parallel for schedule(dynamic)
+		for (int i = 0; i < numNodes; i++) {
+			for (int j = 0; j < numNodes; j++) {
+				std::vector<int> path = std::vector<int>{};
+				int curIndx = (i * numNodes) + j; // basically the stride is being counted 
+				if (i != j) {
+					path = ConstructShortestPathNodesFromPred(i, j, dpm[i].predecessor);
+				}
+				// Add to the overall path
+				allPaths[curIndx] = path;
+			}
+		}
+		return allPaths; // Return the final vector
 	}
 }

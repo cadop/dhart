@@ -5,7 +5,7 @@
 #include <objloader.h>
 #include <meshinfo.h>
 #include <graph.h>
-#include <edge.h>
+#include <Edge.h>
 #include <node.h>
 #include <visibility_graph.h>
 #include <string>
@@ -25,11 +25,13 @@ const std::string plane_path = "plane.obj"; // A flat plane
 const std::string walled_plane_path = "plane_walled.obj"; 
 
 EmbreeRayTracer CreatePlaneTracer() {
-	return EmbreeRayTracer(LoadMeshObjects(plane_path, HF::Geometry::ONLY_FILE, true));
+	vector<MeshInfo> meshInfos = LoadMeshObjects(plane_path, HF::Geometry::ONLY_FILE, true);
+	return EmbreeRayTracer(meshInfos);
 }
 
 TEST(_VisibilityGraph, NodesOnFlatPlaneAllConnect) {
-	EmbreeRayTracer plane_tracer(LoadMeshObjects(plane_path, HF::Geometry::ONLY_FILE, true));
+	vector<MeshInfo> meshInfos = LoadMeshObjects(plane_path, HF::Geometry::ONLY_FILE, true);
+	EmbreeRayTracer plane_tracer(meshInfos);
 	std::vector<Node> nodes;
 	nodes.reserve(100);
 	
@@ -45,7 +47,8 @@ TEST(_VisibilityGraph, NodesOnFlatPlaneAllConnect) {
 }
 
 TEST(_VisibilityGraph, ParallelNodesOnFlatPlaneAllConnect) {
-	EmbreeRayTracer plane_tracer(LoadMeshObjects(plane_path, HF::Geometry::ONLY_FILE, true));
+	vector<MeshInfo> meshInfos = LoadMeshObjects(plane_path, HF::Geometry::ONLY_FILE, true);
+	EmbreeRayTracer plane_tracer(meshInfos);
 	std::vector<Node> nodes;
 	nodes.reserve(100);
 
@@ -63,9 +66,9 @@ TEST(_VisibilityGraph, ParallelNodesOnFlatPlaneAllConnect) {
 
 
 TEST(_VisibilityGraph, NodesOnFlatPlaneWithWallDontConnect) {
-	EmbreeRayTracer plane_tracer(LoadMeshObjects(walled_plane_path, HF::Geometry::ONLY_FILE, true));
+	vector<MeshInfo> meshInfos = LoadMeshObjects(walled_plane_path, HF::Geometry::ONLY_FILE, true);
+	EmbreeRayTracer plane_tracer(meshInfos);
 	std::vector<Node> nodes{ Node(0,-1,0), Node(0,1,0) };
-
 	auto graph = AllToAll(plane_tracer, nodes);
 
 	for (const auto& node : nodes) {
@@ -167,9 +170,9 @@ TEST(C_VisibilityGraph, GroupConstructsValidGraph) {
 	// Assert that all nodes are finite to prove it isn't reading outside of the array's bounds
 	for (const auto& node : out_graph.Nodes()) {
 		ASSERT_TRUE(
-			std::isfinite(node.x),
-			std::isfinite(node.y),
-			std::isfinite(node.z),
+			std::isfinite(node.x) &&
+			std::isfinite(node.y) &&
+			std::isfinite(node.z)
 		);
 		std::cerr << node << std::endl;
 	}

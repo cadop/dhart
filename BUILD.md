@@ -73,22 +73,30 @@ and hit ENTER. The repository will then be cloned to your local machine. For HTT
 
 You can build using either CMAKE from the command line, _or_ through Visual Studio.  Please note the instructions for Visual Studio as they still require the CMAKE installation within visual studio. 
 
-## Using CMAKE Command Line
+## Using CMAKE Command Line for Windows
 
 <details>
   <summary>CMAKE Build Details</summary>
 
 Currently we directly call the configuration arguments when using cmake. (If someone would like to contribute to improving this process feel free to open an issue. )
 
+Generally it is better to make a build directory and build it from there.
+
+1. cd dhart
+
+1. md build
+
+1. cd build
+
 Python Debug
 
-1. `cmake ./src/ -G"Visual Studio 16 2019" -DCMAKE_GENERATOR_PLATFORM="x64"  -DCMAKE_CONFIGURATION_TYPES="Debug" -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DDHARTAPI_Config="All" -DDHARTAPI_EnableTests="False" -DDHARTAPI_EnablePython="True" -DDHARTAPI_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1` 
+1. `cmake ../src/ -G"Visual Studio 17 2022" -DCMAKE_GENERATOR_PLATFORM="x64" -DCMAKE_INSTALL_PREFIX=".\Python" -DDHARTAPI_Config="All" -DDHARTAPI_EnableTests="True" -DCMAKE_CONFIGURATION_TYPES="Debug" -DDHARTAPI_EnablePython="True" -DDHARTAPI_EnableCSharp="False" -DINSTALL_GTEST="True" 2>&1` 
 
 1. `cmake --build . --config Debug`
 
 Python Release
 
-1. `cmake ./src/  -G"Visual Studio 16 2019"  -DCMAKE_GENERATOR_PLATFORM="x64"   -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DDHARTAPI_Config="All" -DDHARTAPI_EnableTests="False" -DCMAKE_CONFIGURATION_TYPES="Release" -DDHARTAPI_EnablePython="True" -DDHARTAPI_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1`
+1. `cmake ../src/ -G"Visual Studio 17 2022" -DCMAKE_GENERATOR_PLATFORM="x64" -DCMAKE_INSTALL_PREFIX=".\Python" -DDHARTAPI_Config="All" -DDHARTAPI_EnableTests="True" -DCMAKE_CONFIGURATION_TYPES="Release" -DDHARTAPI_EnablePython="True" -DDHARTAPI_EnableCSharp="False" -DINSTALL_GTEST="True" 2>&1`
 
 1. `cmake --build . --config Release`
 
@@ -100,6 +108,33 @@ After building (assuming it went okay), run:
 1. `cmake --install .`
 
 1. cd to build/Python and run `pip install .`
+
+</details>
+
+## Using CMAKE Command Line for Linux
+
+<details>
+Using CMAKE in Linux is a bit simpler than Windows, with some differences.
+
+General Instructions:
+
+1. `cd dhart`
+
+1. `mkdir build`
+
+1. `cd build`
+
+1. `cmake -DDHARTAPI_Config=All -DDHARTAPI_EnablePython=ON -DCMAKE_INSTALL_PREFIX="INSTALL_DIR" ../src` (replace INSTALL_DIR with directory of your choise)
+
+1. `make && make install`
+
+Environment Setups:
+
+1. Generally you should try to install the package where your OS is able to locate your library files but not overlap with system installed path. For Ubuntu, usually the system will install libraries in /usr/lib/x86_64-linux-gnu. So you should use something like /usr/local.
+
+1. However you can also install it into any custom location within your own user directory, and then add the locations into the LD_LIBRARY_PATH environment variable using your .bashrc file. 
+
+1. For Linux environment, currently cmake command will modify the .bashrc file automatically to set the paths if for you. (remember to either source the .bashrc file again, or restart your terminal)
 
 </details>
 

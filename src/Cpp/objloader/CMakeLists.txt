@@ -5,10 +5,10 @@ add_library(OBJLoader STATIC)
 target_sources(
 	OBJLoader
 	PRIVATE
-		src/OBJLoader.cpp
-		src/OBJLoader.h
-		src/MeshInfo.h
-		src/MeshInfo.cpp
+		src/objloader.cpp
+		src/objloader.h
+		src/meshinfo.h
+		src/meshinfo.cpp
 	)
 
 target_link_libraries(

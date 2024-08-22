@@ -11,7 +11,7 @@
 #include <objloader.h>
 #include <meshinfo.h>
 #include <graph.h>
-#include <edge.h>
+#include <Edge.h>
 #include <node.h>
 
 #include <view_analysis_C.h>
@@ -60,9 +60,8 @@ TEST(_ViewAnalysis, SphericalViewAnalysis) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(std::vector<MeshInfo> {
-		MeshInfo(plane_vertices, plane_indices, 0, " ")}
-	);
+	std::vector<MeshInfo> meshInfos{MeshInfo(plane_vertices, plane_indices, 0, " ")};
+	EmbreeRayTracer ert(meshInfos);
 
 	// Define observer points
 	std::vector<std::array<float, 3>> points {
@@ -278,7 +277,7 @@ TEST(_ViewAnalysis, AggregateDoesntReturnInfinite) {
 		ViewAnalysis::AGGREGATE_TYPE::AVERAGE
 	);
 	for (auto score : scores)
-		ASSERT_TRUE(isnormal(score) || score == 0);
+		ASSERT_TRUE(std::isnormal(score) || score == 0);
 }
 
 TEST(_ViewAnalysis, FibbonacciDistributePoints) {
@@ -371,9 +370,8 @@ TEST(_ViewAnalysis, ViewAnalysisAggregate) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(std::vector<MeshInfo>{
-		MeshInfo(plane_vertices, plane_indices, 0, " ")}
-	);
+	std::vector<MeshInfo> meshInfos{MeshInfo(plane_vertices, plane_indices, 0, " ")};
+	EmbreeRayTracer ert(meshInfos);
 
 	// Define observer points
 	std::vector<std::array<float, 3>> points{

@@ -2,8 +2,8 @@
 #include <robin_hood.h>
 #include <graph.h>
 #include <node.h>
-#include <edge.h>
-#include <constants.h>
+#include <Edge.h>
+#include <Constants.h>
 #include <HFExceptions.h>
 #include <spatialstructures_C.h>
 
@@ -480,7 +480,7 @@ TEST(_Graph, DefaultNameChange) {
 		GTEST_SUCCEED();
 	}
 	catch (...){
-		GTEST_FAIL("Other exception occured.");
+		GTEST_FAIL();
 	}
 }
 

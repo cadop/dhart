@@ -1229,9 +1229,9 @@ inline typename internal::pow_impl<ScalarX,ScalarY>::result_type pow(const Scala
 SYCL_SPECIALIZE_FLOATING_TYPES_BINARY(pow, pow)
 #endif
 
-template<typename T> EIGEN_DEVICE_FUNC bool (isnan)   (const T &x) { return internal::isnan_impl(x); }
-template<typename T> EIGEN_DEVICE_FUNC bool (isinf)   (const T &x) { return internal::isinf_impl(x); }
-template<typename T> EIGEN_DEVICE_FUNC bool (isfinite)(const T &x) { return internal::isfinite_impl(x); }
+template<typename T> EIGEN_DEVICE_FUNC bool isnan(const T &x) { return internal::isnan_impl(x); }
+template<typename T> EIGEN_DEVICE_FUNC bool isinf(const T &x) { return internal::isinf_impl(x); }
+template<typename T> EIGEN_DEVICE_FUNC bool isfinite(const T &x) { return internal::isfinite_impl(x); }
 
 #if defined(SYCL_DEVICE_ONLY)
 SYCL_SPECIALIZE_FLOATING_TYPES_UNARY_FUNC_RET_TYPE(isnan, isnan, bool)

@@ -15,8 +15,11 @@
 namespace HF {
 }
 
+#ifdef _WIN32
 #define C_INTERFACE extern "C" __declspec(dllexport) int
-
+#else
+#define C_INTERFACE extern "C" __attribute__((visibility("default"))) int
+#endif
 /// <summary>
 /// Convert a raw array from an external caller to an organized vector of points
 /// </summary>

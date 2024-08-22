@@ -6,7 +6,7 @@
 #include <objloader.h>
 #include <meshinfo.h>
 #include <graph.h>
-#include <edge.h>
+#include <Edge.h>
 #include <node.h>
 #include <Constants.h>
 #include <graph_generator.h>
@@ -20,6 +20,7 @@ using HF::GraphGenerator::GraphGenerator;
 using HF::RayTracer::EmbreeRayTracer;
 
 using HF::SpatialStructures::Node;
+template<typename n1_type, typename n2_type> inline double DistanceTo(const n1_type& n1, const n2_type& n2);
 
 EmbreeRayTracer CreateGGExmapleRT() {
 	//! [EX_GraphGeneratorRayTracer]
@@ -90,7 +91,7 @@ TEST(_GraphGenerator, BuildNetwork) {
 	//! [EX_BuildNetwork]
 	
 	// Create a graphgenerator using the raytracer we just created
-	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+	HF::GraphGenerator::GraphGenerator GG(ray_tracer);
 
 	// Setup Graph Parameters
 	std::array<float, 3> start_point{ 0,0,0.25 };
@@ -142,7 +143,7 @@ TEST(_GraphGenerator, OutDegree) {
 	//! [EX_OutDegree]
 
 	// Create a graphgenerator using the raytracer we just created
-	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+	HF::GraphGenerator::GraphGenerator GG(ray_tracer);
 
 	// Setup Graph Parameters
 	std::array<float, 3> start_point{ 0,0,20 };
@@ -178,7 +179,7 @@ TEST(_GraphGenerator, OBS_VisTestCase) {
 	EmbreeRayTracer ray_tracer = CreateObstacleExampleRT("obstacle_vistestcase.obj");
 
 	// Create a graphgenerator using the raytracer we just created
-	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+	HF::GraphGenerator::GraphGenerator GG(ray_tracer);
 
 	// Setup Graph Parameters
 	std::array<float, 3> start_point{ 3,0,0.25 };
@@ -200,7 +201,7 @@ TEST(_GraphGenerator, OBS_VisTestCase) {
 		max_step_connections, min_connections
 	);
 
-	HF::GraphGenerator::GraphGenerator GG_Obstacle = GraphGenerator::GraphGenerator(ray_tracer, std::vector<int>{2});
+	HF::GraphGenerator::GraphGenerator GG_Obstacle(ray_tracer, std::vector<int>{2});
 
 	// Generating a graph that has a high enough upstep to get onto the boxes, but
 	// doesn't because they're marked as obstacles
@@ -221,7 +222,7 @@ TEST(_GraphGenerator, OBS_BuildNetwork) {
 	EmbreeRayTracer ray_tracer = CreateObstacleExampleRT();
 
 	// Create a graphgenerator using the raytracer we just created
-	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+	HF::GraphGenerator::GraphGenerator GG(ray_tracer);
 
 	// Setup Graph Parameters
 	std::array<float, 3> start_point{ 0,0,0.25 };
@@ -242,7 +243,7 @@ TEST(_GraphGenerator, OBS_BuildNetwork) {
 		max_step_connections, min_connections
 	);
 
-	HF::GraphGenerator::GraphGenerator GG_Obstacle = GraphGenerator::GraphGenerator(ray_tracer, std::vector<int>{2});
+	HF::GraphGenerator::GraphGenerator GG_Obstacle(ray_tracer, std::vector<int>{2});
 
 	// Generate the graph using our parameters
 	HF::SpatialStructures::Graph obstacle_graph = GG_Obstacle.BuildNetwork(
@@ -263,7 +264,7 @@ TEST(_GraphGenerator, CrawlGeom) {
 	//! [EX_CrawlGeom]
 
 	// Create a graphgenerator using the raytracer we just created
-	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+	HF::GraphGenerator::GraphGenerator GG(ray_tracer);
 
 	// Set parameters for graph generation
 	std::array<float, 3> start_point{ 0,1,0 };
@@ -361,8 +362,9 @@ TEST(_GraphGenerator, ValidateStartPoint) {
 	HF::GraphGenerator::real3 start_point{ 0,0,10 };
 
 	// Call ValidateStartPoint
+	HF::RayTracer::MultiRT multi_rt(&ray_tracer);
 	HF::GraphGenerator::optional_real3 result = HF::GraphGenerator::ValidateStartPoint(
-		HF::RayTracer::MultiRT(&ray_tracer), start_point, params
+		multi_rt, start_point, params
 	);
 
 	// If the ray intersected, print the result
@@ -381,7 +383,7 @@ TEST(_GraphGenerator, ValidateStartPoint) {
 	// Assert that the ray hit and the start point was correctly updated
 	// to the point of intersection
 	ASSERT_TRUE(result);
-	ASSERT_TRUE(result.pt[0] == 0, result.pt[1] == 0, result.pt[2] == 0);
+	ASSERT_TRUE(result.pt[0] == 0 && result.pt[1] == 0 && result.pt[2] == 0);
 }
 
 TEST(_GraphGenerator, CheckRay) {
@@ -398,8 +400,9 @@ TEST(_GraphGenerator, CheckRay) {
 	HF::GraphGenerator::real3 direction{0,0,-1};
 
 	// Call CheckRay and capture the result
+	HF::RayTracer::MultiRT multi_rt(&ray_tracer);
 	HF::GraphGenerator::optional_real3 result = HF::GraphGenerator::CheckRay(
-		HF::RayTracer::MultiRT(&ray_tracer), start_point, direction, node_z);
+		multi_rt, start_point, direction, node_z);
 
 	// If the ray intersected, print it
 	if (result)
@@ -417,7 +420,7 @@ TEST(_GraphGenerator, CheckRay) {
 	// Assert that the ray hit and the start point was correctly updated
 	// to the point of intersection
 	ASSERT_TRUE(result);
-	ASSERT_TRUE(result.pt[0] == 1, result.pt[1] == 1, result.pt[2] == 0);
+	ASSERT_TRUE(result.pt[0] == 1 && result.pt[1] == 1 && result.pt[2] == 0);
 }
 
 TEST(_GraphGenerator, CreateDirecs) {
@@ -500,7 +503,8 @@ TEST(_GraphGenerator, GetChildren) {
 	params.precision.ground_offset = 0.01f;
 
 	// Call GetChildren
-	auto edges = HF::GraphGenerator::GetChildren(parent, possible_children, HF::RayTracer::MultiRT(&ray_tracer), params);
+	HF::RayTracer::MultiRT multi_rt(&ray_tracer);
+	auto edges = HF::GraphGenerator::GetChildren(parent, possible_children, multi_rt, params);
 
 	// Print children
 	std::ostringstream out_str;
@@ -545,7 +549,8 @@ TEST(_GraphGenerator, CheckChildren) {
 	params.precision.ground_offset = 0.01f;
 
 	// Call CheckChildren 
-	auto valid_children = HF::GraphGenerator::CheckChildren(parent, possible_children, HF::RayTracer::MultiRT(&ray_tracer), params);
+	HF::RayTracer::MultiRT multi_rt(&ray_tracer);
+	auto valid_children = HF::GraphGenerator::CheckChildren(parent, possible_children, multi_rt, params);
 
 	// Print children
 	std::ostringstream out_str;
@@ -592,8 +597,10 @@ TEST(_GraphGenerator, CheckConnection) {
 	// Loop through potential children call each one with check connection
 	std::vector<HF::SpatialStructures::STEP> connections;
 	for (const auto& child : possible_children)
-		connections.push_back(HF::GraphGenerator::CheckConnection(parent, child, HF::RayTracer::MultiRT(&ray_tracer), params));
-		
+	{
+		HF::RayTracer::MultiRT multi_rt(&ray_tracer);
+		connections.push_back(HF::GraphGenerator::CheckConnection(parent, child, multi_rt, params));
+	}
 
 	// Print children
 	std::ostringstream out_str;
@@ -651,8 +658,10 @@ TEST(_GraphGenerator, OcclusionCheck) {
 	HF::GraphGenerator::real3 child_2{ 0,0,1 };
 
 	// Perform slope checks
-	bool occlusion_check_child_1 = HF::GraphGenerator::OcclusionCheck(parent, child_1, HF::RayTracer::MultiRT(&ray_tracer));
-	bool occlusion_check_child_2= HF::GraphGenerator::OcclusionCheck(parent, child_2, HF::RayTracer::MultiRT(&ray_tracer));
+	HF::RayTracer::MultiRT multi_rt1(&ray_tracer);
+	HF::RayTracer::MultiRT multi_rt2(&ray_tracer);
+	bool occlusion_check_child_1 = HF::GraphGenerator::OcclusionCheck(parent, child_1, multi_rt1);
+	bool occlusion_check_child_2= HF::GraphGenerator::OcclusionCheck(parent, child_2, multi_rt2);
 
 	std::cout << "Occlusion Check For Child 1 = " << (occlusion_check_child_1 ? "True" : "False") << std::endl;
 	std::cout << "Occlusion Check For Child 2 = " << (occlusion_check_child_2 ? "True" : "False") << std::endl;
