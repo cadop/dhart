@@ -783,36 +783,39 @@ C_INTERFACE AddNodeAttributes(
 /*!
 	\brief		Retrieve node attribute values from *g
 
-	\param		g			The graph that will be used to retrieve 
-							node attribute values from
-
+	\param		g				The graph that will be used to retrieve 
+								node attribute values from
+	\param		ids				The list of node IDs to get attributes for. 
+								If NULL, returns attributes for all nodes.
 	\param		attribute		The node attribute type to retrieve from *g
+	\param		num_nodes		The length of the ids array
 	\param		out_scores		Pointer to array of (char *), allocated by the caller
 	\param		out_score_size	Keeps track of the size of out_scores buffer, 
 								updated as required
 
+	\pre		All node IDs in `ids` must exist in graph `g`.
+	\pre		If `ids` is not NULL, `num_nodes` must be equal to the length of `ids`.
 	\returns	\link HF_STATUS::OK \endlink on completion.
 
-	\details	Memory shall be allocated in *out_scores to hold the char arrays.
+	\details	For the ID at `ids[i]`, `out_scores[i]` is the value of the attribute for the
+				node associated with that ID.
+
+				If `ids` is NULL, `out_scores` is an array holding the value of the attribute for
+				all nodes, sorted in ascending order by ID.
+				
+				Memory shall be allocated in *out_scores to hold the char arrays.
 				out_scores is a pointer to an array of (char *),
 				which will be allocated by the caller.
 				The caller must call DeleteScores to deallocate the memory addressed
 				by each pointer in out_scores.
 
 	\see \ref graph_setup (how to create a graph)
-	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
-	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
 	\see \ref graph_compress (how to compress a graph after adding/removing edges)
 	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
 	\see \link AddNodeAttributes \endlink (how to add node attributes)
 	\see \ref graph_teardown (how to destroy a graph)
 
 	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
-
-	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
-	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
-
-	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetNodeAttributes
 
@@ -821,7 +824,9 @@ C_INTERFACE AddNodeAttributes(
 */
 C_INTERFACE GetNodeAttributes(
 	const HF::SpatialStructures::Graph* g,
+	const int* ids,
 	const char* attribute,
+	int num_nodes,
 	char** out_scores,
 	int* out_score_size
 );
@@ -854,7 +859,7 @@ C_INTERFACE DeleteScoreArray(char** scores_to_delete, int num_char_arrays);
 	\see \ref graph_compress (how to compress a graph after adding/removing edges)
 	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
 	\see \link AddNodeAttributes \endlink (how to add node attributes)
-	\see link GetNodeAttributes \endlink (how to retrieve node attributes)
+	\see \link GetNodeAttributes \endlink (how to retrieve node attributes)
 	\see \ref graph_teardown (how to destroy a graph)
 
 	Begin by reviewing the example at \ref graph_setup to create a graph.<br>

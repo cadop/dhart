@@ -1844,11 +1844,92 @@ namespace HF::SpatialStructures {
 
 		/*!
 			\code
-				// TODO example
+				// be sure to #include "graph.h"
+ 
+				// Create the nodes
+				HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f);
+				HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);
+				HF::SpatialStructures::Node node_2(11.0f, 22.0f, 140.0f);
+ 
+				// Create a container (vector) of nodes
+				std::vector<HF::SpatialStructures::Node> nodes = { node_0, node_1, node_2 };
+ 
+				// Create matrices for edges and distances, edges.size() == distances().size()
+				std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
+				std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
+ 
+				// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+				HF::SpatialStructures::Graph graph(edges, distances, nodes);
+
+				// Get node IDs
+				int ID_0 = graph.getID(node_0);
+				int ID_1 = graph.getID(node_1);
+				int ID_2 = graph.getID(node_2);
+
+				std::vector<int> ids = {ID_0, ID_1, ID_2};
+
+				// Assign attributes to nodes
+				std::string attribute = "demo attribute";
+				std::vector<std::string> scores = {"2.3", "6.1", "4.0"};
+				graph.AddNodeAttributes(ids, attribute, scores);
+
+				// Get attribute for all nodes
+				std::vector<std::string> cross_slopes = graph.GetNodeAttributes(attribute); // {"2.3", "6.1", "4.0"}
+				
 			\endcode
 		*/
 		std::vector<std::string> GetNodeAttributes(std::string attribute) const;
 
+		/// <summary>
+		/// Get the score for the given attribute of the specified nodes. Nodes that do not have
+		/// a score for this attribute should return an empty string for this array.
+		/// </summary>
+		/// <param name="ids">
+		/// A list of node IDs to obtain scores for.
+		/// </param>
+		/// <param name="attribute">
+		/// The attribute from which a container of scores will be obtained
+		/// </param>
+		/// <returns>
+		/// A container of score, each in the form of a std::string, obtained from attribute
+		/// </returns>
+		/*!
+			\code
+				// be sure to #include "graph.h"
+ 
+				// Create the nodes
+				HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f);
+				HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);
+				HF::SpatialStructures::Node node_2(11.0f, 22.0f, 140.0f);
+ 
+				// Create a container (vector) of nodes
+				std::vector<HF::SpatialStructures::Node> nodes = { node_0, node_1, node_2 };
+ 
+				// Create matrices for edges and distances, edges.size() == distances().size()
+				std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
+				std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
+ 
+				// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+				HF::SpatialStructures::Graph graph(edges, distances, nodes);
+
+				// Get node IDs
+				int ID_0 = graph.getID(node_0);
+				int ID_1 = graph.getID(node_1);
+				int ID_2 = graph.getID(node_2);
+				std::vector<int> ids = {0, 1, 2};
+
+				// Assign attributes to nodes
+				std::string attribute = "demo attribute";
+				std::vector<std::string> scores = {"1.8", "9.6", "5.7"};
+				graph.AddNodeAttributes(ids, attribute, scores);
+
+				// Get attribute for specific node
+				std::vector<std::string> cross_slope_1 = graph.GetNodeAttributes({ID_1}, attribute); // {"9.6"}
+				std::vector<std::string> cross_slope_02 = graph.GetNodeAttributes({ID_0, ID_2}, attribute); // {"1.8", "5.7"}
+				
+			\endcode
+		*/
+		std::vector<std::string> GetNodeAttributes(std::vector<int>& ids, std::string attribute) const;
 		/// <summary>
 		/// Clears the attribute at name and all of its contents from the internal hashmap
 		/// </summary>

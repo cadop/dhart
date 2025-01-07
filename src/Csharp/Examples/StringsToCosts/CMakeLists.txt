@@ -19,7 +19,7 @@ set_target_properties(
 		StringsToCosts
 		PROPERTIES
 		VS_DOTNET_REFERENCES "${normal_references}"
-		VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.5"
+		VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.7.2"
 )
 
 target_compile_options(StringsToCosts PRIVATE "/unsafe")

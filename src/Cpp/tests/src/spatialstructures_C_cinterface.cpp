@@ -879,7 +879,7 @@ namespace CInterfaceTests {
 
 		// By the postconditions of GetNodeAttributes, this should update scores_out,
 		// and scores_out_size with the variables we need
-		GetNodeAttributes(&g, attr_type.c_str(), scores_out, &scores_out_size);
+		GetNodeAttributes(&g, NULL, attr_type.c_str(), 0, scores_out, &scores_out_size);
 
 		// Assert that we can get the scores from this array
 		for (int i = 0; i < scores_out_size; i++)
