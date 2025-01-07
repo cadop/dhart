@@ -1024,7 +1024,16 @@ namespace EdgeExampleTests {
 
 		HF::SpatialStructures::Edge edge(node, score, STEP::NOT_CONNECTED);
 	}
+
+	TEST(_edge, EdgeConstructorThing) {
+		HF::SpatialStructures::Node node(12.0, 23.1, 34.2, 456);
+		float score = 4.3f;
+
+		HF::SpatialStructures::Edge edge(node, score, STEP::NOT_CONNECTED);
+	}
 }
+
+
 
 ///
 ///	The following are tests for the code samples for HF::SpatialStructures::Path
@@ -1927,6 +1936,16 @@ namespace GraphExampleTests {
 			ASSERT_EQ(expected_scores[i], score);
 			std::cout << "attribute: " << score << std::endl;
 		}
+
+		vector<int> ids = { 0, 3 };
+		auto subset_attrs = g.GetNodeAttributes(ids, "cross slope");
+		vector<string> subset_expected_scores = { "5.1", "7.1" };
+		int subset_expected_size = 2;
+		ASSERT_EQ(subset_attrs.size(), subset_expected_size);
+		for (int i = 0; i < subset_expected_size; i++)
+		{
+			ASSERT_EQ(subset_attrs[i], subset_expected_scores[i]);
+		}
 	}
 
 	// Assert that clearing a score from the graph returns an empty array next time
@@ -2028,7 +2047,7 @@ namespace CInterfaceTests {
 
 		// By the postconditions of GetNodeAttributes, this should update scores_out,
 		// and scores_out_size with the variables we need
-		GetNodeAttributes(&g, attr_type.c_str(), scores_out, &scores_out_size);
+		GetNodeAttributes(&g, NULL, attr_type.c_str(), g.size(), scores_out, &scores_out_size);
 
 		// Assert that the size of the output array matches the number of nodes in the graph
 		ASSERT_EQ(g.size(), scores_out_size);
@@ -2066,10 +2085,26 @@ namespace CInterfaceTests {
 
 		}
 
+		std::vector<int> subset_ids = { 3, 5, 7 };
+
+		char** scores_out2 = new char* [subset_ids.size()];
+		int scores_out2_size = 0;
+		std::vector<std::string> subset_expected_scores = { "2.0", "2.8", "4.0" };
+		GetNodeAttributes(&g, subset_ids.data(), attr_type.c_str(), subset_ids.size(), scores_out2, &scores_out2_size);
+		ASSERT_EQ(subset_expected_scores.size(), scores_out2_size);
+		for (int i = 0; i < scores_out2_size; i++)
+		{
+			string score = scores_out2[i];
+			ASSERT_TRUE(score.length() == 3);
+			ASSERT_EQ(scores_out2[i], subset_expected_scores[i]);
+		}
+		
 		// Deallocate the contents of scores_out by calling C_Interface function, then
 		// deallocate scores_out since we're the ones who allocated that with new. 
 		DeleteScoreArray(scores_out, scores_out_size);
 		delete[] scores_out;
+		DeleteScoreArray(scores_out2, scores_out2_size);
+		delete[] scores_out2;
 	}
 
 	// Verify that deallocating the scores array doesn't corrupt the heap. 
@@ -2089,7 +2124,7 @@ namespace CInterfaceTests {
 
 		char** scores_out = new char* [g.size()];
 		int scores_out_size = 0;
-		GetNodeAttributes(&g, attr_type.c_str(), scores_out, &scores_out_size);
+		GetNodeAttributes(&g, NULL, attr_type.c_str(), g.size(), scores_out, &scores_out_size);
 
 		DeleteScoreArray(scores_out, scores_out_size);
 		delete[] scores_out;
@@ -2108,7 +2143,7 @@ namespace CInterfaceTests {
 		std::string attr_type = "cross slope";
 		const char* scores[4] = { "1.4", "2.0", "2.8", "4.0" };
 		AddNodeAttributes(&g, ids.data(), attr_type.c_str(), scores, ids.size());
-
+		
 		// Clear the attribute type and capture the error code
 		auto res = ClearAttributeType(&g, attr_type.c_str());
 		
