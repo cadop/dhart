@@ -517,8 +517,8 @@ class Graph:
         """ Get scores of every node for a specific attribute
 
         Args:
-            `attribute` : The unique key of the attribute to get scores for
-            `ids` : Node IDs in the graph to get attributes for, optional
+            attribute : The unique key of the attribute to get scores for
+            ids : Node IDs in the graph to get attributes for, optional
 
         Preconditions:
             1) Node IDs in `ids` must already belong to nodes in the graph

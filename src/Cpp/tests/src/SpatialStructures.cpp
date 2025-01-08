@@ -1024,16 +1024,7 @@ namespace EdgeExampleTests {
 
 		HF::SpatialStructures::Edge edge(node, score, STEP::NOT_CONNECTED);
 	}
-
-	TEST(_edge, EdgeConstructorThing) {
-		HF::SpatialStructures::Node node(12.0, 23.1, 34.2, 456);
-		float score = 4.3f;
-
-		HF::SpatialStructures::Edge edge(node, score, STEP::NOT_CONNECTED);
-	}
 }
-
-
 
 ///
 ///	The following are tests for the code samples for HF::SpatialStructures::Path
@@ -1937,14 +1928,29 @@ namespace GraphExampleTests {
 			std::cout << "attribute: " << score << std::endl;
 		}
 
-		vector<int> ids = { 0, 3 };
-		auto subset_attrs = g.GetNodeAttributes(ids, "cross slope");
-		vector<string> subset_expected_scores = { "5.1", "7.1" };
-		int subset_expected_size = 2;
-		ASSERT_EQ(subset_attrs.size(), subset_expected_size);
-		for (int i = 0; i < subset_expected_size; i++)
+
+	}
+
+	TEST(_graph, GetNodeAttributesByID) {
+		Graph g;
+		g.addEdge(0, 1, 1); g.addEdge(0, 2, 1);	g.addEdge(1, 3, 1);	g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);	g.addEdge(3, 5, 1);	g.addEdge(3, 6, 1);	g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);	g.addEdge(5, 7, 1);	g.addEdge(5, 8, 1);	g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
+
+		vector<int> ids = { 0, 3, 4, 8 };
+		std::string testattribute = "testattribute";
+		g.AddNodeAttribute(0, testattribute, "5.1");
+		g.AddNodeAttribute(3, testattribute, "7.1");
+		g.AddNodeAttribute(4, testattribute, "2.3");
+		g.AddNodeAttribute(8, testattribute, "1.0");
+		auto attrs = g.GetNodeAttributesByID(ids, testattribute);
+		vector<string> expected_scores = { "5.1", "7.1", "2.3", "1.0" };
+		int expected_scores_size = expected_scores.size();
+		ASSERT_EQ(attrs.size(), expected_scores_size);
+		for (int i = 0; i < expected_scores_size; i++)
 		{
-			ASSERT_EQ(subset_attrs[i], subset_expected_scores[i]);
+			ASSERT_EQ(attrs[i], expected_scores[i]);
 		}
 	}
 
@@ -2047,7 +2053,7 @@ namespace CInterfaceTests {
 
 		// By the postconditions of GetNodeAttributes, this should update scores_out,
 		// and scores_out_size with the variables we need
-		GetNodeAttributes(&g, NULL, attr_type.c_str(), 0, scores_out, &scores_out_size);
+		GetNodeAttributes(&g, attr_type.c_str(), scores_out, &scores_out_size);
 
 		// Assert that the size of the output array matches the number of nodes in the graph
 		ASSERT_EQ(g.size(), scores_out_size);
@@ -2085,28 +2091,55 @@ namespace CInterfaceTests {
 
 		}
 
-		std::vector<int> subset_ids = { 3, 5, 7 };
-
-		char** scores_out2 = new char* [subset_ids.size()];
-		int scores_out2_size = 0;
-		std::vector<std::string> subset_expected_scores = { "2.0", "2.8", "4.0" };
-		GetNodeAttributes(&g, subset_ids.data(), attr_type.c_str(), subset_ids.size(), scores_out2, &scores_out2_size);
-		ASSERT_EQ(subset_expected_scores.size(), scores_out2_size);
-		for (int i = 0; i < scores_out2_size; i++)
-		{
-			string score = scores_out2[i];
-			ASSERT_TRUE(score.length() == 3);
-			ASSERT_EQ(scores_out2[i], subset_expected_scores[i]);
-		}
-		
 		// Deallocate the contents of scores_out by calling C_Interface function, then
 		// deallocate scores_out since we're the ones who allocated that with new. 
 		DeleteScoreArray(scores_out, scores_out_size);
 		delete[] scores_out;
-		DeleteScoreArray(scores_out2, scores_out2_size);
-		delete[] scores_out2;
+
 	}
 
+	TEST(_graphCInterface, GetNodeAttributesByID) {
+		// Create a graph and add edges
+		Graph g;
+		g.addEdge(0, 1, 1); g.addEdge(0, 2, 1); g.addEdge(1, 3, 1); g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1); g.addEdge(3, 5, 1); g.addEdge(3, 6, 1); g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1); g.addEdge(5, 7, 1); g.addEdge(5, 8, 1); g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
+
+		// Create a vector of node IDs and their corresponding values for our attribute
+		std::vector<int> ids = { 1, 2, 5, 7, 8 };
+		std::string attr = "testattribute";
+		const char* scores[5]  = {"1.0", "2.0", "3.0", "4.0", "5.0"};
+
+		// Add node attributes to the graph
+		AddNodeAttributes(&g, ids.data(), attr.c_str(), scores, ids.size());
+
+		// What we expect to return from our call to GetNodeAttributesByID
+		std::vector<int> subset_ids = { 1, 5, 7 };
+		std::vector<std::string> expected_scores_out = { "1.0", "3.0", "4.0" };
+		int expected_scores_out_size = 3;
+
+		// Allocate an array of char arrays to meet the preconditions of GetNodeAttributesByID
+		char** scores_out = new char* [subset_ids.size()];
+		int scores_out_size = 0;
+		
+		// Get node attributes for the specified nodes
+		GetNodeAttributesByID(&g, subset_ids.data(), attr.c_str(), subset_ids.size(), scores_out, &scores_out_size);
+
+		// We expect to get attributes for 3 nodes
+		ASSERT_EQ(scores_out_size, expected_scores_out_size);
+		for (int i = 0; i < expected_scores_out_size; i++)
+		{
+			// Check that the attributes are returned in the right order
+			// in respect to the ordering of the IDs
+			ASSERT_EQ(scores_out[i], expected_scores_out[i]);
+		}
+
+		// Deallocate the contents of scores_out by calling C_Interface function, then
+		// deallocate scores_out since we're the ones who allocated that with new. 
+		DeleteScoreArray(scores_out, scores_out_size);
+		delete[] scores_out;
+	}
 	// Verify that deallocating the scores array doesn't corrupt the heap. 
 	// The other test cases cover things like Adding and getting node attributes.
 	TEST(_graphCInterface, DeleteScoreArray) {
@@ -2124,7 +2157,7 @@ namespace CInterfaceTests {
 
 		char** scores_out = new char* [g.size()];
 		int scores_out_size = 0;
-		GetNodeAttributes(&g, NULL, attr_type.c_str(), 0, scores_out, &scores_out_size);
+		GetNodeAttributes(&g, attr_type.c_str(), scores_out, &scores_out_size);
 
 		DeleteScoreArray(scores_out, scores_out_size);
 		delete[] scores_out;

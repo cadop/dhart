@@ -1875,7 +1875,6 @@ namespace HF::SpatialStructures {
 
 				// Get attribute for all nodes
 				std::vector<std::string> cross_slopes = graph.GetNodeAttributes(attribute); // {"2.3", "6.1", "4.0"}
-				
 			\endcode
 		*/
 		std::vector<std::string> GetNodeAttributes(std::string attribute) const;
@@ -1923,13 +1922,12 @@ namespace HF::SpatialStructures {
 				std::vector<std::string> scores = {"1.8", "9.6", "5.7"};
 				graph.AddNodeAttributes(ids, attribute, scores);
 
-				// Get attribute for specific node
-				std::vector<std::string> cross_slope_1 = graph.GetNodeAttributes({ID_1}, attribute); // {"9.6"}
-				std::vector<std::string> cross_slope_02 = graph.GetNodeAttributes({ID_0, ID_2}, attribute); // {"1.8", "5.7"}
-				
+				// Get attribute for specific nodes
+				std::vector<std::string> cross_slope_1 = graph.GetNodeAttributesByID({ID_1}, attribute); // {"9.6"}
+				std::vector<std::string> cross_slope_02 = graph.GetNodeAttributesByID({ID_0, ID_2}, attribute); // {"1.8", "5.7"}
 			\endcode
 		*/
-		std::vector<std::string> GetNodeAttributes(std::vector<int>& ids, std::string attribute) const;
+		std::vector<std::string> GetNodeAttributesByID(std::vector<int>& ids, std::string attribute) const;
 		/// <summary>
 		/// Clears the attribute at name and all of its contents from the internal hashmap
 		/// </summary>

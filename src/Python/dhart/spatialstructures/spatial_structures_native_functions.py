@@ -383,10 +383,10 @@ def c_get_node_attributes(
     """ Get node attributes from a graph in  C++
 
     Args:
-        `graph_ptr` : Pointer to the graph to get attributes from.
-        `attr` : Unique key of the attribute to get
-        `num_nodes` : number of nodes in the graph
-        `ids` : List of node IDs to get attributes for
+        graph_ptr : Pointer to the graph to get attributes from.
+        attr : Unique key of the attribute to get
+        num_nodes : number of nodes in the graph
+        ids : List of node IDs to get attributes for
 
     Returns:
         A list of strings containing the score for specificed nodes - or for
@@ -397,16 +397,6 @@ def c_get_node_attributes(
     """
 
     # Define variables to meet preconditions
-    if ids is not None:
-        # convert array to C array if non-null, otherwise leave alone.
-        # null check is handled by C interface function
-        id_arr = ConvertIntsToArray(ids)
-        num_ids = len(ids)
-    else:
-        # num_ids is only used when ids is not null, 
-        # but it is equal to num_nodes
-        id_arr = None
-        num_ids = C_NumNodes(graph_ptr)
     attr_ptr = GetStringPtr(attr)
     out_score_type = c_char_p * num_nodes
     out_scores = out_score_type()
@@ -414,9 +404,19 @@ def c_get_node_attributes(
 
     # Call into the function in C++. This will update
     # out_scores and out_scores_size
-    error_code = HFPython.GetNodeAttributes(
-        graph_ptr, id_arr, attr_ptr, num_ids, byref(out_scores), byref(out_scores_size)
-    )
+    if ids is not None:
+        # convert array to C array if non-null, otherwise leave alone.
+        # null check is handled by C interface function
+        id_arr = ConvertIntsToArray(ids)
+        num_ids = len(ids)
+        error_code = HFPython.GetNodeAttributesByID(
+            graph_ptr, id_arr, attr_ptr, num_ids, byref(out_scores), byref(out_scores_size)
+        )
+    else:
+        error_code = HFPython.GetNodeAttributes(
+            graph_ptr, attr_ptr, byref(out_scores), byref(out_scores_size)
+        )
+    
 
     # This function shouldn't return anything other than OK
     assert error_code == HF_STATUS.OK

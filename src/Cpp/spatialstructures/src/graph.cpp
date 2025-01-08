@@ -1361,7 +1361,7 @@ namespace HF::SpatialStructures {
 		return out_attributes;
 	}
 
-	vector<string> Graph::GetNodeAttributes(vector<int>& ids, string attribute) const {
+	vector<string> Graph::GetNodeAttributesByID(vector<int>& ids, string attribute) const {
 		
 		// Return an empty array if this attribute doesn't exist
 		if (node_attr_map.count(attribute) < 1) return vector<string>();

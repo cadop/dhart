@@ -783,14 +783,54 @@ C_INTERFACE AddNodeAttributes(
 /*!
 	\brief		Retrieve node attribute values from *g
 
-	\param		g				The graph that will be used to retrieve 
+	\param		g			The graph that will be used to retrieve 
+							node attribute values from
+
+	\param		attribute		The node attribute type to retrieve from *g
+	\param		out_scores		Pointer to array of (char *), allocated by the caller
+	\param		out_score_size	Keeps track of the size of out_scores buffer, 
+								updated as required
+
+	\returns	\link HF_STATUS::OK \endlink on completion.
+
+	\details	Memory shall be allocated in *out_scores to hold the char arrays.
+				out_scores is a pointer to an array of (char *),
+				which will be allocated by the caller.
+				The caller must call DeleteScores to deallocate the memory addressed
+				by each pointer in out_scores.
+
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
+	\see \link AddNodeAttributes \endlink (how to add node attributes)
+	\see \link GetNodeAttributesByID \endlink (how to get node attributes by node ID)
+	\see \ref graph_teardown (how to destroy a graph)
+
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetNodeAttributes
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
+*/
+C_INTERFACE GetNodeAttributes(
+	const HF::SpatialStructures::Graph* g,
+	const char* attribute,
+	char** out_scores,
+	int* out_score_size
+);
+
+/*!
+	\brief		Retrieve node attribute values from *g
+
+	\param		g				The graph that will be used to retrieve
 								node attribute values from
-	\param		ids				The list of node IDs to get attributes for. 
+	\param		ids				The list of node IDs to get attributes for.
 								If NULL, returns attributes for all nodes.
 	\param		attribute		The node attribute type to retrieve from *g
 	\param		num_nodes		The length of the ids array
 	\param		out_scores		Pointer to array of (char *), allocated by the caller
-	\param		out_score_size	Keeps track of the size of out_scores buffer, 
+	\param		out_score_size	Keeps track of the size of out_scores buffer,
 								updated as required
 
 	\pre		All node IDs in `ids` must exist in graph `g`.
@@ -802,7 +842,7 @@ C_INTERFACE AddNodeAttributes(
 
 				If `ids` is NULL, `out_scores` is an array holding the value of the attribute for
 				all nodes, sorted in ascending order by ID.
-				
+
 				Memory shall be allocated in *out_scores to hold the char arrays.
 				out_scores is a pointer to an array of (char *),
 				which will be allocated by the caller.
@@ -813,16 +853,17 @@ C_INTERFACE AddNodeAttributes(
 	\see \ref graph_compress (how to compress a graph after adding/removing edges)
 	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
 	\see \link AddNodeAttributes \endlink (how to add node attributes)
+	\see \link GetNodeAttributes \endlink (how to get node attributes)
 	\see \ref graph_teardown (how to destroy a graph)
 
 	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
 
-	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetNodeAttributes
+	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetNodeAttributesByID
 
 	Finally, when you are finished with the graph,<br>
 	it must be destroyed. (\ref graph_teardown)
 */
-C_INTERFACE GetNodeAttributes(
+C_INTERFACE GetNodeAttributesByID(
 	const HF::SpatialStructures::Graph* g,
 	const int* ids,
 	const char* attribute,

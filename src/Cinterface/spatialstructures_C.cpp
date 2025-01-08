@@ -319,26 +319,45 @@ C_INTERFACE AddNodeAttributes(
 	return OK;
 }
 
-C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const int* ids, const char* attribute, int num_nodes,
+C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const char* attribute, 
+							  char** out_scores, int* out_score_size) {
+	// get all node attributes from the graph
+	vector<string> v_attrs = g->GetNodeAttributes(std::string(attribute));
+
+	// Iterate through each returned string and copy it into
+	// the output array
+	for (int i = 0; i < v_attrs.size(); i++){
+		// Get the string and its corresponding c_string
+		const string& v_str = v_attrs[i];
+		const char* cstr = v_str.c_str();
+
+		// Allocate space in the output array for this string 
+		const int string_length = v_str.size() + 1; //NOTE: This must be +1 since the null terminator doesn't count
+		// towards the string's overall length
+		out_scores[i] = new char[string_length];
+
+		// Copy the contents of c_str into the output array
+		std::memcpy(out_scores[i], cstr, string_length);
+	}
+
+	// Update the *out_score_size value, which corresponds to v_attrs.size().
+	// (it also corresponds to i, but this notation using v_attrs.size() is easier to understand)
+	*out_score_size = v_attrs.size();
+
+	// If v_attrs.size() == 0, do we want to throw an exception,
+	// which would mean that attribute does not exist as a attribute type?
+	return OK;
+}
+
+C_INTERFACE GetNodeAttributesByID(const HF::SpatialStructures::Graph* g, const int* ids, const char* attribute, int num_nodes,
 							  char** out_scores, int* out_score_size) {
 
-	// declare return vector for graph.cpp call
-	vector<string> v_attrs;
-	if (ids != NULL)
-	{
-		// If IDs are specified, create vector to use 
-		// (std::vector<int>, std::string) defintion of GetNodeAttributes
-		// ids is base address, ids + num_nodes is end address
-		vector<int> v_ids(ids, ids + num_nodes);
-		v_attrs = g->GetNodeAttributes(v_ids, std::string(attribute));
-	}
-	else
-	{
-		// Otherwise, get all node attributes using the
-		// (std::string) defintion
-		v_attrs = g->GetNodeAttributes(std::string(attribute));
-	}
-	
+	// If IDs are specified, create vector to use
+	// (std::vector<int>, std::string) defintion of GetNodeAttributes
+	// ids is base address, ids + num_nodes is end address
+	vector<int> v_ids(ids, ids + num_nodes);
+	vector<string> v_attrs = g->GetNodeAttributesByID(v_ids, std::string(attribute));
+
 	// Iterate through each returned string and copy it into
 	// the output array
 	for (int i = 0; i < v_attrs.size(); i++)
@@ -347,7 +366,7 @@ C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const int* 
 		const string& v_str = v_attrs[i];
 		const char* cstr = v_str.c_str();
 		
-		// Allocate space in the output array for this string 
+		// Allocate space in the output array for this string
 		const int string_length = v_str.size() + 1; //NOTE: This must be +1 since the null terminator doesn't count
 													// towards the string's overall length
 		out_scores[i] = new char[string_length];

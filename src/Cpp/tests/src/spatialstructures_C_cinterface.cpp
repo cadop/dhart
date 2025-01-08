@@ -879,7 +879,7 @@ namespace CInterfaceTests {
 
 		// By the postconditions of GetNodeAttributes, this should update scores_out,
 		// and scores_out_size with the variables we need
-		GetNodeAttributes(&g, NULL, attr_type.c_str(), 0, scores_out, &scores_out_size);
+		GetNodeAttributes(&g, attr_type.c_str(), scores_out, &scores_out_size);
 
 		// Assert that we can get the scores from this array
 		for (int i = 0; i < scores_out_size; i++)
@@ -903,6 +903,50 @@ namespace CInterfaceTests {
 		// Resource cleanup
 		DeleteScoreArray(scores_out, g.size());
 		//! [snippet_spatialstructuresC_GetNodeAttributes]
+	}
+
+	TEST(_spatialstructures_cinterface, GetNodeAttributesByID) {
+		//! [snippet_spatialstructuresC_GetNodeAttributesByID]
+		// Create a graph and add edges
+		HF::SpatialStructures::Graph g;
+		g.addEdge(0, 1, 1); g.addEdge(0, 2, 1); g.addEdge(1, 3, 1); g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1); g.addEdge(3, 5, 1); g.addEdge(3, 6, 1); g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1); g.addEdge(5, 7, 1); g.addEdge(5, 8, 1); g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
+
+		std::vector<int> ids{ 1, 3, 5, 7 };
+		std::string attr_type = "test attribute";
+		const char* scores[4] = {"29.3", "10.7", "3.5", "18.6"};
+
+		AddNodeAttributes(&g, ids.data(), attr_type.c_str(), scores, ids.size());
+
+		char** scores_out = new char* [ids.size()];
+		int scores_out_size = 0;
+
+		GetNodeAttributesByID(&g, ids.data(), attr_type.c_str(), ids.size(), scores_out, &scores_out_size);
+
+		// Assert that we can get the scores from this array
+		for (int i = 0; i < scores_out_size; i++)
+		{
+			// Convert score at this index to a string. 
+			std::string score = scores_out[i];
+
+			// If it's in our input array, ensure that the score at this value
+			// matches the one we passed
+			auto itr = std::find(ids.begin(), ids.end(), i);
+			if (itr != ids.end())
+			{
+				// Get the index of the id in the scores array so we
+				// can compare use it to get our input score at that
+				// index as well.
+				int index = std::distance(ids.begin(), itr);
+			}
+
+		}
+
+		// Resource cleanup
+		DeleteScoreArray(scores_out, g.size());
+		//! [snippet_spatialstructuresC_GetNodeAttributesByID]
 	}
 
 	TEST(_spatialstructures_cinterface, DeleteScoreArray) {
