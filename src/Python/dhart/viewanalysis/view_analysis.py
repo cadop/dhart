@@ -200,19 +200,20 @@ def SphericallyDistributeRays(num_rays: int, upward_fov : float = 50, downward_f
     Examples:
 
         >>> from dhart.viewanalysis import SphericallyDistributeRays
-        >>> print(SphericallyDistributeRays(10))
-        [[-0.         -1.          0.        ]
-         [-0.26500335 -0.8181818  -0.51024675]
-         [ 0.7245825  -0.63636374  0.2646158 ]
-         [-0.8233362  -0.45454547  0.33986175]
-         [ 0.40777823 -0.2727272  -0.87139934]
-         [-0.86162955  0.09090906 -0.49932963]
-         [ 0.93965095  0.2727273  -0.20658147]
-         [-0.51228005  0.45454556  0.72866833]
-         [-0.09913298  0.6363636  -0.7649929 ]
-         [ 0.4396428   0.8181818   0.37053034]]
+        >>> import numpy as np
+        >>> directions = SphericallyDistributeRays(10)
+        >>> print(np.round(directions, 4))
+        [[-0.     -1.      0.   ]
+        [-0.265  -0.8182 -0.5102]
+        [ 0.7246 -0.6364  0.2646]
+        [-0.8233 -0.4545  0.3399]
+        [ 0.4078 -0.2727 -0.8714]
+        [-0.8616  0.0909 -0.4993]
+        [ 0.9397  0.2727 -0.2066]
+        [-0.5123  0.4545  0.7287]
+        [-0.0991  0.6364 -0.765 ]
+        [ 0.4396  0.8182  0.3705]]
 
-    
     """
 
     vector_ptr, data_ptr, num_rays = viewanalysis_native_functions.C_DistributeSpherical(num_rays, upward_fov, downward_fov)
