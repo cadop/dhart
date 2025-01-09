@@ -24,7 +24,7 @@ LIST (APPEND normal_references "netstandard")
 LIST (APPEND normal_references "System.Runtime.Serialization")
 
 # Set the C# language version
-set(CMAKE_CSharp_FLAGS "/langversion:7.3")
+set(CMAKE_CSharp_FLAGS "/langversion:8")
 
 # Include packages. These will add source files to ${sources} and test files to ${test_sources} for each package
 include(${CMAKE_CURRENT_LIST_DIR}/packages/base/package.cmake)
@@ -69,7 +69,7 @@ set_target_properties(
 		DHARTAPICSharp
 		PROPERTIES
 		VS_DOTNET_REFERENCES "${normal_references}"
-		VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.7.2"
+		VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.8"
 )
 
 target_compile_options(DHARTAPICSharp PRIVATE "/unsafe")
@@ -87,7 +87,7 @@ set_target_properties(
 		PROPERTIES
 		VS_GLOBAL_PROJECT_TYPES "{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
 		# VS_GLOBAL_PROJECT_TYPES "{d902c041-2bf7-4fa0-afd7-2a09df2dbb7a}"
-		VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.7.2"
+		VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.8"
 		VS_DOTNET_REFERENCES "${test_references}"
 )
 
