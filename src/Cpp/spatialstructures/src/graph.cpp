@@ -1361,6 +1361,36 @@ namespace HF::SpatialStructures {
 		return out_attributes;
 	}
 
+	vector<string> Graph::GetNodeAttributesByID(vector<int>& ids, string attribute) const {
+		
+		// Return an empty array if this attribute doesn't exist
+		if (node_attr_map.count(attribute) < 1) return vector<string>();
+
+		// Get the attribute map for attribute now that we know it exists
+		const auto& attr_map = node_attr_map.at(attribute);
+
+		// Preallocate output array with empty strings.
+		// Only allocate as many spots we need for the specified IDs.
+		const int num_nodes = ids.size();
+		vector<string> out_attributes(num_nodes, "");
+
+		// Keep index of return array, since it isn't necessarily the same as the ID
+		int idx = 0;
+		// Iterate through all specified IDs
+		for (int i = 0; i < num_nodes; i++)
+		{
+			// For each ID, get associated node, and get the node's attribute
+			int id = ids[i];
+			const auto& score = attr_map.at(id);
+
+			out_attributes[idx] = score;
+			// Increment index to the next space in the output array
+			idx++;
+		}
+		// Return all found attributes
+		return out_attributes;
+	}
+
 	void Graph::ClearNodeAttributes(std::string name) {
 		/* // requires #include <algorithm>, but not working?
 		std::string lower_cased =

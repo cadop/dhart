@@ -1927,6 +1927,31 @@ namespace GraphExampleTests {
 			ASSERT_EQ(expected_scores[i], score);
 			std::cout << "attribute: " << score << std::endl;
 		}
+
+
+	}
+
+	TEST(_graph, GetNodeAttributesByID) {
+		Graph g;
+		g.addEdge(0, 1, 1); g.addEdge(0, 2, 1);	g.addEdge(1, 3, 1);	g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);	g.addEdge(3, 5, 1);	g.addEdge(3, 6, 1);	g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);	g.addEdge(5, 7, 1);	g.addEdge(5, 8, 1);	g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
+
+		vector<int> ids = { 0, 3, 4, 8 };
+		std::string testattribute = "testattribute";
+		g.AddNodeAttribute(0, testattribute, "5.1");
+		g.AddNodeAttribute(3, testattribute, "7.1");
+		g.AddNodeAttribute(4, testattribute, "2.3");
+		g.AddNodeAttribute(8, testattribute, "1.0");
+		auto attrs = g.GetNodeAttributesByID(ids, testattribute);
+		vector<string> expected_scores = { "5.1", "7.1", "2.3", "1.0" };
+		int expected_scores_size = expected_scores.size();
+		ASSERT_EQ(attrs.size(), expected_scores_size);
+		for (int i = 0; i < expected_scores_size; i++)
+		{
+			ASSERT_EQ(attrs[i], expected_scores[i]);
+		}
 	}
 
 	// Assert that clearing a score from the graph returns an empty array next time
@@ -2070,8 +2095,51 @@ namespace CInterfaceTests {
 		// deallocate scores_out since we're the ones who allocated that with new. 
 		DeleteScoreArray(scores_out, scores_out_size);
 		delete[] scores_out;
+
 	}
 
+	TEST(_graphCInterface, GetNodeAttributesByID) {
+		// Create a graph and add edges
+		Graph g;
+		g.addEdge(0, 1, 1); g.addEdge(0, 2, 1); g.addEdge(1, 3, 1); g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1); g.addEdge(3, 5, 1); g.addEdge(3, 6, 1); g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1); g.addEdge(5, 7, 1); g.addEdge(5, 8, 1); g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
+
+		// Create a vector of node IDs and their corresponding values for our attribute
+		std::vector<int> ids = { 1, 2, 5, 7, 8 };
+		std::string attr = "testattribute";
+		const char* scores[5]  = {"1.0", "2.0", "3.0", "4.0", "5.0"};
+
+		// Add node attributes to the graph
+		AddNodeAttributes(&g, ids.data(), attr.c_str(), scores, ids.size());
+
+		// What we expect to return from our call to GetNodeAttributesByID
+		std::vector<int> subset_ids = { 1, 5, 7 };
+		std::vector<std::string> expected_scores_out = { "1.0", "3.0", "4.0" };
+		int expected_scores_out_size = 3;
+
+		// Allocate an array of char arrays to meet the preconditions of GetNodeAttributesByID
+		char** scores_out = new char* [subset_ids.size()];
+		int scores_out_size = 0;
+		
+		// Get node attributes for the specified nodes
+		GetNodeAttributesByID(&g, subset_ids.data(), attr.c_str(), subset_ids.size(), scores_out, &scores_out_size);
+
+		// We expect to get attributes for 3 nodes
+		ASSERT_EQ(scores_out_size, expected_scores_out_size);
+		for (int i = 0; i < expected_scores_out_size; i++)
+		{
+			// Check that the attributes are returned in the right order
+			// in respect to the ordering of the IDs
+			ASSERT_EQ(scores_out[i], expected_scores_out[i]);
+		}
+
+		// Deallocate the contents of scores_out by calling C_Interface function, then
+		// deallocate scores_out since we're the ones who allocated that with new. 
+		DeleteScoreArray(scores_out, scores_out_size);
+		delete[] scores_out;
+	}
 	// Verify that deallocating the scores array doesn't corrupt the heap. 
 	// The other test cases cover things like Adding and getting node attributes.
 	TEST(_graphCInterface, DeleteScoreArray) {
@@ -2108,7 +2176,7 @@ namespace CInterfaceTests {
 		std::string attr_type = "cross slope";
 		const char* scores[4] = { "1.4", "2.0", "2.8", "4.0" };
 		AddNodeAttributes(&g, ids.data(), attr_type.c_str(), scores, ids.size());
-
+		
 		// Clear the attribute type and capture the error code
 		auto res = ClearAttributeType(&g, attr_type.c_str());
 		
