@@ -202,7 +202,7 @@ def SphericallyDistributeRays(num_rays: int, upward_fov : float = 50, downward_f
         >>> from dhart.viewanalysis import SphericallyDistributeRays
         >>> import numpy as np
         >>> directions = SphericallyDistributeRays(10)
-        >>> print(np.round(directions, 4))
+        >>> print(np.round(directions, 4))  # doctest: +NORMALIZE_WHITESPACE
         [[-0.     -1.      0.   ]
         [-0.265  -0.8182 -0.5102]
         [ 0.7246 -0.6364  0.2646]
