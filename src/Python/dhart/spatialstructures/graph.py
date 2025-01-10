@@ -481,7 +481,8 @@ class Graph:
         Preconditions:
             1) IDs in ids must already belong to nodes in the graph
             2) The length of scores and ids must match
-
+            3) All values in scores are of the same type
+            
         Raises:
             ValueError : the length of ids and scores did not match
         
