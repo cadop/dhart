@@ -1,4 +1,4 @@
-name: Documentation
+name: Documentation Tests
 
 on:
     pull_request:
@@ -7,6 +7,7 @@ on:
     push:
         branches:    
             - dev_stage
+            - main
 
 jobs:
   doxygen:
@@ -33,7 +34,8 @@ jobs:
         $url = "https://www.doxygen.nl/files/doxygen-1.9.5.windows.x64.bin.zip"
         Invoke-WebRequest -Uri $url -OutFile "C:\doxygen.zip"
         
-        Extract-7Zip -Path  "C:\doxygen.zip" -DestinationPath "C:\windows\system32"
+        7z x "C:\doxygen.zip" -o"C:\windows\system32" -y
+
         doxygen --version`
 
         choco install graphviz -y
@@ -52,31 +54,14 @@ jobs:
         doxygen Doxyfile_Csharp
         doxygen Doxyfile_Public_CSharp
 
-    - name: Auto-deploy doc changes
-      run : |
-        
-        git config --local user.email "action@github.com"
-        git config --local user.name "github-actions[bot]"
 
-        mkdir html_build
-
-        git worktree add -B docs html_build origin/docs
-        # cp -a docs/. html_build/ 
-        robocopy .\docs\ .\html_build\ /e
-
-        cd html_build
-
-        git add . 
-        git commit -m "ghpages"
-        git push -f
-            
   sphinx:
-    runs-on: windows-2019
+    runs-on: windows-2022
     needs: doxygen
     strategy:
       max-parallel: 0
       matrix:
-        python-version: [3.8]
+        python-version: [3.10]
 
     steps:
     - uses: actions/checkout@v2
@@ -109,7 +94,7 @@ jobs:
       run: |
         ls 
         cd src
-        cmake ./src/  -G"Visual Studio 16 2019"  -DCMAKE_GENERATOR_PLATFORM="x64"   -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DDHARTAPI_Config="All" -DDHARTAPI_EnableTests="False" -DCMAKE_CONFIGURATION_TYPES="Release" -DDHARTAPI_EnablePython="True" -DDHARTAPI_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1
+        cmake ./src/  -G"Visual Studio 17 2022"  -DCMAKE_GENERATOR_PLATFORM="x64"   -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DDHARTAPI_Config="All" -DDHARTAPI_EnableTests="False" -DCMAKE_CONFIGURATION_TYPES="Release" -DDHARTAPI_EnablePython="True" -DDHARTAPI_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1
 
     - name: cmake build
       run: |
@@ -123,32 +108,6 @@ jobs:
         cd src
         cmake --install .
 
-    # - name: check Existing dhart 
-    #   run: |
-    #     python -c "from dhart.spatialstructures import Graph"
-
-    # - name: Install package
-    #   run: |
-    #     ls
-    #     cd build/Python
-    #     ls
-    #     pip install . 
-
-    # - name: test if package dll is installed
-    #   run: | 
-    #     ls 
-    #     cd build/Python
-    #     ls 
-    #     cd bin 
-    #     ls
-    #     python -c "import dhart"
-    #     ls
-    #     python -c "from dhart.spatialstructures import Graph"
-    
-    # - name: Install Sphinx Latex
-    #   run: |
-        # sudo apt-get update -y && sudo apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
-
     - name: Build documentation with sphinx
       run: |
         cd "docs/Python Docs"
@@ -161,21 +120,15 @@ jobs:
         cd html
         ls
 
-    - name: Auto-deploy python doc changes
-      run : |
-        
-        git config --local user.email "action@github.com"
-        git config --local user.name "github-actions[bot]"
+    - name: Run sphinx doctests
+      run: |
+        cd "docs/Python Docs"
+        ls
+        ./make.bat clean
+        ./make.bat doctest
 
-        mkdir html_build
-
-        git worktree add -B docs html_build origin/docs
-        robocopy .\docs\ .\html_build\ /e
-
-        cd html_build
-
-        git add . 
-        git commit -m "ghpages"
-        git push -f
-            
-            
+    - name: Run pytest
+      run: |
+        cd "build/Python"
+        ls
+        pytest --doctest-modules --ignore-glob="*/Rhino*.py"
