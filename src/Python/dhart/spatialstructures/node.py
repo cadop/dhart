@@ -14,7 +14,7 @@ class NodeStruct(ctypes.Structure):
         ("x", ctypes.c_float),
         ("y", ctypes.c_float),
         ("z", ctypes.c_float),
-        ("type", ctypes.c_int),
+        ("type", ctypes.c_short),
         ("id", ctypes.c_int),
     ]
 

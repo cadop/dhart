@@ -64,8 +64,8 @@ def SphericalViewAnalysisAggregate(
         >>> BVH = EmbreeBVH(MI)
         >>> origins = [(0,0,1), (1,0,1), (2,0,50)]
         >>> va = SphericalViewAnalysisAggregate(BVH, origins, 100, 1.7, agg_type=AggregationType.SUM)
-        >>> print(va)
-        [95.05698 73.62985  0.     ]
+        >>> print(va) 
+        [111.631714  87.232346   0.      ]
 
         Cast 150 rays for 3 nodesat 1.7m, then get the average distance for all three
         
@@ -80,7 +80,7 @@ def SphericalViewAnalysisAggregate(
         >>> origins = [(0,0,1), (1,0,1), (2,0,50)]
         >>> va = SphericalViewAnalysisAggregate(BVH, origins, 100, 1.7, agg_type=AggregationType.AVERAGE)
         >>> print(va)
-        [4.5265236 4.3311677 0.       ]
+        [5.315796  5.1313143 0.       ]
 
 
     Returns:
