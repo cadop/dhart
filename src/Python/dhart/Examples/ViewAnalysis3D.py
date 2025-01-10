@@ -3,7 +3,6 @@
 
 .. plot::
     :context: reset
-
     
     import matplotlib.pyplot as plt 
     import numpy as np
@@ -51,15 +50,12 @@
 
 We can find the percentage of rays that hit the object (bvh). 
 
-.. testcode::
+.. plot::
+    :context: close-figs
 
     print(f'Percent of clear view: {( len(hit_dirs_valid)/ len(hit_dirs) ) * 100}')
-
-
-.. testoutput:: 
-    :options: +NORMALIZE_WHITESPACE
-    
-    64.737
+   
+    # 64.737
 
 .. plot::
     :context: close-figs

@@ -18,6 +18,7 @@
 #include "pathfinder_C.h"
 #include "cost_algorithms.h"
 #include "spatialstructures_C.h"
+#include <numeric>
 
 using namespace HF::SpatialStructures;
 using namespace HF::Pathfinding;
@@ -537,6 +538,319 @@ TEST(_pathFinding, FindPaths) {
 		std::cout << p.node << std::endl;
 	}
 }
+
+TEST(_pathFinding, MakePathArray) {
+	// be sure to #include "path_finder.h", #include "boost_graph.h", and #include "graph.h"
+
+	// Create a Graph g, and compress it.
+	HF::SpatialStructures::Graph g;
+	g.addEdge(0, 1, 1);
+	g.addEdge(0, 2, 2);
+	g.addEdge(1, 3, 3);
+	g.addEdge(2, 4, 1);
+	g.addEdge(3, 4, 5);
+	g.Compress();
+
+	// Create a boostGraph from g
+	auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
+
+	// Prepare the parents and children vectors --
+
+	int nodeSize = boostGraph.get()->p.size();
+	std::vector<int> start_points(nodeSize * nodeSize);
+	std::vector<int> end_points(nodeSize * nodeSize);
+
+	for (int i = 0; i < nodeSize; ++i) {
+		std::fill_n(start_points.begin() + i * nodeSize, nodeSize, i);
+		std::iota(end_points.begin() + i * nodeSize, end_points.begin() + (i + 1) * nodeSize, 0);
+	}
+
+	std::vector<HF::SpatialStructures::Path> paths = HF::Pathfinding::FindPaths(boostGraph.get(), start_points, end_points);
+
+	// Create a vector of PathMember pointers for each path 
+	// 
+	std::vector<int> pathNodes;
+	std::vector<int> pathLengths;
+
+	for (auto p : paths) {
+		for (auto pm : p.members) {
+			// Append the nodes for this path
+			std::cout << "Node ID: " << pm.node << std::endl;
+			pathNodes.push_back(pm.node);
+		}
+		// Append the length of this path
+		pathLengths.push_back(p.members.size());
+	}
+
+	for (int i = 0; i < pathNodes.size(); i++) {
+		std::cout << "Node ID: " << pathNodes[i] << std::endl;
+	}
+
+}
+
+
+TEST(_pathFinding, C_CreateAllPredToPath) {
+	// be sure to #include "path_finder.h", #include "boost_graph.h", and #include "graph.h"
+
+	// Create a Graph g, and compress it.
+	HF::SpatialStructures::Graph g;
+	/*
+	g.addEdge(0, 1, 1);
+	g.addEdge(0, 2, 2);
+	g.addEdge(1, 3, 3);
+	g.addEdge(2, 4, 1);
+	g.addEdge(3, 4, 5);
+	g.Compress();
+	*/
+
+	///*
+	// Example usage
+	int nodeCount = 1000; // Total nodes
+	int edgeCount = 500; // Total edges to generate
+	srand(static_cast<unsigned>(time(NULL))); // Seed the random number generator
+	for (int i = 0; i < edgeCount; ++i) {
+		int fromNode = rand() % nodeCount;
+		int toNode = rand() % nodeCount;
+		while (toNode == fromNode) { // Avoid self-loops
+			toNode = rand() % nodeCount;
+		}
+		int weight = 1 + rand() % 10; // Random weights between 1 and 10
+		g.addEdge(fromNode, toNode, weight);
+	}
+
+
+	g.Compress();
+	//*/
+
+	// Create a boost graph with the cost type
+	auto bg = HF::Pathfinding::CreateBoostGraph(g);
+
+	// Prepare the parents and children vectors
+	int nodeSize = bg.get()->p.size();
+	std::vector<int> start_points(nodeSize * nodeSize);
+	std::vector<int> end_points(nodeSize * nodeSize);
+
+	for (int i = 0; i < nodeSize; ++i) {
+		std::fill_n(start_points.begin() + i * nodeSize, nodeSize, i);
+		std::iota(end_points.begin() + i * nodeSize, end_points.begin() + (i + 1) * nodeSize, 0);
+	}
+
+	// Generate paths
+	// **********************************************************************
+	auto start = std::chrono::high_resolution_clock::now();
+
+	auto paths = HF::Pathfinding::FindPaths(bg.get(), start_points, end_points);
+
+	auto finish = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> elapsed = finish - start;
+	std::cout << "FindPaths Elapsed time: " << elapsed.count() << " seconds\n";
+	// **********************************************************************
+
+
+	std::vector<int> pathNodes;
+	std::vector<int> pathLengths;
+
+	// Collect all nodes and path lengths
+	for (const auto& p : paths) {
+		//std::cout << "Path Length: " << p.members.size() << std::endl;
+		for (const auto& pm : p.members) {
+			pathNodes.push_back(pm.node);
+			//std::cout << "Node ID: " << pm.node << std::endl;
+		}
+		//std::cout << "--------------------------" << std::endl;
+		pathLengths.push_back(p.members.size());
+	}
+
+	int out_total_paths = static_cast<int>(paths.size());
+	int out_total_nodes = static_cast<int>(pathNodes.size());
+
+	// Allocate memory for output arrays
+	int* out_path_nodes = new int[out_total_nodes];
+	int* out_path_lengths = new int[out_total_paths];
+
+	// Copy data to output arrays
+	std::copy(pathNodes.begin(), pathNodes.end(), out_path_nodes);
+	std::copy(pathLengths.begin(), pathLengths.end(), out_path_lengths);
+
+	/*
+
+	for (int i = 0; i < 10; i++) {
+		//for (int i = 0; i < pathNodes.size(); i++) {
+		std::cout << "Node ID: " << pathNodes[i] << std::endl;
+	}
+	std::cout << "         " << std::endl;
+	for (int i = 0; i < 10; i++) {
+		//for (int i = 0; i < pathLengths.size(); i++) {
+		std::cout << "Path Length: " << pathLengths[i] << std::endl;
+	}
+	*/
+
+	/*
+	for (int i = 0; i < out_total_nodes; i++) {
+		std::cout << "Node ID: " << out_path_nodes[i] << std::endl;
+	}
+	*/
+
+	// After you're done using the allocated memory, don't forget to delete it to prevent memory leaks
+	delete[] out_path_nodes;
+	delete[] out_path_lengths;
+
+
+	// **********************************************************************
+	// **********************************************************************
+	// **********************************************************************
+		// **********************************************************************
+	auto start_new = std::chrono::high_resolution_clock::now();
+	auto paths_new = HF::Pathfinding::FindAPSP(*bg.get());
+
+	auto finish_new = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> elapsed_new = finish_new - start_new;
+	std::cout << "FindAPSP Elapsed time: " << elapsed_new.count() << " seconds\n";
+	// **********************************************************************
+
+	std::vector<int> pathNodes_new;
+	std::vector<int> pathLengths_new;
+
+	for (const auto& p : paths_new) {
+		for (const auto& pn : p) {
+			pathNodes_new.push_back(pn);
+		}
+		pathLengths_new.push_back(p.size());
+	}
+
+	ASSERT_EQ(pathNodes.size(), pathNodes_new.size());
+
+	for (int i = 0; i < 10; i++) {
+		ASSERT_EQ(pathNodes[i], pathNodes_new[i]);
+		ASSERT_EQ(pathLengths[i], pathLengths_new[i]);
+	}
+
+
+	// **********************************************************************
+// **********************************************************************
+	// Total paths is node_count ^ 2
+	size_t path_count = nodeSize * nodeSize;// 	   	// Pointer to buffer of (Path *)
+
+	Path** out_paths = new Path * [path_count];
+	// out_paths[i...path_count - 1] will be alloc'ed by InsertPathsIntoArray
+
+	// Pointer to buffer of (PathMember *)
+	PathMember** out_path_member = new PathMember * [path_count];
+	// out_path_member[i...path_count - 1] points to out_paths[i...path_count - 1]->GetPMPointer();
+
+	// Pointer to buffer of (int)
+	int* sizes = new int[path_count];
+
+	// **********************************************************************
+	start_new = std::chrono::high_resolution_clock::now();
+	InsertAllToAllPathsIntoArray(bg.get(), out_paths, out_path_member, sizes);
+
+	finish_new = std::chrono::high_resolution_clock::now();
+	elapsed_new = finish_new - start_new;
+	std::cout << "InsertAllToAllPathsIntoArray Elapsed time: " << elapsed_new.count() << " seconds\n";
+	// **********************************************************************
+
+
+	//
+	// Resource cleanup
+	//
+	if (sizes) {
+		delete[] sizes;
+		sizes = nullptr;
+	}
+
+	if (out_path_member) {
+		delete[] out_path_member;
+		out_path_member = nullptr;
+	}
+
+	if (out_paths) {
+		for (int i = 0; i < path_count; i++) {
+			if (out_paths[i]) {
+				delete out_paths[i];
+				out_paths[i] = nullptr;
+			}
+		}
+		delete[] out_paths;
+	}
+
+}
+
+TEST(_pathFinding, C_CreateAllPredToPathParallel) {
+
+	// Create a Graph g, and compress it.
+	HF::SpatialStructures::Graph g;
+	/*
+	g.addEdge(0, 1, 1);
+	g.addEdge(0, 2, 2);
+	g.addEdge(1, 3, 3);
+	g.addEdge(2, 4, 1);
+	g.addEdge(3, 4, 5);
+	g.Compress();
+	*/
+
+	///*
+	// Example usage
+	int nodeCount = 100; // Total nodes
+	int edgeCount = 300; // Total edges to generate
+	srand(static_cast<unsigned>(time(NULL))); // Seed the random number generator
+	for (int i = 0; i < edgeCount; ++i) {
+		int fromNode = rand() % nodeCount;
+		int toNode = rand() % nodeCount;
+		while (toNode == fromNode) { // Avoid self-loops
+			toNode = rand() % nodeCount;
+		}
+		int weight = 1 + rand() % 10; // Random weights between 1 and 10
+		g.addEdge(fromNode, toNode, weight);
+	}
+	g.Compress();
+
+
+	auto bg = HF::Pathfinding::CreateBoostGraph(g);
+	auto paths = HF::Pathfinding::FindAPSP(*bg.get());
+	// **********************************************************************
+
+	std::vector<int> pathNodes;
+	std::vector<int> pathLengths;
+
+	for (const auto& p : paths) {
+		for (const auto& pn : p) {
+			pathNodes.push_back(pn);
+		}
+		pathLengths.push_back(p.size());
+	}
+
+	//int out_total_paths = static_cast<int>(paths.size());
+	//int out_total_nodes = static_cast<int>(pathNodes.size());
+
+	// Allocate memory for output arrays
+	//int* out_path_nodes = new int[out_total_nodes];
+	//int* out_path_lengths = new int[out_total_paths];
+
+	// Copy data to output arrays
+	//std::copy(pathNodes.begin(), pathNodes.end(), out_path_nodes);
+	//std::copy(pathLengths.begin(), pathLengths.end(), out_path_lengths);
+
+
+	for (int i = 0; i < 10; i++) {
+		//for (int i = 0; i < pathNodes.size(); i++) {
+		std::cout << "NEW Node ID: " << pathNodes[i] << std::endl;
+	}
+	std::cout << "         " << std::endl;
+	for (int i = 0; i < 10; i++) {
+		//for (int i = 0; i < pathLengths.size(); i++) {
+		std::cout << "NEW Path Length: " << pathLengths[i] << std::endl;
+	}
+
+
+	// After you're done using the allocated memory, don't forget to delete it to prevent memory leaks
+	//delete[] out_path_nodes;
+	//delete[] out_path_lengths;
+
+}
+
+
+
 TEST(_pathFinding, InsertAllToAllPathsIntoArray) {
 	HF::SpatialStructures::Graph g;
 
@@ -968,6 +1282,47 @@ namespace CInterfaceTests {
 		out_path_member = nullptr;
 		//! [snippet_pathfinder_C_DestroyPath]
 	}
+
+
+
+	// A utility function to add a bidirectional edge
+	void addBidirectionalEdge(HF::SpatialStructures::Graph& g, int u, int v, int weight) {
+		g.addEdge(u, v, weight);
+		g.addEdge(v, u, weight);
+	}
+
+	TEST(C_Pathfinder, CreateManyPathsPerformanceTest) {
+		HF::SpatialStructures::Graph g;
+
+		// Assume we're adding many more nodes and edges to significantly increase the graph size
+		const int NODE_COUNT = 3000; // Adjust this number based on the capability of your system
+		for (int i = 0; i < NODE_COUNT - 1; ++i) {
+			for (int j = i + 1; j < NODE_COUNT; ++j) {
+				addBidirectionalEdge(g, i, j, 1); // Adding a simple weight for the sake of example
+			}
+		}
+
+		g.Compress();
+
+		const size_t path_count = NODE_COUNT * NODE_COUNT;
+		std::vector<Path*> out_paths(path_count);
+		std::vector<PathMember*> out_path_member(path_count);
+		std::vector<int> sizes(path_count);
+
+		// Measure the time it takes to generate all paths
+		auto start = std::chrono::high_resolution_clock::now();
+		CreateAllToAllPaths(&g, "", out_paths.data(), out_path_member.data(), sizes.data(), path_count);
+		auto finish = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double> elapsed = finish - start;
+		std::cout << "Elapsed time: " << elapsed.count() << " seconds\n";
+
+		// Assuming DestroyPath is necessary to avoid memory leaks
+		for (auto& p : out_paths) {
+			DestroyPath(p);
+			p = nullptr;
+		}
+	}
+
 
 	TEST(C_Pathfinder, CreateAllToAllPaths) {
 		//! [snippet_pathfinder_C_CreateAllToAllPaths]

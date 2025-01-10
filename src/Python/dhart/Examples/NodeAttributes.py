@@ -135,10 +135,6 @@ node attribute on either the incoming or outgoing edge.
 
     # We can pick some node ids to define an edge, and query the cost of our custom attribute
     sample_cost = graph.GetEdgeCost(1, 2, edge_cost_name)
-
-    
-.. testcode::
-
     print(f'edge cost {sample_cost}')
 
     
