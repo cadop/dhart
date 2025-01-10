@@ -13,7 +13,7 @@ jobs:
         strategy:
           max-parallel: 0
           matrix:
-            python-version: [3.8]
+            python-version: ['3.10']
     
         steps:
         - uses: actions/checkout@v2
@@ -55,7 +55,8 @@ jobs:
         - name: pip Install
           run: |
             cd "build/Python"
-            pip install .
+            python -m pip install --upgrade pip
+            python -m pip install .
     
         - name: Build documentation with sphinx
           run: |
