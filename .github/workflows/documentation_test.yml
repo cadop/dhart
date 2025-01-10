@@ -9,11 +9,11 @@ on:
 jobs:
 
     sphinx:
-        runs-on: windows-2019
+        runs-on: windows-latest
         strategy:
           max-parallel: 0
           matrix:
-            python-version: ['3.8']
+            python-version: ['3.10']
     
         steps:
         - uses: actions/checkout@v2
@@ -28,7 +28,7 @@ jobs:
 
         - name: Configure cmake
           run: |
-            cmake -S src -B build -G "Visual Studio 16 2019" -A x64 `
+            cmake -S src -B build -G "Visual Studio 17 2022" -A x64 `
             -DDHARTAPI_Config=All `
             -DDHARTAPI_EnableTests=False `
             -DCMAKE_CONFIGURATION_TYPES=Release `
@@ -63,8 +63,8 @@ jobs:
           run: |
             cd "D:/a/dhart/dhart/build/Python"
             python -m pip install --upgrade pip
-            # python -m pip install -e .
-            pip install dhart
+            python -m pip install -e .
+            # pip install dhart
 
         - name: Check Python Install
           run: |
