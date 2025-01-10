@@ -528,8 +528,8 @@ def c_add_node_attributes(
         )
         
 
-    # # Error code should only be OK
-    # assert error_code == HF_STATUS.OK
+    # Error code should only be OK
+    assert error_code == HF_STATUS.OK
     return
 
 
