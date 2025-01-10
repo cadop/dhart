@@ -36,10 +36,13 @@ jobs:
     
         - name: Configure cmake
           run: |
-              cmake -S src -B build -G "Visual Studio 16 2019" -A x64 ^
-                -DCMAKE_INSTALL_PREFIX="build/Python" ^
-                -DDHARTAPI_EnablePython="True"
-                ...
+            cmake -S src -B build -G "Visual Studio 16 2019" -A x64 `
+            -DDHARTAPI_Config=All `
+            -DDHARTAPI_EnableTests=False `
+            -DCMAKE_CONFIGURATION_TYPES=Release `
+            -DDHARTAPI_EnablePython=True `
+            -DDHARTAPI_EnableCSharp=False `
+            -DINSTALL_GTEST=False
         
         - name: Build
           run: cmake --build build --config Release
