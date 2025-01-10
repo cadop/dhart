@@ -2075,6 +2075,56 @@ namespace GraphExampleTests {
 		}
 	}
 
+	TEST(_graph, AttributeValueMapsCheck)
+	{
+		Graph g;
+		g.addEdge(0, 1, 1); g.addEdge(0, 2, 1);	g.addEdge(1, 3, 1);	g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);	g.addEdge(3, 5, 1);	g.addEdge(3, 6, 1);	g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);	g.addEdge(5, 7, 1);	g.addEdge(5, 8, 1);	g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
+
+		vector<int> ids = { 0, 1, 2, 3, 4, 5, 6, 7, 8};
+		vector<std::string> float_test_attributes = { "float_test_attribute1", "float_test_attribute2", "float_test_attribute3", "float_test_attribute4", "float_test_attribute5"};
+		vector<std::string> string_test_attributes = { "string_test_attribute1", "string_test_attribute2", "string_test_attribute3", "string_test_attribute4", "string_test_attribute5"};
+		ASSERT_EQ(float_test_attributes.size(), string_test_attributes.size());
+		vector<vector<float>> float_scores = { { 0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0 },
+												{ 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0 } };
+		vector<vector<std::string>> string_scores = { { "0.0", "1.0", "2.0", "3.0", "4.0", "5.0", "6.0", "7.0", "8.0"},
+													{ "9.0", "10.0", "11.0", "12.0", "13.0", "14.0", "15.0", "16.0", "17.0"} };
+		for (int i = 0; i < float_test_attributes.size(); i++)
+		{
+			g.AddNodeAttributesFloat(ids, float_test_attributes[i], float_scores[i%2]);
+			g.AddNodeAttributes(ids, string_test_attributes[i], string_scores[i%2]);
+		}
+
+		for (int i = 0; i < float_test_attributes.size(); i++)
+		{
+			vector<float> float_attrs = g.GetNodeAttributesFloat(float_test_attributes[i]);
+			ASSERT_TRUE(float_attrs.size() == g.size());
+			for (int j = 0; j < g.size(); j++)
+			{
+				ASSERT_EQ(float_attrs[j], float_scores[i%2][j]);
+			}
+		}
+
+		for (int i = 0; i < string_test_attributes.size(); i++)
+		{
+			vector<std::string> string_attrs = g.GetNodeAttributes(string_test_attributes[i]);
+			ASSERT_TRUE(string_attrs.size() == g.size());
+			for (int j = 0; j < g.size(); j++)
+			{
+				ASSERT_EQ(string_attrs[j], string_scores[i%2][j]);
+			}
+		}
+
+		for (int i = 0; i < float_test_attributes.size(); i++)
+		{
+			vector<float> string_name_float_attrs = g.GetNodeAttributesFloat(string_test_attributes[i]);
+			vector<std::string> float_name_string_attrs = g.GetNodeAttributes(float_test_attributes[i]);
+			ASSERT_TRUE(string_name_float_attrs.size() == 0);
+			ASSERT_TRUE(float_name_string_attrs.size() == 0);
+		}
+	}
 	// Assert that clearing a score from the graph returns an empty array next time
 	// it's called, as the function should gaurantee.
 	TEST(_graph, ClearNodeAttributes) {

@@ -469,7 +469,7 @@ class Graph:
         return spatial_structures_native_functions.C_NumNodes(self.graph_ptr)
 
     def add_node_attributes(
-        self, attribute: str, ids: Union[int, List[int]], scores: Union[str, List[Any]],
+        self, attribute: str, ids: Union[int, List[int]], scores: Union[List[str], List[float]],
         ) -> None:
         """ Add attributes to one or more nodes
         
@@ -482,7 +482,7 @@ class Graph:
             1) IDs in ids must already belong to nodes in the graph
             2) The length of scores and ids must match
             3) All values in scores are of the same type
-            
+
         Raises:
             ValueError : the length of ids and scores did not match
         

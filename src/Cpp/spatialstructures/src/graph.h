@@ -1798,7 +1798,7 @@ namespace HF::SpatialStructures {
 		/// <param name="id">
 		/// The ID of the node that will receive attribute
 		/// </param>
-		/// <param name="attribute">
+		/// <param name="name">
 		/// The attribute that the node at ID will receive
 		/// </param>
 		/// <param name="score">
@@ -1810,7 +1810,7 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		void AddNodeAttribute(int id, const std::string & attribute, const std::string & score);
+		void AddNodeAttribute(int id, const std::string & name, const std::string & score);
 
 		/// <summary>
 		/// Add a float attribute to the node at id. If the node at id already has a score for the
@@ -1823,7 +1823,7 @@ namespace HF::SpatialStructures {
 		/// <param name="id">
 		/// The ID of the node that will receive attribute
 		/// </param>
-		/// <param name="attribute">
+		/// <param name="name">
 		/// The attribute that the node at ID will receive
 		/// </param>
 		/// <param name="score">
@@ -1835,7 +1835,7 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		void AddNodeAttributeFloat(int id, const std::string& attribute, const float score);
+		void AddNodeAttributeFloat(int id, const std::string& name, const float score);
 
 		/// <summary>
 		/// Add a string attribute to the node at id. If the node at id already has a score for the
@@ -1896,15 +1896,15 @@ namespace HF::SpatialStructures {
 		/// Get the score for the given attribute of every node in the graph. Nodes that do not have
 		/// a score for this attribute should return an empty string for this array.
 		/// </summary>
-		/// <param name="attribute">
+		/// <param name="name">
 		/// The attribute from which a container of scores will be obtained
 		/// </param>
 		/// <returns>
-		/// A container of score, each in the form of a std::string, obtained from attribute
+		/// A container of score, each in the form of a std::string, obtained from name
 		/// </returns>
 
 		/*!
-			\pre	`attribute` is a string attribute. That is, at least one string value has been added to this attribute.
+			\pre	`name` is a string attribute. That is, at least one string value has been added to this attribute.
 
 			\code
 				// be sure to #include "graph.h"
@@ -1940,20 +1940,20 @@ namespace HF::SpatialStructures {
 				std::vector<std::string> cross_slopes = graph.GetNodeAttributes(attribute); // {"2.3", "6.1", "4.0"}
 			\endcode
 		*/
-		std::vector<std::string> GetNodeAttributes(std::string attribute) const;
+		std::vector<std::string> GetNodeAttributes(std::string name) const;
 
 		/// <summary>
 		/// Get the score for the given attribute of every node in the graph. Nodes that do not have
 		/// a score for this attribute should return the default value 0.0 for this array.
 		/// </summary>
-		/// <param name="attribute">
+		/// <param name="name">
 		/// The attribute from which a container of scores will be obtained. 
 		/// </param>
 		/// <returns>
 		/// A container of score, each in the form of a float, obtained from attribute
 		/// </returns>
 		/*!
-			\pre	`attribute` is a float attribute. That is, only float values have been added to this attribute.
+			\pre	`name` is a float attribute. That is, only float values have been added to this attribute.
 
 			\code
 				// be sure to #include "graph.h"
@@ -1989,7 +1989,7 @@ namespace HF::SpatialStructures {
 				std::vector<float> cross_slopes = graph.GetNodeAttributesFloat(attribute); // {2.3, 6.1, 4.0}
 			\endcode
 		*/
-		std::vector<float> GetNodeAttributesFloat(std::string attribute) const;
+		std::vector<float> GetNodeAttributesFloat(std::string name) const;
 
 		/// <summary>
 		/// Get the score for the given attribute of the specified nodes. Nodes that do not have
@@ -1998,14 +1998,14 @@ namespace HF::SpatialStructures {
 		/// <param name="ids">
 		/// A list of node IDs to obtain scores for.
 		/// </param>
-		/// <param name="attribute">
+		/// <param name="name">
 		/// The attribute from which a container of scores will be obtained
 		/// </param>
 		/// <returns>
-		/// A container of score, each in the form of a std::string, obtained from attribute
+		/// A container of score, each in the form of a std::string, obtained from name
 		/// </returns>
 		/*!
-			\pre	`attribute` is a string attribute. That is, at least one string value has been added to this attribute.
+			\pre	`name` is a string attribute. That is, at least one string value has been added to this attribute.
 
 			\code
 				// be sure to #include "graph.h"
@@ -2041,7 +2041,7 @@ namespace HF::SpatialStructures {
 				std::vector<std::string> cross_slope_02 = graph.GetNodeAttributesByID({ID_0, ID_2}, attribute); // {"1.8", "5.7"}
 			\endcode
 		*/
-		std::vector<std::string> GetNodeAttributesByID(std::vector<int>& ids, std::string attribute) const;
+		std::vector<std::string> GetNodeAttributesByID(std::vector<int>& ids, std::string name) const;
 
 		/// <summary>
 		/// Get the score for the given attribute of the specified nodes. Nodes that do not have
@@ -2050,14 +2050,14 @@ namespace HF::SpatialStructures {
 		/// <param name="ids">
 		/// A list of node IDs to obtain scores for.
 		/// </param>
-		/// <param name="attribute">
+		/// <param name="name">
 		/// The attribute from which a container of scores will be obtained.
 		/// </param>
 		/// <returns>
-		/// A container of score, each in the form of a std::string, obtained from attribute
+		/// A container of score, each in the form of a std::string, obtained from name
 		/// </returns>
 		/*!
-			\pre	`attribute` is a float attribute. That is, only float values have been added to this attribute.
+			\pre	`name` is a float attribute. That is, only float values have been added to this attribute.
 
 			\code
 				// be sure to #include "graph.h"
@@ -2093,10 +2093,10 @@ namespace HF::SpatialStructures {
 				std::vector<float> cross_slope_02 = graph.GetNodeAttributesByIDFloat({ID_0, ID_2}, attribute); // {1.8, 5.7}
 			\endcode
 		*/
-		std::vector<float> GetNodeAttributesByIDFloat(std::vector<int>& ids, std::string attribute) const;
+		std::vector<float> GetNodeAttributesByIDFloat(std::vector<int>& ids, std::string name) const;
 
 		/*! \brief Check if this attribute exists in the graph and contains float values*/
-		bool IsFloatAttribute(const std::string& key) const;
+		bool IsFloatAttribute(const std::string& name) const;
 
 		/// <summary>
 		/// Clears the attribute at name and all of its contents from the internal hashmap
