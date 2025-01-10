@@ -10,7 +10,6 @@ jobs:
 
     sphinx:
         runs-on: windows-2022
-        needs: doxygen
         strategy:
           max-parallel: 0
           matrix:
@@ -82,9 +81,9 @@ jobs:
             cd "build/Python"
             ls
             pytest --doctest-modules --ignore-glob="*/Rhino*.py"
-            
-  doxygen:
 
+
+  doxygen:
     runs-on: windows-2019
     strategy:
       max-parallel: 0
