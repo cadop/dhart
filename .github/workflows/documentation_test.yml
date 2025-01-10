@@ -42,7 +42,8 @@ jobs:
             -DCMAKE_CONFIGURATION_TYPES=Release `
             -DDHARTAPI_EnablePython=True `
             -DDHARTAPI_EnableCSharp=False `
-            -DINSTALL_GTEST=False
+            -DINSTALL_GTEST=False `
+            -DCMAKE_INSTALL_PREFIX="D:/a/dhart/dhart/build/Python"
         
         - name: Build
           run: cmake --build build --config Release
