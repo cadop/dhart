@@ -25,15 +25,7 @@ jobs:
           with: # for github push action
             #persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
             fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
-        - name: Install dependencies
-          run: |
-            python -m pip install --upgrade pip
-            pip install flake8 pytest
-    
-        - name: Install documentation dependencies
-          run: |
-            pip install sphinx numpydoc matplotlib         
-    
+
         - name: Configure cmake
           run: |
             cmake -S src -B build -G "Visual Studio 16 2019" -A x64 `
@@ -51,11 +43,37 @@ jobs:
         - name: Install
           run: cmake --install build --config Release
         
+        - name: Check Install Location
+          run: |
+            cd "D:/a/dhart/dhart/build/Python"
+            ls
+            cd bin
+            ls
+            cd ..
+            cd dhart
+            ls
+            cd bin
+            ls
+
+        - name: Check Python Install
+          run: |
+            python -c "from dhart.spatialstructures import Graph"
+            python -c "import platform; print(platform.architecture())"
+            python -c "import dhart; print(dhart.__file__)"
+
         - name: pip install
           run: |
             cd build/Python
             python -m pip install --upgrade pip
             python -m pip install .
+
+        - name: Install dependencies
+          run: |
+            python -m pip install flake8 pytest
+      
+        - name: Install documentation dependencies
+          run: |
+            python -m pip install sphinx numpydoc matplotlib         
 
         - name: Check installed package
           run: |
