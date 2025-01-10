@@ -13,7 +13,7 @@ jobs:
         strategy:
           max-parallel: 0
           matrix:
-            python-version: ['3.7']
+            python-version: ['3.8']
     
         steps:
         - uses: actions/checkout@v2
@@ -63,7 +63,8 @@ jobs:
           run: |
             cd "D:/a/dhart/dhart/build/Python"
             python -m pip install --upgrade pip
-            python -m pip install -e .
+            # python -m pip install -e .
+            pip install dhart
 
         - name: Check Python Install
           run: |
