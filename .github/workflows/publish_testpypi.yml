@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-    sphinx:
+    testpypi:
         runs-on: windows-latest
         strategy:
           max-parallel: 0
@@ -65,11 +65,11 @@ jobs:
             python -m pip install --upgrade pip
             python -m pip install setuptools wheel twine
             python -m pip install numpy matplotlib scipy
-            python build
                 
         # Step 4: Build the package
         - name: Build the package
           run: |
+            cd "D:/a/dhart/dhart/build/Python"
             python setup.py sdist bdist_wheel
 
         # Step 5: Publish to Test PyPI
