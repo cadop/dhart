@@ -34,27 +34,22 @@ jobs:
           run: |
             pip install sphinx numpydoc matplotlib         
     
-        - name: Setup cmake
+        - name: Configure cmake
           run: |
-            ls 
-            cd src
-            cmake ./src/  -G"Visual Studio 16 2019"  -DCMAKE_GENERATOR_PLATFORM="x64"   -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DDHARTAPI_Config="All" -DDHARTAPI_EnableTests="False" -DCMAKE_CONFIGURATION_TYPES="Release" -DDHARTAPI_EnablePython="True" -DDHARTAPI_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1
-    
-        - name: cmake build
+              cmake -S src -B build -G "Visual Studio 16 2019" -A x64 ^
+                -DCMAKE_INSTALL_PREFIX="build/Python" ^
+                -DDHARTAPI_EnablePython="True"
+                ...
+        
+        - name: Build
+          run: cmake --build build --config Release
+        
+        - name: Install
+          run: cmake --install build --config Release
+        
+        - name: pip install
           run: |
-            ls
-            cd src
-            cmake --build . --config Release
-    
-        - name: cmake Install
-          run: |
-            ls
-            cd src
-            cmake --install .
-    
-        - name: pip Install
-          run: |
-            cd "build/Python"
+            cd build/Python
             python -m pip install --upgrade pip
             python -m pip install .
 
