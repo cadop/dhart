@@ -292,6 +292,8 @@ def DijkstraFindAllShortestPaths(
     >>> 
     >>> # Get APSP
     >>> SP = DijkstraFindAllShortestPaths(g)
+    >>> # Convert to a dtype object for easier manipulation
+    >>> SP = np.array(SP, dtype=object)
     >>> 
     >>> # Reshape APSP result to nxn of graph size
     >>> apsp_mat = np.reshape(SP, (g_size,g_size))
@@ -477,4 +479,3 @@ def get_path_from_csr(csr, node1, node2):
     start_idx = csr.indptr[node_idx]
     end_idx = csr.indptr[node_idx + 1]
     return csr.indices[start_idx:end_idx]
-
