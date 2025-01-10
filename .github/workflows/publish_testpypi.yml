@@ -70,7 +70,8 @@ jobs:
         - name: Build the package
           run: |
             cd "D:/a/dhart/dhart/build/Python"
-            python setup.py sdist bdist_wheel
+            python -m build
+            # python setup.py sdist bdist_wheel
 
         # Step 5: Publish to Test PyPI
         - name: Publish to Test PyPI
