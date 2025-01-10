@@ -408,36 +408,41 @@ def c_get_node_attributes(
     # Define variables to meet preconditions
     attr_ptr = GetStringPtr(attr)
 
+    # Native function for determining if the data stored for attribute
+    # is float or string type
     is_float = HFPython.IsFloatAttribute(graph_ptr, attr_ptr)
     if is_float:
         out_score_type = c_float * num_nodes
     else:
         out_score_type = c_char_p * num_nodes
 
+    # Define other variables
     out_scores = out_score_type()
     out_scores_size = c_int(0)
 
-    # Call into the function in C++. This will update
-    # out_scores and out_scores_size
+    # Convert array to C array if non-null, otherwise leave alone.
+    # Null check is handled by C interface function
     if ids is not None:
-        # convert array to C array if non-null, otherwise leave alone.
-        # null check is handled by C interface function
         id_arr = ConvertIntsToArray(ids)
         num_ids = len(ids)
         if is_float:
+            # float and ids => get float values by ID
             error_code = HFPython.GetNodeAttributesByIDFloat(
                 graph_ptr, id_arr, attr_ptr, num_ids, byref(out_scores), byref(out_scores_size)
             )
         else:
+            # not float and ids => get string values by ID
             error_code = HFPython.GetNodeAttributesByID(
                 graph_ptr, id_arr, attr_ptr, num_ids, byref(out_scores), byref(out_scores_size)
             )
     else:
         if is_float:
+            # float and not ids => get all float values
             error_code = HFPython.GetNodeAttributesFloat(
                 graph_ptr, attr_ptr, byref(out_scores), byref(out_scores_size)
             )
         else:
+            # not float and not ids => get all string values
             error_code = HFPython.GetNodeAttributes(
                 graph_ptr, attr_ptr, byref(out_scores), byref(out_scores_size)
             )
@@ -462,6 +467,7 @@ def c_get_node_attributes(
         out_vals.append(score)
 
     # Deallocate the memory of the strings in C++
+    # Only required if the values were strings
     if not is_float:
         HFPython.DeleteScoreArray(out_scores, out_scores_size)
 
@@ -483,29 +489,22 @@ def c_add_node_attributes(
         to the id in ids at the same index.
 
     """
+    # Possible input types for scores
+    # May need to add more valid types
     float_types = (int, float, complex, float32, float64, int32, int64)
     string_types = (str, str_)
     # Convert to CTypes
     id_arr = ConvertIntsToArray(ids)
     attribute_ptr = GetStringPtr(attr)
     num_nodes = c_int(len(ids))
-
-    def list_is_float_or_str(lis : List[any]):
-        all_float = True
-        all_str = True
-        for elem in lis:
-            if type(elem) not in float_types:
-                all_float = False
-            if type(elem) not in string_types:
-                all_str = False
-        return all_float, all_str
     
+    # Will be used to check if the array is valid
+    # and can be stored as a float
     is_float_iterable = False
+    # Determine whether this is a normal Python list with lists/floats
     if isinstance(scores, List):
-        all_float, all_str = list_is_float_or_str(scores)
-        if not (all_float ^ all_str):
-            return 
-        is_float_iterable = all_float
+        is_float_iterable = type(scores[0]) in float_types
+    # Or a numpy array with any correct dtype
     elif isinstance(scores, ndarray):
         if scores.dtype in float_types:
             is_float_iterable = True
@@ -514,6 +513,7 @@ def c_add_node_attributes(
         else:
             return
 
+    # Convert array based on type, and call native function
     if is_float_iterable:
         score_arr = ConvertFloatsToArray(scores)
         # Call native function
@@ -530,7 +530,6 @@ def c_add_node_attributes(
 
     # # Error code should only be OK
     # assert error_code == HF_STATUS.OK
-
     return
 
 

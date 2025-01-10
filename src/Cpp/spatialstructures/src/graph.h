@@ -1807,7 +1807,7 @@ namespace HF::SpatialStructures {
 
 		/*!
 			\code
-				TODO: add code example
+				// TODO example
 			\endcode
 		*/
 		void AddNodeAttribute(int id, const std::string & attribute, const std::string & score);
@@ -1832,7 +1832,7 @@ namespace HF::SpatialStructures {
 
 		/*!
 			\code
-				TODO: add code example
+				// TODO example
 			\endcode
 		*/
 		void AddNodeAttributeFloat(int id, const std::string& attribute, const float score);
@@ -1859,7 +1859,7 @@ namespace HF::SpatialStructures {
 			\pre The length of ids, and the length of scores must be equal 
 			\throws std::logic_error The length of scores and the length of ID do not match.
 			\code
-				TODO: add code example
+				// TODO example
 			\endcode
 		*/
 		void AddNodeAttributes(const std::vector<int> & id, const std::string &  name, const std::vector<std::string> & scores);
@@ -1887,7 +1887,7 @@ namespace HF::SpatialStructures {
 			\throws std::logic_error The length of scores and the length of ID do not match
 
 			\code
-				TODO: add code example
+				// TODO example
 			\endcode
 		*/
 		void AddNodeAttributesFloat(const std::vector<int>& id, const std::string& name, const std::vector<float>& scores);
