@@ -1875,7 +1875,47 @@ namespace GraphExampleTests {
 
 		auto attrs = g.GetNodeAttributes("cross slope");
 		ASSERT_TRUE(attrs.size() == g.size());
-}
+
+		// Create a new float attribute that will eventually be turned into a string attribute
+		g.AddNodeAttributeFloat(0, "float_to_string_attribute", 5.1);
+		auto pre_string_add_float_attr = g.GetNodeAttributesFloat("float_to_string_attribute");
+		ASSERT_TRUE(pre_string_add_float_attr.size() == g.size());
+
+		// Add a string as a value to a float attribute, 
+		// which should convert the entire attribute to a string attribute
+		g.AddNodeAttribute(0, "float_to_string_attribute", "1.5");
+		auto string_attrs = g.GetNodeAttributes("float_to_string_attribute");
+		ASSERT_TRUE(string_attrs.size() == g.size());
+
+		// Check that the attribute is no longer a float attribute
+		auto post_string_add_float_attr = g.GetNodeAttributesFloat("float_to_string_attribute");
+		ASSERT_TRUE(post_string_add_float_attr.size() == 0);
+	}
+
+	TEST(_graph, AddNodeAttributeFloat)
+	{
+		Graph g;
+		g.addEdge(0, 1, 1);	g.addEdge(0, 2, 1);	g.addEdge(1, 3, 1);	g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);	g.addEdge(3, 5, 1);	g.addEdge(3, 6, 1);	g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);	g.addEdge(5, 7, 1);	g.addEdge(5, 8, 1);	g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
+
+		const string& attr = "test attribute";
+		// Add floats for test attribute
+		g.AddNodeAttributeFloat(0, attr, 5.1);
+		g.AddNodeAttributeFloat(1, attr, 24.1);
+		g.AddNodeAttributeFloat(2, attr, 9);
+		g.AddNodeAttributeFloat(3, attr, 7.1);
+
+		// Check that test attribute is a float attribute with all nodes...
+		auto float_attrs = g.GetNodeAttributesFloat(attr);
+		ASSERT_TRUE(float_attrs.size() == g.size());
+
+		// And not a string attribute
+		auto string_attrs = g.GetNodeAttributes(attr);
+		ASSERT_TRUE(string_attrs.size() == 0);
+
+	}
 
 	// This just tests that attributes can be added. See GetNodeAttributes
 	// For a test of correctness
@@ -1889,11 +1929,36 @@ namespace GraphExampleTests {
 		std::vector<int> ids{ 1, 3, 5, 7 };
 		std::string attr_type = "cross slope";
 		std::vector<std::string> scores{ "1.4", "2.0", "2.8", "4.0" };
-
+		
 		g.AddNodeAttributes(ids, attr_type, scores);
 
 		auto attrs = g.GetNodeAttributes(attr_type);
 		ASSERT_TRUE(attrs.size() == g.size());
+	}
+
+	TEST(_graph, AddNodeAttributesFloat)
+	{
+		Graph g;
+		g.addEdge(0, 1, 1);	g.addEdge(0, 2, 1);	g.addEdge(1, 3, 1);	g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);	g.addEdge(3, 5, 1);	g.addEdge(3, 6, 1);	g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);	g.addEdge(5, 7, 1);	g.addEdge(5, 8, 1);	g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
+
+		std::vector<int> ids{ 1, 3, 5, 7 };
+		std::string attr_type = "test attribute";
+		std::vector<float> scores{ 1.4, 2.0, 2.8, 4.0 };
+
+		g.AddNodeAttributesFloat(ids, attr_type, scores);
+
+		// Check that all values were added to the float map
+		auto float_attrs = g.GetNodeAttributesFloat(attr_type);
+		ASSERT_TRUE(float_attrs.size() == g.size());
+
+		// And not a string map
+		auto string_attrs = g.GetNodeAttributes(attr_type);
+		ASSERT_TRUE(string_attrs.size() == 0);
+
+
 	}
 
 	// If this fails then the values of the returned attributes don't match the input
@@ -1951,6 +2016,62 @@ namespace GraphExampleTests {
 		for (int i = 0; i < expected_scores_size; i++)
 		{
 			ASSERT_EQ(attrs[i], expected_scores[i]);
+		}
+	}
+
+	TEST(_graph, GetNodeAttributesFloat)
+	{
+		Graph g;
+		g.addEdge(0, 1, 1); g.addEdge(0, 2, 1);	g.addEdge(1, 3, 1);	g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);	g.addEdge(3, 5, 1);	g.addEdge(3, 6, 1);	g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);	g.addEdge(5, 7, 1);	g.addEdge(5, 8, 1);	g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
+
+		vector<int> ids = { 0, 3, 4, 8 };
+		std::string testattribute = "testattribute";
+		g.AddNodeAttributeFloat(0, testattribute, 5.1);
+		g.AddNodeAttributeFloat(3, testattribute, 7.1);
+		g.AddNodeAttributeFloat(4, testattribute, 2.3);
+		g.AddNodeAttributeFloat(8, testattribute, 1.0);
+
+		auto float_attrs = g.GetNodeAttributesFloat(testattribute);
+		vector<float> expected_scores = { 5.1, 0.0, 0.0, 7.1, 2.3, 0, 0, 0, 1.0 };
+		int expected_scores_size = expected_scores.size();
+		ASSERT_EQ(float_attrs.size(), expected_scores_size);
+
+		for (int i = 0; i < expected_scores_size; i++)
+		{
+			ASSERT_EQ(float_attrs[i], expected_scores[i]);
+		}
+
+	}
+
+	TEST(_graph, GetNodeAttributesByIDFloat)
+	{
+		Graph g;
+		g.addEdge(0, 1, 1); g.addEdge(0, 2, 1);	g.addEdge(1, 3, 1);	g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);	g.addEdge(3, 5, 1);	g.addEdge(3, 6, 1);	g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);	g.addEdge(5, 7, 1);	g.addEdge(5, 8, 1);	g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
+
+		vector<int> ids = { 0, 3, 4, 8 };
+		std::string testattribute = "testattribute";
+		g.AddNodeAttributeFloat(0, testattribute, 5.1);
+		g.AddNodeAttributeFloat(3, testattribute, 7.1);
+		g.AddNodeAttributeFloat(4, testattribute, 2.3);
+		g.AddNodeAttributeFloat(8, testattribute, 1.0);
+
+		vector<int> subset_ids = { 0, 4 };
+		auto float_attrs = g.GetNodeAttributesByIDFloat(subset_ids, testattribute);
+
+		vector<float> expected_scores = { 5.1, 2.3 };
+		int expected_scores_size = expected_scores.size();
+
+		ASSERT_EQ(float_attrs.size(), expected_scores_size);
+
+		for (int i = 0; i < expected_scores_size; i++)
+		{
+			ASSERT_EQ(float_attrs[i], expected_scores[i]);
 		}
 	}
 
@@ -2026,6 +2147,29 @@ namespace CInterfaceTests {
 
 		// Assert that atleast that many attributes were added
 		ASSERT_TRUE(g.GetNodeAttributes(attr_type).size() == g.size());
+		// Assert that no float attribute was created
+		ASSERT_TRUE(g.GetNodeAttributesFloat(attr_type).size() == 0);
+	}
+
+	TEST(_graphCInterface, AddNodeAttributesFloat)
+	{
+		// Create a graph
+		Graph g;
+		g.addEdge(0, 1, 1);	g.addEdge(0, 2, 1);	g.addEdge(1, 3, 1);	g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);	g.addEdge(3, 5, 1);	g.addEdge(3, 6, 1);	g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);	g.addEdge(5, 7, 1);	g.addEdge(5, 8, 1);	g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
+
+		// Add node attrbutes
+		std::vector<int> ids{ 1, 3, 5, 7 };
+		std::string attr_type = "testattribute";
+		const float scores[4] = { 1.4, 2.0, 2.8, 4.0 };
+		AddNodeAttributesFloat(&g, ids.data(), attr_type.c_str(), scores, ids.size());
+
+		// Assert that atleast that many attributes were added
+		ASSERT_TRUE(g.GetNodeAttributesFloat(attr_type).size() == g.size());
+		// Assert that no string attribute was created
+		ASSERT_TRUE(g.GetNodeAttributes(attr_type).size() == 0);
 	}
 
 	// Verify that the contents of GetNodeAttributes matches the input to AddNodeAttributes
@@ -2098,6 +2242,53 @@ namespace CInterfaceTests {
 
 	}
 
+	TEST(_graphCInterface, GetNodeAttributesFloat)
+	{
+		Graph g;
+		g.addEdge(0, 1, 1); g.addEdge(0, 2, 1); g.addEdge(1, 3, 1); g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1); g.addEdge(3, 5, 1); g.addEdge(3, 6, 1); g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1); g.addEdge(5, 7, 1); g.addEdge(5, 8, 1); g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
+
+		std::vector<int> ids{ 1, 3, 5, 7 };
+		std::string attr_type = "testattribute";
+		const float scores[4] = { 1.4, 2.0, 2.8, 4.0 };
+
+		AddNodeAttributesFloat(&g, ids.data(), attr_type.c_str(), scores, ids.size());
+
+		float* scores_out = new float[g.size()];
+		int scores_out_size = 0;
+
+		GetNodeAttributesFloat(&g, attr_type.c_str(), scores_out, &scores_out_size);
+		ASSERT_EQ(scores_out_size, g.size());
+
+		for (int i = 0; i < scores_out_size; i++)
+		{
+			// Convert score at this index to a float.
+			float score = scores_out[i];
+
+			// If it's in our input array, ensure that the score at this value
+			// matches the one we passed
+			auto itr = std::find(ids.begin(), ids.end(), i);
+			if (itr != ids.end())
+			{
+				// Get the index of the id in the scores array so we
+				// can compare use it to get our input score at that
+				// index as well.
+				int index = std::distance(ids.begin(), itr);
+
+
+				// Failures at either this or the assert below it could indicate
+				// problems in AddNodeAttributes as well 
+				ASSERT_EQ(scores[index], score);
+			}
+			else
+				ASSERT_EQ(0.0, score);
+
+		}
+		
+		delete[] scores_out;
+	}
 	TEST(_graphCInterface, GetNodeAttributesByID) {
 		// Create a graph and add edges
 		Graph g;
@@ -2139,6 +2330,38 @@ namespace CInterfaceTests {
 		// deallocate scores_out since we're the ones who allocated that with new. 
 		DeleteScoreArray(scores_out, scores_out_size);
 		delete[] scores_out;
+	}
+
+	TEST(_graphCInterface, GetNodeAttributesByIDFloat)
+	{
+		// Create a graph and add edges
+		Graph g;
+		g.addEdge(0, 1, 1); g.addEdge(0, 2, 1); g.addEdge(1, 3, 1); g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1); g.addEdge(3, 5, 1); g.addEdge(3, 6, 1); g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1); g.addEdge(5, 7, 1); g.addEdge(5, 8, 1); g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
+
+		// Create a vector of node IDs and their corresponding values for our attribute
+		std::vector<int> ids = { 1, 2, 5, 7, 8 };
+		std::string attr = "testattribute";
+		const float scores[5] = { 1.0, 2.0, 3.0, 4.0, 5.0 };
+		AddNodeAttributesFloat(&g, ids.data(), attr.c_str(), scores, ids.size());
+
+		std::vector<int> subset_ids = { 1, 5, 7 };
+		std::vector<float> expected_scores_out = { 1.0, 3.0, 4.0 };
+		int expected_scores_out_size = 3;
+		float* scores_out = new float[5];
+		int scores_out_size = 0;
+
+		GetNodeAttributesByIDFloat(&g, subset_ids.data(), attr.c_str(), subset_ids.size(), scores_out, &scores_out_size);
+
+		ASSERT_EQ(scores_out_size, expected_scores_out_size);
+
+		for (int i = 0; i < scores_out_size; i++)
+		{
+			ASSERT_EQ(scores_out[i], expected_scores_out[i]);
+		}
+
 	}
 	// Verify that deallocating the scores array doesn't corrupt the heap. 
 	// The other test cases cover things like Adding and getting node attributes.

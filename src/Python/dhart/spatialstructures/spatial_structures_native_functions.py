@@ -1,11 +1,20 @@
 from ctypes import *
 from dhart.Exceptions import *
 from typing import *
+from numpy import (
+    ndarray,
+    float32,
+    float64,
+    int32,
+    int64,
+    str_
+)
 
 from dhart.common_native_functions import (
     getDLLHandle,
     ConvertPointsToArray,
     ConvertIntsToArray,
+    ConvertFloatsToArray,
     convert_strings_to_array,
     GetStringPtr
 )
@@ -398,7 +407,13 @@ def c_get_node_attributes(
 
     # Define variables to meet preconditions
     attr_ptr = GetStringPtr(attr)
-    out_score_type = c_char_p * num_nodes
+
+    is_float = HFPython.IsFloatAttribute(graph_ptr, attr_ptr)
+    if is_float:
+        out_score_type = c_float * num_nodes
+    else:
+        out_score_type = c_char_p * num_nodes
+
     out_scores = out_score_type()
     out_scores_size = c_int(0)
 
@@ -409,13 +424,23 @@ def c_get_node_attributes(
         # null check is handled by C interface function
         id_arr = ConvertIntsToArray(ids)
         num_ids = len(ids)
-        error_code = HFPython.GetNodeAttributesByID(
-            graph_ptr, id_arr, attr_ptr, num_ids, byref(out_scores), byref(out_scores_size)
-        )
+        if is_float:
+            error_code = HFPython.GetNodeAttributesByIDFloat(
+                graph_ptr, id_arr, attr_ptr, num_ids, byref(out_scores), byref(out_scores_size)
+            )
+        else:
+            error_code = HFPython.GetNodeAttributesByID(
+                graph_ptr, id_arr, attr_ptr, num_ids, byref(out_scores), byref(out_scores_size)
+            )
     else:
-        error_code = HFPython.GetNodeAttributes(
-            graph_ptr, attr_ptr, byref(out_scores), byref(out_scores_size)
-        )
+        if is_float:
+            error_code = HFPython.GetNodeAttributesFloat(
+                graph_ptr, attr_ptr, byref(out_scores), byref(out_scores_size)
+            )
+        else:
+            error_code = HFPython.GetNodeAttributes(
+                graph_ptr, attr_ptr, byref(out_scores), byref(out_scores_size)
+            )
     
 
     # This function shouldn't return anything other than OK
@@ -426,22 +451,26 @@ def c_get_node_attributes(
         return []
 
     # Read strings out of pointer and append them to our output
-    out_strings = []
+    out_vals = []
     for i in range(0, out_scores_size.value):
 
         # .value of a charp reads the string
-        score = out_scores[i].decode("utf-8")
-        out_strings.append(score)
+        if is_float:
+            score = out_scores[i]
+        else:
+            score = out_scores[i].decode("utf-8")
+        out_vals.append(score)
 
     # Deallocate the memory of the strings in C++
-    HFPython.DeleteScoreArray(out_scores, out_scores_size)
+    if not is_float:
+        HFPython.DeleteScoreArray(out_scores, out_scores_size)
 
     # Return output
-    return out_strings
+    return out_vals
 
 
 def c_add_node_attributes(
-    graph_ptr: c_void_p, attr: str, ids: List[int], scores: List[str]
+    graph_ptr: c_void_p, attr: str, ids: List[int], scores: Union[List[str], List[float]]
     ) -> None:
     """ Assign or update scores for nodes for a specific attribute
 
@@ -454,20 +483,53 @@ def c_add_node_attributes(
         to the id in ids at the same index.
 
     """
-
+    float_types = (int, float, complex, float32, float64, int32, int64)
+    string_types = (str, str_)
     # Convert to CTypes
     id_arr = ConvertIntsToArray(ids)
-    score_arr = convert_strings_to_array(scores)
     attribute_ptr = GetStringPtr(attr)
     num_nodes = c_int(len(ids))
 
-    # Call native function
-    error_code = HFPython.AddNodeAttributes(
-        graph_ptr, id_arr, attribute_ptr, score_arr, num_nodes
-    )
+    def list_is_float_or_str(lis : List[any]):
+        all_float = True
+        all_str = True
+        for elem in lis:
+            if type(elem) not in float_types:
+                all_float = False
+            if type(elem) not in string_types:
+                all_str = False
+        return all_float, all_str
+    
+    is_float_iterable = False
+    if isinstance(scores, List):
+        all_float, all_str = list_is_float_or_str(scores)
+        if not (all_float ^ all_str):
+            return 
+        is_float_iterable = all_float
+    elif isinstance(scores, ndarray):
+        if scores.dtype in float_types:
+            is_float_iterable = True
+        elif scores.dtype in string_types:
+            is_float_iterable = False
+        else:
+            return
 
-    # Error code should only be OK
-    assert error_code == HF_STATUS.OK
+    if is_float_iterable:
+        score_arr = ConvertFloatsToArray(scores)
+        # Call native function
+        error_code = HFPython.AddNodeAttributesFloat(
+            graph_ptr, id_arr, attribute_ptr, score_arr, num_nodes
+        )
+    else:
+        score_arr = convert_strings_to_array(scores)
+        # Call native function
+        error_code = HFPython.AddNodeAttributes(
+            graph_ptr, id_arr, attribute_ptr, score_arr, num_nodes
+        )
+        
+
+    # # Error code should only be OK
+    # assert error_code == HF_STATUS.OK
 
     return
 

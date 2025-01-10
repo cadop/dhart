@@ -756,6 +756,8 @@ C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g);
 	\see \ref graph_setup (how to create a graph)
 	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
 	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \link GetNodeAttributes \endlink (how to get string node attributes)
+	\see \link GetNodeAttributesByID \endlink (how to get string node attributes by node ID)
 	\see \ref graph_compress (how to compress a graph after adding/removing edges)
 	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
 	\see \ref graph_teardown (how to destroy a graph)
@@ -781,6 +783,56 @@ C_INTERFACE AddNodeAttributes(
 );
 
 /*!
+	\brief	Add a new float node attribute in the graph for the nodes at ids.
+
+	\param		g			Graph to add attributes to
+	\param		ids			IDs of nodes to add attributes to
+	\param		attribute	The name of the attribute to add the scores to.
+
+	\param		scores		An ordered array of floats
+							that correspond to the score of the ID in ids at the same index.
+
+	\param		num_nodes	Length of both the ids and scores arrays
+
+	\returns	\link HF_STATUS::OK \endlink on completion.
+				 Note that this does not guarantee that some
+				or all of the node attributes have been added
+
+	\details
+	For any id in ids, if said ID doesn't already exist in the graph, then it and its cost will
+	silently be ignored without error.
+
+	\pre	ids and scores arrays must be the same length
+
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \link GetNodeAttributesFloat \endlink (how to get float node attributes)
+	\see \link GetNodeAttributesByIDFloat \endlink (how to get float node attributes by node ID)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
+	\see \ref graph_teardown (how to destroy a graph)
+
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+
+	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
+
+	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_AddNodeAttributesFloat
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
+*/
+C_INTERFACE AddNodeAttributesFloat(
+	HF::SpatialStructures::Graph* g,
+	const int* ids,
+	const char* attribute,
+	const float* scores,
+	int num_nodes
+);
+/*!
 	\brief		Retrieve node attribute values from *g
 
 	\param		g			The graph that will be used to retrieve 
@@ -790,6 +842,8 @@ C_INTERFACE AddNodeAttributes(
 	\param		out_scores		Pointer to array of (char *), allocated by the caller
 	\param		out_score_size	Keeps track of the size of out_scores buffer, 
 								updated as required
+
+	\pre		`attribute` is a string attribute. That is, at least one string value has been added to this attribute.
 
 	\returns	\link HF_STATUS::OK \endlink on completion.
 
@@ -802,8 +856,8 @@ C_INTERFACE AddNodeAttributes(
 	\see \ref graph_setup (how to create a graph)
 	\see \ref graph_compress (how to compress a graph after adding/removing edges)
 	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
-	\see \link AddNodeAttributes \endlink (how to add node attributes)
-	\see \link GetNodeAttributesByID \endlink (how to get node attributes by node ID)
+	\see \link AddNodeAttributes \endlink (how to add string node attributes)
+	\see \link GetNodeAttributesByID \endlink (how to get string node attributes by node ID)
 	\see \ref graph_teardown (how to destroy a graph)
 
 	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
@@ -835,6 +889,7 @@ C_INTERFACE GetNodeAttributes(
 
 	\pre		All node IDs in `ids` must exist in graph `g`.
 	\pre		If `ids` is not NULL, `num_nodes` must be equal to the length of `ids`.
+	\pre		`attribute` is a string attribute. That is, at least one string value has been added to this attribute.
 	\returns	\link HF_STATUS::OK \endlink on completion.
 
 	\details	For the ID at `ids[i]`, `out_scores[i]` is the value of the attribute for the
@@ -852,8 +907,8 @@ C_INTERFACE GetNodeAttributes(
 	\see \ref graph_setup (how to create a graph)
 	\see \ref graph_compress (how to compress a graph after adding/removing edges)
 	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
-	\see \link AddNodeAttributes \endlink (how to add node attributes)
-	\see \link GetNodeAttributes \endlink (how to get node attributes)
+	\see \link AddNodeAttributes \endlink (how to add string node attributes)
+	\see \link GetNodeAttributes \endlink (how to get string node attributes)
 	\see \ref graph_teardown (how to destroy a graph)
 
 	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
@@ -870,6 +925,106 @@ C_INTERFACE GetNodeAttributesByID(
 	int num_nodes,
 	char** out_scores,
 	int* out_score_size
+);
+/*!
+	\brief		Retrieve float node attribute values from *g
+
+	\param		g			The graph that will be used to retrieve
+							node attribute values from
+
+	\param		attribute		The node attribute type to retrieve from *g
+	\param		out_scores		Pointer to array of float, allocated by the caller
+	\param		out_score_size	Keeps track of the size of out_scores buffer,
+								updated as required
+
+	\pre		`attribute` is a float attribute. That is, only float values have been added to this attribute.
+
+	\returns	\link HF_STATUS::OK \endlink on completion.
+
+	\details	The caller must deallocate the memory addressed by out_scores.
+
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
+	\see \link AddNodeAttributesFloat \endlink (how to add float node attributes)
+	\see \link GetNodeAttributesByIDFloat \endlink (how to get float node attributes by node ID)
+	\see \ref graph_teardown (how to destroy a graph)
+
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetNodeAttributesFloat
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
+*/
+C_INTERFACE GetNodeAttributesFloat(
+	const HF::SpatialStructures::Graph* g,
+	const char* attribute,
+	float* out_scores,
+	int* out_score_size
+);
+
+/*!
+	\brief		Retrieve float node attribute values from *g
+
+	\param		g				The graph that will be used to retrieve
+								node attribute values from
+	\param		ids				The list of node IDs to get attributes for.
+								If NULL, returns attributes for all nodes.
+	\param		attribute		The node attribute type to retrieve from *g
+	\param		num_nodes		The length of the ids array
+	\param		out_scores		Pointer to array of floats, allocated by the caller
+	\param		out_score_size	Keeps track of the size of out_scores buffer,
+								updated as required
+
+	\pre		All node IDs in `ids` must exist in graph `g`.
+	\pre		If `ids` is not NULL, `num_nodes` must be equal to the length of `ids`.
+	\pre		`attribute` is a float attribute. That is, only float values have been added to this attribute.
+
+	\returns	\link HF_STATUS::OK \endlink on completion.
+
+	\details	For the ID at `ids[i]`, `out_scores[i]` is the value of the attribute for the
+				node associated with that ID.
+
+				If `ids` is NULL, `out_scores` is an array holding the value of the attribute for
+				all nodes, sorted in ascending order by ID.
+
+				The caller must deallocate the memory addressed by out_scores.
+
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
+	\see \link AddNodeAttributesFloat \endlink (how to add float node attributes)
+	\see \link GetNodeAttributesFloat \endlink (how to get float node attributes)
+	\see \ref graph_teardown (how to destroy a graph)
+
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetNodeAttributesByIDFloat
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
+*/
+C_INTERFACE GetNodeAttributesByIDFloat(
+	const HF::SpatialStructures::Graph* g,
+	const int* ids,
+	const char* attribute,
+	int num_nodes,
+	float* out_scores,
+	int* out_score_size
+);
+
+/*!
+	\brief Check whether or not an attribute is stored with float values in a graph.
+	\param		g			The pointer of the graph to check
+	\param		attribute	The attribute to check
+
+	\returns	1 if the attribute exists in the graph and contains only float values.
+				0 otherwise.
+*/
+C_INTERFACE IsFloatAttribute(
+	const HF::SpatialStructures::Graph* g,
+	const char* attribute
 );
 
 /*!
