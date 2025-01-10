@@ -42,7 +42,11 @@ jobs:
         
         - name: Install
           run: cmake --install build --config Release
-        
+
+        - name: Add build directory to PATH
+          run: |
+            $env:PATH += ";D:/a/dhart/dhart/build/Python/bin"
+
         - name: Check Install Location
           run: |
             cd "D:/a/dhart/dhart/build/Python"
