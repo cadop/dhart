@@ -25,18 +25,20 @@ jobs:
           with: # for github push action
             #persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
             fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
-
+        
+        - name: Query cmake
+          run: |
+              cmake --version
+              
+          
         - name: Configure cmake
           run: |
             cmake -S src -B build -G "Visual Studio 17 2022" -A x64 `
             -DDHARTAPI_Config=All `
-            -DDHARTAPI_EnableTests=False `
             -DCMAKE_CONFIGURATION_TYPES=Release `
             -DDHARTAPI_EnablePython=True `
-            -DDHARTAPI_EnableCSharp=False `
-            -DINSTALL_GTEST=False `
             -DCMAKE_INSTALL_PREFIX="D:/a/dhart/dhart/build/Python"
-        
+
         - name: Build
           run: cmake --build build --config Release
         
