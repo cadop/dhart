@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='dhart',
-      version='0.2.20',
+      version='0.2.21',
       description='Design Humans Analysis RoboTics',
       long_description=long_description,
       long_description_content_type="text/markdown",
