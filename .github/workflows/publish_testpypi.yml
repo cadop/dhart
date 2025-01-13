@@ -31,12 +31,17 @@ jobs:
             cd src
             cmake ./src/  -G"Visual Studio 16 2019"  -DCMAKE_GENERATOR_PLATFORM="x64"   -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DDHARTAPI_Config="All" -DDHARTAPI_EnableTests="False" -DCMAKE_CONFIGURATION_TYPES="Release" -DDHARTAPI_EnablePython="True" -DDHARTAPI_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1
 
-    
-        - name: Build
-          run: cmake --build build --config Release
-        
-        - name: Install
-          run: cmake --install build --config Release
+        - name: cmake build
+          run: |
+              ls
+              cd src
+              cmake --build . --config Release
+      
+        - name: cmake Install
+          run: |
+              ls
+              cd src
+              cmake --install .
 
         - name: Add build directory to PATH
           run: |
@@ -97,15 +102,15 @@ jobs:
             python -c "import platform; print(platform.architecture())"
             python -c "import dhart; print(dhart.__file__)"
         
-        # - name: Run Sphinx from testpypi
-        #   run: |
-        #     cd "D:/a/dhart/dhart/build/Python"
-        #     python -m pip install flake8 pytest
-        #     python -m pip install sphinx numpydoc matplotlib       
-        #     ls
-        #     cd "D:/a/dhart/dhart/docs/Python Docs"
-        #     ls
-        #     ./make.bat clean
-        #     ./make.bat html
-        #     ./make.bat doctest 
+        - name: Run Sphinx from testpypi
+          run: |
+            cd "D:/a/dhart/dhart/build/Python"
+            python -m pip install flake8 pytest
+            python -m pip install sphinx numpydoc matplotlib       
+            ls
+            cd "D:/a/dhart/dhart/docs/Python Docs"
+            ls
+            ./make.bat clean
+            ./make.bat html
+            ./make.bat doctest 
 
