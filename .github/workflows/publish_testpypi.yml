@@ -9,7 +9,7 @@ on:
 jobs:
 
     testpypi:
-        runs-on: windows-latest
+        runs-on: windows-2019
         strategy:
           max-parallel: 0
           matrix:
@@ -25,20 +25,12 @@ jobs:
           with: # for github push action
             #persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
             fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
-        
-        - name: Query cmake
-          run: |
-              cmake --version
-              
-          
+
         - name: Configure cmake
           run: |
-            cmake -S src -B build -G "Visual Studio 17 2022" -A x64 `
-            -DDHARTAPI_Config=All `
-            -DCMAKE_CONFIGURATION_TYPES=Release `
-            -DDHARTAPI_EnablePython=True `
-            -DCMAKE_INSTALL_PREFIX="D:/a/dhart/dhart/build/Python"
+            cmake ./src/  -G"Visual Studio 16 2019"  -DCMAKE_GENERATOR_PLATFORM="x64"   -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DDHARTAPI_Config="All" -DDHARTAPI_EnableTests="False" -DCMAKE_CONFIGURATION_TYPES="Release" -DDHARTAPI_EnablePython="True" -DDHARTAPI_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1
 
+        
         - name: Build
           run: cmake --build build --config Release
         
@@ -96,7 +88,7 @@ jobs:
 
         - name: Check Python Install
           run: | 
-            pip install -i https://test.pypi.org/simple/ dhart==0.2.22
+            pip install -i https://test.pypi.org/simple/ dhart==0.2.24
         
         - name: Try to import dhart
           run: |
