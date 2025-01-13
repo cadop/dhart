@@ -82,11 +82,11 @@ jobs:
           run: |
             cd "D:/a/dhart/dhart/build/Python"
             ls
-            twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+            twine upload --repository testpypi dist/*
 
         - name: Check Python Install
           run: | 
-            pip install -i https://test.pypi.org/simple/ dhart==0.2.8
+            pip install -i https://test.pypi.org/simple/ dhart==0.2.9
         
         - name: Try to import dhart
           run: |
