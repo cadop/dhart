@@ -319,6 +319,38 @@ C_INTERFACE AddNodeAttributes(
 	return OK;
 }
 
+C_INTERFACE AddNodeAttributesFloat(
+	Graph* g,
+	const int* ids,
+	const char* attribute,
+	const float* scores,
+	int num_nodes
+)
+{
+	// It is easy to convert raw pointers that are known to point to buffers/arrays
+	// to a std::vector.
+
+	// ids is the base address, and ids + num_nodes is one-past the last address allocated for ids.
+	std::vector<int> v_ids(ids, ids + num_nodes);
+
+	// scores is the base address, and scores + num_nodes is one-past the last address allocated for scores.
+	std::vector<float> v_scores(scores, scores + num_nodes);
+
+	// If it turns out that v_ids and v_scores have different sizes,
+	// AddNodeAttributes will discover this.
+	try {
+		g->AddNodeAttributesFloat(v_ids, std::string(attribute), v_scores);
+	}
+	catch (std::logic_error) {
+		//return HF_STATUS::OUT_OF_RANGE;
+		assert(false); // This is purely due to programmer error. The top of this function should
+					   // ONLY read num_nodes elements from either array, and this exception will
+					   // only throw if the length of scores and ids is different
+	}
+
+	return OK;
+}
+
 C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const char* attribute, 
 							  char** out_scores, int* out_score_size) {
 	// get all node attributes from the graph
@@ -352,9 +384,7 @@ C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const char*
 C_INTERFACE GetNodeAttributesByID(const HF::SpatialStructures::Graph* g, const int* ids, const char* attribute, int num_nodes,
 							  char** out_scores, int* out_score_size) {
 
-	// If IDs are specified, create vector to use
-	// (std::vector<int>, std::string) defintion of GetNodeAttributes
-	// ids is base address, ids + num_nodes is end address
+	// If IDs are specified, create vector for them
 	vector<int> v_ids(ids, ids + num_nodes);
 	vector<string> v_attrs = g->GetNodeAttributesByID(v_ids, std::string(attribute));
 
@@ -382,6 +412,56 @@ C_INTERFACE GetNodeAttributesByID(const HF::SpatialStructures::Graph* g, const i
 	// If v_attrs.size() == 0, do we want to throw an exception,
 	// which would mean that attribute does not exist as a attribute type?
 	return OK;
+}
+
+C_INTERFACE GetNodeAttributesFloat(const HF::SpatialStructures::Graph* g, const char* attribute,
+	float* out_scores, int* out_score_size) {
+	// get all node attributes from the graph
+	vector<float> v_attrs = g->GetNodeAttributesFloat(std::string(attribute));
+
+	// Iterate through each returned value and copy it into
+	// the output array
+	for (int i = 0; i < v_attrs.size(); i++) {
+		// Copy the contents of v_attrs into the output array
+		std::memcpy(&out_scores[i], &v_attrs[i], sizeof(float));
+	}
+
+	// Update the *out_score_size value, which corresponds to v_attrs.size().
+	// (it also corresponds to i, but this notation using v_attrs.size() is easier to understand)
+	*out_score_size = v_attrs.size();
+
+	// If v_attrs.size() == 0, do we want to throw an exception,
+	// which would mean that attribute does not exist as a attribute type?
+	return OK;
+}
+
+C_INTERFACE GetNodeAttributesByIDFloat(const HF::SpatialStructures::Graph* g, const int* ids, const char* attribute, int num_nodes,
+	float* out_scores, int* out_score_size) {
+
+	// If IDs are specified, create vector for them
+	vector<int> v_ids(ids, ids + num_nodes);
+	vector<float> v_attrs = g->GetNodeAttributesByIDFloat(v_ids, std::string(attribute));
+
+	// Iterate through each returned value and copy it into
+	// the output array
+	for (int i = 0; i < v_attrs.size(); i++)
+	{
+		// Copy the contents of v_attrs into the output array
+		std::memcpy(&out_scores[i], &v_attrs[i], sizeof(float));
+	}
+
+	// Update the *out_score_size value, which corresponds to v_attrs.size().
+	// (it also corresponds to i, but this notation using v_attrs.size() is easier to understand)
+	*out_score_size = v_attrs.size();
+
+	// If v_attrs.size() == 0, do we want to throw an exception,
+	// which would mean that attribute does not exist as a attribute type?
+	return OK;
+}
+
+C_INTERFACE IsFloatAttribute(const HF::SpatialStructures::Graph* g, const char* attribute)
+{
+	return g->IsFloatAttribute(std::string(attribute));
 }
 
 C_INTERFACE DeleteScoreArray(char** scores_to_delete, int num_char_arrays) {
