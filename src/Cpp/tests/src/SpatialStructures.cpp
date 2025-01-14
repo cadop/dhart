@@ -229,6 +229,57 @@ namespace GraphTests {
 		ASSERT_TRUE(std::find(costs.begin(), costs.end(), "CostThatDoesn'tExist") == costs.end());
 	}
 
+	TEST(_Graph, GetEdgeCost) {
+		// Create the graph in some nodes
+		Graph g;
+		Node N1(39, 39, 39);
+		Node N2(54, 54, 54);
+		Node N3(329, 139, 39);
+		Node N4(524, 524, 54);
+
+		// Add an edge to the graph
+		g.Compress();
+		g.addEdge(N1, N2, 30);
+		g.addEdge(N1, N3, 11);
+		g.addEdge(N1, N4, 22);
+		g.addEdge(N2, N1, 33);
+		g.addEdge(N3, N2, 34);
+		g.addEdge(N3, N4, 35);
+
+		// First assert that this can be called before costs have been added
+		auto costs_before_added = g.GetCostTypes();
+		ASSERT_EQ(costs_before_added.size(), 0);
+
+
+		// Then add an edge with an alternate cost type to effectively create this new cost
+		g.addEdge(N1, N2, 39, "TestCost");
+		g.addEdge(N1, N3, 11, "TestCost");
+		g.addEdge(N1, N4, 22, "TestCost");
+		g.addEdge(N2, N1, 33, "TestCost");
+		g.addEdge(N3, N2, 34, "TestCost");
+		g.addEdge(N3, N4, 35, "TestCost");
+
+		const std::string cost_name = "TestCost";
+		vector<EdgeSet> edgesetcosts = g.GetEdges(cost_name);
+
+		// Get cost types from the graph
+		const auto costs = g.GetCostTypes();
+		auto costmap = g.GetCostMap("TestCost");
+		auto specificcost = costmap["TestCost"];
+		auto costarray = specificcost.GetEdgeCostSetCosts();
+
+		//auto costarray = g.edge_cost_maps["TestCost"];
+
+		// Check that the size of the returned costtypes is what we think it should be
+		ASSERT_EQ(costs.size(), 1);
+
+		// See if we can find the cost in the set of returned cost types.
+		ASSERT_TRUE(std::find(costs.begin(), costs.end(), "TestCost") != costs.end());
+
+		// See that we don't find a cost that doesn't exist
+		ASSERT_TRUE(std::find(costs.begin(), costs.end(), "CostThatDoesn'tExist") == costs.end());
+	}
+
     TEST(_Graph, SizeEqualsNumberOfNodes) {
         HF::SpatialStructures::Graph g;
 

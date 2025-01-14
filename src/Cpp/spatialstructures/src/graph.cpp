@@ -321,6 +321,7 @@ namespace HF::SpatialStructures {
 		return (edge_cost_maps.at(key));
 	}
 
+
 	bool Graph::IsDefaultName(const string& name) const
 	{
 		// Check if the name is empty "" or it matches our default
@@ -823,6 +824,7 @@ namespace HF::SpatialStructures {
 	{
 		return this->node_attr_map.count(key) > 0;
 	}
+
 
 	void Graph::addEdge(const Node& parent, const Node& child, float score, const string & cost_type)
 	{
@@ -1389,6 +1391,101 @@ namespace HF::SpatialStructures {
 		}
 		// Return all found attributes
 		return out_attributes;
+	}
+
+	int Graph::CountEdges(const string& cost_type) const {
+		// Count the number of edges of cost_type in a graph
+		vector<EdgeSet> AllEdges = GetEdges(cost_type);
+		int count = 0;
+		for (int i = 0; i < AllEdges.size(); i++) {
+			std::vector<IntEdge> curr_children = AllEdges[i].children;
+			count += curr_children.size();
+		}
+		return count;
+	}
+
+	int Graph::CountEdgesFromEdgeSets(vector<EdgeSet> AllEdges) const {
+		int count = 0;
+		for (int i = 0; i < AllEdges.size(); i++) {
+			std::vector<IntEdge> curr_children = AllEdges[i].children;
+			count += curr_children.size();
+		}
+		return count;
+	}
+
+	std::unordered_map<std::string, EdgeCostSet>  Graph::GetCostMap(const std::string& cost_type)
+	{
+		// Return the private attribute for the graphs cost mapping
+
+		return edge_cost_maps;
+	}
+
+	vector<float> Graph::GetEdgeCosts(const std::string& cost_type) {
+		if (edge_cost_maps.count(cost_type) < 1) return vector<float>();
+
+		std::unordered_map<std::string, EdgeCostSet> costmap = GetCostMap(cost_type);
+		auto specificcost = costmap[cost_type];
+		auto costarray = specificcost.GetEdgeCostSetCosts();
+
+		return costarray;
+	}
+
+	vector<float> Graph::GetEdgeCostsFromNodeIDs(vector<int>& ids, const string& cost_type) const {
+		// Assume that ids is given in [parent1, child1, parent2, child2,...]
+		// Return an empty array if this attribute doesn't exist
+		// Need to raise error if odd number of ids
+		// Maybe add check if each edge is valid
+		if (edge_cost_maps.count(cost_type) < 1) return vector<float>();
+		int num_edges;
+		int number_of_ids = ids.size();
+		// No ids given, so find all edge costs
+		if (number_of_ids < 2) {
+			// Count the number of edges of given cost type
+			vector<EdgeSet> AllEdges = GetEdges(cost_type);
+			num_edges = CountEdgesFromEdgeSets(AllEdges);
+			ids.resize(num_edges);
+
+			// Index of ids vector
+			int idx = 0;
+			// Index of vector of Edgesets (parents)
+			for (int i = 0; i < AllEdges.size(); i++) {
+				EdgeSet curr_edgeset = AllEdges[i];
+				// parent and children
+				int parent = curr_edgeset.parent;
+				vector<IntEdge> curr_children = curr_edgeset.children;
+				int no_of_children = curr_children.size();
+
+				//Index of vector of intedges (children)
+				for (int j = 0; j < no_of_children; j++) {
+					ids[idx] = parent;
+					idx++;
+					ids[idx] = curr_children[j].child;
+					idx++;
+				}
+			}
+		}
+		else {
+			// Strides of 2 per edge
+			num_edges = number_of_ids / 2;
+		}
+
+		vector<float> out_costs(num_edges, -1);
+
+		// Index of edge in output array
+		int idx = 0;
+		// Iterate through all ids
+		for (int i = 0; i < num_edges; i += 2) 
+		{
+			// For each edge, get the cost of the edge
+			int parent = ids[i];
+			int child = ids[i + 1];
+			const auto& score = GetCost(parent, child, cost_type);
+
+			out_costs[idx] = score;
+			idx++;
+		}
+		// Return all costs
+		return out_costs;
 	}
 
 	void Graph::ClearNodeAttributes(std::string name) {

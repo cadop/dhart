@@ -460,6 +460,9 @@ namespace HF::SpatialStructures {
 			return this->costs.data(); 
 		}
 
+		inline std::vector<float> GetEdgeCostSetCosts() {
+			return this->costs;
+		}
 	};
 
 	/*! \brief A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.
@@ -1199,7 +1202,7 @@ namespace HF::SpatialStructures {
 
 				// directed parameter may be true or false
 				std::vector<float> aggregate_graph = graph.AggregateGraph(aggregate, true);
-			\endcode
+			\endcodef
 		*/
 		std::vector<float> AggregateGraph(COST_AGGREGATE agg_type, bool directed = true, const std::string& cost_type = "") const;
 		/*!
@@ -1928,6 +1931,56 @@ namespace HF::SpatialStructures {
 			\endcode
 		*/
 		std::vector<std::string> GetNodeAttributesByID(std::vector<int>& ids, std::string attribute) const;
+
+		/// <summary>
+		/// Get edge costs of all given edges
+		/// </summary>
+		/// <param name="name">
+		/// The attribute that will be cleared from this graph's internal hashmap
+		/// </param>
+
+		/*!
+			\brief
+			\param name
+
+			\code
+				// TODO example
+			\endcode
+		*/
+		int CountEdges(const std::string& cost_type) const;
+		/// <summary>
+		/// Get edge costs of all given edges
+		/// </summary>
+		/// <param name="name">
+		/// The attribute that will be cleared from this graph's internal hashmap
+		/// </param>
+
+		/*!
+			\brief
+			\param name
+
+			\code
+				// TODO example
+			\endcode
+		*/
+		int CountEdgesFromEdgeSets(std::vector<EdgeSet> AllEdges) const;
+		/// <summary>
+		/// Get edge costs of all given edges
+		/// </summary>
+		/// <param name="name">
+		/// The attribute that will be cleared from this graph's internal hashmap
+		/// </param>
+
+		/*!
+			\brief
+			\param name
+
+			\code
+				// TODO example
+			\endcode
+		*/
+		std::vector<float> GetEdgeCosts(const std::string& cost_type);
+		std::vector<float> GetEdgeCostsFromNodeIDs(std::vector<int>& ids, const std::string& cost_type) const;
 		/// <summary>
 		/// Clears the attribute at name and all of its contents from the internal hashmap
 		/// </summary>
@@ -2020,6 +2073,15 @@ namespace HF::SpatialStructures {
 			been added to the default graph2) If adding an alternate edge to the graph, the graph must already be compressed
 		*/
 		void Graph::AddEdges(const std::vector<std::vector<IntEdge>>& edges, const std::string& cost_type);
+
+
+		/*! \brief Get the cost map for the graph
+		
+		/// TODO: Fill this in
+		
+		*/
+		std::unordered_map<std::string, EdgeCostSet> Graph::GetCostMap(const std::string& cost_type = " ");
+
 
 		/*!
 			\brief Clear one or more cost arrays from the graph.
