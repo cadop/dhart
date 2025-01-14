@@ -1,4 +1,4 @@
-﻿cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required (VERSION 3.10)
 set(ROBIN_HOOD_DIR ${PROJECT_SOURCE_DIR}/external/robin_hood/)
 
 include(FetchContent)
