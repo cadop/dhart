@@ -469,7 +469,7 @@ class Graph:
         return spatial_structures_native_functions.C_NumNodes(self.graph_ptr)
 
     def add_node_attributes(
-        self, attribute: str, ids: Union[int, List[int]], scores: Union[str, List[Any]],
+        self, attribute: str, ids: Union[int, List[int]], scores: Union[List[str], List[float]],
         ) -> None:
         """ Add attributes to one or more nodes
         
@@ -481,6 +481,7 @@ class Graph:
         Preconditions:
             1) IDs in ids must already belong to nodes in the graph
             2) The length of scores and ids must match
+            3) All values in scores are of the same type
 
         Raises:
             ValueError : the length of ids and scores did not match
@@ -497,15 +498,20 @@ class Graph:
            >>> csr = g.CompressToCSR()
 
            >>> # Add node attributes to the simple graph
-           >>> attr = "Test"
+           >>> string_attr = "Strings"
+           >>> float_attr = "Floats"
            >>> ids = [0, 1, 2]
-           >>> scores = ["zero", "one", "two"]
-           >>> g.add_node_attributes(attr, ids, scores)
+           >>> string_scores = ["zero", "one", "two"]
+           >>> float_scores = [0.0, 1.0, 2.0]
+           >>> g.add_node_attributes(string_attr, ids, string_scores)
+           >>> g.add_node_attributes(float_attr, ids, float_scores)
 
            >>> # To ensure that they've been added properly we will call
            >>> # get_node_attributes.
-           >>> g.get_node_attributes(attr)
+           >>> g.get_node_attributes(string_attr)
            ['zero', 'one', 'two']
+           >>> g.get_node_attributes(float_attr)
+           [0.0, 1.0, 2.0]
 
         """
         # Just send it to C++
@@ -513,7 +519,9 @@ class Graph:
             self.graph_ptr, attribute, ids, scores
         )
 
-    def get_node_attributes(self, attribute: str, ids : List[int] | None = None) -> List[str]:
+    def get_node_attributes(
+            self, attribute: str, ids : List[int] | None = None
+        ) -> Union[List[str], List[float]]:
         """ Get scores of every node for a specific attribute
 
         Args:
@@ -521,7 +529,7 @@ class Graph:
             ids : Node IDs in the graph to get attributes for, optional
 
         Preconditions:
-            1) Node IDs in `ids` must already belong to nodes in the graph
+            1) Node IDs in ids must already belong to nodes in the graph
 
         Returns:
             A list of strings representing the score of the specified nodes - or 
@@ -544,21 +552,24 @@ class Graph:
            >>> csr = g.CompressToCSR()
 
            >>> # Add node attributes to the simple graph
-           >>> attr = "Test"
+           >>> string_attr = "Strings"
+           >>> float_attr = "Floats"
            >>> ids = [0, 1, 2]
-           >>> scores = ["zero", "one", "two"]
-           >>> g.add_node_attributes(attr, ids, scores)
+           >>> string_scores = ["zero", "one", "two"]
+           >>> float_scores = [0.0, 1.0, 2.0]
+           >>> g.add_node_attributes(string_attr, ids, string_scores)
+           >>> g.add_node_attributes(float_attr, ids, float_scores)
            
            
            >>> # Get attribute scores from the graph
-           >>> g.get_node_attributes(attr)
+           >>> g.get_node_attributes(string_attr)
            ['zero', 'one', 'two']
 
            >>> # Get attribute scores for specific nodes
-           >>> g.get_node_attributes(attr, [0])
+           >>> g.get_node_attributes(string_attr, [0])
            ['zero']
-           >>> g.get_node_attributes(attr, [2, 1])
-           ['two', 'one']
+           >>> g.get_node_attributes(float_attr, [2, 1])
+           [2.0, 1.0]
         """
 
         return spatial_structures_native_functions.c_get_node_attributes(
