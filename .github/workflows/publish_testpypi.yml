@@ -28,15 +28,15 @@ jobs:
 
         - name: Configure CMake
           run: |
-            cmake ./src/ \
-            -G"Visual Studio 16 2019" \
-            -DCMAKE_GENERATOR_PLATFORM="x64" \
-            -DCMAKE_INSTALL_PREFIX="D:/a/dhart/dhart/build/Python" \
-            -DDHARTAPI_Config="All" \
-            -DDHARTAPI_EnableTests="False" \
-            -DCMAKE_CONFIGURATION_TYPES="Release" \
-            -DDHARTAPI_EnablePython="True" \
-            -DDHARTAPI_EnableCSharp="False" \
+            cmake ./src/ `
+            -G"Visual Studio 16 2019" `
+            -DCMAKE_GENERATOR_PLATFORM="x64" `
+            -DCMAKE_INSTALL_PREFIX="D:/a/dhart/dhart/build/Python" `
+            -DDHARTAPI_Config="All" `
+            -DDHARTAPI_EnableTests="False" `
+            -DCMAKE_CONFIGURATION_TYPES="Release" `
+            -DDHARTAPI_EnablePython="True" `
+            -DDHARTAPI_EnableCSharp="False" `
             -DEmbree_DIR="D:/a/dhart/dhart/src/external/Embree"
           
         - name: cmake
