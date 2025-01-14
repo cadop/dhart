@@ -96,22 +96,9 @@ jobs:
             python -m build
             ls
             # python setup.py sdist bdist_wheel
+            python -m pip install -e .
 
 
-        # Step 5: Publish to Test PyPI
-        - name: Publish to Test PyPI
-          env:
-            TWINE_USERNAME: "__token__" # Required for Test PyPI token
-            TWINE_PASSWORD: ${{ secrets.TEST_PYPI_API_TOKEN }}
-          run: |
-            cd "D:/a/dhart/dhart/build/Python"
-            ls
-            twine upload --repository testpypi dist/* --verbose
-
-        - name: Check Python Install
-          run: | 
-            pip install -i https://test.pypi.org/simple/ dhart==0.2.24
-        
         - name: Try to import dhart
           run: |
             python -c "from dhart.spatialstructures import Graph"
@@ -130,3 +117,17 @@ jobs:
             ./make.bat html
             ./make.bat doctest 
 
+
+        # Step 5: Publish to Test PyPI
+        - name: Publish to Test PyPI
+          env:
+            TWINE_USERNAME: "__token__" # Required for Test PyPI token
+            TWINE_PASSWORD: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          run: |
+            cd "D:/a/dhart/dhart/build/Python"
+            ls
+            twine upload --repository testpypi dist/* --verbose
+
+        - name: Check Python Install
+          run: | 
+            pip install -i https://test.pypi.org/simple/ dhart
