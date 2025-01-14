@@ -1,4 +1,4 @@
-﻿cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required (VERSION 3.10)
 
 # Break this into two libraries?
 add_library(OBJLoader STATIC)
