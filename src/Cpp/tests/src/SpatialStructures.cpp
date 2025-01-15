@@ -232,24 +232,20 @@ namespace GraphTests {
 	TEST(_Graph, GetEdgeCosts) {
 		// Create the graph in some nodes
 		Graph g;
-		Node N1(39, 39, 39);
-		Node N2(54, 54, 54);
-		Node N3(329, 139, 39);
-		Node N4(524, 524, 54);
 
 		// Add an edge to the graph
 		g.Compress();
-		g.addEdge(N1, N2, 30);
-		g.addEdge(N1, N3, 11);
-		g.addEdge(N1, N4, 22);
-		g.addEdge(N2, N1, 33);
-		g.addEdge(N3, N2, 34);
-		g.addEdge(N3, N4, 35);
+		g.addEdge(1, 2, 30);
+		g.addEdge(1, 3, 11);
+		g.addEdge(1, 4, 22);
+		g.addEdge(2, 1, 33);
+		g.addEdge(3, 2, 34);
+		g.addEdge(3, 4, 35);
 
 
 		// First assert that default cost works
 		auto default_costs = g.GetEdgeCosts("");
-		//ASSERT_EQ(default_costs, )
+		ASSERT_EQ(default_costs.size(), 0);
 
 		const std::string cost_name = "TestCost";
 		// First assert that this can be called before costs have been added
@@ -258,31 +254,42 @@ namespace GraphTests {
 
 
 		// Then add an edge with an alternate cost type to effectively create this new cost
-		g.addEdge(N1, N2, 39, cost_name);
-		g.addEdge(N1, N3, 11, cost_name);
-		g.addEdge(N1, N4, 22, cost_name);
-		g.addEdge(N2, N1, 33, cost_name);
-		g.addEdge(N3, N2, 34, cost_name);
-		g.addEdge(N3, N4, 35, cost_name);
+		g.addEdge(1, 2, 39, cost_name);
+		g.addEdge(1, 3, 11, cost_name);
+		g.addEdge(1, 4, 22, cost_name);
+		g.addEdge(2, 1, 33, cost_name);
+		g.addEdge(3, 2, 34, cost_name);
+		g.addEdge(3, 4, 35, cost_name);
 
 		vector<EdgeSet> edgesetcosts = g.GetEdges(cost_name);
 
-		// Get cost types from the graph
-		const auto costs = g.GetCostTypes();
+		// All edge costs
+		auto costs_after_added = g.GetEdgeCosts(cost_name);
+		vector<float> expected_costs = { 39, 11, 22, 33, 34, 35 };
+		int expected_costs_size = expected_costs.size();
+		ASSERT_EQ(costs_after_added.size(), expected_costs.size());
+
+		for (int i = 0; i < expected_costs_size; i++)
+		{
+			ASSERT_EQ(costs_after_added[i], expected_costs[i]);
+		}
+		
+		// Subset of edge costs
+		vector<int> ids = { 1, 2, 3, 2, 3, 4 };
+		auto specific_costs_after_added = g.GetEdgeCostsFromNodeIDs(ids, cost_name);
+		vector<float> specific_expected_costs = { 39, 34, 35 };
+		int expected_size = specific_expected_costs.size();
+		ASSERT_EQ(specific_costs_after_added.size(), expected_size);
+
+		for (int i = 0; i < expected_size; i++)
+		{
+			ASSERT_EQ(specific_costs_after_added[i], specific_expected_costs[i]);
+		}
+
 		auto costmap = g.GetCostMap("TestCost");
 		auto specificcost = costmap["TestCost"];
 		auto costarray = specificcost.GetEdgeCostSetCosts();
 
-		//auto costarray = g.edge_cost_maps["TestCost"];
-
-		// Check that the size of the returned costtypes is what we think it should be
-		ASSERT_EQ(costs.size(), 1);
-
-		// See if we can find the cost in the set of returned cost types.
-		ASSERT_TRUE(std::find(costs.begin(), costs.end(), "TestCost") != costs.end());
-
-		// See that we don't find a cost that doesn't exist
-		ASSERT_TRUE(std::find(costs.begin(), costs.end(), "CostThatDoesn'tExist") == costs.end());
 	}
 
     TEST(_Graph, SizeEqualsNumberOfNodes) {

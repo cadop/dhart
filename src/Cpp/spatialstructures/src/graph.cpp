@@ -1569,7 +1569,7 @@ namespace HF::SpatialStructures {
 		// Index of edge in output array
 		int idx = 0;
 		// Iterate through all ids
-		for (int i = 0; i < num_edges; i += 2) 
+		for (int i = 0; i < number_of_ids; i += 2) 
 		{
 			// For each edge, get the cost of the edge
 			int parent = ids[i];

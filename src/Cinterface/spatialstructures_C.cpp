@@ -196,6 +196,7 @@ C_INTERFACE GetEdgeCosts(
 		std::memcpy(&out_scores[i], &v_costs[i], sizeof(float));
 	}
 	*out_score_size = v_costs.size();
+	return OK;
 }
 
 C_INTERFACE GetEdgeCostsFromNodeIDs(
