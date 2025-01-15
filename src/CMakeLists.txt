@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required (VERSION 3.10)
 
 # Paths
 set(PYTHON_PACKAGE_DIR "Python")
@@ -601,6 +601,7 @@ if(DHARTAPI_EnablePython)
     install (FILES ${DEBUG_DEPENDENCY_BINARIES} CONFIGURATIONS Debug DESTINATION dhart/bin)
 
     LIST(APPEND ROOT_FILES ${PYTHON_PACKAGE_DIR}/setup.py)
+    LIST(APPEND ROOT_FILES ${PYTHON_PACKAGE_DIR}/conftest.py)
 endif()
 
 

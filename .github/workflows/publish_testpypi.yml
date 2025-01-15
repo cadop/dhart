@@ -1,0 +1,133 @@
+name: Publish to Test PyPI
+
+on:
+    pull_request:
+        branches:    
+            - dev_stage
+            - main
+
+jobs:
+
+    testpypi:
+        runs-on: windows-2019
+        strategy:
+          max-parallel: 0
+          matrix:
+            python-version: ['3.10']
+    
+        steps:
+        - uses: actions/checkout@v2
+        - name: Set up Python ${{ matrix.python-version }}
+          uses: actions/setup-python@v2
+          with:
+            python-version: ${{ matrix.python-version }}
+        - uses: actions/checkout@v2
+          with: # for github push action
+            #persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+            fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+        - name: Configure CMake
+          run: |
+            cmake -S src -B build `
+            -G "Visual Studio 16 2019" `
+            -A x64 `
+            -DCMAKE_INSTALL_PREFIX="D:/a/dhart/dhart/build/Python" `
+            -DDHARTAPI_Config="All" `
+            -DDHARTAPI_EnableTests="False" `
+            -DCMAKE_CONFIGURATION_TYPES="Release" `
+            -DDHARTAPI_EnablePython="True" `
+            -DDHARTAPI_EnableCSharp="False" `
+            -DEmbree_DIR="D:/a/dhart/dhart/src/external/Embree"
+        
+        - name: Build
+          run: |
+            cmake --build build --config Release --verbose
+          
+        # - name: Configure cmake
+        #   run: |
+        #     cd src
+        #     cmake ./src/  -G"Visual Studio 16 2019"  -DCMAKE_GENERATOR_PLATFORM="x64"   -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DDHARTAPI_Config="All" -DDHARTAPI_EnableTests="False" -DCMAKE_CONFIGURATION_TYPES="Release" -DDHARTAPI_EnablePython="True" -DDHARTAPI_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1
+
+        # - name: cmake build
+        #   run: |
+        #       ls
+        #       cd src
+        #       cmake --build . --config Release
+      
+        - name: cmake Install
+          run: |
+              ls
+              cmake --install build --config Release
+
+
+        - name: Add build directory to PATH
+          run: |
+            $env:PATH += ";D:/a/dhart/dhart/build/Python/bin"
+
+        - name: Check Install Location
+          run: |
+            cd "D:/a/dhart/dhart/build/Python"
+            ls
+            cd bin
+            ls
+            cd ..
+            cd dhart
+            ls
+            cd bin
+            ls
+
+        - name: Build and Install Wheel
+          run: |
+            cd "D:/a/dhart/dhart/build/Python"
+            python -m pip install --upgrade pip
+            python -m pip install setuptools wheel twine build
+            python -m pip install numpy matplotlib scipy
+
+        - name: Increment Package Version
+          run: |
+              cd "D:/a/dhart/dhart/build/Python"
+              python -m pip install bump
+              python -m bump
+
+              
+        # Step 4: Build the package
+        - name: Build the package
+          run: |
+            cd "D:/a/dhart/dhart/build/Python"
+            python -m build
+            ls
+            # python setup.py sdist bdist_wheel
+            python -m pip install -e .
+
+
+        - name: Try to import dhart
+          run: |
+            python -c "from dhart.spatialstructures import Graph"
+            python -c "import platform; print(platform.architecture())"
+            python -c "import dhart; print(dhart.__file__)"
+        
+        - name: Run Sphinx from testpypi
+          run: |
+            cd "D:/a/dhart/dhart/build/Python"
+            python -m pip install flake8 pytest
+            python -m pip install sphinx numpydoc matplotlib       
+            ls
+            cd "D:/a/dhart/dhart/docs/Python Docs"
+            ls
+            ./make.bat clean
+            ./make.bat html
+            ./make.bat doctest 
+
+
+        # Step 5: Publish to Test PyPI
+        - name: Publish to Test PyPI
+          env:
+            TWINE_USERNAME: "__token__" # Required for Test PyPI token
+            TWINE_PASSWORD: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          run: |
+            cd "D:/a/dhart/dhart/build/Python"
+            ls
+            twine upload --repository testpypi dist/* --verbose
+
+        - name: Check Python Install
+          run: | 
+            pip install -i https://test.pypi.org/simple/ dhart

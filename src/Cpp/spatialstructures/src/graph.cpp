@@ -181,7 +181,11 @@ namespace HF::SpatialStructures {
 		// Get the costs for this attribute and convert every value to float. In the case that a 
 		// attribute score could not be converted due to not being a numeric value or not being set
 		// in the first place, those values will be set to -1.
-		const auto& scores = ConvertStringsToFloat(this->GetNodeAttributes(node_attribute));
+		vector<float> scores;
+		if (this->IsFloatAttribute(node_attribute))
+			scores = this->GetNodeAttributesFloat(node_attribute);
+		else
+			scores = ConvertStringsToFloat(this->GetNodeAttributes(node_attribute));
 
 		// Iterate through all nodes in the graph
 		for (const auto& parent : ordered_nodes) {
@@ -822,7 +826,12 @@ namespace HF::SpatialStructures {
 
 	bool Graph::HasNodeAttribute(const std::string& key) const
 	{
-		return this->node_attr_map.count(key) > 0;
+		return this->node_attr_map.count(key) > 0 || this->node_float_attr_map.count(key) > 0;
+	}
+
+	bool Graph::IsFloatAttribute(const std::string& name) const
+	{
+		return this->node_float_attr_map.count(name) > 0;
 	}
 
 
@@ -1233,28 +1242,47 @@ namespace HF::SpatialStructures {
 		return Subgraph{ parent_node, this->GetEdgesForNode(parent_id, false, cost_type) };
 	}
 
-	void Graph::AddNodeAttribute(int id, const std::string & attribute, const std::string & score) {
+	void Graph::AddNodeAttribute(int id, const std::string & name, const std::string & score) {
 		// Check if this id belongs to any node in the graph
 		if (id > this->MaxID()) return;
 
-		/* // requires #include <algorithm>, but not working?
-		std::string lower_cased =
-			std::transform(attribute.begin(), attribute.end(),
-				[](unsigned char c) { return std::tolower(c); }
-		);
-		*/
-		std::string lower_cased = attribute;
-
 		// Retrieve an iterator to the [node attribute : NodeAttributeValueMap]
-		// that corresponds with attribute
-		auto node_attr_map_it = node_attr_map.find(lower_cased);
+		// that corresponds with name
+		auto node_attr_map_it = node_attr_map.find(name);
 
 		if (node_attr_map_it == node_attr_map.end()) {
+			
+			// Check if name could be a float-type attribute
+			auto node_float_attr_map_it = node_float_attr_map.find(name);
+
 			// If the attribute type does not exist...create it.
-			node_attr_map[lower_cased] = NodeAttributeValueMap();
+			// Regardless of whether or not we are converting a float-type attribute,
+			// we need to create a new map for the input string attribute.
+			node_attr_map[name] = NodeAttributeValueMap();
+
+			if (node_float_attr_map_it != node_float_attr_map.end())
+			{
+				// name is in float map, so we assume user
+				// wants to convert the attribute to a string-type attribute. 
+				NodeFloatAttributeValueMap& node_float_attr_value_map = node_float_attr_map_it->second;
+				
+				NodeAttributeValueMap& node_attr_value_map = node_attr_map.find(name)->second;
+
+				for (auto it : node_float_attr_value_map)
+				{
+					node_attr_value_map[it.first] = std::to_string(it.second);
+				}
+
+				// Remove float attribute from float map to avoid duplicates
+				node_float_attr_map.erase(node_float_attr_map_it->first);
+
+				// This should only happen once the first time
+				// AddNodeAttribute is called with a float-type attribute.
+				// Subsequent calls should find this attribute in the string-type map.
+			}
 
 			// Update this iterator so it can be used in the next code block
-			node_attr_map_it = node_attr_map.find(lower_cased);
+			node_attr_map_it = node_attr_map.find(name);
 		}
 
 		// We now have the NodeAttributeValueMap for the desired attribute.
@@ -1270,45 +1298,62 @@ namespace HF::SpatialStructures {
 			// If the node id provided does not exist in the value map...add it.
 			node_attr_value_map[id] = score;
 
-			// Update this iterator so it can be used in the next code block
-			node_attr_value_map_it = node_attr_value_map.find(id);
+		}
+		else
+		{
+			// Otherwise, the key-value pair exists, and we can set the value to score
+			node_attr_value_map_it->second = score;
+		}
+	}
+
+	void Graph::AddNodeAttributeFloat(int id, const std::string& name, const float score)
+	{
+		// Check if this id belongs to any node in the graph
+		if (id > this->MaxID()) return;
+
+		// Retrieve an iterator to the [node attribute : NodeFloatAttributeValueMap]
+		// that corresponds with attribute
+		auto node_float_attr_map_it = node_float_attr_map.find(name);
+
+		if (node_float_attr_map_it == node_float_attr_map.end())
+		{
+			// Check if attribute could be a string attribute
+			auto node_attr_map_it = node_attr_map.find(name);
+			if (node_attr_map_it != node_attr_map.end())
+			{
+				// We assume the user wants to add strings representing floats
+				// to a string attribute, so convert to string and add.
+				// score is guaranteed to be convertable since it is a float.
+				AddNodeAttribute(id, name, std::to_string(score));
+				return;
+			}
+			else
+			{
+				// If the attribute type does not exist...create it.
+				node_float_attr_map[name] = NodeFloatAttributeValueMap();
+
+				// Update this iterator so it can be used in the next code block
+				node_float_attr_map_it = node_float_attr_map.find(name);
+			}
 		}
 
-		// Will be used to assess whether it is floating point, or not
-		std::string found_attr_value = node_attr_value_map_it->second;
+		// We now have the NodeFloatAttributeValueMap for the desired attribute.
+		// A NodeFloatAttributeValueMap stores buckets of [node id : node attribute value as float]
+		NodeFloatAttributeValueMap& node_float_attr_value_map = node_float_attr_map_it->second;
 
-		// Let's determine the data type of score:
-		bool score_is_floating_pt = is_floating_type(score);
+		// Need to see if id exists as a key within node_float_attr_value_map
+		// This will give us the position of a bucket containing:
+		// [node id : node attribute value as float]
+		auto node_float_attr_value_map_it = node_float_attr_value_map.find(id);
 
-		// Let's determine the data type of found_attr_value:
-		bool attr_is_floating_pt = is_floating_type(found_attr_value);
-
-		/*
-			Need to determine if found_attr_value is
-				- a string
-				- a floating point value
-
-			and if the data type for score matches that of found_attr_value
-		*/
-		if (attr_is_floating_pt) {
-			// if the current attribute value is floating point...
-			if (score_is_floating_pt) {
-				// Ok - data type matched.
-				node_attr_value_map_it->second = score;
-			}
-			else {
-				// error?
-			}
+		if (node_float_attr_value_map_it == node_float_attr_value_map.end())
+		{
+			// If the node id provided does not exist in the value map...add it.
+			node_float_attr_value_map[id] = score;
 		}
-		else {
-			// if the current attribute value is not floating point...
-			if (score_is_floating_pt) {
-				// error?
-			}
-			else {
-				// Ok - data type matched
-				node_attr_value_map_it->second = score;
-			}
+		else
+		{
+			node_float_attr_value_map_it->second = score;
 		}
 	}
 
@@ -1333,14 +1378,31 @@ namespace HF::SpatialStructures {
 		}
 	}
 
-	vector<string> Graph::GetNodeAttributes(string attribute) const {
+	void Graph::AddNodeAttributesFloat(const std::vector<int>& id, const std::string& name, const std::vector<float>& scores)
+	{
+		// If size of id container and size of scores container are not in alignment,
+		// throw, since our precondition was violated
+		if (id.size() != scores.size())
+			throw std::logic_error("Tried to pass id and string arrays that are different lengths");
+
+		auto scores_iterator = scores.begin();
+
+		for (int node_id : id) {
+
+			// We can call AddNodeAttributeFloat for each node_id in id.
+			// If the attribute type name does not exist,
+			// it will be created with the first invocation of AddNodeAttributeFloat.
+			AddNodeAttributeFloat(node_id, name, *(scores_iterator++));
+		}
+	}
+	vector<string> Graph::GetNodeAttributes(string name) const {
 
 		// Return an empty array if this attribute doesn't exist
-		if (node_attr_map.count(attribute) < 1) return vector<string>();
+		if (node_attr_map.count(name) < 1) return vector<string>();
 	
-		// Get the attribute map for attribute now that we know it exists
-		const auto& attr_map = node_attr_map.at(attribute);
-
+		// Get the attribute map for name now that we know it exists
+		const auto& attr_map = node_attr_map.at(name);
+		
 		// Preallocate output array with empty strings. We'll only be modifying
 		// the indexes that have scores assigned to them, and leaving the rest
 		// as empty strings
@@ -1363,19 +1425,19 @@ namespace HF::SpatialStructures {
 		return out_attributes;
 	}
 
-	vector<string> Graph::GetNodeAttributesByID(vector<int>& ids, string attribute) const {
+	vector<string> Graph::GetNodeAttributesByID(vector<int>& ids, string name) const {
 		
 		// Return an empty array if this attribute doesn't exist
-		if (node_attr_map.count(attribute) < 1) return vector<string>();
+		if (node_attr_map.count(name) < 1) return vector<string>();
 
-		// Get the attribute map for attribute now that we know it exists
-		const auto& attr_map = node_attr_map.at(attribute);
+		// Get the attribute map for name now that we know it exists
+		const auto& attr_map = node_attr_map.at(name);
 
 		// Preallocate output array with empty strings.
 		// Only allocate as many spots we need for the specified IDs.
 		const int num_nodes = ids.size();
 		vector<string> out_attributes(num_nodes, "");
-
+		
 		// Keep index of return array, since it isn't necessarily the same as the ID
 		int idx = 0;
 		// Iterate through all specified IDs
@@ -1392,6 +1454,67 @@ namespace HF::SpatialStructures {
 		// Return all found attributes
 		return out_attributes;
 	}
+
+	vector<float> Graph::GetNodeAttributesFloat(string name) const {
+
+		// Return an empty array if this attribute doesn't exist
+		if (node_float_attr_map.count(name) < 1) return vector<float>();
+
+		// Get the attribute map for name now that we know it exists
+		const auto& float_attr_map = node_float_attr_map.at(name);
+
+		// Preallocate output array with empty strings. We'll only be modifying
+		// the indexes that have scores assigned to them, and leaving the rest
+		// as empty strings
+		const int num_nodes = ordered_nodes.size();
+		vector<float> out_attributes(num_nodes, 0.0);
+
+		// Iterate through attribute map to assign scores for the nodes
+		// that have them
+		for (const auto& it : float_attr_map)
+		{
+			// Get the id and score of this element in the hashmap
+			const int id = it.first;
+			const float score = it.second;
+
+			// Copy it to the index of the node's ID in our output array
+			out_attributes[id] = score;
+		}
+
+		// Return all found attributes
+		return out_attributes;
+	}
+
+	vector<float> Graph::GetNodeAttributesByIDFloat(vector<int>& ids, string name) const {
+
+		// Return an empty array if this attribute doesn't exist
+		if (node_float_attr_map.count(name) < 1) return vector<float>();
+
+		// Get the attribute map for name now that we know it exists
+		const auto& float_attr_map = node_float_attr_map.at(name);
+
+		// Preallocate output array with empty strings.
+		// Only allocate as many spots we need for the specified IDs.
+		const int num_nodes = ids.size();
+		vector<float> out_attributes(num_nodes, 0.0);
+
+		// Keep index of return array, since it isn't necessarily the same as the ID
+		int idx = 0;
+		// Iterate through all specified IDs
+		for (int i = 0; i < num_nodes; i++)
+		{
+			// For each ID, get associated node, and get the node's attribute
+			int id = ids[i];
+			const auto& score = float_attr_map.at(id);
+
+			out_attributes[idx] = score;
+			// Increment index to the next space in the output array
+			idx++;
+		}
+		// Return all found attributes
+		return out_attributes;
+	}
+
 
 	int Graph::CountEdges(const string& cost_type) const {
 		// Count the number of edges of cost_type in a graph
@@ -1504,6 +1627,10 @@ namespace HF::SpatialStructures {
 			// Erase the key from the dictionary, implicitly freeing the object
 			// it contains.
 			node_attr_map.erase(name);
+		}
+		if (node_float_attr_map.count(name) > 0)
+		{
+			node_float_attr_map.erase(name);
 		}
 	}
 

@@ -31,8 +31,8 @@ def getDLLHandle() -> CDLL:
         cdll_dir = os.path.join(directory, dllname)
         HFPython = CDLL(cdll_dir, use_last_error=False)
 
-    except FileNotFoundError as e:
-        print("CDLL Failed to load!")
+    except (FileNotFoundError, OSError) as e:
+        print(f"CDLL failed to load! Attempted path: {cdll_dir}")
         print(e)
         raise e
 
