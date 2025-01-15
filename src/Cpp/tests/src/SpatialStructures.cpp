@@ -283,6 +283,23 @@ namespace GraphTests {
 		}
 	}
 
+	TEST(_Graph, CountNumberOfEdges) {
+		HF::SpatialStructures::Graph g;
+		g.Compress();
+		HF::SpatialStructures::Node N1(1, 1, 2);
+		HF::SpatialStructures::Node N2(2, 3, 4, 5);
+		HF::SpatialStructures::Node N3(3, 10, 2, 10);
+		g.addEdge(N1, N2, 1);
+		g.addEdge(N2, N3, 1);
+
+		const std::string cost_name = "TestCost";
+
+		g.addEdge(N1, N2, 30, cost_name);
+		g.addEdge(N2, N3, 20, cost_name);
+
+		auto number_of_edges_after = g.CountEdges(cost_name);
+		ASSERT_EQ(number_of_edges_after, 2);
+	}
     TEST(_Graph, SizeEqualsNumberOfNodes) {
         HF::SpatialStructures::Graph g;
 

@@ -1138,7 +1138,7 @@ C_INTERFACE GetEdgeCosts(
 	\returns
 */
 C_INTERFACE CountNumberOfEdges(
-	const Graph* g,
+	const HF::SpatialStructures::Graph* g,
 	const char* cost_type,
 	int* out_size);
 /*!
