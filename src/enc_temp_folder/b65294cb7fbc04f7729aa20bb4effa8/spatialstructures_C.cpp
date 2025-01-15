@@ -203,32 +203,18 @@ C_INTERFACE GetEdgeCostsFromNodeIDs(
 	const HF::SpatialStructures::Graph* g,
 	const int* ids,
 	const char* cost_type,
-	int num_ids,
+	int num_nodes,
 	float** out_scores, 
 	int* out_score_size
 ) {
-	vector<int> v_ids(ids, ids + num_ids);
-	try {
-		vector<float> v_costs = g->GetEdgeCostsFromNodeIDs(v_ids, std::string(cost_type));
-		for (int i = 0; i < v_costs.size(); i++)
-		{
-			std::memcpy(&out_scores[i], &v_costs[i], sizeof(float));
-		}
-		*out_score_size = v_costs.size();
-		//if (!std::isfinite(*out_float)) *out_float = -1.0f;
-	}
-	catch (HF::Exceptions::NoCost)
+	vector<int> v_ids(ids, ids + num_nodes);
+	vector<float> v_costs = g->GetEdgeCostsFromNodeIDs(v_ids, std::string(cost_type));
+
+	for (int i = 0; i < v_costs.size(); i++)
 	{
-		return NO_COST;
+		std::memcpy(&out_scores[i], &v_costs[i], sizeof(float));
 	}
-	catch (std::logic_error)
-	{
-		return NOT_COMPRESSED;
-	}
-	catch (...)
-	{
-		return GENERIC_ERROR;
-	}
+	*out_score_size = v_costs.size();
 	return OK;
 }
 C_INTERFACE GetCSRPointers(
@@ -559,11 +545,6 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g) {
 
 C_INTERFACE GetSizeOfGraph(const Graph * g, int * out_size) {
 	*out_size = g->size();
-	return OK;
-}
-
-C_INTERFACE CountNumberOfEdges(const Graph* g, const char* cost_type, int* out_size) {
-	*out_size = g->CountEdges(cost_type);
 	return OK;
 }
 

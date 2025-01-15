@@ -1544,6 +1544,7 @@ namespace HF::SpatialStructures {
 	}
 
 	vector<float> Graph::GetEdgeCosts(const std::string& cost_type) const {
+		// Need to support default cost query
 		if (edge_cost_maps.count(cost_type) < 1) return vector<float>();
 
 		std::unordered_map<std::string, EdgeCostSet> costmap = GetCostMap(cost_type);

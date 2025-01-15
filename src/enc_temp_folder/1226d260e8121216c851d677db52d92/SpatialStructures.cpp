@@ -242,10 +242,16 @@ namespace GraphTests {
 		g.addEdge(3, 2, 34);
 		g.addEdge(3, 4, 35);
 
+
+		// First assert that default cost works
+		auto default_costs = g.GetEdgeCosts("");
+		ASSERT_EQ(default_costs.size(), 0);
+
 		const std::string cost_name = "TestCost";
 		// First assert that this can be called before costs have been added
 		auto costs_before_added = g.GetEdgeCosts(cost_name);
 		ASSERT_EQ(costs_before_added.size(), 0);
+
 
 		// Then add an edge with an alternate cost type to effectively create this new cost
 		g.addEdge(1, 2, 39, cost_name);
@@ -255,12 +261,12 @@ namespace GraphTests {
 		g.addEdge(3, 2, 34, cost_name);
 		g.addEdge(3, 4, 35, cost_name);
 
-		// Test getting all edge costs of type cost_name
-		auto costs_after_added = g.GetEdgeCosts(cost_name);
+		vector<EdgeSet> edgesetcosts = g.GetEdges(cost_name);
 
+		// All edge costs
+		auto costs_after_added = g.GetEdgeCosts(cost_name);
 		vector<float> expected_costs = { 39, 11, 22, 33, 34, 35 };
 		int expected_costs_size = expected_costs.size();
-
 		ASSERT_EQ(costs_after_added.size(), expected_costs.size());
 
 		for (int i = 0; i < expected_costs_size; i++)
@@ -268,13 +274,13 @@ namespace GraphTests {
 			ASSERT_EQ(costs_after_added[i], expected_costs[i]);
 		}
 		
-		// Test getting edge costs of subset of edges
+		// Subset of edge costs
 		vector<int> ids = { 1, 2, 3, 2, 3, 4 };
-		auto specific_costs_after_added = g.GetEdgeCostsFromNodeIDs(ids, cost_name);
+		auto new_default_costs = g.GetEdgeCostsFromNodeIDs(ids, "");
 
+		auto specific_costs_after_added = g.GetEdgeCostsFromNodeIDs(ids, cost_name);
 		vector<float> specific_expected_costs = { 39, 34, 35 };
 		int expected_size = specific_expected_costs.size();
-
 		ASSERT_EQ(specific_costs_after_added.size(), expected_size);
 
 		for (int i = 0; i < expected_size; i++)

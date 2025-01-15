@@ -1130,17 +1130,7 @@ C_INTERFACE GetEdgeCosts(
 	const char* cost_type,
 	float** out_scores,
 	int* out_score_size);
-/*!
-	\brief TODO
 
-	\param TODO
-
-	\returns
-*/
-C_INTERFACE CountNumberOfEdges(
-	const Graph* g,
-	const char* cost_type,
-	int* out_size);
 /*!
 	\brief TODO
 

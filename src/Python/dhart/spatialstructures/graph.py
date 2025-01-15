@@ -464,9 +464,33 @@ class Graph:
             cost_type
             )
 
+    def GetEdgeCosts(self, cost_type: str, ids: List[int] | None = None) -> List[float]:
+        """Get the costs for each edge in a set of edges
+        
+        Args:
+            cost_type : str
+                Cost type to get the cost from. If left blank will use the graph's default cost type. (second part needs to be implemented)
+            ids : List[int]
+                List of IDs in the format [parent1, child1, parent2, child2,...]. If left blank, compute all edge costs of type cost_type
+        Returns:
+            List[float] : An array of costs of cost_type corresponding to ids in ids.
+
+        """
+        return spatial_structures_native_functions.C_GetEdgeCosts(self.graph_ptr, cost_type, ids)
     def NumNodes(self) -> int:
         """Get the number of nodes in the graph."""
         return spatial_structures_native_functions.C_NumNodes(self.graph_ptr)
+    
+    def NumEdges(self, cost_type) -> int:
+        """ Get the number of edges of cost_type in the graph
+        
+        Args:
+            cost_type : str
+                Cost type to get the edges from.
+            Returns:
+                int : The number of edges with type cost_type.
+        """
+        return spatial_structures_native_functions.C_NumEdges(self.graph_ptr, cost_type)
 
     def add_node_attributes(
         self, attribute: str, ids: Union[int, List[int]], scores: Union[List[str], List[float]],

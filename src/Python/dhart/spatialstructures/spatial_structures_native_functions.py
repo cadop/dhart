@@ -358,6 +358,18 @@ def C_ClearGraph(graph_ptr: c_void_p, cost_type: str = '') -> None:
         print("Unexpected error code: " + error_code)
         assert(False)  # There's some unhandled problem with C++
 
+def C_NumEdges(graph_ptr: c_void_p, cost_type: str) -> int:
+    """ Get the number of edges in the graph"""
+    out_size = c_int(0)
+
+    cost_ptr = GetStringPtr(cost_type)
+    error_code = HFPython.CountNumberOfEdges(graph_ptr, cost_ptr, byref(out_size))
+
+    assert(error_code == HF_STATUS.OK)
+
+    return out_size.value
+
+
 
 def C_NumNodes(graph_ptr: c_void_p) -> int:
     """ Get the number of nodes in the graph """
@@ -391,14 +403,12 @@ def C_CalculateAndStoreCrossSlope(graph_ptr : c_void_p):
 def C_GetEdgeCosts(
         graph_ptr: c_void_p,
         cost_type: str,
-        num_nodes: int,
         ids: List[int]) -> List[float]:
     """ Get edge costs from a graph in C++
     
     Args:
         graph_ptr: Pointer to the graph to get costs from.
         cost_type: Unique key of the type of cost to get.
-        num_nodes: Number of nodes in the graph.
         ids: List of node IDs in the format [parent1, child1, parent2, child2,...]
     
     Returns:
@@ -406,16 +416,22 @@ def C_GetEdgeCosts(
         every node in the graph if unspecified. If the cost type does not
         exist, an empty list will be returned instead.
     """
+    # check if even number of ids given
     # Pointer to cost type
+    num_ids = len(ids)
     cost_ptr = GetStringPtr(cost_type)
-    out_score_type = c_float * num_nodes
+    if ids:
+        num_edges = num_ids//2
+    else:
+        num_edges = C_NumEdges(graph_ptr, cost_type)
+
+    out_score_type = c_float * num_edges
 
     # Output
     out_scores = out_score_type()
     out_scores_size = c_int(0)
 
     id_arr = ConvertIntsToArray(ids)
-    num_ids = len(ids)
     if not ids:
         error_code = HFPython.GetEdgeCosts(
             graph_ptr, cost_ptr, byref(out_scores), byref(out_scores_size)
