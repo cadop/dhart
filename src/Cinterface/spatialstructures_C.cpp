@@ -184,6 +184,20 @@ C_INTERFACE AddEdgeFromNodeIDs(Graph * graph, int parent_id, int child_id, float
 	return OK;
 }
 
+C_INTERFACE GetEdgeCosts(
+	const HF::SpatialStructures::Graph* g,
+	const char* cost_type,
+	float** out_scores,
+	int* out_score_size
+) {
+	vector<float> v_costs = g->GetEdgeCosts(cost_type);
+	for (int i = 0; i < v_costs.size(); i++)
+	{
+		std::memcpy(&out_scores[i], &v_costs[i], sizeof(float));
+	}
+	*out_score_size = v_costs.size();
+}
+
 C_INTERFACE GetEdgeCostsFromNodeIDs(
 	const HF::SpatialStructures::Graph* g,
 	const int* ids,
