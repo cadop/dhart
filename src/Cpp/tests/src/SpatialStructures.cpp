@@ -229,7 +229,7 @@ namespace GraphTests {
 		ASSERT_TRUE(std::find(costs.begin(), costs.end(), "CostThatDoesn'tExist") == costs.end());
 	}
 
-	TEST(_Graph, GetEdgeCost) {
+	TEST(_Graph, GetEdgeCosts) {
 		// Create the graph in some nodes
 		Graph g;
 		Node N1(39, 39, 39);
@@ -246,20 +246,25 @@ namespace GraphTests {
 		g.addEdge(N3, N2, 34);
 		g.addEdge(N3, N4, 35);
 
+
+		// First assert that default cost works
+		auto default_costs = g.GetEdgeCosts("");
+		//ASSERT_EQ(default_costs, )
+
+		const std::string cost_name = "TestCost";
 		// First assert that this can be called before costs have been added
-		auto costs_before_added = g.GetCostTypes();
+		auto costs_before_added = g.GetEdgeCosts(cost_name);
 		ASSERT_EQ(costs_before_added.size(), 0);
 
 
 		// Then add an edge with an alternate cost type to effectively create this new cost
-		g.addEdge(N1, N2, 39, "TestCost");
-		g.addEdge(N1, N3, 11, "TestCost");
-		g.addEdge(N1, N4, 22, "TestCost");
-		g.addEdge(N2, N1, 33, "TestCost");
-		g.addEdge(N3, N2, 34, "TestCost");
-		g.addEdge(N3, N4, 35, "TestCost");
+		g.addEdge(N1, N2, 39, cost_name);
+		g.addEdge(N1, N3, 11, cost_name);
+		g.addEdge(N1, N4, 22, cost_name);
+		g.addEdge(N2, N1, 33, cost_name);
+		g.addEdge(N3, N2, 34, cost_name);
+		g.addEdge(N3, N4, 35, cost_name);
 
-		const std::string cost_name = "TestCost";
 		vector<EdgeSet> edgesetcosts = g.GetEdges(cost_name);
 
 		// Get cost types from the graph
