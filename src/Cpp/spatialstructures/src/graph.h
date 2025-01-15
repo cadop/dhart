@@ -488,7 +488,7 @@ namespace HF::SpatialStructures {
 	*/
 	class Graph {
 		using NodeAttributeValueMap = robin_hood::unordered_map<int, std::string>;
-		using NodeFloatAttributeValueMap = robin_hood::unordered_map<int, float>;
+
 	private:
 		int next_id = 0;								///< The id for the next unique node.
 		std::vector<Node> ordered_nodes;				///< A list of nodes contained by the graph.
@@ -500,7 +500,6 @@ namespace HF::SpatialStructures {
 		bool needs_compression = true;					///< If true, the CSR is inaccurate and requires compression.
 
 		robin_hood::unordered_map<std::string, NodeAttributeValueMap> node_attr_map; ///< Node attribute type : Map of node id to node attribute
-		robin_hood::unordered_map<std::string, NodeFloatAttributeValueMap> node_float_attr_map; ///< Node attribute type : Map of node id to node attribute for float
 
 		std::string active_cost_type;								///< The active edge matrix to use for the graph
 		EdgeMatrix edge_matrix;				///< The underlying CSR containing edge information.
@@ -1792,16 +1791,12 @@ namespace HF::SpatialStructures {
 		Subgraph GetSubgraph(int parent_id, const std::string & cost_type = "") const;
 
 		/// <summary>
-		/// Add a string attribute to the node at id. If the node at id already has a score for the
-		/// attribute at name, then existing score should be overwritten.
-		/// 
-		/// If the attribute is a float attribute, it will be converted into a string attribute. 
-		/// Any existing data for that attribute will be converted into strings.
+		/// Add an attribute to the node at id
 		/// </summary>
 		/// <param name="id">
 		/// The ID of the node that will receive attribute
 		/// </param>
-		/// <param name="name">
+		/// <param name="attribute">
 		/// The attribute that the node at ID will receive
 		/// </param>
 		/// <param name="score">
@@ -1813,40 +1808,11 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		void AddNodeAttribute(int id, const std::string & name, const std::string & score);
+		void AddNodeAttribute(int id, const std::string & attribute, const std::string & score);
 
 		/// <summary>
-		/// Add a float attribute to the node at id. If the node at id already has a score for the
-		/// attribute at name, then existing score should be overwritten.
-		/// 
-		/// If the attribute is a string attribute, score will be added
-		/// as a string value. The attribute will not be converted into a float
-		///	attribute.
-		/// </summary>
-		/// <param name="id">
-		/// The ID of the node that will receive attribute
-		/// </param>
-		/// <param name="name">
-		/// The attribute that the node at ID will receive
-		/// </param>
-		/// <param name="score">
-		/// The weight, or distance that extends from the node at id
-		/// </param>
-
-		/*!
-			\code
-				// TODO example
-			\endcode
-		*/
-		void AddNodeAttributeFloat(int id, const std::string& name, const float score);
-
-		/// <summary>
-		/// Add a string attribute to the node at id. If the node at id already has a score for the
-		/// attribute at name, then existing score should be overwritten.
-		/// 
-		/// If the attribute is a float attribute, it will be converted into a string attribute. 
-		/// All existing data for that attribute will be converted into strings, and the new
-		/// data will be added as string values.
+		/// Add an attribute to the node at id. If the node at id already has a score for the
+		/// attribute at name, then existing score should be overwritten
 		/// </summary>
 		/// <param name="id">
 		/// The container of IDs from which nodes will be retrieved and given attributes
@@ -1861,6 +1827,7 @@ namespace HF::SpatialStructures {
 		/*!
 			\pre The length of ids, and the length of scores must be equal 
 			\throws std::logic_error The length of scores and the length of ID do not match.
+
 			\code
 				// TODO example
 			\endcode
@@ -1868,47 +1835,17 @@ namespace HF::SpatialStructures {
 		void AddNodeAttributes(const std::vector<int> & id, const std::string &  name, const std::vector<std::string> & scores);
 
 		/// <summary>
-		/// Add a float attribute to the node at id. If the node at id already has a score for the
-		/// attribute at name, then existing score should be overwritten.
-		/// 
-		/// If the attribute is a string attribute, scores will be added
-		/// as string values. The attribute will not be converted into a float
-		///	attribute.
-		/// </summary>
-		/// <param name="id">
-		/// The container of IDs from which nodes will be retrieved and given attributes
-		/// </param>
-		/// <param name="name">
-		/// The attribute that each node will receive
-		/// </param>
-		/// <param name="scores">
-		/// The container of score, ordered by the container of node IDs
-		/// </param>
-
-		/*!
-			\pre The length of ids, and the length of scores must be equal
-			\throws std::logic_error The length of scores and the length of ID do not match
-
-			\code
-				// TODO example
-			\endcode
-		*/
-		void AddNodeAttributesFloat(const std::vector<int>& id, const std::string& name, const std::vector<float>& scores);
-
-		/// <summary>
 		/// Get the score for the given attribute of every node in the graph. Nodes that do not have
 		/// a score for this attribute should return an empty string for this array.
 		/// </summary>
-		/// <param name="name">
+		/// <param name="attribute">
 		/// The attribute from which a container of scores will be obtained
 		/// </param>
 		/// <returns>
-		/// A container of score, each in the form of a std::string, obtained from name
+		/// A container of score, each in the form of a std::string, obtained from attribute
 		/// </returns>
 
 		/*!
-			\pre	`name` is a string attribute. That is, at least one string value has been added to this attribute.
-
 			\code
 				// be sure to #include "graph.h"
  
@@ -1943,56 +1880,7 @@ namespace HF::SpatialStructures {
 				std::vector<std::string> cross_slopes = graph.GetNodeAttributes(attribute); // {"2.3", "6.1", "4.0"}
 			\endcode
 		*/
-		std::vector<std::string> GetNodeAttributes(std::string name) const;
-
-		/// <summary>
-		/// Get the score for the given attribute of every node in the graph. Nodes that do not have
-		/// a score for this attribute should return the default value 0.0 for this array.
-		/// </summary>
-		/// <param name="name">
-		/// The attribute from which a container of scores will be obtained. 
-		/// </param>
-		/// <returns>
-		/// A container of score, each in the form of a float, obtained from attribute
-		/// </returns>
-		/*!
-			\pre	`name` is a float attribute. That is, only float values have been added to this attribute.
-
-			\code
-				// be sure to #include "graph.h"
-
-				// Create the nodes
-				HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f);
-				HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);
-				HF::SpatialStructures::Node node_2(11.0f, 22.0f, 140.0f);
-
-				// Create a container (vector) of nodes
-				std::vector<HF::SpatialStructures::Node> nodes = { node_0, node_1, node_2 };
-
-				// Create matrices for edges and distances, edges.size() == distances().size()
-				std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
-				std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
-
-				// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
-				HF::SpatialStructures::Graph graph(edges, distances, nodes);
-
-				// Get node IDs
-				int ID_0 = graph.getID(node_0);
-				int ID_1 = graph.getID(node_1);
-				int ID_2 = graph.getID(node_2);
-
-				std::vector<int> ids = {ID_0, ID_1, ID_2};
-
-				// Assign attributes to nodes
-				std::string attribute = "demo attribute";
-				std::vector<float> scores = {2.3, 6.1, 4.0};
-				graph.AddNodeAttributesFloat(ids, attribute, scores);
-
-				// Get attribute for all nodes
-				std::vector<float> cross_slopes = graph.GetNodeAttributesFloat(attribute); // {2.3, 6.1, 4.0}
-			\endcode
-		*/
-		std::vector<float> GetNodeAttributesFloat(std::string name) const;
+		std::vector<std::string> GetNodeAttributes(std::string attribute) const;
 
 		/// <summary>
 		/// Get the score for the given attribute of the specified nodes. Nodes that do not have
@@ -2001,15 +1889,13 @@ namespace HF::SpatialStructures {
 		/// <param name="ids">
 		/// A list of node IDs to obtain scores for.
 		/// </param>
-		/// <param name="name">
+		/// <param name="attribute">
 		/// The attribute from which a container of scores will be obtained
 		/// </param>
 		/// <returns>
-		/// A container of score, each in the form of a std::string, obtained from name
+		/// A container of score, each in the form of a std::string, obtained from attribute
 		/// </returns>
 		/*!
-			\pre	`name` is a string attribute. That is, at least one string value has been added to this attribute.
-
 			\code
 				// be sure to #include "graph.h"
  
@@ -2044,63 +1930,7 @@ namespace HF::SpatialStructures {
 				std::vector<std::string> cross_slope_02 = graph.GetNodeAttributesByID({ID_0, ID_2}, attribute); // {"1.8", "5.7"}
 			\endcode
 		*/
-		std::vector<std::string> GetNodeAttributesByID(std::vector<int>& ids, std::string name) const;
-
-		/// <summary>
-		/// Get the score for the given attribute of the specified nodes. Nodes that do not have
-		/// a score for this attribute should return an empty string for this array.
-		/// </summary>
-		/// <param name="ids">
-		/// A list of node IDs to obtain scores for.
-		/// </param>
-		/// <param name="name">
-		/// The attribute from which a container of scores will be obtained.
-		/// </param>
-		/// <returns>
-		/// A container of score, each in the form of a std::string, obtained from name
-		/// </returns>
-		/*!
-			\pre	`name` is a float attribute. That is, only float values have been added to this attribute.
-
-			\code
-				// be sure to #include "graph.h"
-
-				// Create the nodes
-				HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f);
-				HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);
-				HF::SpatialStructures::Node node_2(11.0f, 22.0f, 140.0f);
-
-				// Create a container (vector) of nodes
-				std::vector<HF::SpatialStructures::Node> nodes = { node_0, node_1, node_2 };
-
-				// Create matrices for edges and distances, edges.size() == distances().size()
-				std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
-				std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
-
-				// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
-				HF::SpatialStructures::Graph graph(edges, distances, nodes);
-
-				// Get node IDs
-				int ID_0 = graph.getID(node_0);
-				int ID_1 = graph.getID(node_1);
-				int ID_2 = graph.getID(node_2);
-				std::vector<int> ids = {0, 1, 2};
-
-				// Assign attributes to nodes
-				std::string attribute = "demo attribute";
-				std::vector<float> scores = {1.8, 9.6, 5.7};
-				graph.AddNodeAttributesFloat(ids, attribute, scores);
-
-				// Get attribute for specific nodes
-				std::vector<float> cross_slope_1 = graph.GetNodeAttributesByIDFloat({ID_1}, attribute); // {9.6}
-				std::vector<float> cross_slope_02 = graph.GetNodeAttributesByIDFloat({ID_0, ID_2}, attribute); // {1.8, 5.7}
-			\endcode
-		*/
-		std::vector<float> GetNodeAttributesByIDFloat(std::vector<int>& ids, std::string name) const;
-
-		/*! \brief Check if this attribute exists in the graph and contains float values*/
-		bool IsFloatAttribute(const std::string& name) const;
-
+		std::vector<std::string> GetNodeAttributesByID(std::vector<int>& ids, std::string attribute) const;
 
 		/// <summary>
 		/// Get edge costs of all given edges
@@ -2149,7 +1979,7 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		std::vector<float> GetEdgeCosts(const std::string& cost_type);
+		std::vector<float> GetEdgeCosts(const std::string& cost_type) const;
 		std::vector<float> GetEdgeCostsFromNodeIDs(std::vector<int>& ids, const std::string& cost_type) const;
 		/// <summary>
 		/// Clears the attribute at name and all of its contents from the internal hashmap
@@ -2250,7 +2080,7 @@ namespace HF::SpatialStructures {
 		/// TODO: Fill this in
 		
 		*/
-		std::unordered_map<std::string, EdgeCostSet> Graph::GetCostMap(const std::string& cost_type = " ");
+		std::unordered_map<std::string, EdgeCostSet> Graph::GetCostMap(const std::string& cost_type = " ") const;
 
 
 		/*!

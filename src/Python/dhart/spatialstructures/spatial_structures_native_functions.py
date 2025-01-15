@@ -388,6 +388,55 @@ def C_CalculateAndStoreCrossSlope(graph_ptr : c_void_p):
     # CalculateAndStoreCrossSlope  only should return OK. Something must have 
     # changed in the C++ code that hasn't been updated in python.
 
+def C_GetEdgeCosts(
+        graph_ptr: c_void_p,
+        cost_type: str,
+        num_nodes: int,
+        ids: List[int]) -> List[float]:
+    """ Get edge costs from a graph in C++
+    
+    Args:
+        graph_ptr: Pointer to the graph to get costs from.
+        cost_type: Unique key of the type of cost to get.
+        num_nodes: Number of nodes in the graph.
+        ids: List of node IDs in the format [parent1, child1, parent2, child2,...]
+    
+    Returns:
+        A list of floats containing the score for specified edges - or for
+        every node in the graph if unspecified. If the cost type does not
+        exist, an empty list will be returned instead.
+    """
+    # Pointer to cost type
+    cost_ptr = GetStringPtr(cost_type)
+    out_score_type = c_float * num_nodes
+
+    # Output
+    out_scores = out_score_type()
+    out_scores_size = c_int(0)
+
+    id_arr = ConvertIntsToArray(ids)
+    num_ids = len(ids)
+    if not ids:
+        error_code = HFPython.GetEdgeCosts(
+            graph_ptr, cost_ptr, byref(out_scores), byref(out_scores_size)
+        ) 
+    else:
+        error_code = HFPython.GetEdgeCostsFromNodeIDs(
+            graph_ptr, id_arr, cost_ptr, num_ids, byref(out_scores), byref(out_scores_size)
+        )   
+    
+    # Only returns OK
+    assert error_code == HF_STATUS.OK
+
+    # Return an empty list if size is zero
+    if out_scores_size.value == 0:
+        return []
+    
+    out_vals = []
+    for i in range(0, len(out_scores_size.value)):
+        score = out_scores[i]
+        out_vals.append(score)
+    return out_vals
 
 def c_get_node_attributes(
     graph_ptr: c_void_p, 

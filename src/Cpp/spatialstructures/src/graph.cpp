@@ -1536,14 +1536,14 @@ namespace HF::SpatialStructures {
 		return count;
 	}
 
-	std::unordered_map<std::string, EdgeCostSet>  Graph::GetCostMap(const std::string& cost_type)
+	std::unordered_map<std::string, EdgeCostSet>  Graph::GetCostMap(const std::string& cost_type) const
 	{
 		// Return the private attribute for the graphs cost mapping
 
 		return edge_cost_maps;
 	}
 
-	vector<float> Graph::GetEdgeCosts(const std::string& cost_type) {
+	vector<float> Graph::GetEdgeCosts(const std::string& cost_type) const {
 		if (edge_cost_maps.count(cost_type) < 1) return vector<float>();
 
 		std::unordered_map<std::string, EdgeCostSet> costmap = GetCostMap(cost_type);
@@ -1559,38 +1559,10 @@ namespace HF::SpatialStructures {
 		// Need to raise error if odd number of ids
 		// Maybe add check if each edge is valid
 		if (edge_cost_maps.count(cost_type) < 1) return vector<float>();
-		int num_edges;
 		int number_of_ids = ids.size();
-		// No ids given, so find all edge costs
-		if (number_of_ids < 2) {
-			// Count the number of edges of given cost type
-			vector<EdgeSet> AllEdges = GetEdges(cost_type);
-			num_edges = CountEdgesFromEdgeSets(AllEdges);
-			ids.resize(num_edges);
+		// Strides of 2 per edge
+		int num_edges = number_of_ids / 2;
 
-			// Index of ids vector
-			int idx = 0;
-			// Index of vector of Edgesets (parents)
-			for (int i = 0; i < AllEdges.size(); i++) {
-				EdgeSet curr_edgeset = AllEdges[i];
-				// parent and children
-				int parent = curr_edgeset.parent;
-				vector<IntEdge> curr_children = curr_edgeset.children;
-				int no_of_children = curr_children.size();
-
-				//Index of vector of intedges (children)
-				for (int j = 0; j < no_of_children; j++) {
-					ids[idx] = parent;
-					idx++;
-					ids[idx] = curr_children[j].child;
-					idx++;
-				}
-			}
-		}
-		else {
-			// Strides of 2 per edge
-			num_edges = number_of_ids / 2;
-		}
 
 		vector<float> out_costs(num_edges, -1);
 
