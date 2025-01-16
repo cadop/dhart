@@ -1,6 +1,7 @@
 import pytest
 import unittest
 import os
+import pdb
 
 import numpy
 
@@ -191,20 +192,28 @@ def test_GetCosts():
     """Tests that getting multiple costs from the graph is accurate"""
     g = Graph()
     cost_type = "TestCost"
-    g.AddEdgeToGraph(0,1,30)
+    g.AddEdgeToGraph(0,1,50)
+    g.AddEdgeToGraph(0,2,10)
+    g.AddEdgeToGraph(1,2,150)
+    g.AddEdgeToGraph(1,3,70)
+    g.AddEdgeToGraph(2,3,70)
+    g.add_node_attributes("15", [0, 1], [1000, 2000])
+    all_attrs = g.get_node_attributes("15", [0,1])
+    print(all_attrs)
+    assert(all_attrs == [1000,2000])
+    g.CompressToCSR()
     g.AddEdgeToGraph(0, 1, 100, cost_type)
     g.AddEdgeToGraph(0, 2, 50, cost_type)
     g.AddEdgeToGraph(1, 2, 20, cost_type)
-    g.CompressToCSR()
-    
+    g.AddEdgeToGraph(1,3, 1000, cost_type)
+    g.AddEdgeToGraph(2,3, 1500, cost_type)
     ids = [0,1,1,2]
     # All costs of cost_type
     all_costs = g.GetEdgeCosts(cost_type)
-    print(all_costs)
-    assert(all_costs == [100, 50, 20])
+    assert(all_costs == [100.0, 50.0, 20.0, 1000.0])
     # Specific edges to get costs for
     some_costs = g.GetEdgeCosts(cost_type, ids)
-    assert(some_costs == [100, 20])
+    assert(some_costs == [100.0, 20.0])
 
 def test_AddingAndReadingCostTypes():
     """ Tests that alternate cost types can be added and read. Also ensures

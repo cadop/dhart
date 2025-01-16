@@ -213,7 +213,7 @@ C_INTERFACE GetEdgeCostsFromNodeIDs(
 		vector<float> v_costs = g->GetEdgeCostsFromNodeIDs(v_ids, std::string(cost_type));
 		for (int i = 0; i < v_costs.size(); i++)
 		{
-			std::memcpy(&out_scores[i], &v_costs[i], sizeof(float));
+			out_scores[i] = &v_costs[i];
 		}
 		*out_score_size = v_costs.size();
 		//if (!std::isfinite(*out_float)) *out_float = -1.0f;

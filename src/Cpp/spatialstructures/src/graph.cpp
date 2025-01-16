@@ -1550,8 +1550,8 @@ namespace HF::SpatialStructures {
 		std::unordered_map<std::string, EdgeCostSet> costmap = GetCostMap(cost_type);
 		auto specificcost = costmap[cost_type];
 		auto costarray = specificcost.GetEdgeCostSetCosts();
-
-		return costarray;
+		vector<float> copied_costs = costarray;
+		return copied_costs;
 	}
 
 	vector<float> Graph::GetEdgeCostsFromNodeIDs(vector<int>& ids, const string& cost_type) const {
