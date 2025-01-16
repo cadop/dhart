@@ -193,6 +193,7 @@ C_INTERFACE GetEdgeCosts(
 	vector<float> v_costs = g->GetEdgeCosts(cost_type);
 	for (int i = 0; i < v_costs.size(); i++)
 	{
+		//out_scores[i] = &v_costs[i];
 		std::memcpy(&out_scores[i], &v_costs[i], sizeof(float));
 	}
 	*out_score_size = v_costs.size();

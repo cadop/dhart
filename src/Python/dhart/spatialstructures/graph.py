@@ -474,7 +474,26 @@ class Graph:
                 List of IDs in the format [parent1, child1, parent2, child2,...]. If left blank, compute all edge costs of type cost_type
         Returns:
             List[float] : An array of costs of cost_type corresponding to ids in ids.
+        
+        Examples
+        --------
+        >>> from dhart.spatialstructures import Graph
+        >>> # Create a simple graph with 3 nodes
+        >>> g = Graph()
+        >>> cost_type = "TestCost"
+        >>> g.AddEdgeToGraph(0,1,50)
+        >>> g.AddEdgeToGraph(0, 1, 100, cost_type)
+        >>> g.AddEdgeToGraph(0, 2, 50, cost_type)
+        >>> g.AddEdgeToGraph(1, 2, 20, cost_type)
+        >>> csr = g.CompressToCSR()
 
+        >>> ids = [0,1,1,2]
+        >>> # All costs of cost_type
+        >>> g.GetEdgeCosts(cost_type)
+        [100, 50, 20]
+        >>> # Specific edges to get costs for
+        >>> g.GetEdgeCosts(cost_type, ids)
+        [100, 20]
         """
         return spatial_structures_native_functions.C_GetEdgeCosts(self.graph_ptr, cost_type, ids)
     def NumNodes(self) -> int:

@@ -187,6 +187,24 @@ def test_GetCost():
     # Assert this edge cost equals what we specified above
     assert(cost_from_graph == 100)
 
+def test_GetCosts():
+    """Tests that getting multiple costs from the graph is accurate"""
+    g = Graph()
+    cost_type = "TestCost"
+    g.AddEdgeToGraph(0,1,30)
+    g.AddEdgeToGraph(0, 1, 100, cost_type)
+    g.AddEdgeToGraph(0, 2, 50, cost_type)
+    g.AddEdgeToGraph(1, 2, 20, cost_type)
+    g.CompressToCSR()
+    
+    ids = [0,1,1,2]
+    # All costs of cost_type
+    all_costs = g.GetEdgeCosts(cost_type)
+    print(all_costs)
+    assert(all_costs == [100, 50, 20])
+    # Specific edges to get costs for
+    some_costs = g.GetEdgeCosts(cost_type, ids)
+    assert(some_costs == [100, 20])
 
 def test_AddingAndReadingCostTypes():
     """ Tests that alternate cost types can be added and read. Also ensures
