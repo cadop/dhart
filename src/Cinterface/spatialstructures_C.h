@@ -1128,7 +1128,7 @@ C_INTERFACE GraphAttrsToCosts(
 C_INTERFACE GetEdgeCosts(
 	const HF::SpatialStructures::Graph* g,
 	const char* cost_type,
-	float** out_scores,
+	float* out_scores,
 	int* out_score_size);
 /*!
 	\brief TODO
@@ -1153,6 +1153,6 @@ C_INTERFACE GetEdgeCostsFromNodeIDs(
 	const int* ids,
 	const char* cost_type,
 	int num_nodes,
-	float** out_scores,
+	float* out_scores,
 	int* out_score_size);
 /**@}*/

@@ -10,7 +10,7 @@ class EdgeStruct(ctypes.Structure):
     """ A connection between two points in space """
     
     _fields_ = [
-        ("child", ctypes.c_int)
+        ("child", ctypes.c_int),
         ("weight", ctypes.c_float)
         # ("id", ctypes.c_int) # maybe add ids
     ]

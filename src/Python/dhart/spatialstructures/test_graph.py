@@ -197,23 +197,22 @@ def test_GetCosts():
     g.AddEdgeToGraph(1,2,150)
     g.AddEdgeToGraph(1,3,70)
     g.AddEdgeToGraph(2,3,70)
-    g.add_node_attributes("15", [0, 1], [1000, 2000])
-    all_attrs = g.get_node_attributes("15", [0,1])
-    print(all_attrs)
-    assert(all_attrs == [1000,2000])
+
     g.CompressToCSR()
+
     g.AddEdgeToGraph(0, 1, 100, cost_type)
     g.AddEdgeToGraph(0, 2, 50, cost_type)
     g.AddEdgeToGraph(1, 2, 20, cost_type)
     g.AddEdgeToGraph(1,3, 1000, cost_type)
     g.AddEdgeToGraph(2,3, 1500, cost_type)
-    ids = [0,1,1,2]
+
+    ids = [0,1,1,2, 2, 3]
     # All costs of cost_type
     all_costs = g.GetEdgeCosts(cost_type)
-    assert(all_costs == [100.0, 50.0, 20.0, 1000.0])
+    assert(all_costs == [100.0, 50.0, 20.0, 1000.0, 1500.0])
     # Specific edges to get costs for
     some_costs = g.GetEdgeCosts(cost_type, ids)
-    assert(some_costs == [100.0, 20.0])
+    assert(some_costs == [100.0, 20.0, 1500.0])
 
 def test_AddingAndReadingCostTypes():
     """ Tests that alternate cost types can be added and read. Also ensures

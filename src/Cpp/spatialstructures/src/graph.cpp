@@ -1565,7 +1565,7 @@ namespace HF::SpatialStructures {
 		int num_edges = number_of_ids / 2;
 
 
-		vector<float> out_costs(num_edges, -1);
+		vector<float> out_costs(num_edges, -1.0f);
 
 		// Index of edge in output array
 		int idx = 0;

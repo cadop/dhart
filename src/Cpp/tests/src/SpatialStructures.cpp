@@ -235,12 +235,12 @@ namespace GraphTests {
 
 		// Add an edge to the graph
 		g.Compress();
-		g.addEdge(1, 2, 30);
-		g.addEdge(1, 3, 11);
-		g.addEdge(1, 4, 22);
-		g.addEdge(2, 1, 33);
-		g.addEdge(3, 2, 34);
-		g.addEdge(3, 4, 35);
+		g.addEdge(1, 2, 30.0f);
+		g.addEdge(1, 3, 11.0f);
+		g.addEdge(1, 4, 22.0f);
+		g.addEdge(2, 1, 33.0f);
+		g.addEdge(3, 2, 34.0f);
+		g.addEdge(3, 4, 35.0f);
 
 		const std::string cost_name = "TestCost";
 		// First assert that this can be called before costs have been added
@@ -248,17 +248,17 @@ namespace GraphTests {
 		ASSERT_EQ(costs_before_added.size(), 0);
 
 		// Then add an edge with an alternate cost type to effectively create this new cost
-		g.addEdge(1, 2, 39, cost_name);
-		g.addEdge(1, 3, 11, cost_name);
-		g.addEdge(1, 4, 22, cost_name);
-		g.addEdge(2, 1, 33, cost_name);
-		g.addEdge(3, 2, 34, cost_name);
-		g.addEdge(3, 4, 35, cost_name);
+		g.addEdge(1, 2, 39.0f, cost_name);
+		g.addEdge(1, 3, 11.0f, cost_name);
+		g.addEdge(1, 4, 22.0f, cost_name);
+		g.addEdge(2, 1, 33.0f, cost_name);
+		g.addEdge(3, 2, 34.0f, cost_name);
+		g.addEdge(3, 4, 35.0f, cost_name);
 
 		// Test getting all edge costs of type cost_name
-		/*auto costs_after_added = g.GetEdgeCosts(cost_name);
+		auto costs_after_added = g.GetEdgeCosts(cost_name);
 
-		vector<float> expected_costs = { 39, 11, 22, 33, 34, 35 };
+		vector<float> expected_costs = { 39.0f, 11.0f, 22.0f, 33.0f, 34.0f, 35.0f };
 		int expected_costs_size = expected_costs.size();
 
 		ASSERT_EQ(costs_after_added.size(), expected_costs.size());
@@ -266,7 +266,7 @@ namespace GraphTests {
 		for (int i = 0; i < expected_costs_size; i++)
 		{
 			ASSERT_EQ(costs_after_added[i], expected_costs[i]);
-		}*/
+		}
 		
 		// Test getting edge costs of subset of edges
 		vector<int> ids = { 1, 2, 3, 2, 3, 4 };
@@ -2483,6 +2483,63 @@ namespace CInterfaceTests {
 			ASSERT_EQ(scores_out[i], expected_scores_out[i]);
 		}
 
+	}
+
+	TEST(_graphCInterface, GetEdgeCosts) {
+		HF::SpatialStructures::Graph g;
+		g.Compress();
+
+		std::string cost_type = "TestCost";
+
+		g.addEdge(0, 1, 50.0f); g.addEdge(0, 2, 10.0f); g.addEdge(1, 2, 150.0f); g.addEdge(1, 3, 70.0f);
+		g.addEdge(2, 3, 70.0f);
+
+		g.addEdge(0, 1, 100.0f, cost_type); g.addEdge(0, 2, 50.0f, cost_type); g.addEdge(1, 2, 20.0f, cost_type);
+		g.addEdge(1, 3, 1000.0f, cost_type); g.addEdge(2, 3, 1500.0f, cost_type);
+
+		float* scores_out = new float[5];
+		int scores_out_size = 0;
+
+		GetEdgeCosts(&g, cost_type.c_str(), scores_out, &scores_out_size);
+
+		int expected_scores_out_size = 5;
+		std::vector<float> expected_scores_out = { 100.0f, 50.0f, 20.0f, 1000.0f, 1500.0f };
+		ASSERT_EQ(scores_out_size, expected_scores_out_size);
+
+		for (int i = 0; i < scores_out_size; i++) {
+			ASSERT_EQ(scores_out[i], expected_scores_out[i]);
+		}
+		delete[] scores_out;
+	}
+	TEST(_graphCInterface, GetEdgeCostsFromNodeIDs) {
+		HF::SpatialStructures::Graph g;
+		g.Compress();
+
+		std::string cost_type = "TestCost";
+
+		g.addEdge(0, 1, 50.0f); g.addEdge(0, 2, 10.0f); g.addEdge(1, 2, 150.0f); g.addEdge(1, 3, 70.0f);
+		g.addEdge(2, 3, 70.0f);
+
+		g.addEdge(0, 1, 100.0f, cost_type); g.addEdge(0, 2, 50.0f, cost_type); g.addEdge(1, 2, 20.0f, cost_type);
+		g.addEdge(1, 3, 1000.0f, cost_type); g.addEdge(2, 3, 1500.0f, cost_type);
+
+		float* scores_out = new float[3];
+		int scores_out_size = 0;
+
+		std::vector<int> ids = { 0,1,1,2,2,3 };
+
+		GetEdgeCostsFromNodeIDs(&g, ids.data(), cost_type.c_str(), ids.size(), scores_out, &scores_out_size);
+
+		int expected_scores_out_size = 3;
+		std::vector<float> expected_scores_out = { 100.0f, 20.0f, 1500.0f };
+
+		ASSERT_EQ(scores_out_size, expected_scores_out_size);
+		for (int i = 0; i < scores_out_size; i++)
+		{
+			ASSERT_EQ(scores_out[i], expected_scores_out[i]);
+		}
+
+		delete[] scores_out;
 	}
 	// Verify that deallocating the scores array doesn't corrupt the heap. 
 	// The other test cases cover things like Adding and getting node attributes.
