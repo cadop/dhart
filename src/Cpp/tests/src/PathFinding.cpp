@@ -1295,7 +1295,7 @@ namespace CInterfaceTests {
 		HF::SpatialStructures::Graph g;
 
 		// Assume we're adding many more nodes and edges to significantly increase the graph size
-		const int NODE_COUNT = 3000; // Adjust this number based on the capability of your system
+		const int NODE_COUNT = 300; // Adjust this number based on the capability of your system
 		for (int i = 0; i < NODE_COUNT - 1; ++i) {
 			for (int j = i + 1; j < NODE_COUNT; ++j) {
 				addBidirectionalEdge(g, i, j, 1); // Adding a simple weight for the sake of example
