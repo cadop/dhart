@@ -300,6 +300,83 @@ namespace HF::GraphGenerator {
 		return calc_slope > -1.0 * gp.down_slope && calc_slope < gp.up_slope;
 	}
 
+	HF::SpatialStructures::EdgeSet CalculateStepType(const HF::SpatialStructures::Subgraph& sg, RayTracer& rt, const GraphParams& params) {
+		// Step type will be stored here and returned from this function
+
+		//Initialize output
+		std::vector<HF::SpatialStructures::EdgeSet> edge_set;
+
+		//From Subgraph sg
+		Node parent_node = sg.m_parent;
+		std::vector<Edge> edge_list = sg.m_edges;
+
+		// We can preallocate this container to have edge_list.size()
+		// blocks since we know how many children are in the subgraph.
+		std::vector<HF::SpatialStructures::IntEdge> children(edge_list.size());
+		auto it_children = children.begin();
+
+		//For every edge...
+		for (Edge link_a : edge_list) {
+			Node curr_child = link_a.child;
+
+			//Type Casting
+			real_t parent_x = CastToReal(parent_node.x);
+			real_t parent_y = CastToReal(parent_node.y);
+			real_t parent_z = CastToReal(parent_node.z);
+
+			real_t child_x = CastToReal(curr_child.x);
+			real_t child_y = CastToReal(curr_child.y);
+			real_t child_z = CastToReal(curr_child.z);
+
+			std::vector<real_t> parent_loc = { parent_x, parent_y, parent_z };
+			std::vector<real_t> child_loc = { child_x, child_y, child_z };
+
+			real3 parent_cast = CastToReal3(parent_loc);
+			real3 child_cast = CastToReal3(child_loc);
+
+			//Get the step type between parent and child
+			STEP step_type = CheckConnection(parent_cast, child_cast, rt, params);
+
+			//Construct an intedge for this parent-child pair to add to edgeset
+			HF::SpatialStructures::IntEdge ie = { link_a.child.id, static_cast<float>(step_type) };
+
+			*(it_children++) = ie;
+		}
+
+		HF::SpatialStructures::EdgeSet es = { parent_node.id, children };
+
+		return es;
+	}
+
+	std::vector<HF::SpatialStructures::EdgeSet> CalculateStepType(const HF::SpatialStructures::Graph& g, RayTracer& rt, const GraphParams& params) {
+		// Retrieve all nodes from g so we can obtain subgraphs.
+		std::vector<HF::SpatialStructures::Node> nodes = g.Nodes();
+
+		// The result container will always be, at most, the node count of g. 
+		// We can preallocate this memory so we do not have to resize during the loop below.
+		std::vector<HF::SpatialStructures::EdgeSet> result(nodes.size());
+		auto it_result = result.begin();
+
+		for (Node parent_node : nodes) {
+			// Get subgraph via parent_node
+			HF::SpatialStructures::Subgraph sg = g.GetSubgraph(parent_node);
+
+			// Call CalculateStepType using the subgraph
+			HF::SpatialStructures::EdgeSet step_types = CalculateStepType(sg, rt, params);
+
+			*(it_result++) = step_types;
+		}
+		return result;
+	}
+
+	void CalculateAndStoreStepType(HF::SpatialStructures::Graph& g, RayTracer& rt, const GraphParams& params) {
+		// calculates and stores step types of all edges and stores it in the hashmap
+
+		// Get vector of edgesets which contain step types
+		auto result = HF::GraphGenerator::CalculateStepType(g, rt, params);
+		g.AddEdges(result, "step_type");
+	}
+
 	HF::SpatialStructures::STEP CheckConnection(
 		const real3& parent,
 		const real3& child,
