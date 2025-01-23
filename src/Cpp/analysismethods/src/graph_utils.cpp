@@ -371,6 +371,7 @@ namespace HF::GraphGenerator {
 
 	void CalculateAndStoreStepType(HF::SpatialStructures::Graph& g, HF::RayTracer::MultiRT& rt, const GraphParams& params) {
 		// calculates and stores step types of all edges and stores it in the graph
+		g.Compress()
 
 		// Get all edges with weights corresponding to step type
 		auto result = HF::GraphGenerator::CalculateStepType(g, rt, params);
