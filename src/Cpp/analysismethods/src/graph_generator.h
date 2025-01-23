@@ -12,6 +12,7 @@
 #include <vector>
 #include <array>
 #include <Node.h>
+#include <graph.h>
 #include <cassert>
 #include <variant>
 #include <MultiRT.h>
@@ -26,6 +27,8 @@ namespace HF::SpatialStructures {
 	class Graph;
 	struct Edge;
 	enum STEP;
+	struct Subgraph;
+	struct EdgeSet;
 }
 
 /*! \brief Generate a graph of accessible space from a given start point. 
@@ -780,6 +783,24 @@ namespace HF::GraphGenerator {
 		const real3 & child,
 		RayTracer& rt,
 		const GraphParams & params
+	);
+
+	HF::SpatialStructures::EdgeSet CalculateStepType(
+		const HF::SpatialStructures::Subgraph& sg,
+		RayTracer& rt,
+		const GraphParams& params
+	);
+
+	std::vector<HF::SpatialStructures::EdgeSet> CalculateStepType(
+		const HF::SpatialStructures::Graph& g,
+		RayTracer& rt,
+		const GraphParams& params
+	);
+
+	void CalculateAndStoreStepType(
+		HF::SpatialStructures::Graph& g,
+		RayTracer& rt,
+		const GraphParams& params
 	);
 
 	/*! 
