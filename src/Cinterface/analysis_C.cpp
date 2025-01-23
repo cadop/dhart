@@ -126,6 +126,8 @@ C_INTERFACE CalculateAndStoreStepTypes(
 	params.precision.ground_offset = ground_offset;
 	params.precision.node_z = node_z;
 	params.precision.node_spacing = node_spacing;
+	
+	g->Compress();
 
 	auto result = CalculateStepType(*g, HF::RayTracer::MultiRT(ray_tracer), params);
 
