@@ -9,6 +9,7 @@
 #include <edge.h>
 #include <node.h>
 #include <Constants.h>
+#include <analysis_C.h>
 #include <graph_generator.h>
 #include <objloader.h>
 #include <unique_queue.h>
@@ -704,7 +705,6 @@ TEST(_GraphGenerator, CalculateStepType) {
 
 TEST(_GraphGenerator, CalculateAndStoreStepType) {
 	EmbreeRayTracer ray_tracer = CreateGGExmapleRT();
-	//! [EX_CheckStepTypes]
 
 	// Create graph parameters
 	HF::GraphGenerator::GraphParams params;
@@ -713,6 +713,7 @@ TEST(_GraphGenerator, CalculateAndStoreStepType) {
 	params.precision.node_z = 0.01f;
 	params.precision.ground_offset = 0.01f;
 
+	// Construct graph
 	Graph g;
 	Node N0 = Node(0, 0, 1);
 	Node N1 = Node(0, 2, 0);
@@ -727,20 +728,64 @@ TEST(_GraphGenerator, CalculateAndStoreStepType) {
 
 	g.Compress();
 
+	// Compute and store step types in graph
 	CalculateAndStoreStepType(g, HF::RayTracer::MultiRT(&ray_tracer), params);
 
 	std::vector<HF::SpatialStructures::EdgeSet> result = g.GetEdges("step_type");
 
-	HF::SpatialStructures::EdgeSet node_one_edgeset = result[0];
-	std::vector<HF::SpatialStructures::IntEdge> node_one_inteedges = node_one_edgeset.children;
+	// Testing node 0's edges
+	HF::SpatialStructures::EdgeSet node_zero_edgeset = result[0];
+	std::vector<HF::SpatialStructures::IntEdge> node_zero_inteedges = node_zero_edgeset.children;
 
 	std::vector<float> expected_step_types = { 1,0,0,1 };
 
 	for (int i = 0; i < expected_step_types.size(); i++) {
-		float step_type = node_one_inteedges[i].weight;
+		float step_type = node_zero_inteedges[i].weight;
 		ASSERT_EQ(step_type, expected_step_types[i]);
 	}
+}
 
+TEST(_GraphGenerator, CalculateAndStoreStepTypes) {
+	EmbreeRayTracer ray_tracer = CreateGGExmapleRT();
+
+	// Create graph parameters
+	HF::GraphGenerator::GraphParams params;
+	params.up_step = 2; params.down_step = 2;
+	params.up_slope = 45; params.down_slope = 45;
+	params.precision.node_z = 0.01f;
+	params.precision.ground_offset = 0.01f;
+
+	// Construct graph
+	Graph g;
+	Node N0 = Node(0, 0, 1);
+	Node N1 = Node(0, 2, 0);
+	Node N2 = Node(1, 0, 0);
+	Node N3 = Node(0, 1, 0);
+	Node N4 = Node(2, 0, 0);
+
+	g.addEdge(N0, N1);
+	g.addEdge(N0, N2);
+	g.addEdge(N0, N3);
+	g.addEdge(N0, N4);
+
+	g.Compress();
+
+	// Compute and store step types in graph
+
+	CalculateAndStoreStepTypes(&g, &ray_tracer, params.up_step, params.down_step, params.up_slope, params.down_slope, params.precision.ground_offset, params.precision.node_z, params.precision.node_spacing);
+
+	std::vector<HF::SpatialStructures::EdgeSet> result = g.GetEdges("step_type");
+
+	// Testing node 0's edges
+	HF::SpatialStructures::EdgeSet node_zero_edgeset = result[0];
+	std::vector<HF::SpatialStructures::IntEdge> node_zero_inteedges = node_zero_edgeset.children;
+
+	std::vector<float> expected_step_types = { 1,0,0,1 };
+
+	for (int i = 0; i < expected_step_types.size(); i++) {
+		float step_type = node_zero_inteedges[i].weight;
+		ASSERT_EQ(step_type, expected_step_types[i]);
+	}
 }
 
 
