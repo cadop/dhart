@@ -300,7 +300,7 @@ namespace HF::GraphGenerator {
 		return calc_slope > -1.0 * gp.down_slope && calc_slope < gp.up_slope;
 	}
 
-	HF::SpatialStructures::EdgeSet CalculateStepType(const HF::SpatialStructures::Subgraph& sg, RayTracer& rt, const GraphParams& params) {
+	HF::SpatialStructures::EdgeSet CalculateStepType(const HF::SpatialStructures::Subgraph& sg, HF::RayTracer::MultiRT& rt, const GraphParams& params) {
 		// Step type will be stored here and returned from this function
 
 		//Initialize output
@@ -348,7 +348,7 @@ namespace HF::GraphGenerator {
 		return es;
 	}
 
-	std::vector<HF::SpatialStructures::EdgeSet> CalculateStepType(const HF::SpatialStructures::Graph& g, RayTracer& rt, const GraphParams& params) {
+	std::vector<HF::SpatialStructures::EdgeSet> CalculateStepType(const HF::SpatialStructures::Graph& g, HF::RayTracer::MultiRT& rt, const GraphParams& params) {
 		// Retrieve all nodes from g so we can obtain subgraphs.
 		std::vector<HF::SpatialStructures::Node> nodes = g.Nodes();
 
@@ -369,11 +369,13 @@ namespace HF::GraphGenerator {
 		return result;
 	}
 
-	void CalculateAndStoreStepType(HF::SpatialStructures::Graph& g, RayTracer& rt, const GraphParams& params) {
-		// calculates and stores step types of all edges and stores it in the hashmap
+	void CalculateAndStoreStepType(HF::SpatialStructures::Graph& g, HF::RayTracer::MultiRT& rt, const GraphParams& params) {
+		// calculates and stores step types of all edges and stores it in the graph
 
-		// Get vector of edgesets which contain step types
+		// Get all edges with weights corresponding to step type
 		auto result = HF::GraphGenerator::CalculateStepType(g, rt, params);
+
+		// Add edges to the graph
 		g.AddEdges(result, "step_type");
 	}
 

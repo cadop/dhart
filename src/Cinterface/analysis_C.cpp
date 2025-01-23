@@ -105,3 +105,31 @@ C_INTERFACE GenerateGraphObstacles(
 	*out_graph = G;
 	return OK;
 }
+
+C_INTERFACE CalculateAndStoreStepTypes(
+	HF::SpatialStructures::Graph* g, 
+	HF::RayTracer::EmbreeRayTracer* ray_tracer,
+	float up_step,
+	float down_step,
+	float up_slope,
+	float down_slope,
+	float ground_offset,
+	float node_z,
+	float node_spacing
+	) {
+	HF::GraphGenerator::Precision precision = { node_z, node_spacing, ground_offset };
+	HF::GraphGenerator::GraphParams params;
+
+	//Setup params struct
+	params.up_step = up_step; params.down_step = down_step;
+	params.up_slope = up_slope; params.down_slope = down_slope;
+	params.precision.ground_offset = ground_offset;
+	params.precision.node_z = node_z;
+	params.precision.node_spacing = node_spacing;
+
+	auto result = CalculateStepType(*g, HF::RayTracer::MultiRT(ray_tracer), params);
+
+	g->AddEdges(result, "step_type");
+
+	return OK;
+}

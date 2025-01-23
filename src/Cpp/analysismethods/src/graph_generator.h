@@ -787,19 +787,19 @@ namespace HF::GraphGenerator {
 
 	HF::SpatialStructures::EdgeSet CalculateStepType(
 		const HF::SpatialStructures::Subgraph& sg,
-		RayTracer& rt,
+		HF::RayTracer::MultiRT& rt,
 		const GraphParams& params
 	);
 
 	std::vector<HF::SpatialStructures::EdgeSet> CalculateStepType(
 		const HF::SpatialStructures::Graph& g,
-		RayTracer& rt,
+		HF::RayTracer::MultiRT& rt,
 		const GraphParams& params
 	);
 
 	void CalculateAndStoreStepType(
 		HF::SpatialStructures::Graph& g,
-		RayTracer& rt,
+		HF::RayTracer::MultiRT& rt,
 		const GraphParams& params
 	);
 

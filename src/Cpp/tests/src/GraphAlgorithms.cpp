@@ -12,7 +12,6 @@
 #include<ray_data.h>
 
 #include "analysis_C.h"
-#include "graph.h"
 
 namespace HF {
 

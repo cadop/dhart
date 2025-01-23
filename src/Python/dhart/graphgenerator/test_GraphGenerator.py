@@ -2,7 +2,8 @@ import math
 
 from dhart.geometry import LoadOBJ, CommonRotations, OBJGroupType
 from dhart.raytracer import EmbreeBVH
-from dhart.graphgenerator.graph_generator import GenerateGraph
+from dhart.graphgenerator.graph_generator import GenerateGraph, CalculateAndStoreStepTypes
+from dhart.spatialstructures.graph import *
 import dhart
 
 def test_GetNodes():
@@ -110,3 +111,31 @@ def test_obstacle_support():
     assert(obstacle_graph is not None)
 
     assert(obstacle_graph.NumNodes() < non_obstacle_graph.NumNodes())
+
+def test_step_type_query():
+    mesh_path = dhart.get_sample_model("plane.obj")
+    obj = LoadOBJ(mesh_path, rotation=CommonRotations.Yup_to_Zup)
+    bvh = EmbreeBVH(obj)
+
+    g = Graph()
+
+    g.AddEdgeToGraph((0,0,1), (0,2,0), -1)
+    g.AddEdgeToGraph((0,0,1), (1,0,0), -1)
+    g.AddEdgeToGraph((0,0,1), (0,1,0), -1)
+    g.AddEdgeToGraph((0,0,1), (2,0,0), -1)
+
+    up_step, up_slope = 2, 45
+    down_step, down_slope = 2, 45
+    node_z = 0.01
+    ground_offset = 0.01
+
+    CalculateAndStoreStepTypes(
+        g, bvh, up_step, up_slope, down_step, down_slope, node_z, ground_offset
+    )
+
+    expected_steps = [1, 0, 0, 1]
+    parent = 0
+    for child in range(1, 5):
+        result_step = g.GetEdgeCost(parent, child, "step_type")
+        assert(result_step == expected_steps[i-1])
+    
