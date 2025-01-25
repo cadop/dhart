@@ -146,24 +146,10 @@ def GenerateGraph(
 
 def CalculateAndStoreStepTypes(
     g: Graph,
-    bvh: EmbreeBVH,
-    up_step: float = 0.197,
-    up_slope: float = 20,
-    down_step: float = 0.197,
-    down_slope: float = 20,
-    ground_offset: float = 0.01,
-    node_z: float = 0.0001,
-    node_spacing: float = 0.00001
+    bvh: EmbreeBVH
 ) -> None:
 
     graph_generator_native_functions.CalculateAndStoreStepTypes(
         g.graph_ptr,
-        bvh.pointer,
-        up_step,
-        up_slope,
-        down_step,
-        down_slope,
-        ground_offset,
-        node_z,
-        node_spacing
+        bvh.pointer
     )

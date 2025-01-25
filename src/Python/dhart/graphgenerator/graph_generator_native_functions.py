@@ -102,13 +102,6 @@ def GenerateGraph(
 def CalculateAndStoreStepTypes(
     graph_ptr : c_void_p,
     rt_ptr: c_void_p,
-    up_step: float,
-    up_slope: float,
-    down_step: float,
-    down_slope: float,
-    ground_offset: float,
-    node_z: float,
-    node_spacing: float
 ) -> None:
     """Queries the graph's step types and adds them as edges to the graph.
 
@@ -118,12 +111,5 @@ def CalculateAndStoreStepTypes(
     error_code = HFPython.CalculateAndStoreStepTypes(
         graph_ptr,
         rt_ptr,
-        c_float(up_step),
-        c_float(down_step),
-        c_float(up_slope),
-        c_float(down_slope),
-        c_float(ground_offset),
-        c_float(node_z),
-        c_float(node_spacing)
     )
     assert(error_code == HF_STATUS.OK)
