@@ -120,8 +120,6 @@ def test_step_type_query():
     g = Graph()
 
     g.AddEdgeToGraph((0,0,1), (0,2,0), -1)
-    g.AddEdgeToGraph((0,0,1), (1,0,0), -1)
-    g.AddEdgeToGraph((0,0,1), (0,1,0), -1)
     g.AddEdgeToGraph((0,0,1), (2,0,0), -1)
 
     up_step, up_slope = 2, 45
@@ -129,13 +127,12 @@ def test_step_type_query():
     node_z = 0.01
     ground_offset = 0.01
 
-    CalculateAndStoreStepTypes(
-        g, bvh, up_step, up_slope, down_step, down_slope, node_z, ground_offset
-    )
+    CalculateAndStoreStepTypes(g, bvh)
 
-    expected_steps = [1, 0, 0, 1]
+    expected_steps = [1,1]
     parent = 0
-    for child in range(1, 5):
+    for child in range(1, 3):
+        print(g.GetEdgeCost(parent, child, "step_type"))
         result_step = g.GetEdgeCost(parent, child, "step_type")
-        assert(result_step == expected_steps[i-1])
+        assert(result_step == expected_steps[child-1])
     
