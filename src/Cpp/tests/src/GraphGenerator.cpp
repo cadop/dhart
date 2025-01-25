@@ -167,7 +167,7 @@ TEST(_GraphGenerator, OutDegree) {
 
 	//! [EX_OutDegree]
 
-	auto out_str = PrintGraph(g);
+	//auto out_str = PrintGraph(g);
 
 	const auto graph_nodes = g.Nodes();
 
@@ -665,127 +665,150 @@ TEST(_GraphGenerator, OcclusionCheck) {
 }
 
 TEST(_GraphGenerator, CalculateStepType) {
-	EmbreeRayTracer ray_tracer = CreateGGExmapleRT();
+	// Load an OBJ containing a simple plane
+	auto mesh = HF::Geometry::LoadMeshObjects("energy_blob_zup.obj", HF::Geometry::ONLY_FILE, false);
+	
+	// Create a raytracer using this obj
+	EmbreeRayTracer ray_tracer = HF::RayTracer::EmbreeRayTracer(mesh);
 	//! [EX_CheckStepTypes]
 
-	// Create graph parameters
+	// Create a graphgenerator using the raytracer we just created
+	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+
+	// Setup Graph Parameters
+	std::array<float, 3> start_point{ 0,0,20 };
+	std::array<float, 3> spacing{ 1,1,1 };
+
 	HF::GraphGenerator::GraphParams params;
-	params.up_step = 2; params.down_step = 2;
-	params.up_slope = 45; params.down_slope = 45;
-	params.precision.node_z = 0.01f;
-	params.precision.ground_offset = 0.01f;
 
-	Graph g;
-	Node N0 = Node(0, 0, 1);
-	Node N1 = Node(0, 2, 0);
-	Node N2 = Node(1, 0, 0);
-	Node N3 = Node(0, 1, 0);
-	Node N4 = Node(2, 0, 0);
+	int max_nodes = 5000;
+	params.up_step = 0.5; params.down_step = 0.5;
+	params.up_slope = 20; params.down_slope = 20;
+	int max_step_connections = 1;
+	int min_connections = 4;
+	params.precision.node_z = 0.0001;
+	params.precision.ground_offset = 0.01;
+	params.precision.node_spacing = 0.00001;
 
-	g.addEdge(N0, N1);
-	g.addEdge(N0, N2);
-	g.addEdge(N0, N3);
-	g.addEdge(N0, N4);
+	// Generate the graph using our parameters
+	HF::SpatialStructures::Graph g = GG.BuildNetwork(
+		start_point,
+		spacing,
+		max_nodes,
+		params.up_step, params.up_slope,
+		params.down_step, params.down_slope,
+		max_step_connections,
+		min_connections
+	);
 
+	// Compression needed to access step types
 	g.Compress();
 
-	std::vector<HF::SpatialStructures::EdgeSet> step_types = HF::GraphGenerator::CalculateStepType(g, HF::RayTracer::MultiRT(&ray_tracer), params);
+	// Compute all step types and store in std::vector<EdgeSet>
+	auto step_types = HF::GraphGenerator::CalculateStepType(g, HF::RayTracer::MultiRT(&ray_tracer));
 
-	HF::SpatialStructures::EdgeSet node_one_edgeset = step_types[0];
-	std::vector<HF::SpatialStructures::IntEdge> node_one_inteedges = node_one_edgeset.children;
+	// Compare result to CheckConnection results for initial graph generation.
+	bool equal_connections = HF::GraphGenerator::CompareCheckConnections(g, HF::RayTracer::MultiRT(&ray_tracer),
+		params, step_types);
 
-	std::vector<float> expected_step_types = { 1,0,0,1 };
-
-	for (int i = 0; i < expected_step_types.size(); i++) {
-		float step_type = node_one_inteedges[i].weight;
-		ASSERT_EQ(step_type, expected_step_types[i]);
-	}
+	ASSERT_TRUE(equal_connections);
 	//! [EX_CheckStepTypes]
 }
 
 TEST(_GraphGenerator, CalculateAndStoreStepType) {
-	EmbreeRayTracer ray_tracer = CreateGGExmapleRT();
+	// Load an OBJ containing a simple plane
+	auto mesh = HF::Geometry::LoadMeshObjects("energy_blob_zup.obj", HF::Geometry::ONLY_FILE, false);
 
-	// Create graph parameters
+	// Create a raytracer using this obj
+	EmbreeRayTracer ray_tracer = HF::RayTracer::EmbreeRayTracer(mesh);
+	//! [EX_CheckStepTypes]
+
+	// Create a graphgenerator using the raytracer we just created
+	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+
+	// Setup Graph Parameters
+	std::array<float, 3> start_point{ 0,0,20 };
+	std::array<float, 3> spacing{ 1,1,1 };
+
 	HF::GraphGenerator::GraphParams params;
-	params.up_step = 2; params.down_step = 2;
-	params.up_slope = 45; params.down_slope = 45;
-	params.precision.node_z = 0.01f;
-	params.precision.ground_offset = 0.01f;
 
-	// Construct graph
-	Graph g;
-	Node N0 = Node(0, 0, 1);
-	Node N1 = Node(0, 2, 0);
-	Node N2 = Node(1, 0, 0);
-	Node N3 = Node(0, 1, 0);
-	Node N4 = Node(2, 0, 0);
+	int max_nodes = 5000;
+	params.up_step = 0.5; params.down_step = 0.5;
+	params.up_slope = 20; params.down_slope = 20;
+	int max_step_connections = 1;
+	int min_connections = 4;
+	params.precision.node_z = 0.0001;
+	params.precision.ground_offset = 0.01;
+	params.precision.node_spacing = 0.00001;
 
-	g.addEdge(N0, N1);
-	g.addEdge(N0, N2);
-	g.addEdge(N0, N3);
-	g.addEdge(N0, N4);
-
-	g.Compress();
+	// Generate the graph using our parameters
+	HF::SpatialStructures::Graph g = GG.BuildNetwork(
+		start_point,
+		spacing,
+		max_nodes,
+		params.up_step, params.up_slope,
+		params.down_step, params.down_slope,
+		max_step_connections,
+		min_connections
+	);
 
 	// Compute and store step types in graph
-	CalculateAndStoreStepType(g, HF::RayTracer::MultiRT(&ray_tracer), params);
+	HF::GraphGenerator::CalculateAndStoreStepType(g, HF::RayTracer::MultiRT(&ray_tracer));
 
 	std::vector<HF::SpatialStructures::EdgeSet> result = g.GetEdges("step_type");
 
-	// Testing node 0's edges
-	HF::SpatialStructures::EdgeSet node_zero_edgeset = result[0];
-	std::vector<HF::SpatialStructures::IntEdge> node_zero_inteedges = node_zero_edgeset.children;
+	bool equal_connections = HF::GraphGenerator::CompareCheckConnections(g, HF::RayTracer::MultiRT(&ray_tracer),
+		params, result);
 
-	std::vector<float> expected_step_types = { 1,0,0,1 };
-
-	for (int i = 0; i < expected_step_types.size(); i++) {
-		float step_type = node_zero_inteedges[i].weight;
-		ASSERT_EQ(step_type, expected_step_types[i]);
-	}
+	ASSERT_TRUE(equal_connections);
 }
 
 TEST(_GraphGenerator, CalculateAndStoreStepTypes) {
-	EmbreeRayTracer ray_tracer = CreateGGExmapleRT();
+	// Load an OBJ containing a simple plane
+	auto mesh = HF::Geometry::LoadMeshObjects("energy_blob_zup.obj", HF::Geometry::ONLY_FILE, false);
 
-	// Create graph parameters
+	// Create a raytracer using this obj
+	EmbreeRayTracer ray_tracer = HF::RayTracer::EmbreeRayTracer(mesh);
+	//! [EX_CheckStepTypes]
+
+	// Create a graphgenerator using the raytracer we just created
+	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+
+	// Setup Graph Parameters
+	std::array<float, 3> start_point{ 0,0,20 };
+	std::array<float, 3> spacing{ 1,1,1 };
+
 	HF::GraphGenerator::GraphParams params;
-	params.up_step = 2; params.down_step = 2;
-	params.up_slope = 45; params.down_slope = 45;
-	params.precision.node_z = 0.01f;
-	params.precision.ground_offset = 0.01f;
 
-	// Construct graph
-	Graph g;
-	Node N0 = Node(0, 0, 1);
-	Node N1 = Node(0, 2, 0);
-	Node N2 = Node(1, 0, 0);
-	Node N3 = Node(0, 1, 0);
-	Node N4 = Node(2, 0, 0);
+	int max_nodes = 5000;
+	params.up_step = 0.5; params.down_step = 0.5;
+	params.up_slope = 20; params.down_slope = 20;
+	int max_step_connections = 1;
+	int min_connections = 4;
+	params.precision.node_z = 0.0001;
+	params.precision.ground_offset = 0.01;
+	params.precision.node_spacing = 0.00001;
 
-	g.addEdge(N0, N1);
-	g.addEdge(N0, N2);
-	g.addEdge(N0, N3);
-	g.addEdge(N0, N4);
-
-	g.Compress();
+	// Generate the graph using our parameters
+	HF::SpatialStructures::Graph g = GG.BuildNetwork(
+		start_point,
+		spacing,
+		max_nodes,
+		params.up_step, params.up_slope,
+		params.down_step, params.down_slope,
+		max_step_connections,
+		min_connections
+	);
 
 	// Compute and store step types in graph
-
-	CalculateAndStoreStepTypes(&g, &ray_tracer, params.up_step, params.down_step, params.up_slope, params.down_slope, params.precision.ground_offset, params.precision.node_z, params.precision.node_spacing);
+	CalculateAndStoreStepTypes(&g, &ray_tracer);
 
 	std::vector<HF::SpatialStructures::EdgeSet> result = g.GetEdges("step_type");
 
-	// Testing node 0's edges
-	HF::SpatialStructures::EdgeSet node_zero_edgeset = result[0];
-	std::vector<HF::SpatialStructures::IntEdge> node_zero_inteedges = node_zero_edgeset.children;
+	bool equal_connections = HF::GraphGenerator::CompareCheckConnections(g, HF::RayTracer::MultiRT(&ray_tracer),
+		params, result);
 
-	std::vector<float> expected_step_types = { 1,0,0,1 };
-
-	for (int i = 0; i < expected_step_types.size(); i++) {
-		float step_type = node_zero_inteedges[i].weight;
-		ASSERT_EQ(step_type, expected_step_types[i]);
-	}
+	ASSERT_TRUE(equal_connections);
 }
 
 

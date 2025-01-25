@@ -761,7 +761,26 @@ namespace HF::GraphGenerator {
 		RayTracer& rt,
 		const GraphParams & params
 	);
+	/*!
+		\brief Determine what kind of step (if any) is between parent and child, given
+			that a connection was verified using the graph generator. 
 
+		\param parent Node being traversed from
+		\param child  Node being traversed to
+		\param rt Raytracer to use for all ray intersections
+
+		\returns The type of step between parent/child.
+
+		\par Example
+		\snippet tests\src\GraphGenerator.cpp EX_GraphGeneratorRayTracer
+		\snippet tests\src\GraphGenerator.cpp EX_CheckConnection
+		`[1,0,0,1]`
+	*/
+	HF::SpatialStructures::STEP CheckConnection(
+		const real3& parent,
+		const real3& child,
+		RayTracer& rt
+	);
 	/*! 
 		\brief Determine what kind of step (if any) is between parent and child.
 	
@@ -787,22 +806,25 @@ namespace HF::GraphGenerator {
 
 	HF::SpatialStructures::EdgeSet CalculateStepType(
 		const HF::SpatialStructures::Subgraph& sg,
-		HF::RayTracer::MultiRT& rt,
-		const GraphParams& params
+		HF::RayTracer::MultiRT& rt
 	);
 
 	std::vector<HF::SpatialStructures::EdgeSet> CalculateStepType(
 		const HF::SpatialStructures::Graph& g,
-		HF::RayTracer::MultiRT& rt,
-		const GraphParams& params
+		HF::RayTracer::MultiRT& rt
 	);
 
 	void CalculateAndStoreStepType(
 		HF::SpatialStructures::Graph& g,
-		HF::RayTracer::MultiRT& rt,
-		const GraphParams& params
+		HF::RayTracer::MultiRT& rt
 	);
 
+	bool CompareCheckConnections(
+		HF::SpatialStructures::Graph& g,
+		RayTracer& rt,
+		const GraphParams& params,
+		std::vector < HF::SpatialStructures::EdgeSet> to_compare
+	);
 	/*! 
 		\brief Determine if there is a valid line of sight between parent and child
 		
