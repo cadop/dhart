@@ -230,38 +230,13 @@ C_INTERFACE GenerateGraphObstacles(
 
 	\param		ray_tracer				Raytracer containing the geometry to use for graph generation.
 
-	\param		up_step					Maximum height of a step the graph can traverse.
-										Any steps higher this will be considered inaccessible.
-
-	\param		up_slope				Maximum upward slope the graph can traverse in degrees.
-										Any slopes steeper than this will be considered inaccessible.
-
-	\param		down_step				Maximum step down the graph can traverse.
-										Any steps steeper than this will be considered inaccessible.
-
-	\param		down_slope				The maximum downward slope the graph can traverse.
-										Any slopes steeper than this will be considered inaccessible.
-
-	\param		ground_offset			Distance to offset nodes from the ground before checking line of sight.
-
-	\param		node_z					Precision to round the z-component of nodes after a raycast is performed.
-
-	\param		node_spacing			Precision to round nodes after spacing is calculated.
-
 	\returns	\link HF_STATUS::OK \endlink if query was successful and edges corresponding to step types have been added to the graph.
 */
 
 C_INTERFACE CalculateAndStoreStepTypes(
 	HF::SpatialStructures::Graph* g,
-	HF::RayTracer::EmbreeRayTracer* ray_tracer,
-	float up_step,
-	float down_step,
-	float up_slope,
-	float down_slope,
-	float ground_offset,
-	float node_z,
-	float node_spacing
+	HF::RayTracer::EmbreeRayTracer* ray_tracer
 );
-/**@}*/
+/**@}*/ 
 
 #endif /* ANALYSIS_C_H */
