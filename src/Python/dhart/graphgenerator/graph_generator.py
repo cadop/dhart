@@ -148,7 +148,46 @@ def CalculateAndStoreStepTypes(
     g: Graph,
     bvh: EmbreeBVH
 ) -> None:
+    """Calculates and stores the step types of all edges in a given graph. It will be stored as cost type "step_type."
 
+    Args:
+        g (Graph): Graph to query step types on.
+        bvh (EmbreeBVH): Geometry to use for graph generation. The mesh used
+            to generate the BVH must have been Z-up.
+
+    Returns:
+        None
+
+    Examples:
+        Generate a graph and query its step types.
+        >>> from dhart.geometry import LoadOBJ, MeshInfo, CommonRotations
+        >>> from dhart.raytracer import EmbreeBVH  
+        >>> from dhart.geometry.mesh_info import ConstructPlane
+        >>> from dhart.graphgenerator import GenerateGraph
+        >>> import dhart
+
+        >>> obj_path = dhart.get_sample_model("energy_blob_zup.obj")
+        >>> obj = LoadOBJ(obj_path)
+        >>> bvh = EmbreeBVH(obj, True)
+
+        >>> start_point = (0, 0, 20)
+        >>> spacing = (1, 1, 1)
+        >>> max_nodes = 5000
+        >>> up_step, down_step = 0.5, 0.5
+        >>> up_slope, down_slope = 20, 20
+        >>> max_step_connections = 1
+        >>> min_connections = 4
+
+        >>> g = GenerateGraph(bvh, start_point, spacing, max_nodes,
+                            up_step,up_slope,down_step,down_slope,
+                            max_step_connections, min_connections)
+
+
+        >>> CalculateAndStoreStepTypes(g, bvh)
+        
+        >>> print(g.GetEdgeCost(0, 1, "step_type"))
+        3.0
+    """
     graph_generator_native_functions.CalculateAndStoreStepTypes(
         g.graph_ptr,
         bvh.pointer
