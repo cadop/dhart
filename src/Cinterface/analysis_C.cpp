@@ -105,3 +105,17 @@ C_INTERFACE GenerateGraphObstacles(
 	*out_graph = G;
 	return OK;
 }
+
+C_INTERFACE CalculateAndStoreStepTypes(
+	HF::SpatialStructures::Graph* g, 
+	HF::RayTracer::EmbreeRayTracer* ray_tracer
+	) {
+	
+	g->Compress();
+
+	auto result = HF::GraphGenerator::CalculateStepType(*g, HF::RayTracer::MultiRT(ray_tracer));
+
+	g->AddEdges(result, "step_type");
+
+	return OK;
+}

@@ -98,4 +98,18 @@ def GenerateGraph(
         return graph_ptr
     elif error_code == HF_STATUS.NO_GRAPH:
         return None
-    
+
+def CalculateAndStoreStepTypes(
+    graph_ptr : c_void_p,
+    rt_ptr: c_void_p,
+) -> None:
+    """Queries the graph's step types and adds them as edges to the graph.
+
+    Returns:
+        None
+    """
+    error_code = HFPython.CalculateAndStoreStepTypes(
+        graph_ptr,
+        rt_ptr,
+    )
+    assert(error_code == HF_STATUS.OK)

@@ -223,6 +223,20 @@ C_INTERFACE GenerateGraphObstacles(
 	HF::SpatialStructures::Graph** out_graph
 );
 
-/**@}*/
+/*!
+	\brief		Query the graph and identify the step types of all edges, adding them to the graph.
+
+	\param		g						Graph used to query step types.
+
+	\param		ray_tracer				Raytracer containing the geometry to use for graph generation.
+
+	\returns	\link HF_STATUS::OK \endlink if query was successful and edges corresponding to step types have been added to the graph.
+*/
+
+C_INTERFACE CalculateAndStoreStepTypes(
+	HF::SpatialStructures::Graph* g,
+	HF::RayTracer::EmbreeRayTracer* ray_tracer
+);
+/**@}*/ 
 
 #endif /* ANALYSIS_C_H */
