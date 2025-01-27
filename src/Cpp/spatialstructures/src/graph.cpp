@@ -1519,19 +1519,14 @@ namespace HF::SpatialStructures {
 	int Graph::CountEdges(const string& cost_type) const {
 		// Count the number of edges of cost_type in a graph
 		vector<EdgeSet> AllEdges = GetEdges(cost_type);
-		int count = 0;
-		for (int i = 0; i < AllEdges.size(); i++) {
-			std::vector<IntEdge> curr_children = AllEdges[i].children;
-			count += curr_children.size();
-		}
-		return count;
+		return CountEdgesFromEdgeSets(AllEdges);
 	}
 
 	int Graph::CountEdgesFromEdgeSets(vector<EdgeSet> AllEdges) const {
 		int count = 0;
-		for (int i = 0; i < AllEdges.size(); i++) {
-			std::vector<IntEdge> curr_children = AllEdges[i].children;
-			count += curr_children.size();
+		for (EdgeSet edgeset : AllEdges) {
+			std::vector<IntEdge> children = edgeset.children;
+			count += children.size();
 		}
 		return count;
 	}
