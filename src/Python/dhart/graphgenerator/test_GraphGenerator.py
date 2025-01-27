@@ -113,26 +113,49 @@ def test_obstacle_support():
     assert(obstacle_graph.NumNodes() < non_obstacle_graph.NumNodes())
 
 def test_step_type_query():
-    mesh_path = dhart.get_sample_model("plane.obj")
-    obj = LoadOBJ(mesh_path, rotation=CommonRotations.Yup_to_Zup)
-    bvh = EmbreeBVH(obj)
+    # Get a sample model path
+    obj_path = dhart.get_sample_model("energy_blob_zup.obj")
 
-    g = Graph()
+    # Load the obj file
+    obj = LoadOBJ(obj_path)
 
-    g.AddEdgeToGraph((0,0,1), (0,2,0), -1)
-    g.AddEdgeToGraph((0,0,1), (2,0,0), -1)
+    # Create a BVH
+    bvh = EmbreeBVH(obj, True)
 
-    up_step, up_slope = 2, 45
-    down_step, down_slope = 2, 45
-    node_z = 0.01
-    ground_offset = 0.01
+    # Set the graph parameters
+    start_point = (0, 0, 20)
+    spacing = (1, 1, 1)
+    max_nodes = 5000
+    up_step, down_step = 0.5, 0.5
+    up_slope, down_slope = 20, 20
+    max_step_connections = 1
+    min_connections = 4
+    cores = -1
+
+    g = GenerateGraph(bvh, start_point, spacing, max_nodes,
+                            up_step,up_slope,down_step,down_slope,
+                            max_step_connections, min_connections,
+                            cores)
+
 
     CalculateAndStoreStepTypes(g, bvh)
 
-    expected_steps = [1,1]
-    parent = 0
-    for child in range(1, 3):
-        print(g.GetEdgeCost(parent, child, "step_type"))
-        result_step = g.GetEdgeCost(parent, child, "step_type")
-        assert(result_step == expected_steps[child-1])
+    # expected step types in format (parent, (child ids), (step types))
+    expected_steps = ((0, (1,2,3,4), (3,1,2,2)), (4, (0,9,11,12), (3,3,1,2)),
+                    (100, (67,143,144,145),(1,1,2,1)),
+                    (200, (152,181,182,199,202,236,256,257), (3,3,2,1,1,2,1,2)),
+                    (500, (431, 432, 489, 573), (1,1,1,1)), (750, (663,664, 841, 842), (1,1,1,1)),
+                    (1000, (895, 896, 1111, 1112), (1,1,1,1)),
+                    (1250, (1123,1124,1125,1249,1251,1388,1389,1390), (3,1,1,3,1,3,1,1)),
+                    (1500, (1349,1350,1498,1499,1501,1663,1664,1665), (1,1,1,1,1,1,1,1)),
+                    (2000, (1826,1827,1828,1999,2001,2179,2180,2181), (1,1,1,1,1,1,1,1)),
+                    (3000, (2860,2861,2862,2999,3001,3103,3104,3105), (1,2,2,1,1,1,1,1)))
+    
+    for parent, children, expected_types in expected_steps:
+        for i in range(len(children)):
+            child = children[i]
+            print(parent, child)
+            expected_step_type = float(expected_types[i])
+            result_step = g.GetEdgeCost(parent, child, "step_type")
+            assert(result_step == expected_step_type)
     
