@@ -190,12 +190,26 @@ C_INTERFACE GetEdgeCosts(
 	float* out_scores,
 	int* out_score_size
 ) {
-	vector<float> v_costs = g->GetEdgeCosts(cost_type);
-	for (int i = 0; i < v_costs.size(); i++)
-	{
-		out_scores[i] = v_costs[i];
+	try {
+		vector<float> v_costs = g->GetEdgeCosts(cost_type);
+		for (int i = 0; i < v_costs.size(); i++)
+		{
+			out_scores[i] = v_costs[i];
+		}
+		*out_score_size = v_costs.size();
 	}
-	*out_score_size = v_costs.size();
+	catch (HF::Exceptions::NoCost)
+	{
+		return NO_COST;
+	}
+	catch (std::logic_error)
+	{
+		return NOT_COMPRESSED;
+	}
+	catch (...)
+	{
+		return GENERIC_ERROR;
+	}
 	return OK;
 }
 

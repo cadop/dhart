@@ -1202,7 +1202,7 @@ namespace HF::SpatialStructures {
 
 				// directed parameter may be true or false
 				std::vector<float> aggregate_graph = graph.AggregateGraph(aggregate, true);
-			\endcodef
+			\endcode
 		*/
 		std::vector<float> AggregateGraph(COST_AGGREGATE agg_type, bool directed = true, const std::string& cost_type = "") const;
 		/*!
@@ -2088,55 +2088,56 @@ namespace HF::SpatialStructures {
 		bool IsFloatAttribute(const std::string& name) const;
 
 		/// <summary>
-		/// Get edge costs of all given edges
+		/// Count the number of edges of associated cost type
 		/// </summary>
-		/// <param name="name">
-		/// The attribute that will be cleared from this graph's internal hashmap
+		/// <param name="cost_type">
+		/// The desired cost type to count the number of edges of
 		/// </param>
-
-		/*!
-			\brief
-			\param name
-
-			\code
-				// TODO example
-			\endcode
-		*/
+		/// <returns>
+		/// The number of edges of associated cost type in the graph
+		/// </returns>
 
 		int CountEdges(const std::string& cost_type) const;
+
 		/// <summary>
-		/// Get edge costs of all given edges
+		/// Count the number of edges in a given edgeset.
 		/// </summary>
-		/// <param name="name">
-		/// The attribute that will be cleared from this graph's internal hashmap
+		/// <param name="AllEdges">
+		/// The edgeset to count the number of edges in
 		/// </param>
-
-		/*!
-			\brief
-			\param name
-
-			\code
-				// TODO example
-			\endcode
-		*/
+		/// <returns>
+		/// The number of edges in the given edgeset
+		/// </returns>
+		
 		int CountEdgesFromEdgeSets(std::vector<EdgeSet> AllEdges) const;
+
 		/// <summary>
 		/// Get edge costs of all given edges
 		/// </summary>
-		/// <param name="name">
-		/// The attribute that will be cleared from this graph's internal hashmap
+		/// <param name="cost_type">
+		///  The desired cost type to get costs for
 		/// </param>
+		/// <returns>
+		/// A vector of floats containing all costs of given cost type
+		/// </returns>
 
-		/*!
-			\brief
-			\param name
-
-			\code
-				// TODO example
-			\endcode
-		*/
 		std::vector<float> GetEdgeCosts(const std::string& cost_type) const;
+
+		/// <summary>
+		/// Get costs of all given edges
+		/// </summary>
+		/// <param name="ids">
+		///  The ids of nodes to map to edges for cost calculation
+		/// </param>
+		/// <param name="cost_type">
+		///  The desired cost type to get costs for
+		/// </param>
+		/// <returns>
+		/// A vector of floats containing costs of given cost type associated with the given edges
+		/// </returns>
+		
 		std::vector<float> GetEdgeCostsFromNodeIDs(std::vector<int>& ids, const std::string& cost_type) const;
+
 		/// <summary>
 		/// Clears the attribute at name and all of its contents from the internal hashmap
 		/// </summary>
@@ -2232,8 +2233,9 @@ namespace HF::SpatialStructures {
 
 
 		/*! \brief Get the cost map for the graph
-		
-		/// TODO: Fill this in
+ 
+
+			\param cost_type Name of te cost to get the cost map for
 		
 		*/
 		std::unordered_map<std::string, EdgeCostSet> Graph::GetCostMap(const std::string& cost_type = " ") const;

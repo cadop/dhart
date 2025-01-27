@@ -1545,11 +1545,17 @@ namespace HF::SpatialStructures {
 
 	vector<float> Graph::GetEdgeCosts(const std::string& cost_type) const {
 		// Need to support default cost query
+		// No edges of associated cost
 		if (edge_cost_maps.count(cost_type) < 1) return vector<float>();
 
+		// Get cost map associated with cost type
 		std::unordered_map<std::string, EdgeCostSet> costmap = GetCostMap(cost_type);
 		auto specificcost = costmap[cost_type];
+
+		// Get the array of costs
 		auto costarray = specificcost.GetEdgeCostSetCosts();
+
+		// Copy it
 		vector<float> copied_costs = costarray;
 		return copied_costs;
 	}
@@ -1559,7 +1565,10 @@ namespace HF::SpatialStructures {
 		// Return an empty array if this attribute doesn't exist
 		// Need to raise error if odd number of ids
 		// Maybe add check if each edge is valid
+
+		// No edges associated with cost type
 		if (edge_cost_maps.count(cost_type) < 1) return vector<float>();
+
 		int number_of_ids = ids.size();
 		// Strides of 2 per edge
 		int num_edges = number_of_ids / 2;

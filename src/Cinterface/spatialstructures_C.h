@@ -1119,11 +1119,37 @@ C_INTERFACE GraphAttrsToCosts(
 	HF::SpatialStructures::Direction dir);
 
 /*!
-	\brief TODO
+	\brief		Get all edge costs of type cost_type in the graph
 
-	\param TODO
+	\param	g				The graph to traverse
+	\param	cost_type		Name of the cost type to get the cost from
+	\param	out_scores		Output array for the costs in the graph
+	\param	out_scores_size Output parameter for the size of out_scores buffer, updated as required
 
-	\returns 
+	\pre		g is a valid graph.
+
+	\post
+	`out_scores` is updated with the cost of traversing from parent to child. If no
+	edge exists between parent and child, it won't be added.
+
+	\returns \link HF_STATUS::OK \endlink on success
+	\returns \link HF_STATUS::NO_COST \endlink if there was no cost with cost_name
+
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_teardown (how to destroy a graph)
+
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+
+	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
 */
 C_INTERFACE GetEdgeCosts(
 	const HF::SpatialStructures::Graph* g,
@@ -1131,9 +1157,11 @@ C_INTERFACE GetEdgeCosts(
 	float* out_scores,
 	int* out_score_size);
 /*!
-	\brief TODO
+	\brief Count the number of edges associated with cost_type in a given graph.
 
-	\param TODO
+	\param	g				The graph to query
+	\param	cost_type		Name of the cost type to count edges for
+	\param	out_size		Output parameter which holds the number of edges counted.
 
 	\returns
 */
@@ -1142,17 +1170,46 @@ C_INTERFACE CountNumberOfEdges(
 	const char* cost_type,
 	int* out_size);
 /*!
-	\brief TODO
+	\brief		Get the costs of traversing from `parent` to `child` in a given array
 
-	\param TODO
+	\param	g				The graph to traverse
+	\param	ids				An array of ids to get the costs from
+	\param	cost_type		Name of the cost type to get the cost from
+	\param	num_ids			The number of ids given (non-unique)
+	\param	out_scores		Output array for the costs in the graph
+	\param	out_scores_size Output parameter for the size of out_scores buffer, updated as required
 
-	\returns TODO
+	\pre		g is a valid graph.
+	\pre		ids is in the format [parent1, child1, parent2, child2,...] which maps to [edge1,edge2...]
+
+	\post
+	`out_scores` is updated with the cost of traversing from parent to child. If no
+	edge exists between parent and child, it won't be added.
+
+	\returns \link HF_STATUS::OK \endlink on success
+	\returns \link HF_STATUS::NO_COST \endlink if there was no cost with cost_name
+
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_teardown (how to destroy a graph)
+
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+
+	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
 */
 C_INTERFACE GetEdgeCostsFromNodeIDs(
 	const HF::SpatialStructures::Graph* g,
 	const int* ids,
 	const char* cost_type,
-	int num_nodes,
+	int num_ids,
 	float* out_scores,
 	int* out_score_size);
 /**@}*/

@@ -440,7 +440,7 @@ def C_GetEdgeCosts(
         error_code = HFPython.GetEdgeCostsFromNodeIDs(
             graph_ptr, id_arr, cost_ptr, num_ids, byref(out_scores), byref(out_scores_size)
         )   
-    print(out_scores)
+
     # Only returns OK
     assert error_code == HF_STATUS.OK
     # Return an empty list if size is zero
@@ -450,8 +450,8 @@ def C_GetEdgeCosts(
     out_vals = []
     for i in range(0, out_scores_size.value):
         score = out_scores[i]
-        print(score)
         out_vals.append(score)
+        
     return out_vals
 
 def c_get_node_attributes(

@@ -284,19 +284,22 @@ namespace GraphTests {
 	}
 
 	TEST(_Graph, CountNumberOfEdges) {
+		// Construct graph
 		HF::SpatialStructures::Graph g;
-		g.Compress();
 		HF::SpatialStructures::Node N1(1, 1, 2);
 		HF::SpatialStructures::Node N2(2, 3, 4, 5);
 		HF::SpatialStructures::Node N3(3, 10, 2, 10);
 		g.addEdge(N1, N2, 1);
 		g.addEdge(N2, N3, 1);
+		g.Compress();
 
+		// Add edges of alternate cost type
 		const std::string cost_name = "TestCost";
 
 		g.addEdge(N1, N2, 30, cost_name);
 		g.addEdge(N2, N3, 20, cost_name);
 
+		// Count TestCost edges
 		auto number_of_edges_after = g.CountEdges(cost_name);
 		ASSERT_EQ(number_of_edges_after, 2);
 	}
@@ -2486,17 +2489,20 @@ namespace CInterfaceTests {
 	}
 
 	TEST(_graphCInterface, GetEdgeCosts) {
+		// Construct graph
 		HF::SpatialStructures::Graph g;
-		g.Compress();
 
 		std::string cost_type = "TestCost";
 
 		g.addEdge(0, 1, 50.0f); g.addEdge(0, 2, 10.0f); g.addEdge(1, 2, 150.0f); g.addEdge(1, 3, 70.0f);
 		g.addEdge(2, 3, 70.0f);
 
+		g.Compress();
+
 		g.addEdge(0, 1, 100.0f, cost_type); g.addEdge(0, 2, 50.0f, cost_type); g.addEdge(1, 2, 20.0f, cost_type);
 		g.addEdge(1, 3, 1000.0f, cost_type); g.addEdge(2, 3, 1500.0f, cost_type);
 
+		// Query alternate cost type
 		float* scores_out = new float[5];
 		int scores_out_size = 0;
 
@@ -2512,17 +2518,20 @@ namespace CInterfaceTests {
 		delete[] scores_out;
 	}
 	TEST(_graphCInterface, GetEdgeCostsFromNodeIDs) {
+		// Construct graph
 		HF::SpatialStructures::Graph g;
-		g.Compress();
 
 		std::string cost_type = "TestCost";
 
 		g.addEdge(0, 1, 50.0f); g.addEdge(0, 2, 10.0f); g.addEdge(1, 2, 150.0f); g.addEdge(1, 3, 70.0f);
 		g.addEdge(2, 3, 70.0f);
 
+		g.Compress();
+
 		g.addEdge(0, 1, 100.0f, cost_type); g.addEdge(0, 2, 50.0f, cost_type); g.addEdge(1, 2, 20.0f, cost_type);
 		g.addEdge(1, 3, 1000.0f, cost_type); g.addEdge(2, 3, 1500.0f, cost_type);
 
+		// Query alternate cost type using subset of edges
 		float* scores_out = new float[3];
 		int scores_out_size = 0;
 
