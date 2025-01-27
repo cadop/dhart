@@ -12,7 +12,6 @@ set(DEPENDENCY_BINARIES
         "${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Release/msvcp140.dll"
         "${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Release/vcruntime140.dll"
 )
-   
 set(DEBUG_DEPENDENCY_BINARIES
     "${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Debug/vcruntime140_1d.dll"
     "${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Debug/vcruntime140d.dll"
