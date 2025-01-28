@@ -10,7 +10,7 @@ from dhart.native_collections import FloatArray2D, IntArray2D
 
 __all__ = ["ConvertNodesToIds", "DijkstraShortestPath", 
            "DijkstraFindAllShortestPaths", "calculate_distance_and_predecessor",
-           "AllShortestPathsCSR", "get_path_from_csr"]
+           "AllShortestPathsCSR", "get_path_from_csr", "AlternateCostsAlongPath"]
 
 
 def ConvertNodesToIds(graph: Graph, nodes: List[Union[Tuple, int]]) -> List[int]:
@@ -479,3 +479,46 @@ def get_path_from_csr(csr, node1, node2):
     start_idx = csr.indptr[node_idx]
     end_idx = csr.indptr[node_idx + 1]
     return csr.indices[start_idx:end_idx]
+
+def AlternateCostsAlongPath(g: Graph, cost_type: str, path: Union[List[int], Path]) -> List[float]:
+        """Get the costs for each edge in a set of edges
+        
+        Args:
+            cost_type : str
+                Cost type to get the cost from. If left blank will use the graph's default cost type. (second part needs to be implemented)
+            path : List[int]
+                Path of IDs in the format [node1,node2,...,nodek]
+        Returns:
+            List[float] : An array of costs of cost_type corresponding to edges in path
+
+        Examples
+        --------
+        >>> from dhart.spatialstructures import Graph
+        >>> # Create a simple graph with 4 nodes
+        >>> g = Graph()
+
+        >>> g.AddEdgeToGraph(0,1,50)
+        >>> g.AddEdgeToGraph(0,2,10)
+        >>> g.AddEdgeToGraph(1,2,150)
+        >>> g.AddEdgeToGraph(1,3,70)
+        >>> g.AddEdgeToGraph(2,3,70)
+        
+        >>> csr = g.CompressToCSR()
+        >>> cost_type = "TestCost"
+
+        >>> g.AddEdgeToGraph(0, 1, 100, cost_type)
+        >>> g.AddEdgeToGraph(0, 2, 50, cost_type)
+        >>> g.AddEdgeToGraph(1, 2, 20, cost_type)
+        >>> g.AddEdgeToGraph(1,3, 1000, cost_type)
+        >>> g.AddEdgeToGraph(2,3, 1500, cost_type)
+
+        >>> shortest_path = [0,2,3]
+
+        >>> AlternateCostsAlongPath(g, cost_type, shortest_path)
+        [50.0, 1500.0]
+        """
+        if isinstance(path, list):
+            path_size = len(path)
+        else:
+            path_size = path.size[0]
+        return pathfinder_native_functions.C_AlternateCostsAlongPath(g.graph_ptr, cost_type, path, path_size)

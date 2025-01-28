@@ -462,45 +462,6 @@ class Graph:
             child,
             cost_type
             )
-
-    def AlternateCostsAlongPath(self, cost_type: str, path: List[int]) -> List[float]:
-        """Get the costs for each edge in a set of edges
-        
-        Args:
-            cost_type : str
-                Cost type to get the cost from. If left blank will use the graph's default cost type. (second part needs to be implemented)
-            path : List[int]
-                Path of IDs in the format [node1,node2,...,nodek]
-        Returns:
-            List[float] : An array of costs of cost_type corresponding to edges in path
-
-        Examples
-        --------
-        >>> from dhart.spatialstructures import Graph
-        >>> # Create a simple graph with 4 nodes
-        >>> g = Graph()
-
-        >>> g.AddEdgeToGraph(0,1,50)
-        >>> g.AddEdgeToGraph(0,2,10)
-        >>> g.AddEdgeToGraph(1,2,150)
-        >>> g.AddEdgeToGraph(1,3,70)
-        >>> g.AddEdgeToGraph(2,3,70)
-        
-        >>> csr = g.CompressToCSR()
-        >>> cost_type = "TestCost"
-
-        >>> g.AddEdgeToGraph(0, 1, 100, cost_type)
-        >>> g.AddEdgeToGraph(0, 2, 50, cost_type)
-        >>> g.AddEdgeToGraph(1, 2, 20, cost_type)
-        >>> g.AddEdgeToGraph(1,3, 1000, cost_type)
-        >>> g.AddEdgeToGraph(2,3, 1500, cost_type)
-
-        >>> shortest_path = [0,2,3]
-
-        >>> g.AlternateCostsAlongPath(cost_type, shortest_path)
-        [50.0, 1500.0]
-        """
-        return spatial_structures_native_functions.C_AlternateCostsAlongPath(self.graph_ptr, cost_type, path)
         
     def GetEdgeCosts(self, cost_type: str, ids: List[int] | None = None) -> List[float]:
         """Get the costs for each edge in a set of edges

@@ -299,3 +299,56 @@ def C_GetPredAsPaths(
     # with None in the output array
 
     return (node_vector, node_data, length_vector, length_data)
+
+def C_AlternateCostsAlongPath(
+        graph_ptr: c_void_p,
+        cost_type: str,
+        path: Union[List[int], c_void_p]) -> List[float]:
+    """ Get alternate edge costs from a given path of a graph in C++
+    
+    Args:
+        graph_ptr: Pointer to the graph to get costs from.
+        cost_type: Unique key of the type of cost to get.
+        ids: A path in the form of node ids [node1, node2,...,nodek]
+    
+    Returns:
+        A list of floats containing the score for specified nodes along path.
+        If the cost type does not exist, an empty list will be returned instead.
+    """
+    cost_ptr = GetStringPtr(cost_type)
+    if isinstance(path, list):
+        num_ids = len(path)
+    else:
+        out_size = c_int(0)
+        HFPython.GetPathInfo(byref(path.path_ptr), byref(path.data_ptr), byref(out_size))
+        num_ids = out_size.value
+
+    num_edges = num_ids - 1
+    out_score_type = c_float * num_edges
+
+    # Output
+    out_scores = out_score_type()
+    out_scores_size = c_int(0)
+
+    if isinstance(path, list):
+        path_arr = ConvertIntsToArray(path)
+        error_code = HFPython.AlternateCostsAlongPathWithIDs(
+            graph_ptr, path_arr, cost_ptr, num_ids, byref(out_scores), byref(out_scores_size)
+        )   
+    else:
+        error_code = HFPython.AlternateCostsAlongPathStruct(
+            graph_ptr, byref(path), cost_ptr, byref(out_scores), byref(out_scores_size)
+        )
+
+    # Only returns OK
+    assert error_code == HF_STATUS.OK
+    # Return an empty list if size is zero
+    if out_scores_size.value == 0:
+        return []
+    
+    out_vals = []
+    for i in range(0, out_scores_size.value):
+        score = out_scores[i]
+        out_vals.append(score)
+        
+    return out_vals
