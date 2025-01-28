@@ -81,14 +81,14 @@
     >>> node_ids = nodes.array['id']
     >>> for c,n in path:
     ...     # find the numpy index where the node id exists (index should be same as the node id)
-    ...     node_id = np.where(node_ids==n)
+    ...     node_id = np.where(node_ids==n)[0][0]
     ...     print('Index: ',n ,' , Node id: ',node_id, ',  is: ', nodes[node_id])
-    Index:  0  , Node id:  (array([0], dtype=int64),) ,  is:  [(0., 0., 0., 0, 0)]
-    Index:  3  , Node id:  (array([3], dtype=int64),) ,  is:  [(-1., 1., 0., 0, 3)]
-    Index:  15  , Node id:  (array([15], dtype=int64),) ,  is:  [(-2., 2., 0., 0, 15)]
-    Index:  36  , Node id:  (array([36], dtype=int64),) ,  is:  [(-2., 3., 0., 0, 36)]
-    Index:  64  , Node id:  (array([64], dtype=int64),) ,  is:  [(-3., 4., 0., 0, 64)]
-    Index:  100  , Node id:  (array([100], dtype=int64),) ,  is:  [(-4., 5., 0., 0, 100)]
+    Index:  0  , Node id:  [0] ,  is:  [(0., 0., 0., 0, 0)]
+    Index:  3  , Node id:  [3] ,  is:  [(-1., 1., 0., 0, 3)]
+    Index:  15  , Node id:  [15] ,  is:  [(-2., 2., 0., 0, 15)]
+    Index:  36  , Node id:  [36] ,  is:  [(-2., 3., 0., 0, 36)]
+    Index:  64  , Node id:  [64] ,  is:  [(-3., 4., 0., 0, 64)]
+    Index:  100  , Node id:  [100] ,  is:  [(-4., 5., 0., 0, 100)]
 
 """
 
@@ -160,5 +160,5 @@ print('Total path cost: ', path_sum)
 node_ids = nodes.array['id']
 for c,n in path:
     # find the numpy index where the node id exists (index should be same as the node id)
-    node_id = np.where(node_ids==n)
+    node_id = np.where(node_ids==n)[0]
     print('Index: ',n ,' , Node id: ',node_id, ',  is: ', nodes[node_id])

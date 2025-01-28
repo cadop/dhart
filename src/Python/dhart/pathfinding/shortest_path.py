@@ -494,6 +494,7 @@ def AlternateCostsAlongPath(g: Graph, cost_type: str, path: Union[List[int], Pat
         Examples
         --------
         >>> from dhart.spatialstructures import Graph
+        >>> from dhart.pathfinding import AlternateCostsAlongPath
         >>> # Create a simple graph with 4 nodes
         >>> g = Graph()
 

@@ -262,3 +262,4 @@ def test_AlternateCostsAlongPathStruct():
     SP = DijkstraShortestPath(g, 0, 3)
 
     alternate_costs = AlternateCostsAlongPath(g, cost_type, SP)
+    assert(alternate_costs == [50,1500])

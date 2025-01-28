@@ -481,18 +481,20 @@ class Graph:
         >>> g = Graph()
         >>> cost_type = "TestCost"
         >>> g.AddEdgeToGraph(0,1,50)
+        >>> g.AddEdgeToGraph(0,2,50)
+        >>> g.AddEdgeToGraph(1,2,50)
+        >>> csr = g.CompressToCSR()
         >>> g.AddEdgeToGraph(0, 1, 100, cost_type)
         >>> g.AddEdgeToGraph(0, 2, 50, cost_type)
         >>> g.AddEdgeToGraph(1, 2, 20, cost_type)
-        >>> csr = g.CompressToCSR()
 
         >>> ids = [0,1,1,2]
         >>> # All costs of cost_type
         >>> g.GetEdgeCosts(cost_type)
-        [100, 50, 20]
+        [100.0, 50.0, 20.0]
         >>> # Specific edges to get costs for
         >>> g.GetEdgeCosts(cost_type, ids)
-        [100, 20]
+        [100.0, 20.0]
         """
         return spatial_structures_native_functions.C_GetEdgeCosts(self.graph_ptr, cost_type, ids)
     def NumNodes(self) -> int:
