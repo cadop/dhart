@@ -303,6 +303,90 @@ namespace GraphTests {
 		auto number_of_edges_after = g.CountEdges(cost_name);
 		ASSERT_EQ(number_of_edges_after, 2);
 	}
+
+	TEST(_Graph, MapPathToVectorOfNodes) {
+		// Construct graph
+		HF::SpatialStructures::Graph g;
+		g.addEdge(0, 1, 1);
+		g.addEdge(1, 2, 1);
+		g.addEdge(2, 3, 1);
+		g.Compress();
+
+		// First we use the node ids
+		vector<int> path_ids = { 0,1,2,3 };
+
+		vector<int> result_ids = g.MapPathToVectorOfNodes(path_ids);
+
+		// Check that the new vector is te correct size;
+		ASSERT_EQ(result_ids.size(), 6);
+
+		vector<int> expected_result = { 0,1,1,2,2,3 };
+		for (int i = 0; i < expected_result.size(); i++) {
+			ASSERT_EQ(result_ids[i], expected_result[i]);
+		}
+
+		// Next we test using a Path structure
+		PathMember member1 = { 1, 0 };
+		PathMember member2 = { 1, 1 };
+		PathMember member3 = { 1, 2 };
+		PathMember member4 = { 1, 3 };
+		vector<PathMember> members = { member1, member2, member3, member4 };
+		Path path_struct = { members };
+
+		vector<int> result_struct = g.MapPathToVectorOfNodes(path_struct);
+		result_struct = g.MapPathToVectorOfNodes(result_struct);
+
+		ASSERT_EQ(result_struct.size(), 6);
+
+		for (int i = 0; i < expected_result.size(); i++) {
+			ASSERT_EQ(result_struct[i], expected_result[i]);
+		}
+	}
+
+	TEST(_Graph, AlternateCostsAlongPath) {
+		// Construct graph
+		HF::SpatialStructures::Graph g;
+		g.addEdge(0, 1, 1);
+		g.addEdge(1, 2, 1);
+		g.addEdge(2, 3, 1);
+
+		g.Compress();
+
+		const std::string cost_name = "TestCost";
+
+		g.addEdge(0, 1, 30, cost_name);
+		g.addEdge(1, 2, 20, cost_name);
+		g.addEdge(2, 3, 10, cost_name);
+
+		// First we test with node ids
+		vector<int> shortest_path_ids = { 0,1,2,3 };
+
+		vector<float> result_ids = g.AlternateCostsAlongPath(shortest_path_ids, cost_name);
+
+		ASSERT_EQ(result_ids.size(), 3);
+
+		vector<float> expected_result_ids = { 30, 20, 10 };
+		for (int i = 0; i < expected_result_ids.size(); i++) {
+			ASSERT_EQ(result_ids[i], expected_result_ids[i]);
+		}
+
+		// Next we test using a Path structure
+		PathMember member1 = { 1, 0 };
+		PathMember member2 = { 1, 1 };
+		PathMember member3 = { 1, 2 };
+		PathMember member4 = { 1, 3 };
+		vector<PathMember> members = { member1, member2, member3, member4 };
+		Path shortest_path_struct = { members };
+
+		vector<float> result_struct = g.AlternateCostsAlongPath(shortest_path_struct, cost_name);
+
+		ASSERT_EQ(result_ids.size(), 3);
+
+		vector<float> expected_result_struct = { 30, 20, 10 };
+		for (int i = 0; i < expected_result_struct.size(); i++) {
+			ASSERT_EQ(result_ids[i], expected_result_struct[i]);
+		}
+	}
     TEST(_Graph, SizeEqualsNumberOfNodes) {
         HF::SpatialStructures::Graph g;
 
@@ -2550,6 +2634,79 @@ namespace CInterfaceTests {
 
 		delete[] scores_out;
 	}
+
+	TEST(_graphCInterface, AlternateCostsAlongPathWithIDs) {
+		// Construct graph
+		HF::SpatialStructures::Graph g;
+
+		std::string cost_type = "TestCost";
+
+		g.addEdge(0, 1, 50.0f); g.addEdge(0, 2, 10.0f); g.addEdge(1, 2, 150.0f); g.addEdge(1, 3, 70.0f);
+		g.addEdge(2, 3, 70.0f);
+
+		g.Compress();
+
+		g.addEdge(0, 1, 100.0f, cost_type); g.addEdge(0, 2, 50.0f, cost_type); g.addEdge(1, 2, 20.0f, cost_type);
+		g.addEdge(1, 3, 1000.0f, cost_type); g.addEdge(2, 3, 1500.0f, cost_type);
+
+		// Query alternate cost type using subset of edges
+		float* scores_out = new float[2];
+		int scores_out_size = 0;
+
+		std::vector<int> shortest_path = { 0,2,3 };
+
+		AlternateCostsAlongPathWithIDs(&g, shortest_path.data(), cost_type.c_str(), shortest_path.size(), scores_out, &scores_out_size);
+
+		int expected_scores_out_size = 2;
+		std::vector<float> expected_scores_out = { 50.0f, 1500.0f };
+
+		ASSERT_EQ(scores_out_size, expected_scores_out_size);
+		for (int i = 0; i < scores_out_size; i++)
+		{
+			ASSERT_EQ(scores_out[i], expected_scores_out[i]);
+		}
+
+		delete[] scores_out;
+	}
+
+	TEST(_graphCInterface, AlternateCostsAlongPathStruct) {
+		// Construct graph
+		HF::SpatialStructures::Graph g;
+
+		std::string cost_type = "TestCost";
+
+		g.addEdge(0, 1, 50.0f); g.addEdge(0, 2, 10.0f); g.addEdge(1, 2, 150.0f); g.addEdge(1, 3, 70.0f);
+		g.addEdge(2, 3, 70.0f);
+
+		g.Compress();
+
+		g.addEdge(0, 1, 100.0f, cost_type); g.addEdge(0, 2, 50.0f, cost_type); g.addEdge(1, 2, 20.0f, cost_type);
+		g.addEdge(1, 3, 1000.0f, cost_type); g.addEdge(2, 3, 1500.0f, cost_type);
+
+		// Query alternate cost type using subset of edges
+		float* scores_out = new float[2];
+		int scores_out_size = 0;
+
+		PathMember member1 = { 10.0f, 0 };
+		PathMember member2 = { 70.0f, 2 };
+		PathMember member3 = { -1, 3 };
+		vector<PathMember> members = { member1, member2, member3 };
+		Path shortest_path = { members };
+
+		AlternateCostsAlongPathStruct(&g, &shortest_path, cost_type.c_str(), scores_out, &scores_out_size);
+
+		int expected_scores_out_size = 2;
+		std::vector<float> expected_scores_out = { 50.0f, 1500.0f };
+
+		ASSERT_EQ(scores_out_size, expected_scores_out_size);
+		for (int i = 0; i < scores_out_size; i++)
+		{
+			ASSERT_EQ(scores_out[i], expected_scores_out[i]);
+		}
+
+		delete[] scores_out;
+	}
+
 	// Verify that deallocating the scores array doesn't corrupt the heap. 
 	// The other test cases cover things like Adding and getting node attributes.
 	TEST(_graphCInterface, DeleteScoreArray) {

@@ -22,6 +22,8 @@ namespace HF {
 		class Graph;
 		struct Subgraph;
 
+		class Path;
+
 		enum class COST_AGGREGATE : int;
 
 		struct Node;	// Careful with these forward declares!
@@ -1210,6 +1212,47 @@ C_INTERFACE GetEdgeCostsFromNodeIDs(
 	const int* ids,
 	const char* cost_type,
 	int num_ids,
+	float* out_scores,
+	int* out_score_size);
+
+/*!
+	\brief		Get the alternate costs of traversing a given path
+
+	\param	g				The graph to traverse
+	\param	path			A path to get costs from
+	\param	cost_type		Name of the cost type to get the cost from
+	\param	out_scores		Output array for the costs in the graph
+	\param	out_scores_size Output parameter for the size of out_scores buffer, updated as required
+
+	\returns \link HF_STATUS::OK \endlink on success
+	\returns \link HF_STATUS::NO_COST \endlink if there was no cost with cost_name
+*/
+C_INTERFACE AlternateCostsAlongPathWithIDs(
+	const HF::SpatialStructures::Graph* g,
+	const int* ids,
+	const char* cost_type,
+	int num_ids,
+	float* out_scores,
+	int* out_score_size);
+
+/*!
+	\brief		Get the alternate costs of traversing a given path
+
+	\param	g				The graph to traverse
+	\param	ids				A path of ids to get the costs from
+	\param	cost_type		Name of the cost type to get the cost from
+	\param	num_ids			The number of ids given (may be non-unique)
+	\param	out_scores		Output array for the costs in the graph
+	\param	out_scores_size Output parameter for the size of out_scores buffer, updated as required
+
+	\returns \link HF_STATUS::OK \endlink on success
+	\returns \link HF_STATUS::NO_COST \endlink if there was no cost with cost_name
+*/
+
+C_INTERFACE AlternateCostsAlongPathStruct(
+	const HF::SpatialStructures::Graph* g,
+	const HF::SpatialStructures::Path* path,
+	const char* cost_type,
 	float* out_scores,
 	int* out_score_size);
 /**@}*/

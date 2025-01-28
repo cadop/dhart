@@ -11,6 +11,7 @@
 #include <vector>
 #include <Edge.h>
 #include <Node.h>
+#include <path.h>
 #include <Eigen>
 #include <iostream>
 
@@ -2137,6 +2138,60 @@ namespace HF::SpatialStructures {
 		/// </returns>
 		
 		std::vector<float> GetEdgeCostsFromNodeIDs(std::vector<int>& ids, const std::string& cost_type) const;
+		
+		/// <summary>
+		/// Maps a path structure to a vector of node ids (n1,n2,n2,n3,n3...,nk-1,nk)
+		/// </summary>
+		/// <param name="path">
+		///  The path of nodes to map
+		/// </param>
+		/// <returns>
+		/// A vector of node ids that represents the path in the form (n1,n2,n2,n3,n3...,nk-1,nk)
+		/// </returns>
+
+		std::vector<int> Graph::MapPathToVectorOfNodes(HF::SpatialStructures::Path path) const;
+
+		/// <summary>
+		/// Maps a path of node ids (n1,n2,...,nk) to (n1,n2,n2,n3,n3...,nk-1,nk)
+		/// </summary>
+		/// <param name="path">
+		///  The path of nodes to map
+		/// </param>
+		/// <returns>
+		/// A vector of node ids that represents the path in the form (n1,n2,n2,n3,n3...,nk-1,nk)
+		/// </returns>
+
+		std::vector<int> MapPathToVectorOfNodes(std::vector<int>& path) const;
+
+		/// <summary>
+		///  Computes an alternate cost type between nodes along a path.
+		/// </summary>
+		/// <param name="path">
+		///	The path of nodes to get costs between.
+		/// </param>
+		/// <param name="cost_type">
+		///	The type of cost to query
+		/// </param>
+		/// <returns>
+		/// A vector of floats, representing each cost between nodes along the path.
+		/// </returns>
+
+		std::vector<float> Graph::AlternateCostsAlongPath(Path path, const std::string& cost_type) const;
+
+		/// <summary>
+		///  Computes an alternate cost type between nodes along a path.
+		/// </summary>
+		/// <param name="path">
+		///	The path of nodes to get costs between.
+		/// </param>
+		/// <param name="cost_type">
+		///	The type of cost to query
+		/// </param>
+		/// <returns>
+		/// A vector of floats, representing each cost between nodes along the path.
+		/// </returns>
+		
+		std::vector<float> AlternateCostsAlongPath(std::vector<int>& path, const std::string& cost_type) const;
 
 		/// <summary>
 		/// Clears the attribute at name and all of its contents from the internal hashmap

@@ -1587,7 +1587,50 @@ namespace HF::SpatialStructures {
 		// Return all costs
 		return out_costs;
 	}
+	std::vector<int> Graph::MapPathToVectorOfNodes(HF::SpatialStructures::Path path) const {
+		// Map path to vector of nodes
+		int path_size = path.size();
+		std::vector<int> v_ids;
+		v_ids.reserve(path_size);
 
+		for (PathMember curr_node: path.members) {
+			v_ids.push_back(curr_node.node);
+		}
+
+		return v_ids;
+	}
+	std::vector<int> Graph::MapPathToVectorOfNodes(std::vector<int>& path) const {
+		// Maps a path of nodes (n1,n2,...,nk) to (n1,n2,n2,n3,n3...,nk-1,nk)
+		int path_size = path.size();
+		std::vector<int> out;
+		out.reserve(2 * path_size - 2);
+
+		// Starting node should only be in output once
+		out.push_back(path[0]);
+		for (int i = 1; i < path_size - 1; i++) {
+			// Add every node between start and finish twice
+			int node = path[i];
+			out.push_back(node);
+			out.push_back(node);
+		}
+		// Ending node should only be in output once
+		out.push_back(path[path_size - 1]);
+
+		return out;
+	}
+
+	std::vector<float> Graph::AlternateCostsAlongPath(Path path, const std::string& cost_type) const{
+		// Map path struct to vector of int ids
+		vector<int> v_ids = MapPathToVectorOfNodes(path);
+
+		vector<int> node_ids = MapPathToVectorOfNodes(v_ids);
+		return GetEdgeCostsFromNodeIDs(node_ids, cost_type);
+	}
+
+	std::vector<float> Graph::AlternateCostsAlongPath(std::vector<int>& path, const std::string& cost_type) const {
+		vector<int> node_ids = MapPathToVectorOfNodes(path);
+		return GetEdgeCostsFromNodeIDs(node_ids, cost_type);
+	}
 	void Graph::ClearNodeAttributes(std::string name) {
 		/* // requires #include <algorithm>, but not working?
 		std::string lower_cased =

@@ -245,6 +245,69 @@ C_INTERFACE GetEdgeCostsFromNodeIDs(
 	}
 	return OK;
 }
+
+C_INTERFACE AlternateCostsAlongPathStruct(
+	const HF::SpatialStructures::Graph* g,
+	const HF::SpatialStructures::Path* path,
+	const char* cost_type,
+	float* out_scores,
+	int* out_score_size
+) {
+	try {
+		vector<float> v_costs = g->AlternateCostsAlongPath(*path, std::string(cost_type));
+		for (int i = 0; i < v_costs.size(); i++)
+		{
+			out_scores[i] = v_costs[i];
+		}
+		*out_score_size = v_costs.size();
+	}
+	catch (HF::Exceptions::NoCost)
+	{
+		return NO_COST;
+	}
+	catch (std::logic_error)
+	{
+		return NOT_COMPRESSED;
+	}
+	catch (...)
+	{
+		return GENERIC_ERROR;
+	}
+	return OK;
+}
+
+C_INTERFACE AlternateCostsAlongPathWithIDs(
+	const HF::SpatialStructures::Graph* g,
+	const int* path,
+	const char* cost_type,
+	int num_ids,
+	float* out_scores,
+	int* out_score_size
+) {
+	vector<int> v_ids(path, path + num_ids);
+	try {
+		vector<float> v_costs = g->AlternateCostsAlongPath(v_ids, std::string(cost_type));
+		for (int i = 0; i < v_costs.size(); i++)
+		{
+			out_scores[i] = v_costs[i];
+		}
+		*out_score_size = v_costs.size();
+	}
+	catch (HF::Exceptions::NoCost)
+	{
+		return NO_COST;
+	}
+	catch (std::logic_error)
+	{
+		return NOT_COMPRESSED;
+	}
+	catch (...)
+	{
+		return GENERIC_ERROR;
+	}
+	return OK;
+}
+
 C_INTERFACE GetCSRPointers(
 	Graph* graph,
 	int* out_nnz,
