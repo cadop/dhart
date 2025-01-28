@@ -118,11 +118,11 @@
     >>> # The shortest energy path and the shortest distance path differ.
     >>> print(f"Distance path: {distance_path["id"]}")
     Distance path: [  0   7  17  31  49  71  97 127 161 199 241 287 323 361 386 411 436 461
-    486 511 536 561 586 611 636 661 686 711 736 761 786]
+     486 511 536 561 586 611 636 661 686 711 736 761 786]
     >>> 
     >>> print(f"Energy path: {energy_path["id"]}")
     Energy path: [  0   6  15  28  45  66  92 122 156 194 236 282 318 356 381 406 431 457
-    482 507 532 557 582 607 632 657 682 708 734 760 786]
+     482 507 532 557 582 607 632 657 682 708 734 760 786]
     >>> 
     >>> # The energy costs along each path are as follows:
     >>> print(f"Energy cost along shortest distance path: {energy_along_distance_path}")
@@ -130,11 +130,11 @@
     >>> 
     >>> print(f"Energy cost along shortest energy path: {energy_path["cost_to_next"]}")
     Energy cost along shortest energy path: [12.100869  14.714971  14.879747  11.407261   5.6704216 12.496231
-    11.684158   9.923416   9.30909    9.04628    9.380821  11.339294
-    14.562973  17.945984  20.692276  22.447952  49.174408  22.619232
-    18.948212  15.3749695 12.084686   8.797546   6.2996826  5.055084
-    4.1647644  3.5954285 12.745209   4.7065125  2.9411316  2.9284668
-    0.       ]
+     11.684158   9.923416   9.30909    9.04628    9.380821  11.339294
+     14.562973  17.945984  20.692276  22.447952  49.174408  22.619232
+     18.948212  15.3749695 12.084686   8.797546   6.2996826  5.055084
+      4.1647644  3.5954285 12.745209   4.7065125  2.9411316  2.9284668
+      0.       ]
     >>> 
     >>> # Visualize the difference in energy costs between the shortest distance and shortest energy path.
     >>> # Get the x,y,z values of the nodes at shortest energy path ids
@@ -154,7 +154,7 @@
     >>> 
     >>> # Plot the energy along the shortest distance path
     >>> for i in range(len(x_path) - 1):
-    ...     plt.plot(x_path_dist[i:i+2], y_path_dist[i:i+2], color=plt.cm.viridis(energy_along_distance_path[i] / max(energy_along_distance_path)), marker='.', linewidth=3)
+    ...     plt.plot(x_path_dist[i:i+2], y_path_dist[i:i+2], color=plt.cm.viridis(energy_along_distance_path[i] / max(energy_along_distance_path)), marker='.', linewidth=3) # doctest: +SKIP
     ... 
     >>> # Plot the energy along the shortest energy path
     >>> for i in range(len(x_path) - 1):
@@ -162,9 +162,9 @@
     ... 
     >>> plt.show() # doctest: +SKIP
 
- .. plot::
+.. plot::
     :context: close-figs
-
+    
     >>> # The total cost of the shortest energy path is different than the total cost of the energy along the shortest distance path.
     >>> shortest_energy_path_cost = np.sum(energy_path['cost_to_next'])
     >>> 
