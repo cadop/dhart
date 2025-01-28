@@ -280,14 +280,14 @@ plt.show()
 energy_path = DijkstraShortestPath(graph, start_id, end_id, energy_cost_key)
 
 # The shortest energy path and the shortest distance path differ.
-print(f"Distance path: {distance_path["id"]}")
+print(f"Distance path: {distance_path['id']}")
 
-print(f"Energy path: {energy_path["id"]}")
+print(f"Energy path: {energy_path['id']}")
 
 # The energy costs along each path are as follows:
 print(f"Energy cost along shortest distance path: {energy_along_distance_path}")
 
-print(f"Energy cost along shortest energy path: {energy_path["cost_to_next"]}")
+print(f"Energy cost along shortest energy path: {energy_path['cost_to_next']}")
 
 # Visualize the difference in energy costs between the shortest distance and shortest energy path.
 # Get the x,y,z values of the nodes at shortest energy path ids
