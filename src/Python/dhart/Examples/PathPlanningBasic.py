@@ -81,7 +81,7 @@
     >>> node_ids = nodes.array['id']
     >>> for c,n in path:
     ...     # find the numpy index where the node id exists (index should be same as the node id)
-    ...     node_id = np.where(node_ids==n)[0][0]
+    ...     node_id = np.where(node_ids==n)[0]
     ...     print('Index: ',n ,' , Node id: ',node_id, ',  is: ', nodes[node_id])
     Index:  0  , Node id:  [0] ,  is:  [(0., 0., 0., 0, 0)]
     Index:  3  , Node id:  [3] ,  is:  [(-1., 1., 0., 0, 3)]
