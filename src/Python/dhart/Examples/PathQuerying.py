@@ -56,7 +56,7 @@
     >>> # Call the shortest path using distance metrics
     >>> distance_path = DijkstraShortestPath(graph, start_id, end_id)
     >>> 
-    >>> print(f"Distance Path: {distance_path}")
+    >>> print(f"Distance Path: {distance_path}") doctest: +NORMALIZE_WHITESPACE
     Distance Path: [(2.0127509,   0) (2.0350926,   7) (2.0710974,  17) (2.1147027,  31)
      (2.154809 ,  49) (2.167964 ,  71) (2.1390352,  97) (2.099905 , 127)
      (2.0648937, 161) (2.0383816, 199) (2.0266857, 241) (2.0407124, 287)
@@ -116,25 +116,26 @@
     >>> energy_path = DijkstraShortestPath(graph, start_id, end_id, energy_cost_key)
     >>> 
     >>> # The shortest energy path and the shortest distance path differ.
-    >>> print(f"Distance path: {distance_path["id"]}")
+    >>> print(f"Distance path: {distance_path["id"]}") doctest: +NORMALIZE_WHITESPACE
     Distance path: [  0   7  17  31  49  71  97 127 161 199 241 287 323 361 386 411 436 461
-     486 511 536 561 586 611 636 661 686 711 736 761 786]
+    486 511 536 561 586 611 636 661 686 711 736 761 786]
     >>> 
-    >>> print(f"Energy path: {energy_path["id"]}")
+    >>> print(f"Energy path: {energy_path["id"]}") doctest: +NORMALIZE_WHITESPACE
     Energy path: [  0   6  15  28  45  66  92 122 156 194 236 282 318 356 381 406 431 457
-     482 507 532 557 582 607 632 657 682 708 734 760 786]
+    482 507 532 557 582 607 632 657 682 708 734 760 786]
     >>> 
     >>> # The energy costs along each path are as follows:
-    >>> print(f"Energy cost along shortest distance path: {energy_along_distance_path}")
+    >>> print(f"Energy cost along shortest distance path: {energy_asslong_distance_path}")
     Energy cost along shortest distance path: [10.597378730773926, 15.275540351867676, 20.96104621887207, 27.000240325927734, 32.534175872802734, 32.732784271240234, 30.368547439575195, 24.979759216308594, 20.05685043334961, 15.855199813842773, 13.699013710021973, 16.255855560302734, 20.647640228271484, 26.349937438964844, 31.413496017456055, 32.625999450683594, 29.52669906616211, 20.295923233032227, 12.505487442016602, 6.551901817321777, 3.032193183898926, 1.8925143480300903, 2.3157668113708496, 2.428367853164673, 2.453740119934082, 2.3408164978027344, 2.182459831237793, 2.0908737182617188, 2.0618505477905273, 2.051429271697998]
     >>> 
-    >>> print(f"Energy cost along shortest energy path: {energy_path["cost_to_next"]}")
-    Energy cost along shortest energy path: [12.100869  14.714971  14.879747  11.407261   5.6704216 12.496231
-     11.684158   9.923416   9.30909    9.04628    9.380821  11.339294
-     14.562973  17.945984  20.692276  22.447952  49.174408  22.619232
-     18.948212  15.3749695 12.084686   8.797546   6.2996826  5.055084
-      4.1647644  3.5954285 12.745209   4.7065125  2.9411316  2.9284668
-      0.       ]
+    >>> print(f"Energy cost along shortest energy path: {energy_path["cost_to_next"]}") doctest: +NORMALIZE_WHITESPACE
+    Energy cost along shortest energy path: [12.100869  14.714971  
+    14.879747  11.407261   5.6704216 12.496231
+    11.684158   9.923416   9.30909    9.04628    9.380821  11.339294
+    14.562973  17.945984  20.692276  22.447952  49.174408  22.619232
+    18.948212  15.3749695 12.084686   8.797546   6.2996826  5.055084
+    4.1647644  3.5954285 12.745209   4.7065125  2.9411316  2.9284668
+    0.]
     >>> 
     >>> # Visualize the difference in energy costs between the shortest distance and shortest energy path.
     >>> # Get the x,y,z values of the nodes at shortest energy path ids
