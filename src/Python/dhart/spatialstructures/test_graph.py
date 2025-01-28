@@ -214,6 +214,29 @@ def test_GetCosts():
     some_costs = g.GetEdgeCosts(cost_type, ids)
     assert(some_costs == [100.0, 20.0, 1500.0])
 
+def test_AlternateCostsAlongPath():
+    g = Graph()
+    cost_type = "TestCost"
+    g.AddEdgeToGraph(0,1,50)
+    g.AddEdgeToGraph(0,2,10)
+    g.AddEdgeToGraph(1,2,150)
+    g.AddEdgeToGraph(1,3,70)
+    g.AddEdgeToGraph(2,3,70)
+
+    g.CompressToCSR()
+
+    g.AddEdgeToGraph(0, 1, 100, cost_type)
+    g.AddEdgeToGraph(0, 2, 50, cost_type)
+    g.AddEdgeToGraph(1, 2, 20, cost_type)
+    g.AddEdgeToGraph(1,3, 1000, cost_type)
+    g.AddEdgeToGraph(2,3, 1500, cost_type)
+
+    shortest_path = [0,2,3]
+
+    alternate_costs = g.AlternateCostsAlongPath(cost_type, shortest_path)
+    assert(alternate_costs == [50, 1500])
+
+
 def test_AddingAndReadingCostTypes():
     """ Tests that alternate cost types can be added and read. Also ensures
     that error cases are handled and thrown."""
