@@ -1219,8 +1219,9 @@ C_INTERFACE GetEdgeCostsFromNodeIDs(
 	\brief		Get the alternate costs of traversing a given path
 
 	\param	g				The graph to traverse
-	\param	path			A path to get costs from
+	\param	ids				A path of node ids to get costs from (in the form [n1,n2,...,nk]
 	\param	cost_type		Name of the cost type to get the cost from
+	\param	num_ids			The number of ids given (may be non-unique)
 	\param	out_scores		Output array for the costs in the graph
 	\param	out_scores_size Output parameter for the size of out_scores buffer, updated as required
 
@@ -1239,9 +1240,8 @@ C_INTERFACE AlternateCostsAlongPathWithIDs(
 	\brief		Get the alternate costs of traversing a given path
 
 	\param	g				The graph to traverse
-	\param	ids				A path of ids to get the costs from
+	\param	path			A path structure to get the costs from.
 	\param	cost_type		Name of the cost type to get the cost from
-	\param	num_ids			The number of ids given (may be non-unique)
 	\param	out_scores		Output array for the costs in the graph
 	\param	out_scores_size Output parameter for the size of out_scores buffer, updated as required
 

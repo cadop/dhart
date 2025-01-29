@@ -1526,7 +1526,11 @@ namespace HF::SpatialStructures {
 		int count = 0;
 		for (EdgeSet edgeset : AllEdges) {
 			std::vector<IntEdge> children = edgeset.children;
-			count += children.size();
+			for (IntEdge child : children) {
+				if (std::isfinite(child.weight)) {
+					count += 1;
+				}
+			}
 		}
 		return count;
 	}
@@ -1558,8 +1562,12 @@ namespace HF::SpatialStructures {
 	vector<float> Graph::GetEdgeCostsFromNodeIDs(vector<int>& ids, const string& cost_type) const {
 		// Assume that ids is given in [parent1, child1, parent2, child2,...]
 		// Return an empty array if this attribute doesn't exist
-		// Need to raise error if odd number of ids
 		// Maybe add check if each edge is valid
+
+		// 
+		if (ids.size() % 2 != 0) {
+			throw std::invalid_argument("Vector of IDs should be of even length!");
+		}
 
 		// No edges associated with cost type
 		if (edge_cost_maps.count(cost_type) < 1) return vector<float>();
@@ -1580,7 +1588,6 @@ namespace HF::SpatialStructures {
 			int parent = ids[i];
 			int child = ids[i + 1];
 			const auto& score = GetCost(parent, child, cost_type);
-
 			out_costs[idx] = score;
 			idx++;
 		}

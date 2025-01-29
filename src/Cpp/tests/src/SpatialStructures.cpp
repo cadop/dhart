@@ -302,6 +302,13 @@ namespace GraphTests {
 		// Count TestCost edges
 		auto number_of_edges_after = g.CountEdges(cost_name);
 		ASSERT_EQ(number_of_edges_after, 2);
+
+		// Test that counting works when there are fewer edges with a specific cost
+		const std::string new_cost = "fewer_edges_test";
+
+		g.addEdge(N1, N2, 40, new_cost);
+		number_of_edges_after = g.CountEdges(new_cost);
+		ASSERT_EQ(number_of_edges_after, 1);
 	}
 
 	TEST(_Graph, MapPathToVectorOfNodes) {
@@ -2619,6 +2626,7 @@ namespace CInterfaceTests {
 		float* scores_out = new float[3];
 		int scores_out_size = 0;
 
+		// Test that C_Interface works for valid inputs
 		std::vector<int> ids = { 0,1,1,2,2,3 };
 
 		GetEdgeCostsFromNodeIDs(&g, ids.data(), cost_type.c_str(), ids.size(), scores_out, &scores_out_size);
@@ -2632,6 +2640,28 @@ namespace CInterfaceTests {
 			ASSERT_EQ(scores_out[i], expected_scores_out[i]);
 		}
 
+		// Invalid edges are represented as NAN
+		ids = { 3,1,1,2,2,3 };
+		expected_scores_out = { NAN, 20.0f, 1500.0f };
+		GetEdgeCostsFromNodeIDs(&g, ids.data(), cost_type.c_str(), ids.size(), scores_out, &scores_out_size);
+
+		ASSERT_EQ(scores_out_size, expected_scores_out_size);
+		for (int i = 0; i < scores_out_size; i++)
+		{
+			if (!std::isfinite(expected_scores_out[i])) {
+				ASSERT_EQ(std::isfinite(scores_out[i]), false);
+			}
+			else {
+				ASSERT_EQ(scores_out[i], expected_scores_out[i]);
+			}
+		}
+
+		// Test that C_Interface properly throws when invalid input is given
+
+		ids = { 3,1,1,2,2 }; // Odd length input
+		auto res = GetEdgeCostsFromNodeIDs(&g, ids.data(), cost_type.c_str(), ids.size(), scores_out, &scores_out_size);
+
+		ASSERT_EQ(res, HF_STATUS::GENERIC_ERROR);
 		delete[] scores_out;
 	}
 

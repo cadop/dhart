@@ -229,11 +229,14 @@ C_INTERFACE GetEdgeCostsFromNodeIDs(
 			out_scores[i] = v_costs[i];
 		}
 		*out_score_size = v_costs.size();
-		//if (!std::isfinite(*out_float)) *out_float = -1.0f;
 	}
 	catch (HF::Exceptions::NoCost)
 	{
 		return NO_COST;
+	}
+	catch (std::invalid_argument)
+	{
+		return GENERIC_ERROR;
 	}
 	catch (std::logic_error)
 	{
