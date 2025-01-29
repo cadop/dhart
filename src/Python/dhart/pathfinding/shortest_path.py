@@ -480,14 +480,14 @@ def get_path_from_csr(csr, node1, node2):
     end_idx = csr.indptr[node_idx + 1]
     return csr.indices[start_idx:end_idx]
 
-def AlternateCostsAlongPath(g: Graph, cost_type: str, path: Union[List[int], Path]) -> List[float]:
+def AlternateCostsAlongPath(g: Graph, path: Union[List[int], Path], cost_type: str) -> List[float]:
         """Get the costs for each edge in a set of edges
         
         Args:
+            path : Union[List[int], Path]
+                Path of IDs in the format [node1,node2,...,nodek] or Path object
             cost_type : str
                 Cost type to get the cost from. If left blank will use the graph's default cost type. (second part needs to be implemented)
-            path : List[int]
-                Path of IDs in the format [node1,node2,...,nodek]
         Returns:
             List[float] : An array of costs of cost_type corresponding to edges in path
 

@@ -98,7 +98,7 @@
     >>> 
     >>> CalculateEnergyExpenditure(graph)
     >>> 
-    >>> energy_along_distance_path = AlternateCostsAlongPath(graph, CostAlgorithmKeys.ENERGY_EXPENDITURE, distance_path)
+    >>> energy_along_distance_path = AlternateCostsAlongPath(graph, distance_path, energy_cost_key)
     >>> 
     >>> # Plot the points
     >>> plt.scatter(x_nodes, y_nodes, c=z_nodes, alpha=0.3) # doctest: +SKIP
@@ -266,7 +266,7 @@ energy_cost_key = CostAlgorithmKeys.ENERGY_EXPENDITURE
 
 CalculateEnergyExpenditure(graph)
 
-energy_along_distance_path = AlternateCostsAlongPath(graph, CostAlgorithmKeys.ENERGY_EXPENDITURE, distance_path)
+energy_along_distance_path = AlternateCostsAlongPath(graph, path, energy_cost_key)
 
 # Plot the points
 plt.scatter(x_nodes, y_nodes, c=z_nodes, alpha=0.3) 

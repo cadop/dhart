@@ -239,7 +239,7 @@ def test_AlternateCostsAlongPathIDs():
 
     shortest_path = [0,2,3]
 
-    alternate_costs = AlternateCostsAlongPath(g, cost_type, shortest_path)
+    alternate_costs = AlternateCostsAlongPath(g, shortest_path, cost_type)
     assert(alternate_costs == [50, 1500])
     
 def test_AlternateCostsAlongPathStruct():
@@ -261,5 +261,5 @@ def test_AlternateCostsAlongPathStruct():
 
     SP = DijkstraShortestPath(g, 0, 3)
 
-    alternate_costs = AlternateCostsAlongPath(g, cost_type, SP)
+    alternate_costs = AlternateCostsAlongPath(g, SP, cost_type)
     assert(alternate_costs == [50,1500])
