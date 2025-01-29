@@ -515,7 +515,7 @@ def AlternateCostsAlongPath(g: Graph, path: Union[List[int], Path], cost_type: s
 
         >>> shortest_path = [0,2,3]
 
-        >>> AlternateCostsAlongPath(g, cost_type, shortest_path)
+        >>> AlternateCostsAlongPath(g, shortest_path, cost_type)
         [50.0, 1500.0]
         """
         if isinstance(path, list):

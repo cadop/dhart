@@ -497,6 +497,7 @@ class Graph:
         [100.0, 20.0]
         """
         return spatial_structures_native_functions.C_GetEdgeCosts(self.graph_ptr, cost_type, ids)
+        
     def NumNodes(self) -> int:
         """Get the number of nodes in the graph."""
         return spatial_structures_native_functions.C_NumNodes(self.graph_ptr)
