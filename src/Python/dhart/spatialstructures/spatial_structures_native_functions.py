@@ -403,7 +403,7 @@ def C_CalculateAndStoreCrossSlope(graph_ptr : c_void_p):
 def C_GetEdgeCosts(
         graph_ptr: c_void_p,
         cost_type: str,
-        ids: List[int]) -> List[float]:
+        ids: List[int] | None) -> List[float]:
     """ Get edge costs from a graph in C++
     
     Args:
@@ -446,13 +446,9 @@ def C_GetEdgeCosts(
     # Return an empty list if size is zero
     if out_scores_size.value == 0:
         return []
-    
-    out_vals = []
-    for i in range(0, out_scores_size.value):
-        score = out_scores[i]
-        out_vals.append(score)
-        
-    return out_vals
+
+    # Extract data from out_scores
+    return list(out_scores[:out_scores_size.value])
 
 def c_get_node_attributes(
     graph_ptr: c_void_p, 
