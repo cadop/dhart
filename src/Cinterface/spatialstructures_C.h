@@ -446,6 +446,46 @@ C_INTERFACE CreateGraph(
 
 	\param		graph		Graph to add the new edge to
 
+	\param		parent		A parent node structure
+
+	\param		child		A child node structure
+
+	\param		score		The edge cost from parent to child
+
+	\param		cost_type	Edge cost type
+
+	\returns \link HF_STATUS::OK \endlink on success.
+
+	\returns \link HF_STATUS::NOT_COMPRESSED \endlink Tried to add an edge to an alternate cost type
+									   when the graph wasn't compressed.
+
+	\returns \link HF_STATUS::OUT_OF_RANGE \endlink Tried to add an edge to an alternate cost
+										  that didn't already exist in the default graph.
+
+	\pre cost_type MUST be a valid delimited char array.
+				   If the entire program crashes when this is called, this is why.
+
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_teardown (how to destroy a graph)
+*/
+
+C_INTERFACE AddEdgeFromNodeStructs(
+	HF::SpatialStructures::Graph* graph,
+	HF::SpatialStructures::Node* parent,
+	HF::SpatialStructures::Node* child,
+	float score,
+	const char* cost_type
+);
+
+/*!
+	\brief		Add an edge between parent and child.
+				If parent or child does not already exist in the graph,
+				they will be added and automatically assigned new IDs.
+
+	\param		graph		Graph to add the new edge to
+
 	\param		parent		A three-element array of float 
 							containing the x, y, and z coordinates of the parent node
 

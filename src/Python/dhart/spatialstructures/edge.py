@@ -2,6 +2,7 @@ import ctypes
 import numpy
 from . import spatial_structures_native_functions
 from dhart.native_numpy_like import NativeNumpyLike
+from .node import NodeStruct
 from typing import Tuple
 
 __all__ = ['EdgeStruct', "EdgeList", "CreateListOfEdgeStructs"]
@@ -10,8 +11,9 @@ class EdgeStruct(ctypes.Structure):
     """ A connection between two points in space """
     
     _fields_ = [
-        ("child", ctypes.c_int),
-        ("weight", ctypes.c_float)
+        ("child", NodeStruct),
+        ("step_type", ctypes.c_int),
+        ("score", ctypes.c_float)
         # ("id", ctypes.c_int) # maybe add ids
     ]
 
@@ -32,12 +34,12 @@ class EdgeList(NativeNumpyLike):
         edge_array_size = spatial_structures_native_functions.SizeOfEdgeVector(vector_ptr)
         super().__init__(vector_ptr, data_ptr, edge_array_size)
 
-def CreateListOfEdgeStructs(edges: Tuple[int, int]) -> numpy.array:
+def CreateListOfEdgeStructs(edges: Tuple[NodeStruct, int, float]) -> numpy.array:
     """ Create an array of EdgeStructs from a list of tuples. """
     arr = numpy.empty((len(edges),), dtype = EdgeStruct)
     for idx in range(0, len(edges)):
-        arr[idx][0] = edges[idx][1]
-        arr[idx][1] = -1
-        # arr[idx][2] = -1 # in case we add ids
+        arr[idx][0] = edges[idx][0]
+        arr[idx][1] = edges[idx][1]
+        arr[idx][2] = edges[idx][2]
 
     return arr

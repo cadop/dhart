@@ -39,8 +39,21 @@ def GetEdgesForNode(graph_ptr: c_void_p, node_ptr: c_void_p) -> Tuple[c_void_p, 
     
     Get a list of nodes from a graph that belong to the specified node
     """
-    pass
+    # Pointers to store results
+    vector_ptr = c_void_p(0)
+    data_ptr = c_void_p(0)
+    # Call to C interface
+    error_code = HFPython.GetEdgesForNode(graph_ptr, node_ptr, byref(vector_ptr), byref(data_ptr))
 
+    # Check error code
+    if error_code == HF_STATUS.OK:
+        # Return result pointers
+        return vector_ptr, data_ptr
+    elif error_code == HF_STATUS.OUT_OF_RANGE:
+        # Throw if they try to use a cost type that doesn't exist
+        raise IndexError(f"Tried to access a node that isn't a parent")
+    else:
+        assert(False)  # Never should get here, this is a programmer error
 
 def C_AggregateEdgeCosts(
         graph_ptr: c_void_p,
@@ -118,6 +131,45 @@ def C_CreateGraph(nodes: Union[List[Tuple[float, float, float]], None]) -> c_voi
 
     return graph_ptr
 
+def C_AddEdgeFromNodeStructs(
+    graph_ptr: c_void_p,
+    parent_ptr: c_void_p,
+    child_ptr: c_void_p,
+    score: float,
+    cost_type: str,
+    ) -> None:
+    """ Add a new edge to the graph """
+    str_ptr = GetStringPtr(cost_type)
+
+    # Call to native code and capture the error code
+    error_code = HFPython.AddEdgeFromNodeStructs(
+        graph_ptr,
+        parent_ptr,
+        child_ptr,
+        c_float(score),
+        str_ptr
+    )
+
+    # Check error code.
+    if error_code == HF_STATUS.OK:
+        # On success return
+        return
+    elif error_code == HF_STATUS.NOT_COMPRESSED:
+        # Can't add alternate costs to an uncompressed graph
+        raise LogicError(
+            "Tried to add an alternate cost type to the graph before" +
+            "compressing it")
+    elif error_code == HF_STATUS.OUT_OF_RANGE:
+        # Tried to add an edge to an alternate cost type
+        # that didn't exist
+        raise InvalidCostOperation(
+            f"Tried to add an edge from {parent_id} to {child_id} to alternate"
+            + " cost type {cost_type} without first creating an edge between"
+            + "them in the graph's default cost set.")
+    elif error_code == HF_STATUS.GENERIC_ERROR:
+        print("Unexpected error code: " + error_code)
+        assert(False)  # Something is happening in C++ that isn't being
+        # handled by python, or should never happen at all
 
 def C_AddEdgeFromNodes(
     graph_ptr: c_void_p,

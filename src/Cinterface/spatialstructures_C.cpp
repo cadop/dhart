@@ -47,6 +47,21 @@ C_INTERFACE  GetAllNodesFromGraph(const Graph* graph, vector<Node>** out_vector_
 	catch (...) { return HF_STATUS::GENERIC_ERROR; }
 	return GENERIC_ERROR;
 }
+
+C_INTERFACE GetEdgesForNode(const Graph* graph, const Node* Node, vector<Edge>** out_vector_ptr, Edge** out_edge_list_ptr, int* out_edge_list_size) {
+	// This can't function if the node isn't a parent
+	if (!(graph->hasKey(*Node))) {
+		return HF_STATUS::OUT_OF_RANGE;
+	}
+
+	vector<Edge>* Edges = new vector<Edge>();
+	*Edges = (*graph)[*Node];
+	*out_edge_list_ptr = Edges->data();
+	*out_edge_list_size = Edges->size();
+	*out_vector_ptr = Edges;
+	return OK;
+}
+
 C_INTERFACE GetSizeOfNodeVector(
 	const vector<Node>* node_list,
 	int* out_size
@@ -129,6 +144,31 @@ C_INTERFACE CreateGraph(
 	//TODO: Add node constructor
 	Graph * g = new Graph();
 	*out_graph = g;
+	return OK;
+}
+
+C_INTERFACE AddEdgeFromNodeStructs(
+	Graph* graph,
+	Node* parent,
+	Node* child,
+	float score,
+	const char* cost_type
+) {
+	if (!parse_string(cost_type))
+		return NO_COST;
+
+	std::string cost_name(cost_type);
+
+	try {
+		graph->addEdge(*parent, *child, score, cost_name);
+	}
+	catch (std::out_of_range) {
+		return OUT_OF_RANGE;
+	}
+	catch (std::logic_error) {
+		return NOT_COMPRESSED;
+	}
+
 	return OK;
 }
 

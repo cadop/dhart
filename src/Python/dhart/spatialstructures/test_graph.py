@@ -11,6 +11,7 @@ from dhart.spatialstructures import NodeList, NodeStruct, Graph, CostAggregation
 from dhart.Exceptions import LogicError, InvalidCostOperation
 from dhart.utils import is_point
 import dhart.spatialstructures.node as NodeFunctions
+import dhart.spatialstructures.edge as EdgeFunctions
 import dhart.spatialstructures.cost_algorithms as cost_algorithms
 
 
@@ -116,6 +117,24 @@ def test_GetNodes():
     for node in node_list.array:
         print(node)
 
+def test_GetEdgesForNode():
+    g = Graph()
+
+    N0 = NodeStruct(1,2,3,0,0)
+    N1 = NodeStruct(2,3,4,0,1)
+    N2 = NodeStruct(19,2,3,0,2)
+    nodes = [N0, N1, N2]
+    edges = [
+        (nodes[0], nodes[1]),
+        (nodes[0], nodes[2]),
+        (nodes[1], nodes[2]),
+    ]
+    for edge in edges:
+        g.AddEdgeToGraph(edge[0], edge[1], 39)
+    edge_list = g.GetEdgesForNode(nodes[0])
+    assert len(edge_list.array) == 2
+    for edge in edge_list.array:
+        print(edge)
 
 def test_CreateNodes():
     nodes = [(1, 2, 3), (20, 2110, 100)]
@@ -123,11 +142,28 @@ def test_CreateNodes():
 
     for i in range(0, len(nodes)):
         node = nodes[i]
+        print(nodes)
         np_node = structs[i]
         assert node[0] == np_node[0]
         assert node[1] == np_node[1]
         assert node[2] == np_node[2]
 
+def test_CreateEdges():
+    nodes = [(1, 2, 3), (3, 5, 8), (5, 8, 13)]
+    node_structs = NodeFunctions.CreateListOfNodeStructs(nodes)
+    steps = [1,2]
+    weights = [20,40]
+
+    parent = node_structs[0]
+
+    edges = [(node_structs[i], steps[i-1], weights[i-1]) for i in range(1, len(nodes))]
+    edgestructs = EdgeFunctions.CreateListOfEdgeStructs(edges)
+    for i in range(0, len(nodes)-1):
+        edge = edges[i]
+        np_edge = edgestructs[i]
+        assert edge[0] == np_edge[0]
+        assert edge[1] == np_edge[1]
+        assert edge[2] == np_edge[2]
 
 def test_AggregateCostType(SimpleGraphWithCosts):
     """ Test aggregating the edges of a graph using an alternate

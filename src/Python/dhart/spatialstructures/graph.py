@@ -9,6 +9,7 @@ from enum import IntEnum
 
 from dhart.native_numpy_like import NativeNumpyLike
 from .node import NodeStruct, NodeList
+from .edge import EdgeStruct, EdgeList
 from . import spatial_structures_native_functions
 
 __all__ = ['CostAggregationType','EdgeSumArray','Graph', 'Direction']
@@ -211,6 +212,10 @@ class Graph:
         if isinstance(parent, int) and isinstance(child, int):
             spatial_structures_native_functions.C_AddEdgeFromNodeIDs(
                 self.graph_ptr, parent, child, cost, cost_type
+            )
+        elif isinstance(parent, NodeStruct) and isinstance(child, NodeStruct):
+            spatial_structures_native_functions.C_AddEdgeFromNodeStructs(
+                self.graph_ptr, ctypes.byref(parent), ctypes.byref(child), cost, cost_type
             )
         else:
             spatial_structures_native_functions.C_AddEdgeFromNodes(
@@ -444,6 +449,20 @@ class Graph:
         if self.graph_ptr:
             spatial_structures_native_functions.DestroyGraph(self.graph_ptr)
 
+    def GetEdgesForNode(self, parent: NodeStruct) -> List[EdgeStruct]:
+        """ Get the edges for a specific node
+
+        Args:
+            parent (NodeStruct): Node to get the edges for
+
+        Returns:
+            List[EdgeStruct]: List of edges for the node
+        """
+        vector_ptr, data_ptr = spatial_structures_native_functions.GetEdgesForNode(
+            self.graph_ptr, ctypes.byref(parent))
+
+        return EdgeList(vector_ptr, data_ptr)
+        
     def GetEdgeCost(self, parent: int, child: int, cost_type: str = "") -> float:
         """ Get the cost from parent to child for a specific cost type
 
@@ -483,7 +502,7 @@ class Graph:
         >>> g.AddEdgeToGraph(0,1,50)
         >>> g.AddEdgeToGraph(0,2,50)
         >>> g.AddEdgeToGraph(1,2,50)
-        >>> csr = g.CompressToCSR()
+        >>> _ = g.CompressToCSR() #doctest: +ELLIPSIS
         >>> g.AddEdgeToGraph(0, 1, 100, cost_type)
         >>> g.AddEdgeToGraph(0, 2, 50, cost_type)
         >>> g.AddEdgeToGraph(1, 2, 20, cost_type)
@@ -497,7 +516,7 @@ class Graph:
         [100.0, 20.0]
         """
         return spatial_structures_native_functions.C_GetEdgeCosts(self.graph_ptr, cost_type, ids)
-        
+
     def NumNodes(self) -> int:
         """Get the number of nodes in the graph."""
         return spatial_structures_native_functions.C_NumNodes(self.graph_ptr)
