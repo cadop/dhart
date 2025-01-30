@@ -501,7 +501,7 @@ def C_GetEdgeCosts(
         return []
 
     # Extract data from out_scores
-    return list(out_scores[:out_scores_size.value])
+    return out_scores[:out_scores_size.value]
 
 def c_get_node_attributes(
     graph_ptr: c_void_p, 

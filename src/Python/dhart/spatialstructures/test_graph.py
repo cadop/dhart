@@ -258,12 +258,18 @@ def test_GetCosts():
     g.AddEdgeToGraph(2,3, 1500, cost_type)
 
     ids = [0,1,1,2, 2, 3]
+
     # All costs of cost_type
+    expected_all_costs = [100.0, 50.0, 20.0, 1000.0, 1500.0]
     all_costs = g.GetEdgeCosts(cost_type)
-    assert(all_costs == [100.0, 50.0, 20.0, 1000.0, 1500.0])
+    for i in range(0, len(expected_all_costs)):
+        assert(all_costs[i] == expected_all_costs[i])
+
     # Specific edges to get costs for
+    expected_some_costs = [100.0, 20.0, 1500.0]
     some_costs = g.GetEdgeCosts(cost_type, ids)
-    assert(some_costs == [100.0, 20.0, 1500.0])
+    for i in range(0, len(expected_some_costs)):
+        assert(some_costs[i] == expected_some_costs[i])
 
 def test_AddingAndReadingCostTypes():
     """ Tests that alternate cost types can be added and read. Also ensures
