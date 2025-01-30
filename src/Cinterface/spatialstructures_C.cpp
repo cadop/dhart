@@ -47,6 +47,21 @@ C_INTERFACE  GetAllNodesFromGraph(const Graph* graph, vector<Node>** out_vector_
 	catch (...) { return HF_STATUS::GENERIC_ERROR; }
 	return GENERIC_ERROR;
 }
+
+C_INTERFACE GetEdgesForNode(const Graph* graph, const Node* Node, vector<Edge>** out_vector_ptr, Edge** out_edge_list_ptr, int* out_edge_list_size) {
+	// This can't function if the node isn't a parent
+	if (!(graph->hasKey(*Node))) {
+		return HF_STATUS::OUT_OF_RANGE;
+	}
+
+	vector<Edge>* Edges = new vector<Edge>();
+	*Edges = (*graph)[*Node];
+	*out_edge_list_ptr = Edges->data();
+	*out_edge_list_size = Edges->size();
+	*out_vector_ptr = Edges;
+	return OK;
+}
+
 C_INTERFACE GetSizeOfNodeVector(
 	const vector<Node>* node_list,
 	int* out_size
@@ -132,6 +147,31 @@ C_INTERFACE CreateGraph(
 	return OK;
 }
 
+C_INTERFACE AddEdgeFromNodeStructs(
+	Graph* graph,
+	Node* parent,
+	Node* child,
+	float score,
+	const char* cost_type
+) {
+	if (!parse_string(cost_type))
+		return NO_COST;
+
+	std::string cost_name(cost_type);
+
+	try {
+		graph->addEdge(*parent, *child, score, cost_name);
+	}
+	catch (std::out_of_range) {
+		return OUT_OF_RANGE;
+	}
+	catch (std::logic_error) {
+		return NOT_COMPRESSED;
+	}
+
+	return OK;
+}
+
 C_INTERFACE AddEdgeFromNodes(
 	Graph* graph,
 	const float* parent,
@@ -181,6 +221,133 @@ C_INTERFACE AddEdgeFromNodeIDs(Graph * graph, int parent_id, int child_id, float
 		return NOT_COMPRESSED;
 	}
 
+	return OK;
+}
+
+C_INTERFACE GetEdgeCosts(
+	const HF::SpatialStructures::Graph* g,
+	const char* cost_type,
+	float* out_scores,
+	int* out_score_size
+) {
+	try {
+		vector<float> v_costs = g->GetEdgeCosts(cost_type);
+		for (int i = 0; i < v_costs.size(); i++)
+		{
+			out_scores[i] = v_costs[i];
+		}
+		*out_score_size = v_costs.size();
+	}
+	catch (HF::Exceptions::NoCost)
+	{
+		return NO_COST;
+	}
+	catch (std::logic_error)
+	{
+		return NOT_COMPRESSED;
+	}
+	catch (...)
+	{
+		return GENERIC_ERROR;
+	}
+	return OK;
+}
+
+C_INTERFACE GetEdgeCostsFromNodeIDs(
+	const HF::SpatialStructures::Graph* g,
+	const int* ids,
+	const char* cost_type,
+	int num_ids,
+	float* out_scores, 
+	int* out_score_size
+) {
+	vector<int> v_ids(ids, ids + num_ids);
+	try {
+		vector<float> v_costs = g->GetEdgeCostsFromNodeIDs(v_ids, std::string(cost_type));
+		for (int i = 0; i < v_costs.size(); i++)
+		{
+			out_scores[i] = v_costs[i];
+		}
+		*out_score_size = v_costs.size();
+	}
+	catch (HF::Exceptions::NoCost)
+	{
+		return NO_COST;
+	}
+	catch (std::invalid_argument)
+	{
+		return GENERIC_ERROR;
+	}
+	catch (std::logic_error)
+	{
+		return NOT_COMPRESSED;
+	}
+	catch (...)
+	{
+		return GENERIC_ERROR;
+	}
+	return OK;
+}
+
+C_INTERFACE AlternateCostsAlongPathStruct(
+	const HF::SpatialStructures::Graph* g,
+	const HF::SpatialStructures::Path* path,
+	const char* cost_type,
+	float* out_scores,
+	int* out_score_size
+) {
+	try {
+		vector<float> v_costs = g->AlternateCostsAlongPath(*path, std::string(cost_type));
+		for (int i = 0; i < v_costs.size(); i++)
+		{
+			out_scores[i] = v_costs[i];
+		}
+		*out_score_size = v_costs.size();
+	}
+	catch (HF::Exceptions::NoCost)
+	{
+		return NO_COST;
+	}
+	catch (std::logic_error)
+	{
+		return NOT_COMPRESSED;
+	}
+	catch (...)
+	{
+		return GENERIC_ERROR;
+	}
+	return OK;
+}
+
+C_INTERFACE AlternateCostsAlongPathWithIDs(
+	const HF::SpatialStructures::Graph* g,
+	const int* path,
+	const char* cost_type,
+	int num_ids,
+	float* out_scores,
+	int* out_score_size
+) {
+	vector<int> v_ids(path, path + num_ids);
+	try {
+		vector<float> v_costs = g->AlternateCostsAlongPath(v_ids, std::string(cost_type));
+		for (int i = 0; i < v_costs.size(); i++)
+		{
+			out_scores[i] = v_costs[i];
+		}
+		*out_score_size = v_costs.size();
+	}
+	catch (HF::Exceptions::NoCost)
+	{
+		return NO_COST;
+	}
+	catch (std::logic_error)
+	{
+		return NOT_COMPRESSED;
+	}
+	catch (...)
+	{
+		return GENERIC_ERROR;
+	}
 	return OK;
 }
 
@@ -512,6 +679,11 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g) {
 
 C_INTERFACE GetSizeOfGraph(const Graph * g, int * out_size) {
 	*out_size = g->size();
+	return OK;
+}
+
+C_INTERFACE CountNumberOfEdges(const Graph* g, const char* cost_type, int* out_size) {
+	*out_size = g->CountEdges(cost_type);
 	return OK;
 }
 

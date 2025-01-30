@@ -28,14 +28,33 @@ def SizeOfNodeVector(node_vector_ptr: c_void_p) -> int:
     HFPython.GetSizeOfNodeVector(node_vector_ptr, byref(size))
     return size.value
 
+def SizeOfEdgeVector(edge_vector_ptr: c_void_p) -> int:
+    """ Get the size of an edge vector """
+    size = c_int(0)
+    HFPython.GetSizeOfEdgeVector(edge_vector_ptr, byref(size))
+    return size.value
 
 def GetEdgesForNode(graph_ptr: c_void_p, node_ptr: c_void_p) -> Tuple[c_void_p, c_void_p]:
     """ *** UNIMPLEMENTED *** 
     
     Get a list of nodes from a graph that belong to the specified node
     """
-    pass
+    # Pointers to store results
+    vector_ptr = c_void_p(0)
+    data_ptr = c_void_p(0)
+    out_size = c_int(0)
+    # Call to C interface
+    error_code = HFPython.GetEdgesForNode(graph_ptr, node_ptr, byref(vector_ptr), byref(data_ptr), byref(out_size))
 
+    # Check error code
+    if error_code == HF_STATUS.OK:
+        # Return result pointers
+        return vector_ptr, data_ptr
+    elif error_code == HF_STATUS.OUT_OF_RANGE:
+        # Throw if they try to use a cost type that doesn't exist
+        raise IndexError(f"Tried to access a node that isn't a parent")
+    else:
+        assert(False)  # Never should get here, this is a programmer error
 
 def C_AggregateEdgeCosts(
         graph_ptr: c_void_p,
@@ -113,6 +132,44 @@ def C_CreateGraph(nodes: Union[List[Tuple[float, float, float]], None]) -> c_voi
 
     return graph_ptr
 
+def C_AddEdgeFromNodeStructs(
+    graph_ptr: c_void_p,
+    parent_ptr: c_void_p,
+    child_ptr: c_void_p,
+    score: float,
+    cost_type: str,
+    ) -> None:
+    """ Add a new edge to the graph """
+    str_ptr = GetStringPtr(cost_type)
+
+    # Call to native code and capture the error code
+    error_code = HFPython.AddEdgeFromNodeStructs(
+        graph_ptr,
+        parent_ptr,
+        child_ptr,
+        c_float(score),
+        str_ptr
+    )
+
+    # Check error code.
+    if error_code == HF_STATUS.OK:
+        # On success return
+        return
+    elif error_code == HF_STATUS.NOT_COMPRESSED:
+        # Can't add alternate costs to an uncompressed graph
+        raise LogicError(
+            "Tried to add an alternate cost type to the graph before" +
+            "compressing it")
+    elif error_code == HF_STATUS.OUT_OF_RANGE:
+        # Tried to add an alternate cost to an edge that didn't exist
+        raise InvalidCostOperation(
+            f"Tried to add an edge from {parent_id} to {child_id} to alternate"
+            + " cost type {cost_type} without first creating an edge between"
+            + "them in the graph's default cost set.")
+    elif error_code == HF_STATUS.GENERIC_ERROR:
+        print("Unexpected error code: " + error_code)
+        assert(False)  # Something is happening in C++ that isn't being
+        # handled by python, or should never happen at all
 
 def C_AddEdgeFromNodes(
     graph_ptr: c_void_p,
@@ -353,6 +410,18 @@ def C_ClearGraph(graph_ptr: c_void_p, cost_type: str = '') -> None:
         print("Unexpected error code: " + error_code)
         assert(False)  # There's some unhandled problem with C++
 
+def C_NumEdges(graph_ptr: c_void_p, cost_type: str) -> int:
+    """ Get the number of edges in the graph"""
+    out_size = c_int(0)
+
+    cost_ptr = GetStringPtr(cost_type)
+    error_code = HFPython.CountNumberOfEdges(graph_ptr, cost_ptr, byref(out_size))
+
+    assert(error_code == HF_STATUS.OK)
+
+    return out_size.value
+
+
 
 def C_NumNodes(graph_ptr: c_void_p) -> int:
     """ Get the number of nodes in the graph """
@@ -383,6 +452,55 @@ def C_CalculateAndStoreCrossSlope(graph_ptr : c_void_p):
     # CalculateAndStoreCrossSlope  only should return OK. Something must have 
     # changed in the C++ code that hasn't been updated in python.
 
+def C_GetEdgeCosts(
+        graph_ptr: c_void_p,
+        cost_type: str,
+        ids: List[int] | None) -> List[float]:
+    """ Get edge costs from a graph in C++
+    
+    Args:
+        graph_ptr: Pointer to the graph to get costs from.
+        cost_type: Unique key of the type of cost to get.
+        ids: List of node IDs in the format [parent1, child1, parent2, child2,...]
+    
+    Returns:
+        A list of floats containing the score for specified edges - or for
+        every node in the graph if unspecified. If the cost type does not
+        exist, an empty list will be returned instead.
+    """
+    # check if even number of ids given
+    # Pointer to cost type
+    cost_ptr = GetStringPtr(cost_type)
+    if ids:
+        num_ids = len(ids)
+        num_edges = num_ids//2
+    else:
+        num_edges = C_NumEdges(graph_ptr, cost_type)
+
+    out_score_type = c_float * num_edges
+
+    # Output
+    out_scores = out_score_type()
+    out_scores_size = c_int(0)
+
+    if not ids:
+        error_code = HFPython.GetEdgeCosts(
+            graph_ptr, cost_ptr, byref(out_scores), byref(out_scores_size)
+        ) 
+    else:
+        id_arr = ConvertIntsToArray(ids)
+        error_code = HFPython.GetEdgeCostsFromNodeIDs(
+            graph_ptr, id_arr, cost_ptr, num_ids, byref(out_scores), byref(out_scores_size)
+        )   
+
+    # Only returns OK
+    assert error_code == HF_STATUS.OK
+    # Return an empty list if size is zero
+    if out_scores_size.value == 0:
+        return []
+
+    # Extract data from out_scores
+    return out_scores[:out_scores_size.value]
 
 def c_get_node_attributes(
     graph_ptr: c_void_p, 
@@ -599,3 +717,7 @@ def DestroyGraph(graph_ptr: c_void_p):
 def DestroyNodes(node_list_ptr: c_void_p):
     """ Call the destructor for a list of nodes """
     HFPython.DestroyNodes(node_list_ptr)
+
+def DestroyEdges(edge_list_ptr: c_void_p):
+    """ Call the destructor for a list of edges """
+    HFPython.DestroyEdges(edge_list_ptr)

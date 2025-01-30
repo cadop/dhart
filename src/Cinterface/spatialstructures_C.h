@@ -22,6 +22,8 @@ namespace HF {
 		class Graph;
 		struct Subgraph;
 
+		class Path;
+
 		enum class COST_AGGREGATE : int;
 
 		struct Node;	// Careful with these forward declares!
@@ -435,6 +437,46 @@ C_INTERFACE CreateGraph(
 	const float* nodes,
 	int num_nodes,
 	HF::SpatialStructures::Graph** out_graph
+);
+
+/*!
+	\brief		Add an edge between parent and child.
+				If parent or child does not already exist in the graph,
+				they will be added and automatically assigned new IDs.
+
+	\param		graph		Graph to add the new edge to
+
+	\param		parent		A parent node structure
+
+	\param		child		A child node structure
+
+	\param		score		The edge cost from parent to child
+
+	\param		cost_type	Edge cost type
+
+	\returns \link HF_STATUS::OK \endlink on success.
+
+	\returns \link HF_STATUS::NOT_COMPRESSED \endlink Tried to add an edge to an alternate cost type
+									   when the graph wasn't compressed.
+
+	\returns \link HF_STATUS::OUT_OF_RANGE \endlink Tried to add an edge to an alternate cost
+										  that didn't already exist in the default graph.
+
+	\pre cost_type MUST be a valid delimited char array.
+				   If the entire program crashes when this is called, this is why.
+
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_teardown (how to destroy a graph)
+*/
+
+C_INTERFACE AddEdgeFromNodeStructs(
+	HF::SpatialStructures::Graph* graph,
+	HF::SpatialStructures::Node* parent,
+	HF::SpatialStructures::Node* child,
+	float score,
+	const char* cost_type
 );
 
 /*!
@@ -1118,4 +1160,139 @@ C_INTERFACE GraphAttrsToCosts(
 	const char * cost_string, 
 	HF::SpatialStructures::Direction dir);
 
+/*!
+	\brief		Get all edge costs of type cost_type in the graph
+
+	\param	g				The graph to traverse
+	\param	cost_type		Name of the cost type to get the cost from
+	\param	out_scores		Output array for the costs in the graph
+	\param	out_scores_size Output parameter for the size of out_scores buffer, updated as required
+
+	\pre		g is a valid graph.
+
+	\post
+	`out_scores` is updated with the cost of traversing from parent to child. If no
+	edge exists between parent and child, it won't be added.
+
+	\returns \link HF_STATUS::OK \endlink on success
+	\returns \link HF_STATUS::NO_COST \endlink if there was no cost with cost_name
+
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_teardown (how to destroy a graph)
+
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+
+	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
+*/
+C_INTERFACE GetEdgeCosts(
+	const HF::SpatialStructures::Graph* g,
+	const char* cost_type,
+	float* out_scores,
+	int* out_score_size);
+/*!
+	\brief Count the number of edges associated with cost_type in a given graph.
+
+	\param	g				The graph to query
+	\param	cost_type		Name of the cost type to count edges for
+	\param	out_size		Output parameter which holds the number of edges counted.
+
+	\returns
+*/
+C_INTERFACE CountNumberOfEdges(
+	const HF::SpatialStructures::Graph* g,
+	const char* cost_type,
+	int* out_size);
+/*!
+	\brief		Get the costs of traversing from `parent` to `child` in a given array
+
+	\param	g				The graph to traverse
+	\param	ids				An array of ids to get the costs from
+	\param	cost_type		Name of the cost type to get the cost from
+	\param	num_ids			The number of ids given (non-unique)
+	\param	out_scores		Output array for the costs in the graph
+	\param	out_scores_size Output parameter for the size of out_scores buffer, updated as required
+
+	\pre		g is a valid graph.
+	\pre		ids is in the format [parent1, child1, parent2, child2,...] which maps to [edge1,edge2...]
+
+	\post
+	`out_scores` is updated with the cost of traversing from parent to child. If no
+	edge exists between parent and child, it won't be added.
+
+	\returns \link HF_STATUS::OK \endlink on success
+	\returns \link HF_STATUS::NO_COST \endlink if there was no cost with cost_name
+
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_teardown (how to destroy a graph)
+
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+
+	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
+*/
+C_INTERFACE GetEdgeCostsFromNodeIDs(
+	const HF::SpatialStructures::Graph* g,
+	const int* ids,
+	const char* cost_type,
+	int num_ids,
+	float* out_scores,
+	int* out_score_size);
+
+/*!
+	\brief		Get the alternate costs of traversing a given path
+
+	\param	g				The graph to traverse
+	\param	ids				A path of node ids to get costs from (in the form [n1,n2,...,nk]
+	\param	cost_type		Name of the cost type to get the cost from
+	\param	num_ids			The number of ids given (may be non-unique)
+	\param	out_scores		Output array for the costs in the graph
+	\param	out_scores_size Output parameter for the size of out_scores buffer, updated as required
+
+	\returns \link HF_STATUS::OK \endlink on success
+	\returns \link HF_STATUS::NO_COST \endlink if there was no cost with cost_name
+*/
+C_INTERFACE AlternateCostsAlongPathWithIDs(
+	const HF::SpatialStructures::Graph* g,
+	const int* ids,
+	const char* cost_type,
+	int num_ids,
+	float* out_scores,
+	int* out_score_size);
+
+/*!
+	\brief		Get the alternate costs of traversing a given path
+
+	\param	g				The graph to traverse
+	\param	path			A path structure to get the costs from.
+	\param	cost_type		Name of the cost type to get the cost from
+	\param	out_scores		Output array for the costs in the graph
+	\param	out_scores_size Output parameter for the size of out_scores buffer, updated as required
+
+	\returns \link HF_STATUS::OK \endlink on success
+	\returns \link HF_STATUS::NO_COST \endlink if there was no cost with cost_name
+*/
+
+C_INTERFACE AlternateCostsAlongPathStruct(
+	const HF::SpatialStructures::Graph* g,
+	const HF::SpatialStructures::Path* path,
+	const char* cost_type,
+	float* out_scores,
+	int* out_score_size);
 /**@}*/
