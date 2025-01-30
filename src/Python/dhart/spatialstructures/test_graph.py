@@ -271,7 +271,43 @@ def test_GetCosts():
     for i in range(0, len(expected_some_costs)):
         assert(some_costs[i] == expected_some_costs[i])
 
-def test_AddingAndReadingCostTypes():
+def test_AddingAndReadingCostTypesNodeStruct():
+    """ Tests that alternate cost types can be added and read. Also ensures
+    that error cases are handled and thrown."""
+
+    # Create Graph
+    g = Graph()
+
+    N0 = NodeStruct(1,2,3,0,0)
+    N1 = NodeStruct(2,3,4,0,1)
+    N2 = NodeStruct(19,2,3,0,2)
+
+    # Add initial edges to default cost type and compress
+    g.AddEdgeToGraph(N0, N1, 100)
+    g.AddEdgeToGraph(N1, N2, 200)
+
+    # Ensure that we catch callers trying to add alternate costs
+    # to sets of edges before compressing the graph
+    with pytest.raises(LogicError):
+        g.AddEdgeToGraph(0, 1, 250, "cost")
+
+    # Compress the graph
+    g.CompressToCSR()
+
+    # Add edges to the graph for this new cost type
+    test_cost = "Test"
+    g.AddEdgeToGraph(N0, N1, 250, test_cost)
+    g.AddEdgeToGraph(N1, N2, 251, test_cost)
+
+    # Assert that the edges added succssfully
+    assert(g.GetEdgeCost(0, 1, test_cost) == 250)
+    assert(g.GetEdgeCost(1, 2, test_cost) == 251)
+
+    # Ensure we throw if our precondition was violated
+    with pytest.raises(InvalidCostOperation):
+        g.AddEdgeToGraph(N1, N0, 10, test_cost)
+
+def test_AddingAndReadingCostTypesIDs():
     """ Tests that alternate cost types can be added and read. Also ensures
     that error cases are handled and thrown."""
 

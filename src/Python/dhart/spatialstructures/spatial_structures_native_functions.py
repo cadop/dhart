@@ -161,8 +161,7 @@ def C_AddEdgeFromNodeStructs(
             "Tried to add an alternate cost type to the graph before" +
             "compressing it")
     elif error_code == HF_STATUS.OUT_OF_RANGE:
-        # Tried to add an edge to an alternate cost type
-        # that didn't exist
+        # Tried to add an alternate cost to an edge that didn't exist
         raise InvalidCostOperation(
             f"Tried to add an edge from {parent_id} to {child_id} to alternate"
             + " cost type {cost_type} without first creating an edge between"
