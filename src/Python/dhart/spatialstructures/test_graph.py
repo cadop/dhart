@@ -118,6 +118,7 @@ def test_GetNodes():
         print(node)
 
 def test_GetEdgesForNode():
+    # Construct graph with 3 nodes and 3 edges
     g = Graph()
 
     N0 = NodeStruct(1,2,3,0,0)
@@ -129,12 +130,26 @@ def test_GetEdgesForNode():
         (nodes[0], nodes[2]),
         (nodes[1], nodes[2]),
     ]
+
     for edge in edges:
         g.AddEdgeToGraph(edge[0], edge[1], 39)
+
+    # Compression needed before doing anything
+    g.CompressToCSR()
+
     edge_list = g.GetEdgesForNode(nodes[0])
+
+    # Assert that we have the correct number of edges
     assert len(edge_list.array) == 2
-    for edge in edge_list.array:
-        print(edge)
+
+    # Assert that the edges are correct
+    expected_edges = ((N1, 1, 39), (N2, 1, 39))
+    for i in range(len(expected_edges)):
+        edge = edge_list.array[i]
+        expected_edge = expected_edges[i]
+        assert edge[0] == expected_edge[0]
+        assert edge[1] == expected_edge[1]
+        assert edge[2] == expected_edge[2]
 
 def test_CreateNodes():
     nodes = [(1, 2, 3), (20, 2110, 100)]

@@ -2578,6 +2578,40 @@ namespace CInterfaceTests {
 		}
 
 	}
+	TEST(_graphCInterface, GetEdgesForNode) {
+		//! [snippet_spatialstructuresC_GetEdgesForNode]
+
+		HF::SpatialStructures::Graph g;
+		HF::SpatialStructures::Node n0(1, 2, 3, 0);
+		HF::SpatialStructures::Node n1(2, 3, 4, 1);
+		HF::SpatialStructures::Node n2(19, 2, 3, 2);
+
+		g.addEdge(n0, n1, 10);
+		g.addEdge(n0, n2, 20);
+		g.addEdge(n1, n2, 30);
+
+		g.Compress();
+		std::vector<HF::SpatialStructures::Edge>* edge_vec = nullptr;
+		HF::SpatialStructures::Edge* edge_data = nullptr;
+
+		int edge_vec_size = -1;
+
+		GetEdgesForNode(&g, &n0, &edge_vec, &edge_data, &edge_vec_size);
+
+		// Assert that the size of the edge vector is 2
+		ASSERT_EQ(edge_vec_size, 2);
+		
+		// Assert that the edge vector contains the correct edges
+		std::vector<HF::SpatialStructures::Edge> expected_edges = { HF::SpatialStructures::Edge(n1, 10.0f, NONE), HF::SpatialStructures::Edge(n2, 20.0f, NONE) };
+
+		for (int i = 0; i < edge_vec_size; i++) {
+			Edge expected_edge = expected_edges[i];
+			Edge actual_edge = edge_data[i];
+			ASSERT_EQ(expected_edge.child, actual_edge.child);
+			ASSERT_EQ(expected_edge.score, actual_edge.score);
+			ASSERT_EQ(expected_edge.step_type, actual_edge.step_type);
+		}
+	}
 
 	TEST(_graphCInterface, GetEdgeCosts) {
 		// Construct graph

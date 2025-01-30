@@ -42,8 +42,9 @@ def GetEdgesForNode(graph_ptr: c_void_p, node_ptr: c_void_p) -> Tuple[c_void_p, 
     # Pointers to store results
     vector_ptr = c_void_p(0)
     data_ptr = c_void_p(0)
+    out_size = c_int(0)
     # Call to C interface
-    error_code = HFPython.GetEdgesForNode(graph_ptr, node_ptr, byref(vector_ptr), byref(data_ptr))
+    error_code = HFPython.GetEdgesForNode(graph_ptr, node_ptr, byref(vector_ptr), byref(data_ptr), byref(out_size))
 
     # Check error code
     if error_code == HF_STATUS.OK:
