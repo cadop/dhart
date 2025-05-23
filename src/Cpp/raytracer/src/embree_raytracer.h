@@ -111,9 +111,9 @@ namespace HF::RayTracer {
 		*/
 		void SetupScene();
 
-		/*! 
+		/*!
 			\brief Get the vertices for a specific triangle in a mesh.
-		
+
 			\param geomID ID of the geometry the triangle belongs to
 			\param primID Id of the triangle to retrieve
 
@@ -135,7 +135,7 @@ namespace HF::RayTracer {
 			\returns the New ID if a new ID needed to be given to the mesh or the ID given by ID.
 		
 		*/
-		int InsertGeom(RTCGeometry& geom, int id = -1);
+		// int InsertGeom(RTCGeometry& geom, int id = -1); // Removed as per new logic
 
 		/*! \brief Calculate the distance from origin to the point of intersection using an algorithm with higher precision
 			
@@ -1065,7 +1065,10 @@ namespace HF::RayTracer {
 						Vector3D(x,y,z),
 						Vector3D(dx,dy,dz)
 					);
-				out_struct.meshid = result.hit.geomID;
+				// Retrieve the original mesh ID from user data
+				RTCGeometry geo = rtcGetGeometry(scene, result.hit.geomID);
+				void* userData = rtcGetGeometryUserData(geo);
+				out_struct.meshid = (int)(uintptr_t)userData;
 			}
 
 			return out_struct;

@@ -209,23 +209,6 @@ namespace HF::RayTracer {
 		rtcRetainDevice(device);
 	}
 
-	int EmbreeRayTracer::InsertGeom(RTCGeometry& geom, int id)
-	{
-		if (id >= 0) {
-			rtcAttachGeometryByID(scene, geom, id);
-
-			// If we're attaching by ID, then we must check to see if the ID already exists.
-			// If it does already exist, then we'll have to just add it without specifying any ID
-			RTCError error = CheckState(device);
-
-			// Don't know the specific error that will be raised here (Documentation just states some error code)
-			if (error != RTCError::RTC_ERROR_NONE)
-				return InsertGeom(geom);
-		}
-	
-		return static_cast<int>(rtcAttachGeometry(scene, geom));
-	}
-
 	inline Vector3D cross(const Vector3D& x, const Vector3D& y) {
 		return Vector3D{
 			x.y * y.z - y.y * x.z,
@@ -323,7 +306,8 @@ namespace HF::RayTracer {
 		auto geom = ConstructGeometryFromBuffers(tris, verts);
 
 		// Add the geometry by ID
-		int added_id = InsertGeom(geom);
+		// int added_id = InsertGeom(geom); // Removed as per new logic
+		rtcAttachGeometry(scene, geom); // Directly attach the geometry
 
 		// Commit the scene if specified
 		if (Commit)
@@ -386,7 +370,9 @@ namespace HF::RayTracer {
 		auto geom = ConstructGeometryFromBuffers(tris, verts);
 
 		// Add the Mesh to the scene and update it's ID
-		Mesh.meshid = InsertGeom(geom, Mesh.meshid);
+		// Mesh.meshid = InsertGeom(geom, Mesh.meshid); // Removed as per new logic
+		rtcSetGeometryUserData(geom, (void*)(uintptr_t)Mesh.meshid);
+		rtcAttachGeometry(scene, geom);
 
 		// commit if specified
 		if (Commit)
@@ -545,9 +531,20 @@ namespace HF::RayTracer {
 		float dx, float dy, float dz,
 		float max_distance, int mesh_id)
 	{
-		RTCRayHit hit = ConstructHit(x, y, z, dx, dy, dz);
+		RTCRayHit hit = ConstructHit(x, y, z, dx, dy, dz, max_distance); // Pass max_distance
 
 		rtcIntersect1(scene, &context, &hit);
+
+		// If a hit occurred, retrieve the original mesh ID from user data
+		if (hit.hit.geomID != RTC_INVALID_GEOMETRY_ID) {
+			RTCGeometry geo = rtcGetGeometry(scene, hit.hit.geomID);
+			void* userData = rtcGetGeometryUserData(geo);
+			// It's important to store the original mesh ID here, not in the template,
+			// because RTCRayHit itself doesn't have a field for our custom mesh ID.
+			// The template function will use this geomID to fetch the user data.
+			// For now, we'll just ensure hit.hit.geomID is set correctly by Embree.
+			// The actual user data retrieval will be in the template Intersect function.
+		}
 
 		return hit;
 	}
