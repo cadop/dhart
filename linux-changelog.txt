@@ -1,0 +1,30 @@
+TODO:               
+src/Cinterface/pathfinder_C.cpp                                                 add CreateAllPredToPath
+src/Cpp/objloader/src/meshinfo.{cpp, h}                                         rename src/Cpp/objloader/src/MeshInfo.{cpp, h}
+src/Cpp/objloader/src/objloader.{cpp, h}                                        rename src/Cpp/objloader/src/OBJLoader.{cpp, h}
+src/Cpp/spatialstructures/src/Edge.h                                            rename src/Cpp/spatialstructures/src/edge.h
+src/Python/dhart/pathfinding/shortest_path.py                                   add documentation
+src/Python/dhart/viewanalysis/view_analysis.py                                  fix documentation example output
+src/Python/dhart/Examples/{NodeAttributes.py, ViewAnalysis3D.py}                change testcode to plot
+
+DEV:
+src/Cinterface/spatialstructures_C.cpp                                          add GetNodeAttributes,GetNodeAttributesByID
+src/Cinterface/spatialstructures_C.h                                            add documentation, refs
+src/Cpp/spatialstructures/graph.cpp                                             add new Add/Get node attribute functions
+src/Cpp/spatialstructures/graph.h                                               add floatmaps to Graph class, documenation
+src/Cpp/tests/src/SpatialStructures.cpp                                         add unit tests
+src/Cpp/tests/src/spatialstructures_C_cinterface.cpp                            add unit tests
+src/Python/dhart/spatialstructures/graph.py                                     add new function input types, documentation
+src/Python/dhart/spatialstructures/spatial_structures_native_functions.py       ^, numpy imports
+
+?:
+src/Cpp/raytracer/CMakeLists.txt                                                else case is same as if
+src/Cpp/raytracer/src/embree_raytracer.h                                        added <rpc.h>, removed <omp.h> and <algorithm>
+src/Cpp/spatialstructures/src/cost_algorithms.h                                 include "Edge.h"
+src/Cpp/SpatialStructures/src/graph.cpp                                         IMPL_ValueArrayIndex prototype not in Win build
+src/Cpp/spatialstructures/src/Constants.{cpp,h}                                 rename src/Cpp/spatialstructures/src/constants.{cpp,h} (unless Eigen Constants.h)
+src/Python/conftest.py (Win)                                                    not in Linux build
+src/Python/dhart/__init__.py                                                    directory variable "should be in a function"
+src/Python/dhart/spatialstructures/node.py                                      change "type" attribute to c_short
+src/external/Embree/{bin, include}                                              deprecated/deleted-in-Win files
+src/CMakeLists.txt                                                              DHARTAPI options for VS only?
