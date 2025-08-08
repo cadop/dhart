@@ -19,7 +19,7 @@
 #include <array>
 #include <HitStruct.h>
 #include <omp.h>
-#include <algorithm>
+// #include <algorithm>
 
 #define _USE_MATH_DEFINES
 
