@@ -12,7 +12,6 @@
 #include <vector>
 #include <array>
 #include <node.h>
-#include <Edge.h>
 #include <graph.h>
 #include <cassert>
 #include <variant>
