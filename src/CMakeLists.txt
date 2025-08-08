@@ -850,11 +850,8 @@ install(TARGETS ${project_name}
         RUNTIME DESTINATION bin
         INCLUDES DESTINATION include
     )
-if(WIN32)
-    install(FILES ${DEPENDENCY_BINARIES} DESTINATION bin)
-else()
-    install(FILES ${DEPENDENCY_BINARIES} DESTINATION bin)
-endif()
+
+install(FILES ${DEPENDENCY_BINARIES} DESTINATION bin)
 
 # Install python if the option is set to true
 if(DHARTAPI_EnablePython)

@@ -1,8 +1,3 @@
-todo:
-
-src/Python/dhart/Examples/NodeAttributes.py:140									change ".. testcode" to ".. plot"
-src/Python/dhart/Examples/ViewAnalysis3D.py:54									remove ".. testcode", ".. testoutput"
-
 new stuff:
 
 src/Cinterface/pathfinder_C.cpp													add CreateAllPredToPath
@@ -15,27 +10,31 @@ src/Cpp/tests/src/spatialstructures_C_cinterface.cpp							add unit tests for ne
 src/Python/dhart/spatialstructures/graph.py										add new function input types, documentation
 src/Python/dhart/spatialstructures/spatial_structures_native_functions.py		same as above, numpy imports
 src/Python/conftest.py (Win)													not in Linux build
+src/Csharp/CMakeLists.txt														update langversion
+src/Python/dhart/Examples/NodeAttributes.py:140									change ".. testcode" to ".. plot"
+src/Python/dhart/Examples/ViewAnalysis3D.py:54									remove ".. testcode", ".. testoutput"
 
 unsure:
+
+src/external/Embree/{bin, include}												Embree4 upgrade 
+																					bin (dll/so), cmake, embree4 include all exist, 
+																					embree4.lib and tbb2.lib exist, missing other lib and 
+																					other includes
+src/CMakeSettings.json															releases have different names/generators
+src/Python/dhart/viewanalysis/view_analysis.py									fix documentation example output - how to doctest on linux?
+src/Python/dhart/pathfinding/shortest_path.py									add documentation, doctest
+src/Cpp/objloader/src/meshinfo.{cpp, h}											different cases for file name vs CMake in Win version   
+src/Cpp/objloader/src/objloader.{cpp, h}										same as above
+
+attempted fixes:
 
 src/Cpp/raytracer/CMakeLists.txt												else case is same as if
 																				-	deleted conditional 
 src/Cpp/raytracer/src/embree_raytracer.h										added <rpc.h>, removed <omp.h> and <algorithm>
 																				- commented <algorithm>, embree may require. including rpc or removing omp breaks
-src/Cpp/spatialstructures/src/Edge.h											changing case src/Cpp/tests/src/PathFinding.cpp causes error
-src/Cpp/spatialstructures/src/cost_algorithms.h									same as above
 src/Cpp/SpatialStructures/src/graph.cpp											IMPL_ValueArrayIndex prototype not in Win build
 																				-	required in Linux build, doesn't affect Win build
-src/external/Embree/{bin, include}												Embree4 upgrade 
-																					bin (dll/so), cmake, embree4 include all exist, 
-																					embree4.lib and tbb2.lib exist, missing other lib and 
-																					other includes
-src/CMakeLists.txt:853															install else case same as if
-src/CMakeSettings.json															releases have different names/generators
-src/Python/dhart/viewanalysis/view_analysis.py									fix documentation example output - how to doctest on linux?
-src/Python/dhart/pathfinding/shortest_path.py									add documentation, doctest
-src/Csharp/CMakeLists.txt														update langversion
 src/Csharp/Examples/StringsToCosts/CMakeLists.txt								update VS_DOTNET_TARGET_FRAMEWORK_VERSION
 																				-	updated to 4.8
-src/Cpp/objloader/src/meshinfo.{cpp, h}											different cases for file name vs CMake in Win version   
-src/Cpp/objloader/src/objloader.{cpp, h}										same as above
+src/CMakeLists.txt:853															install else case same as if
+																				-	deleted conditional
