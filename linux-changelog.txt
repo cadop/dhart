@@ -13,6 +13,13 @@ src/Python/conftest.py (Win)													not in Linux build
 src/Csharp/CMakeLists.txt														update langversion
 src/Python/dhart/Examples/NodeAttributes.py:140									change ".. testcode" to ".. plot"
 src/Python/dhart/Examples/ViewAnalysis3D.py:54									remove ".. testcode", ".. testoutput"
+src/CMakeSettings.json															releases have different names/generators
+
+necessary changes:
+
+dhart\src\Cinterface\spatialstructures_C.h:48									COST_ALG_KEY cannot be a const
+dhart\src\Cinterface\objloader_C.h:13											must include objloader.h
+
 
 unsure:
 
@@ -20,7 +27,7 @@ src/external/Embree/{bin, include}												Embree4 upgrade
 																					bin (dll/so), cmake, embree4 include all exist, 
 																					embree4.lib and tbb2.lib exist, missing other lib and 
 																					other includes
-src/CMakeSettings.json															releases have different names/generators
+
 src/Python/dhart/viewanalysis/view_analysis.py									fix documentation example output - how to doctest on linux?
 src/Python/dhart/pathfinding/shortest_path.py									add documentation, doctest
 src/Cpp/objloader/src/meshinfo.{cpp, h}											different cases for file name vs CMake in Win version   
@@ -38,3 +45,5 @@ src/Csharp/Examples/StringsToCosts/CMakeLists.txt								update VS_DOTNET_TARGET
 																				-	updated to 4.8
 src/CMakeLists.txt:853															install else case same as if
 																				-	deleted conditional
+src/Cinterface/pathfinder_C.cpp													added <numeric>, <boost_graph>
+																				-	removed <numeric>, <boost_graph>

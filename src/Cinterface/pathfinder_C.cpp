@@ -7,8 +7,6 @@
 #include <graph.h>
 #include <path_finder.h>
 #include <path.h>
-#include <numeric>
-#include <boost_graph.h>
 
 using std::unique_ptr;
 using std::make_unique;
