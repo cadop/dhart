@@ -27,11 +27,8 @@ src/external/Embree/{bin, include}												Embree4 upgrade
 																					bin (dll/so), cmake, embree4 include all exist, 
 																					embree4.lib and tbb2.lib exist, missing other lib and 
 																					other includes
-
 src/Python/dhart/viewanalysis/view_analysis.py									fix documentation example output - how to doctest on linux?
 src/Python/dhart/pathfinding/shortest_path.py									add documentation, doctest
-src/Cpp/objloader/src/meshinfo.{cpp, h}											different cases for file name vs CMake in Win version   
-src/Cpp/objloader/src/objloader.{cpp, h}										same as above
 
 attempted fixes:
 
@@ -47,3 +44,6 @@ src/CMakeLists.txt:853															install else case same as if
 																				-	deleted conditional
 src/Cinterface/pathfinder_C.cpp													<numeric>, <boost_graph> libraries removed
 src/Cpp/analysismethods/src/graph_generator.h:15								<Edge.h> library removed
+src/Cpp/objloader/src/meshinfo.{cpp, h}											different cases for file name vs CMake in Win version
+																				-	using Win casing
+src/Cpp/objloader/src/objloader.{cpp, h}										same as above
