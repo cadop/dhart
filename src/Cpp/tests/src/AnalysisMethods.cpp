@@ -8,7 +8,7 @@
 #include <graph.h>
 #include <edge.h>
 #include <node.h>
-#include <Constants.h>
+#include <constants.h>
 #include <analysis_C.h>
 
 

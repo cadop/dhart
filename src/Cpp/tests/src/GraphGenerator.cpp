@@ -8,7 +8,7 @@
 #include <graph.h>
 #include <edge.h>
 #include <node.h>
-#include <Constants.h>
+#include <constants.h>
 #include <graph_generator.h>
 #include <objloader.h>
 #include <unique_queue.h>

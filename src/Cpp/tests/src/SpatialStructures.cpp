@@ -3,7 +3,7 @@
 #include <graph.h>
 #include <node.h>
 #include <edge.h>
-#include <Constants.h>
+#include <constants.h>
 #include <HFExceptions.h>
 #include <spatialstructures_C.h>
 

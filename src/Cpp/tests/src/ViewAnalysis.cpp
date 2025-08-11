@@ -18,7 +18,7 @@
 #include <raytracer_C.h>
 #include <objloader_C.h>
 #include <HFExceptions.h>
-#include <Constants.h>
+#include <constants.h>
 
 using namespace HF;
 using HF::SpatialStructures::Graph;

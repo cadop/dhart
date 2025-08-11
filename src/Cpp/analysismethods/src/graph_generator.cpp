@@ -6,7 +6,7 @@
 
 #define NOMINMAX
 #include <graph_generator.h>
-#include <Constants.h>
+#include <constants.h>
 #include <node.h>
 #include <edge.h>
 #include <graph.h>

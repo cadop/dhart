@@ -6,13 +6,13 @@ set(CMAKE_CXX_STANDARD 17)
 target_sources(
 	SpatialStructures
 	PRIVATE
-		src/Constants.cpp
+		src/constants.cpp
 		src/edge.cpp
 		src/node.cpp
 		src/path.cpp
 		src/graph.cpp
 		src/cost_algorithms.cpp
-		src/Constants.h
+		src/constants.h
 		src/edge.h
 		src/node.h
 		src/path.h

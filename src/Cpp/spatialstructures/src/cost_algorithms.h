@@ -13,7 +13,7 @@
 #include <string>
 #include "edge.h"
 
-#include "Constants.h"
+#include "constants.h"
 
 namespace HF::SpatialStructures {
 	struct Node;

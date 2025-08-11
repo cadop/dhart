@@ -17,7 +17,7 @@
 #include <embree_raytracer.h>
 #include <edge.h>
 #include <node.h>
-#include <Constants.h>
+#include <constants.h>
 
 using namespace HF;
 using namespace HF::SpatialStructures;
