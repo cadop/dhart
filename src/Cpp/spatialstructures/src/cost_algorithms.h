@@ -11,9 +11,9 @@
 
 #include <vector>
 #include <string>
-#include "Edge.h"
+#include "edge.h"
 
-#include "Constants.h"
+#include "constants.h"
 
 namespace HF::SpatialStructures {
 	struct Node;

@@ -14,7 +14,6 @@
 #endif
 #include <iostream>
 #include <robin_hood.h>
-#include <vector>
 
 #define _USE_MATH_DEFINES
 

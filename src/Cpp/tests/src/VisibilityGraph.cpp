@@ -5,7 +5,7 @@
 #include <objloader.h>
 #include <meshinfo.h>
 #include <graph.h>
-#include <Edge.h>
+#include <edge.h>
 #include <node.h>
 #include <visibility_graph.h>
 #include <string>

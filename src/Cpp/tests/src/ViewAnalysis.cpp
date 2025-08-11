@@ -11,14 +11,14 @@
 #include <objloader.h>
 #include <meshinfo.h>
 #include <graph.h>
-#include <Edge.h>
+#include <edge.h>
 #include <node.h>
 
 #include <view_analysis_C.h>
 #include <raytracer_C.h>
 #include <objloader_C.h>
 #include <HFExceptions.h>
-#include <Constants.h>
+#include <constants.h>
 
 using namespace HF;
 using HF::SpatialStructures::Graph;

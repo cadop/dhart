@@ -2,7 +2,7 @@
 #include <robin_hood.h>
 #include <graph.h>
 #include <node.h>
-#include <Edge.h>
+#include <edge.h>
 #include <spatialstructures_C.h>
 #include <cost_algorithms.h>
 

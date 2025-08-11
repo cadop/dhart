@@ -1,5 +1,5 @@
 ///
-///	\file		Constants.h 
+///	\file		constants.h 
 ///	\brief		Contains definitions for the <see cref="HF::SpatialStructures">HF::SpatialStructures</see> namespace
 ///
 /// \author	TBA 
@@ -54,7 +54,7 @@ namespace HF {
 		/// <returns> f rounded to the nearest rounding_precision. </returns>
 		/*!
 			\code
-				// be sure to #include "Constants.h" std::round from the cmath library is used in
+				// be sure to #include "constants.h" std::round from the cmath library is used in
 				// roundhf. Precision is to the nearest ten-thousandth
 
 				const float my_pi = 3.141592653589793238462643383279502884197169399375105820974944592307816406286;

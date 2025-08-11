@@ -10,7 +10,7 @@
 #include <graph.h>
 #include <algorithm>
 #include <cmath>
-#include <Constants.h>
+#include <constants.h>
 #include <cassert>
 #include <HFExceptions.h>
 #include <numeric>

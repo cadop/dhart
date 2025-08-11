@@ -11,7 +11,7 @@
 #include <vector>
 #include <iostream>
 
-#include "Constants.h"
+#include "constants.h"
 
 namespace HF::SpatialStructures
 {

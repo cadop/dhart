@@ -15,9 +15,9 @@
 #include <robin_hood.h>
 #include <graph.h>
 #include <embree_raytracer.h>
-#include <Edge.h>
+#include <edge.h>
 #include <node.h>
-#include <Constants.h>
+#include <constants.h>
 
 using namespace HF;
 using namespace HF::SpatialStructures;

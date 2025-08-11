@@ -6,9 +6,9 @@
 #include <objloader.h>
 #include <meshinfo.h>
 #include <graph.h>
-#include <Edge.h>
+#include <edge.h>
 #include <node.h>
-#include <Constants.h>
+#include <constants.h>
 #include<ray_data.h>
 
 #include "analysis_C.h"

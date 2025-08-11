@@ -12,7 +12,7 @@
 
 #include "cost_algorithms.h"
 #include "graph.h"
-#include "Constants.h"
+#include "constants.h"
 
 #include <iostream>
 
