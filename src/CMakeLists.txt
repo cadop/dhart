@@ -50,7 +50,7 @@ set(project_name "DHARTAPI")
 
 # For avoiding an initial error
 if(NOT DEFINED DHARTAPI_Config)
-    set(DHARTAPI_Config "GraphGenerator" CACHE STRING "What projects to build")
+    set(DHARTAPI_Config "All" CACHE STRING "What projects to build")
 endif()
 
 # Configuration options
@@ -77,7 +77,7 @@ option(DHARTAPI_EnableCSharp "Include C# Interface" ON)
 option(DHARTAPI_EnablePython "Include Python Interface" ON)
 option(DHARTAPI_BuildCSharpTests "Enable to build C# test projects" OFF)
 set(DHARTAPI_InstallTitle "" CACHE STRING "Installed package will be written to release/<InstallTitle>/. An empty string will follow default behavior.")
-set(DHARTAPI_Config "GraphGenerator" CACHE STRING "What projects to build")
+# set(DHARTAPI_Config "GraphGenerator" CACHE STRING "What projects to build")
 set (ENABLE_EXPORTS ON)
 
 if (NOT "${DHARTAPI_InstallTitle}" STREQUAL "")
@@ -85,10 +85,6 @@ if (NOT "${DHARTAPI_InstallTitle}" STREQUAL "")
 endif()
 
 # Check if CMAKE_INSTALL_PREFIX is set by the user, otherwise set to default
-if(NOT WIN32 AND NOT DEFINED CMAKE_INSTALL_PREFIX)
-    set(CMAKE_INSTALL_PREFIX "/usr/local/dhart" CACHE PATH "Installation directory prefix" FORCE)
-endif()
-
 message(STATUS "CMAKE_INSTALL_PREFIX is set to ${CMAKE_INSTALL_PREFIX}")
 
 # Find the Embree library and include directories, only for Linux
