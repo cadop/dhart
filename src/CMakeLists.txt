@@ -77,7 +77,6 @@ option(DHARTAPI_EnableCSharp "Include C# Interface" ON)
 option(DHARTAPI_EnablePython "Include Python Interface" ON)
 option(DHARTAPI_BuildCSharpTests "Enable to build C# test projects" OFF)
 set(DHARTAPI_InstallTitle "" CACHE STRING "Installed package will be written to release/<InstallTitle>/. An empty string will follow default behavior.")
-# set(DHARTAPI_Config "GraphGenerator" CACHE STRING "What projects to build")
 set (ENABLE_EXPORTS ON)
 
 if (NOT "${DHARTAPI_InstallTitle}" STREQUAL "")
