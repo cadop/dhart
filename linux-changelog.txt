@@ -14,6 +14,8 @@ src/Csharp/CMakeLists.txt														update langversion
 src/Python/dhart/Examples/NodeAttributes.py:140									change ".. testcode" to ".. plot"
 src/Python/dhart/Examples/ViewAnalysis3D.py:54									remove ".. testcode", ".. testoutput"
 src/CMakeSettings.json															releases have different names/generators
+src/Python/dhart/viewanalysis/view_analysis.py									fix documentation example output
+src/Python/dhart/pathfinding/shortest_path.py									add documentation
 
 necessary changes:
 
@@ -28,19 +30,17 @@ src/Cpp/tests/src/GraphGenerator.cpp:386,423									ASSERT_TRUE takes 1 arg
 
 unsure:
 
-src/Python/dhart/viewanalysis/view_analysis.py									fix documentation example output - how to doctest on linux?
-src/Python/dhart/pathfinding/shortest_path.py									add documentation, doctest
 src/Cpp/spatialstructures/node.h												inconsistent case in dev build, lowercase in Linux build
 src/Cpp/spatialstructures/src/node.cpp:19										NAN in dev build, -1 in Linux build
 																				-	warning: overflow in conversion from ‘float’ to ‘int’ changes value from ‘+QNaNf’ to ‘0’ [-Woverflow]
 src/CMakeLists.txt:51															initial warning is avoided, but cmake is run again anyway
 
+
 attempted fixes:
 
 src/Cpp/raytracer/CMakeLists.txt												else case is same as if
 																				-	deleted conditional 
-src/Cpp/raytracer/src/embree_raytracer.h										added <rpc.h>, removed <omp.h> and <algorithm>
-																				- commented <algorithm>, embree may require. including rpc or removing omp breaks
+src/Cpp/raytracer/src/embree_raytracer.h										deleted <algorithm>, embree may require. including <rpc> or removing <omp> breaks
 src/Csharp/Examples/StringsToCosts/CMakeLists.txt								update VS_DOTNET_TARGET_FRAMEWORK_VERSION
 																				-	updated to 4.8
 src/CMakeLists.txt:853															install else case same as if
@@ -53,3 +53,5 @@ src/Cpp/objloader/src/objloader.{cpp, h}										same as above
 src/Cpp/objloader/src/meshinfo.cpp												<vector> library removed
 src/Cpp/spatialstructures/Edge.h												renamed to edge.h, changed all includes
 src/Cpp/spatialstructures/Constants.{cpp, h}									renamed to constants.{cpp, h}, changed all includes
+dhart\src\Cpp\tests\src\performance_testing.h:7									<iomanip> library removed
+dhart\src\external\robin_hood\robin_hood.h										<cstdint> library removed, <limits> library required
