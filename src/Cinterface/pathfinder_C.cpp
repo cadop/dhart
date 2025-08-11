@@ -7,6 +7,8 @@
 #include <graph.h>
 #include <path_finder.h>
 #include <path.h>
+#include <numeric>
+#include <boost_graph.h>
 
 using std::unique_ptr;
 using std::make_unique;
@@ -243,3 +245,83 @@ C_INTERFACE CreateAllPredToPath(
 	return HF_STATUS::OK;
 
 }
+
+
+
+//C_INTERFACE CreateAllPredToPath(
+//	const HF::SpatialStructures::Graph* g,
+//	const char* cost_name,
+//	vector<int>** out_nodes_vector,
+//	int** out_nodes_data, // Output: Flat array of all path nodes
+//	vector<int>** out_lengths_vector,
+//	int** out_lengths_data // Output: Array of path lengths
+//) {
+//
+//	try {
+//
+//		// Create a boost graph with the cost type
+//		auto bg = CreateBoostGraph(*g, string(cost_name));
+//
+//		// Prepare the parents and children vectors
+//
+//		int nodeSize = bg->p.size();
+//		std::vector<int> start_points(nodeSize * nodeSize);
+//		std::vector<int> end_points(nodeSize * nodeSize);
+//
+//		for (int i = 0; i < nodeSize; ++i) {
+//			std::fill_n(start_points.begin() + i * nodeSize, nodeSize, i);
+//			std::iota(end_points.begin() + i * nodeSize, end_points.begin() + (i + 1) * nodeSize, 0);
+//		}
+//
+//		// Generate paths
+//		auto paths = HF::Pathfinding::FindPaths(bg.get(), start_points, end_points);
+//		std::vector<int> pathNodes;
+//		std::vector<int> pathLengths;
+//
+//		// Collect all nodes and path lengths
+//		for (const auto& p : paths)
+//		{
+//			for (const auto& pm : p.members) {
+//				pathNodes.push_back(pm.node);
+//			}
+//			pathLengths.push_back(p.members.size());
+//		}
+//
+//		*out_nodes_vector = new vector<int>();
+//		*out_lengths_vector = new vector<int>();
+//
+//		/*
+//		auto& out_nodes = **out_nodes_vector;
+//		auto& out_lengths = **out_lengths_vector;
+//
+//
+//		out_nodes.resize(pathNodes.size());
+//		out_lengths.resize(pathLengths.size());
+//
+//		for (int i = 0; i < pathNodes.size(); i++) {
+//			out_nodes[i] = pathNodes[i];
+//		}
+//		for (int i = 0; i < pathLengths.size(); i++) {
+//			out_lengths[i] = pathLengths[i];
+//		}
+//
+//
+//		*out_nodes_data = out_nodes.data();
+//		*out_lengths_data = out_lengths.data();
+//		*/
+//
+//		*out_nodes_vector = new vector<int>(pathNodes.begin(), pathNodes.end());
+//		*out_lengths_vector = new vector<int>(pathLengths.begin(), pathLengths.end());
+//
+//		*out_nodes_data = (*out_nodes_vector)->data();
+//		*out_lengths_data = (*out_lengths_vector)->data();
+//	}
+//
+//	catch (HF::Exceptions::NoCost)
+//	{
+//		return HF_STATUS::GENERIC_ERROR;
+//	}
+//	return HF_STATUS::OK;
+//
+//}
+

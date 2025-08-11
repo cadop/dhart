@@ -9,6 +9,7 @@
 #include <edge.h>
 #include <node.h>
 #include <constants.h>
+#include <analysis_C.h>
 #include <graph_generator.h>
 #include <objloader.h>
 #include <unique_queue.h>
@@ -167,7 +168,7 @@ TEST(_GraphGenerator, OutDegree) {
 
 	//! [EX_OutDegree]
 
-	auto out_str = PrintGraph(g);
+	//auto out_str = PrintGraph(g);
 
 	const auto graph_nodes = g.Nodes();
 
@@ -672,5 +673,151 @@ TEST(_GraphGenerator, OcclusionCheck) {
 	ASSERT_FALSE(occlusion_check_child_2);
 }
 
+TEST(_GraphGenerator, CalculateStepType) {
+	// Load an OBJ containing a simple plane
+	auto mesh = HF::Geometry::LoadMeshObjects("energy_blob_zup.obj", HF::Geometry::ONLY_FILE, false);
+	
+	// Create a raytracer using this obj
+	EmbreeRayTracer ray_tracer = HF::RayTracer::EmbreeRayTracer(mesh);
+	//! [EX_CheckStepTypes]
+
+	// Create a graphgenerator using the raytracer we just created
+	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+
+	// Setup Graph Parameters
+	std::array<float, 3> start_point{ 0,0,20 };
+	std::array<float, 3> spacing{ 1,1,1 };
+
+	HF::GraphGenerator::GraphParams params;
+
+	int max_nodes = 5000;
+	params.up_step = 0.5; params.down_step = 0.5;
+	params.up_slope = 20; params.down_slope = 20;
+	int max_step_connections = 1;
+	int min_connections = 4;
+	params.precision.node_z = 0.0001;
+	params.precision.ground_offset = 0.01;
+	params.precision.node_spacing = 0.00001;
+
+	// Generate the graph using our parameters
+	HF::SpatialStructures::Graph g = GG.BuildNetwork(
+		start_point,
+		spacing,
+		max_nodes,
+		params.up_step, params.up_slope,
+		params.down_step, params.down_slope,
+		max_step_connections,
+		min_connections
+	);
+
+	// Compression needed to access step types
+	g.Compress();
+
+	// Compute all step types and store in std::vector<EdgeSet>
+	auto step_types = HF::GraphGenerator::CalculateStepType(g, HF::RayTracer::MultiRT(&ray_tracer));
+
+	// Compare result to CheckConnection results for initial graph generation.
+	bool equal_connections = HF::GraphGenerator::CompareCheckConnections(g, HF::RayTracer::MultiRT(&ray_tracer),
+		params, step_types);
+
+	ASSERT_TRUE(equal_connections);
+	//! [EX_CheckStepTypes]
+}
+
+TEST(_GraphGenerator, CalculateAndStoreStepType) {
+	// Load an OBJ containing a simple plane
+	auto mesh = HF::Geometry::LoadMeshObjects("energy_blob_zup.obj", HF::Geometry::ONLY_FILE, false);
+
+	// Create a raytracer using this obj
+	EmbreeRayTracer ray_tracer = HF::RayTracer::EmbreeRayTracer(mesh);
+	//! [EX_CheckStepTypes]
+
+	// Create a graphgenerator using the raytracer we just created
+	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+
+	// Setup Graph Parameters
+	std::array<float, 3> start_point{ 0,0,20 };
+	std::array<float, 3> spacing{ 1,1,1 };
+
+	HF::GraphGenerator::GraphParams params;
+
+	int max_nodes = 5000;
+	params.up_step = 0.5; params.down_step = 0.5;
+	params.up_slope = 20; params.down_slope = 20;
+	int max_step_connections = 1;
+	int min_connections = 4;
+	params.precision.node_z = 0.0001;
+	params.precision.ground_offset = 0.01;
+	params.precision.node_spacing = 0.00001;
+
+	// Generate the graph using our parameters
+	HF::SpatialStructures::Graph g = GG.BuildNetwork(
+		start_point,
+		spacing,
+		max_nodes,
+		params.up_step, params.up_slope,
+		params.down_step, params.down_slope,
+		max_step_connections,
+		min_connections
+	);
+
+	// Compute and store step types in graph
+	HF::GraphGenerator::CalculateAndStoreStepType(g, HF::RayTracer::MultiRT(&ray_tracer));
+
+	std::vector<HF::SpatialStructures::EdgeSet> result = g.GetEdges("step_type");
+
+	bool equal_connections = HF::GraphGenerator::CompareCheckConnections(g, HF::RayTracer::MultiRT(&ray_tracer),
+		params, result);
+
+	ASSERT_TRUE(equal_connections);
+}
+
+TEST(_GraphGenerator, CalculateAndStoreStepTypes) {
+	// Load an OBJ containing a simple plane
+	auto mesh = HF::Geometry::LoadMeshObjects("energy_blob_zup.obj", HF::Geometry::ONLY_FILE, false);
+
+	// Create a raytracer using this obj
+	EmbreeRayTracer ray_tracer = HF::RayTracer::EmbreeRayTracer(mesh);
+	//! [EX_CheckStepTypes]
+
+	// Create a graphgenerator using the raytracer we just created
+	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+
+	// Setup Graph Parameters
+	std::array<float, 3> start_point{ 0,0,20 };
+	std::array<float, 3> spacing{ 1,1,1 };
+
+	HF::GraphGenerator::GraphParams params;
+
+	int max_nodes = 5000;
+	params.up_step = 0.5; params.down_step = 0.5;
+	params.up_slope = 20; params.down_slope = 20;
+	int max_step_connections = 1;
+	int min_connections = 4;
+	params.precision.node_z = 0.0001;
+	params.precision.ground_offset = 0.01;
+	params.precision.node_spacing = 0.00001;
+
+	// Generate the graph using our parameters
+	HF::SpatialStructures::Graph g = GG.BuildNetwork(
+		start_point,
+		spacing,
+		max_nodes,
+		params.up_step, params.up_slope,
+		params.down_step, params.down_slope,
+		max_step_connections,
+		min_connections
+	);
+
+	// Compute and store step types in graph
+	CalculateAndStoreStepTypes(&g, &ray_tracer);
+
+	std::vector<HF::SpatialStructures::EdgeSet> result = g.GetEdges("step_type");
+
+	bool equal_connections = HF::GraphGenerator::CompareCheckConnections(g, HF::RayTracer::MultiRT(&ray_tracer),
+		params, result);
+
+	ASSERT_TRUE(equal_connections);
+}
 
 

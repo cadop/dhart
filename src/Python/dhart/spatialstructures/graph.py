@@ -9,6 +9,7 @@ from enum import IntEnum
 
 from dhart.native_numpy_like import NativeNumpyLike
 from .node import NodeStruct, NodeList
+from .edge import EdgeStruct, EdgeList
 from . import spatial_structures_native_functions
 
 __all__ = ['CostAggregationType','EdgeSumArray','Graph', 'Direction']
@@ -208,10 +209,13 @@ class Graph:
                functions to behave incorrectly. This was mostly implemented
                for the sake of testing.
         """
-
         if isinstance(parent, int) and isinstance(child, int):
             spatial_structures_native_functions.C_AddEdgeFromNodeIDs(
                 self.graph_ptr, parent, child, cost, cost_type
+            )
+        elif isinstance(parent, NodeStruct) and isinstance(child, NodeStruct):
+            spatial_structures_native_functions.C_AddEdgeFromNodeStructs(
+                self.graph_ptr, ctypes.byref(parent), ctypes.byref(child), cost, cost_type
             )
         else:
             spatial_structures_native_functions.C_AddEdgeFromNodes(
@@ -445,6 +449,20 @@ class Graph:
         if self.graph_ptr:
             spatial_structures_native_functions.DestroyGraph(self.graph_ptr)
 
+    def GetEdgesForNode(self, parent: NodeStruct) -> List[EdgeStruct]:
+        """ Get the edges for a specific node
+
+        Args:
+            parent (NodeStruct): Node to get the edges for
+
+        Returns:
+            List[EdgeStruct]: List of edges for the node
+        """
+        vector_ptr, data_ptr = spatial_structures_native_functions.GetEdgesForNode(
+            self.graph_ptr, ctypes.byref(parent))
+
+        return EdgeList(vector_ptr, data_ptr)
+        
     def GetEdgeCost(self, parent: int, child: int, cost_type: str = "") -> float:
         """ Get the cost from parent to child for a specific cost type
 
@@ -463,13 +481,59 @@ class Graph:
             child,
             cost_type
             )
+        
+    def GetEdgeCosts(self, cost_type: str, ids: List[int] | None = None) -> List[float]:
+        """Get the costs for each edge in a set of edges
+        
+        Args:
+            cost_type : str
+                Cost type to get the cost from. If left blank will use the graph's default cost type. (second part needs to be implemented)
+            ids : List[int]
+                List of IDs in the format [parent1, child1, parent2, child2,...]. If left blank, compute all edge costs of type cost_type
+        Returns:
+            List[float] : An array of costs of cost_type corresponding to ids in ids.
+        
+        Examples
+        --------
+        >>> from dhart.spatialstructures import Graph
+        >>> # Create a simple graph with 3 nodes
+        >>> g = Graph()
+        >>> cost_type = "TestCost"
+        >>> g.AddEdgeToGraph(0,1,50)
+        >>> g.AddEdgeToGraph(0,2,50)
+        >>> g.AddEdgeToGraph(1,2,50)
+        >>> _ = g.CompressToCSR() #doctest: +ELLIPSIS
+        >>> g.AddEdgeToGraph(0, 1, 100, cost_type)
+        >>> g.AddEdgeToGraph(0, 2, 50, cost_type)
+        >>> g.AddEdgeToGraph(1, 2, 20, cost_type)
+
+        >>> ids = [0,1,1,2]
+        >>> # All costs of cost_type
+        >>> g.GetEdgeCosts(cost_type)
+        [100.0, 50.0, 20.0]
+        >>> # Specific edges to get costs for
+        >>> g.GetEdgeCosts(cost_type, ids)
+        [100.0, 20.0]
+        """
+        return spatial_structures_native_functions.C_GetEdgeCosts(self.graph_ptr, cost_type, ids)
 
     def NumNodes(self) -> int:
         """Get the number of nodes in the graph."""
         return spatial_structures_native_functions.C_NumNodes(self.graph_ptr)
+    
+    def NumEdges(self, cost_type) -> int:
+        """ Get the number of edges of cost_type in the graph
+        
+        Args:
+            cost_type : str
+                Cost type to get the edges from.
+            Returns:
+                int : The number of edges with type cost_type.
+        """
+        return spatial_structures_native_functions.C_NumEdges(self.graph_ptr, cost_type)
 
     def add_node_attributes(
-        self, attribute: str, ids: Union[int, List[int]], scores: Union[str, List[Any]],
+        self, attribute: str, ids: Union[int, List[int]], scores: Union[List[str], List[float]],
         ) -> None:
         """ Add attributes to one or more nodes
         
@@ -481,6 +545,7 @@ class Graph:
         Preconditions:
             1) IDs in ids must already belong to nodes in the graph
             2) The length of scores and ids must match
+            3) All values in scores are of the same type
 
         Raises:
             ValueError : the length of ids and scores did not match
@@ -497,15 +562,20 @@ class Graph:
            >>> csr = g.CompressToCSR()
 
            >>> # Add node attributes to the simple graph
-           >>> attr = "Test"
+           >>> string_attr = "Strings"
+           >>> float_attr = "Floats"
            >>> ids = [0, 1, 2]
-           >>> scores = ["zero", "one", "two"]
-           >>> g.add_node_attributes(attr, ids, scores)
+           >>> string_scores = ["zero", "one", "two"]
+           >>> float_scores = [0.0, 1.0, 2.0]
+           >>> g.add_node_attributes(string_attr, ids, string_scores)
+           >>> g.add_node_attributes(float_attr, ids, float_scores)
 
            >>> # To ensure that they've been added properly we will call
            >>> # get_node_attributes.
-           >>> g.get_node_attributes(attr)
+           >>> g.get_node_attributes(string_attr)
            ['zero', 'one', 'two']
+           >>> g.get_node_attributes(float_attr)
+           [0.0, 1.0, 2.0]
 
         """
         # Just send it to C++
@@ -513,18 +583,24 @@ class Graph:
             self.graph_ptr, attribute, ids, scores
         )
 
-    def get_node_attributes(self, attribute: str) -> List[str]:
+    def get_node_attributes(
+            self, attribute: str, ids : List[int] | None = None
+        ) -> Union[List[str], List[float]]:
         """ Get scores of every node for a specific attribute
 
         Args:
             attribute : The unique key of the attribute to get scores for
+            ids : Node IDs in the graph to get attributes for, optional
+
+        Preconditions:
+            1) Node IDs in ids must already belong to nodes in the graph
 
         Returns:
-            A list of strings representing the score of every node in the
-            graph for attribute in order of ID. If attribute does not exist
-            in the graph, then None is returned. For nodes that have never
-            been assigned a score for a specific attribute, the score at
-            the index of their ID will be None.
+            A list of strings representing the score of the specified nodes - or 
+            every node in the graph for attribute if unspecified -
+            in order of ID. If attribute does not exist in the graph, then 
+            None is returned. For nodes that have never been assigned a score 
+            for a specific attribute, the score at the index of their ID will be None.
 
 
         Example:
@@ -540,19 +616,28 @@ class Graph:
            >>> csr = g.CompressToCSR()
 
            >>> # Add node attributes to the simple graph
-           >>> attr = "Test"
+           >>> string_attr = "Strings"
+           >>> float_attr = "Floats"
            >>> ids = [0, 1, 2]
-           >>> scores = ["zero", "one", "two"]
-           >>> g.add_node_attributes(attr, ids, scores)
+           >>> string_scores = ["zero", "one", "two"]
+           >>> float_scores = [0.0, 1.0, 2.0]
+           >>> g.add_node_attributes(string_attr, ids, string_scores)
+           >>> g.add_node_attributes(float_attr, ids, float_scores)
            
            
            >>> # Get attribute scores from the graph
-           >>> g.get_node_attributes(attr)
+           >>> g.get_node_attributes(string_attr)
            ['zero', 'one', 'two']
+
+           >>> # Get attribute scores for specific nodes
+           >>> g.get_node_attributes(string_attr, [0])
+           ['zero']
+           >>> g.get_node_attributes(float_attr, [2, 1])
+           [2.0, 1.0]
         """
 
         return spatial_structures_native_functions.c_get_node_attributes(
-            self.graph_ptr, attribute, self.NumNodes()
+            self.graph_ptr, attribute, self.NumNodes(), ids
         )
 
     def clear_node_attribute(self, attribute: str):

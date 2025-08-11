@@ -1,4 +1,4 @@
-﻿cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.10)
 project("DHARTAPICSharp" CSharp)
 
 ### NOTE:
@@ -24,7 +24,7 @@ LIST (APPEND normal_references "netstandard")
 LIST (APPEND normal_references "System.Runtime.Serialization")
 
 # Set the C# language version
-set(CMAKE_CSharp_FLAGS "/langversion:7.3")
+set(CMAKE_CSharp_FLAGS "/langversion:8")
 
 # Include packages. These will add source files to ${sources} and test files to ${test_sources} for each package
 include(${CMAKE_CURRENT_LIST_DIR}/packages/base/package.cmake)
@@ -97,4 +97,5 @@ install(TARGETS hfcsharptest EXPORT hfcsharptest RUNTIME DESTINATION bin)
 if (DHARTAPI_BuildCSharpTests)
 	add_subdirectory(Examples)
 endif()
+
 

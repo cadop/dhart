@@ -673,6 +673,7 @@ TEST(_pathFinding, C_CreateAllPredToPath) {
 	std::copy(pathLengths.begin(), pathLengths.end(), out_path_lengths);
 
 	/*
+
 	for (int i = 0; i < 10; i++) {
 		//for (int i = 0; i < pathNodes.size(); i++) {
 		std::cout << "Node ID: " << pathNodes[i] << std::endl;
@@ -1281,6 +1282,47 @@ namespace CInterfaceTests {
 		out_path_member = nullptr;
 		//! [snippet_pathfinder_C_DestroyPath]
 	}
+
+
+
+	// A utility function to add a bidirectional edge
+	void addBidirectionalEdge(HF::SpatialStructures::Graph& g, int u, int v, int weight) {
+		g.addEdge(u, v, weight);
+		g.addEdge(v, u, weight);
+	}
+
+	TEST(C_Pathfinder, CreateManyPathsPerformanceTest) {
+		HF::SpatialStructures::Graph g;
+
+		// Assume we're adding many more nodes and edges to significantly increase the graph size
+		const int NODE_COUNT = 300; // Adjust this number based on the capability of your system
+		for (int i = 0; i < NODE_COUNT - 1; ++i) {
+			for (int j = i + 1; j < NODE_COUNT; ++j) {
+				addBidirectionalEdge(g, i, j, 1); // Adding a simple weight for the sake of example
+			}
+		}
+
+		g.Compress();
+
+		const size_t path_count = NODE_COUNT * NODE_COUNT;
+		std::vector<Path*> out_paths(path_count);
+		std::vector<PathMember*> out_path_member(path_count);
+		std::vector<int> sizes(path_count);
+
+		// Measure the time it takes to generate all paths
+		auto start = std::chrono::high_resolution_clock::now();
+		CreateAllToAllPaths(&g, "", out_paths.data(), out_path_member.data(), sizes.data(), path_count);
+		auto finish = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double> elapsed = finish - start;
+		std::cout << "Elapsed time: " << elapsed.count() << " seconds\n";
+
+		// Assuming DestroyPath is necessary to avoid memory leaks
+		for (auto& p : out_paths) {
+			DestroyPath(p);
+			p = nullptr;
+		}
+	}
+
 
 	TEST(C_Pathfinder, CreateAllToAllPaths) {
 		//! [snippet_pathfinder_C_CreateAllToAllPaths]

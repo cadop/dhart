@@ -341,7 +341,7 @@ namespace CInterfaceTests {
 		auto bg = HF::Pathfinding::CreateBoostGraph(*g);
 
 		// Create distance/predecessor matricies from the boost graph
-		// auto matricies = HF::Pathfinding::GenerateDistanceAndPred(*bg.get());
+		//auto matricies = HF::Pathfinding::GenerateDistanceAndPred(*bg.get());
 		auto cpp_pred = matricies.pred; auto cpp_dist = matricies.dist;
 
 		// Compare to C-Interface  generated results

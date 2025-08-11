@@ -511,7 +511,8 @@ C_INTERFACE CalculateDistanceAndPredecessor(
 	std::vector<int>** out_pred_vector,
 	int** out_pred_data
 );
-	
+
+
 C_INTERFACE CreateAllPredToPath(
 	const HF::SpatialStructures::Graph* g,
 	const char* cost_name,

@@ -273,7 +273,7 @@ namespace HF::Pathfinding {
 		DistanceAndPredecessor out_distpred(num_nodes);
 		
 		// Iterate through every row in the array
-		#pragma omp parallel for schedule(dynamic)
+	#pragma omp parallel for schedule(dynamic)
 		for (int row = 0; row < num_nodes; row++) {
 	
 			// Get pointers to the beginning of the row for both matricies
@@ -300,8 +300,8 @@ namespace HF::Pathfinding {
 			// of std::numeric_limits<float>::max. This should be a NAN for the sake of readability. 
 			for (int i = 0; i < num_nodes; i++)
 			{
-				// float & dist_element = dist_row_start[i];
-				// int & pred_element = pred_row_start[i];
+				//float & dist_element = dist_row_start[i];
+				//int & pred_element = pred_row_start[i];
 
 				// If the predecessor element is not not in the range of nodes,
 				// this is boost trying to signal to us that there is no connection
@@ -370,7 +370,9 @@ namespace HF::Pathfinding {
 		// Run InsertPathsIntoArray and mutate out_paths, out_path_members, and out_sizes
 		InsertPathsIntoArray(bg, start_points, end_points, out_paths, out_path_members, out_sizes);
 	}
-	
+
+
+
 	// ****************************************************************************************
 	// Start of the new pathfinding functions
 	// *																						*
@@ -378,10 +380,14 @@ namespace HF::Pathfinding {
 
 	/*!
 		\brief Construct the shortest path of node ids given predecessor and distance vectors.
+
+
 		\param start ID of the starting point.
 		\param end ID of the end point.
 		\param pred Predecessor matrix for the start node.
 		\param distances Distance matrix for pred
+
+
 		\todo Replace exception with an assert statment. It shouldn't be triggered unless
 		there's a problem with this algorithm?
 	*/
@@ -484,4 +490,6 @@ namespace HF::Pathfinding {
 		}
 		return allPaths; // Return the final vector
 	}
+
+
 }

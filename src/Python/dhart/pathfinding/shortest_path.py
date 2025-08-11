@@ -7,9 +7,10 @@ from scipy.sparse import csr_matrix
 from dhart.spatialstructures import Graph
 from dhart.native_collections import FloatArray2D, IntArray2D
 
+
 __all__ = ["ConvertNodesToIds", "DijkstraShortestPath", 
            "DijkstraFindAllShortestPaths", "calculate_distance_and_predecessor",
-           "AllShortestPathsCSR", "get_path_from_csr"]
+           "AllShortestPathsCSR", "get_path_from_csr", "AlternateCostsAlongPath"]
 
 
 def ConvertNodesToIds(graph: Graph, nodes: List[Union[Tuple, int]]) -> List[int]:
@@ -291,6 +292,8 @@ def DijkstraFindAllShortestPaths(
     >>> 
     >>> # Get APSP
     >>> SP = DijkstraFindAllShortestPaths(g)
+    >>> # Convert to a dtype object for easier manipulation
+    >>> SP = np.array(SP, dtype=object)
     >>> 
     >>> # Reshape APSP result to nxn of graph size
     >>> apsp_mat = np.reshape(SP, (g_size,g_size))
@@ -476,3 +479,47 @@ def get_path_from_csr(csr, node1, node2):
     start_idx = csr.indptr[node_idx]
     end_idx = csr.indptr[node_idx + 1]
     return csr.indices[start_idx:end_idx]
+
+def AlternateCostsAlongPath(g: Graph, path: Union[List[int], Path], cost_type: str) -> List[float]:
+        """Get the costs for each edge in a set of edges
+        
+        Args:
+            path : Union[List[int], Path]
+                Path of IDs in the format [node1,node2,...,nodek] or Path object
+            cost_type : str
+                Cost type to get the cost from. If left blank will use the graph's default cost type. (second part needs to be implemented)
+        Returns:
+            List[float] : An array of costs of cost_type corresponding to edges in path
+
+        Examples
+        --------
+        >>> from dhart.spatialstructures import Graph
+        >>> from dhart.pathfinding import AlternateCostsAlongPath
+        >>> # Create a simple graph with 4 nodes
+        >>> g = Graph()
+
+        >>> g.AddEdgeToGraph(0,1,50)
+        >>> g.AddEdgeToGraph(0,2,10)
+        >>> g.AddEdgeToGraph(1,2,150)
+        >>> g.AddEdgeToGraph(1,3,70)
+        >>> g.AddEdgeToGraph(2,3,70)
+        
+        >>> csr = g.CompressToCSR()
+        >>> cost_type = "TestCost"
+
+        >>> g.AddEdgeToGraph(0, 1, 100, cost_type)
+        >>> g.AddEdgeToGraph(0, 2, 50, cost_type)
+        >>> g.AddEdgeToGraph(1, 2, 20, cost_type)
+        >>> g.AddEdgeToGraph(1,3, 1000, cost_type)
+        >>> g.AddEdgeToGraph(2,3, 1500, cost_type)
+
+        >>> shortest_path = [0,2,3]
+
+        >>> AlternateCostsAlongPath(g, shortest_path, cost_type)
+        [50.0, 1500.0]
+        """
+        if isinstance(path, list):
+            path_size = len(path)
+        else:
+            path_size = path.size[0]
+        return pathfinder_native_functions.C_AlternateCostsAlongPath(g.graph_ptr, cost_type, path, path_size)

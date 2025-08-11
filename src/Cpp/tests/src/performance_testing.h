@@ -75,7 +75,7 @@ inline void PrintTrials(
 	}
 
 	std::cerr.imbue(std::locale(""));
-	// std::cerr << std::fixed << std::showpoint << std::setprecision(3);
+	//std::cerr << std::fixed << std::showpoint << std::setprecision(3);
 
 	// Iterate through the results of each trial.
 	for (int i = 0; i < num_trials; i++) {

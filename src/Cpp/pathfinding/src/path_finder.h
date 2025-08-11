@@ -476,6 +476,8 @@ namespace HF {
 		
 		*/
 		DistanceAndPredecessor GenerateDistanceAndPred(const BoostGraph& bg);
+
+		inline DistanceAndPredecessor GenerateDistanceAndPredFast(const BoostGraph& bg);
 			
 		inline DistanceAndPredecessor GenerateDistanceAndPredFast(const BoostGraph& bg);
 		/*!
