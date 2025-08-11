@@ -9,7 +9,7 @@
 
 #include <graph.h>
 #include <node.h>
-#include <Edge.h>
+#include <edge.h>
 #include <assert.h>
 
 using HF::SpatialStructures::Graph;

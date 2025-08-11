@@ -11,7 +11,7 @@
 #include <objloader.h>
 #include <meshinfo.h>
 #include <graph.h>
-#include <Edge.h>
+#include <edge.h>
 #include <node.h>
 
 #include <view_analysis_C.h>

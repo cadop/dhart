@@ -12,7 +12,7 @@ namespace HF {
 	namespace SpatialStructures {
 		class Graph;			///< see graph.h in spatialstructures
 		struct Node;			///< see node.h in spatialstructures
-		struct Edge;			///< see Edge.h in spatialstructures
+		struct Edge;			///< see edge.h in spatialstructures
 	}
 
 	namespace RayTracer {

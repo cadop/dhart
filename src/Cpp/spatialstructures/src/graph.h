@@ -9,7 +9,7 @@
 
 #include <robin_hood.h>
 #include <vector>
-#include <Edge.h>
+#include <edge.h>
 #include <node.h>
 #include <Eigen>
 #include <iostream>

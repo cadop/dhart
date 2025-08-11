@@ -11,7 +11,7 @@
 #include <boost_graph.h>
 #include <graph.h>
 #include <node.h>
-#include <Edge.h>
+#include <edge.h>
 #include <path.h>
 #include <HFExceptions.h>
 

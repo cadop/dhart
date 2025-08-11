@@ -13,7 +13,7 @@ target_sources(
 		src/graph.cpp
 		src/cost_algorithms.cpp
 		src/Constants.h
-		src/Edge.h
+		src/edge.h
 		src/node.h
 		src/path.h
 		src/graph.h

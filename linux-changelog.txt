@@ -23,13 +23,10 @@ dhart\src\Cpp\spatialstructures\src\cost_algorithms.h							must include Edge.h
 dhart\src\Cpp\tests\src\AnalysisMethods.cpp:34									separate meshInfo creation from returning raytracer
 dhart\src\Cpp\tests\src\GraphAlgorithms.cpp:48									FAIL() takes 0 args
 dhart\src\Cpp\tests\src\PathFinding.cpp:21										<numeric> required for std::iota in on Win
+src/Cpp/SpatialStructures/src/graph.cpp											IMPL_ValueArrayIndex required in Linux build, doesn't affect Win build
 
 unsure:
 
-src/external/Embree/{bin, include}												Embree4 upgrade 
-																					bin (dll/so), cmake, embree4 include all exist, 
-																					embree4.lib and tbb2.lib exist, missing other lib and 
-																					other includes
 src/Python/dhart/viewanalysis/view_analysis.py									fix documentation example output - how to doctest on linux?
 src/Python/dhart/pathfinding/shortest_path.py									add documentation, doctest
 src/Cpp/spatialstructures/node.h												inconsistent case in dev build, lowercase in Linux build
@@ -42,8 +39,6 @@ src/Cpp/raytracer/CMakeLists.txt												else case is same as if
 																				-	deleted conditional 
 src/Cpp/raytracer/src/embree_raytracer.h										added <rpc.h>, removed <omp.h> and <algorithm>
 																				- commented <algorithm>, embree may require. including rpc or removing omp breaks
-src/Cpp/SpatialStructures/src/graph.cpp											IMPL_ValueArrayIndex prototype not in dev build
-																				-	required in Linux build, doesn't affect Win build
 src/Csharp/Examples/StringsToCosts/CMakeLists.txt								update VS_DOTNET_TARGET_FRAMEWORK_VERSION
 																				-	updated to 4.8
 src/CMakeLists.txt:853															install else case same as if
@@ -54,3 +49,4 @@ src/Cpp/objloader/src/meshinfo.{cpp, h}											different cases for file name 
 																				-	using dev casing
 src/Cpp/objloader/src/objloader.{cpp, h}										same as above
 src/Cpp/objloader/src/meshinfo.cpp												<vector> library removed
+src/Cpp/spatialstructures/Edge.h												renamed to edge.h, changed all includes

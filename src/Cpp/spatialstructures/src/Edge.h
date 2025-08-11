@@ -1,5 +1,5 @@
 ///
-/// \file		Edge.h
+/// \file		edge.h
 /// \brief		Contains definitions for the <see cref="HF::SpatialStructures::Edge">Edge</see> structure
 ///
 ///	\author		TBA
@@ -39,7 +39,7 @@ namespace HF {
 			/// </param>
 			/*!
 				\code
-					// be sure to #include "Edge.h"
+					// be sure to #include "edge.h"
 			
 					HF::SpatialStructures::Node node(12.0, 23.1, 34.2, 456);
 					float score = 4.3f;
