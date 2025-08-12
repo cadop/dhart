@@ -2149,7 +2149,7 @@ namespace HF::SpatialStructures {
 		/// A vector of node ids that represents the path in the form (n1,n2,n2,n3,n3...,nk-1,nk)
 		/// </returns>
 
-		std::vector<int> Graph::MapPathToVectorOfNodes(HF::SpatialStructures::Path path) const;
+		std::vector<int> MapPathToVectorOfNodes(HF::SpatialStructures::Path path) const;
 
 		/// <summary>
 		/// Maps a path of node ids (n1,n2,...,nk) to (n1,n2,n2,n3,n3...,nk-1,nk)
@@ -2176,7 +2176,7 @@ namespace HF::SpatialStructures {
 		/// A vector of floats, representing each cost between nodes along the path.
 		/// </returns>
 
-		std::vector<float> Graph::AlternateCostsAlongPath(Path path, const std::string& cost_type) const;
+		std::vector<float> AlternateCostsAlongPath(Path path, const std::string& cost_type) const;
 
 		/// <summary>
 		///  Computes an alternate cost type between nodes along a path.
@@ -2293,7 +2293,7 @@ namespace HF::SpatialStructures {
 			\param cost_type Name of te cost to get the cost map for
 		
 		*/
-		std::unordered_map<std::string, EdgeCostSet> Graph::GetCostMap(const std::string& cost_type = " ") const;
+		std::unordered_map<std::string, EdgeCostSet> GetCostMap(const std::string& cost_type = " ") const;
 
 
 		/*!

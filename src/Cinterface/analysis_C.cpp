@@ -113,7 +113,8 @@ C_INTERFACE CalculateAndStoreStepTypes(
 	
 	g->Compress();
 
-	auto result = HF::GraphGenerator::CalculateStepType(*g, HF::RayTracer::MultiRT(ray_tracer));
+	HF::RayTracer::MultiRT multi_rt = HF::RayTracer::MultiRT(ray_tracer);
+	auto result = HF::GraphGenerator::CalculateStepType(*g, multi_rt);
 
 	g->AddEdges(result, "step_type");
 

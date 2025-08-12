@@ -682,7 +682,7 @@ TEST(_GraphGenerator, CalculateStepType) {
 	//! [EX_CheckStepTypes]
 
 	// Create a graphgenerator using the raytracer we just created
-	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+	HF::GraphGenerator::GraphGenerator GG = HF::GraphGenerator::GraphGenerator(ray_tracer);
 
 	// Setup Graph Parameters
 	std::array<float, 3> start_point{ 0,0,20 };
@@ -714,10 +714,12 @@ TEST(_GraphGenerator, CalculateStepType) {
 	g.Compress();
 
 	// Compute all step types and store in std::vector<EdgeSet>
-	auto step_types = HF::GraphGenerator::CalculateStepType(g, HF::RayTracer::MultiRT(&ray_tracer));
+	HF::RayTracer::MultiRT multi_rt1 = HF::RayTracer::MultiRT(&ray_tracer);
+	HF::RayTracer::MultiRT multi_rt2 = HF::RayTracer::MultiRT(&ray_tracer);
+	auto step_types = HF::GraphGenerator::CalculateStepType(g, multi_rt1);
 
 	// Compare result to CheckConnection results for initial graph generation.
-	bool equal_connections = HF::GraphGenerator::CompareCheckConnections(g, HF::RayTracer::MultiRT(&ray_tracer),
+	bool equal_connections = HF::GraphGenerator::CompareCheckConnections(g, multi_rt2,
 		params, step_types);
 
 	ASSERT_TRUE(equal_connections);
@@ -733,7 +735,7 @@ TEST(_GraphGenerator, CalculateAndStoreStepType) {
 	//! [EX_CheckStepTypes]
 
 	// Create a graphgenerator using the raytracer we just created
-	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+	HF::GraphGenerator::GraphGenerator GG = HF::GraphGenerator::GraphGenerator(ray_tracer);
 
 	// Setup Graph Parameters
 	std::array<float, 3> start_point{ 0,0,20 };
@@ -762,11 +764,13 @@ TEST(_GraphGenerator, CalculateAndStoreStepType) {
 	);
 
 	// Compute and store step types in graph
-	HF::GraphGenerator::CalculateAndStoreStepType(g, HF::RayTracer::MultiRT(&ray_tracer));
+	HF::RayTracer::MultiRT multi_rt1 = HF::RayTracer::MultiRT(&ray_tracer);
+	HF::RayTracer::MultiRT multi_rt2 = HF::RayTracer::MultiRT(&ray_tracer);
+	HF::GraphGenerator::CalculateAndStoreStepType(g, multi_rt1);
 
 	std::vector<HF::SpatialStructures::EdgeSet> result = g.GetEdges("step_type");
 
-	bool equal_connections = HF::GraphGenerator::CompareCheckConnections(g, HF::RayTracer::MultiRT(&ray_tracer),
+	bool equal_connections = HF::GraphGenerator::CompareCheckConnections(g, multi_rt2,
 		params, result);
 
 	ASSERT_TRUE(equal_connections);
@@ -781,7 +785,7 @@ TEST(_GraphGenerator, CalculateAndStoreStepTypes) {
 	//! [EX_CheckStepTypes]
 
 	// Create a graphgenerator using the raytracer we just created
-	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+	HF::GraphGenerator::GraphGenerator GG = HF::GraphGenerator::GraphGenerator(ray_tracer);
 
 	// Setup Graph Parameters
 	std::array<float, 3> start_point{ 0,0,20 };
@@ -814,7 +818,8 @@ TEST(_GraphGenerator, CalculateAndStoreStepTypes) {
 
 	std::vector<HF::SpatialStructures::EdgeSet> result = g.GetEdges("step_type");
 
-	bool equal_connections = HF::GraphGenerator::CompareCheckConnections(g, HF::RayTracer::MultiRT(&ray_tracer),
+	HF::RayTracer::MultiRT multi_rt = HF::RayTracer::MultiRT(&ray_tracer);
+	bool equal_connections = HF::GraphGenerator::CompareCheckConnections(g, multi_rt,
 		params, result);
 
 	ASSERT_TRUE(equal_connections);
