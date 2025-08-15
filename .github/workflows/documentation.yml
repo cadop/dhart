@@ -30,7 +30,7 @@ jobs:
         $url = "https://www.doxygen.nl/files/doxygen-1.9.5.windows.x64.bin.zip"
         Invoke-WebRequest -Uri $url -OutFile "C:\doxygen.zip"
         
-        Extract-7Zip -Path  "C:\doxygen.zip" -DestinationPath "C:\windows\system32"
+        Expand-Archive "C:\doxygen.zip" "C:\windows\system32"
         doxygen --version`
 
         choco install graphviz -y
