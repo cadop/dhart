@@ -57,7 +57,7 @@ jobs:
     - name: cmake build
       run: |
         ls
-        cmake --build .
+        cmake --build build
 
     - name: cmake install
       run: |
@@ -66,21 +66,21 @@ jobs:
         
     - name : Install package
       run: |
-        pip install linux-build
+        pip install build/linux-build
 
 
     - name : Run HFUnitTests
       run: |
-        cmake --build . --target test
+        cmake --build build --target test
     
     - name : Run Pytest
       run: |
-        cd linux-build
+        cd build/linux-build
         pytest
 
     - name : Run doctest
       run: |
-        cd ../../docs/Python\ Docs/
+        cd docs/Python\ Docs/
         python -m sphinx source build --builder doctest
     # - name: check Existing dhart 
     #   run: |
