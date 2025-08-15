@@ -186,10 +186,10 @@ def DijkstraShortestPath(
         >>> energy_path = DijkstraShortestPath(g, start_point, end_point, energy_expend_key)
         >>> 
         >>> # Print both paths
-        >>> print("Distance Path:", [ (np.around(x[0],5), x[1]) for x in distance_path.array ] )
+        >>> with np.printoptions(legacy='1.25'):
+        ...     print("Distance Path:", [ (np.around(x[0],5), x[1]) for x in distance_path.array ] )
+        ...     print("Energy Path:", [ (np.around(x[0],5), x[1]) for x in energy_path.array ] )
         Distance Path: [(1.0, 1), (1.0, 12), (1.0, 26), (1.0, 43), (1.0, 64), (1.00001, 89), (1.41489, 118), (0.0, 150)]
-
-        >>> print("Energy Path:", [ (np.around(x[0],5), x[1]) for x in energy_path.array ] )
         Energy Path: [(2.47461, 1), (2.49217, 12), (2.5, 26), (2.48045, 43), (2.45134, 64), (2.43783, 89), (2.75192, 118), (0.0, 150)]
 
 

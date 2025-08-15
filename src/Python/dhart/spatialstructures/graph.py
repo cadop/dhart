@@ -279,7 +279,7 @@ class Graph:
         >>> # Load BVH
         >>> obj_path = dhart.get_sample_model("energy_blob_zup.obj")
         >>> loaded_obj = LoadOBJ(obj_path)
-        >>> embree_bvh = EmbreeBVH(loaded_obj)
+        >>> embree_bvh = EmbreeBVH(loaded_obj, True)
 
         >>> # Set graph parameters 
         >>> start_point, spacing, max_nodes = (-30, 0, 20), (1, 1, 10), 100000
@@ -291,25 +291,25 @@ class Graph:
 
         >>> closest_node = graph.get_closest_nodes(np.array([30,0]), z=False)
         >>> print("Closest Node: ", closest_node)
-        Closest Node:  2421
+        Closest Node:  2399
 
         Check closest nodes using multiple x,y points
 
         >>> closest_node = graph.get_closest_nodes(np.array([[30,0],[20,20]]), z=False)
         >>> print("Closest Node: ", closest_node)
-        Closest Node:  [2421 2450]
+        Closest Node:  [2399 2428]
 
         Check closest nodes using single x,y,z point
 
         >>> closest_node = graph.get_closest_nodes(np.array([30,0,0]))
         >>> print("Closest Node: ", closest_node)
-        Closest Node:  2422
+        Closest Node:  2400
 
         Check closest nodes using multiple x,y,z points
 
         >>> closest_node = graph.get_closest_nodes(np.array([[30,0,0],[20,20,0]]))
         >>> print("Closest Node: ", closest_node)
-        Closest Node:  [2422 2450]
+        Closest Node:  [2400 2428]
 
         """
 

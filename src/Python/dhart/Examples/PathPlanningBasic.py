@@ -45,9 +45,10 @@
     >>> start_point = xyz_nodes[start_id]
     >>> end_point   = xyz_nodes[end_id]
     >>> 
-    >>> print('Start: ',start_point)
+    >>> with np.printoptions(legacy='1.25'):
+    ...     print('Start: ',start_point)
+    ...     print('End:   ',end_point)
     Start:  (0., 0., 0.)
-    >>> print('End:   ',end_point)
     End:    (-4., 5., 0.)
 
     >>> # Call the shortest path 
