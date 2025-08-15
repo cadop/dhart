@@ -43,7 +43,8 @@ inline EmbreeRayTracer CreateRTWithPlane() {
 	};
 
 	const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
-	return EmbreeRayTracer(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
+	std::vector<MeshInfo<float>> meshInfos{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")};
+	return HF::RayTracer::EmbreeRayTracer(meshInfos);
 }
 
 /// <summary>
@@ -199,7 +200,7 @@ TEST(_EmbreeRayTracer, HitPointsAreAccurate) {
 		std::cerr << "(" << origin[0] << "," << origin[1] << "," << origin[2] << ")" << std::endl;
 		EXPECT_TRUE(k.PointIntersection(origin, direction));
 
-		if (isnan(height))
+		if (std::isnan(height))
 			height = origin[2];
 		else
 			EXPECT_NEAR(height, origin[2], 0.001);
@@ -308,7 +309,8 @@ TEST(_EmbreeRayTracer, DeterministicResults) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
+	std::vector<MeshInfo<float>> meshInfos{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")};
+	EmbreeRayTracer ert(meshInfos);
 	
 	const int num_trials = 150;
 	const int num_rays = 1000;
@@ -365,7 +367,8 @@ TEST(_EmbreeRayTracer, PointIntersections) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
+	std::vector<MeshInfo<float>> meshInfos{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")};
+	EmbreeRayTracer ert(meshInfos);
 
 	// Create an array of directions all containing {0,0,-1}
 	std::vector<std::array<float, 3>> directions(10, std::array<float, 3>{0, 0, -1});
@@ -410,7 +413,8 @@ TEST(_EmbreeRayTracer, Occlusions) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
+	std::vector<MeshInfo<float>> meshInfos{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")};
+	EmbreeRayTracer ert(meshInfos);
 
 	// Create an array of directions all containing {0,0,-1}
 	std::vector<std::array<float, 3>> directions(10, std::array<float, 3>{0, 0, -1});
@@ -453,7 +457,8 @@ TEST(_EmbreeRayTracer, OcclusionMultiOrigin) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 	
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
+	std::vector<MeshInfo<float>> meshInfos{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")};
+	EmbreeRayTracer ert(meshInfos);
 
 	// Create a single direction of {0,0,-1} wrapped in an array
 	std::vector<std::array<float, 3>> directions(1, std::array<float, 3>{0, 0, -1});
@@ -495,7 +500,8 @@ TEST(_EmbreeRayTracer, PointIntersection) {
 	const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
+	std::vector<MeshInfo<float>> meshInfos{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")};
+	EmbreeRayTracer ert(meshInfos);
 
 	float x = 0; float y = 0; float z = 1;
 	bool res;
@@ -528,7 +534,8 @@ TEST(_EmbreeRayTracer, CastRayArrayOverload) {
 	const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
+	std::vector<MeshInfo<float>> meshInfos{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")};
+	EmbreeRayTracer ert(meshInfos);
 
 	// Cast a ray straight down and ensure it connects with a distance of 1 (within a certain tolerance)
 	std::array<float, 3> origin{ 0,0,1 };
@@ -616,7 +623,8 @@ TEST(_EmbreeRayTracer, Intersect) {
 	const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
+	std::vector<MeshInfo<float>> meshInfos{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")};
+	EmbreeRayTracer ert(meshInfos);
 
 	// Cast a ray straight down
 	auto straight_down = ert.Intersect(0, 0, 1, 0, 0, -1);
@@ -648,7 +656,8 @@ TEST(_EmbreeRayTracer, IntersectOutputArguments) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
+	std::vector<MeshInfo<float>> meshInfos{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")};
+	EmbreeRayTracer ert(meshInfos);
 
 	// Create a vector of direction and origin arrays.
 	std::array<float, 3> origin{ 0,0.5,1 };
@@ -685,7 +694,8 @@ TEST(_EmbreeRayTracer, Occluded) {
 	const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
+	std::vector<MeshInfo<float>> meshInfos{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")};
+	EmbreeRayTracer ert(meshInfos);
 
 	// Cast a ray straight down
 	bool res = ert.Occluded(
@@ -720,7 +730,8 @@ TEST(_EmbreeRayTracer, CastOcclusionRayArray) {
 	const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
+	std::vector<MeshInfo<float>> meshInfos{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")};
+	EmbreeRayTracer ert(meshInfos);
 
 	// Cast a ray straight down
 	bool straight_down = ert.Occluded(
@@ -755,7 +766,8 @@ TEST(_EmbreeRayTracer, OccludedSingle) {
 	const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
+	std::vector<MeshInfo<float>> meshInfos{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")};
+	EmbreeRayTracer ert(meshInfos);
 
 	// Cast a ray straight down
 	bool straight_down = ert.Occluded(0, 0, 1, 0, 0, -1);

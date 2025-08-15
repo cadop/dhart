@@ -1,7 +1,7 @@
 import pytest
 import numpy
 
-from dhart.pathfinding import DijkstraShortestPath, DijkstraFindAllShortestPaths, calculate_distance_and_predecessor
+from dhart.pathfinding import DijkstraShortestPath, DijkstraFindAllShortestPaths, calculate_distance_and_predecessor, AlternateCostsAlongPath
 from dhart.spatialstructures import Graph
 
 test_cost = "Test"
@@ -220,4 +220,46 @@ def test_CalculateDistanceAndPredecessor():
     print(distance_matrix)
     print(predecessor_matrix)
 
+def test_AlternateCostsAlongPathIDs():
+    g = Graph()
+    cost_type = "TestCost"
+    g.AddEdgeToGraph(0,1,50)
+    g.AddEdgeToGraph(0,2,10)
+    g.AddEdgeToGraph(1,2,150)
+    g.AddEdgeToGraph(1,3,70)
+    g.AddEdgeToGraph(2,3,70)
 
+    g.CompressToCSR()
+
+    g.AddEdgeToGraph(0, 1, 100, cost_type)
+    g.AddEdgeToGraph(0, 2, 50, cost_type)
+    g.AddEdgeToGraph(1, 2, 20, cost_type)
+    g.AddEdgeToGraph(1,3, 1000, cost_type)
+    g.AddEdgeToGraph(2,3, 1500, cost_type)
+
+    shortest_path = [0,2,3]
+
+    alternate_costs = AlternateCostsAlongPath(g, shortest_path, cost_type)
+    assert(alternate_costs == [50, 1500])
+    
+def test_AlternateCostsAlongPathStruct():
+    g = Graph()
+    cost_type = "TestCost"
+    g.AddEdgeToGraph(0,1,50)
+    g.AddEdgeToGraph(0,2,10)
+    g.AddEdgeToGraph(1,2,150)
+    g.AddEdgeToGraph(1,3,70)
+    g.AddEdgeToGraph(2,3,70)
+
+    g.CompressToCSR()
+
+    g.AddEdgeToGraph(0, 1, 100, cost_type)
+    g.AddEdgeToGraph(0, 2, 50, cost_type)
+    g.AddEdgeToGraph(1, 2, 20, cost_type)
+    g.AddEdgeToGraph(1,3, 1000, cost_type)
+    g.AddEdgeToGraph(2,3, 1500, cost_type)
+
+    SP = DijkstraShortestPath(g, 0, 3)
+
+    alternate_costs = AlternateCostsAlongPath(g, SP, cost_type)
+    assert(alternate_costs == [50,1500])

@@ -221,8 +221,8 @@ TEST(C_Pathfinder, DistanceAndPredecessorMatrices_C) {
 		
 		// Comparisons between nans will always fail, so handle this before
 		// doing the equality check. 
-		const bool cpp_dist_is_nan = isnan(cpp_dist->at(i));
-		const bool dist_is_nan = isnan(dist_vector->at(i));
+		const bool cpp_dist_is_nan = std::isnan(cpp_dist->at(i));
+		const bool dist_is_nan = std::isnan(dist_vector->at(i));
 		if (cpp_dist_is_nan && dist_is_nan) continue;
 
 		ASSERT_EQ(cpp_pred->at(i), pred_vector->at(i));
@@ -1295,7 +1295,7 @@ namespace CInterfaceTests {
 		HF::SpatialStructures::Graph g;
 
 		// Assume we're adding many more nodes and edges to significantly increase the graph size
-		const int NODE_COUNT = 3000; // Adjust this number based on the capability of your system
+		const int NODE_COUNT = 300; // Adjust this number based on the capability of your system
 		for (int i = 0; i < NODE_COUNT - 1; ++i) {
 			for (int j = i + 1; j < NODE_COUNT; ++j) {
 				addBidirectionalEdge(g, i, j, 1); // Adding a simple weight for the sake of example

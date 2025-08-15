@@ -21,10 +21,8 @@ target_sources(
 	)
 
 # Just die if we can't find embree for now.
-if(WIN32)
-	set(Embree_DIR ${PROJECT_SOURCE_DIR}/external/Embree)
-	message([STATUS] "Setting embree dir to " ${Embree_DIR})
-endif()
+set(Embree_DIR ${PROJECT_SOURCE_DIR}/external/Embree)
+message([STATUS] "Setting embree dir to " ${Embree_DIR})
 
 find_package(Embree 3.0 REQUIRED)
 #message([STATUS] ${ROBIN_HOOD_DIR})

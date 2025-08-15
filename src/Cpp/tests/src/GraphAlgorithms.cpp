@@ -8,11 +8,10 @@
 #include <graph.h>
 #include <edge.h>
 #include <node.h>
-#include <Constants.h>
+#include <constants.h>
 #include<ray_data.h>
 
 #include "analysis_C.h"
-#include "graph.h"
 
 namespace HF {
 
@@ -45,7 +44,7 @@ namespace HF {
 					// should be incremented
 					if (duplicates_this_node == 2)
 						if (insta_fail)
-							FAIL("Duplicate nodes detected");
+							FAIL();
 						else
 							duplicate_nodes++;
 					

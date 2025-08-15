@@ -22,7 +22,7 @@ struct StopWatch {
 	timepoint end{};
 
 	/*! \brief Create a new clock and start it if auto_start is true.*/
-	inline StopWatch::StopWatch(bool auto_start = true) {
+	inline StopWatch(bool auto_start = true) {
 		if (auto_start)
 			StartClock();
 	}

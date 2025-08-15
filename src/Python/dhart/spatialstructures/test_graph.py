@@ -1,6 +1,7 @@
 import pytest
 import unittest
 import os
+import pdb
 
 import numpy
 
@@ -10,6 +11,7 @@ from dhart.spatialstructures import NodeList, NodeStruct, Graph, CostAggregation
 from dhart.Exceptions import LogicError, InvalidCostOperation
 from dhart.utils import is_point
 import dhart.spatialstructures.node as NodeFunctions
+import dhart.spatialstructures.edge as EdgeFunctions
 import dhart.spatialstructures.cost_algorithms as cost_algorithms
 
 
@@ -115,6 +117,39 @@ def test_GetNodes():
     for node in node_list.array:
         print(node)
 
+def test_GetEdgesForNode():
+    # Construct graph with 3 nodes and 3 edges
+    g = Graph()
+
+    N0 = NodeStruct(1,2,3,0,0)
+    N1 = NodeStruct(2,3,4,0,1)
+    N2 = NodeStruct(19,2,3,0,2)
+    nodes = [N0, N1, N2]
+    edges = [
+        (nodes[0], nodes[1]),
+        (nodes[0], nodes[2]),
+        (nodes[1], nodes[2]),
+    ]
+
+    for edge in edges:
+        g.AddEdgeToGraph(edge[0], edge[1], 39)
+
+    # Compression needed before doing anything
+    g.CompressToCSR()
+
+    edge_list = g.GetEdgesForNode(nodes[0])
+
+    # Assert that we have the correct number of edges
+    assert len(edge_list.array) == 2
+
+    # Assert that the edges are correct
+    expected_edges = ((N1, 1, 39), (N2, 1, 39))
+    for i in range(len(expected_edges)):
+        edge = edge_list.array[i]
+        expected_edge = expected_edges[i]
+        assert edge[0] == expected_edge[0]
+        assert edge[1] == expected_edge[1]
+        assert edge[2] == expected_edge[2]
 
 def test_CreateNodes():
     nodes = [(1, 2, 3), (20, 2110, 100)]
@@ -122,11 +157,28 @@ def test_CreateNodes():
 
     for i in range(0, len(nodes)):
         node = nodes[i]
+        print(nodes)
         np_node = structs[i]
         assert node[0] == np_node[0]
         assert node[1] == np_node[1]
         assert node[2] == np_node[2]
 
+def test_CreateEdges():
+    nodes = [(1, 2, 3), (3, 5, 8), (5, 8, 13)]
+    node_structs = NodeFunctions.CreateListOfNodeStructs(nodes)
+    steps = [1,2]
+    weights = [20,40]
+
+    parent = node_structs[0]
+
+    edges = [(node_structs[i], steps[i-1], weights[i-1]) for i in range(1, len(nodes))]
+    edgestructs = EdgeFunctions.CreateListOfEdgeStructs(edges)
+    for i in range(0, len(nodes)-1):
+        edge = edges[i]
+        np_edge = edgestructs[i]
+        assert edge[0] == np_edge[0]
+        assert edge[1] == np_edge[1]
+        assert edge[2] == np_edge[2]
 
 def test_AggregateCostType(SimpleGraphWithCosts):
     """ Test aggregating the edges of a graph using an alternate
@@ -187,8 +239,75 @@ def test_GetCost():
     # Assert this edge cost equals what we specified above
     assert(cost_from_graph == 100)
 
+def test_GetCosts():
+    """Tests that getting multiple costs from the graph is accurate"""
+    g = Graph()
+    cost_type = "TestCost"
+    g.AddEdgeToGraph(0,1,50)
+    g.AddEdgeToGraph(0,2,10)
+    g.AddEdgeToGraph(1,2,150)
+    g.AddEdgeToGraph(1,3,70)
+    g.AddEdgeToGraph(2,3,70)
 
-def test_AddingAndReadingCostTypes():
+    g.CompressToCSR()
+
+    g.AddEdgeToGraph(0, 1, 100, cost_type)
+    g.AddEdgeToGraph(0, 2, 50, cost_type)
+    g.AddEdgeToGraph(1, 2, 20, cost_type)
+    g.AddEdgeToGraph(1,3, 1000, cost_type)
+    g.AddEdgeToGraph(2,3, 1500, cost_type)
+
+    ids = [0,1,1,2, 2, 3]
+
+    # All costs of cost_type
+    expected_all_costs = [100.0, 50.0, 20.0, 1000.0, 1500.0]
+    all_costs = g.GetEdgeCosts(cost_type)
+    for i in range(0, len(expected_all_costs)):
+        assert(all_costs[i] == expected_all_costs[i])
+
+    # Specific edges to get costs for
+    expected_some_costs = [100.0, 20.0, 1500.0]
+    some_costs = g.GetEdgeCosts(cost_type, ids)
+    for i in range(0, len(expected_some_costs)):
+        assert(some_costs[i] == expected_some_costs[i])
+
+def test_AddingAndReadingCostTypesNodeStruct():
+    """ Tests that alternate cost types can be added and read. Also ensures
+    that error cases are handled and thrown."""
+
+    # Create Graph
+    g = Graph()
+
+    N0 = NodeStruct(1,2,3,0,0)
+    N1 = NodeStruct(2,3,4,0,1)
+    N2 = NodeStruct(19,2,3,0,2)
+
+    # Add initial edges to default cost type and compress
+    g.AddEdgeToGraph(N0, N1, 100)
+    g.AddEdgeToGraph(N1, N2, 200)
+
+    # Ensure that we catch callers trying to add alternate costs
+    # to sets of edges before compressing the graph
+    with pytest.raises(LogicError):
+        g.AddEdgeToGraph(0, 1, 250, "cost")
+
+    # Compress the graph
+    g.CompressToCSR()
+
+    # Add edges to the graph for this new cost type
+    test_cost = "Test"
+    g.AddEdgeToGraph(N0, N1, 250, test_cost)
+    g.AddEdgeToGraph(N1, N2, 251, test_cost)
+
+    # Assert that the edges added succssfully
+    assert(g.GetEdgeCost(0, 1, test_cost) == 250)
+    assert(g.GetEdgeCost(1, 2, test_cost) == 251)
+
+    # Ensure we throw if our precondition was violated
+    with pytest.raises(InvalidCostOperation):
+        g.AddEdgeToGraph(N1, N0, 10, test_cost)
+
+def test_AddingAndReadingCostTypesIDs():
     """ Tests that alternate cost types can be added and read. Also ensures
     that error cases are handled and thrown."""
 

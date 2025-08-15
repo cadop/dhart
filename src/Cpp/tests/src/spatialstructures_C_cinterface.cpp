@@ -1006,7 +1006,6 @@ namespace CInterfaceTests {
 		delete[] scores_out;
 		//! [snippet_spatialstructuresC_GetNodeAttributesFloat]
 	}
-
 	TEST(_spatialstructures_cinterface, GetNodeAttributesByID) {
 		//! [snippet_spatialstructuresC_GetNodeAttributesByID]
 		// Create a graph and add edges

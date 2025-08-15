@@ -2,6 +2,7 @@
 
 
 namespace HF::RayTracer {
+	inline bool DidIntersect(int mesh_id);
 	/// <summary> A simple hit struct to carry all relevant information about hits. </summary>
 	template <typename numeric_type = double>
 	struct HitStruct {

@@ -1,4 +1,4 @@
-﻿cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.10)
 project("DHARTAPICSharp" CSharp)
 
 ### NOTE:
@@ -97,4 +97,5 @@ install(TARGETS hfcsharptest EXPORT hfcsharptest RUNTIME DESTINATION bin)
 if (DHARTAPI_BuildCSharpTests)
 	add_subdirectory(Examples)
 endif()
+
 

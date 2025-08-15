@@ -10,7 +10,7 @@
 #define VISIBILITY_GRAPH_C_H
 
 #include <cinterface_utils.h>
-#include <raytracer_c.h>
+#include <raytracer_C.h>
 
 namespace HF {
 	namespace RayTracer {

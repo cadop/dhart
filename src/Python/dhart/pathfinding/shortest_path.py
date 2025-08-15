@@ -10,7 +10,7 @@ from dhart.native_collections import FloatArray2D, IntArray2D
 
 __all__ = ["ConvertNodesToIds", "DijkstraShortestPath", 
            "DijkstraFindAllShortestPaths", "calculate_distance_and_predecessor",
-           "AllShortestPathsCSR", "get_path_from_csr"]
+           "AllShortestPathsCSR", "get_path_from_csr", "AlternateCostsAlongPath"]
 
 
 def ConvertNodesToIds(graph: Graph, nodes: List[Union[Tuple, int]]) -> List[int]:
@@ -186,10 +186,10 @@ def DijkstraShortestPath(
         >>> energy_path = DijkstraShortestPath(g, start_point, end_point, energy_expend_key)
         >>> 
         >>> # Print both paths
-        >>> print("Distance Path:", [ (np.around(x[0],5), x[1]) for x in distance_path.array ] )
+        >>> with np.printoptions(legacy='1.25'):
+        ...     print("Distance Path:", [ (np.around(x[0],5), x[1]) for x in distance_path.array ] )
+        ...     print("Energy Path:", [ (np.around(x[0],5), x[1]) for x in energy_path.array ] )
         Distance Path: [(1.0, 1), (1.0, 12), (1.0, 26), (1.0, 43), (1.0, 64), (1.00001, 89), (1.41489, 118), (0.0, 150)]
-
-        >>> print("Energy Path:", [ (np.around(x[0],5), x[1]) for x in energy_path.array ] )
         Energy Path: [(2.47461, 1), (2.49217, 12), (2.5, 26), (2.48045, 43), (2.45134, 64), (2.43783, 89), (2.75192, 118), (0.0, 150)]
 
 
@@ -479,3 +479,47 @@ def get_path_from_csr(csr, node1, node2):
     start_idx = csr.indptr[node_idx]
     end_idx = csr.indptr[node_idx + 1]
     return csr.indices[start_idx:end_idx]
+
+def AlternateCostsAlongPath(g: Graph, path: Union[List[int], Path], cost_type: str) -> List[float]:
+        """Get the costs for each edge in a set of edges
+        
+        Args:
+            path : Union[List[int], Path]
+                Path of IDs in the format [node1,node2,...,nodek] or Path object
+            cost_type : str
+                Cost type to get the cost from. If left blank will use the graph's default cost type. (second part needs to be implemented)
+        Returns:
+            List[float] : An array of costs of cost_type corresponding to edges in path
+
+        Examples
+        --------
+        >>> from dhart.spatialstructures import Graph
+        >>> from dhart.pathfinding import AlternateCostsAlongPath
+        >>> # Create a simple graph with 4 nodes
+        >>> g = Graph()
+
+        >>> g.AddEdgeToGraph(0,1,50)
+        >>> g.AddEdgeToGraph(0,2,10)
+        >>> g.AddEdgeToGraph(1,2,150)
+        >>> g.AddEdgeToGraph(1,3,70)
+        >>> g.AddEdgeToGraph(2,3,70)
+        
+        >>> csr = g.CompressToCSR()
+        >>> cost_type = "TestCost"
+
+        >>> g.AddEdgeToGraph(0, 1, 100, cost_type)
+        >>> g.AddEdgeToGraph(0, 2, 50, cost_type)
+        >>> g.AddEdgeToGraph(1, 2, 20, cost_type)
+        >>> g.AddEdgeToGraph(1,3, 1000, cost_type)
+        >>> g.AddEdgeToGraph(2,3, 1500, cost_type)
+
+        >>> shortest_path = [0,2,3]
+
+        >>> AlternateCostsAlongPath(g, shortest_path, cost_type)
+        [50.0, 1500.0]
+        """
+        if isinstance(path, list):
+            path_size = len(path)
+        else:
+            path_size = path.size[0]
+        return pathfinder_native_functions.C_AlternateCostsAlongPath(g.graph_ptr, cost_type, path, path_size)

@@ -9,7 +9,11 @@ from dhart.utils import *
 # This is used to check if an object is a number
 
 # This is the name of the DHART_API DLL
-dllname = "DHARTAPI.dll"
+dllname  = ""
+if os.name == 'nt': # .dll is Windows
+    dllname = "DHARTAPI.dll"
+else: # .so is Linux
+    dllname = "libDHARTAPI.so"
 
 HFPython: Union[None, CDLL] = None  # The C++ DLL containing all functionality we need
 
@@ -23,7 +27,7 @@ def getDLLHandle() -> CDLL:
     try:
         directory = os.path.join(os.path.dirname(os.path.realpath(__file__)),"bin")
 
-        if sys.version_info >=(3,8):
+        if os.name == 'nt' and sys.version_info >=(3,8):
             os.add_dll_directory(directory)
         else:
             os.environ['PATH'] = directory + os.pathsep + os.environ['PATH']

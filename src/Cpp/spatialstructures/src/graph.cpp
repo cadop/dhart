@@ -10,7 +10,7 @@
 #include <graph.h>
 #include <algorithm>
 #include <cmath>
-#include <Constants.h>
+#include <constants.h>
 #include <cassert>
 #include <HFExceptions.h>
 #include <numeric>
@@ -26,6 +26,12 @@ using std::string;
 using namespace HF::Exceptions;
 
 namespace HF::SpatialStructures {
+	int IMPL_ValueArrayIndex(
+		int parent_id,
+		int child_id,
+		const int* outer_index_ptr,
+		const int* inner_index_ptr
+	);
 
 	inline bool IsInRange(int nnz, int num_rows, int parent) {
 		bool out_of_range = (nnz <= 0 || num_rows <= parent);
@@ -325,6 +331,7 @@ namespace HF::SpatialStructures {
 		return (edge_cost_maps.at(key));
 	}
 
+
 	bool Graph::IsDefaultName(const string& name) const
 	{
 		// Check if the name is empty "" or it matches our default
@@ -512,7 +519,7 @@ namespace HF::SpatialStructures {
 		// Throw if we're not compressed since this is a const function and compressing the graph
 		// will make it non-const
 		if (this->needs_compression)
-			throw std::exception("The graph must be compressed!");
+			throw std::runtime_error("The graph must be compressed!");
 
 		// Preallocate an array of edge sets
 		vector<EdgeSet> out_edges(this->size());
@@ -601,7 +608,7 @@ namespace HF::SpatialStructures {
 			throw std::out_of_range("Unimplemented aggregation type");
 			break;
 		}
-		assert((out_total == 0 || isnormal(out_total)));
+		assert((out_total == 0 || std::isnormal(out_total)));
 		return;
 	}
 
@@ -660,7 +667,7 @@ namespace HF::SpatialStructures {
 			for (int k = 0; k < num_nodes; ++k) {
 
 				// Iterate through every edge for the node at column k
-				for (csr::InnerIterator it(edge_matrix, k); it; ++it)
+				for (typename csr::InnerIterator it(edge_matrix, k); it; ++it)
 				{
 					// Get values from the iterator for this row/col.
 					float cost = it.value();
@@ -679,7 +686,7 @@ namespace HF::SpatialStructures {
 	std::vector<float> Graph::AggregateGraph(COST_AGGREGATE agg_type, bool directed, const string& cost_type) const
 	{
 		// This won't work if the graph isn't compressed.
-		if (this->needs_compression) throw std::exception("The graph must be compressed!");
+		if (this->needs_compression) throw std::runtime_error("The graph must be compressed!");
 	
 		// Determine if this is the default cost. 
 		const bool default_cost = this->IsDefaultName(cost_type);
@@ -833,6 +840,7 @@ namespace HF::SpatialStructures {
 		return this->node_float_attr_map.count(name) > 0;
 	}
 
+
 	void Graph::addEdge(const Node& parent, const Node& child, float score, const string & cost_type)
 	{
 		// ![GetOrAssignID_Node]
@@ -961,7 +969,7 @@ namespace HF::SpatialStructures {
 			// with undirected set to false.
 			bool check_undirected = undirected ? HasEdge(child, parent, false, cost_type) : false;
 
-			return (!isnan(cost) || check_undirected);
+			return (!std::isnan(cost) || check_undirected);
 		}
 	}
 
@@ -969,7 +977,7 @@ namespace HF::SpatialStructures {
 
 		// Throw if the graph isn't compresesed.
 		if (!edge_matrix.isCompressed())
-			throw std::exception("Can't get this for uncompressed matrix!");
+			throw std::runtime_error("Can't get this for uncompressed matrix!");
 
 		// Return early if parent or child don't exist in the graph
 		if (!hasKey(parent) || !hasKey(child)) return false;
@@ -1514,6 +1522,128 @@ namespace HF::SpatialStructures {
 	}
 
 
+	int Graph::CountEdges(const string& cost_type) const {
+		// Count the number of edges of cost_type in a graph
+		vector<EdgeSet> AllEdges = GetEdges(cost_type);
+		return CountEdgesFromEdgeSets(AllEdges);
+	}
+
+	int Graph::CountEdgesFromEdgeSets(vector<EdgeSet> AllEdges) const {
+		int count = 0;
+		for (EdgeSet edgeset : AllEdges) {
+			std::vector<IntEdge> children = edgeset.children;
+			for (IntEdge child : children) {
+				if (std::isfinite(child.weight)) {
+					count += 1;
+				}
+			}
+		}
+		return count;
+	}
+
+	std::unordered_map<std::string, EdgeCostSet>  Graph::GetCostMap(const std::string& cost_type) const
+	{
+		// Return the private attribute for the graphs cost mapping
+
+		return edge_cost_maps;
+	}
+
+	vector<float> Graph::GetEdgeCosts(const std::string& cost_type) const {
+		// Need to support default cost query
+		// No edges of associated cost
+		if (edge_cost_maps.count(cost_type) < 1) return vector<float>();
+
+		// Get cost map associated with cost type
+		std::unordered_map<std::string, EdgeCostSet> costmap = GetCostMap(cost_type);
+		auto specificcost = costmap[cost_type];
+
+		// Get the array of costs
+		auto costarray = specificcost.GetEdgeCostSetCosts();
+
+		// Copy it
+		vector<float> copied_costs = costarray;
+		return copied_costs;
+	}
+
+	vector<float> Graph::GetEdgeCostsFromNodeIDs(vector<int>& ids, const string& cost_type) const {
+		// Assume that ids is given in [parent1, child1, parent2, child2,...]
+		// Return an empty array if this attribute doesn't exist
+		// Maybe add check if each edge is valid
+
+		// 
+		if (ids.size() % 2 != 0) {
+			throw std::invalid_argument("Vector of IDs should be of even length!");
+		}
+
+		// No edges associated with cost type
+		if (edge_cost_maps.count(cost_type) < 1) return vector<float>();
+
+		int number_of_ids = ids.size();
+		// Strides of 2 per edge
+		int num_edges = number_of_ids / 2;
+
+
+		vector<float> out_costs(num_edges, -1.0f);
+
+		// Index of edge in output array
+		int idx = 0;
+		// Iterate through all ids
+		for (int i = 0; i < number_of_ids; i += 2) 
+		{
+			// For each edge, get the cost of the edge
+			int parent = ids[i];
+			int child = ids[i + 1];
+			const auto& score = GetCost(parent, child, cost_type);
+			out_costs[idx] = score;
+			idx++;
+		}
+		// Return all costs
+		return out_costs;
+	}
+	std::vector<int> Graph::MapPathToVectorOfNodes(HF::SpatialStructures::Path path) const {
+		// Map path to vector of nodes
+		int path_size = path.size();
+		std::vector<int> v_ids;
+		v_ids.reserve(path_size);
+
+		for (PathMember curr_node: path.members) {
+			v_ids.push_back(curr_node.node);
+		}
+
+		return v_ids;
+	}
+	std::vector<int> Graph::MapPathToVectorOfNodes(std::vector<int>& path) const {
+		// Maps a path of nodes (n1,n2,...,nk) to (n1,n2,n2,n3,n3...,nk-1,nk)
+		int path_size = path.size();
+		std::vector<int> out;
+		out.reserve(2 * path_size - 2);
+
+		// Starting node should only be in output once
+		out.push_back(path[0]);
+		for (int i = 1; i < path_size - 1; i++) {
+			// Add every node between start and finish twice
+			int node = path[i];
+			out.push_back(node);
+			out.push_back(node);
+		}
+		// Ending node should only be in output once
+		out.push_back(path[path_size - 1]);
+
+		return out;
+	}
+
+	std::vector<float> Graph::AlternateCostsAlongPath(Path path, const std::string& cost_type) const{
+		// Map path struct to vector of int ids
+		vector<int> v_ids = MapPathToVectorOfNodes(path);
+
+		vector<int> node_ids = MapPathToVectorOfNodes(v_ids);
+		return GetEdgeCostsFromNodeIDs(node_ids, cost_type);
+	}
+
+	std::vector<float> Graph::AlternateCostsAlongPath(std::vector<int>& path, const std::string& cost_type) const {
+		vector<int> node_ids = MapPathToVectorOfNodes(path);
+		return GetEdgeCostsFromNodeIDs(node_ids, cost_type);
+	}
 	void Graph::ClearNodeAttributes(std::string name) {
 		/* // requires #include <algorithm>, but not working?
 		std::string lower_cased =

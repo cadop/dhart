@@ -5,7 +5,7 @@
 /// \author		TBA
 /// \date		06 Jun 2020
 
-#include <Edge.h>
+#include <edge.h>
 
 namespace HF {
 	namespace SpatialStructures {

@@ -1,8 +1,8 @@
 #include <graph_generator.h>
 
 #include <HitStruct.h>
-#include <Constants.h>
-#include <Edge.h>
+#include <constants.h>
+#include <edge.h>
 #include <embree_raytracer.h>
 #include <ray_data.h>
 #include <cassert>
@@ -300,6 +300,133 @@ namespace HF::GraphGenerator {
 		return calc_slope > -1.0 * gp.down_slope && calc_slope < gp.up_slope;
 	}
 
+	HF::SpatialStructures::EdgeSet CalculateStepType(const HF::SpatialStructures::Subgraph& sg, HF::RayTracer::MultiRT& rt) {
+		// Step type will be stored here and returned from this function
+
+		//Initialize output
+		std::vector<HF::SpatialStructures::EdgeSet> edge_set;
+
+		//From Subgraph sg
+		Node parent_node = sg.m_parent;
+		std::vector<Edge> edge_list = sg.m_edges;
+
+		// We can preallocate this container to have edge_list.size()
+		// blocks since we know how many children are in the subgraph.
+		std::vector<HF::SpatialStructures::IntEdge> children(edge_list.size());
+		auto it_children = children.begin();
+
+		//For every edge...
+		for (Edge link_a : edge_list) {
+			Node curr_child = link_a.child;
+
+			//Type Casting
+			real_t parent_x = CastToReal(parent_node.x);
+			real_t parent_y = CastToReal(parent_node.y);
+			real_t parent_z = CastToReal(parent_node.z);
+
+			real_t child_x = CastToReal(curr_child.x);
+			real_t child_y = CastToReal(curr_child.y);
+			real_t child_z = CastToReal(curr_child.z);
+
+			std::vector<real_t> parent_loc = { parent_x, parent_y, parent_z };
+			std::vector<real_t> child_loc = { child_x, child_y, child_z };
+
+			real3 parent_cast = CastToReal3(parent_loc);
+			real3 child_cast = CastToReal3(child_loc);
+
+			//Get the step type between parent and child
+			STEP step_type = CheckConnection(parent_cast, child_cast, rt);
+
+			//Construct an intedge for this parent-child pair to add to edgeset
+			HF::SpatialStructures::IntEdge ie = { link_a.child.id, static_cast<float>(step_type) };
+
+			*(it_children++) = ie;
+		}
+
+		HF::SpatialStructures::EdgeSet es = { parent_node.id, children };
+
+		return es;
+	}
+
+	std::vector<HF::SpatialStructures::EdgeSet> CalculateStepType(const HF::SpatialStructures::Graph& g, HF::RayTracer::MultiRT& rt) {
+		// Retrieve all nodes from g so we can obtain subgraphs.
+		std::vector<HF::SpatialStructures::Node> nodes = g.Nodes();
+
+		// The result container will always be, at most, the node count of g. 
+		// We can preallocate this memory so we do not have to resize during the loop below.
+		std::vector<HF::SpatialStructures::EdgeSet> result(nodes.size());
+		auto it_result = result.begin();
+
+		for (Node parent_node : nodes) {
+			// Get subgraph via parent_node
+			HF::SpatialStructures::Subgraph sg = g.GetSubgraph(parent_node);
+
+			// Call CalculateStepType using the subgraph
+			HF::SpatialStructures::EdgeSet step_types = CalculateStepType(sg, rt);
+
+			*(it_result++) = step_types;
+		}
+		return result;
+	}
+
+	void CalculateAndStoreStepType(HF::SpatialStructures::Graph& g, HF::RayTracer::MultiRT& rt) {
+		// calculates and stores step types of all edges and stores it in the graph
+
+		// Compression needed before adding edges of alternate cost
+		g.Compress();
+
+		// Get all edges with weights corresponding to step type
+		auto result = HF::GraphGenerator::CalculateStepType(g, rt);
+
+		// Add edges to the graph
+		g.AddEdges(result, "step_type");
+	}
+
+	HF::SpatialStructures::STEP CheckConnection(
+		const real3& parent,
+		const real3& child,
+		RayTracer& rt)
+	{
+		// Default graphh generator ground offset
+		const auto GROUND_OFFSET = 0.01;
+
+		// Create a copy of parent and child that can be modified
+		auto node1 = parent;
+		auto node2 = child;
+
+		// Offset them from the ground slightly
+		node1[2] += GROUND_OFFSET;
+		node2[2] += GROUND_OFFSET;
+
+		if (!OcclusionCheck(node1, node2, rt)) {
+			// Case for when there is direct line of sight between nodes.
+			// Since the edge is already in the graph, we do not need to check whether
+			// they're on the same plane or if the slope between them is valid.
+			return STEP::NONE;
+		}
+		// Otherwise check for step based connections.
+		else {
+			// Since these edges were already verified in the graph generator,
+			// we do not need to check line of sight changes using offsets.
+			STEP s = STEP::NONE;
+
+			// If parent is higher than child, then we have a down step
+			if (parent[2] > child[2]) {
+				s = STEP::DOWN;
+			}
+			// If parent is lower than child, then we have an up step.
+			else if (parent[2] < child[2]) {
+				s = STEP::UP;
+			}
+			// If parent is on an equal plane with the child, then we step over an obstacle.
+			else if (parent[2] == child[2]) {
+				s = STEP::OVER;
+			}
+			return s;
+		}
+
+	}
+
 	HF::SpatialStructures::STEP CheckConnection(
 		const real3& parent,
 		const real3& child,
@@ -378,6 +505,42 @@ namespace HF::GraphGenerator {
 		return STEP::NOT_CONNECTED;
 	}
 
+	bool CompareCheckConnections(HF::SpatialStructures::Graph& g, RayTracer& rt,
+		const GraphParams& params, std::vector < HF::SpatialStructures::EdgeSet> to_compare)
+	{
+		const auto graph_nodes = g.Nodes();
+		for (Node node : graph_nodes) {
+			int parent_id = node.id;
+			std::vector<HF::SpatialStructures::IntEdge> outgoing_edges = to_compare[parent_id].children;
+			for (HF::SpatialStructures::IntEdge edge : outgoing_edges) {
+				int child_id = edge.child;
+				float step_type = edge.weight;
+				Node child = g.NodeFromID(child_id);
+
+				//Type Casting
+				real_t parent_x = CastToReal(node.x);
+				real_t parent_y = CastToReal(node.y);
+				real_t parent_z = CastToReal(node.z);
+
+				real_t child_x = CastToReal(child.x);
+				real_t child_y = CastToReal(child.y);
+				real_t child_z = CastToReal(child.z);
+
+				std::vector<real_t> parent_loc = { parent_x, parent_y, parent_z };
+				std::vector<real_t> child_loc = { child_x, child_y, child_z };
+
+				real3 parent_cast = CastToReal3(parent_loc);
+				real3 child_cast = CastToReal3(child_loc);
+
+				float expected_step_type = static_cast<float>(CheckConnection(parent_cast, child_cast,
+					rt, params));
+				if (expected_step_type != 0 && expected_step_type != step_type) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 	std::vector<real3> GeneratePotentialChildren(
 		const real3& parent,
 		const std::vector<pair>& directions,

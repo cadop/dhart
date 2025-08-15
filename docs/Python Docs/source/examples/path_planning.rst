@@ -11,6 +11,7 @@ Path Planning
    path/limit.rst
    path/multi_cost.rst
    path/custom_cost.rst
+   path/alternate_path_cost.rst
    
 
 .. seealso::
