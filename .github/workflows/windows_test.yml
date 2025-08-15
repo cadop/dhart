@@ -1,4 +1,4 @@
-name: Linux Tests
+name: Windows Tests
 
 on:
   pull_request:
@@ -11,7 +11,7 @@ on:
 jobs:
   linux:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     strategy:
       max-parallel: 0
       matrix:
@@ -57,47 +57,51 @@ jobs:
         ls 
         mkdir build
         cd build
-        cmake ../src `
-        -DDHARTAPI_Config=All `
-        -DDHARTAPI_EnablePython=ON `
-        -DDHARTAPI_EnableTests=ON `
-        -DCMAKE_INSTALL_PREFIX="linux-build" `
-        
+        cmake ../src/ -G"Visual Studio 17 2022" `
+        -DCMAKE_GENERATOR_PLATFORM="x64" `
+        -DCMAKE_INSTALL_PREFIX=".\windows-build" `
+        -DDHARTAPI_Config="All" `
+        -DDHARTAPI_EnableTests="True" `
+        -DCMAKE_CONFIGURATION_TYPES="Debug" `
+        -DDHARTAPI_EnablePython="True" `
+        -DDHARTAPI_EnableCSharp="False" `
+        -DINSTALL_GTEST="True" 2>&1
 
     - name: cmake build
       run: |
         ls
-        cmake --build build
+        cmake --build build --config Debug
 
     - name: cmake install
       run: |
         ls
         cd build
-        make && make install
+        cmake --install .
         
     - name : Install package
       run: |
-        pip install build/linux-build
+        pip install build/windows-build
 
     - name : Run HFUnitTests
       run: |
-        cmake --build build --target test
+        cd .\build\windows-build\Debug
+        .\HFUnitTests.exe
     
     - name : Run Pytest
       run: |
-        cd build/linux-build
+        cd build\windows-build
         pytest
                                                         
     - name : Build documentation
       run: |
-        cd docs/Python\ Docs/
-        make clean
-        make html
+        cd 'docs\Python Docs\'
+        .\make.bat clean
+        .\make.bat html
 
     - name : Run doctest
       run: |
-        cd docs/Python\ Docs/
-        make clean
-        make doctest
+        cd 'docs\Python Docs\'
+        .\make.bat clean
+        .\make.bat doctest
       continue-on-error: true
             
