@@ -9,7 +9,6 @@
 #ifndef EMBREE_RAY_TRACER
 #define EMBREE_RAY_TRACER
 
-//#include <rpc.h>
 #include <rtcore.h>
 
 #ifdef _WIN32
@@ -19,7 +18,6 @@
 #include <array>
 #include <HitStruct.h>
 #include <omp.h>
-// #include <algorithm>
 
 #define _USE_MATH_DEFINES
 

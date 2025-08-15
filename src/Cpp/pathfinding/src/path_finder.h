@@ -478,8 +478,7 @@ namespace HF {
 		DistanceAndPredecessor GenerateDistanceAndPred(const BoostGraph& bg);
 
 		inline DistanceAndPredecessor GenerateDistanceAndPredFast(const BoostGraph& bg);
-			
-		inline DistanceAndPredecessor GenerateDistanceAndPredFast(const BoostGraph& bg);
+		
 		/*!
 			\brief A special version of FindPaths optimized for the C_Interface, such that all paths possible
 				   from each node to every other node are generated.
