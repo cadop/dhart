@@ -11,6 +11,7 @@
 #include <string>
 #include <cassert>
 #include <iostream>
+#include <cmath>
 
 namespace HF {
 	// Forward declares so we don't need to include these in the header.
@@ -477,7 +478,7 @@ namespace HF {
 		DistanceAndPredecessor GenerateDistanceAndPred(const BoostGraph& bg);
 
 		inline DistanceAndPredecessor GenerateDistanceAndPredFast(const BoostGraph& bg);
-			
+		
 		/*!
 			\brief A special version of FindPaths optimized for the C_Interface, such that all paths possible
 				   from each node to every other node are generated.
@@ -613,11 +614,10 @@ namespace HF {
 			\endcode
 		*/
 		void InsertAllToAllPathsIntoArray(BoostGraph* bg, HF::SpatialStructures::Path** out_paths, HF::SpatialStructures::PathMember** out_path_members, int* out_sizes);
-	
+
 		std::vector<std::vector<int>> FindAPSP(BoostGraph& bg);
 
 		//inline std::vector<int> ConstructShortestPathNodesFromPred(int start, int end, int* pred);
-		
 	}
 }
 

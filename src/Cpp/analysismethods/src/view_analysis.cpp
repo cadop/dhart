@@ -107,7 +107,7 @@ namespace HF::ViewAnalysis {
 
 			// Check for nans. These can sometimes occur at the beginning and end of the result set
 			// due to imprecision.
-			if (!isnan(x) && !isnan(y) && !isnan(z)) {
+			if (!std::isnan(x) && !std::isnan(y) && !std::isnan(z)) {
 				auto new_point = std::array<float, 3>{x, y, z};
 				Normalize(new_point);
 				if (AltitudeWithinRange(new_point, max_phi, min_phi))

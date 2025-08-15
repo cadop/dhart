@@ -99,7 +99,7 @@ namespace HF::Pathfinding {
 			// If this is triggered, there's something wrong with this algorithm because the path
 			// suddenly has more nodes than there are in the entire graph.
 			if (p.size() > pred.size())
-				throw std::exception("Path included more nodes than contaiend in the graph!");
+				throw std::runtime_error("Path included more nodes than contaiend in the graph!");
 
 			// Get the next node from the predecessor matrix
 			int next_node = pred[current_node];
@@ -381,10 +381,12 @@ namespace HF::Pathfinding {
 	/*!
 		\brief Construct the shortest path of node ids given predecessor and distance vectors.
 
+
 		\param start ID of the starting point.
 		\param end ID of the end point.
 		\param pred Predecessor matrix for the start node.
 		\param distances Distance matrix for pred
+
 
 		\todo Replace exception with an assert statment. It shouldn't be triggered unless
 		there's a problem with this algorithm?
@@ -488,5 +490,6 @@ namespace HF::Pathfinding {
 		}
 		return allPaths; // Return the final vector
 	}
+
 
 }

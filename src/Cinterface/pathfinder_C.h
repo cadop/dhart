@@ -10,7 +10,12 @@
 #define PATHFINDER_C_H
 
 #include <cinterface_utils.h>
-#define C_INTERFACE extern "C" __declspec(dllexport) int
+
+#ifdef _WIN32
+    #define C_INTERFACE extern "C" __declspec(dllexport) int
+#else
+    #define C_INTERFACE extern "C" __attribute__((visibility("default"))) int
+#endif
 
 namespace HF {
 	namespace SpatialStructures { class Graph; class Path; class PathMember; }
@@ -506,6 +511,7 @@ C_INTERFACE CalculateDistanceAndPredecessor(
 	std::vector<int>** out_pred_vector,
 	int** out_pred_data
 );
+
 
 C_INTERFACE CreateAllPredToPath(
 	const HF::SpatialStructures::Graph* g,

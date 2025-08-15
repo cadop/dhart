@@ -9,13 +9,16 @@
 #ifndef EMBREE_RAY_TRACER
 #define EMBREE_RAY_TRACER
 
-#include <rpc.h>
 #include <rtcore.h>
 
+#ifdef _WIN32
 #include <corecrt_math_defines.h>
+#endif
 #include <vector>
 #include <array>
 #include <HitStruct.h>
+#include <omp.h>
+
 #define _USE_MATH_DEFINES
 
 namespace HF::Geometry {
@@ -39,7 +42,7 @@ namespace HF::RayTracer {
 	struct Vector3D {
 		double x; double y; double z;
 
-		inline Vector3D::Vector3D(double x, double y, double z) {
+		inline Vector3D(double x, double y, double z) {
 			this->x = x;
 			this->y = y;
 			this->z = z;
@@ -1315,7 +1318,7 @@ namespace HF::RayTracer {
 
 
 	\remarks
-	This algorithm is based on an implementation of the Möller–Trumbore intersection algorithm written
+	This algorithm is based on an implementation of the Mï¿½llerï¿½Trumbore intersection algorithm written
 	on the wikipedia page https://en.wikipedia.org/wiki/M%C3%B6ller%E2%80%93Trumbore_intersection_algorithm.
 
 */

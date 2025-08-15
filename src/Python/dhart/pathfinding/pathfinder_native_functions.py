@@ -255,7 +255,7 @@ def C_DestroyPath(path_ptr: c_void_p) -> None:
         HFPython.DestroyPath(c_void_p(path_ptr))
 
 
-        
+
 def C_GetPredAsPaths(
     graph_ptr: c_void_p,
     num_nodes: int,

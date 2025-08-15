@@ -645,7 +645,7 @@ TEST(_Graph, DefaultNameChange) {
 		GTEST_SUCCEED();
 	}
 	catch (...){
-		GTEST_FAIL("Other exception occured.");
+		GTEST_FAIL();
 	}
 }
 

@@ -1,8 +1,8 @@
 #include <graph_generator.h>
 
 #include <HitStruct.h>
-#include <Constants.h>
-#include <Edge.h>
+#include <constants.h>
+#include <edge.h>
 #include <embree_raytracer.h>
 #include <ray_data.h>
 #include <cassert>

@@ -7,7 +7,7 @@
 
 #include <spatialstructures_C.h>
 #include <iostream>
-#include <Constants.h>
+#include <constants.h>
 
 #include <HFExceptions.h>
 #include <graph.h>

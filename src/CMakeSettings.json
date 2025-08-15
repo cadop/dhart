@@ -1,6 +1,182 @@
 ﻿{
   "configurations": [
     {
+      "name": "x64-Debug-VS2022",
+      "generator": "Visual Studio 17 2022 Win64",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "variables": [
+        {
+          "name": "DHARTAPI_Config",
+          "value": "All",
+          "type": "STRING"
+        },
+        {
+          "name": "DHARTAPI_EnableTests",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "DHARTAPI_BuildCSharpTests",
+          "value": "True",
+          "type": "BOOL"
+        }
+      ]
+    },
+    {
+      "name": "x64-DebugRelease-VS2022",
+      "generator": "Visual Studio 17 2022 Win64",
+      "configurationType": "RelWithDebInfo",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "addressSanitizerEnabled": true,
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "variables": [
+        {
+          "name": "DHARTAPI_Config",
+          "value": "All",
+          "type": "STRING"
+        },
+        {
+          "name": "DHARTAPI_EnableTests",
+          "value": "True",
+          "type": "BOOL"
+        }
+      ]
+    },
+    {
+      "name": "x64-Release-VS2022",
+      "generator": "Visual Studio 17 2022 Win64",
+      "configurationType": "Release",
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "variables": [
+        {
+          "name": "DHARTAPI_Config",
+          "value": "All",
+          "type": "STRING"
+        },
+        {
+          "name": "DHARTAPI_EnableTests",
+          "value": "False",
+          "type": "BOOL"
+        },
+        {
+          "name": "CMAKE_BUILD_TYPE",
+          "value": "Release",
+          "type": "STRING"
+        },
+        {
+          "name": "DHARTAPI_EnableCSharp",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "DHARTAPI_EnablePython",
+          "value": "true",
+          "type": "BOOL"
+        }
+      ]
+    },
+    {
+      "name": "x64-Release-Python-VS2022",
+      "generator": "Visual Studio 17 2022 Win64",
+      "configurationType": "Release",
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\..\\build\\Python",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "variables": [
+        {
+          "name": "DHARTAPI_Config",
+          "value": "All",
+          "type": "STRING"
+        },
+        {
+          "name": "DHARTAPI_EnableTests",
+          "value": "False",
+          "type": "BOOL"
+        },
+        {
+          "name": "CMAKE_BUILD_TYPE",
+          "value": "Release",
+          "type": "STRING"
+        },
+        {
+          "name": "DHARTAPI_EnablePython",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "DHARTAPI_EnableCSharp",
+          "value": "False",
+          "type": "BOOL"
+        },
+        {
+          "name": "INSTALL_GTEST",
+          "value": "False",
+          "type": "BOOL"
+        }
+      ]
+    },
+    {
+      "name": "x64-Release-CSharp-VS2022",
+      "generator": "Visual Studio 17 2022 Win64",
+      "configurationType": "Release",
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\..\\build\\C#",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "variables": [
+        {
+          "name": "DHARTAPI_Config",
+          "value": "All",
+          "type": "STRING"
+        },
+        {
+          "name": "DHARTAPI_EnableTests",
+          "value": "False",
+          "type": "BOOL"
+        },
+        {
+          "name": "CMAKE_BUILD_TYPE",
+          "value": "Release",
+          "type": "STRING"
+        },
+        {
+          "name": "DHARTAPI_EnableCSharp",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "DHARTAPI_EnablePython",
+          "value": "False",
+          "type": "BOOL"
+        },
+        {
+          "name": "DHARTAPI_BuildCSharpTests",
+          "value": "False",
+          "type": "BOOL"
+        }
+      ]
+    },
+    {
       "name": "x64-Debug",
       "generator": "Visual Studio 17 2022 Win64",
       "configurationType": "Debug",

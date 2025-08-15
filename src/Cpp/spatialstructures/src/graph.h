@@ -9,8 +9,8 @@
 
 #include <robin_hood.h>
 #include <vector>
-#include <Edge.h>
-#include <Node.h>
+#include <edge.h>
+#include <node.h>
 #include <path.h>
 #include <Eigen>
 #include <iostream>
@@ -109,7 +109,7 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		inline float* CSRPtrs::data_begin() const {
+		inline float* data_begin() const {
 			return data ? data : nullptr;
 		}
 
@@ -128,7 +128,7 @@ namespace HF::SpatialStructures {
 				// TODO example
 			/endcode
 		*/
-		inline float* CSRPtrs::data_end() const {
+		inline float* data_end() const {
 			if (nnz > 0) {
 				return data ? data + nnz : nullptr;
 			}
@@ -151,7 +151,7 @@ namespace HF::SpatialStructures {
 			\endcode
 		*/
 
-		inline int* CSRPtrs::inner_begin() const {
+		inline int* inner_begin() const {
 			return inner_indices ? inner_indices : nullptr;
 		}
 
@@ -172,7 +172,7 @@ namespace HF::SpatialStructures {
 			\endcode
 		*/
 
-		inline int* CSRPtrs::inner_end() const {
+		inline int* inner_end() const {
 			if (nnz > 0) {
 				return inner_indices ? inner_indices + nnz : nullptr;
 			}
@@ -194,7 +194,7 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		inline int* CSRPtrs::outer_begin() const {
+		inline int* outer_begin() const {
 			return outer_indices ? outer_indices : nullptr;
 		}
 
@@ -213,7 +213,7 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		inline int* CSRPtrs::outer_end() const {
+		inline int* outer_end() const {
 			if (rows > 0) {
 				return outer_indices ? outer_indices + rows : nullptr;
 			}
@@ -239,7 +239,7 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		inline float* CSRPtrs::row_begin(int row_number) const {
+		inline float* row_begin(int row_number) const {
 			float* begin = nullptr;
 
 			if (data && rows > 0) {
@@ -272,7 +272,7 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		inline float* CSRPtrs::row_end(int row_number) const {
+		inline float* row_end(int row_number) const {
 			float* end = nullptr;
 			const int next_row = row_number + 1;
 
@@ -310,7 +310,7 @@ namespace HF::SpatialStructures {
 			\endcode
 		*/
 
-		inline int* CSRPtrs::col_begin(int row_number) const {
+		inline int* col_begin(int row_number) const {
 			int* begin = nullptr;
 
 			if (inner_indices && outer_indices) {
@@ -342,7 +342,7 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		inline int* CSRPtrs::col_end(int row_number) const {
+		inline int* col_end(int row_number) const {
 			int* end = nullptr;
 			const int next_row = row_number + 1;
 
@@ -2149,7 +2149,7 @@ namespace HF::SpatialStructures {
 		/// A vector of node ids that represents the path in the form (n1,n2,n2,n3,n3...,nk-1,nk)
 		/// </returns>
 
-		std::vector<int> Graph::MapPathToVectorOfNodes(HF::SpatialStructures::Path path) const;
+		std::vector<int> MapPathToVectorOfNodes(HF::SpatialStructures::Path path) const;
 
 		/// <summary>
 		/// Maps a path of node ids (n1,n2,...,nk) to (n1,n2,n2,n3,n3...,nk-1,nk)
@@ -2176,7 +2176,7 @@ namespace HF::SpatialStructures {
 		/// A vector of floats, representing each cost between nodes along the path.
 		/// </returns>
 
-		std::vector<float> Graph::AlternateCostsAlongPath(Path path, const std::string& cost_type) const;
+		std::vector<float> AlternateCostsAlongPath(Path path, const std::string& cost_type) const;
 
 		/// <summary>
 		///  Computes an alternate cost type between nodes along a path.
@@ -2284,7 +2284,7 @@ namespace HF::SpatialStructures {
 			\throws std::out_of_range Trying to add an edge to an alternate cost type when it hasn't already
 			been added to the default graph2) If adding an alternate edge to the graph, the graph must already be compressed
 		*/
-		void Graph::AddEdges(const std::vector<std::vector<IntEdge>>& edges, const std::string& cost_type);
+		void AddEdges(const std::vector<std::vector<IntEdge>>& edges, const std::string& cost_type);
 
 
 		/*! \brief Get the cost map for the graph
@@ -2293,7 +2293,7 @@ namespace HF::SpatialStructures {
 			\param cost_type Name of te cost to get the cost map for
 		
 		*/
-		std::unordered_map<std::string, EdgeCostSet> Graph::GetCostMap(const std::string& cost_type = " ") const;
+		std::unordered_map<std::string, EdgeCostSet> GetCostMap(const std::string& cost_type = " ") const;
 
 
 		/*!

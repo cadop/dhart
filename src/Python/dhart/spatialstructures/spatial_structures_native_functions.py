@@ -163,7 +163,7 @@ def C_AddEdgeFromNodeStructs(
     elif error_code == HF_STATUS.OUT_OF_RANGE:
         # Tried to add an alternate cost to an edge that didn't exist
         raise InvalidCostOperation(
-            f"Tried to add an edge from {parent_id} to {child_id} to alternate"
+            f"Tried to add an edge from {parent_ptr} to {child_ptr} to alternate"
             + " cost type {cost_type} without first creating an edge between"
             + "them in the graph's default cost set.")
     elif error_code == HF_STATUS.GENERIC_ERROR:

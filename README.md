@@ -11,7 +11,7 @@ We have extensive documentation on the API, and welcome new contributions and bu
 
 ### Limitations
 
-- Currently it is only available on Windows OS. (We happily would accept contributors to help expand to Linux. )
+- Currently it is available on Windows OS, and some work has been done to port it to Linux.
 - Integration with Rhino is currently limited to viewing analysis results through `json` files. 
 
 ### Coming Soon
