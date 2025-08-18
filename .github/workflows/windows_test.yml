@@ -80,7 +80,9 @@ jobs:
 
     - name : Run HFUnitTests
       run: |
-        cd .\build\windows-build\Debug
+        cd build\windows-build
+        ls
+        cd Debug
         .\HFUnitTests.exe
     
     - name : Run Pytest
