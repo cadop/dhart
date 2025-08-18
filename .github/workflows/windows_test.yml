@@ -1,11 +1,10 @@
 name: Windows Tests
 
 on:
-  pull_request:
-    branches:    
-      - main
   push:
     branches:    
+      - dev_stage
+      - dev
       - main
 
 jobs:
@@ -43,6 +42,20 @@ jobs:
         pip install pywavefront
         pip install tk
         pip install pytest
+
+    - name: Install windows documentation requirements
+      run: |
+        $url = "https://www.doxygen.nl/files/doxygen-1.9.5.windows.x64.bin.zip"
+        Invoke-WebRequest -Uri $url -OutFile "C:\doxygen.zip"
+        
+        Expand-Archive "C:\doxygen.zip" "C:\windows\system32"
+
+        doxygen --version`
+
+        choco install graphviz -y
+
+        #sudo apt-get install -y doxygen
+        #sudo apt-get install -y graphviz
 
     - name: Install documentation dependencies
       run: |
@@ -101,4 +114,15 @@ jobs:
         .\make.bat clean
         .\make.bat doctest
       continue-on-error: true
+
+    - name: Build c++ documentation with doxygen
+      run: |
+        cd src
+        doxygen Doxyfile
+        ls 
+            
+    - name: Build c# documentation with doxygen
+      run: |
+        doxygen Doxyfile_Csharp
+        doxygen Doxyfile_Public_CSharp
             
