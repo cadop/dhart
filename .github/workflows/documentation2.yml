@@ -1,4 +1,4 @@
-name: Documentation
+name: New Documentation
 
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
     strategy:
       max-parallel: 0
       matrix:
-        python-version: [3.8]
+        python-version: ['3.10']
 
     steps:
     - uses: actions/checkout@v2
@@ -68,12 +68,12 @@ jobs:
         git push -f
             
   sphinx:
-    runs-on: windows-2022
+    runs-on: ubuntu-latest
     needs: doxygen
     strategy:
       max-parallel: 0
       matrix:
-        python-version: [3.8]
+        python-version: ['3.10']
 
     steps:
     - uses: actions/checkout@v2
@@ -95,8 +95,6 @@ jobs:
         pip install matplotlib 
         pip install numpy 
         pip install scipy
-        pip install dhart
-        python -c "from dhart.spatialstructures import Graph"
 
     - name: Install documentation dependencies
       run: |
@@ -105,20 +103,29 @@ jobs:
     - name: Setup cmake
       run: |
         ls 
-        cd src
-        cmake ./src/  -G"Visual Studio 17 2022"  -DCMAKE_GENERATOR_PLATFORM="x64"   -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DDHARTAPI_Config="All" -DDHARTAPI_EnableTests="False" -DCMAKE_CONFIGURATION_TYPES="Release" -DDHARTAPI_EnablePython="True" -DDHARTAPI_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1
+        mkdir build
+        cd build
+        cmake ../src \
+        -DDHARTAPI_Config=All \
+        -DDHARTAPI_EnablePython=ON \
+        -DDHARTAPI_EnableTests=ON \
+        -DCMAKE_INSTALL_PREFIX="linux-build"
+        
 
     - name: cmake build
       run: |
         ls
-        cd src
-        cmake --build . --config Release
+        cmake --build build
 
-    - name: cmake Install
+    - name: cmake install
       run: |
         ls
-        cd src
-        cmake --install .
+        cd build
+        make && make install
+        
+    - name : Install package
+      run: |
+        pip install build/linux-build
 
     # - name: check Existing dhart 
     #   run: |
@@ -146,17 +153,11 @@ jobs:
     #   run: |
         # sudo apt-get update -y && sudo apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
 
-    - name: Build documentation with sphinx
+    - name : Build documentation
       run: |
-        cd "docs/Python Docs"
-        ls
-        ./make.bat clean
-        ./make.bat html
-        # make latexpdf
-        cd build
-        ls
-        cd html
-        ls
+        cd docs/Python\ Docs/
+        make clean
+        make html
 
     - name: Auto-deploy python doc changes
       run : |
@@ -167,7 +168,7 @@ jobs:
         mkdir html_build
 
         git worktree add -B docs html_build origin/docs
-        robocopy .\docs\ .\html_build\ /e
+        cp -r ./docs/ ./html_build/
 
         cd html_build
 

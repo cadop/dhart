@@ -12,7 +12,7 @@ on:
 jobs:
 
     doxygen:
-        runs-on: windows-2019
+        runs-on: windows-2022
         strategy:
             max-parallel: 0
             matrix:
@@ -34,7 +34,7 @@ jobs:
             $url = "https://www.doxygen.nl/files/doxygen-1.9.5.windows.x64.bin.zip"
             Invoke-WebRequest -Uri $url -OutFile "C:\doxygen.zip"
             
-            7z x "C:\doxygen.zip" -o"C:\windows\system32" -y
+            Expand-Archive "C:\doxygen.zip" "C:\windows\system32"
 
             doxygen --version`
 

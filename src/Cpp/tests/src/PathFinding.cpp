@@ -7,6 +7,7 @@
 #include <boost/graph/dijkstra_shortest_paths_no_color_map.hpp>
 #include <boost/exception/exception.hpp>
 
+#include <chrono>
 #include <path_finder.h>
 #include <boost_graph.h>
 #include <graph.h>

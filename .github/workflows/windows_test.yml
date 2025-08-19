@@ -1,0 +1,128 @@
+name: Windows Tests
+
+on:
+  push:
+    branches:    
+      - dev_stage
+      - dev
+      - main
+
+jobs:
+  windows:
+
+    runs-on: windows-latest
+    strategy:
+      max-parallel: 0
+      matrix:
+        python-version: ['3.10']
+
+    steps:
+
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - uses: actions/checkout@v2
+      with: # for github push action
+        #persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+    
+    - name : Pull from Git LFS
+      run: |
+        git lfs pull
+    
+    - name : Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        pip install matplotlib 
+        pip install numpy 
+        pip install scipy
+        pip install pywavefront
+        pip install tk
+        pip install pytest
+
+    - name: Install windows documentation requirements
+      run: |
+        $url = "https://www.doxygen.nl/files/doxygen-1.9.5.windows.x64.bin.zip"
+        Invoke-WebRequest -Uri $url -OutFile "C:\doxygen.zip"
+        
+        Expand-Archive "C:\doxygen.zip" "C:\windows\system32"
+
+        doxygen --version`
+
+        choco install graphviz -y
+
+        #sudo apt-get install -y doxygen
+        #sudo apt-get install -y graphviz
+
+    - name: Install documentation dependencies
+      run: |
+        pip install sphinx numpydoc       
+
+    - name: Setup cmake
+      run: |
+        ls 
+        mkdir build
+        cd build
+        cmake ../src/ -G"Visual Studio 17 2022" `
+        -DCMAKE_GENERATOR_PLATFORM="x64" `
+        -DCMAKE_INSTALL_PREFIX=".\windows-build" `
+        -DDHARTAPI_Config="All" `
+        -DDHARTAPI_EnableTests="True" `
+        -DCMAKE_CONFIGURATION_TYPES="Debug" `
+        -DDHARTAPI_EnablePython="True" `
+        -DDHARTAPI_EnableCSharp="False" `
+        -DINSTALL_GTEST="True" 2>&1
+
+    - name: cmake build
+      run: |
+        ls
+        cmake --build build --config Debug
+
+    - name: cmake install
+      run: |
+        ls
+        cd build
+        cmake --install .
+        
+    - name : Install package
+      run: |
+        pip install build/windows-build
+
+    - name : Run HFUnitTests
+      run: |
+        cd build\Debug
+        .\HFUnitTests.exe
+    
+    - name : Run Pytest
+      run: |
+        cd build\windows-build
+        pytest
+      continue-on-error: true
+                                                        
+    - name : Build documentation
+      run: |
+        cd 'docs\Python Docs\'
+        .\make.bat clean
+        .\make.bat html
+
+    - name : Run doctest
+      run: |
+        cd 'docs\Python Docs\'
+        .\make.bat clean
+        .\make.bat doctest
+      continue-on-error: true
+
+    - name: Build c++ documentation with doxygen
+      run: |
+        cd src
+        doxygen Doxyfile
+        ls 
+            
+    - name: Build c# documentation with doxygen
+      run: |
+        doxygen Doxyfile_Csharp
+        doxygen Doxyfile_Public_CSharp
+            
