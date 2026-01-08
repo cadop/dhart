@@ -12,6 +12,7 @@ namespace DHARTAPI.Tests.GraphGenerator
     {
         private const string plane_path = "ExampleModels/plane.obj";
         private const string obstacle_plane_path = "ExampleModels/obstacle_plane.obj";
+        private const string step_path = "ExampleModels/step_0_5.obj";
         [TestMethod]
         public void ValidGenerationIsNotNull()
         {
@@ -99,6 +100,50 @@ namespace DHARTAPI.Tests.GraphGenerator
 
             Assert.AreNotEqual(num_obs_nodes, num_non_nodes, "Obstacles produced identical output to non-obstacles");
             Assert.IsTrue(num_obs_nodes < num_non_nodes, "Obstacles did not produce less output than without" );
+        }
+
+        [TestMethod]
+        public void EdgeTypesContainStepTags()
+        {
+            MeshInfo Mesh = OBJLoader.LoadOBJ(step_path);
+            EmbreeBVH BVH = new EmbreeBVH(Mesh);
+
+            Vector3D start_point = new Vector3D(0.25f, 0.25f, 2);
+            Vector3D spacing = new Vector3D(1.0f, 0.25f, 1.0f);
+
+            Graph G = DHARTAPI.GraphGenerator.GraphGenerator.GenerateGraph(
+                BVH,
+                start_point,
+                spacing,
+                max_nodes: 500,
+                up_step: 1.0f,
+                down_step: 1.0f,
+                store_edge_types: true
+            );
+
+            Assert.IsNotNull(G);
+
+            CSRInfo csr = G.CompressToCSR("edge_type");
+            float[] edge_types = new float[csr.nnz];
+            Marshal.Copy(csr.data, edge_types, 0, csr.nnz);
+
+            bool has_step_up = false;
+            bool has_step_down = false;
+
+            foreach (float edge_type in edge_types)
+            {
+                int type = (int)System.Math.Round(edge_type);
+                if (type == 2)
+                    has_step_up = true;
+                else if (type == 3)
+                    has_step_down = true;
+
+                if (has_step_up && has_step_down)
+                    break;
+            }
+
+            Assert.IsTrue(has_step_up, "Expected at least one step-up edge type.");
+            Assert.IsTrue(has_step_down, "Expected at least one step-down edge type.");
         }
 
     }
