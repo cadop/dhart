@@ -355,7 +355,7 @@ namespace CInterfaceTests {
 		const int min_connections = 1;
 		const int cores = 4;
 		
-		if (GenerateGraph(&ert, start, spacing, max_nodes, up_step, up_slope, down_step, down_slope, maximum_step_connections, min_connections, cores, &g)) {
+		if (GenerateGraph(&ert, start, spacing, max_nodes, up_step, up_slope, down_step, down_slope, maximum_step_connections, min_connections, cores, 0, &g)) {
 			std::cout << "GenerateGraph successful" << std::endl;
 		}
 		else {

@@ -112,6 +112,7 @@ namespace CInterfaceTests {
 			down_step, down_slope,
 			maximum_step_connection,
 			core_count,
+			0,
 			&graph);
 
 		if (status != 1) {

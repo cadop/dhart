@@ -70,6 +70,10 @@ namespace HF {
 	\param		core_count				Number of cores to use. -1 will use all available cores, 
 										and 0 or 1 will run a serialized version of the algorithm.
 
+	\param		store_edge_types		If non-zero, store "edge_type" and "cross_slope_tag" edge tags on the graph.
+										edge_type values: 1 flat, 2 step up, 3 step down, 4 step over, 5 slope up, 6 slope down.
+										cross_slope_tag values: 0/1.
+
 	\param		out_graph				Address of a (\link HF::SpatialStructures::Graph \endlink *);
 										*out_graph will address heap-allocated memory to an initialized 
 										\link HF::SpatialStructures::Graph \endlink on success.
@@ -122,6 +126,7 @@ C_INTERFACE GenerateGraph(
 	int max_step_connection,
 	int min_connections,
 	int core_count,
+	int store_edge_types,
 	HF::SpatialStructures::Graph** out_graph
 );
 
@@ -162,6 +167,10 @@ C_INTERFACE GenerateGraph(
 
 	\param		core_count				Number of cores to use. -1 will use all available cores,
 										and 0 or 1 will run a serialized version of the algorithm.
+
+	\param		store_edge_types		If non-zero, store "edge_type" and "cross_slope_tag" edge tags on the graph.
+										edge_type values: 1 flat, 2 step up, 3 step down, 4 step over, 5 slope up, 6 slope down.
+										cross_slope_tag values: 0/1.
 	
 	\param		obstacle_ids			Array of geometry IDs to consider obstacles
 	\param		walkable_ids			Array of geometry IDs to consider as walkable surfaces
@@ -220,6 +229,7 @@ C_INTERFACE GenerateGraphObstacles(
 	int max_step_connection,
 	int min_connections,
 	int core_count,
+	int store_edge_types,
 	const int* obstacle_ids,
 	const int* walkable_ids,
 	int num_obstacles,

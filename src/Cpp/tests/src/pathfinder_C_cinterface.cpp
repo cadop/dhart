@@ -129,7 +129,7 @@ namespace CInterfaceTests {
 
 		status = GenerateGraph(bvh, start_point.data(), spacing.data(), max_nodes,
 			up_step, down_step, up_slope, down_slope,
-			max_step_connections, core_count, &graph);
+			max_step_connections, core_count, 0, &graph);
 
 		if (status != 1) {
 			std::cerr << "Error at GenerateGraph, code: " << status << std::endl;

@@ -31,6 +31,7 @@ C_INTERFACE GenerateGraph(
 	int max_step_connections,
 	int min_connections,
 	int core_count,
+	int store_edge_types,
 	Graph** out_graph
 ){
 	const std::array<float, 3> start_array{ start_point[0], start_point[1], start_point[2] };
@@ -48,7 +49,11 @@ C_INTERFACE GenerateGraph(
 		DownSlope,
 		max_step_connections,
 		min_connections,
-		core_count
+		core_count,
+		HF::GraphGenerator::default_z_precision,
+		HF::GraphGenerator::default_spacing_precision,
+		HF::GraphGenerator::default_ground_offset,
+		store_edge_types != 0
 	);
 
 	if (G->Nodes().size() < 1) {
@@ -71,6 +76,7 @@ C_INTERFACE GenerateGraphObstacles(
 	int max_step_connections,
 	int min_connections,
 	int core_count,
+	int store_edge_types,
 	const int* obstacle_ids,
 	const int* walkable_ids,
 	int num_obstacles,
@@ -95,7 +101,11 @@ C_INTERFACE GenerateGraphObstacles(
 		DownSlope,
 		max_step_connections,
 		min_connections,
-		core_count
+		core_count,
+		HF::GraphGenerator::default_z_precision,
+		HF::GraphGenerator::default_spacing_precision,
+		HF::GraphGenerator::default_ground_offset,
+		store_edge_types != 0
 	);
 
 	if (G->Nodes().size() < 1) {
