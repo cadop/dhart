@@ -66,6 +66,14 @@ struct ModelAndStart {
 	};
 };
 
+struct GraphGeneratorSettings {
+	std::array<float, 3> spacing;
+	float UpStep;
+	float UpSlope;
+	float DownStep;
+	float DownSlope;
+};
+
 inline void WriteToCSV(std::ofstream& file, const std::vector<string>& strings_to_write) {
 	const int n = strings_to_write.size();
 	for (int i = 0; i < strings_to_write.size(); i++) {
@@ -188,13 +196,116 @@ TEST(Performance, CustomTriangleIntersection) {
 	}
 	csv_output.close();
 }
-struct GraphGeneratorSettings {
-	std::array<float, 3> spacing;
-	float UpStep;
-	float UpSlope;
-	float DownStep;
-	float DownSlope;
-};
+
+TEST(Performance, GraphGenerator_EdgeTypeTagging) {
+	const std::string filename = "GraphGeneratorEdgeTypeResults.csv";
+
+	const vector<int> maxnodes = {
+		5000, 5000, 5000,
+	};
+
+	ModelAndStart model({ -22.4280376f, -12.856843f, 5.4826779f }, "energy_blob_zup.obj");
+	const GraphGeneratorSettings parameters{ {0.6f, 0.6f, 0.6f}, 4.0f, 85.0f, 4.0f, 85.0f };
+
+	vector<std::string> RowHeaders = {
+		"Trial Number",
+		"Model",
+		"MaxNodes",
+		"Nodes",
+		"Edges",
+		"Time Base (ms)",
+		"Time With Tags (ms)",
+		"Extra Time (ms)",
+		"Extra Time (%)",
+		"EdgeType Values",
+		"CrossSlope Values",
+		"Tag Bytes",
+		"Tag MiB"
+	};
+
+	std::ofstream csv_output;
+	csv_output.open(filename);
+	WriteToCSV(csv_output, RowHeaders);
+
+	int k = 0;
+	for (int max_nodes : maxnodes) {
+		printf("Generating graphs with maxnodes of %i\n", max_nodes);
+
+		StopWatch base_watch;
+		StopWatch tag_watch;
+
+		GraphGenerator base_generator(model.StandardERT);
+		base_watch.StartClock();
+		auto base_graph = base_generator.BuildNetwork(
+			model.start,
+			parameters.spacing,
+			max_nodes,
+			parameters.UpStep,
+			parameters.UpSlope,
+			parameters.DownStep,
+			parameters.DownSlope,
+			1,
+			1
+		);
+		base_watch.StopClock();
+
+		GraphGenerator tag_generator(model.StandardERT);
+		tag_watch.StartClock();
+		auto tag_graph = tag_generator.BuildNetwork(
+			model.start,
+			parameters.spacing,
+			max_nodes,
+			parameters.UpStep,
+			parameters.UpSlope,
+			parameters.DownStep,
+			parameters.DownSlope,
+			1,
+			1,
+			-1,
+			default_z_precision,
+			default_spacing_precision,
+			default_ground_offset,
+			true
+		);
+		tag_watch.StopClock();
+
+		const auto csr_base = base_graph.GetCSRPointers();
+
+		const int nodes = base_graph.size();
+		const int edges = csr_base.nnz;
+
+		const auto edge_types = tag_graph.GetEdgeCosts("edge_type");
+		const auto cross_slopes = tag_graph.GetEdgeCosts("cross_slope_tag");
+		const size_t edge_type_values = edge_types.size();
+		const size_t cross_slope_values = cross_slopes.size();
+		const size_t tag_bytes = (edge_type_values + cross_slope_values) * sizeof(float);
+		const double tag_mib = static_cast<double>(tag_bytes) / (1024.0 * 1024.0);
+
+		const double base_ms = static_cast<double>(base_watch.GetDuration()) / 1000000.0;
+		const double tag_ms = static_cast<double>(tag_watch.GetDuration()) / 1000000.0;
+		const double extra_ms = tag_ms - base_ms;
+		const double extra_pct = (base_ms > 0.0) ? (extra_ms / base_ms * 100.0) : 0.0;
+
+		std::vector<std::string> output = {
+			std::to_string(k++),
+			model.model_name,
+			std::to_string(max_nodes),
+			std::to_string(nodes),
+			std::to_string(edges),
+			std::to_string(base_ms),
+			std::to_string(tag_ms),
+			std::to_string(extra_ms),
+			std::to_string(extra_pct),
+			std::to_string(edge_type_values),
+			std::to_string(cross_slope_values),
+			std::to_string(tag_bytes),
+			std::to_string(tag_mib)
+		};
+
+		WriteToCSV(csv_output, output);
+	}
+	csv_output.close();
+}
 
 // This will run once for every model and every raycount
 TEST(Performance, GraphGenerator_PrecisevsStandard) {
