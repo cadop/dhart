@@ -71,6 +71,7 @@ namespace DHARTAPI.GraphGenerator
 		Default is 1. A value of 8 when max_step_connections=1 would be a grid.
 
         \param core_count Number of cores to use. -1 will use all available cores, and 0 will run a serialized version of the algorithm.
+        \param store_edge_types If true, store "edge_type" and "cross_slope_tag" edge tags on the graph.
 		\param walkable_id IDs of geometry to be considered as obstacles
 		\param obstacle_id IDs of geometry to be considered as walkable surfaces
          
@@ -110,6 +111,7 @@ namespace DHARTAPI.GraphGenerator
             int max_step_connections = 1,
             int min_connections =1,
             int core_count = -1,
+            bool store_edge_types = false,
             int[] obstacle_ids = null,
             int[] walkable_ids = null)
         {
@@ -126,6 +128,7 @@ namespace DHARTAPI.GraphGenerator
                  max_step_connections,
                  min_connections,
                  core_count,
+                 store_edge_types,
                  obstacle_ids,
                  walkable_ids
              );

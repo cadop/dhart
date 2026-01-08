@@ -53,12 +53,14 @@ namespace DHARTAPI.GraphGenerator
 			int max_step_connections = 1,
 			int min_connections =1,
 			int core_count = -1,
+			bool store_edge_types = false,
 			int[] obstacle_ids = null,
 			int[] walkable_ids = null)
 		{
 			IntPtr out_graph = new IntPtr();
 			float[] start_arr = start_point.ToArray();
 			float[] spacing_arr = spacing.ToArray();
+			int store_edge_types_flag = store_edge_types ? 1 : 0;
 
 			// If obstacles/IDs are null, conider their links as 0
 			int num_obstacles = (obstacle_ids != null) ? obstacle_ids.Length : 0;
@@ -81,6 +83,7 @@ namespace DHARTAPI.GraphGenerator
 					max_step_connections,
 					min_connections,
 					core_count,
+					store_edge_types_flag,
 					ref out_graph
 				);
 			}
@@ -98,6 +101,7 @@ namespace DHARTAPI.GraphGenerator
 					max_step_connections,
 					min_connections,
 					core_count,
+					store_edge_types_flag,
 					obstacle_ids,
 					walkable_ids,
 					num_obstacles,
@@ -126,6 +130,7 @@ namespace DHARTAPI.GraphGenerator
 			int max_step_connection,
 			int min_connections,
 			int core_count,
+			int store_edge_types,
 			ref IntPtr out_graph
 		);
 
@@ -142,6 +147,7 @@ namespace DHARTAPI.GraphGenerator
 			int max_step_connection,
 			int min_connections,
 			int core_count,
+			int store_edge_types,
 			int[] obstacle_ids,
 			int[] walkable_ids,
 			int num_obstacles,
