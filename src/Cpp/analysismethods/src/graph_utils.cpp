@@ -2,6 +2,7 @@
 
 #include <HitStruct.h>
 #include <constants.h>
+#include <cost_algorithms.h>
 #include <edge.h>
 #include <embree_raytracer.h>
 #include <ray_data.h>
@@ -382,6 +383,116 @@ namespace HF::GraphGenerator {
 		g.AddEdges(result, "step_type");
 	}
 
+	HF::SpatialStructures::EdgeSet CalculateEdgeType(
+		const HF::SpatialStructures::Subgraph& sg,
+		HF::RayTracer::MultiRT& rt,
+		const GraphParams& params) {
+		Node parent_node = sg.m_parent;
+		std::vector<Edge> edge_list = sg.m_edges;
+
+		std::vector<HF::SpatialStructures::IntEdge> children(edge_list.size());
+		auto it_children = children.begin();
+
+		for (Edge link_a : edge_list) {
+			Node curr_child = link_a.child;
+
+			real_t parent_x = CastToReal(parent_node.x);
+			real_t parent_y = CastToReal(parent_node.y);
+			real_t parent_z = CastToReal(parent_node.z);
+
+			real_t child_x = CastToReal(curr_child.x);
+			real_t child_y = CastToReal(curr_child.y);
+			real_t child_z = CastToReal(curr_child.z);
+
+			std::vector<real_t> parent_loc = { parent_x, parent_y, parent_z };
+			std::vector<real_t> child_loc = { child_x, child_y, child_z };
+
+			real3 parent_cast = CastToReal3(parent_loc);
+			real3 child_cast = CastToReal3(child_loc);
+
+			EDGE_TYPE edge_type = CheckConnectionType(parent_cast, child_cast, rt, params);
+			HF::SpatialStructures::IntEdge ie = { link_a.child.id, static_cast<float>(edge_type) };
+			*(it_children++) = ie;
+		}
+
+		HF::SpatialStructures::EdgeSet es = { parent_node.id, children };
+		return es;
+	}
+
+	std::vector<HF::SpatialStructures::EdgeSet> CalculateEdgeType(
+		const HF::SpatialStructures::Graph& g,
+		HF::RayTracer::MultiRT& rt,
+		const GraphParams& params) {
+		std::vector<HF::SpatialStructures::Node> nodes = g.Nodes();
+
+		std::vector<HF::SpatialStructures::EdgeSet> result(nodes.size());
+		auto it_result = result.begin();
+
+		for (Node parent_node : nodes) {
+			HF::SpatialStructures::Subgraph sg = g.GetSubgraph(parent_node);
+			HF::SpatialStructures::EdgeSet edge_types = CalculateEdgeType(sg, rt, params);
+			*(it_result++) = edge_types;
+		}
+		return result;
+	}
+
+	void CalculateAndStoreEdgeTypes(
+		HF::SpatialStructures::Graph& g,
+		HF::RayTracer::MultiRT& rt,
+		const GraphParams& params) {
+		g.Compress();
+		auto result = HF::GraphGenerator::CalculateEdgeType(g, rt, params);
+		g.AddEdges(result, "edge_type");
+	}
+
+	std::vector<HF::SpatialStructures::EdgeSet> CalculateCrossSlopeTags(
+		const HF::SpatialStructures::Graph& g,
+		const GraphParams& params) {
+		std::vector<HF::SpatialStructures::Node> nodes = g.Nodes();
+		std::vector<HF::SpatialStructures::EdgeSet> result(nodes.size());
+		auto it_result = result.begin();
+		const real_t threshold = params.precision.ground_offset;
+
+		for (Node parent_node : nodes) {
+			HF::SpatialStructures::Subgraph sg = g.GetSubgraph(parent_node);
+			std::vector<Edge> edge_list = sg.m_edges;
+			std::vector<HF::SpatialStructures::IntEdge> children;
+			children.reserve(edge_list.size());
+
+			for (const Edge& edge_a : edge_list) {
+				auto perpendicular_edges =
+					HF::SpatialStructures::CostAlgorithms::GetPerpendicularEdges<2>(sg, edge_a.child);
+				bool tag = false;
+
+				if (!perpendicular_edges.empty()) {
+					if (perpendicular_edges.size() == 1) {
+						tag = std::abs(edge_a.child.z - perpendicular_edges[0].child.z) > threshold;
+					}
+					else {
+						tag = std::abs(perpendicular_edges[0].child.z - perpendicular_edges[1].child.z) > threshold;
+					}
+				}
+
+				children.push_back(HF::SpatialStructures::IntEdge{
+					edge_a.child.id,
+					tag ? 1.0f : 0.0f
+				});
+			}
+
+			HF::SpatialStructures::EdgeSet es = { parent_node.id, children };
+			*(it_result++) = es;
+		}
+		return result;
+	}
+
+	void CalculateAndStoreCrossSlopeTags(
+		HF::SpatialStructures::Graph& g,
+		const GraphParams& params) {
+		g.Compress();
+		auto result = HF::GraphGenerator::CalculateCrossSlopeTags(g, params);
+		g.AddEdges(result, "cross_slope_tag");
+	}
+
 	HF::SpatialStructures::STEP CheckConnection(
 		const real3& parent,
 		const real3& child,
@@ -503,6 +614,62 @@ namespace HF::GraphGenerator {
 		// If not, then there is no connection between these
 		// nodes.
 		return STEP::NOT_CONNECTED;
+	}
+
+	EDGE_TYPE CheckConnectionType(
+		const real3& parent,
+		const real3& child,
+		RayTracer& rt,
+		const GraphParams& params)
+	{
+		const auto GROUND_OFFSET = params.precision.ground_offset;
+
+		auto node1 = parent;
+		auto node2 = child;
+
+		node1[2] += GROUND_OFFSET;
+		node2[2] += GROUND_OFFSET;
+
+		if (!OcclusionCheck(node1, node2, rt)) {
+			const real_t rise = child[2] - parent[2];
+			if (std::abs(rise) < GROUND_OFFSET) return EDGE_FLAT;
+			if (CheckSlope(parent, child, params)) {
+				return rise > 0 ? EDGE_SLOPE_UP : EDGE_SLOPE_DOWN;
+			}
+			return EDGE_NOT_CONNECTED;
+		}
+		else {
+			EDGE_TYPE s = EDGE_NOT_CONNECTED;
+			if (parent[2] > child[2])
+			{
+				node1 = child;
+				node2 = parent;
+				node1[2] = node1[2] + params.down_step;
+				node2[2] = node2[2] + GROUND_OFFSET;
+				s = EDGE_STEP_DOWN;
+			}
+			else if (node1[2] < node2[2])
+			{
+				node1 = parent;
+				node2 = child;
+				node1[2] = node1[2] + params.up_step;
+				node2[2] = node2[2] + GROUND_OFFSET;
+				s = EDGE_STEP_UP;
+			}
+			else if (node1[2] == node2[2])
+			{
+				node1 = parent;
+				node2 = child;
+				node1[2] = node1[2] + params.up_step;
+				node2[2] = node2[2] + GROUND_OFFSET;
+				s = EDGE_STEP_OVER;
+			}
+
+			if (!OcclusionCheck(node1, node2, rt))
+				return s;
+		}
+
+		return EDGE_NOT_CONNECTED;
 	}
 
 	bool CompareCheckConnections(HF::SpatialStructures::Graph& g, RayTracer& rt,

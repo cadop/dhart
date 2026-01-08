@@ -264,6 +264,17 @@ namespace HF::GraphGenerator {
 		GeometryFlagMap geom_ids; ///< Stores a map of geometry IDs to their HIT_FLAGS and the current filter mode of the graph
 	};
 
+	/*! \brief Extended edge type classification for graph generator edges. */
+	enum EDGE_TYPE {
+		EDGE_NOT_CONNECTED = 0, ///< No connection between parent and child.
+		EDGE_FLAT = 1,		  ///< Connected on the same plane (no slope or step).
+		EDGE_STEP_UP = 2,	  ///< A step up is required to get from parent to child.
+		EDGE_STEP_DOWN = 3,	  ///< A step down is required to get from parent to child.
+		EDGE_STEP_OVER = 4,	  ///< A step over an obstacle is required to get from parent to child.
+		EDGE_SLOPE_UP = 5,	  ///< A slope up is required to get from parent to child.
+		EDGE_SLOPE_DOWN = 6	  ///< A slope down is required to get from parent to child.
+	};
+
 	/*! 
 		\brief A simple wrapper for real3 that is able to determine whether or not it's defined.
 		
@@ -432,6 +443,8 @@ namespace HF::GraphGenerator {
 			\param node_z_precision		  Precision to round the z-component of nodes after a raycast is performed
 			\param node_spacing_precision Precision to round nodes after spacing is calculated
 			\param ground_offset		  Distance to offset nodes from the ground before checking line of sight
+			\param store_edge_types       Store extended edge type tags ("edge_type", "cross_slope_tag") in the graph.
+			                             edge_type values: 1 flat, 2 step up, 3 step down, 4 step over, 5 slope up, 6 slope down.
 
 			\returns The resulting graph or an empty graph if the start check failed
 			 
@@ -477,7 +490,8 @@ namespace HF::GraphGenerator {
 			int cores = -1,
 			z_precision_type node_z_precision = default_z_precision,
 			connect_offset_type  node_spacing_precision = default_spacing_precision,
-			spacing_precision_type ground_offset = default_ground_offset
+			spacing_precision_type ground_offset = default_ground_offset,
+			bool store_edge_types = false
 		) {
 			assert(node_z_precision != 0);
 			return IMPL_BuildNetwork(
@@ -493,7 +507,8 @@ namespace HF::GraphGenerator {
 				cores,
 				CastToReal(node_z_precision),
 				CastToReal(node_spacing_precision),
-				CastToReal(ground_offset)
+				CastToReal(ground_offset),
+				store_edge_types
 			);
 		}
 
@@ -549,7 +564,8 @@ namespace HF::GraphGenerator {
 			int cores = -1,
 			real_t node_z_precision = default_z_precision,
 			real_t node_spacing_precision = default_spacing_precision,
-			real_t ground_offset = default_ground_offset
+			real_t ground_offset = default_ground_offset,
+			bool store_edge_types = false
 		);
 
 
@@ -804,6 +820,14 @@ namespace HF::GraphGenerator {
 		const GraphParams & params
 	);
 
+	/*! \brief Determine the extended edge type between parent and child. */
+	EDGE_TYPE CheckConnectionType(
+		const real3 & parent,
+		const real3 & child,
+		RayTracer& rt,
+		const GraphParams & params
+	);
+
 	HF::SpatialStructures::EdgeSet CalculateStepType(
 		const HF::SpatialStructures::Subgraph& sg,
 		HF::RayTracer::MultiRT& rt
@@ -814,9 +838,39 @@ namespace HF::GraphGenerator {
 		HF::RayTracer::MultiRT& rt
 	);
 
+	HF::SpatialStructures::EdgeSet CalculateEdgeType(
+		const HF::SpatialStructures::Subgraph& sg,
+		HF::RayTracer::MultiRT& rt,
+		const GraphParams& params
+	);
+
+	std::vector<HF::SpatialStructures::EdgeSet> CalculateEdgeType(
+		const HF::SpatialStructures::Graph& g,
+		HF::RayTracer::MultiRT& rt,
+		const GraphParams& params
+	);
+
 	void CalculateAndStoreStepType(
 		HF::SpatialStructures::Graph& g,
 		HF::RayTracer::MultiRT& rt
+	);
+
+	/*! \brief Calculate and store extended edge types ("edge_type") in the graph. */
+	void CalculateAndStoreEdgeTypes(
+		HF::SpatialStructures::Graph& g,
+		HF::RayTracer::MultiRT& rt,
+		const GraphParams& params
+	);
+
+	std::vector<HF::SpatialStructures::EdgeSet> CalculateCrossSlopeTags(
+		const HF::SpatialStructures::Graph& g,
+		const GraphParams& params
+	);
+
+	/*! \brief Calculate and store cross slope tags ("cross_slope_tag") in the graph. */
+	void CalculateAndStoreCrossSlopeTags(
+		HF::SpatialStructures::Graph& g,
+		const GraphParams& params
 	);
 
 	bool CompareCheckConnections(

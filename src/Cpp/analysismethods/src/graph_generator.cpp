@@ -79,7 +79,8 @@ namespace HF::GraphGenerator{
 		int cores,
 		real_t node_z_precision,
 		real_t node_spacing_precision,
-		real_t ground_offset)
+		real_t ground_offset,
+		bool store_edge_types)
 	{
 		if (ground_offset < node_z_precision)
 		{
@@ -125,14 +126,25 @@ namespace HF::GraphGenerator{
 			to_do_list.PushAny(start);
 
 			// If no connection was found, return an empty graph
+			Graph result;
 			if (this->core_count != 0 && this->core_count != 1)
 			{
 				SetupCoreCount(this->core_count);
-				return CrawlGeomParallel(to_do_list);
+				result = CrawlGeomParallel(to_do_list);
 			}
 			// Run the single core version of the graph generator
 			else
-				return CrawlGeom(to_do_list);
+			{
+				result = CrawlGeom(to_do_list);
+			}
+
+			if (store_edge_types)
+			{
+				CalculateAndStoreEdgeTypes(result, ray_tracer, params);
+				CalculateAndStoreCrossSlopeTags(result, params);
+			}
+
+			return result;
 		}
 		else
 			return Graph();
