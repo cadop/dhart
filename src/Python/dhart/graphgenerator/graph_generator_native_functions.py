@@ -23,6 +23,7 @@ def GenerateGraph(
     max_step_connections: int,
     min_connections: int,
     cores : int = -1,
+    store_edge_types: bool = False,
     obstacle_geometry: List[int] = [],
     walkable_geometry: List[int] = []
 ) -> Union[c_void_p, None]:
@@ -65,6 +66,7 @@ def GenerateGraph(
             max_step_connections,
             min_connections,
             c_int(cores),
+            c_int(1 if store_edge_types else 0),
             byref(graph_ptr)
         )
     else:
@@ -85,6 +87,7 @@ def GenerateGraph(
             max_step_connections,
             min_connections,
             c_int(cores),
+            c_int(1 if store_edge_types else 0),
             obstacle_array,
             walkable_array,
             c_int(num_obstacles),

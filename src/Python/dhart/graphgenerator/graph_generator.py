@@ -23,6 +23,7 @@ def GenerateGraph(
     max_step_connections: int = 1,
     min_connections: int = 1,
     cores : int = -1,
+    store_edge_types: bool = False,
     obstacle_ids : List[int] = [],
     walkable_ids : List[int] = []
 ) -> Union[Graph, None]:
@@ -58,6 +59,8 @@ def GenerateGraph(
             Default is 1. A value of 8 when max_step_connections=1 would be a grid.
         cores (int, optional):  Number of cores to use. -1 will use all available cores, 
             and 0 will run a serialized version of the algorithm.
+        store_edge_types (bool, optional): Store edge tags ("edge_type", "cross_slope_tag") in the graph.
+            edge_type values: 1 flat, 2 step up, 3 step down, 4 step over, 5 slope up, 6 slope down.
         obstacle_ids : Ids of geometry to consider as obstacles
         walkable_ids : Ids of geometry to be considered as walkable
 
@@ -136,6 +139,7 @@ def GenerateGraph(
         max_step_connections,
         min_connections,
         cores,
+        store_edge_types,
         obstacle_ids,
         walkable_ids
     )

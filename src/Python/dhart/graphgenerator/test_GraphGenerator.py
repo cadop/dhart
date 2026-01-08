@@ -1,4 +1,5 @@
 import math
+from collections import Counter
 
 from dhart.geometry import LoadOBJ, CommonRotations, OBJGroupType
 from dhart.raytracer import EmbreeBVH
@@ -158,4 +159,45 @@ def test_step_type_query():
             expected_step_type = float(expected_types[i])
             result_step = g.GetEdgeCost(parent, child, "step_type")
             assert(result_step == expected_step_type)
+
+
+def test_edge_type_and_cross_slope_tags():
+    obj_path = dhart.get_sample_model("energy_blob_zup.obj")
+    obj = LoadOBJ(obj_path)
+    bvh = EmbreeBVH(obj, True)
+
+    start_point = (0, 0, 20)
+    spacing = (1, 1, 1)
+    max_nodes = 3000
+    up_step, down_step = 0.5, 0.5
+    up_slope, down_slope = 20, 20
+    max_step_connections = 1
+    min_connections = 4
+    cores = -1
+
+    g = GenerateGraph(
+        bvh,
+        start_point,
+        spacing,
+        max_nodes,
+        up_step,
+        up_slope,
+        down_step,
+        down_slope,
+        max_step_connections,
+        min_connections,
+        cores,
+        store_edge_types=True,
+    )
+
+    g.CompressToCSR()
+    edge_types = [int(val) for val in g.GetEdgeCosts("edge_type")]
+    assert edge_types
+
+    counts = Counter(edge_types)
+    assert counts.get(5, 0) > 0  # EDGE_SLOPE_UP
+    assert counts.get(6, 0) > 0  # EDGE_SLOPE_DOWN
+
+    cross_tags = g.GetEdgeCosts("cross_slope_tag")
+    assert any(val > 0 for val in cross_tags)
     
