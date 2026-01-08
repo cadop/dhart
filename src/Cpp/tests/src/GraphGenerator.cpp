@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include <array>
+#include <algorithm>
 #include <graph_generator.h>
 #include <unique_queue.h>
 #include <embree_raytracer.h>
@@ -84,6 +85,32 @@ void ComparePoints(const N& expected_nodes, const N2& actual_nodes) {
 		auto distance = DistanceTo(expected_nodes[i], actual_nodes[i]);
 		EXPECT_NEAR(0, distance, 0.000001);
 	}
+}
+
+struct ZRange {
+	double min_z;
+	double max_z;
+};
+
+ZRange GetZRange(const Graph& g) {
+	const auto nodes = g.Nodes();
+	if (nodes.empty()) {
+		return { 0.0, 0.0 };
+	}
+
+	double min_z = nodes[0].z;
+	double max_z = nodes[0].z;
+	for (const auto& node : nodes) {
+		min_z = std::min(min_z, static_cast<double>(node.z));
+		max_z = std::max(max_z, static_cast<double>(node.z));
+	}
+
+	return { min_z, max_z };
+}
+
+EmbreeRayTracer CreateSimpleExampleRT(const std::string& obj_file) {
+	auto mesh = HF::Geometry::LoadMeshObjects(obj_file, HF::Geometry::ONLY_FILE, false);
+	return HF::RayTracer::EmbreeRayTracer(mesh);
 }
 
 TEST(_GraphGenerator, BuildNetwork) {
@@ -645,6 +672,201 @@ TEST(_GraphGenerator, CheckSlope) {
 	
 	ASSERT_TRUE(slope_check_child_1);
 	ASSERT_FALSE(slope_check_child_2);
+}
+
+TEST(_GraphGenerator, StepLimitsSeparateFromSlope) {
+	EmbreeRayTracer ray_tracer = CreateSimpleExampleRT("step_0_5.obj");
+
+	std::array<float, 3> spacing{ 0.25f, 0.25f, 2.0f };
+	std::array<float, 3> start_bottom{ 0.5f, 0.5f, 1.0f };
+
+	int max_nodes = 500;
+	int max_step_connections = 1;
+	int min_connections = 1;
+
+	HF::GraphGenerator::GraphGenerator GG_blocked(ray_tracer);
+	HF::SpatialStructures::Graph g_blocked = GG_blocked.BuildNetwork(
+		start_bottom,
+		spacing,
+		max_nodes,
+		0.25f, 85.0f,
+		2.0f, 85.0f,
+		max_step_connections,
+		min_connections
+	);
+
+	ASSERT_FALSE(g_blocked.Nodes().empty());
+	ZRange z_blocked = GetZRange(g_blocked);
+	EXPECT_LT(z_blocked.max_z, 0.3);
+
+	HF::GraphGenerator::GraphGenerator GG_allowed(ray_tracer);
+	HF::SpatialStructures::Graph g_allowed = GG_allowed.BuildNetwork(
+		start_bottom,
+		spacing,
+		max_nodes,
+		0.75f, 85.0f,
+		2.0f, 85.0f,
+		max_step_connections,
+		min_connections
+	);
+
+	ASSERT_FALSE(g_allowed.Nodes().empty());
+	ZRange z_allowed = GetZRange(g_allowed);
+	EXPECT_GT(z_allowed.max_z, 0.45);
+}
+
+TEST(_GraphGenerator, DownStepLimitsSeparateFromSlope) {
+	EmbreeRayTracer ray_tracer = CreateSimpleExampleRT("step_1_5.obj");
+
+	std::array<float, 3> spacing{ 0.25f, 0.25f, 2.0f };
+	std::array<float, 3> start_top{ 1.5f, 0.5f, 3.0f };
+
+	int max_nodes = 500;
+	int max_step_connections = 1;
+	int min_connections = 1;
+
+	HF::GraphGenerator::GraphGenerator GG_blocked(ray_tracer);
+	HF::SpatialStructures::Graph g_blocked = GG_blocked.BuildNetwork(
+		start_top,
+		spacing,
+		max_nodes,
+		2.0f, 85.0f,
+		0.5f, 85.0f,
+		max_step_connections,
+		min_connections
+	);
+
+	ASSERT_FALSE(g_blocked.Nodes().empty());
+	ZRange z_blocked = GetZRange(g_blocked);
+	EXPECT_GT(z_blocked.min_z, 1.0);
+
+	HF::GraphGenerator::GraphGenerator GG_allowed(ray_tracer);
+	HF::SpatialStructures::Graph g_allowed = GG_allowed.BuildNetwork(
+		start_top,
+		spacing,
+		max_nodes,
+		2.0f, 85.0f,
+		2.0f, 85.0f,
+		max_step_connections,
+		min_connections
+	);
+
+	ASSERT_FALSE(g_allowed.Nodes().empty());
+	ZRange z_allowed = GetZRange(g_allowed);
+	EXPECT_LT(z_allowed.min_z, 0.2);
+}
+
+TEST(_GraphGenerator, SlopeLimitsUseDegrees) {
+	EmbreeRayTracer ray_tracer = CreateSimpleExampleRT("ramp_30.obj");
+
+	std::array<float, 3> spacing{ 0.2f, 0.2f, 0.6f };
+	std::array<float, 3> start_bottom{ 0.1f, 0.5f, 2.0f };
+	std::array<float, 3> start_top{ 0.9f, 0.5f, 2.0f };
+
+	int max_nodes = 500;
+	int max_step_connections = 1;
+	int min_connections = 1;
+
+	HF::GraphGenerator::GraphGenerator GG_blocked_up(ray_tracer);
+	HF::SpatialStructures::Graph g_blocked_up = GG_blocked_up.BuildNetwork(
+		start_bottom,
+		spacing,
+		max_nodes,
+		2.0f, 15.0f,
+		2.0f, 85.0f,
+		max_step_connections,
+		min_connections
+	);
+
+	ASSERT_FALSE(g_blocked_up.Nodes().empty());
+	ZRange z_blocked_up = GetZRange(g_blocked_up);
+	EXPECT_LT(z_blocked_up.max_z, 0.3);
+
+	HF::GraphGenerator::GraphGenerator GG_allowed_up(ray_tracer);
+	HF::SpatialStructures::Graph g_allowed_up = GG_allowed_up.BuildNetwork(
+		start_bottom,
+		spacing,
+		max_nodes,
+		2.0f, 25.0f,
+		2.0f, 85.0f,
+		max_step_connections,
+		min_connections
+	);
+
+	ASSERT_FALSE(g_allowed_up.Nodes().empty());
+	ZRange z_allowed_up = GetZRange(g_allowed_up);
+	EXPECT_GT(z_allowed_up.max_z, 0.5);
+
+	HF::GraphGenerator::GraphGenerator GG_blocked_down(ray_tracer);
+	HF::SpatialStructures::Graph g_blocked_down = GG_blocked_down.BuildNetwork(
+		start_top,
+		spacing,
+		max_nodes,
+		2.0f, 85.0f,
+		2.0f, 15.0f,
+		max_step_connections,
+		min_connections
+	);
+
+	ASSERT_FALSE(g_blocked_down.Nodes().empty());
+	ZRange z_blocked_down = GetZRange(g_blocked_down);
+	EXPECT_GT(z_blocked_down.min_z, 0.4);
+
+	HF::GraphGenerator::GraphGenerator GG_allowed_down(ray_tracer);
+	HF::SpatialStructures::Graph g_allowed_down = GG_allowed_down.BuildNetwork(
+		start_top,
+		spacing,
+		max_nodes,
+		2.0f, 85.0f,
+		2.0f, 25.0f,
+		max_step_connections,
+		min_connections
+	);
+
+	ASSERT_FALSE(g_allowed_down.Nodes().empty());
+	ZRange z_allowed_down = GetZRange(g_allowed_down);
+	EXPECT_LT(z_allowed_down.min_z, 0.1);
+}
+
+TEST(_GraphGenerator, SlopeLimitsDifferentAngles) {
+	EmbreeRayTracer ray_tracer = CreateSimpleExampleRT("ramp_60.obj");
+
+	std::array<float, 3> spacing{ 0.2f, 0.2f, 0.6f };
+	std::array<float, 3> start_bottom{ 0.1f, 0.5f, 3.0f };
+
+	int max_nodes = 500;
+	int max_step_connections = 1;
+	int min_connections = 1;
+
+	HF::GraphGenerator::GraphGenerator GG_blocked(ray_tracer);
+	HF::SpatialStructures::Graph g_blocked = GG_blocked.BuildNetwork(
+		start_bottom,
+		spacing,
+		max_nodes,
+		2.0f, 45.0f,
+		2.0f, 85.0f,
+		max_step_connections,
+		min_connections
+	);
+
+	ASSERT_FALSE(g_blocked.Nodes().empty());
+	ZRange z_blocked = GetZRange(g_blocked);
+	EXPECT_LT(z_blocked.max_z, 0.9);
+
+	HF::GraphGenerator::GraphGenerator GG_allowed(ray_tracer);
+	HF::SpatialStructures::Graph g_allowed = GG_allowed.BuildNetwork(
+		start_bottom,
+		spacing,
+		max_nodes,
+		2.0f, 70.0f,
+		2.0f, 85.0f,
+		max_step_connections,
+		min_connections
+	);
+
+	ASSERT_FALSE(g_allowed.Nodes().empty());
+	ZRange z_allowed = GetZRange(g_allowed);
+	EXPECT_GT(z_allowed.max_z, 1.5);
 }
 
 TEST(_GraphGenerator, OcclusionCheck) {
