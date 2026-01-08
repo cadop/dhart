@@ -8,6 +8,8 @@ Generating a Graph
    graph/generating.rst
    graph/get_csr.rst
    graph/visualize.rst
+   graph/constraints.rst
+   graph/edge_types.rst
 
 
 .. seealso::

@@ -11,6 +11,8 @@ Path Planning
    path/limit.rst
    path/multi_cost.rst
    path/custom_cost.rst
+   path/energy_distance_blend.rst
+   path/sample_input_custom_costs.rst
    path/alternate_path_cost.rst
    
 
